@@ -14,9 +14,6 @@ export function Footer() {
               </span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              Curated educational resources — courses, tools, and starter packs for developers, ranked by the community.
-            </p>
-            <p className="mt-3 max-w-xs text-sm text-muted-foreground">
               Discover AI tools, dev tools, courses and many resources for developers to level up your skills.
             </p>
           </div>
