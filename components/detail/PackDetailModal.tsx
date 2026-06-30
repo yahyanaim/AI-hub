@@ -149,6 +149,78 @@ const TOOL_LOGOS: Record<string, string> = {
   'Metabase': 'https://icons.duckduckgo.com/ip3/metabase.com.ico',
 }
 
+const TOOL_DESC: Record<string, string> = {
+  'VS Code': 'Code editor for JS/TS with rich extensions',
+  'VS Code / PyCharm': 'Dual editor for general dev & Python data science',
+  'IntelliJ IDEA': 'Full-featured IDE for Java & JVM languages',
+  'Node.js': 'JavaScript runtime for building server-side apps',
+  'npm / yarn': 'Package managers for installing JS dependencies',
+  'React': 'UI library for building component-based web apps',
+  'ESLint': 'Linter that catches code quality & style issues',
+  'Prettier': 'Auto-formatter that keeps code style consistent',
+  'Jest': 'Testing framework for unit & integration tests',
+  'Webpack / Vite': 'Bundlers that compile & optimize frontend assets',
+  'Git': 'Version control system for tracking code changes',
+  'Postman': 'API client for testing & debugging HTTP endpoints',
+  'JDK 21': 'Java development kit for building JVM applications',
+  'Maven / Gradle': 'Build automation tools for Java projects',
+  'Spring Boot': 'Framework for production-ready Java web services',
+  'Angular CLI': 'Scaffolding & build tool for Angular projects',
+  'TypeScript': 'Typed superset of JavaScript for safer code',
+  'Docker': 'Container platform for consistent dev environments',
+  'PostgreSQL': 'Relational database with advanced SQL features',
+  'PgAdmin': 'GUI admin tool for managing PostgreSQL databases',
+  'Python 3.12': 'General-purpose language for dev, data & scripting',
+  'Anaconda / Miniconda': 'Python environment & package manager for data science',
+  'Jupyter Lab': 'Interactive notebook environment for data exploration',
+  'NumPy': 'Numerical computing library for array operations',
+  'Pandas': 'Data manipulation library for tabular datasets',
+  'Matplotlib': 'Plotting library for creating static visualizations',
+  'Scikit-learn': 'ML library for classification, regression & clustering',
+  'TensorFlow / PyTorch': 'Deep learning frameworks for neural network training',
+  'Kubernetes (Minikube)': 'Local K8s cluster for testing container orchestration',
+  'Terraform': 'Infrastructure-as-code tool for cloud provisioning',
+  'GitHub Actions': 'CI/CD platform for automated testing & deployment',
+  'Prometheus': 'Monitoring system for collecting metrics & alerts',
+  'Grafana': 'Dashboard tool for visualizing infrastructure metrics',
+  'kubectl': 'CLI for managing Kubernetes clusters & deployments',
+  'Helm': 'Package manager for deploying K8s applications',
+  'Ansible': 'Automation tool for config management & provisioning',
+  'AWS CLI': 'Command-line interface for managing AWS services',
+  'React Native CLI': 'Build tool for compiling React Native mobile apps',
+  'Xcode (iOS Simulator)': 'Apple IDE & simulator for iOS app testing',
+  'Android Studio (Emulator)': 'Google IDE & emulator for Android app testing',
+  'Expo': 'Framework for rapid React Native development without native builds',
+  'React Navigation': 'Routing & navigation library for React Native apps',
+  'Metro Bundler': 'JavaScript bundler optimized for React Native',
+  'Flipper (Debugger)': 'Debugging tool for inspecting React Native apps',
+  'Composer': 'Dependency manager for PHP libraries',
+  'PHPUnit': 'Testing framework for PHP unit & integration tests',
+  'Xdebug': 'Debugger & profiler for PHP code inspection',
+  'XAMPP / Laragon': 'Local PHP/MySQL server environment for development',
+  'Symfony CLI': 'Command-line tool for scaffolding Symfony projects',
+  'Doctrine ORM': 'Object-relational mapper for PHP database interactions',
+  'Twig': 'Template engine for clean PHP view rendering',
+  'PHP 8.x': 'Server-side scripting language for dynamic web apps',
+  'API Platform': 'Framework for building REST/GraphQL APIs with PHP',
+  'PHPStorm': 'JetBrains IDE specialized for PHP development',
+  'VS Code / PHPStorm': 'Dual editor choice for PHP & general web dev',
+  'PHPUnit / Panther': 'Testing tools for PHP unit & browser tests',
+  'MongoDB': 'NoSQL document database for flexible data storage',
+  'MySQL': 'Popular relational database for web applications',
+  'Redis': 'In-memory cache & message broker for fast data access',
+  'DBeaver': 'Universal database GUI for multiple DB engines',
+  'Kali Linux': 'Security-focused Linux distro for penetration testing',
+  'Wireshark': 'Network protocol analyzer for packet inspection',
+  'Nmap': 'Network scanner for discovering hosts & open ports',
+  'Burp Suite': 'Web app security testing proxy & scanner',
+  'Metasploit': 'Exploit development framework for security testing',
+  'Tableau': 'BI platform for interactive data visualization',
+  'Power BI': 'Microsoft analytics tool for business reporting',
+  'TablePlus': 'Modern GUI client for multiple database types',
+  'Metabase': 'Open-source BI tool for SQL queries & dashboards',
+}
+
 interface PackDetailModalProps {
   pack: DevTool | null
   onClose: () => void
@@ -252,7 +324,12 @@ export function PackDetailModal({ pack, onClose }: PackDetailModalProps) {
                               ?
                             </div>
                           )}
-                          <span className="truncate text-sm text-foreground">{tool}</span>
+                          <div className="min-w-0">
+                            <span className="truncate text-sm text-foreground">{tool}</span>
+                            {TOOL_DESC[tool] && (
+                              <p className="mt-0.5 truncate text-xs text-muted-foreground">{TOOL_DESC[tool]}</p>
+                            )}
+                          </div>
                         </div>
                         {link && (
                           <a
