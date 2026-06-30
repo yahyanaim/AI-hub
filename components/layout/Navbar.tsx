@@ -147,13 +147,12 @@ export function Navbar() {
               </button>
             </div>
           ) : (
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={() => setAuthModalOpen(true)}
+              className="inline-flex items-center rounded-full bg-brand-orange px-4 py-1.5 text-sm font-semibold text-white transition-all hover:bg-orange-600 active:scale-[0.97]"
             >
               Sign in
-            </Button>
+            </button>
           )}
 
           {/* Mobile menu toggle */}
