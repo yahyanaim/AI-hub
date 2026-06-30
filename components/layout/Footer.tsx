@@ -14,7 +14,7 @@ export function Footer() {
               </span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              The discovery layer for the AI ecosystem. AI tools, developer tools, and repos — ranked by the community.
+              Curated educational resources — courses, tools, and starter packs for developers, ranked by the community.
             </p>
           </div>
 
