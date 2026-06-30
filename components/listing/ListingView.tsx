@@ -221,20 +221,35 @@ export function ListingView<T extends { id: string }>({
             Prev
           </button>
           <div className="flex items-center gap-1">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-              <button
-                key={p}
-                onClick={() => setPage(p)}
-                className={cn(
-                  'flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium transition-colors',
-                  p === page
-                    ? 'bg-brand-orange text-white'
-                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                )}
-              >
-                {p}
-              </button>
-            ))}
+            {(() => {
+              const pages: (number | '...')[] = [1]
+              if (page > 3) pages.push('...')
+              for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
+                if (i > 1 && i < totalPages) pages.push(i)
+              }
+              if (page < totalPages - 2) pages.push('...')
+              if (totalPages > 1) pages.push(totalPages)
+              return pages.map((p, idx) =>
+                p === '...' ? (
+                  <span key={`e-${idx}`} className="flex h-8 w-8 items-center justify-center text-sm text-muted-foreground">
+                    ...
+                  </span>
+                ) : (
+                  <button
+                    key={p}
+                    onClick={() => setPage(p)}
+                    className={cn(
+                      'flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium transition-colors',
+                      p === page
+                        ? 'bg-brand-orange text-white'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    )}
+                  >
+                    {p}
+                  </button>
+                )
+              )
+            })()}
           </div>
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
