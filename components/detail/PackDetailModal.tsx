@@ -271,18 +271,16 @@ export function PackDetailModal({ pack, onClose }: PackDetailModalProps) {
 
             {/* Header */}
             <div className="flex items-start gap-4 px-6 pb-0 pt-6">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-border/50">
-                {PACK_LOGOS[pack.slug] ? (
-                  <img
-                    src={PACK_LOGOS[pack.slug]}
-                    alt=""
-                    className="h-7 w-7 rounded object-contain"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none'
-                    }}
-                  />
-                ) : null}
-              </div>
+              {PACK_LOGOS[pack.slug] ? (
+                <img
+                  src={PACK_LOGOS[pack.slug]}
+                  alt=""
+                  className="h-9 w-9 object-contain"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none'
+                  }}
+                />
+              ) : null}
               <div className="min-w-0 flex-1 pr-6">
                 <h2 className="text-lg font-semibold text-foreground">{pack.name}</h2>
                 <p className="mt-0.5 text-sm text-muted-foreground">{pack.tagline}</p>
