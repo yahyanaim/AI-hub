@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Coffee, X, ArrowRight } from 'lucide-react'
+import { Coffee, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
   const [open, setOpen] = useState(true)
+  const [supported, setSupported] = useState(false)
 
   useEffect(() => {
     if (!open) return
@@ -13,7 +14,13 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
+  const handleSupport = () => {
+    setSupported(true)
+    localStorage.setItem('ai-hunt-donated', 'true')
+  }
+
   const handleDismiss = () => {
+    if (!supported) return
     setOpen(false)
     setTimeout(onDismiss, 200)
   }
@@ -38,29 +45,22 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="px-6 pb-6 pt-8">
-              <button
-                onClick={handleDismiss}
-                className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                aria-label="Close"
-              >
-                <X className="h-4 w-4" />
-              </button>
-
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#FF5E5B]/10">
-                <Coffee className="h-8 w-8 text-[#FF5E5B]" />
+                <Coffee className={`h-8 w-8 ${supported ? 'text-[#FF5E5B]' : 'text-[#FF5E5B]'}`} />
               </div>
 
               <h2 className="text-center font-heading text-xl font-bold text-foreground">
                 Buy me a coffee?
               </h2>
               <p className="mt-2 text-center text-sm text-muted-foreground">
-                If AI Hunt helped you, consider supporting it with a small donation. Every bit helps keep this project running and improving.
+                A small donation is required to submit. Your support keeps this project running and improving.
               </p>
 
               <a
                 href="https://ko-fi.com/yahianaim"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleSupport}
                 className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#FF5E5B] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#e04a48]"
               >
                 <Coffee className="h-5 w-5" />
@@ -70,9 +70,10 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
 
               <button
                 onClick={handleDismiss}
-                className="mt-3 w-full rounded-lg border border-border bg-card py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                disabled={!supported}
+                className="mt-3 w-full rounded-lg border border-border bg-card py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
               >
-                No thanks, continue
+                {supported ? "I've supported — continue" : 'Click Ko-fi link above first'}
               </button>
             </div>
           </motion.div>

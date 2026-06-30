@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ExternalLink, Flame, Heart, TrendingUp } from 'lucide-react'
+import { ExternalLink, Flame, Heart, TrendingUp, Trash2 } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
@@ -20,7 +20,7 @@ export function ToolCard({
   className?: string
   rank?: number
 }) {
-  const { getUser, openDetailModal } = useApp()
+  const { getUser, currentUser, deleteTool, openDetailModal } = useApp()
   const submitter = getUser(tool.submittedBy)
   const rating = ratingFor(tool.upvotes, tool.bookmarks)
 
@@ -64,8 +64,19 @@ export function ToolCard({
             <span className="text-xs font-medium text-muted-foreground">{rating.toFixed(1)}</span>
           </div>
         </div>
-        {/* Bookmark, top-right */}
-        <div className="relative z-20 -mr-1 -mt-1" onClick={(e) => e.stopPropagation()}>
+        {/* Actions, top-right */}
+        <div className="relative z-20 -mr-1 -mt-1 flex items-center gap-0.5" onClick={(e) => e.stopPropagation()}>
+          {currentUser?.id === tool.submittedBy && (
+            <button
+              onClick={() => {
+                if (window.confirm(`Delete "${tool.name}"?`)) deleteTool(tool.id)
+              }}
+              className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground opacity-0 transition-all hover:bg-red-500/10 hover:text-red-500 group-hover:opacity-100"
+              aria-label="Delete tool"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </button>
+          )}
           <BookmarkButton itemType="tool" itemId={tool.id} />
         </div>
       </div>

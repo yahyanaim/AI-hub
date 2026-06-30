@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ExternalLink, Heart } from 'lucide-react'
+import { ExternalLink, Heart, Trash2 } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
@@ -20,7 +20,7 @@ export function RepoCard({
   className?: string
   rank?: number
 }) {
-  const { getUser, openDetailModalForRepo } = useApp()
+  const { getUser, currentUser, deleteRepo, openDetailModalForRepo } = useApp()
   const submitter = getUser(repo.submittedBy)
   const rating = ratingFor(repo.upvotes, repo.bookmarks)
 
@@ -62,7 +62,18 @@ export function RepoCard({
             <span className="text-xs font-medium text-muted-foreground">{rating.toFixed(1)}</span>
           </div>
         </div>
-        <div className="relative z-20 -mr-1 -mt-1" onClick={(e) => e.stopPropagation()}>
+        <div className="relative z-20 -mr-1 -mt-1 flex items-center gap-0.5" onClick={(e) => e.stopPropagation()}>
+          {currentUser?.id === repo.submittedBy && (
+            <button
+              onClick={() => {
+                if (window.confirm(`Delete "${repo.name}"?`)) deleteRepo(repo.id)
+              }}
+              className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground opacity-0 transition-all hover:bg-red-500/10 hover:text-red-500 group-hover:opacity-100"
+              aria-label="Delete repo"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </button>
+          )}
           <BookmarkButton itemType="repo" itemId={repo.id} />
         </div>
       </div>

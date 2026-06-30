@@ -9,8 +9,10 @@ import {
   Share2,
   MessageSquare,
   Sparkles,
+  Trash2,
 } from 'lucide-react'
 import { useApp } from '@/lib/store'
+import { useRouter } from 'next/navigation'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge, Tag } from '@/components/ui/Badges'
@@ -29,7 +31,8 @@ export function ToolDetail({
 }: {
   slug: string
 }) {
-  const { tools, repos, getItemBySlug, getUser } = useApp()
+  const { tools, repos, getItemBySlug, getUser, currentUser, deleteTool } = useApp()
+  const router = useRouter()
   const [notFoundFlag, setNotFoundFlag] = useState(false)
   const [tool, setTool] = useState(
     tools.find((t) => t.slug === slug)
@@ -138,6 +141,20 @@ export function ToolDetail({
             <button onClick={share} className="btn-secondary" aria-label="Share">
               <Share2 className="h-4 w-4" />
             </button>
+            {currentUser?.id === tool.submittedBy && (
+              <button
+                onClick={() => {
+                  if (window.confirm(`Delete "${tool.name}"?`)) {
+                    deleteTool(tool.id)
+                    router.push('/tools')
+                  }
+                }}
+                className="btn-secondary text-red-500 hover:border-red-500/30 hover:bg-red-500/10"
+                aria-label="Delete tool"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            )}
           </div>
         </div>
       </div>

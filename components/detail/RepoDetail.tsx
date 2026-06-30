@@ -2,9 +2,10 @@
 
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Star, ArrowUpRight } from 'lucide-react'
+import { X, Star, ArrowUpRight, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import { useApp } from '@/lib/store'
+import { useRouter } from 'next/navigation'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge, Tag } from '@/components/ui/Badges'
@@ -15,7 +16,8 @@ import { formatNumber, ratingFor } from '@/lib/utils'
 import type { Repo } from '@/types'
 
 export function RepoDetailModal() {
-  const { detailModalRepoId, closeDetailModalForRepo, repos, getUser } = useApp()
+  const { detailModalRepoId, closeDetailModalForRepo, repos, getUser, currentUser, deleteRepo } = useApp()
+  const router = useRouter()
   const repo = repos.find((r) => r.id === detailModalRepoId) ?? null
 
   useEffect(() => {
@@ -120,6 +122,21 @@ export function RepoDetailModal() {
               <div className="flex items-center gap-2">
                 <UpvoteButton itemType="repo" itemId={repo.id} count={repo.upvotes} variant="detail" />
                 <BookmarkButton itemType="repo" itemId={repo.id} variant="detail" />
+                {currentUser?.id === repo.submittedBy && (
+                  <button
+                    onClick={() => {
+                      if (window.confirm(`Delete "${repo.name}"?`)) {
+                        deleteRepo(repo.id)
+                        closeDetailModalForRepo()
+                        router.push('/edittools')
+                      }
+                    }}
+                    className="btn-secondary text-red-500 hover:border-red-500/30 hover:bg-red-500/10"
+                    aria-label="Delete repo"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                )}
               </div>
               <a
                 href={repo.url}
@@ -139,7 +156,8 @@ export function RepoDetailModal() {
 }
 
 export function RepoDetail({ slug }: { slug: string }) {
-  const { repos, getUser } = useApp()
+  const { repos, getUser, currentUser, deleteRepo } = useApp()
+  const router = useRouter()
   const repo = repos.find((r) => r.slug === slug)
 
   if (!repo) return null
@@ -188,6 +206,20 @@ export function RepoDetail({ slug }: { slug: string }) {
             Visit site
             <ArrowUpRight className="h-4 w-4" />
           </a>
+          {currentUser?.id === repo.submittedBy && (
+            <button
+              onClick={() => {
+                if (window.confirm(`Delete "${repo.name}"?`)) {
+                  deleteRepo(repo.id)
+                  router.push('/edittools')
+                }
+              }}
+              className="btn-secondary text-red-500 hover:border-red-500/30 hover:bg-red-500/10"
+              aria-label="Delete repo"
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          )}
         </div>
       </div>
     </div>

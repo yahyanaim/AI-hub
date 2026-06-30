@@ -121,6 +121,11 @@ interface AppContextValue {
   submitPrompt: (input: SubmitPromptInput) => Prompt
   submitRepo: (input: SubmitRepoInput) => Repo
 
+  // delete
+  deleteTool: (id: string) => void
+  deleteDevTool: (id: string) => void
+  deleteRepo: (id: string) => void
+
   // lookups
   getItemById: (itemType: ItemType, id: string) => Tool | DevTool | Prompt | Repo | Course | undefined
   getItemBySlug: (itemType: ItemType, slug: string) => Tool | DevTool | Prompt | Repo | Course | undefined
@@ -542,6 +547,55 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return repo
   }, [])
 
+  // ---------------- Delete ----------------
+  const deleteTool = useCallback((id: string) => {
+    setState((prev) => {
+      const item = prev.tools.find((t) => t.id === id)
+      if (!item || item.submittedBy !== prev.currentUserId) return prev
+      return {
+        ...prev,
+        tools: prev.tools.filter((t) => t.id !== id),
+        users: prev.users.map((u) =>
+          u.id === prev.currentUserId
+            ? { ...u, submittedTools: u.submittedTools.filter((tid) => tid !== id) }
+            : u
+        ),
+      }
+    })
+  }, [])
+
+  const deleteDevTool = useCallback((id: string) => {
+    setState((prev) => {
+      const item = prev.devTools.find((d) => d.id === id)
+      if (!item || item.submittedBy !== prev.currentUserId) return prev
+      return {
+        ...prev,
+        devTools: prev.devTools.filter((d) => d.id !== id),
+        users: prev.users.map((u) =>
+          u.id === prev.currentUserId
+            ? { ...u, submittedDevTools: u.submittedDevTools.filter((did) => did !== id) }
+            : u
+        ),
+      }
+    })
+  }, [])
+
+  const deleteRepo = useCallback((id: string) => {
+    setState((prev) => {
+      const item = prev.repos.find((r) => r.id === id)
+      if (!item || item.submittedBy !== prev.currentUserId) return prev
+      return {
+        ...prev,
+        repos: prev.repos.filter((r) => r.id !== id),
+        users: prev.users.map((u) =>
+          u.id === prev.currentUserId
+            ? { ...u, submittedRepos: u.submittedRepos.filter((rid) => rid !== id) }
+            : u
+        ),
+      }
+    })
+  }, [])
+
   // ---------------- Lookups ----------------
   const getItemById = useCallback(
     (itemType: ItemType, id: string) => {
@@ -619,6 +673,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     submitDevTool,
     submitPrompt,
     submitRepo,
+    deleteTool,
+    deleteDevTool,
+    deleteRepo,
     getItemById,
     getItemBySlug,
     addRecentSearch,

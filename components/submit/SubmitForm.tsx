@@ -135,10 +135,13 @@ export function SubmitForm() {
       setAuthModalOpen(true)
       return
     }
-    if (!localStorage.getItem('ai-hunt-donated')) {
-      setShowDonation(true)
-      return
-    }
+    setShowDonation(true)
+    setPendingSubmit(true)
+    return
+  }
+
+  const finishSubmit = () => {
+    setShowDonation(false)
     if (form.type === 'tool') {
       const tool = submitTool({
         name: form.name,
@@ -220,54 +223,7 @@ export function SubmitForm() {
   return (
     <>
       {showDonation && (
-        <DonationGate
-          onDismiss={() => {
-            localStorage.setItem('ai-hunt-donated', 'true')
-            setShowDonation(false)
-            // Re-trigger submit
-            if (!currentUser) {
-              setAuthModalOpen(true)
-              return
-            }
-            if (form.type === 'tool') {
-              const tool = submitTool({
-                name: form.name,
-                tagline: form.tagline,
-                description: form.description,
-                url: form.url,
-                logoUrl: form.logoUrl,
-                category: form.category as ToolCategory,
-                tags: form.tags,
-                pricing: form.pricing,
-              })
-              setSubmitted({ type: 'tool', slug: tool.slug })
-            } else if (form.type === 'devtool') {
-              const devTool = submitDevTool({
-                name: form.name,
-                tagline: form.tagline,
-                description: form.description,
-                url: form.url,
-                logoUrl: form.logoUrl,
-                category: form.category as DevToolCategory,
-                tags: form.tags,
-                pricing: form.pricing,
-              })
-              setSubmitted({ type: 'devtool', slug: devTool.slug })
-            } else if (form.type === 'repo') {
-              const repo = submitRepo({
-                name: form.name,
-                tagline: form.tagline,
-                description: form.description,
-                url: form.url,
-                logoUrl: form.logoUrl,
-                category: form.category as EditToolCategory,
-                tags: form.tags,
-                pricing: form.pricing,
-              })
-              setSubmitted({ type: 'repo', slug: repo.slug })
-            }
-          }}
-        />
+        <DonationGate onDismiss={finishSubmit} />
       )}
     <div className="mx-auto max-w-2xl">
       {/* Stepper */}
