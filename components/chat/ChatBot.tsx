@@ -143,7 +143,7 @@ export function ChatBot() {
             style={{ height: 'min(600px, calc(100vh - 160px))' }}
           >
             {/* Header with logo */}
-            <div className="flex items-center gap-2.5 border-b border-border bg-muted/50 px-5 py-3">
+            <div className="flex items-center gap-2.5 border-b border-border bg-muted/50 px-4 py-3">
               <img
                 src="/logo.png"
                 alt="AI Hunt"
@@ -156,6 +156,13 @@ export function ChatBot() {
                 </div>
                 <p className="text-[11px] text-muted-foreground">Powered by NVIDIA AI</p>
               </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
 
             {/* Messages */}
