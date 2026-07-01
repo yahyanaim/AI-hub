@@ -34,32 +34,51 @@ export async function POST(request: Request) {
       max_tokens: 2048,
       temperature: 0.70,
       top_p: 0.95,
-      stream: false,
+      stream: true,
     }
 
-    const response = await fetch(NVIDIA_API_URL, {
+    const nvidiaResponse = await fetch(NVIDIA_API_URL, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${API_KEY}`,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
       },
       body: JSON.stringify(payload),
     })
 
-    const data = await response.json()
-
-    if (!response.ok) {
+    if (!nvidiaResponse.ok) {
+      const text = await nvidiaResponse.text()
       return NextResponse.json(
-        {
-          error: `NVIDIA API error: ${response.status}`,
-          details: data?.error?.message || JSON.stringify(data),
-        },
-        { status: response.status }
+        { error: `NVIDIA API error: ${nvidiaResponse.status}`, details: text },
+        { status: nvidiaResponse.status }
       )
     }
 
-    return NextResponse.json(data)
+    const stream = new ReadableStream({
+      async start(controller) {
+        const reader = nvidiaResponse.body!.getReader()
+        const decoder = new TextDecoder()
+
+        try {
+          while (true) {
+            const { done, value } = await reader.read()
+            if (done) break
+            controller.enqueue(value)
+          }
+        } finally {
+          controller.close()
+          reader.releaseLock()
+        }
+      },
+    })
+
+    return new Response(stream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
+    })
   } catch (error: any) {
     return NextResponse.json(
       { error: 'Internal server error', details: error?.message },

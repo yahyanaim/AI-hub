@@ -60,6 +60,9 @@ export function ChatBot() {
     setInput('')
     setLoading(true)
 
+    let assistantMsg = ''
+    setMessages((prev) => [...prev, { role: 'assistant', content: '' }])
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -69,29 +72,57 @@ export function ChatBot() {
         }),
       })
 
-      const data = await res.json()
-
       if (!res.ok) {
-        throw new Error(data.details || data.error || `HTTP ${res.status}`)
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(errorData.details || errorData.error || `HTTP ${res.status}`)
       }
 
-      const reply = data.choices?.[0]?.message?.content
-      if (!reply) throw new Error('Empty response from AI')
+      const reader = res.body!.getReader()
+      const decoder = new TextDecoder()
+      let buffer = ''
 
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: reply },
-      ])
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        buffer += decoder.decode(value, { stream: true })
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
+
+        for (const line of lines) {
+          const trimmed = line.trim()
+          if (!trimmed.startsWith('data: ')) continue
+          const data = trimmed.slice(6)
+          if (data === '[DONE]') break
+
+          try {
+            const json = JSON.parse(data)
+            const chunk = json.choices?.[0]?.delta?.content
+            if (chunk) {
+              assistantMsg += chunk
+              setMessages((prev) => {
+                const next = [...prev]
+                next[next.length - 1] = { role: 'assistant', content: assistantMsg }
+                return next
+              })
+            }
+          } catch {}
+        }
+      }
+
+      if (!assistantMsg) throw new Error('Empty response from AI')
     } catch (err: any) {
       const msg = err?.message || 'Something went wrong. Please try again.'
       setError(msg)
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: `Sorry, I encountered an error: ${msg}`,
-        },
-      ])
+      setMessages((prev) => {
+        const next = [...prev]
+        if (prev[prev.length - 1]?.role === 'assistant' && prev[prev.length - 1]?.content === '') {
+          next[next.length - 1] = { role: 'assistant', content: `Sorry, I encountered an error: ${msg}` }
+        } else {
+          next.push({ role: 'assistant', content: `Sorry, I encountered an error: ${msg}` })
+        }
+        return next
+      })
     } finally {
       setLoading(false)
     }
@@ -207,7 +238,7 @@ export function ChatBot() {
                   </div>
                 </div>
               ))}
-              {loading && (
+              {loading && !messages.some(m => m.role === 'assistant' && m.content === '') && (
                 <div className="mb-4 flex gap-3">
                   <img src="/logo.png" alt="AI Hunt" className="h-5 w-5 rounded-full" />
                   <div className="rounded-lg bg-muted/50 px-3.5 py-2.5">
