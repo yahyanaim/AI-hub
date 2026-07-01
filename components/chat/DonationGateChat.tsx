@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Coffee, ArrowRight, Bot } from 'lucide-react'
+import { Coffee, ArrowRight, Bot, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export function DonationGateChat({ open, onDismiss }: { open: boolean; onDismiss: () => void }) {
@@ -24,13 +24,20 @@ export function DonationGateChat({ open, onDismiss }: { open: boolean; onDismiss
         >
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
 
-          <motion.div
-            className="relative flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-card shadow-xl"
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 8 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
+            <motion.div
+              className="relative flex w-full max-w-sm flex-col overflow-hidden rounded-2xl bg-card shadow-xl"
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: 8 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <button
+                onClick={() => { setSupported(false); onDismiss() }}
+                className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
             <div className="px-6 pb-6 pt-8">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-orange/10">
                 <Bot className={`h-8 w-8 ${supported ? 'text-brand-orange' : 'text-brand-orange'}`} />
