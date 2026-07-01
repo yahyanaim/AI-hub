@@ -10,7 +10,7 @@ import { cn, formatNumber, relativeTime } from '@/lib/utils'
 import type { ItemType } from '@/types'
 
 type Period = 'weekly' | 'monthly' | 'alltime'
-type BoardType = 'tool' | 'prompt' | 'repo'
+type BoardType = 'tool' | 'devtool' | 'course' | 'repo'
 
 const PERIODS: { value: Period; label: string }[] = [
   { value: 'weekly', label: 'This week' },
@@ -20,12 +20,13 @@ const PERIODS: { value: Period; label: string }[] = [
 
 const BOARD_TYPES: { value: BoardType; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { value: 'tool', label: 'Tools', icon: Trophy },
-  { value: 'prompt', label: 'Dev Tools', icon: Star },
-  { value: 'repo', label: 'Repos', icon: GitBranch },
+  { value: 'devtool', label: 'Dev Tools', icon: Star },
+  { value: 'course', label: 'Courses', icon: Medal },
+  { value: 'repo', label: 'Edit Tools', icon: GitBranch },
 ]
 
 export function LeaderboardView() {
-  const { tools, devTools, prompts, repos } = useApp()
+  const { tools, devTools, courses, repos } = useApp()
   const [period, setPeriod] = useState<Period>('weekly')
   const [type, setType] = useState<BoardType>('tool')
 
@@ -62,7 +63,7 @@ export function LeaderboardView() {
           createdAt: t.createdAt,
         }))
     }
-    if (type === 'prompt') {
+    if (type === 'devtool') {
       return devTools
         .filter((d) => period === 'alltime' || inPeriod(d.createdAt))
         .map((d) => ({
@@ -72,8 +73,24 @@ export function LeaderboardView() {
           href: `/devtool/${d.slug}`,
           score: d.upvotes,
           secondary: `${formatNumber(d.bookmarks)} bookmarks`,
+          logoUrl: d.logoUrl,
           badge: d.featured ? '🔥 Trending' : undefined,
           createdAt: d.createdAt,
+        }))
+    }
+    if (type === 'course') {
+      return courses
+        .filter((c) => period === 'alltime' || inPeriod(c.createdAt))
+        .map((c) => ({
+          id: c.id,
+          title: c.name,
+          subtitle: c.tagline,
+          href: `/courses/${c.slug}`,
+          score: c.upvotes,
+          secondary: `${formatNumber(c.bookmarks)} bookmarks`,
+          logoUrl: c.logoUrl,
+          badge: c.featured ? '🔥 Trending' : undefined,
+          createdAt: c.createdAt,
         }))
     }
     return repos
@@ -103,7 +120,7 @@ export function LeaderboardView() {
           Top of the charts
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          The highest-voted {type === 'tool' ? 'tools' : type === 'prompt' ? 'dev tools' : 'repos'} across each period.
+          The highest-voted {type === 'tool' ? 'tools' : type === 'devtool' ? 'dev tools' : type === 'course' ? 'courses' : 'edit tools'} across each period.
         </p>
       </div>
 
@@ -227,15 +244,9 @@ export function LeaderboardView() {
             <div className="h-9 w-9 shrink-0">
               {r.logoUrl ? (
                 <Logo src={r.logoUrl} name={r.title} size={36} />
-              ) : type === 'repo' ? (
-                <div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-xs font-bold text-blue-500">
-                  {r.title[0]?.toUpperCase()}
-                </div>
-              ) : r.logoUrl ? (
-                <Logo src={r.logoUrl} name={r.title} size={36} />
               ) : (
                 <div className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-xs font-bold text-accent">
-                  {'>'}
+                  {r.title[0]?.toUpperCase()}
                 </div>
               )}
             </div>
