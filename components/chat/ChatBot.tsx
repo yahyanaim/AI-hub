@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Bot, User, Sparkles, Loader2, X, MessageSquare } from 'lucide-react'
+import { Send, Bot, User, Sparkles, Loader2, X, MessageSquare, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import ReactMarkdown from 'react-markdown'
 
@@ -13,17 +13,7 @@ type Message = {
 
 const INITIAL_MESSAGE: Message = {
   role: 'assistant',
-  content: `# 👋 Welcome to AI Career Advisor!
-
-I'm here to help you on your learning journey. Here's what I can do:
-
-- **Assess your current skill level** — tell me what you've built or learned
-- **Recommend learning paths** — personalized for your goals
-- **Suggest courses** from our catalog that match your level
-- **Answer technical questions** — debugging, concepts, best practices
-- **Build a study plan** — tailored to your available time
-
-Ready to get started? Tell me a bit about yourself!`,
+  content: `Welcome to AI Career Advisor! I can help you find courses, assess your level, and build a learning path. What would you like help with?`,
 }
 
 export function ChatBot() {
@@ -31,6 +21,7 @@ export function ChatBot() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
+  const [error, setError] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -44,6 +35,7 @@ export function ChatBot() {
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return
+    setError('')
 
     const userMsg: Message = { role: 'user', content: input.trim() }
     const updated = [...messages, userMsg]
@@ -60,21 +52,27 @@ export function ChatBot() {
         }),
       })
 
-      if (!res.ok) throw new Error('API error')
-
       const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.details || data.error || `HTTP ${res.status}`)
+      }
+
       const reply = data.choices?.[0]?.message?.content
+      if (!reply) throw new Error('Empty response from AI')
 
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: reply || 'Sorry, I could not generate a response.' },
+        { role: 'assistant', content: reply },
       ])
-    } catch {
+    } catch (err: any) {
+      const msg = err?.message || 'Something went wrong. Please try again.'
+      setError(msg)
       setMessages((prev) => [
         ...prev,
         {
           role: 'assistant',
-          content: 'Sorry, I encountered an error. Please try again later.',
+          content: `Sorry, I encountered an error: ${msg}`,
         },
       ])
     } finally {
@@ -91,7 +89,6 @@ export function ChatBot() {
 
   return (
     <>
-      {/* FAB button */}
       <button
         onClick={() => setOpen(!open)}
         className={cn(
@@ -105,7 +102,6 @@ export function ChatBot() {
         {open ? <X className="h-6 w-6" /> : <MessageSquare className="h-6 w-6" />}
       </button>
 
-      {/* Chat panel */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -116,11 +112,13 @@ export function ChatBot() {
             className="fixed bottom-24 right-6 z-50 flex w-[400px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
             style={{ height: 'min(600px, calc(100vh - 160px))' }}
           >
-            {/* Header */}
-            <div className="flex items-center gap-2.5 border-b border-border bg-muted/50 px-5 py-3.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-orange/10">
-                <Bot className="h-4 w-4 text-brand-orange" />
-              </div>
+            {/* Header with logo */}
+            <div className="flex items-center gap-2.5 border-b border-border bg-muted/50 px-5 py-3">
+              <img
+                src="/logo.png"
+                alt="AI Hunt"
+                className="h-7 w-7 rounded-full"
+              />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
                   <span className="text-sm font-semibold text-foreground">AI Career Advisor</span>
@@ -163,7 +161,7 @@ export function ChatBot() {
                     )}
                   >
                     {msg.role === 'assistant' ? (
-                      <div className="prose prose-sm dark:prose-invert max-w-none [&_h1]:text-base [&_h1]:font-bold [&_h2]:text-sm [&_h2]:font-semibold [&_ul]:pl-4 [&_li]:text-sm [&_code]:rounded [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-xs [&_pre]:rounded-lg [&_pre]:bg-muted [&_pre]:p-3 [&_pre]:text-xs">
+                      <div className="prose prose-sm dark:prose-invert max-w-none [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_ul]:pl-4 [&_li]:text-sm [&_code]:rounded [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-xs">
                         <ReactMarkdown>{msg.content}</ReactMarkdown>
                       </div>
                     ) : (
@@ -180,6 +178,12 @@ export function ChatBot() {
                   <div className="rounded-lg bg-muted/50 px-3.5 py-2.5">
                     <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                   </div>
+                </div>
+              )}
+              {error && !loading && (
+                <div className="mb-2 flex items-center gap-1.5 rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-500">
+                  <AlertCircle className="h-3 w-3 shrink-0" />
+                  <span>Error: {error}</span>
                 </div>
               )}
               <div ref={bottomRef} />
@@ -206,9 +210,6 @@ export function ChatBot() {
                   <Send className="h-4 w-4" />
                 </button>
               </div>
-              <p className="mt-1.5 text-[10px] text-muted-foreground text-center">
-                The advisor may produce inaccurate information. Verify important advice.
-              </p>
             </div>
           </motion.div>
         )}
