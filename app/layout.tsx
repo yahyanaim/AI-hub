@@ -12,7 +12,7 @@ import { CourseDetailModal } from '@/components/detail/CourseDetail'
 import { Analytics } from '@vercel/analytics/react'
 import { ChatBot } from '@/components/chat/ChatBot'
 
-const baseUrl = 'https://ai-hunt.vercel.app'
+const baseUrl = 'https://aihubtools.vercel.app'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

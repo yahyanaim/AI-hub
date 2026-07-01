@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_USERS } from '@/lib/seed'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ai-hunt.app'
+  const baseUrl = 'https://aihubtools.vercel.app'
 
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },

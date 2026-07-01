@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: tool.logoUrl ? [tool.logoUrl] : undefined,
     },
     alternates: {
-      canonical: `https://ai-hunt.app/tools/${tool.slug}`,
+      canonical: `https://aihubtools.vercel.app/tools/${tool.slug}`,
     },
   }
 }

@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/'],
       },
     ],
-    sitemap: 'https://ai-hunt.app/sitemap.xml',
+    sitemap: 'https://aihubtools.vercel.app/sitemap.xml',
   }
 }
