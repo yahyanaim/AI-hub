@@ -7,17 +7,34 @@ import { Search, X, CornerDownLeft, ArrowRight, Clock } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { cn, formatNumber } from '@/lib/utils'
 import { Logo } from '@/components/ui/Logo'
-import type { Tool, DevTool, Prompt, Repo } from '@/types'
+import {
+  TOOL_CATEGORY_LABELS,
+  DEVTOOL_CATEGORY_LABELS,
+  REPO_CATEGORY_LABELS,
+  type Tool,
+  type DevTool,
+  type Repo,
+} from '@/types'
 
 interface SearchResult {
-  type: 'tool' | 'prompt' | 'devtool' | 'repo'
+  type: 'tool' | 'devtool' | 'repo'
   id: string
   slug: string
   title: string
   subtitle: string
   meta?: string
   href: string
-  item: Tool | DevTool | Prompt | Repo
+  item: Tool | DevTool | Repo
+}
+
+function tokenize(s: string): string[] {
+  return s.toLowerCase().split(/\s+/).filter(Boolean)
+}
+
+function matchesQuery(queryWords: string[], fields: string[]): boolean {
+  if (!queryWords.length) return false
+  const lowerFields = fields.map((f) => f.toLowerCase())
+  return queryWords.some((word) => lowerFields.some((f) => f.includes(word)))
 }
 
 export function CommandPalette() {
@@ -26,7 +43,6 @@ export function CommandPalette() {
     setPaletteOpen,
     tools,
     devTools,
-    prompts,
     repos,
     recentSearches,
     addRecentSearch,
@@ -38,7 +54,6 @@ export function CommandPalette() {
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
 
-  // ⌘K / Ctrl+K shortcut
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -53,7 +68,6 @@ export function CommandPalette() {
     return () => window.removeEventListener('keydown', handler)
   }, [setPaletteOpen, paletteOpen])
 
-  // Focus + reset on open
   useEffect(() => {
     if (paletteOpen) {
       setQuery('')
@@ -62,28 +76,24 @@ export function CommandPalette() {
     }
   }, [paletteOpen])
 
-  // Lock scroll
   useEffect(() => {
     if (paletteOpen) {
       document.body.style.overflow = 'hidden'
-      return () => {
-        document.body.style.overflow = ''
-      }
+      return () => { document.body.style.overflow = '' }
     }
   }, [paletteOpen])
 
+  const queryWords = useMemo(() => tokenize(query), [query])
+
   const results = useMemo<SearchResult[]>(() => {
-    const q = query.trim().toLowerCase()
-    if (!q) return []
-    const matches = (s: string) => s.toLowerCase().includes(q)
+    if (!queryWords.length) return []
 
     const toolResults: SearchResult[] = tools
-      .filter(
-        (t) =>
-          matches(t.name) ||
-          matches(t.tagline) ||
-          matches(t.description) ||
-          t.tags.some(matches)
+      .filter((t) =>
+        matchesQuery(queryWords, [
+          t.name, t.tagline, t.description, ...t.tags,
+          TOOL_CATEGORY_LABELS[t.category as keyof typeof TOOL_CATEGORY_LABELS] ?? '',
+        ])
       )
       .slice(0, 4)
       .map((t) => ({
@@ -98,31 +108,30 @@ export function CommandPalette() {
       }))
 
     const devToolResults: SearchResult[] = devTools
-      .filter(
-        (p) =>
-          matches(p.name) ||
-          matches(p.tagline) ||
-          matches(p.description) ||
-          p.tags.some(matches)
+      .filter((d) =>
+        matchesQuery(queryWords, [
+          d.name, d.tagline, d.description, ...d.tags,
+          DEVTOOL_CATEGORY_LABELS[d.category as keyof typeof DEVTOOL_CATEGORY_LABELS] ?? '',
+        ])
       )
       .slice(0, 4)
-      .map((p) => ({
+      .map((d) => ({
         type: 'devtool' as const,
-        id: p.id,
-        slug: p.slug,
-        title: p.name,
-        subtitle: p.tagline,
-        meta: formatNumber(p.upvotes) + ' upvotes',
-        href: `/devtool/${p.slug}`,
-        item: p,
+        id: d.id,
+        slug: d.slug,
+        title: d.name,
+        subtitle: d.tagline,
+        meta: formatNumber(d.upvotes) + ' upvotes',
+        href: `/devtool/${d.slug}`,
+        item: d,
       }))
 
     const repoResults: SearchResult[] = repos
-      .filter(
-        (r) =>
-          matches(r.name) ||
-          matches(r.description) ||
-          r.tags.some(matches)
+      .filter((r) =>
+        matchesQuery(queryWords, [
+          r.name, r.description, ...(r.tags ?? []),
+          REPO_CATEGORY_LABELS[r.category as keyof typeof REPO_CATEGORY_LABELS] ?? '',
+        ])
       )
       .slice(0, 4)
       .map((r) => ({
@@ -137,9 +146,8 @@ export function CommandPalette() {
       }))
 
     return [...toolResults, ...devToolResults, ...repoResults]
-  }, [query, tools, devTools, prompts, repos])
+  }, [queryWords, tools, devTools, repos])
 
-  // Grouped view
   const grouped = useMemo(() => {
     const g: Record<string, SearchResult[]> = {}
     for (const r of results) {
@@ -148,12 +156,10 @@ export function CommandPalette() {
     return g
   }, [results])
 
-  // Reset active when results change
   useEffect(() => {
     setActiveIndex(0)
   }, [query])
 
-  // Keyboard nav within list
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
@@ -193,7 +199,6 @@ export function CommandPalette() {
         className="relative w-full max-w-xl overflow-hidden rounded-lg border border-border bg-card shadow-2xl animate-slide-up"
         onKeyDown={onKeyDown}
       >
-        {/* Input */}
         <div className="flex items-center gap-3 border-b border-border px-4">
           <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
           <input
@@ -213,7 +218,6 @@ export function CommandPalette() {
           </button>
         </div>
 
-        {/* Body */}
         <div ref={listRef} className="max-h-[60vh] overflow-y-auto p-2">
           {showRecents && (
             <div className="mb-2">
@@ -244,7 +248,7 @@ export function CommandPalette() {
           {query.trim() && results.length === 0 && (
             <div className="px-4 py-12 text-center">
               <p className="text-sm text-muted-foreground">
-                No results for “{query}”.
+                No results for &ldquo;{query}&rdquo;.
               </p>
               <Link
                 href={`/search?q=${encodeURIComponent(query)}`}
@@ -259,16 +263,13 @@ export function CommandPalette() {
             </div>
           )}
 
-          {/* Grouped results */}
           {Object.entries(grouped).map(([group, items]) => {
             const label =
-               group === 'tool'
-                 ? 'Tools'
-                 : group === 'devtool'
-                   ? 'Dev Tools'
-                 : group === 'prompt'
-                   ? 'Prompts'
-                   : 'Repos'
+              group === 'tool'
+                ? 'Tools'
+                : group === 'devtool'
+                  ? 'Dev Tools'
+                  : 'Repos'
             return (
               <div key={group} className="mb-1">
                 <div className="px-2 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -301,14 +302,12 @@ export function CommandPalette() {
                           name={r.title}
                           size={32}
                         />
-                      ) : r.type === 'repo' ? (
-                        <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted text-xs font-bold text-brand-blue">
-                          {(r.item as Repo).name[0]?.toUpperCase()}
-                        </div>
                       ) : (
-                        <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted font-heading text-xs font-bold text-accent">
-                          {'>'}
-                        </div>
+                        <Logo
+                          src={(r.item as Repo).logoUrl}
+                          name={r.title}
+                          size={32}
+                        />
                       )}
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-sm font-medium text-foreground">
@@ -332,25 +331,18 @@ export function CommandPalette() {
           })}
         </div>
 
-        {/* Footer */}
         <div className="flex items-center justify-between border-t border-border px-4 py-2 text-xs text-muted-foreground">
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1">
-              <kbd className="rounded-sm border border-border bg-muted px-1 py-0.5 font-mono">
-                ↑↓
-              </kbd>
+              <kbd className="rounded-sm border border-border bg-muted px-1 py-0.5 font-mono">↑↓</kbd>
               navigate
             </span>
             <span className="flex items-center gap-1">
-              <kbd className="rounded-sm border border-border bg-muted px-1 py-0.5 font-mono">
-                ↵
-              </kbd>
+              <kbd className="rounded-sm border border-border bg-muted px-1 py-0.5 font-mono">↵</kbd>
               open
             </span>
             <span className="flex items-center gap-1">
-              <kbd className="rounded-sm border border-border bg-muted px-1 py-0.5 font-mono">
-                esc
-              </kbd>
+              <kbd className="rounded-sm border border-border bg-muted px-1 py-0.5 font-mono">esc</kbd>
               close
             </span>
           </div>

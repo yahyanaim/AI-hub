@@ -10,51 +10,113 @@ import { Logo } from '@/components/ui/Logo'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
-import { cn, formatNumber } from '@/lib/utils'
-import type { Tool, DevTool, Prompt, Repo } from '@/types'
+import {
+  TOOL_CATEGORY_LABELS,
+  DEVTOOL_CATEGORY_LABELS,
+  REPO_CATEGORY_LABELS,
+  type Tool,
+  type DevTool,
+  type Repo,
+} from '@/types'
+import { cn } from '@/lib/utils'
+
+function scoreItem(queryWords: string[], fields: string[]): number {
+  let score = 0
+  for (const word of queryWords) {
+    for (const field of fields) {
+      const lower = field.toLowerCase()
+      if (lower === word) score += 100
+      else if (lower.startsWith(word)) score += 50
+      else if (lower.includes(word)) score += 10
+    }
+  }
+  return score
+}
+
+function tokenize(s: string): string[] {
+  return s.toLowerCase().split(/\s+/).filter(Boolean)
+}
 
 export function SearchView() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const { tools, devTools, prompts, repos } = useApp()
+  const { tools, devTools, repos } = useApp()
   const [query, setQuery] = useState(searchParams.get('q') ?? '')
   const [tab, setTab] = useState<'all' | 'tool' | 'devtool' | 'repo'>('all')
 
   const q = query.trim().toLowerCase()
-  const matches = useCallback(
-    (s: string) => s.toLowerCase().includes(q),
-    [q]
+  const queryWords = tokenize(q)
+
+  const searchIn = useCallback(
+    (item: { name: string; tagline?: string; description?: string; tags?: string[]; category: string; url?: string }, extraFields: string[] = []) => {
+      if (!q) return false
+      const fields = [item.name, item.tagline ?? '', item.description ?? '', item.url ?? '', ...(item.tags ?? []), ...extraFields]
+      return queryWords.some((word) => fields.some((f) => f.toLowerCase().includes(word)))
+    },
+    [q, queryWords]
   )
 
-  const toolResults = useMemo(
-    () =>
-      tools.filter(
-        (t) =>
-          matches(t.name) || matches(t.tagline) || matches(t.description) || t.tags.some(matches)
-      ),
-    [tools, matches]
-  )
-  const devToolResults = useMemo(
-    () =>
-      devTools.filter(
-        (d) =>
-          matches(d.name) ||
-          matches(d.tagline) ||
-          matches(d.description) ||
-          d.tags.some(matches)
-      ),
-    [devTools, matches]
-  )
-  const repoResults = useMemo(
-    () =>
-      repos.filter(
-        (r) =>
-          matches(r.name) ||
-          matches(r.description) ||
-          r.tags.some(matches)
-      ),
-    [repos, matches]
-  )
+  const toolResults = useMemo(() => {
+    const items = tools.filter((t) =>
+      searchIn(t, [TOOL_CATEGORY_LABELS[t.category as keyof typeof TOOL_CATEGORY_LABELS] ?? ''])
+    )
+    if (!q) return items
+    return items
+      .map((t) => ({
+        item: t,
+        score: scoreItem(queryWords, [
+          t.name,
+          t.tagline,
+          t.description,
+          ...t.tags,
+          TOOL_CATEGORY_LABELS[t.category as keyof typeof TOOL_CATEGORY_LABELS] ?? '',
+        ]),
+      }))
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map((x) => x.item)
+  }, [tools, searchIn, q, queryWords])
+
+  const devToolResults = useMemo(() => {
+    const items = devTools.filter((d) =>
+      searchIn(d, [DEVTOOL_CATEGORY_LABELS[d.category as keyof typeof DEVTOOL_CATEGORY_LABELS] ?? ''])
+    )
+    if (!q) return items
+    return items
+      .map((d) => ({
+        item: d,
+        score: scoreItem(queryWords, [
+          d.name,
+          d.tagline,
+          d.description,
+          ...d.tags,
+          DEVTOOL_CATEGORY_LABELS[d.category as keyof typeof DEVTOOL_CATEGORY_LABELS] ?? '',
+        ]),
+      }))
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map((x) => x.item)
+  }, [devTools, searchIn, q, queryWords])
+
+  const repoResults = useMemo(() => {
+    const items = repos.filter((r) =>
+      searchIn(r, [REPO_CATEGORY_LABELS[r.category as keyof typeof REPO_CATEGORY_LABELS] ?? ''])
+    )
+    if (!q) return items
+    return items
+      .map((r) => ({
+        item: r,
+        score: scoreItem(queryWords, [
+          r.name,
+          r.description,
+          ...(r.tags ?? []),
+          REPO_CATEGORY_LABELS[r.category as keyof typeof REPO_CATEGORY_LABELS] ?? '',
+        ]),
+      }))
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map((x) => x.item)
+  }, [repos, searchIn, q, queryWords])
 
   const total = toolResults.length + devToolResults.length + repoResults.length
   const showing =
@@ -75,14 +137,13 @@ export function SearchView() {
         </p>
       </div>
 
-      {/* Search bar */}
       <div className="mx-auto mt-8 max-w-xl">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search anything…"
+            placeholder="Search anything — try 'HTML', 'React', 'SEO'…"
             className="input pl-12 py-3 text-base"
             autoFocus
             onKeyDown={(e) => {
@@ -103,7 +164,6 @@ export function SearchView() {
         </div>
       </div>
 
-      {/* Tabs */}
       <div className="mx-auto mt-4 flex max-w-xl items-center justify-center gap-1 rounded-md border border-border bg-card p-0.5">
         {(
           [
@@ -128,7 +188,6 @@ export function SearchView() {
         ))}
       </div>
 
-      {/* Results */}
       <div className="mx-auto mt-8 max-w-4xl">
         {!q && (
           <div className="py-16 text-center text-sm text-muted-foreground">
@@ -140,7 +199,7 @@ export function SearchView() {
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <SearchX className="mb-3 h-10 w-10 text-muted-foreground" />
             <p className="text-sm text-muted-foreground">
-              No results for “{query}”.
+              No results for &ldquo;{query}&rdquo;.
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
               Try a different query or browse the categories.
@@ -151,7 +210,7 @@ export function SearchView() {
         {q && total > 0 && (
           <>
             <p className="mb-6 text-sm text-muted-foreground">
-              {showing} result{showing !== 1 ? 's' : ''} for “{query}”
+              {showing} result{showing !== 1 ? 's' : ''} for &ldquo;{query}&rdquo;
             </p>
 
             {tab === 'all' || tab === 'tool' ? (
