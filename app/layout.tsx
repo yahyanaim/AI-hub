@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     alternateLocale: ['fr_FR', 'ar_SA'],
     images: [
       {
-        url: '/api/og',
-        width: 1200,
-        height: 630,
+        url: '/logo.png',
+        width: 512,
+        height: 512,
         alt: 'AI Hunt',
       },
     ],
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: 'AI Hunt — Discover AI Tools & Developer Resources',
     description:
       'Community-driven platform for AI tools, dev tools, GitHub repos, and coding courses.',
-    images: ['/api/og'],
+    images: ['/logo.png'],
     creator: '@yahianaim',
   },
   alternates: {
