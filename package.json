@@ -40,5 +40,8 @@
     "postcss": "8.4.41",
     "tailwindcss": "3.4.10",
     "typescript": "5.5.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["core-js", "sharp"]
   }
 }
