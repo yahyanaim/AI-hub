@@ -12,7 +12,7 @@ import { CourseDetailModal } from '@/components/detail/CourseDetail'
 import { Analytics } from '@vercel/analytics/react'
 import { ChatBot } from '@/components/chat/ChatBot'
 
-const baseUrl = 'https://ai-hunt.app'
+const baseUrl = 'https://ai-hunt.vercel.app'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     alternateLocale: ['fr_FR', 'ar_SA'],
     images: [
       {
-        url: '/logo.png',
-        width: 512,
-        height: 512,
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
         alt: 'AI Hunt',
       },
     ],
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: 'AI Hunt — Discover AI Tools & Developer Resources',
     description:
       'Community-driven platform for AI tools, dev tools, GitHub repos, and coding courses.',
-    images: ['/logo.png'],
+    images: ['/opengraph-image'],
     creator: '@yahianaim',
   },
   alternates: {

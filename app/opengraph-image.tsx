@@ -8,6 +8,10 @@ export const size = {
 }
 export const contentType = 'image/png'
 
+const BASE_URL = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'https://ai-hunt.vercel.app'
+
 export default async function Image() {
   return new ImageResponse(
     (
@@ -57,7 +61,7 @@ export default async function Image() {
           }}
         >
           <img
-            src="https://ai-hunt.vercel.app/logo.png"
+            src={`${BASE_URL}/logo.png`}
             alt="AI Hunt"
             width={80}
             height={80}
