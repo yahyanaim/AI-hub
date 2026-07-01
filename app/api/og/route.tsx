@@ -1,11 +1,8 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'AI Hunt — Discover AI Tools & Developer Resources'
-export const size = { width: 1200, height: 630 }
-export const contentType = 'image/png'
 
-export default async function Image() {
+export async function GET() {
   return new ImageResponse(
     (
       <div
@@ -36,6 +33,7 @@ export default async function Image() {
             color: '#94a3b8',
             textAlign: 'center',
             maxWidth: 700,
+            marginBottom: 40,
           }}
         >
           Discover AI Tools, Developer Resources & Learning Paths
@@ -44,30 +42,14 @@ export default async function Image() {
           style={{
             display: 'flex',
             gap: 12,
-            marginTop: 40,
           }}
         >
-          <div
-            style={{
-              background: '#FF6B00',
-              color: '#fff',
-              fontSize: 18,
-              fontWeight: 600,
-              paddingTop: 10,
-              paddingBottom: 10,
-              paddingLeft: 24,
-              paddingRight: 24,
-              borderRadius: 8,
-            }}
-          >
-            AI Tools
-          </div>
-          {['Dev Tools', 'Courses', 'Repos'].map((label) => (
+          {['AI Tools', 'Dev Tools', 'Courses', 'Repos'].map((label, i) => (
             <div
               key={label}
               style={{
-                background: 'rgba(255,255,255,0.1)',
-                color: '#e2e8f0',
+                background: i === 0 ? '#FF6B00' : 'rgba(255,255,255,0.1)',
+                color: i === 0 ? '#fff' : '#e2e8f0',
                 fontSize: 18,
                 fontWeight: 600,
                 paddingTop: 10,
@@ -83,6 +65,9 @@ export default async function Image() {
         </div>
       </div>
     ),
-    { width: 1200, height: 630 }
+    {
+      width: 1200,
+      height: 630,
+    }
   )
 }
