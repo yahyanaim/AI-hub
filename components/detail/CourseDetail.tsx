@@ -135,39 +135,45 @@ export function CourseDetailModal() {
                 {course.description}
               </p>
 
-              <div className="mb-5 border-l-2 border-border pl-4">
+              <div className="mb-5">
                 <h3 className="mb-3 flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   <BookOpen className="h-4 w-4" />
                   Roadmap ({course.roadmap.length} steps)
                 </h3>
-                <div className="space-y-4">
-                   {course.roadmap.map((step, i) => {
-                     const isCapstone = step.title === 'Capstone Project'
-                     return (
-                     <div key={i} className="relative">
-                       <div className="absolute -left-[1.35rem] top-1.5 flex h-4 w-4 items-center justify-center rounded-full border-2 border-brand-orange bg-card">
-                         <span className="text-[8px] font-bold text-brand-orange">{i + 1}</span>
-                       </div>
-                        <div className="pl-2">
-                            <div className="flex items-center gap-2">
-                              <h4 className="text-sm font-medium text-foreground">{step.title}</h4>
-                              <span className="text-[10px] text-muted-foreground">{step.duration}</span>
-                            </div>
-                            {!isCapstone && (
+                <div className="relative">
+                  <div className="absolute left-[7px] top-2 h-[calc(100%-1rem)] w-0.5 bg-border" />
+                  {course.roadmap.map((step, i) => {
+                    const isLast = i === course.roadmap.length - 1
+                    const isCapstone = step.title === 'Capstone Project'
+                    return (
+                      <div key={i} className="relative flex gap-4 pb-5 last:pb-0">
+                        <div className="relative z-10 flex shrink-0 flex-col items-center">
+                          <span className="flex h-4 w-4 items-center justify-center rounded-full border-2 border-brand-orange bg-card text-[8px] font-bold text-brand-orange">
+                            {i + 1}
+                          </span>
+                          {!isLast && <div className="mt-1 h-full w-0.5 bg-border" />}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <h4 className="text-sm font-medium text-foreground">{step.title}</h4>
+                            <span className="text-[10px] text-muted-foreground">{step.duration}</span>
+                          </div>
+                          {!isCapstone && (
                             <div className="mt-1 flex flex-wrap gap-1">
                               {step.topics.map((topic) => (
                                 <Tag key={topic} color={topicColor(topic)}>{topic}</Tag>
                               ))}
                             </div>
-                            )}
-                            {step.description && (
-                              <p className={cn("leading-relaxed pl-2 text-left", isCapstone ? "mt-2 text-sm text-foreground/90" : "mt-2 text-[11px] text-muted-foreground/80")}>
-                                {step.description}
-                              </p>
-                            )}
+                          )}
+                          {step.description && (
+                            <p className={cn("leading-relaxed", isCapstone ? "mt-2 text-sm text-foreground/90" : "mt-1 text-[11px] text-muted-foreground/80")}>
+                              {step.description}
+                            </p>
+                          )}
                         </div>
-                     </div>
-                     )})}
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
 
@@ -256,32 +262,40 @@ export function CourseDetail({ slug }: { slug: string }) {
             <BookOpen className="h-5 w-5 text-brand-orange" />
             Roadmap ({course.roadmap.length} steps)
           </h2>
-          <div className="space-y-4">
+          <div className="relative">
+            <div className="absolute left-[11px] top-2 h-[calc(100%-1.5rem)] w-0.5 bg-border" />
             {course.roadmap.map((step, i) => {
+              const isLast = i === course.roadmap.length - 1
               const isCapstone = step.title === 'Capstone Project'
               return (
-              <div key={i} className="rounded-lg border border-border bg-card p-4">
-                <div className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-orange/10 text-xs font-bold text-brand-orange">
-                    {i + 1}
-                  </span>
-                  <h3 className="font-medium text-foreground">{step.title}</h3>
-                  <span className="text-xs text-muted-foreground">{step.duration}</span>
+                <div key={i} className="relative flex gap-4 pb-6 last:pb-0">
+                  <div className="relative z-10 flex shrink-0 flex-col items-center">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-brand-orange bg-card text-xs font-bold text-brand-orange">
+                      {i + 1}
+                    </span>
+                    {!isLast && <div className="mt-1 h-full w-0.5 bg-border" />}
+                  </div>
+                  <div className="min-w-0 flex-1 rounded-lg border border-border bg-card p-4">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-medium text-foreground">{step.title}</h3>
+                      <span className="text-xs text-muted-foreground">{step.duration}</span>
+                    </div>
+                    {!isCapstone && (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {step.topics.map((topic) => (
+                          <Tag key={topic} color={topicColor(topic)}>{topic}</Tag>
+                        ))}
+                      </div>
+                    )}
+                    {step.description && (
+                      <p className={cn("leading-relaxed", isCapstone ? "mt-3 text-sm text-foreground/90" : "mt-2 text-xs text-muted-foreground/80")}>
+                        {step.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                {!isCapstone && (
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {step.topics.map((topic) => (
-                    <Tag key={topic} color={topicColor(topic)}>{topic}</Tag>
-                  ))}
-                </div>
-                )}
-                {step.description && (
-                  <p className={cn("leading-relaxed text-left", isCapstone ? "mt-3 text-sm text-foreground/90" : "mt-2 text-xs text-muted-foreground/80")}>
-                    {step.description}
-                  </p>
-                )}
-              </div>
-            )})}
+              )
+            })}
           </div>
         </div>
 
