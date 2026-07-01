@@ -27,6 +27,7 @@ export interface ListingConfig {
   description: string
   categoryLabel: string
   categoryOptions: FilterOption[]
+  itemLabel?: string
   extraFilters?: 'pricing' | 'language'
   pricingOptions?: FilterOption[]
   languageOptions?: FilterOption[]
@@ -173,7 +174,7 @@ export function ListingView<T extends { id: string }>({
 
       {/* Results count */}
       <div className="mb-4 text-sm text-muted-foreground">
-        <span className="font-semibold text-foreground">{filtered.length}</span> tools &middot; Page {page} of {totalPages}
+        <span className="font-semibold text-foreground">{filtered.length}</span> {config.itemLabel ?? 'tools'} &middot; Page {page} of {totalPages}
       </div>
 
       {/* Grid / List */}

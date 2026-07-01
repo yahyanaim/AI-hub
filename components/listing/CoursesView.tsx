@@ -22,6 +22,7 @@ export function CoursesView() {
           'Structured roadmaps and learning paths for software developers. From full-stack to AI engineering.',
         categoryLabel: 'Category',
         categoryOptions,
+        itemLabel: 'courses',
       }}
       renderCard={(c) => <CourseCard course={c} />}
       getCategory={(c) => c.category}
