@@ -10,6 +10,7 @@ import { ToolDetailModal } from '@/components/detail/ToolDetailModal'
 import { RepoDetailModal } from '@/components/detail/RepoDetail'
 import { CourseDetailModal } from '@/components/detail/CourseDetail'
 import { Analytics } from '@vercel/analytics/react'
+import { ChatBot } from '@/components/chat/ChatBot'
 
 const baseUrl = 'https://ai-hunt.app'
 
@@ -171,6 +172,7 @@ export default function RootLayout({
           <RepoDetailModal />
           <CourseDetailModal />
           <Analytics />
+          <ChatBot />
         </AppProvider>
       </body>
     </html>
