@@ -8,6 +8,7 @@ import { AuthModal } from '@/components/auth/AuthModal'
 import { ToolDetailModal } from '@/components/detail/ToolDetailModal'
 import { RepoDetailModal } from '@/components/detail/RepoDetail'
 import { CourseDetailModal } from '@/components/detail/CourseDetail'
+import { Analytics } from '@vercel/analytics/react'
 
 export const metadata: Metadata = {
   title: {
@@ -62,6 +63,7 @@ export default function RootLayout({
           <ToolDetailModal />
           <RepoDetailModal />
           <CourseDetailModal />
+          <Analytics />
         </AppProvider>
       </body>
     </html>
