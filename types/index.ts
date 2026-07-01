@@ -13,6 +13,16 @@ export type ToolCategory =
   | 'marketing'
   | 'data'
   | 'agents'
+  | 'sales-leads'
+  | 'automation'
+  | 'social-community'
+  | 'design-ui-ux'
+  | 'finance'
+  | 'api-backend'
+  | 'engineering-data'
+  | 'no-code'
+  | 'open-source-ai'
+  | 'seo'
   | 'other'
 
 export type DevToolCategory =
@@ -214,6 +224,16 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
   marketing: 'Marketing',
   data: 'Data',
   agents: 'Agents',
+  'sales-leads': 'Sales & Leads',
+  automation: 'AI Automation',
+  'social-community': 'Social Community',
+  'design-ui-ux': 'Design UI/UX',
+  finance: 'Finance',
+  'api-backend': 'API Backend',
+  'engineering-data': 'Engineering & Data',
+  'no-code': 'No Code Platform',
+  'open-source-ai': 'Open Source AI',
+  seo: 'SEO Tools',
   other: 'Other',
 }
 
