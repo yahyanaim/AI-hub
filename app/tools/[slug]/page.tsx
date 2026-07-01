@@ -17,6 +17,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: tool.name,
       description: tool.tagline,
       type: 'article',
+      images: tool.logoUrl ? [{ url: tool.logoUrl, alt: tool.name }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: tool.name,
+      description: tool.tagline,
+      images: tool.logoUrl ? [tool.logoUrl] : undefined,
+    },
+    alternates: {
+      canonical: `https://ai-hunt.app/tools/${tool.slug}`,
     },
   }
 }
