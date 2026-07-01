@@ -76,7 +76,7 @@ export function Footer() {
               <Twitter className="h-5 w-5" />
             </a>
             <span className="flex items-center gap-1 text-xs text-muted-foreground">
-              Made with <Heart className="h-3 w-3 fill-red-500 text-red-500" />
+              Made with <Heart className="h-3 w-3 fill-red-500 text-red-500" /> by Yahia Naim
             </span>
           </div>
         </div>
