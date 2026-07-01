@@ -11,20 +11,22 @@ import {
   TOOL_CATEGORY_LABELS,
   DEVTOOL_CATEGORY_LABELS,
   REPO_CATEGORY_LABELS,
+  COURSE_CATEGORY_LABELS,
   type Tool,
   type DevTool,
   type Repo,
+  type Course,
 } from '@/types'
 
 interface SearchResult {
-  type: 'tool' | 'devtool' | 'repo'
+  type: 'tool' | 'devtool' | 'course' | 'repo'
   id: string
   slug: string
   title: string
   subtitle: string
   meta?: string
   href: string
-  item: Tool | DevTool | Repo
+  item: Tool | DevTool | Repo | Course
 }
 
 function tokenize(s: string): string[] {
@@ -43,6 +45,7 @@ export function CommandPalette() {
     setPaletteOpen,
     tools,
     devTools,
+    courses,
     repos,
     recentSearches,
     addRecentSearch,
@@ -126,6 +129,26 @@ export function CommandPalette() {
         item: d,
       }))
 
+    const courseResults: SearchResult[] = courses
+      .filter((c) =>
+        matchesQuery(queryWords, [
+          c.name, c.tagline, c.description, c.difficulty, c.duration,
+          COURSE_CATEGORY_LABELS[c.category as keyof typeof COURSE_CATEGORY_LABELS] ?? '',
+          ...(c.roadmap?.flatMap((s) => [s.title, ...(s.topics ?? [])]) ?? []),
+        ])
+      )
+      .slice(0, 4)
+      .map((c) => ({
+        type: 'course' as const,
+        id: c.id,
+        slug: c.slug,
+        title: c.name,
+        subtitle: c.tagline,
+        meta: c.duration,
+        href: `/courses/${c.slug}`,
+        item: c,
+      }))
+
     const repoResults: SearchResult[] = repos
       .filter((r) =>
         matchesQuery(queryWords, [
@@ -145,8 +168,8 @@ export function CommandPalette() {
         item: r,
       }))
 
-    return [...toolResults, ...devToolResults, ...repoResults]
-  }, [queryWords, tools, devTools, repos])
+    return [...toolResults, ...devToolResults, ...courseResults, ...repoResults]
+  }, [queryWords, tools, devTools, courses, repos])
 
   const grouped = useMemo(() => {
     const g: Record<string, SearchResult[]> = {}
@@ -205,7 +228,7 @@ export function CommandPalette() {
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search AI tools, dev tools, repos…"
+            placeholder="Search AI tools, dev tools, courses, repos…"
             className="w-full bg-transparent py-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             aria-label="Search query"
           />
@@ -269,7 +292,9 @@ export function CommandPalette() {
                 ? 'Tools'
                 : group === 'devtool'
                   ? 'Dev Tools'
-                  : 'Repos'
+                  : group === 'course'
+                    ? 'Courses'
+                    : 'Repos'
             return (
               <div key={group} className="mb-1">
                 <div className="px-2 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -290,15 +315,9 @@ export function CommandPalette() {
                           : 'hover:bg-muted/60'
                       )}
                     >
-                      {r.type === 'tool' ? (
+                      {r.type === 'tool' || r.type === 'devtool' || r.type === 'course' ? (
                         <Logo
-                          src={(r.item as Tool).logoUrl}
-                          name={r.title}
-                          size={32}
-                        />
-                      ) : r.type === 'devtool' ? (
-                        <Logo
-                          src={(r.item as DevTool).logoUrl}
+                          src={(r.item as Tool | DevTool | Course).logoUrl}
                           name={r.title}
                           size={32}
                         />
