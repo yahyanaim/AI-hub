@@ -116,11 +116,9 @@ export function Navbar() {
           </button>
 
           {/* Submit button */}
-          <Link href="/submit" className="hidden sm:inline-flex">
-            <Button size="sm" className="gap-1.5">
-              <Plus className="h-4 w-4" />
-              Submit
-            </Button>
+          <Link href="/submit" className="hidden sm:inline-flex rounded-full bg-brand-orange px-4 py-1.5 text-sm font-semibold text-white transition-all hover:bg-orange-600 active:scale-[0.97]">
+            <Plus className="mr-1 h-4 w-4" />
+            Submit
           </Link>
 
           {/* Auth */}
