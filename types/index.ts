@@ -39,6 +39,7 @@ export type DevToolCategory =
   | 'library'
   | 'framework'
   | 'starter-pack'
+  | 'templates'
   | 'other'
 
 export type EditToolCategory =
@@ -251,6 +252,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   library: 'Library',
   framework: 'Framework',
   'starter-pack': 'Starter Packs',
+  templates: 'Templates',
   other: 'Other',
 }
 
