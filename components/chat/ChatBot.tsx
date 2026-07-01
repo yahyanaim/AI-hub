@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Bot, User, Sparkles, Loader2, X, MessageSquare, AlertCircle, Lock } from 'lucide-react'
+import { Send, User, Sparkles, Loader2, X, MessageSquare, AlertCircle, Lock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import ReactMarkdown from 'react-markdown'
 import { DonationGateChat } from './DonationGateChat'
@@ -177,7 +177,7 @@ export function ChatBot() {
                     )}
                   >
                     {msg.role === 'assistant' ? (
-                      <Bot className="h-3.5 w-3.5" />
+                      <img src="/logo.png" alt="AI Hunt" className="h-5 w-5 rounded-full" />
                     ) : (
                       <User className="h-3.5 w-3.5" />
                     )}
@@ -202,9 +202,7 @@ export function ChatBot() {
               ))}
               {loading && (
                 <div className="mb-4 flex gap-3">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
-                    <Bot className="h-3.5 w-3.5" />
-                  </div>
+                  <img src="/logo.png" alt="AI Hunt" className="h-5 w-5 rounded-full" />
                   <div className="rounded-lg bg-muted/50 px-3.5 py-2.5">
                     <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                   </div>
