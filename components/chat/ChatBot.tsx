@@ -2,9 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Bot, User, Sparkles, Loader2, X, MessageSquare, AlertCircle } from 'lucide-react'
+import { Send, Bot, User, Sparkles, Loader2, X, MessageSquare, AlertCircle, Lock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import ReactMarkdown from 'react-markdown'
+import { DonationGateChat } from './DonationGateChat'
 
 type Message = {
   role: 'user' | 'assistant'
@@ -21,9 +22,12 @@ export function ChatBot() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
+  const [showDonationGate, setShowDonationGate] = useState(false)
   const [error, setError] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const hasDonated = typeof window !== 'undefined' && localStorage.getItem('ai-hunt-donated') === 'true'
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -32,6 +36,19 @@ export function ChatBot() {
   useEffect(() => {
     if (open) inputRef.current?.focus()
   }, [open])
+
+  const openChat = () => {
+    if (!hasDonated) {
+      setShowDonationGate(true)
+    } else {
+      setOpen(true)
+    }
+  }
+
+  const onDonationDismiss = () => {
+    setShowDonationGate(false)
+    setOpen(true)
+  }
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return
@@ -90,17 +107,30 @@ export function ChatBot() {
   return (
     <>
       <button
-        onClick={() => setOpen(!open)}
+        onClick={open ? () => setOpen(false) : openChat}
         className={cn(
           'fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-xl transition-all duration-200',
           open
             ? 'bg-muted hover:bg-muted/80'
-            : 'bg-brand-orange text-white hover:bg-orange-600'
+            : hasDonated
+              ? 'bg-brand-orange text-white hover:bg-orange-600'
+              : 'bg-muted text-muted-foreground hover:bg-muted/80'
         )}
         aria-label={open ? 'Close chat' : 'Open chat'}
       >
-        {open ? <X className="h-6 w-6" /> : <MessageSquare className="h-6 w-6" />}
+        {open ? <X className="h-6 w-6" /> : hasDonated ? <MessageSquare className="h-6 w-6" /> : <Lock className="h-5 w-5" />}
       </button>
+      {!hasDonated && !open && (
+        <div className="fixed bottom-6 right-6 z-50 mb-16 flex items-center gap-1 rounded-full bg-muted px-3 py-1.5 text-[11px] text-muted-foreground shadow-lg">
+          <Lock className="h-3 w-3" />
+          Donate to unlock
+        </div>
+      )}
+
+      <DonationGateChat
+        open={showDonationGate}
+        onDismiss={onDonationDismiss}
+      />
 
       <AnimatePresence>
         {open && (
