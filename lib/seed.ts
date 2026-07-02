@@ -9543,6 +9543,32 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(5),
     updatedAt: daysAgo(1),
   },
+  // Data Science
+  {
+    id: 'c59',
+    slug: 'mit-60002-computational-thinking-data-science',
+    name: "Introduction to Computational Thinking and Data Science",
+    description: "MIT's 6.0002 course covering optimization problems, graph-theoretic models, stochastic thinking, random walks, Monte Carlo simulation, confidence intervals, sampling, experimental data analysis, machine learning, clustering, and classification. Taught by Prof. Eric Grimson, Prof. John Guttag, and Dr. Ana Bell. Includes 15 lecture videos, problem sets, and programming assignments.",
+    tagline: 'MIT OCW — free computational thinking & data science',
+    url: 'https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/ocw.mit.edu.ico',
+    category: 'data-science',
+    difficulty: 'intermediate',
+    duration: '15 weeks',
+    roadmap: [
+      { title: 'Optimization & Graph Models', topics: ['Optimization Problems', 'Graph-Theoretic Models', 'Shortest Path', 'Knapsack Problem'], duration: '3 weeks', url: 'https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/video_galleries/lecture-videos/' },
+      { title: 'Stochastic Thinking & Simulation', topics: ['Stochastic Processes', 'Random Walks', 'Monte Carlo Simulation', 'Probability Distributions'], duration: '3 weeks', url: 'https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/video_galleries/lecture-videos/' },
+      { title: 'Statistics & Experimental Data', topics: ['Confidence Intervals', 'Sampling & Standard Error', 'Experimental Data Analysis', 'Statistical Inference'], duration: '3 weeks', url: 'https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/video_galleries/lecture-videos/' },
+      { title: 'Machine Learning', topics: ['Introduction to ML', 'Clustering (K-Means)', 'Classification', 'Statistical Sins & Wrap Up'], duration: '4 weeks', url: 'https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/video_galleries/lecture-videos/' },
+    ],
+    upvotes: 820,
+    bookmarks: 300,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(5),
+    updatedAt: daysAgo(1),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
