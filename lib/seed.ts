@@ -8592,7 +8592,7 @@ export const SEED_COURSES: Course[] = [
     url: 'https://www.edx.org/course/introduction-to-linux',
     pricing: 'free',
     logoUrl: 'https://icons.duckduckgo.com/ip3/edx.org.ico',
-    category: 'hosting',
+    category: 'cloud',
     difficulty: 'beginner',
     duration: '6 weeks',
     roadmap: [
@@ -8894,7 +8894,7 @@ export const SEED_COURSES: Course[] = [
     url: 'https://www.oracle.com/cloud/',
     pricing: 'free',
     logoUrl: 'https://icons.duckduckgo.com/ip3/oracle.com.ico',
-    category: 'hosting',
+    category: 'cloud',
     difficulty: 'intermediate',
     duration: '10 weeks',
     roadmap: [
@@ -9273,7 +9273,7 @@ export const SEED_COURSES: Course[] = [
     url: 'https://www.youtube.com/watch?v=kTp5xUtcalw',
     pricing: 'free',
     logoUrl: 'https://icons.duckduckgo.com/ip3/kubernetes.io.ico',
-    category: 'hosting',
+    category: 'cloud',
     difficulty: 'intermediate',
     duration: '12 weeks',
     roadmap: [
@@ -9355,7 +9355,7 @@ export const SEED_COURSES: Course[] = [
     url: 'https://www.youtube.com/watch?v=NhDYbskXRgc',
     pricing: 'free',
     logoUrl: 'https://icons.duckduckgo.com/ip3/aws.amazon.com.ico',
-    category: 'hosting',
+    category: 'cloud',
     difficulty: 'beginner',
     duration: '8 weeks',
     roadmap: [
