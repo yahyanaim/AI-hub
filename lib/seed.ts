@@ -9763,6 +9763,31 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(3),
     updatedAt: daysAgo(1),
   },
+  // AI Engineering
+  {
+    id: 'c64',
+    slug: 'ibm-intro-agentic-ai',
+    name: 'Introduction to Agentic AI',
+    description: 'IBM SkillsNetwork\'s free course on agentic AI. Covers core principles of AI agents, how they perceive environments, make decisions, and take autonomous actions. Topics include distinguishing agentic AI from generative AI, how agents interact with tools via protocols like MCP, and real-world applications across industries. Interactive format with an AI-driven podcast, videos, readings, and quizzes. Includes a free certificate.',
+    tagline: 'IBM — free 3-hour intro to AI agents',
+    url: 'https://www.ibm.com/training/course/introduction-to-agentic-ai-CLPCC202501',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/ibm.com.ico',
+    category: 'ai-engineering',
+    difficulty: 'beginner',
+    duration: '3 hours',
+    roadmap: [
+      { title: 'What is Agentic AI', topics: ['Core Principles of AI Agents', 'Agentic vs Generative AI', 'Perception & Decision-Making', 'Autonomous Action'], duration: '45 min', url: 'https://www.ibm.com/training/course/introduction-to-agentic-ai-CLPCC202501' },
+      { title: 'How AI Agents Work', topics: ['Agent Architecture', 'Tool Integration & MCP', 'Memory & Context', 'Multi-Agent Systems'], duration: '1 hour', url: 'https://www.ibm.com/training/course/introduction-to-agentic-ai-CLPCC202501' },
+      { title: 'Applications & Future', topics: ['Industry Use Cases', 'Enterprise Automation', 'Responsible AI Agents', 'Next Steps'], duration: '1 hour 15 min', url: 'https://www.ibm.com/training/course/introduction-to-agentic-ai-CLPCC202501' },
+    ],
+    upvotes: 380,
+    bookmarks: 150,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(2),
+    updatedAt: daysAgo(1),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
