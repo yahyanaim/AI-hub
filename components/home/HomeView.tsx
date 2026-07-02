@@ -8,7 +8,6 @@ import { HeroSection } from './HeroSection'
 import { Sidebar } from './Sidebar'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { motion } from 'framer-motion'
-import { AIToolsCarousel } from './AIToolsCarousel'
 
 export function HomeView() {
   const { tools, devTools, prompts, repos, setPaletteOpen } = useApp()
@@ -99,9 +98,6 @@ export function HomeView() {
           </div>
         </div>
       </div>
-
-      {/* AI Tools Carousel */}
-      <AIToolsCarousel />
     </div>
   )
 }
