@@ -132,6 +132,8 @@ export type CourseCategory =
   | 'computer-science'
   | 'cybersecurity'
   | 'math'
+  | 'writing'
+  | 'automation'
 
 export interface RoadmapStep {
   title: string
@@ -280,6 +282,8 @@ export const COURSE_CATEGORY_LABELS: Record<CourseCategory, string> = {
   'computer-science': 'Computer Science',
   cybersecurity: 'Cybersecurity',
   math: 'Math',
+  writing: 'Writing & Communication',
+  automation: 'Automation & No-Code',
 }
 
 export const PRICING_LABELS: Record<Pricing, string> = {
