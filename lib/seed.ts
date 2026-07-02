@@ -9569,6 +9569,31 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(5),
     updatedAt: daysAgo(1),
   },
+  // AI Engineering
+  {
+    id: 'c60',
+    slug: 'ucla-rl-llm',
+    name: 'Reinforcement Learning of Large Language Models',
+    description: 'A UCLA graduate-level course by Prof. Ernest K. Ryu covering deep reinforcement learning, large language models, and RL for LLMs. Topics include MDP foundations, imitation learning, deep policy gradient (PPO, GRPO), Transformers (BERT, GPT), instruction fine-tuning, RLHF (PPO, DPO), and RL with verifiable rewards (RLVR). Includes 12 video lectures, slides, and homework exercises.',
+    tagline: 'UCLA — free RL for LLMs course',
+    url: 'https://ernestryu.com/courses/RL-LLM.html',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/ernestryu.com.ico',
+    category: 'ai-engineering',
+    difficulty: 'advanced',
+    duration: '12 lectures',
+    roadmap: [
+      { title: 'Deep Reinforcement Learning', topics: ['MDP Foundations', 'Imitation Learning', 'Value Iteration', 'Deep Policy Evaluation', 'A3C', 'PPO', 'GRPO', 'AlphaGo', 'Expert Iteration'], duration: '5 lectures', url: 'https://ernestryu.com/courses/RL-LLM.html' },
+      { title: 'Large Language Models', topics: ['NLP Foundations', 'Language Modeling', 'RNNs', 'Transformers (BERT, GPT)', 'Modern Transformer Updates', 'Sampling Methods', 'In-Context Learning', 'Instruction Fine-Tuning'], duration: '4 lectures', url: 'https://ernestryu.com/courses/RL-LLM.html' },
+      { title: 'RL for LLMs', topics: ['RLHF (PPO, DPO)', 'RL with Verifiable Rewards (RLVR)', 'Reward Modeling', 'Alignment', 'Safety'], duration: '3 lectures', url: 'https://ernestryu.com/courses/RL-LLM.html' },
+    ],
+    upvotes: 560,
+    bookmarks: 210,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(3),
+    updatedAt: daysAgo(1),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
