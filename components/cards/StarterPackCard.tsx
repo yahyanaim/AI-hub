@@ -17,6 +17,7 @@ const PACK_LOGOS: Record<string, string> = {
   'sql-stack': 'https://icons.duckduckgo.com/ip3/postgresql.org.ico',
   'data-analytics-stack': 'https://icons.duckduckgo.com/ip3/python.org.ico',
   'cybersecurity-stack': 'https://icons.duckduckgo.com/ip3/kali.org.ico',
+  'laravel-vue-stack': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
 }
 
 const TOOL_LOGOS: Record<string, string> = {
