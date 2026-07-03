@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     }
 
     const payload = {
-      model: 'meta/llama-3.2-3b-instruct',
+      model: 'minimaxai/minimax-m3',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages,
