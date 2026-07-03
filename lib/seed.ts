@@ -7424,6 +7424,27 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     createdAt: daysAgo(180),
     updatedAt: daysAgo(1),
   },
+  // Starter Packs
+  {
+    id: 'd152',
+    slug: 'laravel-vue-stack',
+    name: 'Laravel + Vue.js Stack',
+    tagline: 'Full starter environment for building modern web apps with Laravel and Vue.js',
+    description: `A complete development environment for building full-stack web applications with Laravel (PHP) on the backend and Vue.js on the frontend. Includes Inertia.js for seamless SPA integration, Vite for fast bundling, and all essential tools for modern PHP/Vue development.`,
+    url: 'https://laravel.com',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/laravel.com.ico',
+    category: 'starter-pack',
+    tags: ['php', 'vue', 'full-stack', 'web', 'inertia'],
+    pricing: 'free',
+    upvotes: 580,
+    bookmarks: 190,
+    submittedBy: 'u1',
+    featured: true,
+    featuredDate: daysAgo(1),
+    createdAt: daysAgo(30),
+    updatedAt: daysAgo(1),
+    tools: ['PHP 8.x', 'Composer', 'Laravel', 'Vue.js', 'Vite', 'Inertia.js', 'Tailwind CSS', 'MySQL / PostgreSQL', 'Git', 'Laravel Herd / Valet', 'VS Code', 'ESLint / Prettier'],
+  },
 ]
 
 export const SEED_REPOS: Repo[] = [
