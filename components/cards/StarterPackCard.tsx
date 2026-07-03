@@ -27,8 +27,10 @@ const TOOL_LOGOS: Record<string, string> = {
   'npm / yarn': 'https://www.google.com/s2/favicons?domain=npmjs.com&sz=64',
   'React': 'https://www.google.com/s2/favicons?domain=react.dev&sz=64',
   'ESLint': 'https://www.google.com/s2/favicons?domain=eslint.org&sz=64',
+  'ESLint / Prettier': 'https://www.google.com/s2/favicons?domain=eslint.org&sz=64',
   'Prettier': 'https://www.google.com/s2/favicons?domain=prettier.io&sz=64',
   'Jest': 'https://www.google.com/s2/favicons?domain=jestjs.io&sz=64',
+  'Vite': 'https://www.google.com/s2/favicons?domain=vite.dev&sz=64',
   'Webpack / Vite': 'https://www.google.com/s2/favicons?domain=vite.dev&sz=64',
   'Git': 'https://www.google.com/s2/favicons?domain=git-scm.com&sz=64',
   'Postman': 'https://www.google.com/s2/favicons?domain=postman.com&sz=64',
@@ -89,6 +91,12 @@ const TOOL_LOGOS: Record<string, string> = {
   'Power BI': 'https://www.google.com/s2/favicons?domain=powerbi.microsoft.com&sz=64',
   'TablePlus': 'https://www.google.com/s2/favicons?domain=tableplus.com&sz=64',
   'Metabase': 'https://www.google.com/s2/favicons?domain=metabase.com&sz=64',
+  'Laravel': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
+  'Vue.js': 'https://www.google.com/s2/favicons?domain=vuejs.org&sz=64',
+  'Inertia.js': 'https://www.google.com/s2/favicons?domain=inertiajs.com&sz=64',
+  'Tailwind CSS': 'https://www.google.com/s2/favicons?domain=tailwindcss.com&sz=64',
+  'MySQL / PostgreSQL': 'https://www.google.com/s2/favicons?domain=mysql.com&sz=64',
+  'Laravel Herd / Valet': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
 }
 
 export function StarterPackCard({
