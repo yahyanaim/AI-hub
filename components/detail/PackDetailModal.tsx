@@ -75,6 +75,14 @@ const INSTALL_LINKS: Record<string, string> = {
   'Power BI': 'https://powerbi.microsoft.com/downloads/',
   'TablePlus': 'https://tableplus.com/download',
   'Metabase': 'https://www.metabase.com/start/',
+  'Laravel': 'https://laravel.com/docs/installation',
+  'Vue.js': 'https://vuejs.org/guide/quick-start',
+  'Vite': 'https://vite.dev/guide/',
+  'Inertia.js': 'https://inertiajs.com/',
+  'Tailwind CSS': 'https://tailwindcss.com/docs/installation',
+  'MySQL / PostgreSQL': 'https://dev.mysql.com/downloads/',
+  'Laravel Herd / Valet': 'https://herd.laravel.com/',
+  'ESLint / Prettier': 'https://eslint.org/docs/user-guide/getting-started',
 }
 
 const TOOL_LOGOS: Record<string, string> = {
@@ -147,6 +155,14 @@ const TOOL_LOGOS: Record<string, string> = {
   'Power BI': 'https://www.google.com/s2/favicons?domain=powerbi.microsoft.com&sz=64',
   'TablePlus': 'https://www.google.com/s2/favicons?domain=tableplus.com&sz=64',
   'Metabase': 'https://www.google.com/s2/favicons?domain=metabase.com&sz=64',
+  'Laravel': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
+  'Vue.js': 'https://www.google.com/s2/favicons?domain=vuejs.org&sz=64',
+  'Vite': 'https://www.google.com/s2/favicons?domain=vite.dev&sz=64',
+  'Inertia.js': 'https://www.google.com/s2/favicons?domain=inertiajs.com&sz=64',
+  'Tailwind CSS': 'https://www.google.com/s2/favicons?domain=tailwindcss.com&sz=64',
+  'MySQL / PostgreSQL': 'https://www.google.com/s2/favicons?domain=mysql.com&sz=64',
+  'Laravel Herd / Valet': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
+  'ESLint / Prettier': 'https://www.google.com/s2/favicons?domain=eslint.org&sz=64',
 }
 
 const TOOL_DESC: Record<string, string> = {
@@ -219,6 +235,14 @@ const TOOL_DESC: Record<string, string> = {
   'Power BI': 'Microsoft analytics tool for business reporting',
   'TablePlus': 'Modern GUI client for multiple database types',
   'Metabase': 'Open-source BI tool for SQL queries & dashboards',
+  'Laravel': 'PHP framework for elegant, expressive web applications',
+  'Vue.js': 'Progressive frontend framework for building SPAs',
+  'Vite': 'Fast build tool & dev server for modern frontends',
+  'Inertia.js': 'Build SPAs using classic server-side routing',
+  'Tailwind CSS': 'Utility-first CSS framework for rapid UI development',
+  'MySQL / PostgreSQL': 'Relational databases for web application storage',
+  'Laravel Herd / Valet': 'Local PHP development environment for macOS',
+  'ESLint / Prettier': 'Code quality tools for consistent JavaScript',
 }
 
 interface PackDetailModalProps {
@@ -391,4 +415,5 @@ const PACK_LOGOS: Record<string, string> = {
   'sql-stack': 'https://icons.duckduckgo.com/ip3/postgresql.org.ico',
   'data-analytics-stack': 'https://icons.duckduckgo.com/ip3/python.org.ico',
   'cybersecurity-stack': 'https://icons.duckduckgo.com/ip3/kali.org.ico',
+  'laravel-vue-stack': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
 }
