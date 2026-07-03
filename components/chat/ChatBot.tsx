@@ -137,20 +137,20 @@ export function ChatBot() {
 
   return (
     <>
-      <button
-        onClick={open ? () => setOpen(false) : openChat}
-        className={cn(
-          'fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-xl transition-all duration-200',
-          open
-            ? 'bg-muted hover:bg-muted/80'
-            : hasDonated
+      {!open && (
+        <button
+          onClick={openChat}
+          className={cn(
+            'fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-xl transition-all duration-200',
+            hasDonated
               ? 'bg-brand-orange text-white hover:bg-orange-600'
               : 'bg-muted text-muted-foreground hover:bg-muted/80'
-        )}
-        aria-label={open ? 'Close chat' : 'Open chat'}
-      >
-        {open ? <X className="h-6 w-6" /> : hasDonated ? <MessageSquare className="h-6 w-6" /> : <Lock className="h-5 w-5" />}
-      </button>
+          )}
+          aria-label="Open chat"
+        >
+          {hasDonated ? <MessageSquare className="h-6 w-6" /> : <Lock className="h-5 w-5" />}
+        </button>
+      )}
       {!hasDonated && !open && (
         <div className="fixed bottom-6 right-6 z-50 mb-16 flex items-center gap-1 rounded-full bg-muted px-3 py-1.5 text-[11px] text-muted-foreground shadow-lg">
           <Lock className="h-3 w-3" />
