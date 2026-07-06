@@ -95,7 +95,7 @@ const TOOL_LOGOS: Record<string, string> = {
   'ESLint': 'https://www.google.com/s2/favicons?domain=eslint.org&sz=64',
   'Prettier': 'https://www.google.com/s2/favicons?domain=prettier.io&sz=64',
   'Jest': 'https://www.google.com/s2/favicons?domain=jestjs.io&sz=64',
-  'Webpack / Vite': 'https://www.google.com/s2/favicons?domain=vite.dev&sz=64',
+  'Webpack / Vite': 'https://icons.duckduckgo.com/ip3/vite.dev.ico',
   'Git': 'https://www.google.com/s2/favicons?domain=git-scm.com&sz=64',
   'Postman': 'https://www.google.com/s2/favicons?domain=postman.com&sz=64',
   'JDK 21': 'https://www.google.com/s2/favicons?domain=oracle.com&sz=64',
@@ -155,14 +155,14 @@ const TOOL_LOGOS: Record<string, string> = {
   'Power BI': 'https://www.google.com/s2/favicons?domain=powerbi.microsoft.com&sz=64',
   'TablePlus': 'https://www.google.com/s2/favicons?domain=tableplus.com&sz=64',
   'Metabase': 'https://www.google.com/s2/favicons?domain=metabase.com&sz=64',
-  'Laravel': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
-  'Vue.js': 'https://www.google.com/s2/favicons?domain=vuejs.org&sz=64',
-  'Vite': 'https://www.google.com/s2/favicons?domain=vite.dev&sz=64',
-  'Inertia.js': 'https://www.google.com/s2/favicons?domain=inertiajs.com&sz=64',
-  'Tailwind CSS': 'https://www.google.com/s2/favicons?domain=tailwindcss.com&sz=64',
-  'MySQL / PostgreSQL': 'https://www.google.com/s2/favicons?domain=mysql.com&sz=64',
-  'Laravel Herd / Valet': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
-  'ESLint / Prettier': 'https://www.google.com/s2/favicons?domain=eslint.org&sz=64',
+  'Laravel': 'https://icons.duckduckgo.com/ip3/laravel.com.ico',
+  'Vue.js': 'https://icons.duckduckgo.com/ip3/vuejs.org.ico',
+  'Vite': 'https://icons.duckduckgo.com/ip3/vite.dev.ico',
+  'Inertia.js': 'https://icons.duckduckgo.com/ip3/inertiajs.com.ico',
+  'Tailwind CSS': 'https://icons.duckduckgo.com/ip3/tailwindcss.com.ico',
+  'MySQL / PostgreSQL': 'https://icons.duckduckgo.com/ip3/mysql.com.ico',
+  'Laravel Herd / Valet': 'https://icons.duckduckgo.com/ip3/laravel.com.ico',
+  'ESLint / Prettier': 'https://icons.duckduckgo.com/ip3/eslint.org.ico',
 }
 
 const TOOL_DESC: Record<string, string> = {
@@ -415,5 +415,5 @@ const PACK_LOGOS: Record<string, string> = {
   'sql-stack': 'https://icons.duckduckgo.com/ip3/postgresql.org.ico',
   'data-analytics-stack': 'https://icons.duckduckgo.com/ip3/python.org.ico',
   'cybersecurity-stack': 'https://icons.duckduckgo.com/ip3/kali.org.ico',
-  'laravel-vue-stack': 'https://www.google.com/s2/favicons?domain=laravel.com&sz=64',
+  'laravel-vue-stack': 'https://icons.duckduckgo.com/ip3/laravel.com.ico',
 }
