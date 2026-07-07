@@ -12,7 +12,7 @@ const pricingOptions: FilterOption[] = Object.entries(PRICING_LABELS).map(
   ([value, label]) => ({ value, label })
 )
 
-const FREE_PRICING = new Set(['free', 'open-source'])
+const FREE_PRICING = new Set(['free', 'open-source', 'freemium'])
 
 const SUB_OPTIONS: FilterOption[] = [
   { value: 'images', label: 'Images' },

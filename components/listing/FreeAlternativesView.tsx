@@ -42,7 +42,7 @@ const SECTIONS: SubSection[] = [
   },
 ]
 
-const FREE_PRICING = new Set(['free', 'open-source'])
+const FREE_PRICING = new Set(['free', 'open-source', 'freemium'])
 
 export function FreeAlternativesView() {
   const { tools } = useApp()

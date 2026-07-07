@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useApp } from '@/lib/store'
-import { TOOL_CATEGORY_LABELS, REPO_CATEGORY_LABELS } from '@/types'
+import { TOOL_CATEGORY_LABELS, REPO_CATEGORY_LABELS, type Tool } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import {
   Wrench,
@@ -21,7 +21,9 @@ export function Sidebar() {
     key,
     label,
     type: 'tools' as const,
-    count: tools.filter((t) => t.category === key).length,
+    count: key === 'free-alternatives'
+      ? tools.filter((t) => ['free', 'open-source', 'freemium'].includes(t.pricing)).length
+      : tools.filter((t) => t.category === key).length,
   }))
 
   const topTools = [...tools].sort((a, b) => b.upvotes - a.upvotes).slice(0, 5)
