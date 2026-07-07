@@ -74,7 +74,7 @@ export function ListingView<T extends { id: string }>({
 
   const filtered = useMemo(() => {
     let arr = [...items]
-    if (category !== 'all') {
+    if (category !== 'all' && !freeOnly) {
       if (config.customCategoryFilter) {
         arr = arr.filter((i) => config.customCategoryFilter!(getCategory(i), i, category))
       } else {
