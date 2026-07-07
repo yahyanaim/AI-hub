@@ -117,6 +117,7 @@ export function ListingView<T extends { id: string }>({
     category,
     pricing,
     language,
+    subcategory,
     getCategory,
     getPricing,
     getLanguage,
@@ -124,6 +125,8 @@ export function ListingView<T extends { id: string }>({
     getBookmarks,
     getCreatedAt,
     getTrendingScore,
+    config.customCategoryFilter,
+    config.subcategoryFilter,
   ])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
