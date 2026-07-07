@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { SearchX, SlidersHorizontal, ChevronLeft, ChevronRight, Check } from 'lucide-react'
+import { SearchX, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
 import { CardGrid } from '@/components/cards/CardPrimitives'
 import { Dropdown, ChipFilter, ClearButton } from '@/components/layout/FilterBar'
 import type { FilterOption } from '@/components/layout/FilterBar'
@@ -67,14 +67,13 @@ export function ListingView<T extends { id: string }>({
   const [sort, setSort] = useState<SortKey>('trending')
   const [category, setCategory] = useState('all')
   const [pricing, setPricing] = useState('all')
-  const [freeOnly, setFreeOnly] = useState(false)
   const [language, setLanguage] = useState('all')
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [page, setPage] = useState(1)
 
   const filtered = useMemo(() => {
     let arr = [...items]
-    if (category !== 'all' && !freeOnly) {
+    if (category !== 'all') {
       if (config.customCategoryFilter) {
         arr = arr.filter((i) => config.customCategoryFilter!(getCategory(i), i, category))
       } else {
@@ -82,7 +81,6 @@ export function ListingView<T extends { id: string }>({
       }
     }
     if (pricing !== 'all' && getPricing) arr = arr.filter((i) => getPricing(i) === pricing)
-    if (freeOnly && getPricing) arr = arr.filter((i) => ['free', 'open-source', 'freemium'].includes(getPricing(i)))
     if (language !== 'all' && getLanguage) arr = arr.filter((i) => getLanguage(i) === language)
 
     arr.sort((a, b) => {
@@ -110,7 +108,6 @@ export function ListingView<T extends { id: string }>({
     sort,
     category,
     pricing,
-    freeOnly,
     language,
     getCategory,
     getPricing,
@@ -127,12 +124,11 @@ export function ListingView<T extends { id: string }>({
   const paginated = filtered.slice((page - 1) * pageSize, page * pageSize)
 
   const hasFilters =
-    category !== 'all' || pricing !== 'all' || language !== 'all' || freeOnly || sort !== 'trending'
+    category !== 'all' || pricing !== 'all' || language !== 'all' || sort !== 'trending'
 
   const clearFilters = () => {
     setCategory('all')
     setPricing('all')
-    setFreeOnly(false)
     setLanguage('all')
     setSort('trending')
     setPage(1)
@@ -169,23 +165,6 @@ export function ListingView<T extends { id: string }>({
           <Dropdown label="" value={sort} options={SORT_OPTIONS} onChange={(v) => changeFilter(setSort, v as SortKey)} />
           {config.extraFilters?.includes('pricing') && config.pricingOptions && (
             <Dropdown label="Pricing" value={pricing} options={config.pricingOptions} onChange={(v) => changeFilter(setPricing, v)} />
-          )}
-          {config.extraFilters?.includes('pricing') && (
-            <button
-              onClick={() => { setFreeOnly(!freeOnly); setPage(1) }}
-              className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors ${
-                freeOnly
-                  ? 'bg-brand-orange/10 text-brand-orange'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-              }`}
-            >
-              <span className={`flex h-3.5 w-3.5 items-center justify-center rounded border ${
-                freeOnly ? 'border-brand-orange bg-brand-orange' : 'border-border'
-              }`}>
-                {freeOnly && <Check className="h-2.5 w-2.5 text-white" strokeWidth={3} />}
-              </span>
-              Free alternatives only
-            </button>
           )}
           {config.extraFilters?.includes('language') && config.languageOptions && (
             <Dropdown label="Language" value={language} options={config.languageOptions} onChange={(v) => changeFilter(setLanguage, v)} />
