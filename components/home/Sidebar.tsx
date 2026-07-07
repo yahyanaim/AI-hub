@@ -21,9 +21,7 @@ export function Sidebar() {
     key,
     label,
     type: 'tools' as const,
-    count: key === 'free-alternatives'
-      ? tools.filter((t) => ['free', 'open-source', 'freemium'].includes(t.pricing)).length
-      : tools.filter((t) => t.category === key).length,
+    count: tools.filter((t) => t.category === key).length,
   }))
 
   const topTools = [...tools].sort((a, b) => b.upvotes - a.upvotes).slice(0, 5)
