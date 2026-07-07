@@ -31,6 +31,10 @@ export interface ListingConfig {
   extraFilters?: 'pricing' | 'language'
   pricingOptions?: FilterOption[]
   languageOptions?: FilterOption[]
+  customCategoryFilter?: (itemCategory: string, item: any, selectedCategory: string) => boolean
+  subcategoryOptions?: FilterOption[]
+  subcategoryLabel?: string
+  subcategoryFilter?: (item: any, subcategory: string) => boolean
 }
 
 interface ListingViewProps<T> {
@@ -64,14 +68,28 @@ export function ListingView<T extends { id: string }>({
   const [category, setCategory] = useState('all')
   const [pricing, setPricing] = useState('all')
   const [language, setLanguage] = useState('all')
+  const [subcategory, setSubcategory] = useState('all')
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [page, setPage] = useState(1)
 
   const filtered = useMemo(() => {
     let arr = [...items]
-    if (category !== 'all') arr = arr.filter((i) => getCategory(i) === category)
+    if (category !== 'all') {
+      if (config.customCategoryFilter) {
+        arr = arr.filter((i) => config.customCategoryFilter!(getCategory(i), i, category))
+      } else {
+        arr = arr.filter((i) => getCategory(i) === category)
+      }
+    }
     if (pricing !== 'all' && getPricing) arr = arr.filter((i) => getPricing(i) === pricing)
     if (language !== 'all' && getLanguage) arr = arr.filter((i) => getLanguage(i) === language)
+    if (subcategory !== 'all') {
+      if (config.subcategoryFilter) {
+        arr = arr.filter((i) => config.subcategoryFilter!(i, subcategory))
+      } else if (getCategory) {
+        arr = arr.filter((i) => getCategory(i) === subcategory)
+      }
+    }
 
     arr.sort((a, b) => {
       switch (sort) {
@@ -118,6 +136,7 @@ export function ListingView<T extends { id: string }>({
     setCategory('all')
     setPricing('all')
     setLanguage('all')
+    setSubcategory('all')
     setSort('trending')
     setPage(1)
   }
@@ -170,6 +189,16 @@ export function ListingView<T extends { id: string }>({
           value={category}
           onChange={(v) => changeFilter(setCategory, v)}
         />
+
+        {/* Subcategory chips — shown only for free-alternatives */}
+        {category === 'free-alternatives' && config.subcategoryOptions && config.subcategoryOptions.length > 0 && (
+          <ChipFilter
+            label={config.subcategoryLabel ?? 'Type'}
+            options={[{ value: 'all', label: 'All' }, ...config.subcategoryOptions]}
+            value={subcategory}
+            onChange={(v) => changeFilter(setSubcategory, v)}
+          />
+        )}
       </div>
 
       {/* Results count */}
