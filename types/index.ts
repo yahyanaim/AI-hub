@@ -18,6 +18,7 @@ export type ToolCategory =
   | 'social-community'
   | 'design-ui-ux'
   | 'finance'
+  | 'email'
   | 'api-backend'
   | 'engineering-data'
   | 'no-code'
@@ -234,6 +235,7 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
   'social-community': 'Social Community',
   'design-ui-ux': 'Design UI/UX',
   finance: 'Finance',
+  email: 'Email',
   'api-backend': 'API Backend',
   'engineering-data': 'Engineering & Data',
   'no-code': 'No Code Platform',
