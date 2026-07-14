@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
-const NVIDIA_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const API_KEY = process.env.NVIDIA_API_KEY
+const API_URL = 'https://inference.dahl.global/v1/chat/completions'
+const API_KEY = process.env.DAHL_API_KEY || 'dahl_3GhLtaQ362nfX6QAmJLx1bWL8pR5FdpMf'
 
 const SYSTEM_PROMPT = `You are an AI Career Advisor for AI Hunt — a community-driven platform for AI tools, developer tools, open-source repos, and coding courses.
 
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     }
 
     const payload = {
-      model: 'minimaxai/minimax-m3',
+      model: 'moonshotai/Kimi-K2.6',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages,
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       stream: true,
     }
 
-    const nvidiaResponse = await fetch(NVIDIA_API_URL, {
+    const nvidiaResponse = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${API_KEY}`,
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
     if (!nvidiaResponse.ok) {
       const text = await nvidiaResponse.text()
       return NextResponse.json(
-        { error: `NVIDIA API error: ${nvidiaResponse.status}`, details: text },
+        { error: `API error: ${nvidiaResponse.status}`, details: text },
         { status: nvidiaResponse.status }
       )
     }
