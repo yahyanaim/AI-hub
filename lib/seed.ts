@@ -31426,6 +31426,33 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(60),
     updatedAt: daysAgo(5),
   },
+  // System Design
+  {
+    id: 'c67',
+    slug: 'system-design-primer',
+    name: 'System Design Primer',
+    description: 'A comprehensive open-source guide to learning **system design** — the art of designing large-scale distributed systems. Covers topics from scalability, CAP theorem, and load balancing to real-world architectures (Twitter, YouTube, Uber). Includes Anki flashcards, interactive coding exercises, and company-specific design problems.',
+    tagline: 'The #1 open-source resource for system design interviews',
+    url: 'https://github.com/donnemartin/system-design-primer',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/github.com.ico',
+    category: 'computer-science',
+    difficulty: 'intermediate',
+    duration: 'Self-paced',
+    roadmap: [
+      { title: 'Fundamentals', topics: ['Scalability', 'Latency vs Throughput', 'CAP Theorem', 'ACID vs BASE', 'Consistency Patterns', 'Availability Patterns'], duration: 'Self-paced', url: 'https://github.com/donnemartin/system-design-primer' },
+      { title: 'System Design Building Blocks', topics: ['Load Balancing', 'Caching', 'Data Partitioning', 'Indexes', 'Proxies', 'Redundancy & Replication', 'SQL vs NoSQL', 'CDN', 'DNS', 'Message Queues'], duration: 'Self-paced', url: 'https://github.com/donnemartin/system-design-primer#system-design-topics' },
+      { title: 'Design Problems', topics: ['Design Pastebin', 'Design URL Shortener', 'Design Twitter', 'Design YouTube', 'Design Web Crawler', 'Design Chat System', 'Design Uber', 'Design Dropbox', 'More Problems'], duration: 'Self-paced', url: 'https://github.com/donnemartin/system-design-primer#design-a-url-shortener' },
+      { title: 'Interview Prep', topics: ['Anki Flashcards', 'Practice Problems', 'Company-Specific Systems', 'Whiteboard Walkthroughs', 'Trade-off Analysis'], duration: 'Self-paced', url: 'https://github.com/donnemartin/system-design-primer#how-to-approach-a-system-design-interview-question' },
+      { title: 'Real-World Architectures', topics: ['Twitter Architecture', 'YouTube Architecture', 'Uber Architecture', 'Facebook Timeline', 'Amazon Shopping Cart'], duration: 'Self-paced', url: 'https://github.com/donnemartin/system-design-primer#real-world-architectures' },
+    ],
+    upvotes: 890,
+    bookmarks: 340,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(1),
+    updatedAt: daysAgo(1),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
