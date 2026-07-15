@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
-const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const API_KEY = process.env.NVIDIA_API_KEY
+const API_URL = 'https://inference.dahl.global/v1/chat/completions'
+const API_KEY = process.env.DAHL_API_KEY || 'dahl_3GhLtaQ362nfX6QAmJLx1bWL8pR5FdpMf'
 
 const SYSTEM_PROMPT = `You are an AI Career Advisor for AI Hunt — a community-driven platform for AI tools, developer tools, open-source repos, and coding courses.
 
@@ -41,13 +41,13 @@ export async function POST(request: Request) {
 
     if (!API_KEY) {
       return NextResponse.json(
-        { error: 'NVIDIA API key not configured' },
+        { error: 'API key not configured' },
         { status: 500 }
       )
     }
 
     const payload = {
-      model: 'nvidia/llama-3.1-nemotron-ultra-253b-v1',
+      model: 'moonshotai/Kimi-K2.6',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages,
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       stream: true,
     }
 
-    const nvidiaResponse = await fetch(API_URL, {
+    const apiResponse = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${API_KEY}`,
@@ -67,17 +67,17 @@ export async function POST(request: Request) {
       body: JSON.stringify(payload),
     })
 
-    if (!nvidiaResponse.ok) {
-      const text = await nvidiaResponse.text()
+    if (!apiResponse.ok) {
+      const text = await apiResponse.text()
       return NextResponse.json(
-        { error: `API error: ${nvidiaResponse.status}`, details: text },
-        { status: nvidiaResponse.status }
+        { error: `API error: ${apiResponse.status}`, details: text },
+        { status: apiResponse.status }
       )
     }
 
     const stream = new ReadableStream({
       async start(controller) {
-        const reader = nvidiaResponse.body!.getReader()
+        const reader = apiResponse.body!.getReader()
         const decoder = new TextDecoder()
 
         try {
