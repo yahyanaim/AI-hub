@@ -32,7 +32,7 @@ import {
 } from '@/lib/seed'
 import { uuid, slugify } from '@/lib/utils'
 
-const STORAGE_KEY = 'ai-hunt-state-v1'
+const STORAGE_KEY = 'ai-hunt-state-v2'
 
 interface PersistedState {
   tools: Tool[]
