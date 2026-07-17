@@ -29286,6 +29286,33 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(1),
     updatedAt: daysAgo(1),
   },
+  // Full Stack
+  {
+    id: 'c68',
+    slug: 'certified-full-stack-developer',
+    name: 'Certified Full-Stack Developer',
+    description: "freeCodeCamp's comprehensive full-stack developer certification covering Responsive Web Design, JavaScript, Front-End Libraries (React), Python, Relational Databases, and Back-End Development & APIs. Culminates in a full-stack developer exam. 500+ exercises, 100k+ students. Verifiable professional certification — 100% free.",
+    tagline: 'Become a certified full-stack developer — 100% free',
+    url: 'https://www.freecodecamp.org/learn/full-stack-developer-v9/',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/freecodecamp.org.ico',
+    category: 'fullstack',
+    difficulty: 'intermediate',
+    duration: '300 hours',
+    roadmap: [
+      { title: 'Responsive Web Design', topics: ['HTML5', 'CSS3', 'Flexbox', 'CSS Grid', 'Accessibility'], duration: '50 hours', url: 'https://www.freecodecamp.org/learn/full-stack-developer-v9/' },
+      { title: 'JavaScript', topics: ['Variables & Data Types', 'Functions & Scope', 'DOM Manipulation', 'OOP & FP', 'Algorithms'], duration: '80 hours', url: 'https://www.freecodecamp.org/learn/full-stack-developer-v9/' },
+      { title: 'Front-End Libraries & Python', topics: ['React', 'Redux', 'Python Fundamentals', 'Data Structures'], duration: '60 hours', url: 'https://www.freecodecamp.org/learn/full-stack-developer-v9/' },
+      { title: 'Relational Databases', topics: ['SQL', 'PostgreSQL', 'Database Design', 'Queries & Joins'], duration: '50 hours', url: 'https://www.freecodecamp.org/learn/full-stack-developer-v9/' },
+      { title: 'Back-End & APIs', topics: ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'Final Exam'], duration: '60 hours', url: 'https://www.freecodecamp.org/learn/full-stack-developer-v9/' },
+    ],
+    upvotes: 920,
+    bookmarks: 380,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(2),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
