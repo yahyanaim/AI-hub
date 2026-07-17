@@ -24555,6 +24555,24 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     createdAt: daysAgo(60),
     updatedAt: daysAgo(5),
   },
+  {
+    id: 'd408',
+    slug: 'tldraw',
+    name: 'tldraw',
+    tagline: 'Open-source infinite canvas whiteboard SDK and app',
+    description: `tldraw is a **free and open-source** infinite canvas whiteboard SDK and application. Draw, annotate, diagram, and collaborate in real-time. Provides a rich editor component that can be embedded in any web app. MIT licensed.`,
+    url: 'https://tldraw.com',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/tldraw.com.ico',
+    category: 'collaboration',
+    tags: ["whiteboard","canvas","open-source","collaboration","drawing"],
+    pricing: 'free',
+    upvotes: 210,
+    bookmarks: 68,
+    submittedBy: 'u2',
+    featured: false,
+    createdAt: daysAgo(45),
+    updatedAt: daysAgo(2),
+  },
 ]
 
 export const SEED_REPOS: Repo[] = [
