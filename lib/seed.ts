@@ -29545,6 +29545,29 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c78',
+    slug: 'cisco-python-essentials',
+    name: 'Python Essentials 1 & 2',
+    description: "Cisco Networking Academy's free Python course series covering Python fundamentals (PE1) and intermediate concepts (PE2). Covers data types, control flow, functions, tuples, dictionaries, exceptions, modules, OOP, and file handling. Includes 30+ labs and prepares for PCEP certification.",
+    tagline: 'Free Python course from Cisco with PCEP prep',
+    url: 'https://www.netacad.com/learning-collections/python',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/netacad.com.ico',
+    category: 'python',
+    difficulty: 'beginner',
+    duration: '~60 hours',
+    roadmap: [
+      { title: 'Python Essentials 1: Basics', topics: ['Intro to Python', 'Data Types & Variables', 'Operators & I/O', 'Control Flow & Loops', 'Lists & Collections', 'Functions & Tuples', 'Dictionaries & Exceptions'], duration: '30 hours', url: 'https://www.netacad.com/learning-collections/python' },
+      { title: 'Python Essentials 2: Intermediate', topics: ['Modules & Packages', 'Strings & Methods', 'OOP Fundamentals', 'File Operations', 'Exception Handling', 'Advanced Functions', 'Final Exam & PCEP Prep'], duration: '30 hours', url: 'https://www.netacad.com/learning-collections/python' },
+    ],
+    upvotes: 700,
+    bookmarks: 250,
+    submittedBy: 'u3',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
