@@ -29394,6 +29394,32 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(1),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c72',
+    slug: 'codecademy-web-development',
+    name: 'Web Development Catalog (Codecademy)',
+    description: "Codecademy's complete web development catalog covering HTML, CSS, JavaScript, React, Node.js, TypeScript, Git, and more. Includes career paths for front-end, back-end, and full-stack engineering. Interactive coding exercises and projects with free and paid tiers.",
+    tagline: 'Interactive web dev courses on Codecademy',
+    url: 'https://www.codecademy.com/catalog/subject/web-development',
+    pricing: 'freemium',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/codecademy.com.ico',
+    category: 'fullstack',
+    difficulty: 'beginner',
+    duration: '150+ hours',
+    roadmap: [
+      { title: 'Front-End Fundamentals', topics: ['HTML', 'CSS', 'JavaScript', 'Git & GitHub'], duration: '30 hours', url: 'https://www.codecademy.com/catalog/subject/web-development' },
+      { title: 'Front-End Frameworks', topics: ['React', 'Angular', 'Vue.js', 'Next.js'], duration: '30 hours', url: 'https://www.codecademy.com/catalog/subject/web-development' },
+      { title: 'Back-End Development', topics: ['Node.js', 'Express', 'Flask', 'Django'], duration: '30 hours', url: 'https://www.codecademy.com/catalog/subject/web-development' },
+      { title: 'Databases & APIs', topics: ['SQL', 'MongoDB', 'REST APIs', 'WebSockets'], duration: '20 hours', url: 'https://www.codecademy.com/catalog/subject/web-development' },
+      { title: 'Career Paths', topics: ['Front-End Engineer', 'Back-End Engineer', 'Full-Stack Engineer', 'Build Websites from Scratch'], duration: '40 hours', url: 'https://www.codecademy.com/catalog/subject/web-development' },
+    ],
+    upvotes: 650,
+    bookmarks: 220,
+    submittedBy: 'u4',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
