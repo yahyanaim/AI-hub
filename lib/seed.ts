@@ -29470,6 +29470,31 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c75',
+    slug: 'ibm-ux-design-fundamentals',
+    name: 'User Experience Design Fundamentals',
+    description: "IBM SkillsBuild's learning path on UX design fundamentals. Covers user personas, wireframing, prototyping, usability testing, information architecture, and design tools. Earn an IBM digital credential.",
+    tagline: 'Free UX design fundamentals from IBM',
+    url: 'https://skills.yourlearning.ibm.com/activity/PLAN-3749C72117E2',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/skillsbuild.org.ico',
+    category: 'frontend',
+    difficulty: 'intermediate',
+    duration: '~12 hours',
+    roadmap: [
+      { title: 'UX Design Foundations', topics: ['What is UX Design', 'User-Centered Design', 'Design Thinking', 'UX Design Process'], duration: '3 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-3749C72117E2' },
+      { title: 'User Research & Personas', topics: ['User Research Methods', 'User Personas', 'User Stories', 'Journey Mapping'], duration: '3 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-3749C72117E2' },
+      { title: 'Wireframing & Prototyping', topics: ['Information Architecture', 'Site Maps', 'Wireframing', 'Interactive Prototypes'], duration: '3 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-3749C72117E2' },
+      { title: 'Usability Testing & Portfolio', topics: ['Usability Testing', 'Design Tools (Figma, Adobe XD)', 'Case Study Review', 'Final Assessment & Credential'], duration: '3 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-3749C72117E2' },
+    ],
+    upvotes: 440,
+    bookmarks: 160,
+    submittedBy: 'u2',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
