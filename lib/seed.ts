@@ -29520,6 +29520,31 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c77',
+    slug: 'datacamp-intro-to-python',
+    name: 'Introduction to Python',
+    description: "DataCamp's beginner-friendly Python course covering Python basics, variables, types, lists, functions, methods, packages, and NumPy. Interactive coding exercises with instant feedback. No prior experience needed.",
+    tagline: 'Learn Python for data science on DataCamp',
+    url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science',
+    pricing: 'freemium',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/datacamp.com.ico',
+    category: 'python',
+    difficulty: 'beginner',
+    duration: '~4 hours',
+    roadmap: [
+      { title: 'Python Basics', topics: ['Hello Python', 'Variables & Types', 'Calculations', 'Type Operations'], duration: '1 hour', url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science' },
+      { title: 'Python Lists', topics: ['Creating Lists', 'List Subsetting', 'Slicing & Dicing', 'List Manipulation'], duration: '1 hour', url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science' },
+      { title: 'Functions & Packages', topics: ['Built-in Functions', 'Methods', 'Packages', 'Importing'], duration: '1 hour', url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science' },
+      { title: 'NumPy', topics: ['NumPy Arrays', '2D Arrays', 'Array Subsetting', 'Basic Statistics'], duration: '1 hour', url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science' },
+    ],
+    upvotes: 680,
+    bookmarks: 240,
+    submittedBy: 'u5',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
