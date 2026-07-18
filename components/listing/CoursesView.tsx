@@ -13,7 +13,20 @@ export function CoursesView() {
   const { courses } = useApp()
 
   return (
-    <ListingView<Course>
+    <>
+      <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200">
+        <strong>Free access & certification:</strong> To get free access and earn a Coursera certificate, fill out{' '}
+        <a
+          href="https://recoded.typeform.com/apricot?typeform-source=l.facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold underline hover:text-blue-600 dark:hover:text-blue-300"
+        >
+          this form
+        </a>
+        .
+      </div>
+      <ListingView<Course>
       items={courses}
       config={{
         title: 'Learning Courses',
@@ -31,5 +44,6 @@ export function CoursesView() {
       getCreatedAt={(c) => c.createdAt}
       getTrendingScore={(c) => c.upvotes + (c.featured ? 100 : 0)}
     />
+    </>
   )
 }

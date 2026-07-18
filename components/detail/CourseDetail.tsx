@@ -217,20 +217,6 @@ export function CourseDetail({ slug }: { slug: string }) {
   return (
     <div className="container-page py-8">
       <div className="rounded-xl border border-border bg-muted p-6 md:p-8">
-        {slug === 'fast-prototyping-genai-apps-streamlit' && (
-          <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200">
-            <strong>Free access & certification:</strong> To get free access and earn a Coursera certificate, fill out{' '}
-            <a
-              href="https://recoded.typeform.com/apricot?typeform-source=l.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold underline hover:text-blue-600 dark:hover:text-blue-300"
-            >
-              this form
-            </a>
-            .
-          </div>
-        )}
         <div className="flex flex-col gap-6 md:flex-row md:items-start">
           <Logo src={course.logoUrl} name={course.name} size={80} />
           <div className="min-w-0 flex-1">
