@@ -29495,6 +29495,31 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c76',
+    slug: 'linux-foundation-intro-to-linux',
+    name: 'Introduction to Linux (LFS101)',
+    description: "Linux Foundation's free course covering Linux fundamentals across major distributions. Covers command line operations, file systems, text editors, bash scripting, network operations, system configuration, and security principles. Includes hands-on labs and a digital badge.",
+    tagline: 'Free Linux fundamentals from the Linux Foundation',
+    url: 'https://training.linuxfoundation.org/training/introduction-to-linux/',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/training.linuxfoundation.org.ico',
+    category: 'computer-science',
+    difficulty: 'beginner',
+    duration: '~60 hours',
+    roadmap: [
+      { title: 'Linux Basics & System Startup', topics: ['Linux Philosophy', 'Distributions', 'Boot Process', 'Graphical Interface'], duration: '8 hours', url: 'https://training.linuxfoundation.org/training/introduction-to-linux/' },
+      { title: 'Command Line & File Operations', topics: ['Shell Basics', 'File Operations', 'Text Editors', 'User Environment'], duration: '14 hours', url: 'https://training.linuxfoundation.org/training/introduction-to-linux/' },
+      { title: 'System Administration', topics: ['Processes', 'Network Operations', 'Manipulating Text', 'Printing'], duration: '14 hours', url: 'https://training.linuxfoundation.org/training/introduction-to-linux/' },
+      { title: 'Scripting & Security', topics: ['Bash Shell Scripting', 'Advanced Scripting', 'Local Security', 'Final Labs'], duration: '14 hours', url: 'https://training.linuxfoundation.org/training/introduction-to-linux/' },
+    ],
+    upvotes: 530,
+    bookmarks: 200,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
