@@ -29420,6 +29420,31 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c73',
+    slug: 'ibm-web-development-fundamentals',
+    name: 'Web Development Fundamentals',
+    description: "IBM SkillsBuild's free learning path covering web development basics. Covers HTML, CSS, JavaScript, responsive design, and building websites. Earn industry-recognized IBM digital credentials upon completion.",
+    tagline: 'Free web dev fundamentals from IBM',
+    url: 'https://skills.yourlearning.ibm.com/activity/PLAN-8749C02A78EC',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/skillsbuild.org.ico',
+    category: 'frontend',
+    difficulty: 'beginner',
+    duration: '~11 hours',
+    roadmap: [
+      { title: 'Web Development Basics', topics: ['How the Web Works', 'HTML Fundamentals', 'CSS Styling', 'Responsive Design'], duration: '3 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-8749C02A78EC' },
+      { title: 'JavaScript Essentials', topics: ['Variables & Types', 'Functions', 'DOM Manipulation', 'Events'], duration: '3 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-8749C02A78EC' },
+      { title: 'Building Websites', topics: ['Project Structure', 'Layout & Navigation', 'Forms & Validation', 'Accessibility'], duration: '3 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-8749C02A78EC' },
+      { title: 'Career Readiness', topics: ['Portfolio Building', 'Industry Credentials', 'Web Dev Careers', 'Next Steps'], duration: '2 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-8749C02A78EC' },
+    ],
+    upvotes: 420,
+    bookmarks: 150,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
