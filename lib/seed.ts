@@ -29735,6 +29735,30 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c86',
+    slug: 'fast-prototyping-genai-apps-streamlit',
+    name: 'Fast Prototyping of GenAI Apps with Streamlit',
+    description: 'Build interactive GenAI prototypes in hours using Streamlit and Snowflake. Covers rapid prototyping, prompt engineering, RAG, and deployment — no front-end skills required.',
+    tagline: 'Build GenAI prototypes in hours, not weeks',
+    url: 'https://www.deeplearning.ai/courses/fast-prototyping-of-genai-apps-with-streamlit/',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/deeplearning.ai.ico',
+    category: 'ai-engineering',
+    difficulty: 'intermediate',
+    duration: '9h21m',
+    roadmap: [
+      { title: 'Introduction to Prototyping GenAI Apps', topics: ['Prototyping for GenAI', 'Web App Frameworks', 'Data Analysis with Streamlit'], duration: '3h', url: 'https://www.deeplearning.ai/courses/fast-prototyping-of-genai-apps-with-streamlit/' },
+      { title: 'Fast Prototyping with Streamlit in Snowflake', topics: ['Building Prototypes in Snowflake', 'Data Analysis with Snowflake & GenAI', 'LLM-Powered Insights'], duration: '3h', url: 'https://www.deeplearning.ai/courses/fast-prototyping-of-genai-apps-with-streamlit/' },
+      { title: 'Iterative Improvement', topics: ['Deploying Your Prototype', 'Gathering Feedback', 'Prompt Engineering & RAG', 'Production Readiness'], duration: '3h21m', url: 'https://www.deeplearning.ai/courses/fast-prototyping-of-genai-apps-with-streamlit/' },
+    ],
+    upvotes: 500,
+    bookmarks: 180,
+    submittedBy: 'u3',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
