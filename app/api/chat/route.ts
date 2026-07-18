@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
-const API_URL = 'https://inference.dahl.global/v1/chat/completions'
-const API_KEY = process.env.DAHL_API_KEY || 'dahl_3GhLtaQ362nfX6QAmJLx1bWL8pR5FdpMf'
+const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
+const API_KEY = process.env.NVIDIA_API_KEY || process.env.DAHL_API_KEY
 
 const SYSTEM_PROMPT = `You are an AI Career Advisor for AI Hunt — a community-driven platform for AI tools, developer tools, open-source repos, and coding courses.
 
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     }
 
     const payload = {
-      model: 'moonshotai/Kimi-K2.6',
+      model: 'meta/llama-3.1-70b-instruct',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages,
