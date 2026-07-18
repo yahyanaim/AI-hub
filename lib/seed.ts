@@ -29445,6 +29445,31 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c74',
+    slug: 'ibm-data-analytics-sustainability',
+    name: 'Data Analytics for Sustainability',
+    description: "IBM SkillsBuild's learning path on data analytics for sustainability. Covers data collection, analysis techniques, visualization, and applying data-driven insights to environmental and sustainability challenges. Earn an IBM digital credential.",
+    tagline: 'Free data analytics for sustainability from IBM',
+    url: 'https://skills.yourlearning.ibm.com/activity/PLAN-BC751C6192EB',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/skillsbuild.org.ico',
+    category: 'data-science',
+    difficulty: 'beginner',
+    duration: '~10 hours',
+    roadmap: [
+      { title: 'Sustainability & Data Fundamentals', topics: ['Sustainability Concepts', 'Data Analytics Overview', 'Data Collection Methods', 'Ethical Data Use'], duration: '2.5 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-BC751C6192EB' },
+      { title: 'Data Analysis Techniques', topics: ['Data Cleaning', 'Statistical Analysis', 'Trend Identification', 'Pattern Recognition'], duration: '2.5 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-BC751C6192EB' },
+      { title: 'Data Visualization & Storytelling', topics: ['Visualization Tools', 'Dashboards', 'Reporting Insights', 'Data Storytelling'], duration: '2.5 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-BC751C6192EB' },
+      { title: 'Real-World Applications', topics: ['Environmental Impact Analysis', 'Resource Optimization', 'Sustainability Reporting', 'Final Assessment & Credential'], duration: '2.5 hours', url: 'https://skills.yourlearning.ibm.com/activity/PLAN-BC751C6192EB' },
+    ],
+    upvotes: 380,
+    bookmarks: 135,
+    submittedBy: 'u5',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
