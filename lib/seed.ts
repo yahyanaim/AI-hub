@@ -30121,6 +30121,33 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c101',
+    slug: 'mastering-excel',
+    name: 'Mastering Excel',
+    description: 'A free Excel specialization from Edraak covering everything from basics to advanced skills. Includes 6 courses: Excel functions & tricks, VBA programming, dashboards, data analysis, spreadsheets, and advanced Excel techniques. Free certificate available.',
+    tagline: 'Master Excel from scratch with free certificate',
+    url: 'https://programs.edraak.org/learn/specialization/me101-vv2',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/edraak.org.ico',
+    category: 'data-science',
+    difficulty: 'beginner',
+    duration: 'self-paced',
+    roadmap: [
+      { title: 'Excel Functions & Tricks', topics: ['Basic Formulas', 'Text Functions', 'Logical Functions', 'Lookup Functions'], duration: 'self-paced', url: 'https://programs.edraak.org/learn/specialization/me101-vv2' },
+      { title: 'Data Analysis Using Excel', topics: ['Sorting & Filtering', 'Pivot Tables', 'Data Validation', 'What-If Analysis'], duration: 'self-paced', url: 'https://programs.edraak.org/learn/specialization/me101-vv2' },
+      { title: 'Excel Spreadsheets', topics: ['Spreadsheet Design', 'Formatting', 'Charts & Graphs', 'Printing & Sharing'], duration: 'self-paced', url: 'https://programs.edraak.org/learn/specialization/me101-vv2' },
+      { title: 'Advanced Excel', topics: ['Array Formulas', 'Advanced Functions', 'Conditional Formatting', 'Data Modeling'], duration: 'self-paced', url: 'https://programs.edraak.org/learn/specialization/me101-vv2' },
+      { title: 'VBA Programming', topics: ['Macros', 'VBA Editor', 'User-Defined Functions', 'Automation'], duration: 'self-paced', url: 'https://programs.edraak.org/learn/specialization/me101-vv2' },
+      { title: 'Excel Dashboards', topics: ['Dashboard Design', 'Form Controls', 'Interactive Charts', 'Dynamic Reporting'], duration: 'self-paced', url: 'https://programs.edraak.org/learn/specialization/me101-vv2' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'admin',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
