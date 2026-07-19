@@ -32,11 +32,15 @@ const CATEGORY_TO_TYPE: Record<string, string> = {
   rag: '/edittools',
 }
 
+const baseUrl = 'https://aihubtools.vercel.app'
+
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
   const cat = params.category
+  const name = cat.charAt(0).toUpperCase() + cat.slice(1)
   return {
-    title: `${cat.charAt(0).toUpperCase() + cat.slice(1)}`,
-    description: `Browse ${cat} AI tools, dev tools, and repos.`,
+    title: `${name} Tools & Resources`,
+    description: `Browse the best ${cat} AI tools, developer tools, open-source repos, and learning resources. Curated and ranked by the community.`,
+    alternates: { canonical: `${baseUrl}/categories/${cat}` },
   }
 }
 

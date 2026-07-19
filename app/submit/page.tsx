@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
 import { SubmitForm } from '@/components/submit/SubmitForm'
 
+const baseUrl = 'https://aihubtools.vercel.app'
+
 export const metadata: Metadata = {
-  title: 'Submit',
-  description: 'Submit a tool, dev tool, or repo to AI Hunt.',
+  title: 'Submit a Tool or Resource',
+  description: 'Submit an AI tool, developer tool, open-source repo, or coding course to the AI Hunt community. New submissions are reviewed before going live.',
+  alternates: { canonical: `${baseUrl}/submit` },
 }
 
 export default function SubmitPage() {

@@ -21,14 +21,12 @@ export const metadata: Metadata = {
     template: '%s — AI Hunt',
   },
   description:
-    'AI Hunt is a community-driven discovery platform for AI tools, developer tools, open-source repos, and coding courses. Find the best resources for developers in Morocco, Algeria, France, Egypt, Saudi Arabia, and Qatar — and worldwide.',
+    'AI Hunt is a community-driven platform to discover and share the best AI tools, developer tools, open-source GitHub repos, and coding courses. Find top-rated resources for developers, ranked by the community.',
   keywords: [
     'AI tools', 'AI Hunt', 'developer tools', 'dev tools', 'open source', 'GitHub repos',
-    'Morocco AI', 'Algeria tech', 'France developer tools', 'Egypt AI tools',
-    'Saudi Arabia tech', 'Qatar tech', 'North Africa developers',
-    'AI tools Maroc', 'outils IA', 'أدوات الذكاء الاصطناعي',
     'best AI tools 2026', 'free AI tools', 'AI for developers',
     'LLM tools', 'machine learning tools', 'AI SaaS',
+    'code editors', 'AI search', 'coding courses', 'developer platform',
   ],
   authors: [{ name: 'Yahia Naim' }],
   creator: 'Yahia Naim',
@@ -51,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Hunt — Discover AI Tools & Developer Resources',
     description:
-      'Community-driven platform for AI tools, dev tools, GitHub repos, and coding courses. Trusted by developers worldwide.',
+      'Community-driven platform to discover and share AI tools, dev tools, GitHub repos, and coding courses. Trusted by developers worldwide.',
     url: baseUrl,
     siteName: 'AI Hunt',
     type: 'website',
@@ -59,10 +57,10 @@ export const metadata: Metadata = {
     alternateLocale: ['fr_FR', 'ar_SA'],
     images: [
       {
-        url: '/logo.png',
-        width: 512,
-        height: 512,
-        alt: 'AI Hunt',
+        url: '/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'AI Hunt — Discover AI Tools & Developer Resources',
       },
     ],
   },
@@ -83,7 +81,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'YOUR_GOOGLE_VERIFICATION_CODE',
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION ?? '',
   },
   category: 'technology',
 }
@@ -154,6 +152,24 @@ export default function RootLayout({
               },
               sameAs: [
                 'https://github.com/yahyanaim/AI-hub',
+              ],
+            }),
+          }}
+        />
+        <Script
+          id="schema-breadcrumb"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              name: 'AI Hunt Breadcrumb',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+                { '@type': 'ListItem', position: 2, name: 'AI Tools', item: `${baseUrl}/tools` },
+                { '@type': 'ListItem', position: 3, name: 'Dev Tools', item: `${baseUrl}/devtool` },
+                { '@type': 'ListItem', position: 4, name: 'Courses', item: `${baseUrl}/courses` },
+                { '@type': 'ListItem', position: 5, name: 'Leaderboard', item: `${baseUrl}/leaderboard` },
               ],
             }),
           }}

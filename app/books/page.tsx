@@ -1,5 +1,20 @@
+import type { Metadata } from 'next'
 import { BookOpen, Construction } from 'lucide-react'
 import Link from 'next/link'
+
+const baseUrl = 'https://aihubtools.vercel.app'
+
+export const metadata: Metadata = {
+  title: 'Books for Developers',
+  description: 'Curated book recommendations for developers, engineers, and AI practitioners. Coming soon with hand-picked titles, community reviews, and learning paths.',
+  openGraph: {
+    title: 'Books for Developers — AI Hunt',
+    description: 'Curated book recommendations for developers, engineers, and AI practitioners. Coming soon.',
+    url: `${baseUrl}/books`,
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Books' }],
+  },
+  alternates: { canonical: `${baseUrl}/books` },
+}
 
 export default function BooksPage() {
   return (
