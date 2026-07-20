@@ -99,7 +99,7 @@ export const SEED_USERS: User[] = [
     displayName: 'Yahia Naim',
     avatarUrl: '',
     bio: 'Creator of AI Hunt. Curating the best developer resources.',
-    website: 'https://github.com/yahyanaim',
+    website: '',
     githubHandle: '',
     twitterHandle: 'yahianaim',
     submittedTools: [],
