@@ -38159,6 +38159,33 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c119',
+    slug: 'intro-data-science-cisco',
+    name: 'Introduction to Data Science',
+    description: 'A Cisco Networking Academy course introducing data science fundamentals. Covers data collection, cleaning, analysis, visualization, machine learning basics, and real-world data science workflows using Python.',
+    tagline: 'Data science fundamentals from Cisco',
+    url: 'https://www.netacad.com/courses/introduction-data-science?courseLang=en-US',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/netacad.com.ico',
+    category: 'data-science',
+    difficulty: 'beginner',
+    duration: '30 hours',
+    roadmap: [
+      { title: 'Data Science Overview', topics: ['What is Data Science', 'Data Science Lifecycle', 'Roles & Tools', 'Ethics & Privacy'], duration: '4 hours', url: 'https://www.netacad.com/courses/introduction-data-science?courseLang=en-US' },
+      { title: 'Data Collection & Preparation', topics: ['Data Sources', 'Data Types', 'Data Cleaning', 'Handling Missing Values'], duration: '6 hours', url: 'https://www.netacad.com/courses/introduction-data-science?courseLang=en-US' },
+      { title: 'Data Analysis & Visualization', topics: ['Exploratory Analysis', 'Statistical Summaries', 'Matplotlib & Seaborn', 'Storytelling with Data'], duration: '6 hours', url: 'https://www.netacad.com/courses/introduction-data-science?courseLang=en-US' },
+      { title: 'Machine Learning Basics', topics: ['Supervised vs Unsupervised', 'Regression', 'Classification', 'Model Evaluation'], duration: '6 hours', url: 'https://www.netacad.com/courses/introduction-data-science?courseLang=en-US' },
+      { title: 'Python for Data Science', topics: ['Pandas', 'NumPy', 'Scikit-learn', 'Jupyter Notebooks'], duration: '4 hours', url: 'https://www.netacad.com/courses/introduction-data-science?courseLang=en-US' },
+      { title: 'Capstone Project', topics: ['Real-world Dataset', 'End-to-End Analysis', 'Visualization & Report', 'Presentation'], duration: '4 hours', url: 'https://www.netacad.com/courses/introduction-data-science?courseLang=en-US' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
