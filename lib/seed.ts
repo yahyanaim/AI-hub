@@ -38186,6 +38186,32 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c120',
+    slug: 'n8n-beginner-course',
+    name: 'n8n Beginner Course',
+    description: 'A free YouTube-based beginner course for n8n workflow automation. Covers n8n fundamentals, nodes, triggers, workflows, integrations with popular APIs, and building real-world automations step by step.',
+    tagline: 'Learn n8n workflow automation',
+    url: 'https://www.classcentral.com/classroom/youtube-n8n-beginner-course-513875',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/classcentral.com.ico',
+    category: 'automation',
+    difficulty: 'beginner',
+    duration: '4 hours',
+    roadmap: [
+      { title: 'Getting Started', topics: ['What is n8n', 'Installation', 'UI Overview', 'First Workflow'], duration: '30 min', url: 'https://www.classcentral.com/classroom/youtube-n8n-beginner-course-513875' },
+      { title: 'Core Nodes', topics: ['Trigger Nodes', 'Action Nodes', 'Data Flow', 'Error Handling'], duration: '45 min', url: 'https://www.classcentral.com/classroom/youtube-n8n-beginner-course-513875' },
+      { title: 'Integrations', topics: ['HTTP Requests', 'Email', 'Google Sheets', 'Slack & Discord'], duration: '1 hour', url: 'https://www.classcentral.com/classroom/youtube-n8n-beginner-course-513875' },
+      { title: 'Real-World Automations', topics: ['Form Submissions', 'Data Sync', 'Notifications', 'Scheduled Tasks'], duration: '1 hour', url: 'https://www.classcentral.com/classroom/youtube-n8n-beginner-course-513875' },
+      { title: 'Advanced Patterns', topics: ['Sub-workflows', 'Loops & Conditions', 'Environment Variables', 'Version Control'], duration: '45 min', url: 'https://www.classcentral.com/classroom/youtube-n8n-beginner-course-513875' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
