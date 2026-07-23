@@ -6,9 +6,8 @@ const API_KEY = process.env.NVIDIA_API_KEY || process.env.DAHL_API_KEY
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
-    const roadmap = c.roadmap.map(r => `"${r.title}"`).join(' → ')
-    return `- ${c.id}: "${c.name}" | ${c.category} | ${c.difficulty} | ${c.duration} | ${c.pricing}\n  Roadmap: ${roadmap}`
-  }).join('\n\n')
+    return `- ${c.id}: "${c.name}" | ${c.category} | ${c.difficulty} | ${c.duration} | ${c.pricing}`
+  }).join('\n')
 }
 
 const COURSE_CATALOG = buildCourseCatalog()
@@ -88,70 +87,22 @@ Only proceed when they confirm.
 
 ## Phase 3 — The Roadmap Delivery
 
-Deliver the full roadmap following all steps below. Every section must be tailored to this specific person. Reference their skills, goals, constraints, and timeline throughout. Use the course catalog at the bottom to recommend exact courses. When recommending courses, always use the exact names from the catalog and reference the course's roadmap phases.
+Deliver a tailored roadmap with these steps. Use the course catalog below to recommend exact courses by name.
 
-### Step -1: Current State Analysis
-A — Skill Gap Assessment: List current technical skills with proficiency. Produce a Skill Matrix (Skill, Current Level 1-10, Target Level, Gap, Priority, Timeline).
-B — Career Level Assessment: Entry (needs fundamentals), Junior (needs depth + framework mastery), Mid (needs advanced skills + system design), Senior (needs leadership + strategy). Produce Career Readiness Score.
-C — Strengths, Weaknesses & Reality Check: Top 3 strengths, Top 5 critical gaps, Top 3 misconceptions.
+1. **Current State Analysis** — Skill matrix, career level, strengths/gaps/reality check
+2. **Learning Path Strategy** — Phased roadmap (Foundations → Frontend → Backend → Fullstack Projects), learning approach, realistic timeline
+3. **Skill Development** — Skills to master table, certification/course plan (use exact names from catalog)
+4. **Hands-On Resources** — Platform comparison, 12-week curriculum
+5. **Project & Portfolio** — 4-5 progressive projects, GitHub/blog/personal site strategy
+6. **Lab & Coding Practice** — Practice platforms, dev setup guide
+7. **Skill Tracking** — Trackers for skills/projects/milestones
+8. **Community & Networking** — Communities, events, content, mentorship
+9. **Interview Prep** — Technical topics, behavioral, coding challenges, portfolio talking points
+10. **Daily & Weekly Routine** — Custom schedule matching their hours
+11. **Acceleration Plan** — Month-by-month for 3/6/12 months
+12. **Readiness Assessment** — Are they ready for entry-level/internship/freelance?
 
-### Step 0: Learning Path Strategy
-A — Role-Specific Phased Roadmap following this progression: Phase 1 Foundations (HTML/CSS/JS, Git), Phase 2 Frontend (React/Vue, State, UI/UX), Phase 3 Backend (Node/Python, DB, APIs), Phase 4 Fullstack Projects (CI/CD, Cloud, System Design). For each phase: 5-7 key skills, recommended resources, 1-2 projects, milestones, time commitment.
-B — Learning Strategy: Certification-first? Project-first? Bootcamp vs self-taught? Recommended blend.
-C — Realistic Timeline: Minimum, comfortable, and accelerated timelines.
-
-**CHECKPOINT:** After Step 0, ask: "I've completed the initial analysis and strategy. Continue with remaining steps, pause, or adjust?"
-
-### Step 1: Skill Development Roadmap
-A — Skills to Master: Comprehensive list of frontend, backend, DevOps, and soft skills for their specific target. For each: why critical, current/target level, timeline, primary resource, sub-topics, mastery verification.
-B — Certifications/Courses Roadmap: Tier 0 (optional foundation), Tier 1 (core skills), Tier 2 (industry recognition), Tier 3 (advanced). Use exact course names from AI Hunt's catalog with timeline/cost/why.
-
-### Step 2: Hands-On Learning Resources
-A — Platform Comparison table (Platform, Best For, Cost, Quality, Why Recommended).
-B — 12-Week Curriculum: Week-by-week with objectives, topics, resources, exercises, deliverables.
-C — Resource Quality Notes: pros/cons, best use case, common mistakes per resource.
-
-### Step 3: Project & Portfolio Building
-A — Progressive Project Plan: 4-5 projects from static site → frontend app → fullstack CRUD → complex capstone. Each with scope, skills, phases, time estimate, portfolio deliverables.
-B — GitHub Strategy: profile structure, README standards, commit practices.
-C — Blog Strategy: Dev.to/Hashnode/Medium, project case studies.
-D — Personal Website: what to include, hosting (Vercel/Netlify/GitHub Pages).
-
-### Step 4: Lab Environments & Coding Practice
-A — Coding Practice table (LeetCode, Frontend Mentor, DevChallenges, etc.).
-B — Local Development Setup guide (IDE, Node/Python, Git, Docker).
-
-### Step 5: Skill Tracking System
-A — Master Skill Tracker table. B — Project Tracker table. C — Milestone Timeline (monthly).
-
-### Step 6: Community & Networking
-A — Online communities (Stack Overflow, Reddit, Discord, Twitter/X).
-B — Events & Hackathons (Meetup, Devpost, Conferences).
-C — Content Creation (building in public, learning journey).
-D — Mentorship.
-
-### Step 7: Interview Preparation
-A — 25-30 technical topics. B — Behavioral questions. C — Coding challenges. D — Portfolio talking points.
-
-### Step 8: Daily & Weekly Routine
-A — Custom daily schedule matching their exact available hours.
-B — Weekly structure with targets.
-C — Month-by-month targets.
-D — Weekly check-in template.
-
-### Step 9: Progress Tracking System
-A — Master dashboard (skills + projects dashboards, monthly snapshot).
-B — End-of-month review checklist.
-C — Quarterly deep dive.
-
-### Step 10: Common Pitfalls (tailored to this person)
-For each: what it looks like, why dangerous for them, concrete solution.
-
-### Step 11: 6-Month Acceleration Plan
-Month-by-month with theme, objectives, weekly breakdown, deliverables, time commitment, success criteria.
-
-### Step 12: Final Readiness Assessment
-Am I ready for Entry-Level / Internship / Freelance role? Competitive analysis.
+After Step 2, ask: "Continue, pause, or adjust?"
 
 ---
 
@@ -193,7 +144,7 @@ export async function POST(request: Request) {
         { role: 'system', content: SYSTEM_PROMPT },
         ...messages,
       ],
-      max_tokens: 4096,
+      max_tokens: 2048,
       temperature: 0.70,
       top_p: 0.95,
       stream: true,
