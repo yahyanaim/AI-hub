@@ -27,14 +27,20 @@ export type ToolCategory =
   | 'other'
 
 export type DevToolCategory =
+  | 'ide'
   | 'debugging'
   | 'testing'
+  | 'ci-cd'
   | 'monitoring'
+  | 'database'
   | 'api'
+  | 'cli'
   | 'containers'
   | 'collaboration'
   | 'library'
+  | 'framework'
   | 'starter-pack'
+  | 'templates'
   | 'hosting'
   | 'conception'
   | 'other'
@@ -239,14 +245,20 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
 }
 
 export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
+  ide: 'IDE',
   debugging: 'Debugging',
   testing: 'Testing',
+  'ci-cd': 'CI/CD',
   monitoring: 'Monitoring',
+  database: 'Database',
   api: 'API',
+  cli: 'CLI',
   containers: 'Containers',
   collaboration: 'Collaboration',
   library: 'Library',
+  framework: 'Framework',
   'starter-pack': 'Starter Packs',
+  templates: 'Templates',
   hosting: 'Hosting & VPS',
   conception: 'Conception',
   other: 'Other',
