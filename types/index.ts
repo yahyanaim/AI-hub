@@ -27,23 +27,53 @@ export type ToolCategory =
   | 'other'
 
 export type DevToolCategory =
-  | 'ide'
-  | 'debugging'
-  | 'testing'
-  | 'ci-cd'
-  | 'monitoring'
-  | 'database'
+  | 'analytics'
   | 'api'
+  | 'artifact'
+  | 'auth'
+  | 'baas'
+  | 'cdn'
+  | 'ci-cd'
   | 'cli'
-  | 'containers'
+  | 'cms'
+  | 'code-quality'
   | 'collaboration'
-  | 'library'
-  | 'framework'
-  | 'starter-pack'
-  | 'templates'
-  | 'hosting'
+  | 'commenting'
   | 'conception'
+  | 'containers'
+  | 'crash-reporting'
+  | 'database'
+  | 'debugging'
+  | 'dns'
+  | 'domain'
+  | 'email'
+  | 'feature-flags'
+  | 'forms'
+  | 'framework'
+  | 'generative-ai'
+  | 'hosting'
+  | 'ide'
+  | 'library'
+  | 'logging'
+  | 'low-code'
+  | 'messaging'
+  | 'mobile'
+  | 'monitoring'
   | 'other'
+  | 'paas'
+  | 'payment'
+  | 'project-management'
+  | 'remote-desktop'
+  | 'screenshot'
+  | 'search'
+  | 'security'
+  | 'session-recording'
+  | 'source-control'
+  | 'starter-pack'
+  | 'storage'
+  | 'templates'
+  | 'testing'
+  | 'translation'
 
 export type EditToolCategory =
   | 'pdf'
@@ -245,23 +275,53 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
 }
 
 export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
-  ide: 'IDE',
-  debugging: 'Debugging',
-  testing: 'Testing',
-  'ci-cd': 'CI/CD',
-  monitoring: 'Monitoring',
-  database: 'Database',
+  analytics: 'Analytics',
   api: 'API',
+  artifact: 'Artifact Repos',
+  auth: 'Authentication',
+  baas: 'BaaS',
+  cdn: 'CDN & Protection',
+  'ci-cd': 'CI/CD',
   cli: 'CLI',
-  containers: 'Containers',
+  cms: 'CMS',
+  'code-quality': 'Code Quality',
   collaboration: 'Collaboration',
-  library: 'Library',
-  framework: 'Framework',
-  'starter-pack': 'Starter Packs',
-  templates: 'Templates',
-  hosting: 'Hosting & VPS',
+  commenting: 'Commenting',
   conception: 'Conception',
+  containers: 'Containers',
+  'crash-reporting': 'Crash Reporting',
+  database: 'Database',
+  debugging: 'Debugging',
+  dns: 'DNS',
+  domain: 'Domain',
+  email: 'Email',
+  'feature-flags': 'Feature Flags',
+  forms: 'Forms',
+  framework: 'Framework',
+  'generative-ai': 'Generative AI',
+  hosting: 'Hosting & VPS',
+  ide: 'IDE',
+  library: 'Library',
+  logging: 'Log Management',
+  'low-code': 'Low-Code',
+  messaging: 'Messaging & Streaming',
+  mobile: 'Mobile',
+  monitoring: 'Monitoring',
   other: 'Other',
+  paas: 'PaaS',
+  payment: 'Payment',
+  'project-management': 'Project Management',
+  'remote-desktop': 'Remote Desktop',
+  screenshot: 'Screenshot APIs',
+  search: 'Search',
+  security: 'Security',
+  'session-recording': 'Session Recording',
+  'source-control': 'Source Control',
+  'starter-pack': 'Starter Packs',
+  storage: 'Storage & Media',
+  templates: 'Templates',
+  testing: 'Testing',
+  translation: 'Translation',
 }
 
 export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
