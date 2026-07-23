@@ -38212,6 +38212,33 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c121',
+    slug: 'data-engineer-with-python',
+    name: 'Data Engineer with Python Career Track',
+    description: 'A comprehensive DataCamp career track covering data engineering with Python. Includes data engineering fundamentals, ETL pipelines, relational databases, Apache Spark, data warehousing, and real-world projects. Free on Archive.org.',
+    tagline: 'Complete data engineering career track',
+    url: 'https://archive.org/details/data-camp-data-engineer-with-python-career-track',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/archive.org.ico',
+    category: 'data-science',
+    difficulty: 'beginner',
+    duration: '40 hours',
+    roadmap: [
+      { title: 'Data Engineering for Everyone', topics: ['Data Engineering Overview', 'Data Pipelines', 'ETL vs ELT', 'Role of Data Engineer'], duration: '4 hours', url: 'https://archive.org/details/data-camp-data-engineer-with-python-career-track/01_Data_Engineering_For_Everyone/1.mp4' },
+      { title: 'Python for Data Engineering', topics: ['Python Basics', 'Data Manipulation', 'Pandas', 'File I/O & APIs'], duration: '8 hours', url: 'https://archive.org/details/data-camp-data-engineer-with-python-career-track' },
+      { title: 'Relational Databases & SQL', topics: ['SQL Queries', 'Database Design', 'PostgreSQL', 'Window Functions'], duration: '8 hours', url: 'https://archive.org/details/data-camp-data-engineer-with-python-career-track' },
+      { title: 'ETL & Data Pipelines', topics: ['ETL Design', 'Data Cleaning', 'Apache Airflow', 'Pipeline Orchestration'], duration: '8 hours', url: 'https://archive.org/details/data-camp-data-engineer-with-python-career-track' },
+      { title: 'Big Data with Spark', topics: ['Apache Spark', 'PySpark', 'RDDs & DataFrames', 'Cluster Computing'], duration: '6 hours', url: 'https://archive.org/details/data-camp-data-engineer-with-python-career-track' },
+      { title: 'Data Warehousing & Capstone', topics: ['Data Warehousing', 'Schema Design', 'Cloud Platforms', 'End-to-End Pipeline'], duration: '6 hours', url: 'https://archive.org/details/data-camp-data-engineer-with-python-career-track' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
