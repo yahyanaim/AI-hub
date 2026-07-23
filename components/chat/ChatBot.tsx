@@ -14,7 +14,7 @@ type Message = {
 
 const INITIAL_MESSAGE: Message = {
   role: 'assistant',
-  content: `Welcome to AI Career Advisor! I can help you find courses, assess your level, and build a learning path. What would you like help with?`,
+  content: `Hey! I'm your Fullstack Development Advisor. I'll help you build your skills, find the right courses, and create a learning plan that actually works for you. What are you looking to achieve?`,
 }
 
 export function ChatBot() {
