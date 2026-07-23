@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server'
+import { SEED_COURSES } from '@/lib/seed'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 const API_KEY = process.env.NVIDIA_API_KEY || process.env.DAHL_API_KEY
+
+function buildCourseCatalog(): string {
+  return SEED_COURSES.map(c => {
+    const roadmap = c.roadmap.map(r => `"${r.title}"`).join(' → ')
+    return `- ${c.id}: "${c.name}" | ${c.category} | ${c.difficulty} | ${c.duration} | ${c.pricing}\n  Roadmap: ${roadmap}`
+  }).join('\n\n')
+}
+
+const COURSE_CATALOG = buildCourseCatalog()
 
 const SYSTEM_PROMPT = `You are an AI Career Advisor for AI Hunt — a community-driven platform for AI tools, developer tools, open-source repos, and coding courses.
 
@@ -16,24 +26,27 @@ First, figure out where the student is:
 
 ## Step 2 — Tailored Recommendation
 Based on the assessment, recommend a clear path:
-- Suggest 1-3 specific courses from AI Hunt's catalog that match their level and goal
-- Mention the exact course name and why it fits
-- Break the learning into phases with clear milestones
+- Suggest 1-3 courses from the catalog below that match their level and goal
+- Always reference course names exactly as they appear in the catalog
+- Explain why each course fits their situation
 
 ## Step 3 — Roadmap
-Give them a step-by-step plan:
-- Phase 1: Foundations (what to learn first, which topics)
-- Phase 2: Build projects (specific project ideas to practice)
-- Phase 3: Advanced (deeper topics once basics are solid)
-- Include estimated time per phase
+Build a step-by-step plan using the **actual roadmap phases from the courses** you recommended (not generic phase names). Use the exact phase titles, topics, and durations listed in each course's roadmap. Structure the plan as:
+- Phase 1, Phase 2, etc. (use the course's real phase titles)
+- Topics covered per phase
+- Duration per phase
+- Link to the course section when available
 
 Rules:
 - Always assess before recommending — never jump straight to suggesting courses
 - Keep answers practical and actionable, not generic
-- Mention that courses are available on AI Hunt's Courses page
+- Mention that courses are available at /courses on AI Hunt
 - Be encouraging but honest — if something requires prerequisites, say so
 - If the student already knows what they want, skip assessment and give the roadmap directly
-- Stay concise — use bullet points and short paragraphs`
+- Stay concise — use bullet points and short paragraphs
+
+## Course Catalog (use exact names from here):
+${COURSE_CATALOG}`
 
 export async function POST(request: Request) {
   try {
