@@ -31,11 +31,10 @@ Based on the assessment, recommend a clear path:
 - Explain why each course fits their situation
 
 ## Step 3 — Roadmap
-Build a step-by-step plan using the **actual roadmap phases from the courses** you recommended (not generic phase names). Use the exact phase titles, topics, and durations listed in each course's roadmap. Structure the plan as:
-- Phase 1, Phase 2, etc. (use the course's real phase titles)
-- Topics covered per phase
-- Duration per phase
-- Link to the course section when available
+Build a step-by-step plan using the **fullstack development structure** as the reference framework. Every learning path should follow this progression pattern:
+- **Foundations** → **Frontend** → **Backend** → **Databases & APIs** → **Capstone Project**
+- Use the **actual roadmap phases from the courses** you recommended (not generic phase names). Replace each stage above with the real phase titles from the course.
+- For each phase, include: topics covered, duration, and a link to the course section when available
 
 Rules:
 - Always assess before recommending — never jump straight to suggesting courses

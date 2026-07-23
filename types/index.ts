@@ -50,7 +50,6 @@ export type DevToolCategory =
   | 'feature-flags'
   | 'forms'
   | 'framework'
-  | 'generative-ai'
   | 'hosting'
   | 'ide'
   | 'library'
@@ -298,7 +297,6 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   'feature-flags': 'Feature Flags',
   forms: 'Forms',
   framework: 'Framework',
-  'generative-ai': 'Generative AI',
   hosting: 'Hosting & VPS',
   ide: 'IDE',
   library: 'Library',
