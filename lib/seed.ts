@@ -38133,6 +38133,32 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c118',
+    slug: 'reactjs-beginner-masterclass',
+    name: 'ReactJS - The Beginner Masterclass',
+    description: 'A Packt masterclass on Coursera for React beginners. Covers React fundamentals, components, props, state, hooks, event handling, forms, and building your first React application from scratch.',
+    tagline: 'Master React from scratch',
+    url: 'https://www.coursera.org/learn/packt-reactjs-the-beginner-masterclass-dqzkr',
+    pricing: 'freemium',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/coursera.org.ico',
+    category: 'frontend',
+    difficulty: 'beginner',
+    duration: '8 hours',
+    roadmap: [
+      { title: 'React Foundations', topics: ['JSX', 'Components', 'Props', 'Project Setup'], duration: '1.5 hours', url: 'https://www.coursera.org/learn/packt-reactjs-the-beginner-masterclass-dqzkr' },
+      { title: 'State & Events', topics: ['useState', 'Event Handling', 'Forms', 'Conditional Rendering'], duration: '2 hours', url: 'https://www.coursera.org/learn/packt-reactjs-the-beginner-masterclass-dqzkr' },
+      { title: 'Hooks Deep Dive', topics: ['useEffect', 'useRef', 'useContext', 'Custom Hooks'], duration: '2 hours', url: 'https://www.coursera.org/learn/packt-reactjs-the-beginner-masterclass-dqzkr' },
+      { title: 'Lists & Data Flow', topics: ['Lists & Keys', 'Lifting State', 'Children Prop', 'Controlled Components'], duration: '1.5 hours', url: 'https://www.coursera.org/learn/packt-reactjs-the-beginner-masterclass-dqzkr' },
+      { title: 'Build Your First App', topics: ['Project Structure', 'API Integration', 'Deployment', 'Best Practices'], duration: '1 hour', url: 'https://www.coursera.org/learn/packt-reactjs-the-beginner-masterclass-dqzkr' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
