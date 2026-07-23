@@ -38106,6 +38106,33 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c117',
+    slug: 'architecting-vue-3-enterprise',
+    name: 'Architecting Vue.js 3 - Enterprise-Ready Web Applications',
+    description: 'A comprehensive Packt course on Coursera covering Vue.js 3 enterprise architecture. Includes component design, state management with Pinia, routing, testing, performance optimization, and building scalable Vue applications.',
+    tagline: 'Build enterprise-ready Vue 3 apps',
+    url: 'https://www.coursera.org/learn/packt-architecting-vue-js-3-enterprise-ready-web-applications',
+    pricing: 'freemium',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/coursera.org.ico',
+    category: 'frontend',
+    difficulty: 'intermediate',
+    duration: '10 hours',
+    roadmap: [
+      { title: 'Vue 3 Foundations', topics: ['Composition API', 'Script Setup', 'Reactivity System', 'Teleport & Suspense'], duration: '2 hours', url: 'https://www.coursera.org/learn/packt-architecting-vue-js-3-enterprise-ready-web-applications' },
+      { title: 'Component Architecture', topics: ['Component Design Patterns', 'Slots & Scoped Slots', 'Custom Directives', 'Render Functions'], duration: '2 hours', url: 'https://www.coursera.org/learn/packt-architecting-vue-js-3-enterprise-ready-web-applications' },
+      { title: 'State Management with Pinia', topics: ['Pinia Stores', 'Actions & Getters', 'Plugins', 'Server State Sync'], duration: '1.5 hours', url: 'https://www.coursera.org/learn/packt-architecting-vue-js-3-enterprise-ready-web-applications' },
+      { title: 'Routing & Navigation', topics: ['Vue Router 4', 'Dynamic Routing', 'Navigation Guards', 'Lazy Loading'], duration: '1.5 hours', url: 'https://www.coursera.org/learn/packt-architecting-vue-js-3-enterprise-ready-web-applications' },
+      { title: 'Testing & Performance', topics: ['Vitest', 'Component Testing', 'Performance Optimization', 'Bundle Analysis'], duration: '1.5 hours', url: 'https://www.coursera.org/learn/packt-architecting-vue-js-3-enterprise-ready-web-applications' },
+      { title: 'Enterprise Patterns', topics: ['Error Boundaries', 'Internationalization', 'Accessibility', 'Monorepo Setup'], duration: '1.5 hours', url: 'https://www.coursera.org/learn/packt-architecting-vue-js-3-enterprise-ready-web-applications' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
