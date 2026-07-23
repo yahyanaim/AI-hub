@@ -1,12 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { ListingView, type FilterOption } from '@/components/listing/ListingView'
 import { DevToolCard } from '@/components/cards/DevToolCard'
-import { StarterPackCard } from '@/components/cards/StarterPackCard'
-import { PackDetailModal } from '@/components/detail/PackDetailModal'
 import { useApp } from '@/lib/store'
-import { Package } from 'lucide-react'
 import {
   DEVTOOL_CATEGORY_LABELS,
   PRICING_LABELS,
@@ -22,10 +18,6 @@ const pricingOptions: FilterOption[] = Object.entries(PRICING_LABELS).map(
 
 export function DevToolsView() {
   const { devTools } = useApp()
-  const [selectedPack, setSelectedPack] = useState<DevTool | null>(null)
-
-  const packs = devTools.filter((d) => d.category === 'starter-pack')
-  const regularDevTools = devTools.filter((d) => d.category !== 'starter-pack')
 
   return (
     <div className="container-page py-8">
@@ -43,46 +35,9 @@ export function DevToolsView() {
         </p>
       </div>
 
-      {/* Starter Packs section */}
-      {packs.length > 0 && (
-        <section className="mb-12">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-orange to-orange-400">
-              <Package className="h-4 w-4 text-white" />
-            </div>
-            <div>
-              <h2 className="font-heading text-lg font-bold text-foreground">
-                Starter Packs
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                Pre-configured development environments &mdash; pick a stack and start building
-              </p>
-            </div>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {packs.map((pack) => (
-              <StarterPackCard
-                key={pack.id}
-                devtool={pack}
-                onPackClick={setSelectedPack}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Divider */}
-      {packs.length > 0 && regularDevTools.length > 0 && (
-        <div className="mb-8 flex items-center gap-4">
-          <div className="h-px flex-1 bg-border" />
-          <span className="text-xs font-medium text-muted-foreground">All Dev Tools</span>
-          <div className="h-px flex-1 bg-border" />
-        </div>
-      )}
-
-      {/* Regular dev tools */}
+      {/* All dev tools (including starter packs as a regular category) */}
       <ListingView<DevTool>
-        items={regularDevTools}
+        items={devTools}
         config={{
           title: '',
           eyebrow: '',
@@ -102,9 +57,6 @@ export function DevToolsView() {
           t.upvotes + Math.round(t.bookmarks * 0.8) + (t.featured ? 80 : 0)
         }
       />
-
-      {/* Pack Detail Modal */}
-      <PackDetailModal pack={selectedPack} onClose={() => setSelectedPack(null)} />
     </div>
   )
 }
