@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { SEED_USERS } from '@/lib/seed'
+import { SEED_USERS } from '@/lib/seed-users'
 import { ProfileView } from '@/components/profile/ProfileView'
 
 export async function generateStaticParams() {

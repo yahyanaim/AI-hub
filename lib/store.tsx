@@ -21,15 +21,8 @@ import type {
   ItemType,
   Pricing,
 } from '@/types'
-import {
-  SEED_TOOLS,
-  SEED_DEV_TOOLS,
-  SEED_PROMPTS,
-  SEED_REPOS,
-  SEED_COURSES,
-  SEED_USERS,
-  SEED_COMMENTS,
-} from '@/lib/seed'
+import { SEED_PROMPTS, SEED_COMMENTS } from '@/lib/seed'
+import { SEED_USERS } from '@/lib/seed-users'
 import { uuid, slugify } from '@/lib/utils'
 
 const STORAGE_KEY = 'ai-hunt-state-v2'
@@ -157,13 +150,18 @@ interface AppContextValue {
 
 const AppContext = createContext<AppContextValue | null>(null)
 
+const EMPTY_TOOLS: Tool[] = []
+const EMPTY_DEV_TOOLS: DevTool[] = []
+const EMPTY_REPOS: Repo[] = []
+const EMPTY_COURSES: Course[] = []
+
 function freshSeed(): PersistedState {
   return {
-    tools: SEED_TOOLS,
-    devTools: SEED_DEV_TOOLS,
+    tools: EMPTY_TOOLS,
+    devTools: EMPTY_DEV_TOOLS,
     prompts: SEED_PROMPTS,
-    repos: SEED_REPOS,
-    courses: SEED_COURSES,
+    repos: EMPTY_REPOS,
+    courses: EMPTY_COURSES,
     users: SEED_USERS,
     comments: SEED_COMMENTS,
     currentUserId: null,
@@ -187,34 +185,52 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Hydrate from localStorage on mount
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (raw) {
-        const parsed = JSON.parse(raw) as PersistedState
-        // Merge seed updates into stored data (seed content wins for matching IDs, user-added items preserved)
-        const mergeSeeds = <T extends { id: string }>(stored: T[] | undefined, seeds: T[]) =>
-          stored?.length
-            ? [
-                ...seeds.filter((s) => !stored.some((d) => d.id === s.id)),
-                ...stored.filter((d) => !seeds.some((s) => s.id === d.id)),
-                ...seeds.filter((s) => stored.some((d) => d.id === s.id)),
-              ]
-            : seeds
-        setState({
-          ...parsed,
-          tools: mergeSeeds(parsed.tools, SEED_TOOLS),
-          devTools: mergeSeeds(parsed.devTools, SEED_DEV_TOOLS),
-          prompts: mergeSeeds(parsed.prompts, SEED_PROMPTS),
-          repos: mergeSeeds(parsed.repos, SEED_REPOS),
-          courses: mergeSeeds(parsed.courses, SEED_COURSES),
-          users: parsed.users?.length ? parsed.users : SEED_USERS,
-          comments: parsed.comments ?? SEED_COMMENTS,
-        })
+    const load = async () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY)
+        // Dynamically import large seed data (keeps client bundles small)
+        const seedMod = await import('@/lib/seed')
+        const seedTools = seedMod.SEED_TOOLS as Tool[]
+        const seedDevTools = seedMod.SEED_DEV_TOOLS as DevTool[]
+        const seedRepos = seedMod.SEED_REPOS as Repo[]
+        const seedCourses = seedMod.SEED_COURSES as Course[]
+        if (raw) {
+          const parsed = JSON.parse(raw) as PersistedState
+          // Merge seed updates into stored data (seed content wins for matching IDs, user-added items preserved)
+          const mergeSeeds = <T extends { id: string }>(stored: T[] | undefined, seedItems: T[]) =>
+            stored?.length
+              ? [
+                  ...seedItems.filter((s) => !stored.some((d) => d.id === s.id)),
+                  ...stored.filter((d) => !seedItems.some((s) => s.id === d.id)),
+                  ...seedItems.filter((s) => stored.some((d) => d.id === s.id)),
+                ]
+              : seedItems
+          setState({
+            ...parsed,
+            tools: mergeSeeds(parsed.tools, seedTools),
+            devTools: mergeSeeds(parsed.devTools, seedDevTools),
+            prompts: mergeSeeds(parsed.prompts, SEED_PROMPTS),
+            repos: mergeSeeds(parsed.repos, seedRepos),
+            courses: mergeSeeds(parsed.courses, seedCourses),
+            users: parsed.users?.length ? parsed.users : SEED_USERS,
+            comments: parsed.comments ?? SEED_COMMENTS,
+          })
+        } else {
+          // First visit: use seed data directly
+          setState((prev) => ({
+            ...prev,
+            tools: seedTools,
+            devTools: seedDevTools,
+            repos: seedRepos,
+            courses: seedCourses,
+          }))
+        }
+      } catch {
+        // ignore corrupt state
       }
-    } catch {
-      // ignore corrupt state
+      setHydrated(true)
     }
-    setHydrated(true)
+    load()
   }, [])
 
   // Persist (debounced via microtask)
