@@ -39491,6 +39491,33 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c122',
+    slug: 'business-strategy-leadership-management',
+    name: 'Business Strategy and Leadership Management Specialization',
+    description: 'A free Saylor University specialization program designed to cultivate the skills required to excel in leadership roles and drive strategic success in diverse organizations. Covers leadership theory, management vs. leadership, decision-making, change management, team and conflict management, business communication, management information systems, and process optimization (supply chain and quality management).',
+    tagline: '6-course leadership & strategy specialization from Saylor',
+    url: 'https://learn.saylor.org/mod/page/view.php?id=101598',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/learn.saylor.org.ico',
+    category: 'writing',
+    difficulty: 'beginner',
+    duration: '~300 hours',
+    roadmap: [
+      { title: 'BUS206 — Management Information Systems', topics: ['MIS Fundamentals', 'Hardware, Software & Networking', 'Data & Databases', 'IS Strategy & Development'], duration: '~57 hours', url: 'https://learn.saylor.org/course/view.php?id=41' },
+      { title: 'BUS208 — Principles of Management', topics: ['Management Functions', 'Planning & Organizing', 'Leading & Controlling', 'Strategy & Corporate Culture'], duration: '70 hours', url: 'https://learn.saylor.org/course/view.php?id=1235' },
+      { title: 'BUS209 — Organizational Behavior', topics: ['Individual & Group Dynamics', 'Motivation', 'Conflict & Negotiation', 'Managing Change'], duration: '48 hours', url: 'https://learn.saylor.org/course/view.php?id=1236' },
+      { title: 'BUS210 — Business Communication', topics: ['Business Writing', 'Presentations', 'Intercultural Communication', 'Crisis Communication'], duration: '33 hours', url: 'https://learn.saylor.org/course/view.php?id=1239' },
+      { title: 'BUS300 — Operations Management', topics: ['Process Design', 'Supply Chain Management', 'Quality Management', 'Inventory & Planning'], duration: '38 hours', url: 'https://learn.saylor.org/course/view.php?id=1251' },
+      { title: 'BUS401 — Management Leadership', topics: ['Leadership Theories', 'Decision-Making', 'Managing Change', 'Leading Individuals & Teams'], duration: '71 hours', url: 'https://learn.saylor.org/course/view.php?id=1330' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
