@@ -30,7 +30,7 @@ export function OfferDetail({ slug }: { slug: string }) {
             <p className="mt-1 text-sm text-muted-foreground">
               {offer.tagline}
             </p>
-            <p className="mt-2 max-w-2xl text-base text-muted-foreground">
+            <p className="mt-2 w-full text-base text-muted-foreground">
               {offer.description}
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
