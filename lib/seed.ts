@@ -39676,6 +39676,33 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c130',
+    slug: 'mckinsey-forward',
+    name: 'McKinsey.org Forward Program',
+    description: 'A free multi-week learning program from McKinsey.org to equip people at different career stages with practical, transferable workplace skills for the future of work. Builds adaptability and resilience, structured problem solving, communication for impact, relationships and well-being, and digital and AI essentials through interactive self-paced courses, case scenarios, reflections, and live webinars. Completers earn a shareable digital badge and join a global alumni network.',
+    tagline: 'Free 10-week career skills program from McKinsey',
+    url: 'https://www.mckinsey.org/our-programs/forward/overview',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/mckinsey.org.ico',
+    category: 'writing',
+    difficulty: 'beginner',
+    duration: '10 weeks',
+    roadmap: [
+      { title: 'Adaptability & Resilience', topics: ['Growth Mindsets', 'Adapting to Change', 'Resilience Habits'], duration: '~2 hours', url: 'https://www.mckinsey.org/our-programs/forward/overview' },
+      { title: 'Problem Solving', topics: ['Structured Problem Solving', 'Defining Problems', 'Prioritizing Tasks'], duration: '~2 hours', url: 'https://www.mckinsey.org/our-programs/forward/overview' },
+      { title: 'Communicating for Impact', topics: ['Planning Communication', 'Structuring Messages', 'Targeting Audiences'], duration: '~2 hours', url: 'https://www.mckinsey.org/our-programs/forward/overview' },
+      { title: 'Relationships & Well-being', topics: ['Building Workplace Relationships', 'Well-being Management'], duration: '~2 hours', url: 'https://www.mckinsey.org/our-programs/forward/overview' },
+      { title: 'Digital and AI Essentials', topics: ['Digital Mindset', 'AI Basics', 'Expanding Your Toolkit'], duration: '~2 hours', url: 'https://www.mckinsey.org/our-programs/forward/overview' },
+      { title: 'Lead Forward Webinar', topics: ['Self-Leadership Skills', 'Applying Learnings', 'Live Session with Experts'], duration: '~1 hour', url: 'https://www.mckinsey.org/our-programs/forward/overview' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
