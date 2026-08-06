@@ -39704,112 +39704,43 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c131',
+    slug: 'ef-set-english-test',
+    name: 'EF SET — Free English Certificate',
+    description: 'The EF SET (EF Standard English Test) is a free online English proficiency test developed by EF Education First. Take the 90-minute full test covering reading, writing, listening, and speaking, or the 50-minute EF SET that certifies reading and listening. Results are fully aligned with CEFR levels (A1–C2) and include a free shareable EF SET Certificate you can add to your CV or LinkedIn. Over 30 million tests taken since 2016.',
+    tagline: 'Free English test with CEFR-aligned certificate',
+    url: 'https://www.efset.org/',
+    pricing: 'free',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=efset.org&sz=128',
+    category: 'writing',
+    difficulty: 'beginner',
+    duration: '50–90 minutes',
+    roadmap: [
+      { title: 'Try the practice test', topics: ['20-Question Quick Check', 'Test Format', 'Preparing for Certification'], duration: '~10 minutes', url: 'https://www.efset.org/quick-check/' },
+      { title: 'Take the EF SET (50 min)', topics: ['Reading Skills', 'Listening Skills', 'CEFR-Aligned Results', 'Free Certificate'], duration: '50 minutes', url: 'https://www.efset.org/ef-set-50/' },
+      { title: 'Take the full EF SET (90 min)', topics: ['Reading', 'Writing', 'Listening', 'Speaking', 'Complete CEFR Score'], duration: '90 minutes', url: 'https://www.efset.org/4-skill/' },
+      { title: 'Earn and share your certificate', topics: ['Free EF SET Certificate', 'Add to LinkedIn', 'Find Your Certificate'], duration: 'Instant', url: 'https://www.efset.org/english-certificate/' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_OFFERS: Offer[] = [
   {
     id: 'o1',
-    slug: 'future-skills-academy',
-    name: 'Future Skills Academy',
-    tagline: 'Free skills program for the Arab region — UNDP & MBRF',
-    description:
-      'A completely free, online upskilling program by the UNDP Regional Bureau for Arab States and the Mohammed bin Rashid Al Maktoum Knowledge Foundation. Aimed at learners across the Arab region — from fresh graduates and job seekers to public/private sector professionals and entrepreneurs. Covers Transferable Skills, Entrepreneurship Skills, and Advanced Technical Skills, delivered through Coursera. Successful applicants receive free access to selected courses and earn certificates.',
-    url: 'https://www.knowledge4all.com/future-skills-academy/overview',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/knowledge4all.com.ico',
-    category: 'learning',
-    tags: ['free', 'arab-region', 'coursera', 'certificate', 'undp'],
-    pricing: 'free',
-    steps: [
-      {
-        title: 'Confirm your target category',
-        description:
-          'The program serves six groups: Public Sector, Private Sector (MSMEs), Fresh Graduates, TVET Affiliates, Job Seekers, and Entrepreneurs. Each has a different enrollment path, so identify which one applies to you.',
-      },
-      {
-        title: 'Fill out the application form',
-        description:
-          'Click "Apply now" on the Apply page to open the individual online form (hosted on SurveyMonkey). Complete it accurately and submit — enrollment is free.',
-        url: 'https://www.knowledge4all.com/future-skills-academy/apply',
-      },
-      {
-        title: 'Await your approval email',
-        description:
-          'After submitting, wait for an email that verifies your accepted place in the program. Response time varies by cohort.',
-      },
-      {
-        title: 'Activate your Coursera account',
-        description:
-          'Follow the instructions in the email to set up your Coursera account — the program’s e-learning platform. Your free course access is granted through this account.',
-      },
-      {
-        title: 'Begin your learning journey',
-        description:
-          'Enroll in your assigned courses, complete the modules, and earn your certificates. Keep an eye on the program’s competition page for extra opportunities.',
-      },
-    ],
-    upvotes: 24,
-    bookmarks: 31,
-    submittedBy: 'u6',
-    featured: true,
-    createdAt: daysAgo(6),
-    updatedAt: daysAgo(1),
-  },
-  {
-    id: 'o2',
-    slug: 're-coded-start-learning',
-    name: 'Re:Coded',
-    tagline: 'Free self-led learning tracks for tech careers',
-    description:
-      'Free, self-paced online learning tracks from Re:Coded covering UX/UI Design (6 courses), Software Development (3 courses), Workplace Skills (5 courses), Job Search Skills (4 courses), and Digital Freelancing Skills. All in English, all free. Finish a track to earn a shareable certificate and build job-ready skills.',
-    url: 'https://www.re-coded.com/start-learning',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/re-coded.com.ico',
-    category: 'learning',
-    tags: ['free', 'self-paced', 'certificate', 'ux-ui', 'coding'],
-    pricing: 'free',
-    steps: [
-      {
-        title: 'Open the Start Learning page',
-        description:
-          'Go to re-coded.com and click "Start learning" to see the full list of available tracks.',
-        url: 'https://www.re-coded.com/start-learning',
-      },
-      {
-        title: 'Pick a track',
-        description:
-          'Choose between UX/UI Design, Software Development, Workplace Skills, Job Search Skills, or Digital Freelancing Skills — depending on your goal.',
-      },
-      {
-        title: 'Create a free account',
-        description:
-          'Sign up with your email so your progress and certificates are saved. No payment information is required.',
-      },
-      {
-        title: 'Work through the self-paced courses',
-        description:
-          'Complete the courses at your own rhythm. Each course includes lessons, exercises, and projects to build your portfolio.',
-      },
-      {
-        title: 'Earn your certificate',
-        description:
-          'Finish a track to receive a shareable certificate you can add to your CV and LinkedIn.',
-      },
-    ],
-    upvotes: 18,
-    bookmarks: 22,
-    submittedBy: 'u6',
-    featured: false,
-    createdAt: daysAgo(9),
-    updatedAt: daysAgo(1),
-  },
-  {
-    id: 'o3',
     slug: 'tokenrouter-unified-ai-hub',
     name: 'TokenRouter',
     tagline: 'One API for 300+ AI models — convert LLMs to OpenAI/Claude/Gemini format',
     description:
       'A unified AI model hub that converts leading LLMs into OpenAI-, Claude-, and Gemini-compatible APIs. Route requests across 300+ models from a single key, compare providers, and manage everything from one dashboard. Includes docs, release notes, and a model directory. Ideal for developers who want model-agnostic access without vendor lock-in.',
     url: 'https://www.tokenrouter.com/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/tokenrouter.com.ico',
+    logoUrl: 'https://www.tokenrouter.com/logo-without-title.png',
     category: 'tool',
     tags: ['api', 'llm-router', 'multi-model', 'developers'],
     pricing: 'freemium',
@@ -39845,118 +39776,107 @@ export const SEED_OFFERS: Offer[] = [
     upvotes: 15,
     bookmarks: 19,
     submittedBy: 'u6',
-    featured: false,
+    featured: true,
     createdAt: daysAgo(12),
     updatedAt: daysAgo(2),
   },
   {
-    id: 'o4',
-    slug: 'kimi-k3-free-api-guide',
-    name: 'Kimi K3 — Get Free API Access',
-    tagline: 'Step-by-step guide to accessing Moonshot AI’s Kimi K3 for free',
+    id: 'o2',
+    slug: 'nvidia-nim',
+    name: 'NVIDIA NIM',
+    tagline: 'Free OpenAI-compatible inference across 100+ models on DGX Cloud',
     description:
-      'Kimi K3 is Moonshot AI’s flagship model (2.8T params, 1M context, native vision). The first-party API is prepaid, but there are legitimate free paths: the free Kimi app/web tier, OpenRouter’s free/low-cost routes, trial credits, and keyless browser access via Puter.js. This guide walks through each, with exact URLs and code samples.',
-    url: 'https://platform.kimi.ai',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/platform.kimi.ai.ico',
+      'NVIDIA’s free inference platform at build.nvidia.com. Join the NVIDIA Developer Program to get API access to 100+ leading models (Nemotron, GLM, MiniMax, DeepSeek and more) served on DGX Cloud. Every model exposes an OpenAI-compatible endpoint, so switching models is just a string change. New developers get 1,000–5,000 free inference credits with roughly 40 requests/minute per model — perfect for prototyping and building agents.',
+    url: 'https://build.nvidia.com/models',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/build.nvidia.com.ico',
     category: 'api-access',
-    tags: ['kimi', 'moonshot', 'free-api', 'llm', 'guide'],
+    tags: ['nvidia', 'free-api', 'gpu', 'llm', 'openai-compatible'],
     pricing: 'free',
     steps: [
       {
-        title: 'Use the free Kimi app first (zero setup)',
+        title: 'Open the NVIDIA model catalog',
         description:
-          'Open kimi.com and start chatting — K3 is the flagship model behind the consumer product. Free tier covers chat plus Kimi Code and Kimi Work within daily rate limits. Best for quick testing before you build anything.',
-        url: 'https://kimi.com',
+          'Go to build.nvidia.com/models to browse the full catalog of supported models, filters, and playgrounds.',
+        url: 'https://build.nvidia.com/models',
       },
       {
-        title: 'Create a Moonshot developer account',
+        title: 'Join the NVIDIA Developer program (free)',
         description:
-          'For API access, sign up at platform.kimi.ai (the consumer side) or platform.moonshot.ai (the developer console). New accounts often include trial credit — check the console’s balance page before adding funds.',
-        url: 'https://platform.moonshot.ai',
+          'Create an account on build.nvidia.com and join the NVIDIA Developer Program. This unlocks the hosted NIM APIs and can award 1,000–5,000 free inference credits.',
+        url: 'https://build.nvidia.com/',
       },
       {
-        title: 'Generate an API key',
+        title: 'Generate your NVIDIA API key',
         description:
-          'Open the API Keys section of the console and create a new key. Copy it once — the full key is shown only at creation time. Store it in an env var such as MOONSHOT_API_KEY.',
+          'In your account, generate an API key that starts with nvapi-. Keep it in an env var for your app or agent.',
       },
       {
         title: 'Call the OpenAI-compatible endpoint',
         description:
-          'The base URL is https://api.moonshot.ai/v1. Use the model ID kimi-k3. Example: curl https://api.moonshot.ai/v1/chat/completions -H "Authorization: Bearer $MOONSHOT_API_KEY" -H "Content-Type: application/json" -d \'{"model":"kimi-k3","messages":[{"role":"user","content":"Hello"}]}\'.',
+          'Use https://integrate.api.nvidia.com/v1 as your base URL and pass the model ID of any catalog model. Your existing OpenAI SDK code works with just a base URL + key swap.',
       },
       {
-        title: 'Route for free via OpenRouter',
+        title: 'Prototype within the free tier',
         description:
-          'If you don’t want Moonshot’s prepaid billing, OpenRouter exposes moonshotai/kimi-k3 behind an OpenAI-compatible endpoint. Check the model page for a free or low-cost promotional route, and benefit from prompt caching.',
-        url: 'https://openrouter.ai/moonshotai/kimi-k3',
-      },
-      {
-        title: 'Go keyless with Puter.js (free, unlimited for apps)',
-        description:
-          'For free access without any API key or backend, include <script src="https://js.puter.com/v2/"></script> and call puter.ai.chat("...", { model: "moonshotai/kimi-k3" }). Users pay their own usage through the User-Pays model.',
-        url: 'https://developer.puter.com/tutorials/free-unlimited-moonshot-ai-api/',
-      },
-      {
-        title: 'Self-host after weights drop',
-        description:
-          'Moonshot plans to release K3 open weights (aimed around late July 2026). When they land on Hugging Face, you can run the model yourself — though a 2.8T-parameter MoE needs serious multi-GPU hardware.',
+          'Each model is rate-limited (roughly 40 req/min) and credits are consumed per request. Perfect for prototypes, agents, and experiments — move to paid or self-hosted NIM for production.',
       },
     ],
-    upvotes: 41,
-    bookmarks: 57,
+    upvotes: 28,
+    bookmarks: 34,
     submittedBy: 'u6',
     featured: true,
-    createdAt: daysAgo(3),
-    updatedAt: daysAgo(0),
+    createdAt: daysAgo(5),
+    updatedAt: daysAgo(1),
   },
   {
-    id: 'o5',
-    slug: '1000-fikra',
-    name: '1000 Fikra',
-    tagline: 'Free Moroccan program to turn every idea into a business',
+    id: 'o3',
+    slug: 'dahl-inference',
+    name: 'Dahl Inference',
+    tagline: 'Powerful models, simple API access — MiniMax, Kimi, GLM & more',
     description:
-      'A free national program in Morocco (with Afriquia Maak) built on the Rebel Business School methodology — "faire de chaque idée un business". Open to everyone, registration is free and without condition. Participants get hands-on training to develop their business idea. The site is in French.',
-    url: 'https://www.1000fikra.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/1000fikra.ma.ico',
-    category: 'fellowship',
-    tags: ['morocco', 'free', 'entrepreneurship', 'french', 'rebel-business-school'],
-    pricing: 'free',
+      'Dahl Inference is a model catalog that makes powerful open models easy to use through a single, simple API. It hosts strong models — MiniMax M2.7, Kimi K2.6, GLM 5.2 — with straightforward routing behind one key. Browse the catalog at inference.dahl.global/models, try the chat playground, and integrate with docs at docs.dahl.global. Endpoints are OpenAI-compatible for easy drops into existing code.',
+    url: 'https://inference.dahl.global/models',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/inference.dahl.global.ico',
+    category: 'api-access',
+    tags: ['api', 'mini-max', 'kimi', 'glm', 'llm'],
+    pricing: 'freemium',
     steps: [
       {
-        title: 'Open the 1000 Fikra website',
+        title: 'Open the model catalog',
         description:
-          'Go to 1000fikra.ma (the site is in French). The program is open to all Moroccans — no prior experience or capital required.',
-        url: 'https://www.1000fikra.ma/',
+          'Browse inference.dahl.global/models to see the available models (MiniMax M2.7, Kimi K2.6, GLM 5.2) with context sizes and capabilities.',
+        url: 'https://inference.dahl.global/models',
       },
       {
-        title: 'Register at the inscription page',
+        title: 'Sign in and get an API key',
         description:
-          'Click "S’inscrire" (register) and fill out the free registration form at /inscription. Participation is free and open to everyone.',
-        url: 'https://www.1000fikra.ma/inscription',
+          'Sign in to your Dahl account and click "GET API KEY". Your key authenticates all your inference requests.',
       },
       {
-        title: 'Attend the Rebel Business School training',
+        title: 'Try the chat playground',
         description:
-          'Selected participants join hands-on workshops built on the Rebel Business School methodology — practical, fast-paced sessions to shape your business idea into a real project.',
+          'Use /chat to test the models interactively before wiring up your code — confirm the response quality and latency.',
+        url: 'https://inference.dahl.global/chat',
       },
       {
-        title: 'Develop your project with coaches',
+        title: 'Integrate with the Dahl API',
         description:
-          'Work with mentors and coaches to refine your idea, validate your market, and prepare to launch.',
+          'Follow the docs at docs.dahl.global to route requests through the API with your key. Models and endpoints are OpenAI-compatible for easy drops into existing code.',
+        url: 'https://docs.dahl.global',
       },
       {
-        title: 'Present at the 1000 Fikra Expo',
+        title: 'Monitor via the status page',
         description:
-          'Outstanding projects get to showcase at the 1000 Fikra Expo (1000fikraexpo.ma), connecting with partners and investors.',
-        url: 'https://1000fikraexpo.ma/',
+          'Check /status for uptime and current availability when you ship to production.',
+        url: 'https://inference.dahl.global/status',
       },
     ],
-    upvotes: 12,
-    bookmarks: 17,
+    upvotes: 11,
+    bookmarks: 14,
     submittedBy: 'u6',
     featured: false,
-    createdAt: daysAgo(15),
-    updatedAt: daysAgo(2),
+    createdAt: daysAgo(3),
+    updatedAt: daysAgo(1),
   },
 ]
 
