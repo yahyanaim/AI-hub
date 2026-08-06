@@ -58,7 +58,7 @@ export function OfferCard({ offer, className }: { offer: Offer; className?: stri
         </div>
       </div>
 
-      <p className="mb-3 line-clamp-2 min-h-[2.5rem] text-sm leading-relaxed text-muted-foreground">
+      <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
         {offer.description}
       </p>
 
