@@ -22,7 +22,7 @@ const NAV_LINKS = [
   { href: '/devtool', label: 'Dev Tools' },
   { href: '/edittools', label: 'Editing Tools' },
   { href: '/courses', label: 'Courses' },
-  { href: '/books', label: 'Books' },
+  { href: '/offers', label: 'Offers' },
   { href: '/leaderboard', label: 'Leaderboard' },
 ]
 
