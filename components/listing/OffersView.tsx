@@ -19,7 +19,7 @@ export function OffersView() {
         title: 'Offers & Deals',
         eyebrow: 'Offers',
         description:
-          'Free programs, fellowship opportunities, and developer resources worth claiming. Each offer includes a step-by-step guide to get it.',
+          'Free programs, fellowships, and developer resources worth claiming. Each offer includes a visual journey showing exactly how to get it.',
         categoryLabel: 'Category',
         categoryOptions,
         itemLabel: 'offers',
