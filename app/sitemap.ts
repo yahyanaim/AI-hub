@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_USERS } from '@/lib/seed'
+import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS, SEED_USERS } from '@/lib/seed'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://aihubtools.vercel.app'
@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/devtool`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/edittools`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/courses`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
+    { url: `${baseUrl}/offers`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/leaderboard`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.8 },
     { url: `${baseUrl}/search`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.6 },
     { url: `${baseUrl}/submit`, lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.7 },
@@ -50,5 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4,
   }))
 
-  return [...staticPages, ...toolPages, ...devToolPages, ...repoPages, ...coursePages, ...userPages]
+  const offerPages = SEED_OFFERS.map((offer) => ({
+    url: `${baseUrl}/offers/${offer.slug}`,
+    lastModified: new Date(offer.updatedAt),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  return [...staticPages, ...toolPages, ...devToolPages, ...repoPages, ...coursePages, ...offerPages, ...userPages]
 }

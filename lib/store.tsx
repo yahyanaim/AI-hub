@@ -16,6 +16,7 @@ import type {
   Prompt,
   Repo,
   Course,
+  Offer,
   User,
   Comment,
   ItemType,
@@ -33,6 +34,7 @@ interface PersistedState {
   prompts: Prompt[]
   repos: Repo[]
   courses: Course[]
+  offers: Offer[]
   users: User[]
   comments: Comment[]
   currentUserId: string | null
@@ -88,6 +90,7 @@ interface AppContextValue {
   prompts: Prompt[]
   repos: Repo[]
   courses: Course[]
+  offers: Offer[]
   users: User[]
   comments: Comment[]
   currentUser: User | null
@@ -120,8 +123,8 @@ interface AppContextValue {
   deleteRepo: (id: string) => void
 
   // lookups
-  getItemById: (itemType: ItemType, id: string) => Tool | DevTool | Prompt | Repo | Course | undefined
-  getItemBySlug: (itemType: ItemType, slug: string) => Tool | DevTool | Prompt | Repo | Course | undefined
+  getItemById: (itemType: ItemType, id: string) => Tool | DevTool | Prompt | Repo | Course | Offer | undefined
+  getItemBySlug: (itemType: ItemType, slug: string) => Tool | DevTool | Prompt | Repo | Course | Offer | undefined
 
   // search
   addRecentSearch: (q: string) => void
@@ -154,6 +157,7 @@ const EMPTY_TOOLS: Tool[] = []
 const EMPTY_DEV_TOOLS: DevTool[] = []
 const EMPTY_REPOS: Repo[] = []
 const EMPTY_COURSES: Course[] = []
+const EMPTY_OFFERS: Offer[] = []
 
 function freshSeed(): PersistedState {
   return {
@@ -162,6 +166,7 @@ function freshSeed(): PersistedState {
     prompts: SEED_PROMPTS,
     repos: EMPTY_REPOS,
     courses: EMPTY_COURSES,
+    offers: EMPTY_OFFERS,
     users: SEED_USERS,
     comments: SEED_COMMENTS,
     currentUserId: null,
@@ -194,6 +199,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const seedDevTools = seedMod.SEED_DEV_TOOLS as DevTool[]
         const seedRepos = seedMod.SEED_REPOS as Repo[]
         const seedCourses = seedMod.SEED_COURSES as Course[]
+        const seedOffers = seedMod.SEED_OFFERS as Offer[]
         if (raw) {
           const parsed = JSON.parse(raw) as PersistedState
           // Merge seed updates into stored data (seed content wins for matching IDs, user-added items preserved)
@@ -212,6 +218,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
             prompts: mergeSeeds(parsed.prompts, SEED_PROMPTS),
             repos: mergeSeeds(parsed.repos, seedRepos),
             courses: mergeSeeds(parsed.courses, seedCourses),
+            offers: mergeSeeds(parsed.offers, seedOffers),
             users: parsed.users?.length ? parsed.users : SEED_USERS,
             comments: parsed.comments ?? SEED_COMMENTS,
           })
@@ -223,6 +230,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
             devTools: seedDevTools,
             repos: seedRepos,
             courses: seedCourses,
+            offers: seedOffers,
           }))
         }
       } catch {
@@ -281,6 +289,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           prompts: prev.prompts.map(bumpUpvotes),
           repos: prev.repos.map(bumpUpvotes),
           courses: prev.courses.map(bumpUpvotes),
+          offers: prev.offers.map(bumpUpvotes),
         }
       })
     },
@@ -316,6 +325,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           prompts: prev.prompts,
           repos: bump(prev.repos) as Repo[],
           courses: bump(prev.courses) as Course[],
+          offers: bump(prev.offers) as Offer[],
         }
       })
     },
@@ -619,9 +629,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       if (itemType === 'devtool') return state.devTools.find((d) => d.id === id)
       if (itemType === 'prompt') return state.prompts.find((p) => p.id === id)
       if (itemType === 'course') return state.courses.find((c) => c.id === id)
+      if (itemType === 'offer') return state.offers.find((o) => o.id === id)
       return state.repos.find((r) => r.id === id)
     },
-    [state.tools, state.devTools, state.prompts, state.courses, state.repos]
+    [state.tools, state.devTools, state.prompts, state.courses, state.repos, state.offers]
   )
   const getItemBySlug = useCallback(
     (itemType: ItemType, slug: string) => {
@@ -629,9 +640,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       if (itemType === 'devtool') return state.devTools.find((d) => d.slug === slug)
       if (itemType === 'prompt') return state.prompts.find((p) => p.slug === slug)
       if (itemType === 'course') return state.courses.find((c) => c.slug === slug)
+      if (itemType === 'offer') return state.offers.find((o) => o.slug === slug)
       return state.repos.find((r) => r.slug === slug)
     },
-    [state.tools, state.devTools, state.prompts, state.courses, state.repos]
+    [state.tools, state.devTools, state.prompts, state.courses, state.repos, state.offers]
   )
 
   // ---------------- Search ----------------
@@ -710,6 +722,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     openDetailModalForRepo: (repoId: string) => setDetailModalRepoId(repoId),
     closeDetailModalForRepo: () => setDetailModalRepoId(null),
     courses: state.courses,
+    offers: state.offers,
     detailModalCourseId,
     openDetailModalForCourse,
     closeDetailModalForCourse,

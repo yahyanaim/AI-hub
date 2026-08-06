@@ -86,7 +86,7 @@ export type EditToolCategory =
 
 export type Pricing = 'free' | 'freemium' | 'paid' | 'open-source'
 
-export type ItemType = 'tool' | 'devtool' | 'prompt' | 'repo' | 'course'
+export type ItemType = 'tool' | 'devtool' | 'prompt' | 'repo' | 'course' | 'offer'
 
 export interface DevTool {
   id: string
@@ -212,6 +212,42 @@ export interface Repo {
   submittedBy: string
   featured: boolean
   featuredDate?: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type OfferCategory =
+  | 'learning'
+  | 'fellowship'
+  | 'scholarship'
+  | 'api-access'
+  | 'tool'
+  | 'guide'
+  | 'competition'
+
+export interface OfferStep {
+  title: string
+  description: string
+  duration?: string
+  url?: string
+}
+
+export interface Offer {
+  id: string
+  slug: string
+  name: string
+  tagline: string
+  description: string
+  url: string
+  logoUrl: string
+  category: OfferCategory
+  tags: string[]
+  pricing: Pricing
+  steps: OfferStep[]
+  upvotes: number
+  bookmarks: number
+  submittedBy: string
+  featured: boolean
   createdAt: string
   updatedAt: string
 }
@@ -355,4 +391,14 @@ export const PRICING_LABELS: Record<Pricing, string> = {
   freemium: 'Freemium',
   paid: 'Paid',
   'open-source': 'Open Source',
+}
+
+export const OFFER_CATEGORY_LABELS: Record<OfferCategory, string> = {
+  learning: 'Learning',
+  fellowship: 'Fellowship',
+  scholarship: 'Scholarship',
+  'api-access': 'Free API',
+  tool: 'Tool',
+  guide: 'Guide',
+  competition: 'Competition',
 }

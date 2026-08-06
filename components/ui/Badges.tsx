@@ -6,10 +6,12 @@ import {
   type ToolCategory,
   type EditToolCategory,
   type CourseCategory,
+  type OfferCategory,
   TOOL_CATEGORY_LABELS,
   DEVTOOL_CATEGORY_LABELS,
   REPO_CATEGORY_LABELS,
   COURSE_CATEGORY_LABELS,
+  OFFER_CATEGORY_LABELS,
 } from '@/types'
 
 export function CategoryBadge({
@@ -17,8 +19,8 @@ export function CategoryBadge({
   category,
   className,
 }: {
-  kind: 'tool' | 'devtool' | 'repo' | 'course'
-  category: DevToolCategory | ToolCategory | EditToolCategory | CourseCategory
+  kind: 'tool' | 'devtool' | 'repo' | 'course' | 'offer'
+  category: DevToolCategory | ToolCategory | EditToolCategory | CourseCategory | OfferCategory
   className?: string
 }) {
   const label =
@@ -28,7 +30,9 @@ export function CategoryBadge({
         ? DEVTOOL_CATEGORY_LABELS[category as DevToolCategory]
         : kind === 'course'
           ? COURSE_CATEGORY_LABELS[category as CourseCategory]
-          : REPO_CATEGORY_LABELS[category as EditToolCategory]
+          : kind === 'offer'
+            ? OFFER_CATEGORY_LABELS[category as OfferCategory]
+            : REPO_CATEGORY_LABELS[category as EditToolCategory]
   return (
     <span className={cn('inline-flex items-center gap-1 rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-medium text-brand-orange', className)}>
       {label}
