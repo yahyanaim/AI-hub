@@ -63,6 +63,10 @@ export function OfferCard({ offer, className }: { offer: Offer; className?: stri
         <PricingBadge pricing={offer.pricing} />
       </div>
 
+      <p className="mb-4 line-clamp-2 min-h-[2.5rem] text-sm leading-relaxed text-muted-foreground">
+        {offer.description}
+      </p>
+
       <div className="mt-auto flex items-center justify-between border-t border-border/50 pt-3">
         <div className="flex items-center gap-2">
           {submitter && (
