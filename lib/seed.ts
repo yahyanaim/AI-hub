@@ -39737,7 +39737,7 @@ export const SEED_COURSES: Course[] = [
     tagline: 'Free grammar, vocabulary, audio & video practice from Oxford',
     url: 'https://elt.oup.com/student/englishfile/?cc=ma&selLanguage=en',
     pricing: 'free',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/elt.oup.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=elt.oup.com&sz=128',
     category: 'writing',
     difficulty: 'beginner',
     duration: 'Self-paced',
