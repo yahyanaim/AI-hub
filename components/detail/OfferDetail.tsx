@@ -89,17 +89,6 @@ export function OfferDetail({ slug }: { slug: string }) {
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
-                {step.url && (
-                  <a
-                    href={step.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-brand-orange hover:underline"
-                  >
-                    Open link
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                )}
               </div>
             </li>
           ))}
