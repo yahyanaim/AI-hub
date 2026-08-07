@@ -39729,6 +39729,31 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c132',
+    slug: 'english-file-online',
+    name: 'English File Student Site',
+    description: 'Free online resources that accompany the English File coursebooks from Oxford University Press. For every level (Beginner to Advanced Plus) you get grammar and vocabulary exercises, audio and video, pronunciation practice, and downloadable materials — all free and self-paced. Works on any device, ideal for improving your English alongside the English File books or as a standalone practice hub.',
+    tagline: 'Free grammar, vocabulary, audio & video practice from Oxford',
+    url: 'https://elt.oup.com/student/englishfile/?cc=ma&selLanguage=en',
+    pricing: 'free',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/elt.oup.com.ico',
+    category: 'writing',
+    difficulty: 'beginner',
+    duration: 'Self-paced',
+    roadmap: [
+      { title: 'Pick your English File level', topics: ['Beginner to Advanced Plus', 'Placement Quiz', 'Choose Your Study Path'], duration: '~10 minutes', url: 'https://elt.oup.com/student/englishfile/?cc=ma&selLanguage=en' },
+      { title: 'Grammar practice', topics: ['Grammar Files per Unit', 'Interactive Exercises', 'Grammar Revision'], duration: 'Ongoing', url: 'https://elt.oup.com/student/englishfile/grammar' },
+      { title: 'Vocabulary builder', topics: ['Topic-Based Vocabulary', 'Word Lists', 'Pronunciation Practice'], duration: 'Ongoing', url: 'https://elt.oup.com/student/englishfile/vocabulary' },
+      { title: 'Listening & video', topics: ['Audio Resources', 'Video Episodes', 'Real-Life English'], duration: 'Ongoing', url: 'https://elt.oup.com/student/englishfile/audio' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_OFFERS: Offer[] = [
@@ -39922,8 +39947,8 @@ export const SEED_OFFERS: Offer[] = [
     bookmarks: 14,
     submittedBy: 'u6',
     featured: false,
-    createdAt: daysAgo(3),
-    updatedAt: daysAgo(1),
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
   },
 ]
 
