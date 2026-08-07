@@ -39734,6 +39734,53 @@ export const SEED_COURSES: Course[] = [
 export const SEED_OFFERS: Offer[] = [
   {
     id: 'o1',
+    slug: 'future-skills-academy',
+    name: 'Future Skills Academy',
+    tagline: 'Free skills program for the Arab region — UNDP & MBRF',
+    description:
+      'A completely free, online upskilling program by the UNDP Regional Bureau for Arab States and the Mohammed bin Rashid Al Maktoum Knowledge Foundation. Aimed at learners across the Arab region — from fresh graduates and job seekers to public/private sector professionals and entrepreneurs. Covers Transferable Skills, Entrepreneurship Skills, and Advanced Technical Skills, delivered through Coursera. Successful applicants get free access to selected courses and earn certificates.',
+    url: 'https://www.knowledge4all.com/FutureSkills4All/overview',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/knowledge4all.com.ico',
+    category: 'learning',
+    tags: ['free', 'arab-region', 'coursera', 'certificate', 'undp'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Confirm your target category',
+        description:
+          'The program serves six groups: Public Sector, Private Sector (MSMEs), Fresh Graduates, TVET Affiliates, Job Seekers, and Entrepreneurs. Each has a different enrollment path, so identify which one applies to you.',
+      },
+      {
+        title: 'Open the Apply page',
+        description:
+          'Visit the program’s Apply page on Knowledge for All to find the individual online application form and complete it accurately — enrollment is free.',
+        url: 'https://www.knowledge4all.com/FutureSkills4All/apply',
+      },
+      {
+        title: 'Await your approval email',
+        description:
+          'After submitting, wait for an email that verifies your accepted place in the program. Response time varies by cohort.',
+      },
+      {
+        title: 'Activate your Coursera account',
+        description:
+          'Follow the instructions in the email to set up your Coursera account — the program’s e-learning platform. Your free course access is granted through this account.',
+      },
+      {
+        title: 'Begin your learning journey',
+        description:
+          'Enroll in your assigned courses, complete the modules, and earn your certificates. Check the program’s Competition page for extra opportunities.',
+      },
+    ],
+    upvotes: 24,
+    bookmarks: 31,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(6),
+    updatedAt: daysAgo(1),
+  },
+  {
+    id: 'o2',
     slug: 'tokenrouter-unified-ai-hub',
     name: 'TokenRouter',
     tagline: 'One API for 300+ AI models — convert LLMs to OpenAI/Claude/Gemini format',
@@ -39781,7 +39828,7 @@ export const SEED_OFFERS: Offer[] = [
     updatedAt: daysAgo(2),
   },
   {
-    id: 'o2',
+    id: 'o3',
     slug: 'nvidia-nim',
     name: 'NVIDIA NIM',
     tagline: 'Free OpenAI-compatible inference across 100+ models on DGX Cloud',
@@ -39829,7 +39876,7 @@ export const SEED_OFFERS: Offer[] = [
     updatedAt: daysAgo(1),
   },
   {
-    id: 'o3',
+    id: 'o4',
     slug: 'dahl-inference',
     name: 'Dahl Inference',
     tagline: 'Powerful models, simple API access — MiniMax, Kimi, GLM & more',
