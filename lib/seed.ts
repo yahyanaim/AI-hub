@@ -39808,41 +39808,44 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o2',
     slug: 'tokenrouter-unified-ai-hub',
     name: 'TokenRouter',
-    tagline: 'One API for 300+ AI models — convert LLMs to OpenAI/Claude/Gemini format',
+    tagline: 'Kimi K3 free + one API for 300+ models — convert LLMs to OpenAI/Claude/Gemini format',
     description:
-      'A unified AI model hub that converts leading LLMs into OpenAI-, Claude-, and Gemini-compatible APIs. Route requests across 300+ models from a single key, compare providers, and manage everything from one dashboard. Includes docs, release notes, and a model directory. Ideal for developers who want model-agnostic access without vendor lock-in.',
+      'A unified AI model hub that converts leading LLMs into OpenAI-, Claude-, and Gemini-compatible APIs. Right now TokenRouter runs a free tier of Kimi K3 — a frontier reasoning model — on its own B300/GB300 deployment. Route requests across 300+ models from a single key, compare providers, and manage everything from one dashboard. Includes docs, release notes, and a model directory. Ideal for developers who want frontier models at no cost and model-agnostic access without vendor lock-in.',
     url: 'https://www.tokenrouter.com/',
     logoUrl: 'https://www.tokenrouter.com/logo-without-title.png',
     category: 'tool',
-    tags: ['api', 'llm-router', 'multi-model', 'developers'],
+    tags: ['api', 'llm-router', 'multi-model', 'developers', 'kimi', 'free-model'],
     pricing: 'freemium',
     steps: [
       {
-        title: 'Create an account',
+        title: 'Create a TokenRouter account',
         description:
-          'Sign up on tokenrouter.com with your email. The free tier lets you test routing across models with limited credits.',
+          'Sign up at tokenrouter.com with your email. No credit card is required for the free tier.',
         url: 'https://www.tokenrouter.com/',
       },
       {
-        title: 'Get your API key',
+        title: 'Open API Keys and create a key',
         description:
-          'Open the dashboard and generate an API key. Keep it safe — it authenticates all your routed requests.',
+          'In the dashboard, go to API Keys and generate a key. Keep it safe — it authenticates all your routed requests.',
+        url: 'https://www.tokenrouter.com/api-keys',
+      },
+      {
+        title: 'Pick the free Kimi K3 model',
+        description:
+          'On the /models page, choose Kimi K3 Free (model id: moonshotai/kimi-k3-free). It runs on TokenRouter’s own B300/GB300 deployment and is free through the announced free tier period.',
+        url: 'https://www.tokenrouter.com/models',
       },
       {
         title: 'Point your client at the unified endpoint',
         description:
-          'Use TokenRouter as your base URL in any OpenAI/Claude/Gemini-compatible SDK. Your existing code keeps working — you only swap the endpoint and model name.',
-      },
-      {
-        title: 'Browse the model directory',
-        description:
-          'Check the /models page to compare 300+ models, pricing, and capabilities before choosing which to route to.',
-        url: 'https://www.tokenrouter.com/models',
+          'Use https://api.tokenrouter.com/v1 as the base URL with model moonshotai/kimi-k3-free in any OpenAI/Claude/Gemini-compatible SDK — Cursor, Claude Code, Cline, Aider, Hermes, even OpenCode. Swap the endpoint and model name and your existing code keeps working.',
+        url: 'https://www.tokenrouter.com/docs',
       },
       {
         title: 'Read the docs and release notes',
         description:
-          'Follow /docs for setup guides and /release-notes to stay current on new models and features.',
+          'Follow the docs for setup guides and the release notes to stay current on new models, free tiers, and features.',
+        url: 'https://www.tokenrouter.com/release-notes',
       },
     ],
     upvotes: 15,
