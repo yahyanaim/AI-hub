@@ -39792,7 +39792,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=databaseschool.com&sz=128',
     category: 'backend',
     difficulty: 'beginner',
-    duration: '39 videos · self-paced',
+    duration: 'Self-paced',
     roadmap: [
       { title: 'Get oriented', topics: ['Introduction to the Course', 'Why Choose Postgres', 'Understanding the Vocabulary'], duration: '~16 min', url: 'https://databaseschool.com/series/intro-to-postgres/videos/203' },
       { title: 'Querying data', topics: ['Exploring the Data', 'Filtering', 'Operators & Pattern Matching', 'Dealing with NULLs', 'Aggregating Data', 'HAVING'], duration: '~59 min', url: 'https://databaseschool.com/series/intro-to-postgres/videos/207' },
@@ -39820,7 +39820,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=databaseschool.com&sz=128',
     category: 'backend',
     difficulty: 'intermediate',
-    duration: '115 videos · self-paced',
+    duration: 'Self-paced',
     roadmap: [
       { title: 'Get oriented', topics: ['Introduction', 'Course Structure', 'Postgres vs. Everyone', 'The psql CLI'], duration: '~11 min', url: 'https://databaseschool.com/series/mastering-postgres/videos/88' },
       { title: 'Core data types', topics: ['Intro to Schema', 'Integers & Numeric', 'Money, Casting, Characters', 'Domains, UUIDs, Enums'], duration: '~90 min', url: 'https://databaseschool.com/series/mastering-postgres/videos/92' },
