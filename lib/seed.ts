@@ -18727,6 +18727,24 @@ export const SEED_TOOLS: Tool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 't1352',
+    slug: 'chatgpt-translate',
+    name: 'ChatGPT Translate',
+    tagline: 'AI-powered text translation with context-aware accuracy',
+    description: 'ChatGPT Translate is a dedicated browser tool by OpenAI that uses ChatGPT models to translate text between languages. Unlike keyword-based machine translation, it understands tone, idioms, and cultural context to produce natural, human-quality translations. Perfect for documents, emails, articles, learning a language, or quick on-the-go translation — entirely free to use with a ChatGPT account.',
+    url: 'https://chatgpt.com/translate/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128',
+    category: 'writing',
+    tags: ['translation', 'language', 'openai', 'writing'],
+    pricing: 'free',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ];
 
 export const SEED_PROMPTS: Prompt[] = []
