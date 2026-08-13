@@ -4,13 +4,15 @@ import { ListingView, type FilterOption } from '@/components/listing/ListingView
 import { CourseCard } from '@/components/cards/CourseCard'
 import { useApp } from '@/lib/store'
 import { COURSE_CATEGORY_LABELS, type Course } from '@/types'
+import { useRouter } from 'next/navigation'
 
 const categoryOptions: FilterOption[] = Object.entries(COURSE_CATEGORY_LABELS).map(
   ([value, label]) => ({ value, label })
 )
 
-export function CoursesView() {
+export function CoursesView({ initialCategory }: { initialCategory?: string }) {
   const { courses } = useApp()
+  const router = useRouter()
 
   return (
     <>
@@ -36,6 +38,10 @@ export function CoursesView() {
         categoryLabel: 'Category',
         categoryOptions,
         itemLabel: 'courses',
+        initialCategory,
+        onCategoryChange: (cat) => {
+          router.push(cat === 'all' ? '/courses' : `/courses/${cat}`)
+        },
       }}
       renderCard={(c) => <CourseCard course={c} />}
       getCategory={(c) => c.category}

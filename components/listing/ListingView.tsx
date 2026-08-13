@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { SearchX, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
 import { CardGrid } from '@/components/cards/CardPrimitives'
@@ -35,6 +35,8 @@ export interface ListingConfig {
   subcategoryOptions?: FilterOption[]
   subcategoryLabel?: string
   subcategoryFilter?: (item: any, subcategory: string) => boolean
+  initialCategory?: string
+  onCategoryChange?: (category: string) => void
 }
 
 interface ListingViewProps<T> {
@@ -65,11 +67,17 @@ export function ListingView<T extends { id: string }>({
   pageSize = PAGE_SIZE,
 }: ListingViewProps<T>) {
   const [sort, setSort] = useState<SortKey>('trending')
-  const [category, setCategory] = useState('all')
+  const [category, setCategory] = useState(config.initialCategory ?? 'all')
   const [pricing, setPricing] = useState('all')
   const [language, setLanguage] = useState('all')
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    const next = config.initialCategory ?? 'all'
+    setCategory(next)
+    setPage(1)
+  }, [config.initialCategory])
 
   const filtered = useMemo(() => {
     let arr = [...items]
@@ -180,7 +188,10 @@ export function ListingView<T extends { id: string }>({
           label={config.categoryLabel}
           options={[{ value: 'all', label: 'All' }, ...config.categoryOptions]}
           value={category}
-          onChange={(v) => changeFilter(setCategory, v)}
+          onChange={(v) => {
+            changeFilter(setCategory, v)
+            config.onCategoryChange?.(v)
+          }}
         />
       </div>
 

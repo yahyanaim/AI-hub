@@ -145,7 +145,7 @@ export function CommandPalette() {
         title: c.name,
         subtitle: c.tagline,
         meta: c.duration,
-        href: `/courses/${c.slug}`,
+        href: `/courses/${c.category}/${c.slug}`,
         item: c,
       }))
 

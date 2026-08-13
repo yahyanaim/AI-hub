@@ -85,7 +85,7 @@ export function LeaderboardView() {
           id: c.id,
           title: c.name,
           subtitle: c.tagline,
-          href: `/courses/${c.slug}`,
+          href: `/courses/${c.category}/${c.slug}`,
           score: c.upvotes,
           secondary: `${formatNumber(c.bookmarks)} bookmarks`,
           logoUrl: c.logoUrl,

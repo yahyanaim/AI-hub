@@ -1,14 +1,24 @@
 import type { Metadata } from 'next'
+import { redirect, notFound } from 'next/navigation'
 import { SEED_COURSES, SEED_USERS } from '@/lib/seed'
 import { CourseDetail } from '@/components/detail/CourseDetail'
 
-export async function generateStaticParams() {
-  return SEED_COURSES.map((course) => ({ slug: course.slug }))
+const baseUrl = 'https://aihubtools.vercel.app'
+
+export function generateStaticParams() {
+  return SEED_COURSES.map((course) => ({ category: course.category, slug: course.slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const course = SEED_COURSES.find((c) => c.slug === params.slug)
+export async function generateMetadata({ params }: { params: { category: string; slug: string } }): Promise<Metadata> {
+  const { category, slug } = params
+  const course = SEED_COURSES.find((c) => c.slug === slug)
+
   if (!course) return { title: 'Course Not Found' }
+
+  if (course.category !== category) {
+    redirect(`/courses/${course.category}/${course.slug}`)
+  }
+
   return {
     title: course.name,
     description: course.description,
@@ -25,17 +35,24 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: course.logoUrl ? [course.logoUrl] : undefined,
     },
     alternates: {
-      canonical: `https://aihubtools.vercel.app/courses/${course.slug}`,
+      canonical: `${baseUrl}/courses/${course.category}/${course.slug}`,
     },
   }
 }
 
-export default async function CourseDetailPage({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default async function CourseDetailPage({ params }: { params: { category: string; slug: string } }) {
+  const { category, slug } = params
   const course = SEED_COURSES.find((c) => c.slug === slug)
-  const user = course ? SEED_USERS.find((u) => u.id === course.submittedBy) : null
 
-  const jsonLd = course ? {
+  if (!course) notFound()
+
+  if (course.category !== category) {
+    redirect(`/courses/${course.category}/${course.slug}`)
+  }
+
+  const user = SEED_USERS.find((u) => u.id === course.submittedBy)
+
+  const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Course',
     name: course.name,
@@ -57,16 +74,14 @@ export default async function CourseDetailPage({ params }: { params: { slug: str
     } : undefined,
     url: course.url,
     datePublished: course.createdAt,
-  } : null
+  }
 
   return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <CourseDetail slug={slug} />
     </>
   )

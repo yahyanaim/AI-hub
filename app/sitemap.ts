@@ -38,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const coursePages = SEED_COURSES.map((course) => ({
-    url: `${baseUrl}/courses/${course.slug}`,
+    url: `${baseUrl}/courses/${course.category}/${course.slug}`,
     lastModified: new Date(course.updatedAt),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
