@@ -12,6 +12,7 @@ const CATEGORY_TO_TYPE: Record<string, string> = {
   marketing: '/tools',
   data: '/tools',
   agents: '/tools',
+  education: '/tools',
   ide: '/prompts',
   debugging: '/prompts',
   testing: '/prompts',

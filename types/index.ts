@@ -24,6 +24,7 @@ export type ToolCategory =
   | 'no-code'
   | 'open-source-ai'
   | 'seo'
+  | 'education'
   | 'other'
 
 export type DevToolCategory =
@@ -307,6 +308,7 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
   'no-code': 'No Code Platform',
   'open-source-ai': 'Open Source AI',
   seo: 'SEO Tools',
+  education: 'Education',
   other: 'Other',
 }
 
