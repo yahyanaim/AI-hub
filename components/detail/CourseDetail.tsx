@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Flame, Clock, BookOpen, Download } from 'lucide-react'
+import { X, Flame, Clock, BookOpen, Download, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import { useApp } from '@/lib/store'
 import { Logo } from '@/components/ui/Logo'
@@ -90,6 +90,14 @@ export function CourseDetailModal() {
                     </a>
                   )}
                 </div>
+                <Link
+                  href={`/courses/${course.category}/${course.slug}`}
+                  onClick={closeDetailModalForCourse}
+                  className="mt-1 inline-flex items-center gap-0.5 text-xs font-medium text-muted-foreground transition-colors hover:text-brand-orange"
+                >
+                  View full page
+                  <ArrowUpRight className="h-3 w-3" />
+                </Link>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   {course.tagline}
                 </p>

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ExternalLink, Clock, BookOpen, Download } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
@@ -11,18 +12,20 @@ import { cn, downloadRoadmapPlan } from '@/lib/utils'
 import type { Course } from '@/types'
 
 export function CourseCard({ course, className }: { course: Course; className?: string }) {
-  const { getUser, openDetailModalForCourse } = useApp()
+  const { getUser } = useApp()
+  const router = useRouter()
   const submitter = getUser(course.submittedBy)
+  const coursePath = `/courses/${course.category}/${course.slug}`
 
   return (
     <article
-      onClick={() => openDetailModalForCourse(course.id)}
+      onClick={() => router.push(coursePath)}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()
-          openDetailModalForCourse(course.id)
+          router.push(coursePath)
         }
       }}
       className={cn(

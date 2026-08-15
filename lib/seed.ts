@@ -41568,6 +41568,54 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(1),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o6',
+    slug: 'opencode-with-deepseek',
+    name: 'OpenCode + DeepSeek (Free)',
+    tagline: 'Free open-source coding agent powered by DeepSeek\u2019s cheapest models',
+    description:
+      'OpenCode is a free, open-source AI coding agent for the terminal, desktop, and web that reads your repo, edits files, and runs commands. DeepSeek offers some of the cheapest capable LLMs, including the free `deepseek-v4-flash` tier — pair them and you get a full agentic coding setup for cents per session with no subscription on either side. Connect through OpenCode\u2019s built-in `/connect` flow: pick the DeepSeek provider, paste your API key, and select a V4 model.',
+    url: 'https://opencode.ai',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/opencode.ai.ico',
+    category: 'tool',
+    tags: ['open-source', 'coding-agent', 'deepseek', 'free', 'cli', 'terminal'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Install OpenCode',
+        description:
+          'Install the free, open-source coding agent for your OS. The easiest path is a one-line terminal install, then run `opencode` in your project directory.',
+        url: 'https://opencode.ai/docs',
+      },
+      {
+        title: 'Create a DeepSeek account and API key',
+        description:
+          'Sign up on the DeepSeek platform and generate an API key. OpenCode stores it locally — never paste it into a repo file or commit it to Git.',
+        url: 'https://platform.deepseek.com',
+      },
+      {
+        title: 'Connect the DeepSeek provider',
+        description:
+          'Inside OpenCode, type `/connect`, search for DeepSeek, and select it. Paste your DeepSeek API key when prompted. The credential is stored so you only enter it once.',
+      },
+      {
+        title: 'Pick the free V4 model',
+        description:
+          'Run `/models` and select `deepseek-v4-flash` for fast, cheap everyday coding — or `deepseek-v4-pro` for harder, repository-wide tasks. The free flash tier is ideal for a zero-cost setup.',
+      },
+      {
+        title: 'Start building',
+        description:
+          'Describe a task in plain language and let OpenCode read your repo, edit files, run commands, and iterate. OpenCode is free; you only pay DeepSeek\u2019s low pay-per-token rate.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
