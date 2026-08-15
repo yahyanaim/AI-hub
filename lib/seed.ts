@@ -41521,6 +41521,53 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o5',
+    slug: 'flux-3-early-access',
+    name: 'FLUX 3 Early Access',
+    tagline: 'Black Forest Labs\u2019 multimodal model — video, image, audio & action in early access',
+    description:
+      'FLUX 3 is Black Forest Labs\u2019 new multimodal foundation model that jointly learns from images, video, and audio in a single unified architecture. FLUX 3 Video (with native audio generation, up to 20-second clips) is available now through a gated early access program — anyone can apply, but BFL approves requests by use case. Capabilities include text-to-video, image-to-video, video continuation, keyframe control, multilingual dialogue, and agentic clip chaining. In early evaluations it was preferred over Runway Gen-4.5 in 77% of comparisons and Luma Ray 3.2 in 93%. Early access is free to apply; video generation is pay-as-you-go (from $0.06/sec draft HD). FLUX 3 Image, FLUX 3 Action, and the open-weight FLUX 3 Dev follow over the coming weeks.',
+    url: 'https://bfl.ai/models/flux-3',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/bfl.ai.ico',
+    category: 'tool',
+    tags: ['video', 'image', 'audio', 'multimodal', 'early-access', 'black-forest-labs'],
+    pricing: 'freemium',
+    steps: [
+      {
+        title: 'Open the FLUX 3 model page',
+        description:
+          'Visit bfl.ai/models/flux-3 to read about FLUX 3 Video, Image, Action, and the Dev backbone, and review the early evaluation results and FAQ.',
+        url: 'https://bfl.ai/models/flux-3',
+      },
+      {
+        title: 'Request early access',
+        description:
+          'Submit the early access form on the model page. The program is free and open to anyone, but access is discretionary — Black Forest Labs approves based on your use case and fit.',
+      },
+      {
+        title: 'Describe your use case',
+        description:
+          'Explain how you plan to use FLUX 3 (e.g., content creation, filmmaking, product design, virtual try-on). Strong, specific use cases are prioritized.',
+      },
+      {
+        title: 'Wait for BFL approval',
+        description:
+          'There is no published wait time or approval criteria. Apply early and check your inbox — approval grants access through the BFL dashboard and API.',
+      },
+      {
+        title: 'Generate with FLUX 3 Video',
+        description:
+          'Once approved, generate up to 20-second videos with native audio from text, images, or keyframes. Pricing is pay-as-you-go (draft HD from $0.06/sec) with no subscriptions or seat fees.',
+      },
+    ],
+    upvotes: 18,
+    bookmarks: 22,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(1),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
