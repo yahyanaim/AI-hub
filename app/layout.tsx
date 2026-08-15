@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     title: 'AI Hunt — Discover AI Tools & Developer Resources',
     description:
       'Community-driven platform for AI tools, dev tools, GitHub repos, and coding courses.',
-    images: ['/logo.png'],
+    images: ['/og.png'],
     creator: '@yahianaim',
   },
   alternates: {
