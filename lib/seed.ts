@@ -34354,6 +34354,24 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'd836',
+    slug: 'luma-labs',
+    name: 'Luma Labs',
+    tagline: 'Dream Machine API — photorealistic video generation for developers',
+    description: 'Luma Labs Dream Machine is a photorealistic AI video API for developers: generate high-fidelity video from text/images with strong physics and camera control via REST API. Free tier for prototyping, pay-per-second for production. Docs at lumalabs.ai/docs.',
+    url: 'https://lumalabs.ai',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/lumalabs.ai.ico',
+    category: 'api',
+    tags: ['video-generation', 'dream-machine', 'api', 'ai-video', 'developers'],
+    pricing: 'freemium',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_REPOS: Repo[] = [
