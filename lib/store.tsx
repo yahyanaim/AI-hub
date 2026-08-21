@@ -26,7 +26,7 @@ import { SEED_PROMPTS, SEED_COMMENTS } from '@/lib/seed'
 import { SEED_USERS } from '@/lib/seed-users'
 import { uuid, slugify } from '@/lib/utils'
 
-const STORAGE_KEY = 'ai-hunt-state-v2'
+const STORAGE_KEY = 'ai-hunt-state-v3' // bump to force-clean stale localStorage when seeds remove items
 
 interface PersistedState {
   tools: Tool[]
