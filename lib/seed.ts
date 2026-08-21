@@ -41383,6 +41383,32 @@ export const SEED_OFFERS: Offer[] = [
           'Enroll in your assigned courses, complete the modules, and earn your certificates. Check the program’s Competition page for extra opportunities.',
       },
     ],
+    nameAr: 'أكاديمية مهارات المستقبل',
+    taglineAr: 'برنامج مهارات مجاني للمنطقة العربية — الأمم المتحدة الإنمائية ومؤسسة محمد بن راشد',
+    descriptionAr: 'برنامج مجاني بالكامل عبر الإنترنت من المكتب الإقليمي لبرنامج الأمم المتحدة الإنمائي ومؤسسة محمد بن راشد للمعرفة. موجه لحديثي التخرج والباحثين عن عمل والمهنيين ورواد الأعمال في المنطقة العربية. يغطي المهارات القابلة للنقل وريادة الأعمال والمهارات التقنية المتقدمة عبر كورسيرا مع شهادات مجانية.',
+    stepsAr: [
+      {
+        title: 'حدد فئتك المستهدفة',
+        description: 'يخدم البرنامج ست فئات: القطاع العام، الخاص (MSMEs)، حديثو التخرج، التعليم المهني، الباحثون عن عمل، ورواد الأعمال. حدد المسار المناسب لك.'
+      },
+      {
+        title: 'افتح صفحة التقديم',
+        description: 'اذهب إلى صفحة التقديم في Knowledge4All واملأ نموذج الطلب بدقة — التسجيل مجاني.',
+        url: 'https://www.knowledge4all.com/FutureSkills4All/apply'
+      },
+      {
+        title: 'انتظر رسالة الموافقة',
+        description: 'بعد الإرسال، انتظر رسالة بريد تؤكد قبولك. تختلف مدة الرد حسب الدفعة.'
+      },
+      {
+        title: 'فعّل حساب كورسيرا',
+        description: 'اتبع تعليمات الرسالة لإنشاء حساب كورسيرا — ستحصل على وصول مجاني للمقررات.'
+      },
+      {
+        title: 'ابدأ رحلة التعلم',
+        description: 'سجّل في مقرراتك، أكمل الوحدات واحصل على الشهادات. تابع صفحة المسابقة لفرص إضافية.'
+      }
+    ],
     upvotes: 24,
     bookmarks: 31,
     submittedBy: 'u6',
@@ -41434,6 +41460,36 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.tokenrouter.com/release-notes',
       },
     ],
+    nameAr: 'TokenRouter',
+    taglineAr: 'Kimi K3 مجاناً + واجهة موحدة لـ 300+ نموذج — حوّل LLMs إلى OpenAI/Claude/Gemini',
+    descriptionAr: 'مركز نماذج موحد يحوّل أبرز النماذج إلى واجهات متوافقة مع OpenAI وClaude وGemini. حالياً يوفر Kimi K3 مجاناً على خوادم B300/GB300. وجّه الطلبات عبر 300+ نموذج بمفتاح واحد، وقارن المزودين من لوحة واحدة.',
+    stepsAr: [
+      {
+        title: 'أنشئ حساب TokenRouter',
+        description: 'سجّل في tokenrouter.com ببريدك. لا حاجة لبطاقة للخطة المجانية.',
+        url: 'https://www.tokenrouter.com/'
+      },
+      {
+        title: 'افتح مفاتيح API وأنشئ مفتاحاً',
+        description: 'في اللوحة اذهب إلى API Keys وأنشئ مفتاحاً. احتفظ به بأمان.',
+        url: 'https://www.tokenrouter.com/api-keys'
+      },
+      {
+        title: 'اختر Kimi K3 المجاني',
+        description: 'في صفحة النماذج اختر Kimi K3 Free (moonshotai/kimi-k3-free).',
+        url: 'https://www.tokenrouter.com/models'
+      },
+      {
+        title: 'وجّه عميلك للنقطة الموحدة',
+        description: 'استخدم https://api.tokenrouter.com/v1 كنقطة أساس مع النموذج moonshotai/kimi-k3-free في أي SDK متوافق.',
+        url: 'https://www.tokenrouter.com/docs'
+      },
+      {
+        title: 'اقرأ الوثائق',
+        description: 'تابع الوثائق وملاحظات الإصدار لمعرفة النماذج والخطط المجانية الجديدة.',
+        url: 'https://www.tokenrouter.com/release-notes'
+      }
+    ],
     upvotes: 15,
     bookmarks: 19,
     submittedBy: 'u6',
@@ -41481,6 +41537,33 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Each model is rate-limited (roughly 40 req/min) and credits are consumed per request. Perfect for prototypes, agents, and experiments — move to paid or self-hosted NIM for production.',
       },
+    ],
+    nameAr: 'NVIDIA NIM',
+    taglineAr: 'استدلال مجاني متوافق مع OpenAI لأكثر من 100 نموذج على DGX Cloud',
+    descriptionAr: 'منصة الاستدلال المجانية من NVIDIA على build.nvidia.com. انضم لبرنامج مطوري NVIDIA واحصل على وصول لـ 100+ نموذج (Nemotron، GLM، MiniMax، DeepSeek) على DGX Cloud مع نقطة متوافقة مع OpenAI و 1000-5000 رصيد مجاني.',
+    stepsAr: [
+      {
+        title: 'افتح كتالوج نماذج NVIDIA',
+        description: 'اذهب إلى build.nvidia.com/models لاستعراض كل النماذج.',
+        url: 'https://build.nvidia.com/models'
+      },
+      {
+        title: 'انضم لبرنامج المطورين (مجاني)',
+        description: 'أنشئ حساباً وانضم لبرنامج NVIDIA Developer للحصول على 1000-5000 رصيد مجاني.',
+        url: 'https://build.nvidia.com/'
+      },
+      {
+        title: 'أنشئ مفتاح API',
+        description: 'أنشئ مفتاحاً يبدأ بـ nvapi- واحتفظ به في متغير بيئة.'
+      },
+      {
+        title: 'استدعِ النقطة المتوافقة',
+        description: 'استخدم https://integrate.api.nvidia.com/v1 كنقطة أساس ومرر معرف النموذج.'
+      },
+      {
+        title: 'جرّب ضمن الحد المجاني',
+        description: 'كل نموذج محدود بنحو 40 طلب/دقيقة — مثالي للنماذج الأولية والوكلاء.'
+      }
     ],
     upvotes: 28,
     bookmarks: 34,
@@ -41532,6 +41615,35 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://inference.dahl.global/status',
       },
     ],
+    nameAr: 'Dahl Inference',
+    taglineAr: 'نماذج قوية عبر API بسيط — MiniMax و Kimi و GLM والمزيد',
+    descriptionAr: 'كتالوج Dahl يسهّل استخدام النماذج القوية عبر مفتاح واحد: MiniMax M2.7 و Kimi K2.6 و GLM 5.2 مع توجيه بسيط وواجهة OpenAI متوافقة.',
+    stepsAr: [
+      {
+        title: 'افتح الكتالوج',
+        description: 'تصفح inference.dahl.global/models لمعرفة النماذج المتاحة.',
+        url: 'https://inference.dahl.global/models'
+      },
+      {
+        title: 'سجّل واحصل على مفتاح',
+        description: 'سجّل دخولك وانقر "GET API KEY".'
+      },
+      {
+        title: 'جرّب ساحة الدردشة',
+        description: 'استخدم /chat لاختبار النماذج تفاعلياً قبل البرمجة.',
+        url: 'https://inference.dahl.global/chat'
+      },
+      {
+        title: 'ادمج عبر API',
+        description: 'اتبع الوثائق في docs.dahl.global لتمرير الطلبات بمفتاحك.',
+        url: 'https://docs.dahl.global'
+      },
+      {
+        title: 'راقب الحالة',
+        description: 'تابع /status لمعرفة الجاهزية في الإنتاج.',
+        url: 'https://inference.dahl.global/status'
+      }
+    ],
     upvotes: 11,
     bookmarks: 14,
     submittedBy: 'u6',
@@ -41578,6 +41690,32 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Once approved, generate up to 20-second videos with native audio from text, images, or keyframes. Pricing is pay-as-you-go (draft HD from $0.06/sec) with no subscriptions or seat fees.',
       },
+    ],
+    nameAr: 'FLUX 3 وصول مبكر',
+    taglineAr: 'نموذج Black Forest Labs متعدد الوسائط — فيديو وصور وصوت',
+    descriptionAr: 'FLUX 3 نموذج أساسي متعدد الوسائط يتعلم من الصور والفيديو والصوت معاً. FLUX 3 Video متاح الآن عبر وصول مبكر مجاني للتقديم — توليد حتى 20 ثانية مع صوت أصلي، تحويل نص/صورة إلى فيديو، وتسلسل لقطات.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة FLUX 3',
+        description: 'اذهب إلى bfl.ai/models/flux-3 لقراءة التفاصيل والأسئلة الشائعة.',
+        url: 'https://bfl.ai/models/flux-3'
+      },
+      {
+        title: 'اطلب الوصول المبكر',
+        description: 'قدّم نموذج الوصول المبكر — مجاني ومفتوح للجميع لكن الموافقة حسب حالة الاستخدام.'
+      },
+      {
+        title: 'اشرح حالة الاستخدام',
+        description: 'وضّح كيف ستستخدم FLUX 3 (محتوى، أفلام، تصميم). الحالات المحددة لها أولوية.'
+      },
+      {
+        title: 'انتظر موافقة BFL',
+        description: 'لا توجد مدة معلنة — قدّم مبكراً وتابع بريدك.'
+      },
+      {
+        title: 'ولّد بفيديو FLUX 3',
+        description: 'بعد الموافقة، ولّد فيديوهات حتى 20 ثانية بالصوت الأصلي — الدفع حسب الاستخدام من 0.06$ للثانية.'
+      }
     ],
     upvotes: 18,
     bookmarks: 22,
@@ -41626,6 +41764,33 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Describe a task in plain language and let OpenCode read your repo, edit files, run commands, and iterate. OpenCode is free; you only pay DeepSeek\u2019s low pay-per-token rate.',
       },
+    ],
+    nameAr: 'OpenCode + DeepSeek (مجاني)',
+    taglineAr: 'وكيل برمجة مفتوح المصدر مجاني مدعوم بأرخص نماذج DeepSeek',
+    descriptionAr: 'OpenCode وكيل برمجة مجاني للطرفية وسطح المكتب والويب يقرأ المستودع ويعدّل الملفات وينفذ الأوامر. DeepSeek يقدّم أرخص النماذج القوية بما فيها المستوى المجاني deepseek-v4-flash — معاً تحصل على إعداد وكيلي كامل بأقل تكلفة.',
+    stepsAr: [
+      {
+        title: 'ثبّت OpenCode',
+        description: 'ثبّت الوكيل المجاني لنظامك ثم شغّل opencode في مشروعك.',
+        url: 'https://opencode.ai/docs'
+      },
+      {
+        title: 'أنشئ حساب DeepSeek ومفتاح',
+        description: 'سجّل في منصة DeepSeek وأنشئ مفتاح API.',
+        url: 'https://platform.deepseek.com'
+      },
+      {
+        title: 'اربط مزود DeepSeek',
+        description: 'داخل OpenCode اكتب /connect وابحث عن DeepSeek والصق المفتاح.'
+      },
+      {
+        title: 'اختر نموذج V4 المجاني',
+        description: 'شغّل /models واختر deepseek-v4-flash للمهام اليومية أو pro للمهام الصعبة.'
+      },
+      {
+        title: 'ابدأ البناء',
+        description: 'صف مهمتك بلغة طبيعية ودع OpenCode يقرأ ويعدّل وينفذ ويكرر.'
+      }
     ],
     upvotes: 12,
     bookmarks: 16,
@@ -41754,6 +41919,33 @@ export const SEED_OFFERS: Offer[] = [
           'Describe your task in plain language — Muse Spark will explore the codebase, edit files, run commands, and verify with builds/tests, all in one autonomous loop.',
       },
     ],
+    nameAr: 'Muse Spark',
+    taglineAr: 'ذكاء برمجي وكيلي مجاني من Meta — مليون رمز مجاناً لـ OpenCode',
+    descriptionAr: 'Muse Spark نموذج وكيلي من Meta للهندسة المستقلة: يقرأ المستودع ويخطط ويعدّل وينفذ الاختبارات ويكرر. المستوى المجاني للمساهمين يعطي ~مليون رمز مجاناً لتشغيل OpenCode و Hermes و OpenClaw بدون اشتراك.',
+    stepsAr: [
+      {
+        title: 'افتح Muse Spark',
+        description: 'اذهب إلى صفحة Muse Spark وأنشئ حساب Meta AI.',
+        url: 'https://www.meta.ai/muse-spark'
+      },
+      {
+        title: 'أنشئ مفتاح API',
+        description: 'أنشئ مفتاحاً — المستوى المجاني يضم ~مليون رمز للبدء.'
+      },
+      {
+        title: 'اربط من OpenCode',
+        description: 'شغّل opencode واكتب /connect واختر Muse Spark والصق المفتاح.',
+        url: 'https://opencode.ai/docs'
+      },
+      {
+        title: 'اختر muse-spark-1.2',
+        description: 'شغّل /models واختر muse-spark-1.2-contributor-free.'
+      },
+      {
+        title: 'انطلق بحلقة الوكيل',
+        description: 'صف مهمتك ودع Spark يستكشف ويعدّل وينفذ ويتحقق.'
+      }
+    ],
     upvotes: 31,
     bookmarks: 44,
     submittedBy: 'u6',
@@ -41878,6 +42070,32 @@ export const SEED_OFFERS: Offer[] = [
           'Credit expires in 12 months. To renew, you must still be enrolled — re-verify with updated enrollment proof. Graduates can move to Azure Free (no credit but still free services).',
       },
     ],
+    nameAr: 'Azure للطلاب',
+    taglineAr: 'رصيد 100$ + 12 شهر مجاناً + 25+ خدمة مجانية دائماً — بدون بطاقة',
+    descriptionAr: 'Azure للطلاب يمنح 100$ رصيد لـ 12 شهراً بدون بطاقة عند التسجيل، مع 25+ خدمة مجانية دائماً. يتجدد بالتحقق. غير الطلاب يمكنهم التسجيل في كلية مجتمع للحصول على .edu.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة Azure للطلاب',
+        description: 'اذهب إلى azure.microsoft.com/free/students واضغط "Activate now".',
+        url: 'https://azure.microsoft.com/free/students'
+      },
+      {
+        title: 'تحقق — طالب أو غير طالب',
+        description: 'طالب: سجّل ببريد .edu → فوري. غير طالب: سجّل في CC للحصول على .edu وهوية، أو ارفع خطاباً وبطاقة عبر SheerID/UNiDAYS.'
+      },
+      {
+        title: 'أنشئ حساب Azure (بدون بطاقة)',
+        description: 'أكمل التسجيل بالتحقق عبر الهاتف. لا حاجة لبطاقة في البداية.'
+      },
+      {
+        title: 'فعّل رصيد 100$ وابدأ',
+        description: 'اذهب إلى portal.azure.com → Subscriptions → سترى الرصيد. أطلق VM أو App Service.'
+      },
+      {
+        title: 'جدّد بعد 12 شهراً',
+        description: 'الرصيد ينتهي بعد 12 شهراً — أعد التحقق بإثبات جديد.'
+      }
+    ],
     upvotes: 36,
     bookmarks: 48,
     submittedBy: 'u6',
@@ -41924,6 +42142,32 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Credits expire in 12 months. Re-verify each year with fresh proof. After graduation credits stop but labs stay accessible as alumni.',
       },
+    ],
+    nameAr: 'AWS Educate',
+    taglineAr: 'رصيد 100$ من AWS + مختبرات عملية + خصم شهادات للطلاب',
+    descriptionAr: 'AWS Educate: رصيد 75-100$ سنوياً، 20+ مسار وظيفي، مختبرات عملية وخصم 50% على شهادة Cloud Practitioner. يتحقق عبر .edu أو مستند تسجيل.',
+    stepsAr: [
+      {
+        title: 'أنشئ حساب AWS Educate',
+        description: 'اذهب إلى aws.amazon.com/education/awseducate → "Join AWS Educate".',
+        url: 'https://aws.amazon.com/education/awseducate/'
+      },
+      {
+        title: 'قدّم إثبات الطالب',
+        description: 'طالب: أدخل .edu → فوري. أو ارفع بطاقة + خطاب. غير طالب: سجّل في CC واحصل على بريد وهوية وارفعهما.'
+      },
+      {
+        title: 'انتظر الموافقة واطلب الرصيد',
+        description: 'الموافقة خلال ساعات. راجع بريدك "Application Approved" وانسخ رمز الرصيد من "My Credits".'
+      },
+      {
+        title: 'أكمل المختبرات واحصل على خصم الشهادة',
+        description: 'ادخل "Builder Labs" و "Career Pathways" لفتح قسيمة 50%.'
+      },
+      {
+        title: 'جدّد سنوياً',
+        description: 'الرصيد ينتهي بعد 12 شهراً — أعد التحقق كل سنة.'
+      }
     ],
     upvotes: 31,
     bookmarks: 42,
@@ -41972,6 +42216,32 @@ export const SEED_OFFERS: Offer[] = [
           'Benefit is 12 months. Keep your CC enrollment active and re-verify via UNiDAYS before expiry to extend.',
       },
     ],
+    nameAr: 'Cloudflare للطلاب',
+    taglineAr: '12 شهر من Cloudflare Pro مجاناً — Workers و R2 و Pages',
+    descriptionAr: 'Cloudflare يمنح الطلاب سنة مجانية من مزايا Pro: طلبات Workers غير محدودة، تخزين R2، بناء Pages، وقناة Zero Trust. يتحقق عبر UNiDAYS.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة الطلاب',
+        description: 'اذهب إلى cloudflare.com/students → "Verify with UNiDAYS".',
+        url: 'https://www.cloudflare.com/students/'
+      },
+      {
+        title: 'أنشئ UNiDAYS وتحقق',
+        description: 'طالب: سجّل بـ .edu → فوري. غير طالب: سجّل في CC للحصول على .edu مقبول في UNiDAYS وارفعه.'
+      },
+      {
+        title: 'اطلب عرض Cloudflare',
+        description: 'بعد موافقة UNiDAYS ستُعاد إلى Cloudflare برمز ترويجي — طبّقه في الفوترة.'
+      },
+      {
+        title: 'فعّل Workers و R2 و Pages',
+        description: 'في لوحة التحكم → Workers & Pages → أنشئ Worker و R2 bucket.'
+      },
+      {
+        title: 'جدّد السنة القادمة',
+        description: 'المزايا 12 شهراً — أعد التحقق عبر UNiDAYS قبل الانتهاء.'
+      }
+    ],
     upvotes: 22,
     bookmarks: 28,
     submittedBy: 'u6',
@@ -42009,6 +42279,24 @@ export const SEED_OFFERS: Offer[] = [
           'Once upgraded, your dashboard shows higher API query credits and export limits. Use via shodan search CLI or API at developer.shodan.io. Keep the .edu mailbox active for re-checks.',
       },
     ],
+    nameAr: 'Shodan الأكاديمي',
+    taglineAr: 'ترقية عضوية Shodan مجانية للباحثين والطلاب ببريد .edu',
+    descriptionAr: 'يمنح Shodan ترقية مجانية مستمرة للطلاب/الباحثين المسجلين ببريد .edu/.ac: نتائج غير محدودة ورصيد API. تتم عبر مراسلة الدعم.',
+    stepsAr: [
+      {
+        title: 'أنشئ حساب Shodan ببريد .edu',
+        description: 'طالب: سجّل في account.shodan.io ببريد .edu. غير طالب: احصل على بريد CC وسجّل به.',
+        url: 'https://account.shodan.io/register'
+      },
+      {
+        title: 'راسل الدعم للترقية',
+        description: 'أرسل بريداً إلى support@shodan.io من بريدك .edu بعنوان "Academic Upgrade".'
+      },
+      {
+        title: 'تحقق واستخدم الحصة المرقّاة',
+        description: 'بعد الترقية، ستظهر الحصة الأعلى في لوحتك.'
+      }
+    ],
     upvotes: 18,
     bookmarks: 24,
     submittedBy: 'u6',
@@ -42045,6 +42333,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Use https://api.hyperbolic.ai/v1 with your API key, model “deepseek-ai/DeepSeek-R1”. Drop-in for any OpenAI SDK — just swap base URL and key.',
       },
+    ],
+    nameAr: 'Hyperbolic AI',
+    taglineAr: 'رصيد 15$ مجاناً + GPU ببريد .edu — DeepSeek R1 و Qwen',
+    descriptionAr: 'يقدّم Hyperbolic رصيد 15$ وGPU مخفّض للطلاب ببريد .edu عبر واجهة OpenAI متوافقة لـ DeepSeek-R1 و Qwen و Llama.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .edu',
+        description: 'اذهب إلى app.hyperbolic.ai وسجّل ببريد .edu (CC يعمل).',
+        url: 'https://app.hyperbolic.ai/'
+      },
+      {
+        title: 'اطلب رصيد الطلاب',
+        description: 'في الفوترة طبّق "STUDENT15" أو راسل الدعم في Discord.'
+      },
+      {
+        title: 'استدعِ النقطة المتوافقة',
+        description: 'استخدم https://api.hyperbolic.ai/v1 بمفتاحك ونموذج deepseek-ai/DeepSeek-R1.'
+      }
     ],
     upvotes: 14,
     bookmarks: 18,
@@ -42088,6 +42394,28 @@ export const SEED_OFFERS: Offer[] = [
           'Offer is typically 6-12 months. Requires re-verification after expiry. If you graduate or drop, Plus reverts to Free but you keep chat history.',
       },
     ],
+    nameAr: 'ChatGPT Plus للطلاب',
+    taglineAr: 'ChatGPT Plus مجاناً للطلاب — GPT-4o بحدود أعلى',
+    descriptionAr: 'يقدّم OpenAI Plus مجاناً للطلاب عبر SheerID/UNiDAYS في دول مدعومة: GPT-4o، حدود أعلى، رفع ملفات، وأداة كود. غير الطلاب يمكنهم التسجيل في CC أمريكية للحصول على تحقق SheerID أمريكي.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة الطلاب',
+        description: 'اذهب إلى chatgpt.com/students → "Claim Student Offer" → SheerID.',
+        url: 'https://chatgpt.com/students'
+      },
+      {
+        title: 'تحقق — طالب أو غير طالب',
+        description: 'طالب: أدخل .edu → فوري. غير طالب: سجّل في CC أمريكية واحصل على .edu وخطاب وارفعه في SheerID.'
+      },
+      {
+        title: 'استرد Plus',
+        description: 'بعد الموافقة اضغط "Redeem" → يتحول حسابك إلى Plus.'
+      },
+      {
+        title: 'استخدم حتى التجديد',
+        description: 'العرض 6-12 شهراً ويتطلب إعادة تحقق.'
+      }
+    ],
     upvotes: 41,
     bookmarks: 53,
     submittedBy: 'u6',
@@ -42130,6 +42458,28 @@ export const SEED_OFFERS: Offer[] = [
           'Valid 12 months, renewable while enrolled. Keep proof for next year.',
       },
     ],
+    nameAr: 'Cursor Pro للطلاب',
+    taglineAr: 'سنة Cursor Pro مجاناً — محرر AI مع وضع الوكيل',
+    descriptionAr: 'يمنح Cursor الطلاب سنة Pro مجاناً: إكمال غير محدود، وضع الوكيل، دردشة تفهم قاعدة الكود. يتحقق عبر SheerID.',
+    stepsAr: [
+      {
+        title: 'اذهب إلى Cursor للطلاب',
+        description: 'اذهب إلى cursor.com/students → "Verify student status".',
+        url: 'https://cursor.com/students'
+      },
+      {
+        title: 'تحقق عبر SheerID',
+        description: 'طالب: .edu → فوري. غير طالب: سجّل في CC وارفعه خطاباً وبطاقة — يقبل معظم المدارس.'
+      },
+      {
+        title: 'زامن Pro مع حسابك',
+        description: 'بعد الموافقة، سجّل دخولك في Cursor بنفس البريد → يظهر Pro.'
+      },
+      {
+        title: 'جدّد سنوياً',
+        description: 'صالح 12 شهراً قابل للتجديد أثناء الدراسة.'
+      }
+    ],
     upvotes: 38,
     bookmarks: 45,
     submittedBy: 'u6',
@@ -42166,6 +42516,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Once approved, your account flips to Pro. Verify at Settings → Subscription → “Pro — Student”. Use web or API at perplexity.ai/settings/api.',
       },
+    ],
+    nameAr: 'Perplexity Pro للطلاب',
+    taglineAr: 'سنة Perplexity Pro مجاناً — 300+ بحث Pro يومياً',
+    descriptionAr: 'يمنح Perplexity الطلاب سنة Pro مجاناً: 300+ بحث Pro، رفع ملفات، وتوليد صور و API. يتحقق عبر SheerID.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة التعليم',
+        description: 'اذهب إلى perplexity.ai/education → "Claim Pro".',
+        url: 'https://www.perplexity.ai/education'
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: .edu → تلقائي. غير طالب: ارفع خطاباً وبطاقة عبر SheerID — يسمح بالمراجعة اليدوية.'
+      },
+      {
+        title: 'فعّل Pro',
+        description: 'بعد الموافقة، يتحول حسابك إلى Pro.'
+      }
     ],
     upvotes: 27,
     bookmarks: 31,
@@ -42204,6 +42572,24 @@ export const SEED_OFFERS: Offer[] = [
           'Your account gets premium credits monthly. Type a prompt → V0 builds component → Copy code or deploy to Vercel in one click.',
       },
     ],
+    nameAr: 'V0 من Vercel للطلاب',
+    taglineAr: 'رصيد V0 مجاناً للطلاب — حوّل النص إلى React',
+    descriptionAr: 'يمنح Vercel الطلاب رصيداً مجانياً: ولّد مكونات React + Tailwind + shadcn من نص أو صورة وصدّر الكود. يتحقق عبر .edu أو GitHub Student.',
+    stepsAr: [
+      {
+        title: 'سجّل في V0',
+        description: 'اذهب إلى v0.app/students وسجّل بحساب Vercel/GitHub.',
+        url: 'https://v0.app/students'
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: .edu → تلقائي. غير طالب: اربط GitHub Student أو ارفع خطاباً.'
+      },
+      {
+        title: 'ولّد واجهة',
+        description: 'اكتب وصفاً → يبني V0 المكوّن → انسخ الكود أو انشره في Vercel.'
+      }
+    ],
     upvotes: 19,
     bookmarks: 22,
     submittedBy: 'u6',
@@ -42240,6 +42626,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'After approval (email in 1-3 days), sign in to Kiro IDE with same email → License auto-applies. Check Settings → About → “Student”.',
       },
+    ],
+    nameAr: 'Kiro.dev للطلاب',
+    taglineAr: 'Kiro IDE مجاناً للطلاب — تحقق عبر ملف مقبول',
+    descriptionAr: 'يمنح Kiro.dev الطلاب وصول Pro مجاناً: برمجة وكيلية ودردشة قاعدة كود وتوجيه نماذج. يقبل تسجيل CC عبر ملف.',
+    stepsAr: [
+      {
+        title: 'قدّم في Kiro للطلاب',
+        description: 'اذهب إلى kiro.dev/students → "Apply".',
+        url: 'https://kiro.dev/students/'
+      },
+      {
+        title: 'قدّم الإثبات',
+        description: 'طالب: .edu وبطاقة. غير طالب: سجّل في CC وارفعه خطاباً وبطاقة (الاسم والمدرسة والتاريخ).'
+      },
+      {
+        title: 'فعّل الترخيص',
+        description: 'بعد الموافقة خلال 1-3 أيام، سجّل دخولك في Kiro بنفس البريد.'
+      }
     ],
     upvotes: 12,
     bookmarks: 15,
@@ -42278,6 +42682,24 @@ export const SEED_OFFERS: Offer[] = [
           'Create an AI app → Add models (OpenAI/Gemini) → Publish. Pro limits: higher docs, workflows, and seats.',
       },
     ],
+    nameAr: 'Dify.AI للتعليم',
+    taglineAr: 'خطة Professional مجاناً لسنة — بناء تطبيقات LLM',
+    descriptionAr: 'يمنح Dify الطلاب سنة Professional مجاناً: بناء ونشر تطبيقات LLM مع قواعد بيانات وأدوات. يتحقق ببريد .edu فقط.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .edu',
+        description: 'سجّل في cloud.dify.ai ببريد .edu (CC يعمل لغير الطلاب).',
+        url: 'https://dify.ai/'
+      },
+      {
+        title: 'اطلب خطة التعليم',
+        description: 'في الإعدادات → التعليم → "Apply" → يوافق تلقائياً للنطاقات .edu.'
+      },
+      {
+        title: 'ابنِ التطبيقات',
+        description: 'أنشئ تطبيق AI → أضف النماذج → انشر. حدود Pro أعلى.'
+      }
+    ],
     upvotes: 16,
     bookmarks: 19,
     submittedBy: 'u6',
@@ -42315,6 +42737,24 @@ export const SEED_OFFERS: Offer[] = [
           'Free tier includes 100k tokens/month while student status active. Upgrade automatically when needed.',
       },
     ],
+    nameAr: 'Firecrawl للطلاب',
+    taglineAr: 'رصيد Firecrawl مجاناً — واجهة كشط للـ LLM',
+    descriptionAr: 'يمنح Firecrawl الطلاب رصيداً مجانياً: حوّل أي رابط إلى markdown/JSON نظيف لـ RAG. مثالي لبناء الوكلاء. يتحقق ببريد .edu.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .edu',
+        description: 'اذهب إلى firecrawl.dev/student-program وسجّل ببريد .edu (CC يعمل).',
+        url: 'https://www.firecrawl.dev/student-program'
+      },
+      {
+        title: 'احصل على مفتاح API',
+        description: 'بعد التحقق، لوحة التحكم → API Keys → انسخ المفتاح.'
+      },
+      {
+        title: 'ابنِ بالرصيد المجاني',
+        description: 'الخطة المجانية 100k رمز/شهر أثناء حالة الطالب.'
+      }
+    ],
     upvotes: 13,
     bookmarks: 16,
     submittedBy: 'u6',
@@ -42351,6 +42791,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Pro enables instantly. Check status in Account → Pro. Renewable while enrolled.',
       },
+    ],
+    nameAr: 'Windsurf للطلاب',
+    taglineAr: 'Windsurf Pro مجاناً (Codeium) — محرر وكيلي',
+    descriptionAr: 'يمنح Windsurf الطلاب Pro مجاناً: وكيل Cascade وإكمال وتفهم قاعدة الكود. يتحقق عبر .edu أو GitHub Student.',
+    stepsAr: [
+      {
+        title: 'حمّل Windsurf',
+        description: 'اذهب إلى windsurf.com/editor → حمّل.',
+        url: 'https://windsurf.com/editor'
+      },
+      {
+        title: 'تحقق',
+        description: 'في التطبيق → الإعدادات → طالب → تحقق بـ .edu أو GitHub Student.'
+      },
+      {
+        title: 'فعّل Pro',
+        description: 'يتفعل Pro فوراً. تحقق في الحساب → Pro. قابل للتجديد.'
+      }
     ],
     upvotes: 17,
     bookmarks: 20,
@@ -42458,6 +42916,28 @@ export const SEED_OFFERS: Offer[] = [
           'Status is 1-2 years. Re-verify when you change schools or graduate.',
       },
     ],
+    nameAr: 'Figma للتعليم',
+    taglineAr: 'مؤسسة Figma مجاناً للطلاب — Figma + FigJam و 3 محررين',
+    descriptionAr: 'تمنح Figma الطلاب خطة مؤسسة مجانية: Figma Design و FigJam و Dev Mode ومكتبات الفريق. تحقق عبر بريد أو ملف. غير الطلاب يمكنهم التسجيل في CC ورفع الملفات.',
+    stepsAr: [
+      {
+        title: 'قدّم في Figma',
+        description: 'اذهب إلى figma.com/education → "Apply for Education Status".',
+        url: 'https://www.figma.com/education/'
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: أدخل .edu → تلقائي. غير طالب: اختر "No school email" وارفعه بطاقة وخطاب.'
+      },
+      {
+        title: 'أنشئ فريق التعليم',
+        description: 'بعد الموافقة خلال 1-3 أيام، أنشئ فريق التعليم — يتحول إلى مؤسسة مع 3 محررين وملفات غير محدودة.'
+      },
+      {
+        title: 'جدّد أثناء الدراسة',
+        description: 'الحالة 1-2 سنة — أعد التحقق عند تغيير المدرسة.'
+      }
+    ],
     upvotes: 44,
     bookmarks: 51,
     submittedBy: 'u6',
@@ -42550,6 +43030,24 @@ export const SEED_OFFERS: Offer[] = [
           'After approval, Canva adds “Education Pro” to your account. Check Billing → “Education — Free”. Create designs with Pro unlocked and invite 2 classmates to share.',
       },
     ],
+    nameAr: 'Canva Pro للتعليم',
+    taglineAr: 'Canva Pro مجاناً للطلاب — 140M قالب و Magic AI',
+    descriptionAr: 'تمنح Canva الطلاب Pro مجاناً: 140M+ قالب، Magic Write/Resize، 1TB و Brand Kit. تحقق عبر بوابة التعليم.',
+    stepsAr: [
+      {
+        title: 'قدّم عبر Canva للتعليم',
+        description: 'اذهب إلى canva.com/education/students → "Claim verification".',
+        url: 'https://www.canva.com/education/students/'
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: ابحث عن مدرستك → تحقق بـ .edu أو ارفع بطاقة وخطاب. غير طالب: ارفع بطاقة CC + لقطة تسجيل → موافقة خلال يومين.'
+      },
+      {
+        title: 'فعّل Pro',
+        description: 'بعد الموافقة، يضاف "Education Pro" لحسابك. تحقق في الفوترة → Education Free.'
+      }
+    ],
     upvotes: 28,
     bookmarks: 33,
     submittedBy: 'u6',
@@ -42592,6 +43090,28 @@ export const SEED_OFFERS: Offer[] = [
           'License expires in 12 months; re-verify with fresh enrollment to renew.',
       },
     ],
+    nameAr: 'Autodesk للتعليم',
+    taglineAr: 'حزمة Autodesk كاملة مجاناً لسنة — AutoCAD و Maya و Revit',
+    descriptionAr: 'تمنح Autodesk الطلاب ترخيص سنة مجانية لـ 20+ منتج: AutoCAD و Maya و 3ds Max و Revit و Inventor و Fusion 360. تحقق عبر SheerID.',
+    stepsAr: [
+      {
+        title: 'أنشئ حساب Autodesk للتعليم',
+        description: 'اذهب إلى autodesk.com/education/edu-software/overview → "Get product".',
+        url: 'https://www.autodesk.com/education/edu-software/overview'
+      },
+      {
+        title: 'تحقق عبر SheerID',
+        description: 'اضغط "Verify" → SheerID. طالب: .edu → تلقائي. غير طالب: "Upload document" → بطاقة + خطاب.'
+      },
+      {
+        title: 'حمّل وفعّل',
+        description: 'بعد التحقق، اختر المنتج → حمّل → ثبّت → سجّل دخولك. يتفعل 12 شهراً.'
+      },
+      {
+        title: 'جدّد سنوياً',
+        description: 'ينتهي بعد 12 شهراً — أعد التحقق بخطاب جديد.'
+      }
+    ],
     upvotes: 24,
     bookmarks: 29,
     submittedBy: 'u6',
@@ -42628,6 +43148,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'After verification, Zed → Settings → Subscription shows Pro. Features enable instantly. Renewable while enrolled.',
       },
+    ],
+    nameAr: 'Zed Pro للطلاب',
+    taglineAr: 'سنة Zed Pro مجاناً — محرر Rust سريع مع AI',
+    descriptionAr: 'يمنح Zed الطلاب سنة Pro مجاناً: تحرير/دردشة AI، تعاون متعدد، وثيمات مميزة. يتحقق عبر .edu أو GitHub Student.',
+    stepsAr: [
+      {
+        title: 'حمّل Zed وسجّل',
+        description: 'اذهب إلى zed.dev/education → حمّل Zed وسجّل.',
+        url: 'https://zed.dev/education'
+      },
+      {
+        title: 'تحقق',
+        description: 'اضغط "Verify" → بريد .edu أو "Verify with GitHub Student". غير طالب: احصل على GitHub Pack عبر ملف ثم اربط.'
+      },
+      {
+        title: 'فعّل Pro',
+        description: 'بعد التحقق، الإعدادات → الاشتراك يظهر Pro. يتفعل فوراً وقابل للتجديد.'
+      }
     ],
     upvotes: 16,
     bookmarks: 19,
@@ -42666,6 +43204,24 @@ export const SEED_OFFERS: Offer[] = [
           'Sign in at office.com with your Education account → Install Office desktop → OneDrive syncs 100GB (Teams and Outlook included). License stays active while enrolled; graduates keep files but lose edit rights.',
       },
     ],
+    nameAr: 'Microsoft 365 للتعليم',
+    taglineAr: 'Office 365 مجاناً + OneDrive 1TB + Teams للطلاب',
+    descriptionAr: 'Microsoft 365 Education A1 مجاناً للطلاب المحققين: Word و Excel و PowerPoint على الويب وسطح المكتب، 100GB OneDrive، Teams وبريد 50GB. يتحقق عبر نطاق .edu.',
+    stepsAr: [
+      {
+        title: 'تحقق إذا كانت مدرستك تقدّم M365',
+        description: 'اذهب إلى microsoft.com/education/products/office → "Get started" → أدخل بريدك .edu.',
+        url: 'https://www.microsoft.com/education/products/office'
+      },
+      {
+        title: 'احصل على الوصول — طالب أو غير طالب',
+        description: 'طالب: أدخل .edu → رابط تحقق. غير طالب: سجّل في CC تدعم Microsoft Education للحصول على حساب M365.'
+      },
+      {
+        title: 'ثبّت Office واستخدم OneDrive',
+        description: 'سجّل في office.com بحساب التعليم → ثبّت Office → OneDrive 100GB.'
+      }
+    ],
     upvotes: 41,
     bookmarks: 52,
     submittedBy: 'u6',
@@ -42702,6 +43258,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'After approval, checkout at student price. Install via Creative Cloud Desktop app → sign in → all apps activate. Discount renews yearly with re-verification.',
       },
+    ],
+    nameAr: 'Adobe Creative Cloud للطلاب',
+    taglineAr: 'خصم 60%+ على Creative Cloud Pro — فوتوشوب و 20+ تطبيق',
+    descriptionAr: 'Adobe Creative Cloud Pro للطلاب ~60% خصم (~19.99$ بدل 59.99$). يضم Photoshop و Illustrator و Premiere و 100GB. يتحقق عبر SheerID.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة Adobe للطلاب',
+        description: 'اذهب إلى adobe.com/creativecloud/buy/students.html → "Buy now".',
+        url: 'https://www.adobe.com/creativecloud/buy/students.html'
+      },
+      {
+        title: 'تحقق — بريد أو مستند',
+        description: 'طالب: .edu → فوري. غير طالب: اختر "Upload document" → بطاقة + خطاب.'
+      },
+      {
+        title: 'ادفع وثبّت',
+        description: 'بعد الموافقة، ادفع بسعر الطلاب وثبّت عبر Creative Cloud Desktop.'
+      }
     ],
     upvotes: 35,
     bookmarks: 41,
@@ -42740,6 +43314,24 @@ export const SEED_OFFERS: Offer[] = [
           'Admins manage storage at school.apple.com. Students cannot buy more — 200GB is the cap while enrolled. Graduates lose quota after account removed.',
       },
     ],
+    nameAr: 'Apple للتعليم: 200GB iCloud',
+    taglineAr: '200GB iCloud مجاناً بشكل دائم عبر Apple School Manager',
+    descriptionAr: 'تقدّم Apple 200GB iCloud مجاناً بشكل دائم للطلاب/المعلمين إذا كانت مدرستهم تستخدم Apple School Manager. يخصص المسؤول معرف Apple المُدار → تظهر الحصة 200GB.',
+    stepsAr: [
+      {
+        title: 'اطلب من IT معرف Apple المُدار',
+        description: 'طالب: تواصل مع الدعم → "Request Managed Apple ID". غير طالب: بعد تسجيل CC اطلب حساب ASM.',
+        url: 'https://www.apple.com/education/k12/'
+      },
+      {
+        title: 'سجّل على iPhone/Mac',
+        description: 'في الإعدادات → سجّل بمعرفك المُدار → يظهر iCloud 200GB.'
+      },
+      {
+        title: 'أدر عبر School Manager',
+        description: 'يدير المسؤولون التخزين في school.apple.com. الحصة 200GB كحد أقصى أثناء الدراسة.'
+      }
+    ],
     upvotes: 19,
     bookmarks: 24,
     submittedBy: 'u6',
@@ -42776,6 +43368,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Go to mathworks.com → Downloads → MATLAB R2024b → license activates via account. Or use matlab.mathworks.com online — no install needed.',
       },
+    ],
+    nameAr: 'MATLAB للطلاب',
+    taglineAr: 'MATLAB + Simulink + 10 صناديق للطلاب — 49$ أو مجاناً عبر الحرم',
+    descriptionAr: 'حزمة MATLAB للطلاب: MATLAB و Simulink و 10 صناديق بـ 49$ أو مجاناً إذا كان الحرم لديه ترخيص شامل. يتحقق عبر .edu أو SSO الحرم.',
+    stepsAr: [
+      {
+        title: 'تحقق من ترخيص الحرم أولاً',
+        description: 'اذهب إلى mathworks.com/academia → أدخل .edu → "Is my campus licensed?" إذا نعم، تحصل عليه مجاناً.',
+        url: 'https://www.mathworks.com/products/matlab/student.html'
+      },
+      {
+        title: 'احصل على MATLAB — طالب أو غير طالب',
+        description: 'طالب: أنشئ حساب MathWorks ببريد .edu. غير طالب: سجّل في CC لمادة رياضيات للحصول على .edu.'
+      },
+      {
+        title: 'حمّل أو استخدم عبر الويب',
+        description: 'اذهب إلى mathworks.com → التنزيلات → MATLAB أو استخدم matlab.mathworks.com عبر الويب.'
+      }
     ],
     upvotes: 21,
     bookmarks: 26,
@@ -42814,6 +43424,24 @@ export const SEED_OFFERS: Offer[] = [
           'Create a Repl → choose language → use AI chat to generate code. Deploy with one click — hosting included.',
       },
     ],
+    nameAr: 'Replit للطلاب',
+    taglineAr: 'خصم 50% على Replit Core + رصيد AI عبر GitHub Student',
+    descriptionAr: 'يمنح Replit الطلاب خصم 50% على Core (13.50$ بدل 27$) ورصيد AI عند ربطه بـ GitHub Student Pack. يضم IDE مستضاف لـ 50+ لغة.',
+    stepsAr: [
+      {
+        title: 'اربط GitHub Student أو .edu',
+        description: 'سجّل في replit.com/students بحساب GitHub الموافق عليه — يكتشف تلقائياً.',
+        url: 'https://replit.com/students'
+      },
+      {
+        title: 'طبّق خصم الطلاب',
+        description: 'في الفوترة → "Student Discount" → طبّق. الخصم طالما GitHub Student نشط.'
+      },
+      {
+        title: 'برمج في المتصفح',
+        description: 'أنشئ Repl → اختر لغة → استخدم دردشة AI لتوليد الكود ونشره بنقرة.'
+      }
+    ],
     upvotes: 18,
     bookmarks: 22,
     submittedBy: 'u6',
@@ -42850,6 +43478,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'Create a $6 Droplet or App Platform app — credit burns first. Track in Billing → Credits. Credit expires in 12 months.',
       },
+    ],
+    nameAr: 'DigitalOcean للطلاب',
+    taglineAr: 'رصيد 200$ لـ 12 شهراً عبر GitHub Student Pack',
+    descriptionAr: 'DigitalOcean عبر GitHub Student Pack: رصيد 200$ لـ 12 شهراً لتشغيل droplets و DBs و Spaces و App Platform. يتحقق عبر ربط GitHub Student.',
+    stepsAr: [
+      {
+        title: 'احصل على GitHub Student Pack أولاً',
+        description: 'اتبع خطوات o9 للحصول على الموافقة (عبر .edu أو ملف CC).',
+        url: 'https://education.github.com/pack'
+      },
+      {
+        title: 'اطلب في DigitalOcean',
+        description: 'في GitHub Pack → DigitalOcean → "Get access" → يعاد توجيهك ويُطبق الرمز تلقائياً.'
+      },
+      {
+        title: 'انشر',
+        description: 'أنشئ Droplet بـ 6$ أو تطبيق — الرصيد يُستهلك أولاً وينتهي بعد 12 شهراً.'
+      }
     ],
     upvotes: 22,
     bookmarks: 27,
@@ -42888,6 +43534,24 @@ export const SEED_OFFERS: Offer[] = [
           'Domain is free for 1 year; renew at ~$8/yr after. SSL renews annually via same portal while student status active.',
       },
     ],
+    nameAr: 'Namecheap للتعليم',
+    taglineAr: 'دومين مجاني لسنة + SSL + استضافة عبر GitHub Student Pack',
+    descriptionAr: 'Namecheap عبر GitHub Student Pack: دومين .me مجاني لسنة و PositiveSSL مجاني وتجربة استضافة. يتحقق عبر ربط GitHub Student.',
+    stepsAr: [
+      {
+        title: 'وافق على GitHub Student',
+        description: 'أكمل تحقق GitHub Student (ملف CC مقبول).',
+        url: 'https://education.github.com/pack'
+      },
+      {
+        title: 'اطلب في Namecheap',
+        description: 'GitHub Pack → Namecheap → "Get access" → أنشئ حساباً بنفس البريد → يظهر رصيد الدومين.'
+      },
+      {
+        title: 'جدّد أو احتفظ بالدومين',
+        description: 'الدومين مجاني لسنة ثم ~8$ سنوياً. SSL يتجدد سنوياً.'
+      }
+    ],
     upvotes: 20,
     bookmarks: 25,
     submittedBy: 'u6',
@@ -42924,6 +43588,24 @@ export const SEED_OFFERS: Offer[] = [
         description:
           'After approval, download Sketch for Mac → sign in → Education workspace appears. License renews annually with fresh proof.',
       },
+    ],
+    nameAr: 'Sketch للتعليم',
+    taglineAr: 'Sketch مجاناً للطلاب — تصميم واجهات على macOS',
+    descriptionAr: 'يمنح Sketch الطلاب ترخيص تعليم مجاني: تطبيق macOS ومساحة ويب ومكتبات فريق ومشاركة نماذج. يتحقق عبر بريد أو ملف.',
+    stepsAr: [
+      {
+        title: 'قدّم في Sketch للتعليم',
+        description: 'اذهب إلى sketch.com/education → "Apply for free Education license".',
+        url: 'https://www.sketch.com/education/'
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: .edu → تلقائي. غير طالب: "No school email" → ارفع بطاقة وخطاب. تقبل CC.'
+      },
+      {
+        title: 'ثبّت Sketch',
+        description: 'بعد الموافقة، حمّل Sketch لـ Mac → سجّل دخولك → تظهر مساحة التعليم.'
+      }
     ],
     upvotes: 16,
     bookmarks: 19,
