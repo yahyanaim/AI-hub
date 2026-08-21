@@ -46444,6 +46444,896 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o83',
+    slug: 'revenuecat-shipaton-2026',
+    name: 'RevenueCat Shipaton 2026',
+    tagline: '$740k cash + Times Square billboard + NYC trip — ship apps with RevenueCat',
+    description:
+      'RevenueCat global hackathon Aug 1-Sep 30, 2026: ship an iOS/Android/macOS app using RevenueCat SDK for at least one purchase. $740k cash, $1M+ total including sponsor prizes. Grand $100k + NYC Shippies red carpet + Times Square billboard + 9to5Mac press. Category 1sts $20k-$30k. Student-only Next Gen category requires no App Store release. Sponsors: Replit, OneSignal, JetBrains, Stripe, Samsung.',
+    url: 'https://revenuecat-shipaton-2026.devpost.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/devpost.com.ico',
+    category: 'competition',
+    tags: ['hackathon', 'revenuecat', 'apps', 'prizes', 'shipaton'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create Devpost and join hackathon',
+        description:
+          'Go to revenuecat-shipaton-2026.devpost.com → Join hackathon. Create/reuse RevenueCat account.',
+        url: 'https://revenuecat-shipaton-2026.devpost.com/',
+      },
+      {
+        title: 'Build app with RevenueCat SDK (Aug 1-Sep 30)',
+        description:
+          'Build iOS/iPadOS/macOS/Android app with at least one RevenueCat purchase. First public version must be released in the window. Use sponsors: Replit, Stripe, etc. for bonus categories.',
+      },
+      {
+        title: 'Ship and submit with traction story',
+        description:
+          'Submit on Devpost with App Store/TestFlight link + video + description of post-release growth tactics. Grand Prize judges traction/growth momentum, not just code.',
+      },
+      {
+        title: 'Judging and Shippies NYC',
+        description:
+          'Winners get $100k + Times Square billboard + NYC trip. Student Next Gen needs only video + open-source code (no store release).',
+      },
+    ],
+    nameAr: 'RevenueCat Shipaton 2026',
+    taglineAr: '740 ألف $ + لوحة Times Square + رحلة نيويورك — أطلق تطبيقاتك',
+    descriptionAr: 'هاكاثون عالمي 1 أغسطس - 30 سبتمبر 2026: أطلق تطبيق iOS/Android باستخدام RevenueCat SDK. جوائز 740 ألف $ نقداً وأكثر من مليون إجمالي، الجائزة الكبرى 100 ألف $ + نيويورك + Times Square.',
+    stepsAr: [
+      {
+        title: 'أنشئ حساب Devpost وانضم',
+        description: 'اذهب إلى revenuecat-shipaton-2026.devpost.com → انضم.',
+        url: 'https://revenuecat-shipaton-2026.devpost.com/',
+      },
+      {
+        title: 'ابنِ تطبيقاً بـ RevenueCat SDK',
+        description: 'ابنِ تطبيقاً مع عملية شراء واحدة على الأقل عبر RevenueCat. الإصدار الأول يجب أن يكون ضمن الفترة.',
+      },
+      {
+        title: 'أطلق وقدّم قصة النمو',
+        description: 'قدّم رابط المتجر + فيديو + كيف روّجت للتطبيق بعد الإطلاق.',
+      },
+      {
+        title: 'التحكيم وحفل نيويورك',
+        description: 'الفائزون يحصلون على 100 ألف $ و Times Square. فئة الطلاب لا تتطلب نشراً في المتجر.',
+      },
+    ],
+    upvotes: 22,
+    bookmarks: 28,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o84',
+    slug: 'xprize-build-with-gemini',
+    name: 'XPRIZE Build with Gemini',
+    tagline: '$2M with Google — build AI businesses with real users & revenue',
+    description:
+      'XPRIZE + Google $2M hackathon May 19-Aug 17, 2026: build AI business in 5 categories (Education, Entrepreneurship, Small Business, Financial Access, Professional Services). Grand $500k, 2nd $200k, 3×$100k, 15×$50k runner + 5×$50k category. Judged on business viability, AI-native ops, impact. Must launch real business with real users/revenue in 90 days. Finals Sep 25 LA.',
+    url: 'https://www.xprize.org/prizes/build-with-gemini',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/xprize.org.ico',
+    category: 'competition',
+    tags: ['xprize', 'gemini', 'hackathon', 'google', '2m'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Register on XPRIZE',
+        description:
+          'Go to xprize.org/prizes/build-with-gemini → Register. Open worldwide.',
+        url: 'https://www.xprize.org/prizes/build-with-gemini',
+      },
+      {
+        title: 'Build 90 days with real traction',
+        description:
+          'May 19-Aug 17 build: launch business, acquire users, generate revenue. Projections alone fail — need real traction.',
+      },
+      {
+        title: 'Submit and Hacker Fund screen',
+        description:
+          'Submit by Aug 17. Hacker Fund screens/verify, then expert panel selects 5 finalists for live final Sep 25 in LA.',
+      },
+    ],
+    nameAr: 'XPRIZE ابنِ مع Gemini',
+    taglineAr: 'مليونا $ مع جوجل — ابنِ شركات ذكاء اصطناعي بمستخدمين حقيقيين',
+    descriptionAr: 'هاكاثون XPRIZE وجوجل 2 مليون $ من 19 مايو إلى 17 أغسطس 2026: ابنِ شركة ذكاء اصطناعي في 5 فئات. الجائزة الكبرى 500 ألف $.',
+    stepsAr: [
+      {
+        title: 'سجّل في XPRIZE',
+        description: 'اذهب إلى xprize.org/prizes/build-with-gemini وسجّل.',
+        url: 'https://www.xprize.org/prizes/build-with-gemini',
+      },
+      {
+        title: 'ابنِ 90 يوماً بزخم حقيقي',
+        description: 'أطلق عملاً واحصل على مستخدمين وإيرادات حقيقية — التوقعات وحدها لا تكفي.',
+      },
+      {
+        title: 'قدّم وانتظر النهائي في LA',
+        description: 'آخر موعد 17 أغسطس، النهائي 25 سبتمبر في لوس أنجلوس.',
+      },
+    ],
+    upvotes: 18,
+    bookmarks: 22,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o85',
+    slug: 'treehacks-2026',
+    name: 'TreeHacks 2026',
+    tagline: '$1,030,875 at Stanford — largest US collegiate hackathon',
+    description:
+      'Stanford TreeHacks Feb 14-15, 2026 — invite-only collegiate, $1,030,875 pool. YC interview, OpenAI lunch + 1yr ChatGPT Pro, Anthropic/Modal credits, Human Capital $50k per member (up to $200k), Cloudflare $250k credits, HeyGen, etc. Invite via application.',
+    url: 'https://treehacks-2026.devpost.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/devpost.com.ico',
+    category: 'competition',
+    tags: ['treehacks', 'stanford', 'hackathon', 'collegiate', '1m'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply for invite (Stanford)',
+        description:
+          'Go to treehacks-2026.devpost.com → Apply. Invite-only, collegiate ID required.',
+        url: 'https://treehacks-2026.devpost.com/',
+      },
+      {
+        title: 'Hack Feb 14-15 at Stanford',
+        description:
+          'Onsite 36h. Tracks: OpenAI AI, Anthropic Human Flourishing, Modal Inference, YC Iconic Company, etc.',
+      },
+      {
+        title: 'Demo and win',
+        description:
+          'Present to judges — YC 1st gets guaranteed interview, 2nd/3rd office hours. Human Capital fellowship $50k per member.',
+      },
+    ],
+    nameAr: 'TreeHacks 2026',
+    taglineAr: '1,030,875$ في ستانفورد — أكبر هاكاثون جامعي أمريكي',
+    descriptionAr: 'هاكاثون ستانفورد 14-15 فبراير 2026 بدعوة فقط — جوائز أكثر من مليون $. مقابلة YC مضمونة.',
+    stepsAr: [
+      {
+        title: 'قدّم للحصول على دعوة',
+        description: 'اذهب إلى treehacks-2026.devpost.com وقدّم.',
+        url: 'https://treehacks-2026.devpost.com/',
+      },
+      {
+        title: 'شارك في 14-15 فبراير بستانفورد',
+        description: '36 ساعة حضورياً — مسارات OpenAI و Anthropic و YC.',
+      },
+      {
+        title: 'اعرض مشروعك',
+        description: 'الفائز الأول يحصل على مقابلة YC مضمونة.',
+      },
+    ],
+    upvotes: 15,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o86',
+    slug: 'sui-overflow-2026',
+    name: 'Sui Overflow 2026',
+    tagline: 'Virtual global hackathon — $30k per track + $70k pools',
+    description:
+      'Sui Overflow virtual 2026: build AI agents, DeFi/payments, DeepBook, EVE on Sui. Per track $30k 1st/$15k 2nd/$10k 3rd/$7.5k 4th + specialized $70k/$50k pools. Global online.',
+    url: 'https://overflow.sui.io/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/sui.io.ico',
+    category: 'competition',
+    tags: ['sui', 'hackathon', 'web3', 'agents', 'defi'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Register on Sui Overflow',
+        description:
+          'Go to overflow.sui.io → Register.',
+        url: 'https://overflow.sui.io/',
+      },
+      {
+        title: 'Build on Sui tracks',
+        description:
+          'Choose Agentic Web, DeFi & Payments, DeepBook, etc. Use Sui object model.',
+      },
+      {
+        title: 'Submit virtually',
+        description:
+          'Submit online — per track $30k 1st. Community voting + panel judging.',
+      },
+    ],
+    nameAr: 'Sui Overflow 2026',
+    taglineAr: 'هاكاثون افتراضي عالمي — 30 ألف $ لكل مسار',
+    descriptionAr: 'هاكاثون Sui الافتراضي: ابنِ وكلاء AI و DeFi على Sui. 30 ألف $ للمركز الأول بكل مسار.',
+    stepsAr: [
+      {
+        title: 'سجّل في Sui Overflow',
+        description: 'اذهب إلى overflow.sui.io وسجّل.',
+        url: 'https://overflow.sui.io/',
+      },
+      {
+        title: 'ابنِ على مسارات Sui',
+        description: 'اختر Agentic Web أو DeFi.',
+      },
+      {
+        title: 'قدّم افتراضياً',
+        description: 'قدّم عبر الإنترنت — تصويت مجتمع + تحكيم.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o87',
+    slug: 'mistral-worldwide-hackathon-2026',
+    name: 'Mistral Worldwide Hackathon 2026',
+    tagline: 'Global $10k + $15k credits + hiring at Mistral',
+    description:
+      'Mistral 2026 worldwide: Global winner $10k + $15k credits + hiring, per location $1.5k/1k/$500 + ElevenLabs $2k/team. Locations worldwide, final in Paris.',
+    url: 'https://worldwide-hackathon.mistral.ai/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/mistral.ai.ico',
+    category: 'competition',
+    tags: ['mistral', 'hackathon', 'ww', 'credits', 'hiring'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Pick a location and register',
+        description:
+          'Go to worldwide-hackathon.mistral.ai → Choose city → Register.',
+        url: 'https://worldwide-hackathon.mistral.ai/',
+      },
+      {
+        title: 'Hack with Mistral API',
+        description:
+          'Build with Mistral credits provided. Special awards: ElevenLabs $2k/team, Best Architecture $500.',
+      },
+      {
+        title: 'Global final',
+        description:
+          'Location winners → global final $10k + hiring opportunity.',
+      },
+    ],
+    nameAr: 'هاكاثون Mistral العالمي 2026',
+    taglineAr: 'العالمي 10 آلاف $ + 15 ألف رصيد + توظيف',
+    descriptionAr: 'هاكاثون Mistral العالمي: الفائز العالمي 10 آلاف $ + 15 ألف رصيد + توظيف.',
+    stepsAr: [
+      {
+        title: 'اختر مدينة وسجّل',
+        description: 'اذهب إلى worldwide-hackathon.mistral.ai واختر المدينة.',
+        url: 'https://worldwide-hackathon.mistral.ai/',
+      },
+      {
+        title: 'ابنِ بـ Mistral',
+        description: 'استخدم رصيد Mistral المقدم — جوائز ElevenLabs.',
+      },
+      {
+        title: 'النهائي العالمي',
+        description: 'الفائزون المحليون إلى النهائي العالمي.',
+      },
+    ],
+    upvotes: 11,
+    bookmarks: 14,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o88',
+    slug: 'gloo-ai-hackathon-2026',
+    name: 'Gloo AI Hackathon 2026 — Build for Good',
+    tagline: '$200k, no coding required — Boulder, Oct 6-8',
+    description:
+      'Gloo AI for Good Oct 6-8, 2026 Boulder, Colorado: $200k pool, no coding required, for Faith & Flourishing builders. Start building Sep 8.',
+    url: 'https://gloo.com/ai/hackathon',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/gloo.com.ico',
+    category: 'competition',
+    tags: ['gloo', 'ai', 'for-good', 'boulder', '200k'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Register on Gloo',
+        description:
+          'Go to gloo.com/ai/hackathon → Register (hold spot).',
+        url: 'https://gloo.com/ai/hackathon',
+      },
+      {
+        title: 'Start building Sep 8',
+        description:
+          'No code required — build AI for Good projects.',
+      },
+      {
+        title: 'Join Oct 6-8 in Boulder',
+        description:
+          'Limelight Hotel Boulder — compete for $200k.',
+      },
+    ],
+    nameAr: 'Gloo AI هاكاثون 2026',
+    taglineAr: '200 ألف $ بدون برمجة — بولدر 6-8 أكتوبر',
+    descriptionAr: 'هاكاثون Gloo للخير 6-8 أكتوبر 2026 بولدر: 200 ألف $ بدون حاجة لبرمجة.',
+    stepsAr: [
+      {
+        title: 'سجّل في Gloo',
+        description: 'اذهب إلى gloo.com/ai/hackathon وسجّل.',
+        url: 'https://gloo.com/ai/hackathon',
+      },
+      {
+        title: 'ابدأ 8 سبتمبر',
+        description: 'لا حاجة لبرمجة — ابنِ مشروع AI للخير.',
+      },
+      {
+        title: 'شارك في بولدر',
+        description: 'فندق Limelight — نافس على 200 ألف $.',
+      },
+    ],
+    upvotes: 10,
+    bookmarks: 12,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o89',
+    slug: 'vslive-microsoft-ai-hackathon-2026',
+    name: 'VSLive! Microsoft AI Hackathon 2026',
+    tagline: '$25k at Microsoft HQ Redmond — Azure OpenAI + Copilot',
+    description:
+      'VSLive Microsoft AI Hackathon July 28-29, 2026 at Microsoft HQ Building 98 Redmond: $25k pool ($6k Grand, $2k Team/Solo). Build enterprise AI on Azure OpenAI, Copilot, agents, .NET. Free for VSLive attendees, $50 community in-person only.',
+    url: 'https://vslive.com/events/microsofthq-2026/hackathon.aspx',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/vslive.com.ico',
+    category: 'competition',
+    tags: ['vslive', 'microsoft', 'azure', 'hackathon', '25k'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Register for VSLive Microsoft HQ',
+        description:
+          'Go to vslive.com/events/microsofthq-2026/hackathon.aspx → Register. Free for attendees, $50 community.',
+        url: 'https://vslive.com/events/microsofthq-2026/hackathon.aspx',
+      },
+      {
+        title: 'Hack July 28-29 at Building 98',
+        description:
+          '6-10pm Tue + 5-9pm Wed at Microsoft Commons Mixer. Build on Azure OpenAI/Copilot.',
+      },
+      {
+        title: 'Win Grand $6k',
+        description:
+          'Judged on innovation/execution/impact. One monetary prize per team.',
+      },
+    ],
+    nameAr: 'VSLive! هاكاثون مايكروسوفت AI 2026',
+    taglineAr: '25 ألف $ في مقر مايكروسوفت — Azure OpenAI',
+    descriptionAr: 'هاكاثون VSLive 28-29 يوليو 2026 في مقر مايكروسوفت ريدموند: 25 ألف $ (6 آلاف كبرى).',
+    stepsAr: [
+      {
+        title: 'سجّل لـ VSLive',
+        description: 'اذهب إلى vslive.com وسجّل — مجاني للحضور.',
+        url: 'https://vslive.com/events/microsofthq-2026/hackathon.aspx',
+      },
+      {
+        title: 'شارك 28-29 يوليو',
+        description: 'في مبنى 98 — ابنِ على Azure OpenAI.',
+      },
+      {
+        title: 'افوز بـ 6 آلاف $',
+        description: 'تحكيم على الابتكار والتنفيذ.',
+      },
+    ],
+    upvotes: 9,
+    bookmarks: 11,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o90',
+    slug: 'devnetwork-api-cloud-ai-hackathon-2026',
+    name: 'DevNetwork API + Cloud + AI Hackathon 2026',
+    tagline: '$39.5k at API World Santa Clara + online',
+    description:
+      'DevNetwork API + Cloud + AI Hackathon @ API World 2026: $39.5k pool ($12.5k overall winner). Online Aug 17-Sep 3 + in-person Sep 2-3 Santa Clara Convention Center. 300+ participants, challenges from Perfect Corp, SerpApi, Xano.',
+    url: 'https://api-cloud-ai-hackathon-2026.devpost.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/devpost.com.ico',
+    category: 'competition',
+    tags: ['devnetwork', 'api', 'cloud', 'ai', 'api-world'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Join on Devpost',
+        description:
+          'Go to api-cloud-ai-hackathon-2026.devpost.com → Join.',
+        url: 'https://api-cloud-ai-hackathon-2026.devpost.com/',
+      },
+      {
+        title: 'Hack online Aug 17-Sep 3',
+        description:
+          'Build API/Cloud/AI projects. Challenges: Perfect Corp AI, SerpApi $3k, Xano SaaS.',
+      },
+      {
+        title: 'Demo Sep 2-3 Santa Clara',
+        description:
+          'In-person + awards at Santa Clara Convention Center. Overall $12.5k + Echos + passes.',
+      },
+    ],
+    nameAr: 'DevNetwork API + Cloud + AI هاكاثون 2026',
+    taglineAr: '39.5 ألف $ في API World سانتا كلارا',
+    descriptionAr: 'هاكاثون DevNetwork في API World 2026: 39.5 ألف $ (12.5 ألف للفائز). عبر الإنترنت وأيضاً حضورياً.',
+    stepsAr: [
+      {
+        title: 'انضم عبر Devpost',
+        description: 'اذهب إلى api-cloud-ai-hackathon-2026.devpost.com وانضم.',
+        url: 'https://api-cloud-ai-hackathon-2026.devpost.com/',
+      },
+      {
+        title: 'شارك 17 أغسطس - 3 سبتمبر',
+        description: 'ابنِ مشاريع API/Cloud/AI — تحديات Perfect Corp و SerpApi.',
+      },
+      {
+        title: 'اعرض 2-3 سبتمبر',
+        description: 'حضورياً في Santa Clara — الجائزة 12.5 ألف $.',
+      },
+    ],
+    upvotes: 11,
+    bookmarks: 13,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o91',
+    slug: 'y-combinator-fall-2026',
+    name: 'Y Combinator Fall 2026',
+    tagline: '$500k for 7% + $375k MFN — SF, Demo Day',
+    description:
+      'Y Combinator Fall 2026 batch Oct-Dec SF: $500k standard deal = $125k for 7% + $375k uncapped MFN SAFE (committed day accepted, not batch start). Deadline July 27, 2026 8pm PT, decisions by Aug 28, 10-min Zoom interview, Demo Day fundraising compression. Apply at ycombinator.com/apply. Early Decision for Winter/Spring/Summer 2027.',
+    url: 'https://www.ycombinator.com/apply',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/ycombinator.com.ico',
+    category: 'competition',
+    tags: ['yc', 'y-combinator', 'accelerator', '500k', '7percent'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply by July 27, 2026 8pm PT',
+        description:
+          'Go to ycombinator.com/apply → Submit. Late apps still read but no promised date.',
+        url: 'https://www.ycombinator.com/apply',
+      },
+      {
+        title: 'Interview (10 min Zoom)',
+        description:
+          'If invited, 10-min Zoom with 2-3 partners in Aug/Sep — decision often same day.',
+      },
+      {
+        title: 'Get $500k and join batch Oct-Dec SF',
+        description:
+          '$500k committed day accepted. Batch 3 months in SF, then Demo Day + investor intros.',
+      },
+    ],
+    nameAr: 'Y Combinator خريف 2026',
+    taglineAr: '500 ألف $ مقابل 7% + 375 ألف MFN — سان فرانسيسكو',
+    descriptionAr: 'دفعة YC خريف 2026 أكتوبر-ديسمبر سان فرانسيسكو: 500 ألف $ = 125 ألف مقابل 7% + 375 ألف MFN. آخر موعد 27 يوليو 2026.',
+    stepsAr: [
+      {
+        title: 'قدّم قبل 27 يوليو 2026',
+        description: 'اذهب إلى ycombinator.com/apply وقدّم.',
+        url: 'https://www.ycombinator.com/apply',
+      },
+      {
+        title: 'مقابلة 10 دقائق',
+        description: 'زووم مع شريكين — القرار غالباً نفس اليوم.',
+      },
+      {
+        title: 'احصل على 500 ألف $ وانضم',
+        description: '500 ألف $ تُحجز يوم القبول — 3 أشهر في SF ثم Demo Day.',
+      },
+    ],
+    upvotes: 32,
+    bookmarks: 38,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o92',
+    slug: 'techstars-accelerator',
+    name: 'Techstars Accelerator',
+    tagline: '$220k for ~6% — global vertical accelerators',
+    description:
+      'Techstars $220k = $20k for 5% CEA + $200k uncapped MFN SAFE (~6% total, adds ~1% at $20M pre). Global vertical programs (London fintech, Boston AI, etc.). No Demo Day lift like YC, but 74% raise within 3 years. Pick for industry/city network you lack.',
+    url: 'https://www.techstars.com/accelerators',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/techstars.com.ico',
+    category: 'competition',
+    tags: ['techstars', 'accelerator', '220k', '6percent', 'global'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Find your vertical program',
+        description:
+          'Go to techstars.com/accelerators → Pick city/vertical (e.g., London fintech).',
+        url: 'https://www.techstars.com/accelerators',
+      },
+      {
+        title: 'Apply with traction + team',
+        description:
+          'Apply with deck, traction, team. No co-founder required like EF/Antler.',
+      },
+      {
+        title: 'Join 3 months, Demo Day not compressed',
+        description:
+          '3 months in-person, mentor network, $220k deal. Understand it is regional sales, not YC fundraising compression.',
+      },
+    ],
+    nameAr: 'Techstars مسرّعة',
+    taglineAr: '220 ألف $ مقابل ~6% — مسرعات عالمية متخصصة',
+    descriptionAr: 'Techstars 220 ألف $ = 20 ألف مقابل 5% + 200 ألف MFN (~6%). برامج عمودية عالمية.',
+    stepsAr: [
+      {
+        title: 'اختر برنامجك العمودي',
+        description: 'اذهب إلى techstars.com/accelerators واختر المدينة/المجال.',
+        url: 'https://www.techstars.com/accelerators',
+      },
+      {
+        title: 'قدّم بزخم وفريق',
+        description: 'قدّم عرضاً وزخماً — لا حاجة لشريك مؤسس.',
+      },
+      {
+        title: 'انضم 3 أشهر',
+        description: 'شبكة مرشدين + 220 ألف $ — ليس ضغط Demo Day كـ YC.',
+      },
+    ],
+    upvotes: 14,
+    bookmarks: 17,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o93',
+    slug: 'antler-disrupt-2026',
+    name: 'Antler Disrupt 2026',
+    tagline: '$400k for 10% + $650k perks day 1 — 4-week sprint',
+    description:
+      'Antler Disrupt 4-week sprint Ho Chi Minh City Mar 30-Apr 20, 2026 (Spring) + other locations: $400k = $250k for 10% + $150k MFN SAFE, $650k perks day 1 ($4M after), no fee. Need working product + early traction. <3% acceptance, IC at Week 4.',
+    url: 'https://www.antler.co/academy/disrupt',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/antler.co.ico',
+    category: 'competition',
+    tags: ['antler', 'disrupt', '$400k', '10percent', 'sprint'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on Antler Disrupt',
+        description:
+          'Go to antler.co/academy/disrupt → Apply (rolling). Need product + traction.',
+        url: 'https://www.antler.co/academy/disrupt',
+      },
+      {
+        title: '4-week sprint Ho Chi Minh',
+        description:
+          'Mar 30-Apr 20, 2026 Ho Chi Minh. GTM, enterprise intros, IC prep. Fewer than 3% selected.',
+      },
+      {
+        title: 'IC Week 4 — $400k',
+        description:
+          'Present to IC — majority yes = $400k invested immediately + $650k perks + Elevate follow-on.',
+      },
+    ],
+    nameAr: 'Antler Disrupt 2026',
+    taglineAr: '400 ألف $ مقابل 10% + 650 ألف مزايا — 4 أسابيع',
+    descriptionAr: 'Antler Disrupt 4 أسابيع في هو تشي منه 30 مارس - 20 أبريل 2026: 400 ألف $ = 250 ألف مقابل 10% + 150 ألف MFN.',
+    stepsAr: [
+      {
+        title: 'قدّم في Antler Disrupt',
+        description: 'اذهب إلى antler.co/academy/disrupt وقدّم — يحتاج منتجاً وزخماً.',
+        url: 'https://www.antler.co/academy/disrupt',
+      },
+      {
+        title: 'شارك 4 أسابيع',
+        description: 'هو تشي منه — GTM وIntro لمؤسسات.',
+      },
+      {
+        title: 'لجنة الاستثمار — 400 ألف $',
+        description: 'عرض أمام اللجنة — أغلبية نعم = استثمار فوري.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o94',
+    slug: 'antler-residency-uk-india-singapore',
+    name: 'Antler Residency (UK / India / Singapore)',
+    tagline: 'UK £210k net, India ₹4Cr, SG up to $400k — inception stage',
+    description:
+      'Antler Residency 6-8 weeks inception: UK London £210k net (£125k 8.5% + £85k note, £40k fee) + up to £330k follow-on, India 3 weeks → ₹4Cr (~$480k) + $1M perks (deadline Feb 19, 2026), Singapore up to $400k ($150k first). Pre-team/pre-product accepted, <1% in UK. 80% raise within 9mo.',
+    url: 'https://www.antler.co/residency/uk',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/antler.co.ico',
+    category: 'competition',
+    tags: ['antler', 'residency', 'uk', 'india', 'inception'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Pick residency and apply',
+        description:
+          'UK: antler.co/residency/uk (8 weeks London). India: AI Residency (3 weeks, deadline Feb 19, 2026). SG: up to $400k.',
+        url: 'https://www.antler.co/residency/uk',
+      },
+      {
+        title: 'Residency 6-8 weeks — find co-founder',
+        description:
+          'Residency builds team/idea pre-incorporation — EF/Antler are co-founder products, not fundraising bets.',
+      },
+      {
+        title: 'IC and raise with Elevate',
+        description:
+          'IC invests at inception; Elevate can add up to £25M at Series A. 80% raise within 9mo in UK.',
+      },
+    ],
+    nameAr: 'إقامة Antler (UK / الهند / سنغافورة)',
+    taglineAr: 'UK 210 ألف £، الهند 4 كرور، سنغافورة 400 ألف $ — مرحلة التأسيس',
+    descriptionAr: 'إقامة Antler 6-8 أسابيع: UK 210 ألف £ صافي، الهند 3 أسابيع → 4 كرور، سنغافورة حتى 400 ألف $. قبول قبل الفريق/المنتج.',
+    stepsAr: [
+      {
+        title: 'اختر الإقامة وقدّم',
+        description: 'UK: antler.co/residency/uk — 8 أسابيع لندن.',
+        url: 'https://www.antler.co/residency/uk',
+      },
+      {
+        title: 'الإقامة — ابحث عن شريك',
+        description: 'بناء الفريق والفكرة قبل التأسيس.',
+      },
+      {
+        title: 'لجنة وضخ إضافي',
+        description: 'Elevate يضيف حتى 25M £ في Series A.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o95',
+    slug: '500-global-flagship',
+    name: '500 Global Flagship',
+    tagline: '$150k for 6% — SF flagship, diligence-based',
+    description:
+      '500 Global Flagship SF: $150k for 6% (subject to diligence). 500 Global has 2600+ companies, not fundraising compression like YC but strong network. Apply via 500.co.',
+    url: 'https://flagship.aplica.500.co/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/500.co.ico',
+    category: 'competition',
+    tags: ['500-global', 'flagship', '150k', '6percent', 'sf'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on 500 Flagship',
+        description:
+          'Go to flagship.aplica.500.co → Apply.',
+        url: 'https://flagship.aplica.500.co/',
+      },
+      {
+        title: 'Diligence and batch',
+        description:
+          '500 reviews traction/team — terms subject to diligence.',
+      },
+      {
+        title: 'Join SF flagship',
+        description:
+          'Batch in SF, network of 2600+ companies.',
+      },
+    ],
+    nameAr: '500 Global Flagship',
+    taglineAr: '150 ألف $ مقابل 6% — رائد سان فرانسيسكو',
+    descriptionAr: '500 Global Flagship SF: 150 ألف $ مقابل 6% — شبكة 2600+ شركة.',
+    stepsAr: [
+      {
+        title: 'قدّم في 500 Flagship',
+        description: 'اذهب إلى flagship.aplica.500.co وقدّم.',
+        url: 'https://flagship.aplica.500.co/',
+      },
+      {
+        title: 'فحص واختيار',
+        description: 'فحص الزخم والفريق.',
+      },
+      {
+        title: 'انضم في SF',
+        description: 'دفعة في سان فرانسيسكو.',
+      },
+    ],
+    upvotes: 10,
+    bookmarks: 12,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o96',
+    slug: 'a16z-speedrun',
+    name: 'a16z Speedrun',
+    tagline: '$500k-$1M for 10% — gaming/AI speedrun + $500k follow-on',
+    description:
+      'a16z Speedrun: $500k for 10% (up to $1M total) + $500k follow-on within 18 months if you raise next round. For gaming/AI startups, 12 weeks LA/SF, Demo Day with a16z network.',
+    url: 'https://a16z.com/speedrun/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/a16z.com.ico',
+    category: 'competition',
+    tags: ['a16z', 'speedrun', 'gaming', '500k', '10percent'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Speedrun',
+        description:
+          'Go to a16z.com/speedrun → Apply. Gaming/AI focus.',
+        url: 'https://a16z.com/speedrun/',
+      },
+      {
+        title: '12 weeks LA/SF',
+        description:
+          '12-week program, Demo Day, a16z mentors.',
+      },
+      {
+        title: 'Get $500k + follow-on',
+        description:
+          '$500k for 10% + $500k follow-on option within 18mo.',
+      },
+    ],
+    nameAr: 'a16z Speedrun',
+    taglineAr: '500 ألف - مليون $ مقابل 10% — ألعاب و AI',
+    descriptionAr: 'a16z Speedrun: 500 ألف $ مقابل 10% حتى مليون + 500 ألف متابعة خلال 18 شهراً.',
+    stepsAr: [
+      {
+        title: 'قدّم لـ Speedrun',
+        description: 'اذهب إلى a16z.com/speedrun وقدّم.',
+        url: 'https://a16z.com/speedrun/',
+      },
+      {
+        title: '12 أسبوعاً',
+        description: 'برنامج 12 أسبوعاً.',
+      },
+      {
+        title: 'احصل على 500 ألف $',
+        description: '500 ألف مقابل 10% + متابعة.',
+      },
+    ],
+    upvotes: 11,
+    bookmarks: 13,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o97',
+    slug: 'techstars-founder-catalyst',
+    name: 'Techstars Founder Catalyst',
+    tagline: '10-week pre-accelerator, no equity — idea stage',
+    description:
+      'Techstars Founder Catalyst 10-week pre-accelerator, virtual, part-time: training, mentors, network for pre-funding idea stage (<$400k raised). No equity. Current: Global Fall 2026, Alabama, EIT Urban Mobility. Apply at techstars.com/founder-catalyst.',
+    url: 'https://www.techstars.com/founder-catalyst',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/techstars.com.ico',
+    category: 'competition',
+    tags: ['techstars', 'catalyst', 'pre-accelerator', 'no-equity', '10-week'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Pick Catalyst program',
+        description:
+          'Go to techstars.com/founder-catalyst → Choose Global Fall/Alabama/EIT.',
+        url: 'https://www.techstars.com/founder-catalyst',
+      },
+      {
+        title: 'Apply (<$400k raised)',
+        description:
+          'Apply with idea + team. < $400k raised gets most benefit. No equity exchange.',
+      },
+      {
+        title: '10 weeks virtual',
+        description:
+          'Part-time virtual — sharpen idea, customer discovery, next level prep.',
+      },
+    ],
+    nameAr: 'Techstars Founder Catalyst',
+    taglineAr: '10 أسابيع قبل المسرّعة — بدون أسهم — مرحلة الفكرة',
+    descriptionAr: 'Techstars Founder Catalyst 10 أسابيع قبل المسرّعة افتراضياً: تدريب ومرشدون لمن هم <400 ألف $ — بدون أسهم.',
+    stepsAr: [
+      {
+        title: 'اختر برنامج Catalyst',
+        description: 'اذهب إلى techstars.com/founder-catalyst واختر.',
+        url: 'https://www.techstars.com/founder-catalyst',
+      },
+      {
+        title: 'قدّم (<400 ألف $)',
+        description: 'قدّم بفكرة وفريق — بدون أسهم.',
+      },
+      {
+        title: '10 أسابيع افتراضياً',
+        description: 'دوام جزئي — صقل الفكرة.',
+      },
+    ],
+    upvotes: 9,
+    bookmarks: 11,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o98',
+    slug: 'entrepreneur-first',
+    name: 'Entrepreneur First (EF)',
+    tagline: '$150k for 8-10% — co-founder matching pre-team',
+    description:
+      'Entrepreneur First London/Paris/Berlin: $150k for 8-10% (8% + optional $125k MFN). Pre-team/pre-idea, co-founder matching is the product, not fundraising. Best for solo technical talent without team. If you already have co-founder + traction, skip EF.',
+    url: 'https://www.joinef.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/joinef.com.ico',
+    category: 'competition',
+    tags: ['ef', 'entrepreneur-first', 'co-founder', '150k', '8percent'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to EF with talent profile',
+        description:
+          'Go to joinef.com → Apply. Solo technical/commercial talent, no team needed.',
+        url: 'https://www.joinef.com/',
+      },
+      {
+        title: 'Cohort co-founder matching',
+        description:
+          'EF forms teams in cohort — its actual product.',
+      },
+      {
+        title: 'Get $150k and build',
+        description:
+          '$150k for 8-10% after team formed. Skip if you already have trusted co-founder + traction.',
+      },
+    ],
+    nameAr: 'Entrepreneur First',
+    taglineAr: '150 ألف $ مقابل 8-10% — مطابقة شريك مؤسس',
+    descriptionAr: 'Entrepreneur First لندن/باريس/برلين: 150 ألف $ مقابل 8-10% — مطابقة شريك قبل الفريق.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى EF',
+        description: 'اذهب إلى joinef.com وقدّم — فرد بدون فريق.',
+        url: 'https://www.joinef.com/',
+      },
+      {
+        title: 'مطابقة الشريك',
+        description: 'EF يشكّل الفرق في الدفعة.',
+      },
+      {
+        title: 'احصل على 150 ألف $',
+        description: '150 ألف مقابل 8-10% بعد تشكيل الفريق.',
+      },
+    ],
+    upvotes: 10,
+    bookmarks: 12,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
