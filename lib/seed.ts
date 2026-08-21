@@ -18982,6 +18982,19 @@ export const SEED_TOOLS: Tool[] = [
     featured: false,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
+    nameAr: 'تصميم نظام المؤسسات — د. حمزة علي',
+    taglineAr: 'تصميم أنظمة سحابية من المبادئ إلى أحمال العمل الإنتاجية بالذكاء الاصطناعي',
+    descriptionAr: 'منهج grounded المصدر لتصميم أنظمة موثوقة وآمنة وقابلة للتشغيل على Azure، من المبادئ الأولى إلى أحمال العمل الإنتاجية بالذكاء الاصطناعي. يغطي تصميم نظام المؤسسات، الأنظمة الموزعة، أنظمة الذكاء الاصطناعي، الأمن السيبراني، الموثوقية، السحابة (Azure)، HPC، الحافة، والبنية الأساسية الحرجة للمهام. من الهوية، الشبكة، واجهة البرمجة، البيانات، الطابور، النموذج، المشغل، ومسار التعافي عبر إطار Azure Well-Architected (الموثوقية، الأمن، التكلفة، التميز التشغيلي، الأداء) إلى أحمال العمل الإنتاجية بالذكاء الاصطنوي allocations budgets, quality of retrieval, latency, and tool authority become part of the architecture. By Dr. Hazem Ali (Microsoft MVP). Clone: git clone https://github.com/DrHazemAli/enterprise-system-design.git — start with foundation/README.md, reference/ modules 00-10, and principals.',
+    stepsAr: [
+      { title: 'الأساس الهندسي —بناء الحكم', topics: ['تنفيذ وتصحيح الأخطاء', 'تفكيك', 'SOLID و Architecture أنظف', 'مراجعة الحمل'], duration: 'Self-paced' },
+      { title: 'أطلس Ground Zero — مدير موارد السحابة وAzure', topics: ['مقدمات سحابية', 'Azure Resource Manager', 'تدفق اسم → طلب → مورد', 'حدود الهوية والشبكة'], duration: 'Self-paced' },
+      { title: 'أسس تصميم النظام', topics: ['توسيع من 1 إلى 1 مليون', 'اتساق وCAP', 'مواقع مؤقتة و Queues', 'الضغط الخلفي والتقدير'], duration: 'Self-paced' },
+      { title: 'البيانات والاسترجاع — دليل البحث المصرح به', topics: ['متشوقات ومتشابهات متجهات', 'Architecture RQE للمؤسسات', 'بيانات واعية للأذونات', 'جودة الاسترجاع'], duration: 'Self-paced' },
+      { title: 'سطح تحكم AI', topics: ['موازين الرموز والمحدودات', 'نطاق الأدوات والتوجيه', 'تدوير النماذج وفشل الإلغاء', 'حالة الوكيل'], duration: 'Self-paced' },
+      { title: 'الاستضافة والخدمة', topics: ['تشريح طلب الاستضافة', 'KV-cache والتجميع المستمر', 'زمن الوصول مقابل الذاكرة مقابل الجودة', 'إ throughput الاستضافة'], duration: 'Self-paced' },
+      { title: 'تنفيذ وHPC → 09 Edge & Hybrid', topics: ['هندسة الحوسبة وحركة البيانات', 'دورة حياة النموذج (تدريب/تقييم/تعزيز/إلغاء)', 'الأمن والسلامة (AI بدون ثقة)', 'عمليات والحافة الهجينة'], duration: 'Self-paced' },
+      { title: '10 دراسات حالة وملّاك', topics: ['مراجعة تصميم كاملة', 'ملّاك حمزة (هندسة، AI، أمن سيبراني، شبكة، موثوقية)', 'حالة آمنة واحتواء الفشل', 'SLOs موجهة للعواقب'], duration: 'Self-paced' },
+    ],
   },
 ];
 
@@ -34371,6 +34384,19 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
+    nameAr: 'تصميم نظام المؤسسات — د. حمزة علي',
+    taglineAr: 'تصميم أنظمة سحابية من المبادئ إلى أحمال العمل الإنتاجية بالذكاء الاصطناعي',
+    descriptionAr: 'منهج grounded المصدر لتصميم أنظمة موثوقة وآمنة وقابلة للتشغيل على Azure، من المبادئ الأولى إلى أحمال العمل الإنتاجية بالذكاء الاصطناعي. يغطي تصميم نظام المؤسسات، الأنظمة الموزعة، أنظمة الذكاء الاصطناعي، الأمن السيبراني، الموثوقية، السحابة (Azure)، HPC، الحافة، والبنية الأساسية الحرجة للمهام. من الهوية، الشبكة، واجهة البرمجة، البيانات، الطابور، النموذج، المشغل، ومسار التعافي عبر إطار Azure Well-Architected (الموثوقية، الأمن، التكلفة، التميز التشغيلي، الأداء) إلى أحمال العمل الإنتاجية بالذكاء الاصطنوي allocations budgets, quality of retrieval, latency, and tool authority become part of the architecture. By Dr. Hazem Ali (Microsoft MVP). Clone: git clone https://github.com/DrHazemAli/enterprise-system-design.git — start with foundation/README.md, reference/ modules 00-10, and principals.',
+    stepsAr: [
+      { title: 'الأساس الهندسي —بناء الحكم', topics: ['تنفيذ وتصحيح الأخطاء', 'تفكيك', 'SOLID و Architecture أنظف', 'مراجعة الحمل'], duration: 'Self-paced' },
+      { title: 'أطلس Ground Zero — مدير موارد السحابة وAzure', topics: ['مقدمات سحابية', 'Azure Resource Manager', 'تدفق اسم → طلب → مورد', 'حدود الهوية والشبكة'], duration: 'Self-paced' },
+      { title: 'أسس تصميم النظام', topics: ['توسيع من 1 إلى 1 مليون', 'اتساق وCAP', 'مواقع مؤقتة و Queues', 'الضغط الخلفي والتقدير'], duration: 'Self-paced' },
+      { title: 'البيانات والاسترجاع — دليل البحث المصرح به', topics: ['متشوقات ومتشابهات متجهات', 'Architecture RQE للمؤسسات', 'بيانات واعية للأذونات', 'جودة الاسترجاع'], duration: 'Self-paced' },
+      { title: 'سطح تحكم AI', topics: ['موازين الرموز والمحدودات', 'نطاق الأدوات والتوجيه', 'تدوير النماذج وفشل الإلغاء', 'حالة الوكيل'], duration: 'Self-paced' },
+      { title: 'الاستضافة والخدمة', topics: ['تشريح طلب الاستضافة', 'KV-cache والتجميع المستمر', 'زمن الوصول مقابل الذاكرة مقابل الجودة', 'إ throughput الاستضافة'], duration: 'Self-paced' },
+      { title: 'تنفيذ وHPC → 09 Edge & Hybrid', topics: ['هندسة الحوسبة وحركة البيانات', 'دورة حياة النموذج (تدريب/تقييم/تعزيز/إلغاء)', 'الأمن والسلامة (AI بدون ثقة)', 'عمليات والحافة الهجينة'], duration: 'Self-paced' },
+      { title: '10 دراسات حالة وملّاك', topics: ['مراجعة تصميم كاملة', 'ملّاك حمزة (هندسة، AI، أمن سيبراني، شبكة، موثوقية)', 'حالة آمنة واحتواء الفشل', 'SLOs موجهة للعواقب'], duration: 'Self-paced' },
+    ],
   },
 ]
 
@@ -41386,6 +41412,19 @@ export const SEED_COURSES: Course[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
+    nameAr: 'تصميم نظام المؤسسات — د. حمزة علي',
+    taglineAr: 'تصميم أنظمة سحابية من المبادئ إلى أحمال العمل الإنتاجية بالذكاء الاصطناعي',
+    descriptionAr: 'منهج grounded المصدر لتصميم أنظمة موثوقة وآمنة وقابلة للتشغيل على Azure، من المبادئ الأولى إلى أحمال العمل الإنتاجية بالذكاء الاصطناعي. يغطي تصميم نظام المؤسسات، الأنظمة الموزعة، أنظمة الذكاء الاصطناعي، الأمن السيبراني، الموثوقية، السحابة (Azure)، HPC، الحافة، والبنية الأساسية الحرجة للمهام. من الهوية، الشبكة، واجهة البرمجة، البيانات، الطابور، النموذج، المشغل، ومسار التعافي عبر إطار Azure Well-Architected (الموثوقية، الأمن، التكلفة، التميز التشغيلي، الأداء) إلى أحمال العمل الإنتاجية بالذكاء الاصطنوي allocations budgets, quality of retrieval, latency, and tool authority become part of the architecture. By Dr. Hazem Ali (Microsoft MVP). Clone: git clone https://github.com/DrHazemAli/enterprise-system-design.git — start with foundation/README.md, reference/ modules 00-10, and principals.',
+    stepsAr: [
+      { title: 'الأساس الهندسي —بناء الحكم', topics: ['تنفيذ وتصحيح الأخطاء', 'تفكيك', 'SOLID و Architecture أنظف', 'مراجعة الحمل'], duration: 'Self-paced' },
+      { title: 'أطلس Ground Zero — مدير موارد السحابة وAzure', topics: ['مقدمات سحابية', 'Azure Resource Manager', 'تدفق اسم → طلب → مورد', 'حدود الهوية والشبكة'], duration: 'Self-paced' },
+      { title: 'أسس تصميم النظام', topics: ['توسيع من 1 إلى 1 مليون', 'اتساق وCAP', 'مواقع مؤقتة و Queues', 'الضغط الخلفي والتقدير'], duration: 'Self-paced' },
+      { title: 'البيانات والاسترجاع — دليل البحث المصرح به', topics: ['متشوقات ومتشابهات متجهات', 'Architecture RQE للمؤسسات', 'بيانات واعية للأذونات', 'جودة الاسترجاع'], duration: 'Self-paced' },
+      { title: 'سطح تحكم AI', topics: ['موازين الرموز والمحدودات', 'نطاق الأدوات والتوجيه', 'تدوير النماذج وفشل الإلغاء', 'حالة الوكيل'], duration: 'Self-paced' },
+      { title: 'الاستضافة والخدمة', topics: ['تشريح طلب الاستضافة', 'KV-cache والتجميع المستمر', 'زمن الوصول مقابل الذاكرة مقابل الجودة', 'إ throughput الاستضافة'], duration: 'Self-paced' },
+      { title: 'تنفيذ وHPC → 09 Edge & Hybrid', topics: ['هندسة الحوسبة وحركة البيانات', 'دورة حياة النموذج (تدريب/تقييم/تعزيز/إلغاء)', 'الأمن والسلامة (AI بدون ثقة)', 'عمليات والحافة الهجينة'], duration: 'Self-paced' },
+      { title: '10 دراسات حالة وملّاك', topics: ['مراجعة تصميم كاملة', 'ملّاك حمزة (هندسة، AI، أمن سيبراني، شبكة، موثوقية)', 'حالة آمنة واحتواء الفشل', 'SLOs موجهة للعواقب'], duration: 'Self-paced' },
+    ],
   },
 ]
 
@@ -48269,6 +48308,19 @@ export const SEED_OFFERS: Offer[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
+    nameAr: 'تصميم نظام المؤسسات — د. حمزة علي',
+    taglineAr: 'تصميم أنظمة سحابية من المبادئ إلى أحمال العمل الإنتاجية بالذكاء الاصطناعي',
+    descriptionAr: 'منهج grounded المصدر لتصميم أنظمة موثوقة وآمنة وقابلة للتشغيل على Azure، من المبادئ الأولى إلى أحمال العمل الإنتاجية بالذكاء الاصطناعي. يغطي تصميم نظام المؤسسات، الأنظمة الموزعة، أنظمة الذكاء الاصطناعي، الأمن السيبراني، الموثوقية، السحابة (Azure)، HPC، الحافة، والبنية الأساسية الحرجة للمهام. من الهوية، الشبكة، واجهة البرمجة، البيانات، الطابور، النموذج، المشغل، ومسار التعافي عبر إطار Azure Well-Architected (الموثوقية، الأمن، التكلفة، التميز التشغيلي، الأداء) إلى أحمال العمل الإنتاجية بالذكاء الاصطنوي allocations budgets, quality of retrieval, latency, and tool authority become part of the architecture. By Dr. Hazem Ali (Microsoft MVP). Clone: git clone https://github.com/DrHazemAli/enterprise-system-design.git — start with foundation/README.md, reference/ modules 00-10, and principals.',
+    stepsAr: [
+      { title: 'الأساس الهندسي —بناء الحكم', topics: ['تنفيذ وتصحيح الأخطاء', 'تفكيك', 'SOLID و Architecture أنظف', 'مراجعة الحمل'], duration: 'Self-paced' },
+      { title: 'أطلس Ground Zero — مدير موارد السحابة وAzure', topics: ['مقدمات سحابية', 'Azure Resource Manager', 'تدفق اسم → طلب → مورد', 'حدود الهوية والشبكة'], duration: 'Self-paced' },
+      { title: 'أسس تصميم النظام', topics: ['توسيع من 1 إلى 1 مليون', 'اتساق وCAP', 'مواقع مؤقتة و Queues', 'الضغط الخلفي والتقدير'], duration: 'Self-paced' },
+      { title: 'البيانات والاسترجاع — دليل البحث المصرح به', topics: ['متشوقات ومتشابهات متجهات', 'Architecture RQE للمؤسسات', 'بيانات واعية للأذونات', 'جودة الاسترجاع'], duration: 'Self-paced' },
+      { title: 'سطح تحكم AI', topics: ['موازين الرموز والمحدودات', 'نطاق الأدوات والتوجيه', 'تدوير النماذج وفشل الإلغاء', 'حالة الوكيل'], duration: 'Self-paced' },
+      { title: 'الاستضافة والخدمة', topics: ['تشريح طلب الاستضافة', 'KV-cache والتجميع المستمر', 'زمن الوصول مقابل الذاكرة مقابل الجودة', 'إ throughput الاستضافة'], duration: 'Self-paced' },
+      { title: 'تنفيذ وHPC → 09 Edge & Hybrid', topics: ['هندسة الحوسبة وحركة البيانات', 'دورة حياة النموذج (تدريب/تقييم/تعزيز/إلغاء)', 'الأمن والسلامة (AI بدون ثقة)', 'عمليات والحافة الهجينة'], duration: 'Self-paced' },
+      { title: '10 دراسات حالة وملّاك', topics: ['مراجعة تصميم كاملة', 'ملّاك حمزة (هندسة، AI، أمن سيبراني، شبكة، موثوقية)', 'حالة آمنة واحتواء الفشل', 'SLOs موجهة للعواقب'], duration: 'Self-paced' },
+    ],
   },
 ]
 
