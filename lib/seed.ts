@@ -41930,7 +41930,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Shodan grants a free ongoing membership upgrade to students/researchers who register with a .edu/.ac address: unlimited search results, API credits, and history. Manual upgrade via support email. Works with any academic email from edumailshop/normal college. Non-students can obtain it by creating a US CC .edu mailbox.',
     url: 'https://help.shodan.io/the-basics/academic-upgrade',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/shodan.io.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=shodan.io&sz=64',
     category: 'api-access',
     tags: ['shodan', 'security', 'iot', 'academic', 'osint'],
     pricing: 'free',
@@ -42199,7 +42199,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Dify gives verified students 1 year of Professional free: build and deploy LLM apps/agents with datasets, tools, and hosting. Verifies with .edu email. Non-students can get it with any CC .edu mailbox (email-only verification).',
     url: 'https://dify.ai/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/dify.ai.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=dify.ai&sz=64',
     category: 'api-access',
     tags: ['dify', 'llm', 'agent', 'students', 'no-code'],
     pricing: 'free',
@@ -42530,6 +42530,302 @@ export const SEED_OFFERS: Offer[] = [
         title: 'Enable Pro',
         description:
           'After verification, Zed → Settings → Subscription shows Pro. Features enable instantly. Renewable while enrolled.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o29',
+    slug: 'microsoft-365-education',
+    name: 'Microsoft 365 Education',
+    tagline: 'Free Office 365 + 1TB OneDrive + Teams for students (A1 license)',
+    description:
+      'Microsoft 365 Education A1 is free for verified students: Word, Excel, PowerPoint, OneNote on web + desktop, 100GB OneDrive (legacy 1TB on older tenants), Teams, and 50GB Exchange mail. Verifies via school .edu/Microsoft 365 Education domain. Non-students can enroll in a CC that issues Microsoft 365 Education accounts (most US CCs auto-provision) → get the school M365 login and claim.',
+    url: 'https://www.microsoft.com/education/products/office',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/microsoft.com.ico',
+    category: 'tool',
+    tags: ['microsoft', 'office365', 'onedrive', 'students', 'teams'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check if your school provides M365',
+        description:
+          'Visit microsoft.com/education/products/office → “Get started with Office 365 Education” → Enter your .edu email. If your school is federated, you are auto-verified.',
+        url: 'https://www.microsoft.com/education/products/office',
+      },
+      {
+        title: 'Get access — student vs non-student',
+        description:
+          'STUDENT: Enter .edu → receive verification link → create M365 Education account. NON-STUDENT: Enroll in a CC that supports Microsoft Education (e.g., Coastline, Rio Hondo) — after 24h you get a @student.cc.edu Microsoft 365 login → use that to sign in. No file upload path — must be email domain approved by Microsoft.',
+      },
+      {
+        title: 'Install Office and use OneDrive',
+        description:
+          'Sign in at office.com with your Education account → Install Office desktop → OneDrive syncs 100GB (Teams and Outlook included). License stays active while enrolled; graduates keep files but lose edit rights.',
+      },
+    ],
+    upvotes: 41,
+    bookmarks: 52,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o30',
+    slug: 'adobe-creative-cloud-student',
+    name: 'Adobe Creative Cloud Student',
+    tagline: '60%+ off Creative Cloud Pro — Photoshop, Illustrator, Premiere, 20+ apps',
+    description:
+      'Adobe Creative Cloud Pro for Students/Teachers: ~60% off (~$19.99/mo vs $59.99). Includes Photoshop, Illustrator, Premiere Pro, After Effects, XD, 100GB cloud. Verifies via SheerID/UNiDAYS with .edu or file. Non-students can qualify with CC enrollment + ID/transcript — SheerID accepts file proof and approves most accredited CCs.',
+    url: 'https://www.adobe.com/creativecloud/buy/students.html',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/adobe.com.ico',
+    category: 'tool',
+    tags: ['adobe', 'creative-cloud', 'photoshop', 'students', 'discount'],
+    pricing: 'paid',
+    steps: [
+      {
+        title: 'Open Adobe Student page',
+        description:
+          'Visit adobe.com/creativecloud/buy/students.html → “Buy now” → student verification modal opens.',
+        url: 'https://www.adobe.com/creativecloud/buy/students.html',
+      },
+      {
+        title: 'Verify — email or document',
+        description:
+          'STUDENT: Enter .edu → instant via SheerID. NON-STUDENT: Choose “Upload document” → student ID + enrollment letter showing name + school + current date. CC enrollments are accepted; keep the PDF in English/color scan.',
+      },
+      {
+        title: 'Checkout and install',
+        description:
+          'After approval, checkout at student price. Install via Creative Cloud Desktop app → sign in → all apps activate. Discount renews yearly with re-verification.',
+      },
+    ],
+    upvotes: 35,
+    bookmarks: 41,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o31',
+    slug: 'apple-education-icloud-200gb',
+    name: 'Apple Education: 200GB iCloud',
+    tagline: 'Permanent 200GB iCloud storage free for teachers & students via Apple School Manager',
+    description:
+      'Apple offers 200GB iCloud free (permanent while enrolled) for students/teacherswhose school uses Apple School Manager. The school admin assigns the Managed Apple ID → 200GB quota appears in Settings. For personal Apple IDs, students can claim Apple Music Student ($5.99) + iCloud+ features. Non-students can ask their CC IT desk to issue a Managed Apple ID after enrollment — many CCs support ASM.',
+    url: 'https://www.apple.com/education/k12/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/apple.com.ico',
+    category: 'tool',
+    tags: ['apple', 'icloud', 'storage', 'education', 'school-manager'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Ask your school IT for Managed Apple ID',
+        description:
+          'STUDENT: Contact IT/helpdesk → “Request Managed Apple ID via Apple School Manager for iCloud 200GB”. They will invite your school email. NON-STUDENT: After CC enrollment, ask IT for ASM account — CCs using ASM can create one in minutes.',
+        url: 'https://www.apple.com/education/k12/',
+      },
+      {
+        title: 'Sign in on iPhone/Mac',
+        description:
+          'On iOS: Settings → Sign in with Managed Apple ID → iCloud shows 200GB. Use for Photos, Drive, Backup. Personal iCloud stays separate — you can keep both.',
+      },
+      {
+        title: 'Manage via School Manager',
+        description:
+          'Admins manage storage at school.apple.com. Students cannot buy more — 200GB is the cap while enrolled. Graduates lose quota after account removed.',
+      },
+    ],
+    upvotes: 19,
+    bookmarks: 24,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o32',
+    slug: 'matlab-student-suite',
+    name: 'MATLAB Student Suite',
+    tagline: 'MATLAB + Simulink + 10 toolboxes for students — $49 license, free via campus',
+    description:
+      'MathWorks MATLAB Student Suite: MATLAB, Simulink, and 10 toolboxes for $49 (or free if your campus has a Campus-Wide License — check with .edu). Includes online MATLAB, 1TB Drive. Verifies via .edu email or campus SSO. Non-students can get it via CC Math course — MathWorks accepts any accredited .edu, and many CCs have campus license covering you free.',
+    url: 'https://www.mathworks.com/products/matlab/student.html',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/mathworks.com.ico',
+    category: 'tool',
+    tags: ['matlab', 'simulink', 'mathworks', 'students', 'engineering'],
+    pricing: 'paid',
+    steps: [
+      {
+        title: 'Check campus license first',
+        description:
+          'Visit mathworks.com/academia → Enter school .edu → “Is my campus licensed?” If yes, you get MATLAB free with school login — no $49 needed.',
+        url: 'https://www.mathworks.com/products/matlab/student.html',
+      },
+      {
+        title: 'Get MATLAB — student vs non-student',
+        description:
+          'STUDENT: Create MathWorks Account with .edu → verify via email OTP. NON-STUDENT: Enroll in CC Math/Engineering 1-credit → get .edu + campus SSO → register; MathWorks approves CC .edu domains like any university.',
+      },
+      {
+        title: 'Download or use online',
+        description:
+          'Go to mathworks.com → Downloads → MATLAB R2024b → license activates via account. Or use matlab.mathworks.com online — no install needed.',
+      },
+    ],
+    upvotes: 21,
+    bookmarks: 26,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o33',
+    slug: 'replit-student',
+    name: 'Replit Student',
+    tagline: '50% off Replit Core + free AI credits for students via GitHub Student',
+    description:
+      'Replit gives students 50% off Core ($13.50 vs $27/mo) plus free AI credits when linked to GitHub Student Pack. Includes hosted IDE for 50+ languages, Deployments, and AI assistant. Verifies via GitHub Student linkage or .edu email.',
+    url: 'https://replit.com/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/replit.com.ico',
+    category: 'tool',
+    tags: ['replit', 'ide', 'hosting', 'students', 'discount'],
+    pricing: 'paid',
+    steps: [
+      {
+        title: 'Link GitHub Student or .edu',
+        description:
+          'STUDENT: Sign in to replit.com/students with GitHub already approved for Student Pack — Replit auto-detects. Or verify with .edu email. NON-STUDENT: Approve GitHub Pack first via CC file (see o9), then return to Replit to claim.',
+        url: 'https://replit.com/students',
+      },
+      {
+        title: 'Apply student discount',
+        description:
+          'In Billing → “Student Discount” → Apply. Discount is 50% for as long as GitHub Student is active. Free AI credits are added monthly.',
+      },
+      {
+        title: 'Code in browser',
+        description:
+          'Create a Repl → choose language → use AI chat to generate code. Deploy with one click — hosting included.',
+      },
+    ],
+    upvotes: 18,
+    bookmarks: 22,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o34',
+    slug: 'digitalocean-student',
+    name: 'DigitalOcean Student',
+    tagline: '$200 credit for 12 months via GitHub Student Pack — droplets, DBs, Spaces',
+    description:
+      'DigitalOcean via GitHub Student Pack: $200 credit for 12 months to run droplets, managed DBs, Spaces object storage, and App Platform. Verifies via GitHub Student linkage — no separate .edu check. Non-students qualify by first getting GitHub Pack via CC file (o9).',
+    url: 'https://www.digitalocean.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/digitalocean.com.ico',
+    category: 'api-access',
+    tags: ['digitalocean', 'hosting', 'cloud', 'droplet', 'students'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Get GitHub Student Pack first',
+        description:
+          'Follow o9 steps to get GitHub Student Pack approved (via .edu or CC file). DigitalOcean credit is inside the pack, not a standalone portal.',
+        url: 'https://education.github.com/pack',
+      },
+      {
+        title: 'Claim on DigitalOcean',
+        description:
+          'In GitHub Pack → find DigitalOcean → “Get access” → redirected to digitalocean.com where $200 promo auto-applies. Create account with same email and add card (required for verification, but credit covers spend).',
+      },
+      {
+        title: 'Deploy',
+        description:
+          'Create a $6 Droplet or App Platform app — credit burns first. Track in Billing → Credits. Credit expires in 12 months.',
+      },
+    ],
+    upvotes: 22,
+    bookmarks: 27,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o35',
+    slug: 'namecheap-education',
+    name: 'Namecheap Education',
+    tagline: 'Free 1-year domain + SSL + $100 hosting via GitHub Student Pack',
+    description:
+      'Namecheap via GitHub Student Pack: free .me domain for 1 year, free PositiveSSL, and free hosting trial. Verifies via GitHub Student linkage. Also standalone .edu discount at nc.me/edu. Non-students get it via CC → GitHub Pack file path.',
+    url: 'https://www.namecheap.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/namecheap.com.ico',
+    category: 'tool',
+    tags: ['namecheap', 'domain', 'ssl', 'hosting', 'students'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Approve GitHub Student',
+        description:
+          'Complete o9 GitHub Student verification (CC file accepted).',
+        url: 'https://education.github.com/pack',
+      },
+      {
+        title: 'Claim at Namecheap',
+        description:
+          'GitHub Pack → Namecheap → “Get access” → Create Namecheap account with same email → domain credit appears. Search a .me domain → checkout shows $0 for first year. SSL claim is in Namecheap dashboard → SSL → Free SSL.',
+      },
+      {
+        title: 'Renew or keep domain',
+        description:
+          'Domain is free for 1 year; renew at ~$8/yr after. SSL renews annually via same portal while student status active.',
+      },
+    ],
+    upvotes: 20,
+    bookmarks: 25,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o36',
+    slug: 'sketch-education',
+    name: 'Sketch Education',
+    tagline: 'Free Sketch for students — native macOS UI design with team workspace',
+    description:
+      'Sketch gives verified students free Education license: macOS app + web workspace, team libraries, and prototype sharing. Verifies via school email or file. Non-students can get it with CC enrollment + ID upload — manual review approves most accredited schools.',
+    url: 'https://www.sketch.com/education/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/sketch.com.ico',
+    category: 'tool',
+    tags: ['sketch', 'design', 'ui', 'mac', 'students'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply at Sketch Education',
+        description:
+          'Visit sketch.com/education → “Apply for free Education license”.',
+        url: 'https://www.sketch.com/education/',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: .edu email → auto. NON-STUDENT: “No school email” → upload student ID + enrollment letter (show name + school + current term). CC IDs accepted; review 1-3 days.',
+      },
+      {
+        title: 'Install Sketch',
+        description:
+          'After approval, download Sketch for Mac → sign in → Education workspace appears. License renews annually with fresh proof.',
       },
     ],
     upvotes: 16,
