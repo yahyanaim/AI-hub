@@ -16803,11 +16803,12 @@ const toolsPart2: Tool[] = [
     createdAt: daysAgo(267),
     updatedAt: daysAgo(20),
   },
-];
+] as Tool[];
 
 export const SEED_TOOLS: Tool[] = [
   ...toolsPart1,
   ...toolsPart2,
+  ...[] as Tool[],
 
   {
     id: 't1229',
