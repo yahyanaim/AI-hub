@@ -41362,7 +41362,7 @@ export const SEED_COURSES: Course[] = [
     id: 'c159',
     slug: 'enterprise-system-design',
     name: 'Enterprise System Design — Dr. Hazem Ali',
-    description: 'A source-grounded course & reference for engineers designing systems that must survive real traffic, partial failure, security review, and changing requirements. Spans enterprise system design, distributed systems, AI systems, cybersecurity, reliability, cloud (Azure), HPC, edge, and mission-critical infrastructure. From first principles — identity, network, API, data, queue, model, operator, recovery — through Azure Well-Architected (reliability, security, cost, operations, performance) to production AI workloads where token budgets, retrieval quality, latency, and tool authority become architecture. By Dr. Hazem Ali (Microsoft MVP, 570+ stars, 117 forks). Clone: git clone https://github.com/DrHazemAli/enterprise-system-design.git — start with foundation/README.md, principals, and reference/ modules 00-10.',
+    description: 'Source-grounded enterprise system design course for building reliable, secure, and operable platforms on Azure, from first principles to production AI workloads. Covers enterprise system design, distributed systems, AI systems, cybersecurity, reliability, cloud (Azure), HPC, edge, and mission-critical infrastructure. From identity, network, API, data, queue, model, operator, recovery through Azure Well-Architected (reliability, security, cost, operations, performance) to production AI workloads where token budgets, retrieval quality, latency, and tool authority become architecture. By Dr. Hazem Ali (Microsoft MVP). Clone: git clone https://github.com/DrHazemAli/enterprise-system-design.git — start with foundation/README.md, reference/ modules 00-10, and principals.',
     tagline: 'Source-grounded Azure system design: from primitives to production AI',
     url: 'https://github.com/DrHazemAli/enterprise-system-design',
     pricing: 'free',
@@ -47331,6 +47331,942 @@ export const SEED_OFFERS: Offer[] = [
     bookmarks: 12,
     submittedBy: 'u6',
     featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+
+  {
+    id: 'o99',
+    slug: 'supernova-gitex-africa-2026',
+    name: 'SUPERNOVA Challenge @ GITEX Africa 2026',
+    tagline: 'Largest Africa startup competition — 100+ countries → Silicon Valley',
+    description:
+      'SUPERNOVA is the flagship startup competition at GITEX Africa Marrakech (largest Africa tech event, 100+ countries). Moroccan Woliz won 2026 FinTech & Blockchain prize. Past winners raised significant funding and gained international investor attention.',
+    url: 'https://gitexafrica.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/gitexafrica.com.ico',
+    category: 'competition',
+    tags: ['gitex', 'supernova', 'morocco', 'competition', 'africa'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on GITEX Africa',
+        description:
+          'Go to gitexafrica.com → SUPERNOVA → Apply. Open to 100+ countries.',
+        url: 'https://gitexafrica.com/',
+      },
+      {
+        title: 'Pitch at Marrakech (April)',
+        description:
+          'If selected, pitch at GITEX Africa Marrakech (April 7-9). 131 apps → 10 finalists in 2026.',
+      },
+      {
+        title: 'Win and go global',
+        description:
+          'Winners get FinTech/Blockchain prizes + investor exposure + Silicon Valley path. Woliz case.',
+      },
+    ],
+    nameAr: 'تحدي SUPERNOVA في جيتكس أفريقيا 2026',
+    taglineAr: 'أكبر مسابقة شركات ناشئة في أفريقيا — 100+ دولة → وادي السيليكون',
+    descriptionAr: 'SUPERNOVA هي المسابقة الرئيسية في جيتكس أفريقيا مراكش (أكبر حدث تقني أفريقي). فازت Woliz المغربية بجائزة FinTech 2026.',
+    stepsAr: [
+      {
+        title: 'قدّم في جيتكس أفريقيا',
+        description: 'اذهب إلى gitexafrica.com → SUPERNOVA وقدّم.',
+        url: 'https://gitexafrica.com/',
+      },
+      {
+        title: 'اعرض في مراكش أبريل',
+        description: 'إذا تم اختيارك، اعرض في مراكش (131 طلباً → 10 نهائيين).',
+      },
+      {
+        title: 'افز وفُز عالمياً',
+        description: 'جوائز + مستثمرون + طريق إلى وادي السيليكون.',
+      },
+    ],
+    upvotes: 14,
+    bookmarks: 17,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o100',
+    slug: 'startup-world-cup-morocco',
+    name: 'Startup World Cup Morocco',
+    tagline: 'National final at Technopark Casa → Grand Finale in Silicon Valley',
+    description:
+      'Startup World Cup Morocco (Pegasus Tech Ventures + Technopark Casablanca): 131 Moroccan apps → 10 finalists → winner ORA Technologies (fintech) represents Morocco vs 65+ countries in Silicon Valley Grand Finale. 300+ attendees, networking.',
+    url: 'https://www.startupworldcup.io/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/startupworldcup.io.ico',
+    category: 'competition',
+    tags: ['startup-world-cup', 'morocco', 'pegasus', 'silicon-valley', 'technopark'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply via Technopark',
+        description:
+          'Watch Technopark Casablanca call → Apply for Startup World Cup Morocco.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: 'National final Casa',
+        description:
+          'Pitch at Technopark Casablanca (March-June). 10 finalists, 131 apps in 2026.',
+      },
+      {
+        title: 'Grand Finale Silicon Valley',
+        description:
+          'National winner flies to California to compete vs 65+ countries.',
+      },
+    ],
+    nameAr: 'كأس العالم للشركات الناشئة المغرب',
+    taglineAr: 'النهائي الوطني في تكنوبارك → النهائي الكبير في وادي السيليكون',
+    descriptionAr: 'كأس العالم للشركات الناشئة المغرب: 131 طلباً → 10 نهائيين → الفائز ORA يمثل المغرب في وادي السيليكون ضد 65 دولة.',
+    stepsAr: [
+      {
+        title: 'قدّم عبر تكنوبارك',
+        description: 'تابع إعلان تكنوبارك وقدّم.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: 'النهائي الوطني بالدار البيضاء',
+        description: 'اعرض في تكنوبارك — 10 نهائيين.',
+      },
+      {
+        title: 'النهائي في وادي السيليكون',
+        description: 'الفائز يسافر لكاليفورنيا.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o101',
+    slug: 'nba-africa-triple-double-alx',
+    name: 'NBA Africa Triple Double Accelerator x ALX',
+    tagline: '$25k + OpenAI + CMU — Reborn Morocco won 2025',
+    description:
+      'NBA Africa + ALX Ventures + ServiceNow + OpenAI + CMU Africa: 700+ apps → 10 finalists → 3-month acceleration. 1st $25k + CMU incubation + $10k OpenAI credits + OpenAI immersion, 5th $2.5k. Reborn (Morocco, SportTech) 1st, Fitclan, Athlon (Egypt) among 2025 winners.',
+    url: 'https://www.alxafrica.com/programme/nba-africa-triple-double-accelerator/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/alxafrica.com.ico',
+    category: 'competition',
+    tags: ['nba', 'alx', 'accelerator', 'openai', 'cmu', '25k'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on ALX',
+        description:
+          'Go to alxafrica.com → NBA Triple Double → Apply (700+ apps).',
+        url: 'https://www.alxafrica.com/programme/nba-africa-triple-double-accelerator/',
+      },
+      {
+        title: '3 months acceleration',
+        description:
+          '10 finalists from Egypt, Kenya, Morocco, Nigeria, SA — mentorship + OpenAI + CMU.',
+      },
+      {
+        title: 'Final and prizes',
+        description:
+          'Demo Day — 1st $25k + CMU incubation + OpenAI immersion.',
+      },
+    ],
+    nameAr: 'NBA Africa Triple Double مع ALX',
+    taglineAr: '25 ألف $ + OpenAI + CMU — فاز Reborn المغرب 2025',
+    descriptionAr: 'NBA Africa + ALX + OpenAI + CMU: 700+ طلب → 10 نهائيين → 3 أشهر تسريع. المركز الأول 25 ألف $ + حضانة CMU.',
+    stepsAr: [
+      {
+        title: 'قدّم في ALX',
+        description: 'اذهب إلى alxafrica.com وقدّم.',
+        url: 'https://www.alxafrica.com/programme/nba-africa-triple-double-accelerator/',
+      },
+      {
+        title: '3 أشهر تسريع',
+        description: '10 نهائيين من 5 دول — إرشاد + OpenAI.',
+      },
+      {
+        title: 'النهائي والجوائز',
+        description: 'الأول 25 ألف $ + حضانة CMU.',
+      },
+    ],
+    upvotes: 11,
+    bookmarks: 13,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o102',
+    slug: 'baobab-network-accelerator',
+    name: 'Baobab Network Accelerator',
+    tagline: '$100k for 12.5% + $50k Morocco examples — 12 weeks remote',
+    description:
+      'Baobab Network Nairobi — Africa leading accelerator: $100k lump sum for 12.5% equity + 12-week remote (2 weeks intensive + 3 months hands-on) + Demo Day. Portfolio: Colis.ma ($50k Morocco logistics 2023), VOVE ID (Morocco regtech 2025), Afrigility, Eazy Chain. No need to leave Africa, US incorporation optional.',
+    url: 'https://thebaobabnetwork.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/thebaobabnetwork.com.ico',
+    category: 'competition',
+    tags: ['baobab', 'accelerator', '100k', '12.5percent', 'africa'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on Baobab',
+        description:
+          'Go to thebaobabnetwork.com → Apply. Must have Africa presence, led by African team.',
+        url: 'https://thebaobabnetwork.com/',
+      },
+      {
+        title: '12-week remote accelerator',
+        description:
+          '2 weeks intensive + 3 months hands-on with venture partners + global network.',
+      },
+      {
+        title: 'Demo Day and $100k',
+        description:
+          '$100k at start for 12.5% + follow-on network. Demo Day with angels/VCs.',
+      },
+    ],
+    nameAr: 'مسرّعة Baobab Network',
+    taglineAr: '100 ألف $ مقابل 12.5% — 12 أسبوعاً عن بعد',
+    descriptionAr: 'Baobab نيروبي: 100 ألف $ مقابل 12.5% + 12 أسبوعاً عن بعد + Demo Day. أمثلة مغربية Colis.ma و VOVE ID.',
+    stepsAr: [
+      {
+        title: 'قدّم في Baobab',
+        description: 'اذهب إلى thebaobabnetwork.com وقدّم — يجب أن يكون لك وجود في أفريقيا.',
+        url: 'https://thebaobabnetwork.com/',
+      },
+      {
+        title: '12 أسبوعاً عن بعد',
+        description: 'أسبوعان مكثفان + 3 أشهر دعم يدوي.',
+      },
+      {
+        title: 'Demo Day و 100 ألف $',
+        description: '100 ألف $ مقابل 12.5% + شبكة مستثمرين.',
+      },
+    ],
+    upvotes: 13,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o103',
+    slug: 'morocco-accelerator-cohort3',
+    name: 'Morocco Accelerator Cohort 3',
+    tagline: 'Equity-free 3 months + Tamwilcom non-dilutive — Technopark + Plug and Play',
+    description:
+      'Morocco Accelerator 3-month (Oct 2026) funded by Ministry Digital Transition, operated by Technopark + Plug and Play (Digital Morocco 2030): equity-free, fee-free mentorship, workshops, office at Technopark, corporate/investor intros, global ecosystem, eligible for Startup Venture Building non-dilutive financing via Tamwilcom. Prev. 80+ founders, 200+ mentorships, $5M+ raised, 19 grad 20M MAD, 2 to Silicon Valley Winter Summit. Moroccan founder/diaspora, traction + revenue, scalable tech. Closes Sep 15, 2026.',
+    url: 'https://technopark.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/technopark.ma.ico',
+    category: 'competition',
+    tags: ['morocco-accelerator', 'technopark', 'plug-and-play', 'tamwilcom', 'free'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check eligibility',
+        description:
+          'Moroccan founder/co-founder/diaspora, product in market, traction + revenue, scalable tech.',
+      },
+      {
+        title: 'Apply by Sep 15, 2026',
+        description:
+          'Apply via Technopark link: lnkd.in/gsmHS5zq. Selection in September, starts October.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: 'Join 3 months + Tamwilcom',
+        description:
+          'Mentorship, Corporate Day (12+ corporates, 75+ 1-1), investor intros, non-dilutive financing eligibility.',
+      },
+    ],
+    nameAr: 'مسرّعة المغرب الدفعة 3',
+    taglineAr: '3 أشهر بدون أسهم + تمويل Tamwilcom غير مخفف',
+    descriptionAr: 'مسرّعة المغرب 3 أشهر أكتوبر 2026 بتمويل الوزارة وتشغيل تكنوبارك + Plug and Play: بدون أسهم، إرشاد وورشات ومكتب وTamwilcom. 80+ مؤسساً، 5M$ تم جمعها.',
+    stepsAr: [
+      {
+        title: 'تحقق من الأهلية',
+        description: 'مؤسس مغربي/مغترب، منتج في السوق، زخم وإيرادات.',
+      },
+      {
+        title: 'قدّم قبل 15 سبتمبر 2026',
+        description: 'قدّم عبر رابط تكنوبارك.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: 'انضم 3 أشهر + Tamwilcom',
+        description: 'إرشاد ويوم شركات وتمويل غير مخفف.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o104',
+    slug: 'ramadan-ia-hackathon',
+    name: 'Ramadan IA Hackathon',
+    tagline: 'National 12 regions — AI Made in Morocco — TalibWay, Bahriya, Solar, Ichara',
+    description:
+      'Ramadan IA national hackathon by Ministry Digital Transition: 12 regions simultaneous, 3 days/region Feb-Mar. 1st TalibWay (AI school orientation), 2nd Bahriya (AI fishing rest periods), 3rd Solar (AI solar sand detection) in Dakhla, Grand Ichara (sign language) in Tangier. Winners get mentorship + pilot + GITEX showcase. Part of AI Made in Morocco sovereign roadmap.',
+    url: 'https://www.mmsp.gov.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/mmsp.gov.ma.ico',
+    category: 'competition',
+    tags: ['ramadan-ia', 'hackathon', 'morocco', 'ai-made-in-morocco', '12-regions'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Watch Ministry call (Ramadan)',
+        description:
+          'Ministry posts call per region (Guelmim, Laayoune, Dakhla, etc.) Feb-Mar.',
+        url: 'https://www.mmsp.gov.ma/',
+      },
+      {
+        title: 'Hack 3 days locally',
+        description:
+          'Teams build AI for local problem (education, fishing, solar, accessibility).',
+      },
+      {
+        title: 'Win mentorship + GITEX',
+        description:
+          'High-potential solutions get mentorship, pilot, and GITEX Africa exposure.',
+      },
+    ],
+    nameAr: 'هاكاثون رمضان IA',
+    taglineAr: 'وطني 12 جهة — ذكاء اصطناعي صنع في المغرب',
+    descriptionAr: 'هاكاثون رمضان IA الوطني 12 جهة في 3 أيام: TalibWay للتوجيه، Bahriya للصيد، Solar للطاقة الشمسية، Ichara للغة الإشارة.',
+    stepsAr: [
+      {
+        title: 'تابع إعلان الوزارة',
+        description: 'تنشر الوزارة الدعوة لكل جهة في رمضان.',
+        url: 'https://www.mmsp.gov.ma/',
+      },
+      {
+        title: 'ابنِ 3 أيام محلياً',
+        description: 'حلول ذكاء اصطناعي لمشاكل محلية.',
+      },
+      {
+        title: 'افز بإرشاد + جيتكس',
+        description: 'المشاريع المميزة تُعرض في جيتكس.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o105',
+    slug: 'cyberstrike-2026-ctf',
+    name: 'CyberStrike 2026 CTF @ GITEX Africa',
+    tagline: '2nd national — ANCA CERT + DGSSI + Cisco XDR',
+    description:
+      'CyberStrike 2026 CTF & Hackathon at GITEX Africa Marrakech (ANCA CERT, DGSSI, Cisco XDR): national/regional African talent, rapid incident response, threat hunting, forensics, XDR. Ryane El Ouarrat 2nd national.',
+    url: 'https://www.ancacert.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/ancacert.ma.ico',
+    category: 'competition',
+    tags: ['cyberstrike', 'ctf', 'gitex', 'anca', 'cisco'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Qualify via ANCA',
+        description:
+          'Watch ANCA CERT call for CyberStrike at GITEX Africa.',
+        url: 'https://www.ancacert.ma/',
+      },
+      {
+        title: 'Compete at GITEX Marrakech',
+        description:
+          'CTF: incident response, forensics, XDR challenges.',
+      },
+      {
+        title: 'Win cert and trophy',
+        description:
+          'Trophy + Cisco XDR cert + DGSSI recognition.',
+      },
+    ],
+    nameAr: 'CyberStrike 2026 CTF في جيتكس',
+    taglineAr: 'المركز الثاني وطنياً — ANCA + DGSSI + Cisco',
+    descriptionAr: 'CyberStrike 2026 CTF في جيتكس مراكش: ANCA و DGSSI و Cisco XDR — استجابة سريعة وتتبع تهديدات.',
+    stepsAr: [
+      {
+        title: 'تأهل عبر ANCA',
+        description: 'تابع إعلان ANCA لـ CyberStrike.',
+        url: 'https://www.ancacert.ma/',
+      },
+      {
+        title: 'نافس في جيتكس',
+        description: 'CTF: استجابة وطب شرعي و XDR.',
+      },
+      {
+        title: 'افز بالكأس وشهادة',
+        description: 'كأس + شهادة Cisco XDR.',
+      },
+    ],
+    upvotes: 9,
+    bookmarks: 11,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o106',
+    slug: 'macc-2026-morocco-academia-cyber',
+    name: 'MACC 2026 — Morocco Academia Cyber Competition',
+    tagline: 'National Champions APT-Catorzat at GITEX — DGSSI + SecDojo',
+    description:
+      '1st Morocco Academia Cyber Competition MACC 2026 at GITEX Africa: universities nationwide, APT-Catorzat 1st (UMP). Trophy presided by DGSSI, SecDojo organized.',
+    url: 'https://www.secdojo.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/secdojo.com.ico',
+    category: 'competition',
+    tags: ['macc', 'cyber', 'gitex', 'dgssi', 'secdojo'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Form university team',
+        description:
+          'Gather UMP/FS etc. team and watch SecDojo call.',
+        url: 'https://www.secdojo.com/',
+      },
+      {
+        title: 'Compete at GITEX',
+        description:
+          'Universities nationwide CTF at GITEX Africa Marrakech.',
+      },
+      {
+        title: 'Win national title',
+        description:
+          'Trophy + DGSSI recognition.',
+      },
+    ],
+    nameAr: 'MACC 2026 — مسابقة المغرب الجامعية السيبرانية',
+    taglineAr: 'الأبطال APT-Catorzat في جيتكس — DGSSI + SecDojo',
+    descriptionAr: 'أول مسابقة جامعية سيبرانية MACC 2026 في جيتكس: جامعات وطنياً، فاز APT-Catorzat.',
+    stepsAr: [
+      {
+        title: 'شكّل فريقاً جامعياً',
+        description: 'اجمع فريقاً وتابع SecDojo.',
+        url: 'https://www.secdojo.com/',
+      },
+      {
+        title: 'نافس في جيتكس',
+        description: 'CTF جامعات وطنياً.',
+      },
+      {
+        title: 'افز باللقب الوطني',
+        description: 'كأس + تكريم DGSSI.',
+      },
+    ],
+    upvotes: 9,
+    bookmarks: 11,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o107',
+    slug: 'boost-up-lab-casablanca',
+    name: 'Boost Up Lab Casablanca',
+    tagline: '6 months pre-incubation — idea to Demo Day — Technopark + Ministry',
+    description:
+      'Boost Up Lab Casablanca (Technopark, Ministry Digital Transition — Digital Morocco 2030): 6 months pre-incubation to turn idea into concrete project, business model, solution, with experts/mentors, ending Demo Day. Part of national Boost Up Lab. Deadline Aug 23, 2026 for Casablanca cohort.',
+    url: 'https://technopark.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/technopark.ma.ico',
+    category: 'competition',
+    tags: ['boost-up', 'pre-incubation', 'technopark', 'demo-day', '6-months'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply by Aug 23, 2026',
+        description:
+          'Apply via Technopark: lnkd.in/eAfhC5fR (Casablanca). Also check lnkd.in/eEtX25c6 rules.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: '6 months pre-incubation',
+        description:
+          'Structured: idea → business model → solution with mentors.',
+      },
+      {
+        title: 'Demo Day',
+        description:
+          'Present project at Demo Day for incubation pipeline.',
+      },
+    ],
+    nameAr: 'Boost Up Lab الدار البيضاء',
+    taglineAr: '6 أشهر ما قبل الحضانة — من الفكرة إلى Demo Day',
+    descriptionAr: 'Boost Up Lab الدار البيضاء 6 أشهر ما قبل الحضانة: حول فكرتك إلى مشروع مع مرشدين و Demo Day. آخر موعد 23 أغسطس 2026.',
+    stepsAr: [
+      {
+        title: 'قدّم قبل 23 أغسطس 2026',
+        description: 'قدّم عبر تكنوبارك.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: '6 أشهر حضانة',
+        description: 'منهج مهيكل مع مرشدين.',
+      },
+      {
+        title: 'Demo Day',
+        description: 'اعرض مشروعك.',
+      },
+    ],
+    upvotes: 10,
+    bookmarks: 12,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o108',
+    slug: 'lafactory-casablanca',
+    name: 'LaFactory by Screendy (Casablanca)',
+    tagline: '3-month accelerator, equity-free, OCP backed — Intelaka fast-track',
+    description:
+      'LaFactory Casablanca by Screendy (OCP Group): 3-month accelerator, equity-free mentoring, coworking, Intelaka fast-track application support. For scalable tech startups.',
+    url: 'https://www.lafactory.co/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/lafactory.co.ico',
+    category: 'competition',
+    tags: ['lafactory', 'screendy', 'ocp', 'accelerator', 'intelaka'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on LaFactory',
+        description:
+          'Go to lafactory.co → Apply.',
+        url: 'https://www.lafactory.co/',
+      },
+      {
+        title: '3 months equity-free',
+        description:
+          'Mentoring, workshops, Intelaka support.',
+      },
+      {
+        title: 'Demo and Intelaka',
+        description:
+          'Pitch and get Intelaka loan guarantee fast-track.',
+      },
+    ],
+    nameAr: 'LaFactory الدار البيضاء',
+    taglineAr: '3 أشهر تسريع بدون أسهم — بدعم OCP',
+    descriptionAr: 'LaFactory بالدار البيضاء: 3 أشهر تسريع بدون أسهم، إرشاد و Intelaka.',
+    stepsAr: [
+      {
+        title: 'قدّم في LaFactory',
+        description: 'اذهب إلى lafactory.co وقدّم.',
+        url: 'https://www.lafactory.co/',
+      },
+      {
+        title: '3 أشهر بدون أسهم',
+        description: 'إرشاد وورشات.',
+      },
+      {
+        title: 'عرض و Intelaka',
+        description: 'اعرض واحصل على Intelaka.',
+      },
+    ],
+    upvotes: 9,
+    bookmarks: 11,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o109',
+    slug: 'alx-ventures-founder-academy',
+    name: 'ALX Ventures Founder Academy',
+    tagline: '3-month Founder Academy — 300 grads, 28 incubated → Demo Day grants',
+    description:
+      'ALX Ventures Founder Academy (Casablanca, Accra, Nairobi): 3-month online + hub access for 18-35y, startup foundations, product, pitching, workshops, office hours, ALX Hubs. 1200 learners, 300 grads, 28 incubated to Demo Day grants. Priority Technopark incubation via ALX-Technopark partnership.',
+    url: 'https://www.alxafrica.com/programme/founder-academy/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/alxafrica.com.ico',
+    category: 'competition',
+    tags: ['alx', 'founder-academy', '3-month', 'demo-day', 'alx-ventures'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply 18-35y',
+        description:
+          'Go to alxafrica.com/programme/founder-academy → Apply. 18-35y.',
+        url: 'https://www.alxafrica.com/programme/founder-academy/',
+      },
+      {
+        title: '3 months online + hubs',
+        description:
+          'Startup foundations, product, customers, growth — workshops + office hours + Casablanca Hub.',
+      },
+      {
+        title: 'Demo Day grants + Technopark',
+        description:
+          '28 per cohort to Demo Day grants + priority Technopark incubation (Orange workspace).',
+      },
+    ],
+    nameAr: 'أكاديمية ALX للمؤسسين',
+    taglineAr: '3 أشهر — 300 خريج، 28 محتضن → منح Demo Day',
+    descriptionAr: 'أكاديمية ALX للمؤسسين 3 أشهر أونلاين + Hubs للشباب 18-35: تأسيس وم product و pitching.',
+    stepsAr: [
+      {
+        title: 'قدّم 18-35 سنة',
+        description: 'اذهب إلى alxafrica.com وقدّم.',
+        url: 'https://www.alxafrica.com/programme/founder-academy/',
+      },
+      {
+        title: '3 أشهر أونلاين + Hubs',
+        description: 'تأسيس ومنتج وزبائن.',
+      },
+      {
+        title: 'Demo Day ومنح',
+        description: '28 إلى Demo Day + حضانة تكنوبارك.',
+      },
+    ],
+    upvotes: 11,
+    bookmarks: 13,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o110',
+    slug: 'technopark-morocco',
+    name: 'Technopark Maroc (MITC)',
+    tagline: 'Subsidized office + 1800 startups — Casa/Rabat/Tanger + AWS/Azure/Google',
+    description:
+      'Technopark Maroc (MITC) since 2001 Casa/Rabat/Tanger: subsidized office/coworking for tech/Green/creative, 1800+ startups, 800+ projects, 250+ companies now. AWS/Azure/Google cloud credits, investor/export support, AUSIM Village stand at Assises Tanger Oct 7-9 (2m² + hosting). Apply at technopark.ma.',
+    url: 'https://technopark.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/technopark.ma.ico',
+    category: 'competition',
+    tags: ['technopark', 'mitc', 'incubator', 'morocco', 'office'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on Technopark',
+        description:
+          'Go to technopark.ma → Apply.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: 'Get office + cloud',
+        description:
+          'Subsidized office/coworking + AWS/Azure/Google credits.',
+      },
+      {
+        title: 'Exhibit at AUSIM Oct 7-9 Tanger',
+        description:
+          'Selected 8 startups get Village stand + hosting at Assises (AI + sovereignty).',
+      },
+    ],
+    nameAr: 'تكنوبارك المغرب',
+    taglineAr: 'مكتب مدعّم + 1800 شركة ناشئة — الدار البيضاء/الرباط/طنجة',
+    descriptionAr: 'تكنوبارك منذ 2001: مكتب مدعّم لـ 1800+ شركة، رصيد سحابي AWS/Azure/Google.',
+    stepsAr: [
+      {
+        title: 'قدّم في تكنوبارك',
+        description: 'اذهب إلى technopark.ma وقدّم.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: 'احصل على مكتب وسحابة',
+        description: 'مكتب مدعّم + رصيد سحابي.',
+      },
+      {
+        title: 'اعرض في AUSIM طنجة',
+        description: '8 شركات تحصل على جناح + استضافة.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o111',
+    slug: 'orange-ai-garden-technopark',
+    name: 'Orange Maroc + Technopark AI Garden',
+    tagline: 'Orange cloud, connectivity, cybersec + pilot contracts — GITEX 2026',
+    description:
+      'Orange Maroc + Technopark AI Garden (signed GITEX Africa 2026): Orange cloud, connectivity, cybersec, business use cases, pilot contracts with Orange engineering + shared infra. Telco distribution to millions is key for MENA AI startups. Apply via Technopark.',
+    url: 'https://www.orange.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/orange.ma.ico',
+    category: 'competition',
+    tags: ['orange', 'ai-garden', 'technopark', 'pilot', 'telco'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Be Technopark incubated',
+        description:
+          'Join Technopark to be eligible for AI Garden.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: 'Co-build pilot with Orange',
+        description:
+          'Orange engineering + shared infra + business use cases.',
+      },
+      {
+        title: 'Scale to telco distribution',
+        description:
+          'Pilot → distribution to Orange millions + government/enterprise.',
+      },
+    ],
+    nameAr: 'Orange المغرب + حديقة AI تكنوبارك',
+    taglineAr: 'سحابة Orange واتصال وأمن + عقود تجريبية',
+    descriptionAr: 'Orange + تكنوبارك حديقة AI: سحابة واتصال وأمن وعقود تجريبية مع مهندسي Orange.',
+    stepsAr: [
+      {
+        title: 'كن محتضناً في تكنوبارك',
+        description: 'انضم لتكنوبارك لتكون مؤهلاً.',
+        url: 'https://technopark.ma/',
+      },
+      {
+        title: 'ابنِ تجربة مع Orange',
+        description: 'هندسة Orange + بنية مشتركة.',
+      },
+      {
+        title: 'توسّع عبر شبكة الاتصالات',
+        description: 'تجربة → توزيع لملايين مشتركي Orange.',
+      },
+    ],
+    upvotes: 9,
+    bookmarks: 11,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o112',
+    slug: '212-founders-cdg-invest',
+    name: '212 Founders (CDG Invest)',
+    tagline: '$50k-$200k pre-seed + 18 months incubation + BF loan',
+    description:
+      '212 Founders by CDG Invest — Morocco main VC pre-seed: $50k-$200k for Moroccan seed startups + 18 months incubation, office, mentoring, bridge loan. The reference for Moroccan seed funding.',
+    url: 'https://www.cdg-invest.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/cdg-invest.ma.ico',
+    category: 'competition',
+    tags: ['212-founders', 'cdg-invest', 'pre-seed', 'morocco', 'bf-loan'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on CDG Invest',
+        description:
+          'Go to cdg-invest.ma → 212 Founders → Apply.',
+        url: 'https://www.cdg-invest.ma/',
+      },
+      {
+        title: 'Pre-seed $50k-$200k',
+        description:
+          'If selected, $50k-$200k + 18 months incubation.',
+      },
+      {
+        title: 'Bridge and scale',
+        description:
+          'Office, mentoring, bridge loan to next round.',
+      },
+    ],
+    nameAr: '212 Founders (CDG Invest)',
+    taglineAr: '50-200 ألف $ ما قبل البذرة + 18 شهر حضانة',
+    descriptionAr: '212 Founders التابع لـ CDG Invest: 50-200 ألف $ لمرحلة ما قبل البذرة + 18 شهر حضانة.',
+    stepsAr: [
+      {
+        title: 'قدّم في CDG Invest',
+        description: 'اذهب إلى cdg-invest.ma وقدّم.',
+        url: 'https://www.cdg-invest.ma/',
+      },
+      {
+        title: 'ما قبل البذرة 50-200 ألف $',
+        description: 'إذا تم اختيارك، 50-200 ألف $ + 18 شهر حضانة.',
+      },
+      {
+        title: 'جسر وتوسع',
+        description: 'مكتب وإرشاد وقرض جسري.',
+      },
+    ],
+    upvotes: 10,
+    bookmarks: 12,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o113',
+    slug: 'um6p-ventures',
+    name: 'UM6P Ventures',
+    tagline: 'Deeptech lab access + AgriTech/CleanTech investors — Ben Guerir',
+    description:
+      'UM6P Ventures (UM6P, Ben Guerir): deeptech lab access, prototyping, AgriTech/CleanTech investors, affiliated with Mohammed VI Polytechnic. For lab-heavy startups.',
+    url: 'https://www.um6p.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/um6p.ma.ico',
+    category: 'competition',
+    tags: ['um6p', 'deeptech', 'lab', 'agritech', 'ben-guerir'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on UM6P Ventures',
+        description:
+          'Go to um6p.ma → Ventures → Apply.',
+        url: 'https://www.um6p.ma/',
+      },
+      {
+        title: 'Lab + investors',
+        description:
+          'Deeptech lab + AgriTech/CleanTech investor intros.',
+      },
+      {
+        title: 'Prototype and scale',
+        description:
+          'Build and scale with UM6P network.',
+      },
+    ],
+    nameAr: 'UM6P Ventures',
+    taglineAr: 'وصول للمختبرات + مستثمرو AgriTech',
+    descriptionAr: 'UM6P Ventures بن جرير: وصول للمختبرات ونمذجة ومستثمرو AgriTech/CleanTech.',
+    stepsAr: [
+      {
+        title: 'قدّم في UM6P Ventures',
+        description: 'اذهب إلى um6p.ma وقدّم.',
+        url: 'https://www.um6p.ma/',
+      },
+      {
+        title: 'مختبر ومستثمرون',
+        description: 'مختبر عميق + مستثمرون.',
+      },
+      {
+        title: 'نمذج وتوسّع',
+        description: 'ابنِ وتوسّع عبر شبكة UM6P.',
+      },
+    ],
+    upvotes: 8,
+    bookmarks: 10,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o114',
+    slug: 'impact-lab-marrakech',
+    name: 'Impact Lab (Marrakech)',
+    tagline: 'Impact investors + development funds — social enterprise',
+    description:
+      'Impact Lab Marrakech: connects social enterprises to impact investors and international development funds. For social/environmental startups.',
+    url: 'https://www.impactlab.africa/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/impactlab.africa.ico',
+    category: 'competition',
+    tags: ['impact-lab', 'social', 'impact-investors', 'marrakech', 'development-funds'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply on Impact Lab',
+        description:
+          'Go to impactlab.africa → Apply.',
+        url: 'https://www.impactlab.africa/',
+      },
+      {
+        title: 'Connect to impact investors',
+        description:
+          'Pitch to impact VCs + development funds.',
+      },
+      {
+        title: 'Scale social impact',
+        description:
+          'Funding + mentorship for social ventures.',
+      },
+    ],
+    nameAr: 'Impact Lab مراكش',
+    taglineAr: 'مستثمرو أثر + صناديق تنمية — ريادة اجتماعية',
+    descriptionAr: 'Impact Lab مراكش: يربط الشركات الاجتماعية بمستثمري الأثر وصناديق التنمية الدولية.',
+    stepsAr: [
+      {
+        title: 'قدّم في Impact Lab',
+        description: 'اذهب إلى impactlab.africa وقدّم.',
+        url: 'https://www.impactlab.africa/',
+      },
+      {
+        title: 'تواصل مع مستثمري الأثر',
+        description: 'اعرض على VCs للأثر.',
+      },
+      {
+        title: 'وسّع الأثر الاجتماعي',
+        description: 'تمويل + إرشاد.',
+      },
+    ],
+    upvotes: 8,
+    bookmarks: 10,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o115',
+    slug: 'intelaka-forsa-morocco',
+    name: 'Intelaka & Forsa (Morocco Government)',
+    tagline: 'Intelaka up to 1.2M MAD loan + Forsa 100k MAD grant — any idea',
+    description:
+      'Government Intelaka (1.2M MAD loan with guarantee via banks) + Forsa (100k MAD grant via forsa.ma) for any Moroccan with an idea. No tech filter, open to all sectors. Apply via bank list (Intelaka) and forsa.ma portal.',
+    url: 'https://www.forsa.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/forsa.ma.ico',
+    category: 'competition',
+    tags: ['intelaka', 'forsa', 'government', 'morocco', 'grant', 'loan'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Choose Intelaka or Forsa',
+        description:
+          'Intelaka: up to 1.2M MAD bank loan + guarantee. Forsa: 100k MAD grant + training. Pick based on needs.',
+        url: 'https://www.forsa.ma/',
+      },
+      {
+        title: 'Apply',
+        description:
+          'Intelaka: go to participating bank with business plan. Forsa: apply at forsa.ma portal.',
+      },
+      {
+        title: 'Get funding',
+        description:
+          'If selected, receive loan/grant + training. Open to any sector, any Moroccan with idea.',
+      },
+    ],
+    nameAr: 'انطلاقة وفُرصة (حكومة المغرب)',
+    taglineAr: 'انطلاقة حتى 1.2M درهم قرض + فرصة 100 ألف درهم منحة — لأي فكرة',
+    descriptionAr: 'انطلاقة (1.2M درهم قرض بضمان) + فرصة (100 ألف درهم منحة عبر forsa.ma) لأي مغربي لديه فكرة — بدون فلتر تقني.',
+    stepsAr: [
+      {
+        title: 'اختر انطلاقة أو فرصة',
+        description: 'انطلاقة: حتى 1.2M قرض. فرصة: 100 ألف منحة + تكوين.',
+        url: 'https://www.forsa.ma/',
+      },
+      {
+        title: 'قدّم',
+        description: 'انطلاقة: اذهب للبنك بخطة عمل. فرصة: قدّم في forsa.ma.',
+      },
+      {
+        title: 'احصل على التمويل',
+        description: 'إذا تم اختيارك، تحصل على قرض/منحة + تكوين.',
+      },
+    ],
+    upvotes: 15,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
