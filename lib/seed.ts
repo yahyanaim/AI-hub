@@ -18965,6 +18965,24 @@ export const SEED_TOOLS: Tool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 't1365',
+    slug: 'loom',
+    name: 'Loom',
+    tagline: 'AI-powered screen recording & async video messaging',
+    description: `Loom is the leading async video messaging platform — record your screen, camera, or both and share instantly. Its AI features auto-generate titles, summaries, chapters, and CTAs, remove filler words and silence, and turn any video into a doc or bug report. With instant transcripts, viewer insights, and deep integrations for Slack, Notion, and Jira, Loom replaces meetings with watchable, searchable video.`,
+    url: 'https://loom.com',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/loom.com.ico',
+    category: 'video',
+    tags: ['screen-recording', 'video-messaging', 'async', 'ai-summary'],
+    pricing: 'freemium',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ];
 
 export const SEED_PROMPTS: Prompt[] = []
@@ -41611,6 +41629,103 @@ export const SEED_OFFERS: Offer[] = [
     ],
     upvotes: 12,
     bookmarks: 16,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o7',
+    slug: 'gemini-for-students',
+    name: 'Gemini for Students',
+    tagline: 'Free Gemini Advanced + 2TB storage for 12 months — Google One AI Premium for verified students',
+    description:
+      'Google’s official student offer: get 12 months of Google One AI Premium free as a verified college student. Includes Gemini Advanced with Gemini 2.5 Pro, 2TB of Google Drive / Photos / Gmail storage, NotebookLM Plus with higher limits, Gemini in Docs/Sheets/Slides/Gmail, and Veo 3 Fast for video generation. Normally $19.99/month — free for students 18+ until your free year ends, then auto-cancels unless you confirm. Verify through SheerID with your .edu email or student ID; works for eligible undergraduate and graduate students in supported countries.',
+    url: 'https://one.google.com/join/ai-student',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/gemini.google.com.ico',
+    category: 'learning',
+    tags: ['gemini', 'google', 'students', 'free', 'ai-premium', 'notebooklm'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open the student offer page',
+        description:
+          'Go to one.google.com/join/ai-student (or gemini.google.com/students) and click "Get student offer" to start eligibility check.',
+        url: 'https://one.google.com/join/ai-student',
+      },
+      {
+        title: 'Verify you are a student (SheerID)',
+        description:
+          'Click Verify eligibility — you will be sent to SheerID. Verify with your college .edu email, enrollment document, or student ID. Must be 18+ and enrolled at an accredited college/university in a supported country.',
+        url: 'https://one.google.com/join/ai-student',
+      },
+      {
+        title: 'Claim Google One AI Premium',
+        description:
+          'Once verified, accept the Google One AI Premium promotion. Your account is upgraded instantly: Gemini Advanced (2.5 Pro), 2TB storage across Drive/Photos/Gmail, and NotebookLM Plus.',
+      },
+      {
+        title: 'Use Gemini everywhere',
+        description:
+          'Open gemini.google.com for chat, use Gemini in Gmail/Docs/Sheets/Slides to draft and summarize, and use NotebookLM at notebooklm.google.com for your uploaded PDFs/slides with source-grounded answers.',
+        url: 'https://gemini.google.com',
+      },
+      {
+        title: 'Set a renewal reminder',
+        description:
+          'Your free year ends after 12 months and requires re-verification to keep the discount. Set a calendar reminder for month 11 — Google will also email you before it renews at the standard $19.99/mo unless you cancel.',
+      },
+    ],
+    upvotes: 42,
+    bookmarks: 56,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o8',
+    slug: 'muse-spark',
+    name: 'Muse Spark',
+    tagline: 'Free agentic coding AI by Meta — 1M tokens free for OpenCode & terminal agents',
+    description:
+      'Muse Spark is Meta’s agentic coding model built for autonomous engineering loops: it reads your repo, plans multi-step changes, edits files, runs tests, and iterates. Muse Spark 1.2 is the contributor-free tier — sign up and get ~1M free tokens to power OpenCode, Hermes, OpenClaw and other terminal agents with zero subscription. Connect via OpenCode /connect or any OpenAI-compatible base URL, pick muse-spark-1.2, and start shipping.',
+    url: 'https://www.meta.ai/muse-spark',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/meta.ai.ico',
+    category: 'tool',
+    tags: ['meta', 'muse-spark', 'coding-agent', 'free', 'opencode', 'llm'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open Muse Spark',
+        description:
+          'Visit the Muse Spark model page and create a Meta AI account if you do not have one.',
+        url: 'https://www.meta.ai/muse-spark',
+      },
+      {
+        title: 'Create an API key',
+        description:
+          'In the dashboard, generate an API key for Muse Spark. The contributor-free tier includes roughly 1M free tokens to get started with no credit card required for the trial.',
+      },
+      {
+        title: 'Connect from OpenCode',
+        description:
+          'Run opencode in your project, type /connect, pick Muse Spark (or Custom OpenAI-compatible), and paste your API key. Alternatively set the base URL in your agent config to the Muse Spark endpoint.',
+        url: 'https://opencode.ai/docs',
+      },
+      {
+        title: 'Select muse-spark-1.2',
+        description:
+          'Run /models and choose muse-spark-1.2-contributor-free for zero-cost coding, or muse-spark-1.2 for higher rate limits. The model is fully instruction-tuned for file edits, shell execution, and repo search.',
+      },
+      {
+        title: 'Ship with the agent loop',
+        description:
+          'Describe your task in plain language — Muse Spark will explore the codebase, edit files, run commands, and verify with builds/tests, all in one autonomous loop.',
+      },
+    ],
+    upvotes: 31,
+    bookmarks: 44,
     submittedBy: 'u6',
     featured: true,
     createdAt: daysAgo(0),
