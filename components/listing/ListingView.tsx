@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { SearchX, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
 import { CardGrid } from '@/components/cards/CardPrimitives'
@@ -20,6 +20,24 @@ const SORT_OPTIONS: FilterOption[] = [
 ]
 
 const PAGE_SIZE = 12
+
+interface SavedListingState {
+  sort?: SortKey
+  category?: string
+  pricing?: string
+  language?: string
+  view?: 'grid' | 'list'
+  page?: number
+}
+
+function loadSavedState(key: string): SavedListingState {
+  if (typeof window === 'undefined') return {}
+  try {
+    return JSON.parse(sessionStorage.getItem(key) ?? '{}') as SavedListingState
+  } catch {
+    return {}
+  }
+}
 
 export interface ListingConfig {
   title: string
@@ -66,14 +84,71 @@ export function ListingView<T extends { id: string }>({
   getTrendingScore,
   pageSize = PAGE_SIZE,
 }: ListingViewProps<T>) {
-  const [sort, setSort] = useState<SortKey>('trending')
-  const [category, setCategory] = useState(config.initialCategory ?? 'all')
-  const [pricing, setPricing] = useState('all')
-  const [language, setLanguage] = useState('all')
-  const [view, setView] = useState<'grid' | 'list'>('grid')
-  const [page, setPage] = useState(1)
+  // Restore last-visited state (page/filters/view) when coming back to this listing
+  const storageKey = `listing-view:${config.itemLabel ?? config.title ?? 'default'}`
+  const [saved] = useState<SavedListingState>(() => loadSavedState(storageKey))
 
+  const [sort, setSort] = useState<SortKey>(saved.sort ?? 'trending')
+  const [category, setCategory] = useState(
+    config.initialCategory ?? saved.category ?? 'all'
+  )
+  const [pricing, setPricing] = useState(saved.pricing ?? 'all')
+  const [language, setLanguage] = useState(saved.language ?? 'all')
+  const [view, setView] = useState<'grid' | 'list'>(saved.view ?? 'grid')
+  const [page, setPage] = useState(saved.page ?? 1)
+
+  // Persist state on every change
   useEffect(() => {
+    try {
+      sessionStorage.setItem(
+        storageKey,
+        JSON.stringify({ sort, category, pricing, language, view, page })
+      )
+    } catch {
+      // storage unavailable
+    }
+  }, [storageKey, sort, category, pricing, language, view, page])
+
+  // Track scroll position so returning from a detail page restores it
+  useEffect(() => {
+    const scrollKey = `${storageKey}:scroll`
+    const onScroll = () => {
+      try {
+        sessionStorage.setItem(scrollKey, String(window.scrollY))
+      } catch {
+        // storage unavailable
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [storageKey])
+
+  // Restore scroll once the list has data and rendered
+  const [scrollRestored, setScrollRestored] = useState(false)
+  useEffect(() => {
+    if (scrollRestored || items.length === 0) return
+    setScrollRestored(true)
+    let target = 0
+    try {
+      target = Number(sessionStorage.getItem(`${storageKey}:scroll`) ?? 0)
+    } catch {
+      target = 0
+    }
+    if (!target) return
+    const raf = requestAnimationFrame(() => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      window.scrollTo(0, Math.max(0, Math.min(target, max)))
+    })
+    return () => cancelAnimationFrame(raf)
+  }, [items.length, scrollRestored, storageKey])
+
+  // React to external category changes (skip first run to preserve restored state)
+  const firstCategoryRun = useRef(true)
+  useEffect(() => {
+    if (firstCategoryRun.current) {
+      firstCategoryRun.current = false
+      return
+    }
     const next = config.initialCategory ?? 'all'
     setCategory(next)
     setPage(1)
@@ -130,6 +205,11 @@ export function ListingView<T extends { id: string }>({
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
   const paginated = filtered.slice((page - 1) * pageSize, page * pageSize)
+
+  // Keep restored page valid if the item count shrinks
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages)
+  }, [totalPages, page])
 
   const hasFilters =
     category !== 'all' || pricing !== 'all' || language !== 'all' || sort !== 'trending'

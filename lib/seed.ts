@@ -47624,61 +47624,6 @@ export const SEED_OFFERS: Offer[] = [
     updatedAt: daysAgo(0),
   },
   {
-    id: 'o104',
-    slug: 'ramadan-ia-hackathon',
-    name: 'Ramadan IA Hackathon',
-    tagline: 'National 12 regions — AI Made in Morocco — TalibWay, Bahriya, Solar, Ichara',
-    description:
-      'Ramadan IA national hackathon by Ministry Digital Transition: 12 regions simultaneous, 3 days/region Feb-Mar. 1st TalibWay (AI school orientation), 2nd Bahriya (AI fishing rest periods), 3rd Solar (AI solar sand detection) in Dakhla, Grand Ichara (sign language) in Tangier. Winners get mentorship + pilot + GITEX showcase. Part of AI Made in Morocco sovereign roadmap.',
-    url: 'https://www.mmsp.gov.ma/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=mmsp.gov.ma&sz=64',
-    category: 'competition',
-    tags: ['ramadan-ia', 'hackathon', 'morocco', 'ai-made-in-morocco', '12-regions'],
-    pricing: 'free',
-    steps: [
-      {
-        title: 'Watch Ministry call (Ramadan)',
-        description:
-          'Ministry posts call per region (Guelmim, Laayoune, Dakhla, etc.) Feb-Mar.',
-        url: 'https://www.mmsp.gov.ma/',
-      },
-      {
-        title: 'Hack 3 days locally',
-        description:
-          'Teams build AI for local problem (education, fishing, solar, accessibility).',
-      },
-      {
-        title: 'Win mentorship + GITEX',
-        description:
-          'High-potential solutions get mentorship, pilot, and GITEX Africa exposure.',
-      },
-    ],
-    nameAr: 'هاكاثون رمضان IA',
-    taglineAr: 'وطني 12 جهة — ذكاء اصطناعي صنع في المغرب',
-    descriptionAr: 'هاكاثون رمضان IA الوطني 12 جهة في 3 أيام: TalibWay للتوجيه، Bahriya للصيد، Solar للطاقة الشمسية، Ichara للغة الإشارة.',
-    stepsAr: [
-      {
-        title: 'تابع إعلان الوزارة',
-        description: 'تنشر الوزارة الدعوة لكل جهة في رمضان.',
-        url: 'https://www.mmsp.gov.ma/',
-      },
-      {
-        title: 'ابنِ 3 أيام محلياً',
-        description: 'حلول ذكاء اصطناعي لمشاكل محلية.',
-      },
-      {
-        title: 'افز بإرشاد + جيتكس',
-        description: 'المشاريع المميزة تُعرض في جيتكس.',
-      },
-    ],
-    upvotes: 12,
-    bookmarks: 15,
-    submittedBy: 'u6',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
-  {
     id: 'o105',
     slug: 'cyberstrike-2026-ctf',
     name: 'CyberStrike 2026 CTF @ GITEX Africa',
@@ -47724,61 +47669,6 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'افز بالكأس وشهادة',
         description: 'كأس + شهادة Cisco XDR.',
-      },
-    ],
-    upvotes: 9,
-    bookmarks: 11,
-    submittedBy: 'u6',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
-  {
-    id: 'o106',
-    slug: 'macc-2026-morocco-academia-cyber',
-    name: 'MACC 2026 — Morocco Academia Cyber Competition',
-    tagline: 'National Champions APT-Catorzat at GITEX — DGSSI + SecDojo',
-    description:
-      '1st Morocco Academia Cyber Competition MACC 2026 at GITEX Africa: universities nationwide, APT-Catorzat 1st (UMP). Trophy presided by DGSSI, SecDojo organized.',
-    url: 'https://www.secdojo.com/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=secdojo.com&sz=64',
-    category: 'competition',
-    tags: ['macc', 'cyber', 'gitex', 'dgssi', 'secdojo'],
-    pricing: 'free',
-    steps: [
-      {
-        title: 'Form university team',
-        description:
-          'Gather UMP/FS etc. team and watch SecDojo call.',
-        url: 'https://www.secdojo.com/',
-      },
-      {
-        title: 'Compete at GITEX',
-        description:
-          'Universities nationwide CTF at GITEX Africa Marrakech.',
-      },
-      {
-        title: 'Win national title',
-        description:
-          'Trophy + DGSSI recognition.',
-      },
-    ],
-    nameAr: 'MACC 2026 — مسابقة المغرب الجامعية السيبرانية',
-    taglineAr: 'الأبطال APT-Catorzat في جيتكس — DGSSI + SecDojo',
-    descriptionAr: 'أول مسابقة جامعية سيبرانية MACC 2026 في جيتكس: جامعات وطنياً، فاز APT-Catorzat.',
-    stepsAr: [
-      {
-        title: 'شكّل فريقاً جامعياً',
-        description: 'اجمع فريقاً وتابع SecDojo.',
-        url: 'https://www.secdojo.com/',
-      },
-      {
-        title: 'نافس في جيتكس',
-        description: 'CTF جامعات وطنياً.',
-      },
-      {
-        title: 'افز باللقب الوطني',
-        description: 'كأس + تكريم DGSSI.',
       },
     ],
     upvotes: 9,
@@ -48015,8 +47905,8 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Orange cloud, connectivity, cybersec + pilot contracts — GITEX 2026',
     description:
       'Orange Maroc + Technopark AI Garden (signed GITEX Africa 2026): Orange cloud, connectivity, cybersec, business use cases, pilot contracts with Orange engineering + shared infra. Telco distribution to millions is key for MENA AI startups. Apply via Technopark.',
-    url: 'https://www.orange.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/orange.ma.ico',
+    url: 'https://www.orange.ma/en/news/orange-maroc-technopark-and-aws-launch-ia-garden-programme',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=orange.ma&sz=64',
     category: 'competition',
     tags: ['orange', 'ai-garden', 'technopark', 'pilot', 'telco'],
     pricing: 'free',
@@ -48280,6 +48170,110 @@ export const SEED_OFFERS: Offer[] = [
     bookmarks: 18,
     submittedBy: 'u6',
     featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o116',
+    slug: 'academia-raqmya',
+    name: 'Academia Raqmya — Morocco Digital Academy',
+    tagline: 'Free national digital learning platform — ADD & Ministry of Digital Transition',
+    description:
+      'Academia Raqmya (الأكاديمية الرقمية) is Morocco\'s national inclusive e-learning platform, built by the Digital Development Agency (ADD) under the Ministry of Digital Transition. 100% free courses in AI, cybersecurity, data, development, digital marketing and administration for the general public, civil servants, and companies (SMEs & startups), with certificates of completion. Available in Arabic and French, with iOS/Android apps.',
+    url: 'https://academiaraqmya.gov.ma/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=academiaraqmya.gov.ma&sz=64',
+    category: 'competition',
+    tags: ['academia-raqmya', 'digital-academy', 'morocco', 'free-training', 'add'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create your free account',
+        description: 'Sign up at academiaraqmya.gov.ma with your email — open to everyone (public, administrations, companies).',
+        url: 'https://academiaraqmya.gov.ma/',
+      },
+      {
+        title: 'Pick a track and learn',
+        description: 'Choose from AI, cybersecurity, data, development or digital marketing tracks in Arabic or French, at your own pace.',
+      },
+      {
+        title: 'Earn your certificate',
+        description: 'Pass the assessments to earn certificates; verify them online via the platform.',
+      },
+    ],
+    nameAr: 'الأكاديمية الرقمية',
+    taglineAr: 'منصة التعلم الرقمي الوطنية المجانية — الوكالة التنمية الرقمية ووزارة الانتقال الرقمي',
+    descriptionAr: 'الأكاديمية الرقمية هي منصة التعلم الإلكتروني الوطنية الشاملة، من وكالة التنمية الرقمية بوزارة الانتقال الرقمي. دورات مجانية 100% في الذكاء الاصطناعي والأمن السيبراني والبيانات والتطوير والتسويق الرقمي للعموم والإدارات والمقاولات، مع شهادات إتمام. متوفرة بالعربية والفرنسية مع تطبيقات للهاتف.',
+    stepsAr: [
+      {
+        title: 'أنشئ حسابك المجاني',
+        description: 'سجّل في academiaraqmya.gov.ma ببريدك الإلكتروني — مفتوحة للجميع.',
+        url: 'https://academiaraqmya.gov.ma/',
+      },
+      {
+        title: 'اختر مساراً وتعلّم',
+        description: 'مسارات في الذكاء الاصطناعي والأمن السيبراني والبيانات والتطوير، بالعربية أو الفرنسية.',
+      },
+      {
+        title: 'احصل على شهادتك',
+        description: 'اجتز التقييمات واحصل على شهادة قابلة للتحقق عبر المنصة.',
+      },
+    ],
+    upvotes: 14,
+    bookmarks: 20,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o117',
+    slug: 'maroc-entrepreneurs-network',
+    name: 'Maroc Entrepreneurs Network',
+    tagline: 'Community network connecting Moroccan founders, mentors & investors',
+    description:
+      'Maroc Entrepreneurs is a non-profit network that connects Moroccan entrepreneurs and project holders with mentors, experts, investors, and each other. Members get networking events, pitch practice, experience sharing, and access to a community of founders across Morocco and the diaspora — useful for finding co-founders, first customers, and funding intros.',
+    url: 'https://marocentrepreneurs.com/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=marocentrepreneurs.com&sz=64',
+    category: 'competition',
+    tags: ['maroc-entrepreneurs', 'network', 'founders', 'mentors', 'morocco'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Join the network',
+        description: 'Sign up on marocentrepreneurs.com and present your project or profile.',
+        url: 'https://marocentrepreneurs.com/',
+      },
+      {
+        title: 'Connect with founders & mentors',
+        description: 'Take part in events, forums and meetups; exchange experience with other entrepreneurs.',
+      },
+      {
+        title: 'Grow your project',
+        description: 'Find co-founders, first customers, mentors and investor introductions through the community.',
+      },
+    ],
+    nameAr: 'شبكة رواد الأعمال المغرب',
+    taglineAr: 'شبكة تربط رواد الأعمال المغاربة بالموجهين والمستثمرين',
+    descriptionAr: 'ماروك أونتربرنور هي شبكة غير ربحية تربط رواد الأعمال المغاربة وأصحاب المشاريع بالموجهين والخبراء والمستثمرين. تنظّم لقاءات وتكوينات وتقدم فضاءً لتبادل الخبرات والعثور على شركاء وعملاء ومستثمرين.',
+    stepsAr: [
+      {
+        title: 'انضم إلى الشبكة',
+        description: 'سجّل في marocentrepreneurs.com وقدّم مشروعك أو ملفك.',
+        url: 'https://marocentrepreneurs.com/',
+      },
+      {
+        title: 'تواصل مع الرواد والموجهين',
+        description: 'شارك في اللقاءات والمنتديات وتبادل الخبرات مع رواد آخرين.',
+      },
+      {
+        title: 'طوّر مشروعك',
+        description: 'اعثر على شركاء وعملاء أوائل وموجهات نحو المستثمرين عبر المجتمع.',
+      },
+    ],
+    upvotes: 11,
+    bookmarks: 13,
+    submittedBy: 'u6',
+    featured: false,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
