@@ -44171,8 +44171,8 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Legit American CC enrollment in 24-72h — unlock 40+ student offers with .edu + ID',
     description:
       'The master guide for non-students: how to legitimately get an accredited US Community College .EDU mailbox + student ID + enrollment letter in 24-72h for ~$0-$60, and which offers on AI Hunt you can then claim. No paid mailbox shop needed. Covers open-admission CCs (Dallas College, LA City College, Santa Monica College, Coastline, Rio Hondo, El Camino, Pierce, Cerritos) that issue Microsoft 365 .EDU, Canvas portal access, and official transcripts. Lists 40+ offers on this site unlockable with that single CC enrollment (GitHub Pack, Azure $100, AWS Educate $100, Cloudflare Pro, JetBrains, Figma, Notion Plus, Canva, Autodesk, Zed, Gemini, ChatGPT Plus, Cursor, Perplexity, V0, Shodan, Hyperbolic, Consensus, Julius, Microsoft 365, Adobe 60% off, Apple 200GB, MATLAB, Replit, DigitalOcean $200, Namecheap domain, Sketch, YouTube/Amazon Prime, and more). Includes SheerID/UNiDAYS/manual file tips to get approved first try.',
-    url: 'https://www.aacc.nche.edu/college-finder/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=aacc.nche.edu&sz=64',
+    url: 'https://www.dallascollege.edu/admissions/application',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/dallascollege.edu.ico',
     category: 'guide',
     tags: ['cc', 'community-college', 'edu', 'american', 'guide', 'how-to', 'sheerid', 'unidays'],
     pricing: 'free',
@@ -44180,8 +44180,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Pick an open-admission CC (no SAT needed)',
         description:
-          'Choose one accredited CC with online enrollment and instant .EDU: Dallas College (dallascollege.edu), Los Angeles City College (lacitycollege.edu), Santa Monica College (smc.edu), Coastline College (coastline.edu), Rio Hondo (riohondo.edu), El Camino (elcamino.edu). All are regionally accredited and accepted by SheerID/GitHub/JetBrains. Check aacc.nche.edu/college-finder for list.',
-        url: 'https://www.aacc.nche.edu/college-finder/',
+          'Choose one accredited CC with online enrollment and instant .EDU: Dallas College (dallascollege.edu), Los Angeles City College (lacitycollege.edu), Santa Monica College (smc.edu), Coastline College (coastline.edu), Rio Hondo (riohondo.edu), El Camino (elcamino.edu). All are regionally accredited and accepted by SheerID/GitHub/JetBrains. Apply via Dallas College Application or California OpenCCC — search “OpenCCC Apply” for CA colleges.',
+        url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
         title: 'Apply as non-degree / dual-enrollment student (15 min)',
@@ -44215,8 +44215,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'اختر كلية مفتوحة القبول (بدون SAT)',
-        description: 'اختر كلية معتمدة بتسجيل إلكتروني وبريد .EDU فوري: Dallas College، LA City College، Santa Monica College، Coastline، Rio Hondo، El Camino. كلها معتمدة ومقبولة في SheerID/GitHub. راجع aacc.nche.edu/college-finder.',
-        url: 'https://www.aacc.nche.edu/college-finder/',
+        description: 'اختر كلية معتمدة بتسجيل إلكتروني وبريد .EDU فوري: Dallas College، LA City College، Santa Monica College، Coastline، Rio Hondo، El Camino. كلها معتمدة ومقبولة في SheerID/GitHub. قدّم عبر Dallas College Application أو OpenCCC لكليات كاليفورنيا.',
+        url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
         title: 'قدّم كطالب غير متفرغ (15 دقيقة)',
