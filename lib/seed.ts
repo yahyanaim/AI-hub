@@ -42932,6 +42932,556 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o37',
+    slug: 'youtube-premium-student',
+    name: 'YouTube Premium Student',
+    tagline: '1 month free + 50% off Premium — no ads, background play, offline',
+    description:
+      'YouTube Premium Student: first month free, then ~50% off (~$7.99 vs $13.99). Includes ad-free YouTube + YouTube Music, background play, offline downloads, and picture-in-picture. Verifies via SheerID with .edu or file. Non-students can qualify with CC enrollment + ID — SheerID accepts enrollment letter + student ID for most US CCs.',
+    url: 'https://www.youtube.com/premium/student',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/youtube.com.ico',
+    category: 'tool',
+    tags: ['youtube', 'premium', 'students', 'music', 'discount'],
+    pricing: 'paid',
+    steps: [
+      {
+        title: 'Open YouTube Student page',
+        description:
+          'Go to youtube.com/premium/student → “Try 1 month free”. You will be sent to SheerID.',
+        url: 'https://www.youtube.com/premium/student',
+      },
+      {
+        title: 'Verify — student vs non-student',
+        description:
+          'STUDENT: Enter school name + .edu → instant. NON-STUDENT: Enroll in an accredited CC for 1 credit → get .edu + ID + enrollment letter → when SheerID asks for document upload, upload PDF (name + school + current term).',
+      },
+      {
+        title: 'Activate Premium',
+        description:
+          'After approval, YouTube upgrades to Premium. Add payment method, cancel auto-renew anytime. Discount valid up to 4 years while enrolled with yearly re-verification.',
+      },
+    ],
+    nameAr: 'يوتيوب بريميوم للطلاب',
+    taglineAr: 'شهر مجاناً + خصم 50% — بدون إعلانات وتشغيل في الخلفية وتحميل',
+    descriptionAr: 'يوتيوب بريميوم للطلاب: شهر أول مجاناً ثم خصم ~50% (~7.99$). يشمل يوتيوب وYouTube Music بدون إعلانات، تشغيل في الخلفية، تحميل للمشاهدة دون إنترنت، وصورة داخل صورة. يتحقق عبر SheerID ببريد .edu أو ملف. غير الطلاب يمكنهم التسجيل في كلية مجتمع للحصول على إثبات.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة الطلاب',
+        description: 'اذهب إلى youtube.com/premium/student → "جرب شهر مجاناً" → ستنتقل إلى SheerID.',
+        url: 'https://www.youtube.com/premium/student',
+      },
+      {
+        title: 'تحقق — طالب أو غير طالب',
+        description: 'طالب: أدخل اسم المدرسة + .edu → فوري. غير طالب: سجّل في CC معتمدة واحصل على .edu وبطاقة وخطاب → ارفع PDF عند طلب SheerID.',
+      },
+      {
+        title: 'فعّل بريميوم',
+        description: 'بعد الموافقة، يتحول حسابك إلى Premium. أضف بطاقة دفع ويمكنك الإلغاء في أي وقت. الخصم صالح حتى 4 سنوات مع تحقق سنوي.',
+      },
+    ],
+    upvotes: 24,
+    bookmarks: 28,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o38',
+    slug: 'amazon-prime-student',
+    name: 'Amazon Prime Student',
+    tagline: '6 months free Prime then 50% off — free delivery, Prime Video, plus 30% off Luna',
+    description:
+      'Amazon Prime Student: 6 months free (no charge), then 50% off ($7.49/mo vs $14.99). Includes free delivery, Prime Video, Prime Reading, and exclusive deals. Verifies via .edu email or SheerID file. Non-students can enroll in a CC to get .edu + enrollment proof — Amazon accepts upload of enrollment letter + ID via SheerID.',
+    url: 'https://www.amazon.com/joinstudent',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/amazon.com.ico',
+    category: 'tool',
+    tags: ['amazon', 'prime', 'students', 'free-trial', 'shipping'],
+    pricing: 'paid',
+    steps: [
+      {
+        title: 'Join Prime Student',
+        description:
+          'Visit amazon.com/joinstudent → “Start 6-month trial”. Sign in with Amazon account.',
+        url: 'https://www.amazon.com/joinstudent',
+      },
+      {
+        title: 'Verify student status',
+        description:
+          'STUDENT: Enter .edu email → code sent → verify. No .edu? Click “Verify with document” → upload student ID + enrollment letter (name + school + date). NON-STUDENT: Use CC enrollment (1 course) to get .edu + letter → upload.',
+      },
+      {
+        title: 'Enjoy Prime and renew check',
+        description:
+          'Trial is 6 months free, then auto-charges at 50% off. Amazon may ask to re-verify after 12 months. Cancel anytime before renewal. You keep Prime Video watchlist after trial.',
+      },
+    ],
+    nameAr: 'أمازون برايم للطلاب',
+    taglineAr: '6 أشهر مجاناً ثم خصم 50% — توصيل مجاني وبرايم فيديو',
+    descriptionAr: 'أمازون برايم للطلاب: 6 أشهر مجاناً ثم خصم 50% (7.49$ مقابل 14.99$). يشمل توصيل مجاني، Prime Video، قراءة، وعروض خاصة. يتحقق عبر .edu أو SheerID بملف. غير الطلاب يمكنهم التسجيل في كلية مجتمع للحصول على إثبات.',
+    stepsAr: [
+      {
+        title: 'انضم لبرايم الطلاب',
+        description: 'اذهب إلى amazon.com/joinstudent → "ابدأ التجربة 6 أشهر". سجّل دخولك.',
+        url: 'https://www.amazon.com/joinstudent',
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: أدخل .edu → رمز تحقق. بدون .edu: اضغط "Verify with document" → ارفع بطاقة + خطاب تسجيل. غير طالب: احصل على إثبات CC وارفعه.',
+      },
+      {
+        title: 'استخدم برايم',
+        description: 'التجربة 6 أشهر مجاناً ثم نصف السعر. يطلب إعادة التحقق بعد 12 شهراً. يمكنك الإلغاء قبل التجديد.',
+      },
+    ],
+    upvotes: 31,
+    bookmarks: 36,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o39',
+    slug: 'consensus-academic',
+    name: 'Consensus Academic',
+    tagline: '1 year Consensus Pro free with .edu — AI search over 200M papers',
+    description:
+      'Consensus gives students 1 year of Pro free (normally $12/mo): AI synthesis over 200M research papers, study snapshots, and citation search. Verifies with .edu email instantly. Non-students can get it with any CC .edu mailbox — email-only verification.',
+    url: 'https://consensus.app/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/consensus.app.ico',
+    category: 'learning',
+    tags: ['consensus', 'research', 'papers', 'students', 'ai-search'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .edu',
+        description:
+          'Go to consensus.app → Sign up with .edu email. STUDENT: use school .edu. NON-STUDENT: use CC .edu mailbox — verification is email domain only.',
+        url: 'https://consensus.app/',
+      },
+      {
+        title: 'Claim Pro',
+        description:
+          'Check email for Pro upgrade link or go to Settings → Billing → “Education — Pro”. Pro unlocks unlimited AI summaries and filters.',
+      },
+      {
+        title: 'Search papers',
+        description:
+          'Type a research question → Consensus returns synthesized answer with citations + Study Snapshot. Export to Zotero/Notion.',
+      },
+    ],
+    nameAr: 'كونسنسس الأكاديمي',
+    taglineAr: 'سنة Pro مجاناً ببريد .edu — بحث ذكي في 200M ورقة',
+    descriptionAr: 'يمنح كونسنسس الطلاب سنة Pro مجاناً: تلخيص ذكي لأكثر من 200M ورقة بحثية، لقطات دراسة، وبحث بالاستشهادات. يتحقق فوراً ببريد .edu.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .edu',
+        description: 'اذهب إلى consensus.app → سجّل ببريد .edu. غير طالب: استخدم بريد CC — التحقق بالبريد فقط.',
+        url: 'https://consensus.app/',
+      },
+      {
+        title: 'فعّل Pro',
+        description: 'تحقق من بريدك لرابط الترقية أو الإعدادات → الفوترة → Education Pro.',
+      },
+      {
+        title: 'ابحث في الأوراق',
+        description: 'اكتب سؤالاً بحثياً → يعطيك خلاصة مع استشهادات وقابلية تصدير إلى Zotero.',
+      },
+    ],
+    upvotes: 18,
+    bookmarks: 22,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o40',
+    slug: 'julius-ai-student',
+    name: 'Julius AI Student',
+    tagline: 'Free Julius Pro for students — chat with data, charts, and analysis',
+    description:
+      'Julius AI gives verified students free Pro: chat with CSVs/Excel/Sheets, auto-charts, and data cleaning. Verifies with .edu email. Non-students can get it with CC .edu mailbox (email-only).',
+    url: 'https://julius.ai/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/julius.ai.ico',
+    category: 'tool',
+    tags: ['julius', 'data', 'analysis', 'students', 'charts'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .edu',
+        description:
+          'Visit julius.ai → Sign up with .edu email. NON-STUDENT: use CC .edu — email verification only.',
+        url: 'https://julius.ai/',
+      },
+      {
+        title: 'Upgrade to Pro',
+        description:
+          'Dashboard → Settings → Education → Pro auto-enables for .edu domains. Refresh to see higher message limits.',
+      },
+      {
+        title: 'Analyze data',
+        description:
+          'Upload a CSV/Excel → ask “Clean and chart this” → Julius returns visuals and insights. Export charts to Slides.',
+      },
+    ],
+    nameAr: 'جوليوس AI للطلاب',
+    taglineAr: 'Pro مجاناً للطلاب — حلّل بياناتك بالدردشة',
+    descriptionAr: 'يمنح Julius الطلاب Pro مجاناً: دردشة مع ملفات CSV/Excel، رسوم تلقائية وتنظيف بيانات. يتحقق ببريد .edu فقط.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .edu',
+        description: 'اذهب إلى julius.ai → سجّل ببريد .edu. غير طالب: استخدم بريد CC.',
+        url: 'https://julius.ai/',
+      },
+      {
+        title: 'رقّ إلى Pro',
+        description: 'لوحة التحكم → الإعدادات → التعليم → Pro يتفعل تلقائياً.',
+      },
+      {
+        title: 'حلّل بياناتك',
+        description: 'ارفع CSV → اطلب "نظّف وارسم" → يعطيك رسوماً ورؤى قابلة للتصدير.',
+      },
+    ],
+    upvotes: 14,
+    bookmarks: 17,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o41',
+    slug: 'goodnotes-education',
+    name: 'GoodNotes Education',
+    tagline: '1 year GoodNotes Pro free for students — iPad/Mac notes + AI',
+    description:
+      'GoodNotes gives verified students 1 year of Pro free: unlimited notebooks, AI handwriting search, and iCloud sync. Verifies via UNiDAYS with .edu or file. Non-students can qualify with CC enrollment + UNiDAYS file upload — most CCs are listed.',
+    url: 'https://www.goodnotes.com/education',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/goodnotes.com.ico',
+    category: 'tool',
+    tags: ['goodnotes', 'notes', 'ipad', 'students', 'handwriting'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open GoodNotes Education',
+        description:
+          'Visit goodnotes.com/education → “Verify with UNiDAYS”.',
+        url: 'https://www.goodnotes.com/education',
+      },
+      {
+        title: 'Verify via UNiDAYS',
+        description:
+          'STUDENT: Enter school + .edu → instant. NON-STUDENT: Choose file upload → student ID + enrollment letter (name + school + current term). UNiDAYS approves CCs in minutes.',
+      },
+      {
+        title: 'Redeem Pro',
+        description:
+          'After approval, redeem code in GoodNotes app → Settings → Redeem. Pro unlocks on iPad, iPhone, Mac. Renewable while enrolled.',
+      },
+    ],
+    nameAr: 'GoodNotes للطلاب',
+    taglineAr: 'سنة Pro مجاناً — دفتر iPad مع بحث بخط اليد و AI',
+    descriptionAr: 'يمنح GoodNotes الطلاب سنة Pro مجاناً: دفاتر غير محدودة، بحث بخط اليد وAI، ومزامنة iCloud. يتحقق عبر UNiDAYS.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة التعليم',
+        description: 'اذهب إلى goodnotes.com/education → "Verify with UNiDAYS".',
+        url: 'https://www.goodnotes.com/education',
+      },
+      {
+        title: 'تحقق عبر UNiDAYS',
+        description: 'طالب: أدخل .edu → فوري. غير طالب: ارفع بطاقة + خطاب تسجيل — يوافق على CC خلال دقائق.',
+      },
+      {
+        title: 'استرد Pro',
+        description: 'بعد الموافقة، استرد الرمز في التطبيق → الإعدادات → Redeem. يتفعل على كل أجهزتك.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o42',
+    slug: 'mathpix-student',
+    name: 'Mathpix Student',
+    tagline: '500+ OCR snips/month free for students — LaTeX + formula search',
+    description:
+      'Mathpix Snip gives students 500+ OCR conversions/month free (normally 100). Snap handwritten or PDF math → LaTeX, Word, and search. Verifies with .edu email. Non-students can get it with CC .edu mailbox — email-only.',
+    url: 'https://mathpix.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/mathpix.com.ico',
+    category: 'learning',
+    tags: ['mathpix', 'ocr', 'latex', 'students', 'math'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create Mathpix with .edu',
+        description:
+          'Sign up at mathpix.com with .edu email (CC .edu works for non-students). Verify via email link.',
+        url: 'https://mathpix.com/',
+      },
+      {
+        title: 'Download Snip',
+        description:
+          'Download Mathpix Snip for Mac/Win/iOS → sign in → Pro quota shows 500. Drag-snip any formula.',
+      },
+      {
+        title: 'Use LaTeX export',
+        description:
+          'Snip → copy LaTeX → paste in Overleaf/Notion/Word. Quota resets monthly while student status active.',
+      },
+    ],
+    nameAr: 'Mathpix للطلاب',
+    taglineAr: '500+ تحويل OCR شهرياً مجاناً — LaTeX وبحث صيغ',
+    descriptionAr: 'يمنح Mathpix الطلاب 500+ تحويل OCR شهرياً مجاناً (بدل 100). التقط معادلاتك → LaTeX. يتحقق ببريد .edu فقط.',
+    stepsAr: [
+      {
+        title: 'أنشئ حساباً ببريد .edu',
+        description: 'سجّل في mathpix.com ببريد .edu (CC يعمل لغير الطلاب).',
+        url: 'https://mathpix.com/',
+      },
+      {
+        title: 'حمّل Snip',
+        description: 'حمّل Mathpix Snip → سجّل دخولك → سترى حصة 500. اسحب لتحديد أي معادلة.',
+      },
+      {
+        title: 'صدّر LaTeX',
+        description: 'انسخ LaTeX → الصق في Overleaf/Notion. الحصة تتجدد شهرياً.',
+      },
+    ],
+    upvotes: 15,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o43',
+    slug: 'shapr3d-education',
+    name: 'Shapr3D Education',
+    tagline: '1 year Shapr3D Pro free — CAD on iPad/Mac with file proof',
+    description:
+      'Shapr3D gives students 1 year of Pro free: full CAD modeling on iPad/Mac/Win. Verifies via school email or file (ID + enrollment). Non-students can qualify with CC enrollment + ID upload — manual review approves most accredited CCs.',
+    url: 'https://www.shapr3d.com/education',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/shapr3d.com.ico',
+    category: 'tool',
+    tags: ['shapr3d', 'cad', '3d', 'students', 'ipad'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply at Shapr3D Education',
+        description:
+          'Visit shapr3d.com/education → “Apply for free license”.',
+        url: 'https://www.shapr3d.com/education',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: .edu email → auto. NON-STUDENT: “No school email” → upload student ID + enrollment letter (show name + school + current term). CC IDs accepted; 1-3 day review.',
+      },
+      {
+        title: 'Install Shapr3D',
+        description:
+          'After approval, download Shapr3D → sign in → Pro workspace appears. Renew annually with fresh proof.',
+      },
+    ],
+    nameAr: 'Shapr3D للطلاب',
+    taglineAr: 'سنة Pro مجاناً — CAD على iPad/Mac',
+    descriptionAr: 'يمنح Shapr3D الطلاب سنة Pro مجاناً: نمذجة CAD كاملة على iPad/Mac. يتحقق عبر .edu أو ملف.',
+    stepsAr: [
+      {
+        title: 'قدّم في Shapr3D',
+        description: 'اذهب إلى shapr3d.com/education → "Apply".',
+        url: 'https://www.shapr3d.com/education',
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب — تقبل CC.',
+      },
+      {
+        title: 'ثبّت Shapr3D',
+        description: 'بعد الموافقة، حمّل التطبيق → سجّل دخولك → Pro يتفعل.',
+      },
+    ],
+    upvotes: 13,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o44',
+    slug: 'tower-git-student',
+    name: 'Tower Git Student',
+    tagline: '1 year Tower free for students — Git client for Mac & Windows',
+    description:
+      'Tower gives students free license for 1 year: powerful Git GUI for Mac/Win with drag-and-drop, merge, and PR flows. Verifies via school email or file. Non-students can get it with CC ID + enrollment — manual approval.',
+    url: 'https://www.git-tower.com/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/git-tower.com.ico',
+    category: 'tool',
+    tags: ['tower', 'git', 'client', 'students', 'mac'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Request Tower Student',
+        description:
+          'Visit git-tower.com/students → “Request student license”.',
+        url: 'https://www.git-tower.com/students',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: .edu → instant. NON-STUDENT: Upload student ID + enrollment letter — Tower manually approves CCs.',
+      },
+      {
+        title: 'Activate Tower',
+        description:
+          'Receive license email → download Tower → paste license key. Renew yearly.',
+      },
+    ],
+    nameAr: 'Tower للطلاب',
+    taglineAr: 'سنة Tower مجاناً — عميل Git لـ Mac و Windows',
+    descriptionAr: 'يمنح Tower الطلاب ترخيصاً مجانياً لسنة: واجهة Git قوية مع سحب وإفلات ودمج. يتحقق عبر .edu أو ملف.',
+    stepsAr: [
+      {
+        title: 'اطلب ترخيص Tower',
+        description: 'اذهب إلى git-tower.com/students → "Request".',
+        url: 'https://www.git-tower.com/students',
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: .edu → فوري. غير طالب: ارفع بطاقة + خطاب — موافقة يدوية.',
+      },
+      {
+        title: 'فعّل Tower',
+        description: 'استلم مفتاح الترخيص → حمّل Tower → الصق المفتاح. يتجدد سنوياً.',
+      },
+    ],
+    upvotes: 11,
+    bookmarks: 14,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o45',
+    slug: 'craft-docs-education',
+    name: 'Craft Docs Education',
+    tagline: 'Free Craft Pro for students — docs + AI with file proof',
+    description:
+      'Craft gives verified students free Pro: docs, calendar, AI writing, and team workspace. Verifies via school email or file. Non-students can qualify with CC enrollment + file proof — Craft manually reviews.',
+    url: 'https://www.craft.do/education',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/craft.do.ico',
+    category: 'tool',
+    tags: ['craft', 'notes', 'docs', 'students', 'ai'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply at Craft Education',
+        description:
+          'Visit craft.do/education → “Apply for free Education”.',
+        url: 'https://www.craft.do/education',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: .edu → auto. NON-STUDENT: “No school email” → upload student ID + enrollment letter. CC accepted.',
+      },
+      {
+        title: 'Activate Craft Pro',
+        description:
+          'After approval, Craft app shows Education workspace with Pro unlocked. Renew annually.',
+      },
+    ],
+    nameAr: 'Craft للطلاب',
+    taglineAr: 'Craft Pro مجاناً — مستندات + AI',
+    descriptionAr: 'يمنح Craft الطلاب Pro مجاناً: مستندات وتقويم وذكاء اصطناعي. يتحقق عبر .edu أو ملف.',
+    stepsAr: [
+      {
+        title: 'قدّم في Craft',
+        description: 'اذهب إلى craft.do/education → "Apply".',
+        url: 'https://www.craft.do/education',
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب — تقبل CC.',
+      },
+      {
+        title: 'فعّل Pro',
+        description: 'بعد الموافقة، يظهر workspace تعليمي مع Pro. يتجدد سنوياً.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o46',
+    slug: 'ilovepdf-education',
+    name: 'iLovePDF Education',
+    tagline: 'Premium 1 year free for students — edit, merge, OCR PDFs',
+    description:
+      'iLovePDF gives verified students Premium free for 1 year: edit, merge, split, compress, OCR, and sign PDFs with high limits. Verifies via school email or file upload. Non-students can qualify with CC ID + enrollment — manual review approves most.',
+    url: 'https://www.ilovepdf.com/education',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/ilovepdf.com.ico',
+    category: 'tool',
+    tags: ['ilovepdf', 'pdf', 'students', 'ocr', 'premium'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply at iLovePDF Education',
+        description:
+          'Visit ilovepdf.com/education → “Apply for Premium for free”.',
+        url: 'https://www.ilovepdf.com/education',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: Enter school name + .edu → auto. NON-STUDENT: Upload student ID + enrollment letter (show name + school + current term). CC IDs accepted; 1-2 day review.',
+      },
+      {
+        title: 'Use Premium',
+        description:
+          'After approval, your account shows Premium. Use iLovePDF tools with high limits. Renew annually while enrolled.',
+      },
+    ],
+    nameAr: 'iLovePDF للطلاب',
+    taglineAr: 'Premium سنة مجاناً — تحرير ودمج وOCR للـ PDF',
+    descriptionAr: 'يمنح iLovePDF الطلاب Premium مجاناً لسنة: تحرير ودمج وضغط وOCR وتوقيع PDF بحدود عالية. يتحقق عبر .edu أو ملف.',
+    stepsAr: [
+      {
+        title: 'قدّم في iLovePDF',
+        description: 'اذهب إلى ilovepdf.com/education → "Apply".',
+        url: 'https://www.ilovepdf.com/education',
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: أدخل .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب — تقبل CC.',
+      },
+      {
+        title: 'استخدم Premium',
+        description: 'بعد الموافقة، يظهر Premium في حسابك. يتجدد سنوياً أثناء الدراسة.',
+      },
+    ],
+    upvotes: 17,
+    bookmarks: 20,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
