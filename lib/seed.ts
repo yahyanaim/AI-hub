@@ -47712,7 +47712,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'CyberStrike 2026 CTF & Hackathon at GITEX Africa Marrakech (ANCA CERT, DGSSI, Cisco XDR): national/regional African talent, rapid incident response, threat hunting, forensics, XDR. Ryane El Ouarrat 2nd national.',
     url: 'https://www.ancacert.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/ancacert.ma.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=ancacert.ma&sz=64',
     category: 'competition',
     tags: ['cyberstrike', 'ctf', 'gitex', 'anca', 'cisco'],
     pricing: 'free',
@@ -47767,7 +47767,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       '1st Morocco Academia Cyber Competition MACC 2026 at GITEX Africa: universities nationwide, APT-Catorzat 1st (UMP). Trophy presided by DGSSI, SecDojo organized.',
     url: 'https://www.secdojo.com/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/secdojo.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=secdojo.com&sz=64',
     category: 'competition',
     tags: ['macc', 'cyber', 'gitex', 'dgssi', 'secdojo'],
     pricing: 'free',
@@ -47877,7 +47877,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'LaFactory Casablanca by Screendy (OCP Group): 3-month accelerator, equity-free mentoring, coworking, Intelaka fast-track application support. For scalable tech startups.',
     url: 'https://www.lafactory.co/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/lafactory.co.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=lafactory.co&sz=64',
     category: 'competition',
     tags: ['lafactory', 'screendy', 'ocp', 'accelerator', 'intelaka'],
     pricing: 'free',
@@ -48097,7 +48097,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       '212 Founders by CDG Invest — Morocco main VC pre-seed: $50k-$200k for Moroccan seed startups + 18 months incubation, office, mentoring, bridge loan. The reference for Moroccan seed funding.',
     url: 'https://www.cdg-invest.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/cdg-invest.ma.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=cdg-invest.ma&sz=64',
     category: 'competition',
     tags: ['212-founders', 'cdg-invest', 'pre-seed', 'morocco', 'bf-loan'],
     pricing: 'free',
@@ -48207,7 +48207,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Impact Lab Marrakech: connects social enterprises to impact investors and international development funds. For social/environmental startups.',
     url: 'https://www.impactlab.africa/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/impactlab.africa.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=impactlab.africa&sz=64',
     category: 'competition',
     tags: ['impact-lab', 'social', 'impact-investors', 'marrakech', 'development-funds'],
     pricing: 'free',
@@ -48262,7 +48262,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Government Intelaka (1.2M MAD loan with guarantee via banks) + Forsa (100k MAD grant via forsa.ma) for any Moroccan with an idea. No tech filter, open to all sectors. Apply via bank list (Intelaka) and forsa.ma portal.',
     url: 'https://www.forsa.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/forsa.ma.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=forsa.ma&sz=64',
     category: 'competition',
     tags: ['intelaka', 'forsa', 'government', 'morocco', 'grant', 'loan'],
     pricing: 'free',
