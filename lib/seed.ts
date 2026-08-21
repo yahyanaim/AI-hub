@@ -44246,6 +44246,1606 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o48',
+    slug: 'dallas-college-edu',
+    name: 'Dallas College — .EDU Mailbox',
+    tagline: 'Dallas College — #1 for internationals, $0 first semester, instant .EDU',
+    description:
+      'Dallas College (dallascollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.dallascollege.edu/admissions/application',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/dallascollege.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'dallascollege', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Dallas College (15 min)',
+        description:
+          'Go to https://www.dallascollege.edu/admissions/application → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.dallascollege.edu/admissions/application',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.dallascollege.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Dallas كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Dallas College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Dallas College (dallascollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Dallas College',
+        description: 'اذهب إلى https://www.dallascollege.edu/admissions/application → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.dallascollege.edu/admissions/application',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.dallascollege.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o49',
+    slug: 'lacc-edu',
+    name: 'Los Angeles City College — .EDU Mailbox',
+    tagline: 'LACC — OpenCCC, LA district, .EDU + Canvas in 24h',
+    description:
+      'Los Angeles City College (lacitycollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.lacitycollege.edu/Admissions/Apply',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/lacitycollege.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'lacitycollege', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Los Angeles City College (15 min)',
+        description:
+          'Go to https://www.lacitycollege.edu/Admissions/Apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.lacitycollege.edu/Admissions/Apply',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.lacitycollege.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Los Angeles City كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Los Angeles City College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Los Angeles City College (lacitycollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Los Angeles City College',
+        description: 'اذهب إلى https://www.lacitycollege.edu/Admissions/Apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.lacitycollege.edu/Admissions/Apply',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.lacitycollege.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o50',
+    slug: 'smc-edu',
+    name: 'Santa Monica College — .EDU Mailbox',
+    tagline: 'SMC — top transfer CC, high SheerID acceptance',
+    description:
+      'Santa Monica College (smc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.smc.edu/admissions/apply.php',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/smc.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'smc', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Santa Monica College (15 min)',
+        description:
+          'Go to https://www.smc.edu/admissions/apply.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.smc.edu/admissions/apply.php',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.smc.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Santa Monica كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Santa Monica College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Santa Monica College (smc.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Santa Monica College',
+        description: 'اذهب إلى https://www.smc.edu/admissions/apply.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.smc.edu/admissions/apply.php',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.smc.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o51',
+    slug: 'coastline-edu',
+    name: 'Coastline College — .EDU Mailbox',
+    tagline: 'Coastline — 100% online, .EDU in 24h',
+    description:
+      'Coastline College (coastline.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/coastline.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'coastline', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Coastline College (15 min)',
+        description:
+          'Go to https://www.coastline.edu/admissions-aid/apply-now.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.coastline.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Coastline كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Coastline College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Coastline College (coastline.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Coastline College',
+        description: 'اذهب إلى https://www.coastline.edu/admissions-aid/apply-now.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.coastline.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o52',
+    slug: 'rio-hondo-edu',
+    name: 'Rio Hondo College — .EDU Mailbox',
+    tagline: 'Rio Hondo — OpenCCC, low fees, quick ID',
+    description:
+      'Rio Hondo College (riohondo.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.riohondo.edu/admissions/apply-now/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/riohondo.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'riohondo', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Rio Hondo College (15 min)',
+        description:
+          'Go to https://www.riohondo.edu/admissions/apply-now/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.riohondo.edu/admissions/apply-now/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.riohondo.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Rio Hondo كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Rio Hondo College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Rio Hondo College (riohondo.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Rio Hondo College',
+        description: 'اذهب إلى https://www.riohondo.edu/admissions/apply-now/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.riohondo.edu/admissions/apply-now/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.riohondo.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o53',
+    slug: 'el-camino-edu',
+    name: 'El Camino College — .EDU Mailbox',
+    tagline: 'El Camino — $46/unit, Microsoft 365 .EDU',
+    description:
+      'El Camino College (elcamino.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.elcamino.edu/admissions/apply/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/elcamino.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'elcamino', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to El Camino College (15 min)',
+        description:
+          'Go to https://www.elcamino.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.elcamino.edu/admissions/apply/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.elcamino.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'El Camino كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من El Camino College — تسجيل 24-72 ساعة',
+    descriptionAr: 'El Camino College (elcamino.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى El Camino College',
+        description: 'اذهب إلى https://www.elcamino.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.elcamino.edu/admissions/apply/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.elcamino.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o54',
+    slug: 'pasadena-city-edu',
+    name: 'Pasadena City College — .EDU Mailbox',
+    tagline: 'Pasadena City — large CA CC, auto .EDU',
+    description:
+      'Pasadena City College (pasadena.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://pasadena.edu/admissions/apply.php',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/pasadena.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'pasadena', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Pasadena City College (15 min)',
+        description:
+          'Go to https://pasadena.edu/admissions/apply.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://pasadena.edu/admissions/apply.php',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.pasadena.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Pasadena City كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Pasadena City College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Pasadena City College (pasadena.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Pasadena City College',
+        description: 'اذهب إلى https://pasadena.edu/admissions/apply.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://pasadena.edu/admissions/apply.php',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.pasadena.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o55',
+    slug: 'glendale-cc-edu',
+    name: 'Glendale Community College — .EDU Mailbox',
+    tagline: 'Glendale — OpenCCC, fast Canvas access',
+    description:
+      'Glendale Community College (glendale.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.glendale.edu/apply',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/glendale.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'glendale', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Glendale Community College (15 min)',
+        description:
+          'Go to https://www.glendale.edu/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.glendale.edu/apply',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.glendale.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Glendale Community كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Glendale Community College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Glendale Community College (glendale.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Glendale Community College',
+        description: 'اذهب إلى https://www.glendale.edu/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.glendale.edu/apply',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.glendale.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o56',
+    slug: 'cerritos-edu',
+    name: 'Cerritos College — .EDU Mailbox',
+    tagline: 'Cerritos — $46/unit, SheerID OK',
+    description:
+      'Cerritos College (cerritos.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.cerritos.edu/admissions/apply.php',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/cerritos.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'cerritos', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Cerritos College (15 min)',
+        description:
+          'Go to https://www.cerritos.edu/admissions/apply.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.cerritos.edu/admissions/apply.php',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.cerritos.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Cerritos كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Cerritos College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Cerritos College (cerritos.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Cerritos College',
+        description: 'اذهب إلى https://www.cerritos.edu/admissions/apply.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.cerritos.edu/admissions/apply.php',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.cerritos.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o57',
+    slug: 'pierce-college-edu',
+    name: 'Pierce College — .EDU Mailbox',
+    tagline: 'Pierce College — LA district, .EDU in 48h',
+    description:
+      'Pierce College (piercecollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.piercecollege.edu/admissions/apply.asp',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/piercecollege.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'piercecollege', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Pierce College (15 min)',
+        description:
+          'Go to https://www.piercecollege.edu/admissions/apply.asp → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.piercecollege.edu/admissions/apply.asp',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.piercecollege.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Pierce كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Pierce College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Pierce College (piercecollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Pierce College',
+        description: 'اذهب إلى https://www.piercecollege.edu/admissions/apply.asp → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.piercecollege.edu/admissions/apply.asp',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.piercecollege.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o58',
+    slug: 'cypress-edu',
+    name: 'Cypress College — .EDU Mailbox',
+    tagline: 'Cypress — North Orange, OpenCCC',
+    description:
+      'Cypress College (cypresscollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.cypresscollege.edu/admissions/apply/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/cypresscollege.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'cypresscollege', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Cypress College (15 min)',
+        description:
+          'Go to https://www.cypresscollege.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.cypresscollege.edu/admissions/apply/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.cypresscollege.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Cypress كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Cypress College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Cypress College (cypresscollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Cypress College',
+        description: 'اذهب إلى https://www.cypresscollege.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.cypresscollege.edu/admissions/apply/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.cypresscollege.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o59',
+    slug: 'fullerton-edu',
+    name: 'Fullerton College — .EDU Mailbox',
+    tagline: 'Fullerton — Fullerton, CA, .EDU instant',
+    description:
+      'Fullerton College (fullerton.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.fullcoll.edu/admissions/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/fullerton.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'fullerton', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Fullerton College (15 min)',
+        description:
+          'Go to https://www.fullcoll.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.fullcoll.edu/admissions/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.fullerton.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Fullerton كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Fullerton College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Fullerton College (fullerton.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Fullerton College',
+        description: 'اذهب إلى https://www.fullcoll.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.fullcoll.edu/admissions/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.fullerton.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o60',
+    slug: 'orange-coast-edu',
+    name: 'Orange Coast College — .EDU Mailbox',
+    tagline: 'OCC — Costa Mesa, large, .EDU',
+    description:
+      'Orange Coast College (orangecoastcollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.orangecoastcollege.edu/admissions/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/orangecoastcollege.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'orangecoastcollege', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Orange Coast College (15 min)',
+        description:
+          'Go to https://www.orangecoastcollege.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.orangecoastcollege.edu/admissions/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.orangecoastcollege.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Orange Coast كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Orange Coast College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Orange Coast College (orangecoastcollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Orange Coast College',
+        description: 'اذهب إلى https://www.orangecoastcollege.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.orangecoastcollege.edu/admissions/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.orangecoastcollege.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o61',
+    slug: 'ivc-edu',
+    name: 'Irvine Valley College — .EDU Mailbox',
+    tagline: 'IVC — Irvine, .EDU + transcript PDF',
+    description:
+      'Irvine Valley College (ivc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.ivc.edu/admissions/apply',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/ivc.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'ivc', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Irvine Valley College (15 min)',
+        description:
+          'Go to https://www.ivc.edu/admissions/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.ivc.edu/admissions/apply',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.ivc.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Irvine Valley كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Irvine Valley College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Irvine Valley College (ivc.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Irvine Valley College',
+        description: 'اذهب إلى https://www.ivc.edu/admissions/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.ivc.edu/admissions/apply',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.ivc.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o62',
+    slug: 'saddleback-edu',
+    name: 'Saddleback College — .EDU Mailbox',
+    tagline: 'Saddleback — Mission Viejo, .EDU 24h',
+    description:
+      'Saddleback College (saddleback.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.saddleback.edu/admissions/apply',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/saddleback.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'saddleback', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Saddleback College (15 min)',
+        description:
+          'Go to https://www.saddleback.edu/admissions/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.saddleback.edu/admissions/apply',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.saddleback.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Saddleback كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Saddleback College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Saddleback College (saddleback.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Saddleback College',
+        description: 'اذهب إلى https://www.saddleback.edu/admissions/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.saddleback.edu/admissions/apply',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.saddleback.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o63',
+    slug: 'palomar-edu',
+    name: 'Palomar College — .EDU Mailbox',
+    tagline: 'Palomar — San Diego area, OpenCCC',
+    description:
+      'Palomar College (palomar.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.palomar.edu/apply/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/palomar.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'palomar', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Palomar College (15 min)',
+        description:
+          'Go to https://www.palomar.edu/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.palomar.edu/apply/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.palomar.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Palomar كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Palomar College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Palomar College (palomar.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Palomar College',
+        description: 'اذهب إلى https://www.palomar.edu/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.palomar.edu/apply/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.palomar.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o64',
+    slug: 'miracosta-edu',
+    name: 'MiraCosta College — .EDU Mailbox',
+    tagline: 'MiraCosta — Oceanside, .EDU quick',
+    description:
+      'MiraCosta College (miracosta.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.miracosta.edu/admissions/apply.html',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/miracosta.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'miracosta', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to MiraCosta College (15 min)',
+        description:
+          'Go to https://www.miracosta.edu/admissions/apply.html → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.miracosta.edu/admissions/apply.html',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.miracosta.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'MiraCosta كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من MiraCosta College — تسجيل 24-72 ساعة',
+    descriptionAr: 'MiraCosta College (miracosta.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى MiraCosta College',
+        description: 'اذهب إلى https://www.miracosta.edu/admissions/apply.html → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.miracosta.edu/admissions/apply.html',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.miracosta.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o65',
+    slug: 'southwestern-edu',
+    name: 'Southwestern College — .EDU Mailbox',
+    tagline: 'Southwestern College — Chula Vista, $46/unit',
+    description:
+      'Southwestern College (swccd.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.swccd.edu/admissions/apply.aspx',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/swccd.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'swccd', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Southwestern College (15 min)',
+        description:
+          'Go to https://www.swccd.edu/admissions/apply.aspx → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.swccd.edu/admissions/apply.aspx',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.swccd.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Southwestern كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Southwestern College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Southwestern College (swccd.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Southwestern College',
+        description: 'اذهب إلى https://www.swccd.edu/admissions/apply.aspx → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.swccd.edu/admissions/apply.aspx',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.swccd.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o66',
+    slug: 'berkeley-city-edu',
+    name: 'Berkeley City College — .EDU Mailbox',
+    tagline: 'Berkeley City — Peralta district, Bay Area .EDU',
+    description:
+      'Berkeley City College (peralta.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://peralta.edu/berkeley/admissions',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/peralta.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'peralta', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Berkeley City College (15 min)',
+        description:
+          'Go to https://peralta.edu/berkeley/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://peralta.edu/berkeley/admissions',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.peralta.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Berkeley City كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Berkeley City College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Berkeley City College (peralta.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Berkeley City College',
+        description: 'اذهب إلى https://peralta.edu/berkeley/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://peralta.edu/berkeley/admissions',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.peralta.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o67',
+    slug: 'dvc-edu',
+    name: 'Diablo Valley College — .EDU Mailbox',
+    tagline: 'DVC — Pleasant Hill, high GitHub acceptance',
+    description:
+      'Diablo Valley College (dvc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.dvc.edu/enrollment/apply.html',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/dvc.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'dvc', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Diablo Valley College (15 min)',
+        description:
+          'Go to https://www.dvc.edu/enrollment/apply.html → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.dvc.edu/enrollment/apply.html',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.dvc.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Diablo Valley كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Diablo Valley College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Diablo Valley College (dvc.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Diablo Valley College',
+        description: 'اذهب إلى https://www.dvc.edu/enrollment/apply.html → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.dvc.edu/enrollment/apply.html',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.dvc.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o68',
+    slug: 'de-anza-edu',
+    name: 'De Anza College — .EDU Mailbox',
+    tagline: 'De Anza — Cupertino/Silicon Valley, .EDU',
+    description:
+      'De Anza College (deanza.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.deanza.edu/apply-and-register/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/deanza.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'deanza', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to De Anza College (15 min)',
+        description:
+          'Go to https://www.deanza.edu/apply-and-register/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.deanza.edu/apply-and-register/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.deanza.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'De Anza كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من De Anza College — تسجيل 24-72 ساعة',
+    descriptionAr: 'De Anza College (deanza.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى De Anza College',
+        description: 'اذهب إلى https://www.deanza.edu/apply-and-register/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.deanza.edu/apply-and-register/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.deanza.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o69',
+    slug: 'foothill-edu',
+    name: 'Foothill College — .EDU Mailbox',
+    tagline: 'Foothill — Los Altos, .EDU in 24h',
+    description:
+      'Foothill College (foothill.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.foothill.edu/apply/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/foothill.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'foothill', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Foothill College (15 min)',
+        description:
+          'Go to https://www.foothill.edu/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.foothill.edu/apply/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.foothill.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Foothill كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Foothill College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Foothill College (foothill.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Foothill College',
+        description: 'اذهب إلى https://www.foothill.edu/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.foothill.edu/apply/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.foothill.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o70',
+    slug: 'sdcity-edu',
+    name: 'San Diego City College — .EDU Mailbox',
+    tagline: 'SD City College — San Diego, .EDU',
+    description:
+      'San Diego City College (sdcity.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.sdcity.edu/admissions/apply.aspx',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=sdcity.edu&sz=64',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'sdcity', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to San Diego City College (15 min)',
+        description:
+          'Go to https://www.sdcity.edu/admissions/apply.aspx → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.sdcity.edu/admissions/apply.aspx',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.sdcity.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'San Diego City كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من San Diego City College — تسجيل 24-72 ساعة',
+    descriptionAr: 'San Diego City College (sdcity.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى San Diego City College',
+        description: 'اذهب إلى https://www.sdcity.edu/admissions/apply.aspx → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.sdcity.edu/admissions/apply.aspx',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.sdcity.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o71',
+    slug: 'bmcc-edu',
+    name: 'Borough of Manhattan CC — .EDU Mailbox',
+    tagline: 'BMCC — CUNY New York, .EDU for GitHub/Azure',
+    description:
+      'Borough of Manhattan CC (bmcc.cuny.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.bmcc.cuny.edu/admissions/apply/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=bmcc.cuny.edu&sz=64',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'bmcc', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Borough of Manhattan CC (15 min)',
+        description:
+          'Go to https://www.bmcc.cuny.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.bmcc.cuny.edu/admissions/apply/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.bmcc.cuny.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'كلية مانهاتن — بريد .EDU',
+    taglineAr: 'بريد .EDU من Borough of Manhattan CC — تسجيل 24-72 ساعة',
+    descriptionAr: 'Borough of Manhattan CC (bmcc.cuny.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Borough of Manhattan CC',
+        description: 'اذهب إلى https://www.bmcc.cuny.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.bmcc.cuny.edu/admissions/apply/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.bmcc.cuny.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o72',
+    slug: 'hcc-edu',
+    name: 'Houston Community College — .EDU Mailbox',
+    tagline: 'HCC — Houston, TX, .EDU + Canvas',
+    description:
+      'Houston Community College (hccs.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
+    url: 'https://www.hccs.edu/applying-and-paying/application/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/hccs.edu.ico',
+    category: 'guide',
+    tags: ['cc', 'edu', 'college', 'hccs', 'us-cc', 'open-admission'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply to Houston Community College (15 min)',
+        description:
+          'Go to https://www.hccs.edu/applying-and-paying/application/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.hccs.edu/applying-and-paying/application/',
+      },
+      {
+        title: 'Enroll in 1 online course ($0-$46)',
+        description:
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+      },
+      {
+        title: 'Collect .EDU + ID + letter in 24-72h',
+        description:
+          'Check portal → Email for @student.hccs.edu mailbox, Student Services → download ID PDF, and Enrollment Verification / Schedule PDF (name + school + current date). Save as color PDFs.',
+      },
+      {
+        title: 'Unlock 40+ offers with that proof',
+        description:
+          'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
+      },
+    ],
+    nameAr: 'Houston Community كلية — بريد .EDU',
+    taglineAr: 'بريد .EDU من Houston Community College — تسجيل 24-72 ساعة',
+    descriptionAr: 'Houston Community College (hccs.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
+    stepsAr: [
+      {
+        title: 'قدّم إلى Houston Community College',
+        description: 'اذهب إلى https://www.hccs.edu/applying-and-paying/application/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.hccs.edu/applying-and-paying/application/',
+      },
+      {
+        title: 'سجّل في مقرر واحد ($0-$46)',
+        description: 'بعد القبول، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت. كثير من الكليات مجانية وإلا ~46$. لا تحتاج لإنهائه.',
+      },
+      {
+        title: 'اجمع .EDU والهوية والخطاب خلال 24-72 ساعة',
+        description: 'تحقق من البوابة → بريد @student.hccs.edu + بطاقة طالب PDF + خطاب تسجيل بتاريخ حديث. احفظها كملفات ملونة.',
+      },
+      {
+        title: 'افتح 40+ عرضاً بذلك الإثبات',
+        description: 'استخدم البريد لـ Notion وغيرها؛ ارفع البطاقة والخطاب إلى SheerID لـ GitHub/JetBrains/Adobe؛ و UNiDAYS لـ Cloudflare. راجع الدليل o47.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
