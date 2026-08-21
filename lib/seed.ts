@@ -41786,15 +41786,15 @@ export const SEED_OFFERS: Offer[] = [
   },
   {
     id: 'o6',
-    slug: 'opencode-with-deepseek',
-    name: 'OpenCode + DeepSeek (Free)',
-    tagline: 'Free open-source coding agent powered by DeepSeek\u2019s cheapest models',
+    slug: 'opencode-with-ox-alpha',
+    name: 'OpenCode + Ox Alpha (Free)',
+    tagline: 'Free open-source coding agent powered by Ox Alpha — free stealth model on OpenCode Zen',
     description:
-      'OpenCode is a free, open-source AI coding agent for the terminal, desktop, and web that reads your repo, edits files, and runs commands. DeepSeek offers some of the cheapest capable LLMs, including the free `deepseek-v4-flash` tier — pair them and you get a full agentic coding setup for cents per session with no subscription on either side. Connect through OpenCode\u2019s built-in `/connect` flow: pick the DeepSeek provider, paste your API key, and select a V4 model.',
-    url: 'https://opencode.ai',
+      'OpenCode is a free, open-source AI coding agent for the terminal, desktop, and web that reads your repo, edits files, and runs commands. Ox Alpha Free (`x-preview-f-free`) is a stealth model served through OpenCode Zen that is completely free during its preview period — input, output, and cached tokens are all $0 — and its provider follows a zero-retention policy, so your code is never used for model training. Pair them for a full agentic coding setup at literally no cost: connect via `/connect`, pick OpenCode Zen, paste your API key, then select the model with `/models`.',
+    url: 'https://opencode.ai/zen',
     logoUrl: 'https://icons.duckduckgo.com/ip3/opencode.ai.ico',
     category: 'tool',
-    tags: ['open-source', 'coding-agent', 'deepseek', 'free', 'cli', 'terminal'],
+    tags: ['open-source', 'coding-agent', 'ox-alpha', 'free', 'cli', 'terminal'],
     pricing: 'free',
     steps: [
       {
@@ -41804,30 +41804,30 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://opencode.ai/docs',
       },
       {
-        title: 'Create a DeepSeek account and API key',
+        title: 'Create an OpenCode Zen account and API key',
         description:
-          'Sign up on the DeepSeek platform and generate an API key. OpenCode stores it locally — never paste it into a repo file or commit it to Git.',
-        url: 'https://platform.deepseek.com',
+          'Sign in to OpenCode Zen and copy your API key. No paid credits needed — Ox Alpha Free is $0 during its preview period.',
+        url: 'https://opencode.ai/auth',
       },
       {
-        title: 'Connect the DeepSeek provider',
+        title: 'Connect the Zen provider',
         description:
-          'Inside OpenCode, type `/connect`, search for DeepSeek, and select it. Paste your DeepSeek API key when prompted. The credential is stored so you only enter it once.',
+          'Inside OpenCode, type `/connect`, select OpenCode Zen, and paste your API key when prompted. The credential is stored locally so you only enter it once.',
       },
       {
-        title: 'Pick the free V4 model',
+        title: 'Pick the Ox Alpha Free model',
         description:
-          'Run `/models` and select `deepseek-v4-flash` for fast, cheap everyday coding — or `deepseek-v4-pro` for harder, repository-wide tasks. The free flash tier is ideal for a zero-cost setup.',
+          'Run `/models` and select `opencode/x-preview-f-free` (Ox Alpha Free) for fast, capable everyday coding at zero cost. You can also set it in opencode.json as your default model.',
       },
       {
         title: 'Start building',
         description:
-          'Describe a task in plain language and let OpenCode read your repo, edit files, run commands, and iterate. OpenCode is free; you only pay DeepSeek\u2019s low pay-per-token rate.',
+          'Describe a task in plain language and let OpenCode read your repo, edit files, run commands, and iterate. Both the agent and the model are free — nothing to pay.',
       },
     ],
-    nameAr: 'OpenCode + DeepSeek (مجاني)',
-    taglineAr: 'وكيل برمجة مفتوح المصدر مجاني مدعوم بأرخص نماذج DeepSeek',
-    descriptionAr: 'OpenCode وكيل برمجة مجاني للطرفية وسطح المكتب والويب يقرأ المستودع ويعدّل الملفات وينفذ الأوامر. DeepSeek يقدّم أرخص النماذج القوية بما فيها المستوى المجاني deepseek-v4-flash — معاً تحصل على إعداد وكيلي كامل بأقل تكلفة.',
+    nameAr: 'OpenCode + Ox Alpha (مجاني)',
+    taglineAr: 'وكيل برمجة مفتوح المصدر مجاني مدعوم بنموذج Ox Alpha المجاني على OpenCode Zen',
+    descriptionAr: 'OpenCode وكيل برمجة مجاني للطرفية وسطح المكتب والويب يقرأ المستودع ويعدّل الملفات وينفذ الأوامر. نموذج Ox Alpha Free عبر OpenCode Zen مجاني تماماً خلال فترة المعاينة — المدخلات والمخرجات كلها بـ 0$ — ومزوده يتبع سياسة عدم الاحتفاظ بالبيانات فلا يُستخدم كودك في التدريب. اربطهما عبر /connect واختر النموذج من /models.',
     stepsAr: [
       {
         title: 'ثبّت OpenCode',
@@ -41835,21 +41835,21 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://opencode.ai/docs'
       },
       {
-        title: 'أنشئ حساب DeepSeek ومفتاح',
-        description: 'سجّل في منصة DeepSeek وأنشئ مفتاح API.',
-        url: 'https://platform.deepseek.com'
+        title: 'أنشئ حساب OpenCode Zen ومفتاح API',
+        description: 'سجّل الدخول إلى OpenCodeZen وانسخ مفتاح API — لا حاجة لأي رصيد.',
+        url: 'https://opencode.ai/auth'
       },
       {
-        title: 'اربط مزود DeepSeek',
-        description: 'داخل OpenCode اكتب /connect وابحث عن DeepSeek والصق المفتاح.'
+        title: 'اربط مزود Zen',
+        description: 'داخل OpenCode اكتب /connect واختر OpenCode Zen والصق المفتاح.'
       },
       {
-        title: 'اختر نموذج V4 المجاني',
-        description: 'شغّل /models واختر deepseek-v4-flash للمهام اليومية أو pro للمهام الصعبة.'
+        title: 'اختر نموذج Ox Alpha Free',
+        description: 'شغّل /models واختر opencode/x-preview-f-free أو اجعله الافتراضياً في opencode.json.'
       },
       {
         title: 'ابدأ البناء',
-        description: 'صف مهمتك بلغة طبيعية ودع OpenCode يقرأ ويعدّل وينفذ ويكرر.'
+        description: 'صف مهمتك بلغة طبيعية ودع OpenCode يقرأ ويعدّل وينفذ ويكرر — وكيل ونموذج مجاناً.'
       }
     ],
     upvotes: 12,
@@ -47905,7 +47905,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Orange cloud, connectivity, cybersec + pilot contracts — GITEX 2026',
     description:
       'Orange Maroc + Technopark AI Garden (signed GITEX Africa 2026): Orange cloud, connectivity, cybersec, business use cases, pilot contracts with Orange engineering + shared infra. Telco distribution to millions is key for MENA AI startups. Apply via Technopark.',
-    url: 'https://www.orange.ma/en/news/orange-maroc-technopark-and-aws-launch-ia-garden-programme',
+    url: 'https://techafricanews.com/2026/04/09/orange-maroc-partners-technopark-to-accelerate-ai-and-digital-transformation/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=orange.ma&sz=64',
     category: 'competition',
     tags: ['orange', 'ai-garden', 'technopark', 'pilot', 'telco'],
