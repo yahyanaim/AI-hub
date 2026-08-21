@@ -44220,7 +44220,7 @@ export const SEED_OFFERS: Offer[] = [
       'The master guide for non-students: how to legitimately get an accredited US Community College .EDU mailbox + student ID + enrollment letter in 24-72h for ~$0-$60, and which offers on AI Hunt you can then claim. No paid mailbox shop needed.\\n\\n**All colleges below issue .EDU + Microsoft 365 + Canvas + transcript and are accepted by SheerID/GitHub/JetBrains/Adobe. Open-admission, no SAT, online apply in 15 min:**\\n\\n**Texas:** Dallas College (dallascollege.edu) — dallascollege.edu/admissions/application — $0 first semester many students\\n**California (all via OpenCCCApply — home.cccapply.org):** LA City College (lacitycollege.edu), Santa Monica College (smc.edu), Coastline (coastline.edu), Rio Hondo (riohondo.edu), El Camino (elcamino.edu), Pasadena City (pasadena.edu), Glendale (glendale.edu), Cerritos (cerritos.edu), Pierce College (piercecollege.edu), Cypress (cypresscollege.edu), Fullerton (fullcoll.edu), Orange Coast (orangecoastcollege.edu), Irvine Valley (ivc.edu), Saddleback (saddleback.edu), Palomar (palomar.edu), MiraCosta (miracosta.edu), Southwestern (swccd.edu), Berkeley City (peralta.edu/berkeley), Diablo Valley (dvc.edu), De Anza (deanza.edu), Foothill (foothill.edu), San Diego City (sdcity.edu), Mt San Antonio (mtsac.edu), Long Beach City (lbcc.edu)\\n**Other states:** Borough of Manhattan CC (bmcc.cuny.edu, NY), LaGuardia CC (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill CC (bhcc.edu, MA), Community College of Philadelphia (ccp.edu, PA)\\n\\n**Pick any ONE — you only need one CC to unlock all 40+ offers:** GitHub Pack, Azure $100, AWS Educate $100, Cloudflare Pro, JetBrains, Figma, Notion Plus, Canva, Autodesk, Zed, Gemini, ChatGPT Plus, Cursor, Perplexity, V0, Shodan, Hyperbolic, Consensus, Julius, Microsoft 365, Adobe 60% off, Apple 200GB, MATLAB, Replit, DigitalOcean $200, Namecheap domain, Sketch, YouTube/Amazon Prime, iLovePDF, Craft, Tower, Shapr3D, Mathpix, GoodNotes, Firecrawl, Dify, Kiro, Windsurf, Consensus, and more. Includes SheerID/UNiDAYS/manual file tips to get approved first try.',
     url: 'https://www.dallascollege.edu/admissions/application',
     logoUrl: 'https://icons.duckduckgo.com/ip3/dallascollege.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'community-college', 'edu', 'american', 'guide', 'how-to', 'sheerid', 'unidays'],
     pricing: 'free',
     steps: [
@@ -44302,7 +44302,7 @@ export const SEED_OFFERS: Offer[] = [
       'Dallas College (dallascollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.dallascollege.edu/admissions/application',
     logoUrl: 'https://icons.duckduckgo.com/ip3/dallascollege.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'dallascollege', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44366,7 +44366,7 @@ export const SEED_OFFERS: Offer[] = [
       'Los Angeles City College (lacitycollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.lacitycollege.edu/Admissions/Apply',
     logoUrl: 'https://icons.duckduckgo.com/ip3/lacitycollege.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'lacitycollege', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44430,7 +44430,7 @@ export const SEED_OFFERS: Offer[] = [
       'Santa Monica College (smc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.smc.edu/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=smc.edu&sz=64',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'smc', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44494,7 +44494,7 @@ export const SEED_OFFERS: Offer[] = [
       'Coastline College (coastline.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
     logoUrl: 'https://www.google.com/s2/favicons?domain=coastline.edu&sz=64',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'coastline', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44558,7 +44558,7 @@ export const SEED_OFFERS: Offer[] = [
       'Rio Hondo College (riohondo.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.riohondo.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/riohondo.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'riohondo', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44622,7 +44622,7 @@ export const SEED_OFFERS: Offer[] = [
       'El Camino College (elcamino.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.elcamino.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/www.elcamino.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'elcamino', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44686,7 +44686,7 @@ export const SEED_OFFERS: Offer[] = [
       'Pasadena City College (pasadena.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://pasadena.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/pasadena.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'pasadena', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44750,7 +44750,7 @@ export const SEED_OFFERS: Offer[] = [
       'Glendale Community College (glendale.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.glendale.edu/apply',
     logoUrl: 'https://www.google.com/s2/favicons?domain=glendale.edu&sz=64',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'glendale', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44814,7 +44814,7 @@ export const SEED_OFFERS: Offer[] = [
       'Cerritos College (cerritos.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.cerritos.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/www.cerritos.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'cerritos', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44878,7 +44878,7 @@ export const SEED_OFFERS: Offer[] = [
       'Pierce College (piercecollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.piercecollege.edu/admissions/apply.asp',
     logoUrl: 'https://icons.duckduckgo.com/ip3/piercecollege.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'piercecollege', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -44942,7 +44942,7 @@ export const SEED_OFFERS: Offer[] = [
       'Cypress College (cypresscollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.cypresscollege.edu/admissions/apply/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/cypresscollege.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'cypresscollege', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45006,7 +45006,7 @@ export const SEED_OFFERS: Offer[] = [
       'Fullerton College (fullerton.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.fullcoll.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/fullerton.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'fullerton', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45070,7 +45070,7 @@ export const SEED_OFFERS: Offer[] = [
       'Orange Coast College (orangecoastcollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.orangecoastcollege.edu/admissions',
     logoUrl: 'https://icons.duckduckgo.com/ip3/orangecoastcollege.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'orangecoastcollege', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45134,7 +45134,7 @@ export const SEED_OFFERS: Offer[] = [
       'Irvine Valley College (ivc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.ivc.edu/admissions/apply',
     logoUrl: 'https://icons.duckduckgo.com/ip3/ivc.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'ivc', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45198,7 +45198,7 @@ export const SEED_OFFERS: Offer[] = [
       'Saddleback College (saddleback.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.saddleback.edu/admissions',
     logoUrl: 'https://www.google.com/s2/favicons?domain=saddleback.edu&sz=64',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'saddleback', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45262,7 +45262,7 @@ export const SEED_OFFERS: Offer[] = [
       'Palomar College (palomar.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.palomar.edu/admissions',
     logoUrl: 'https://icons.duckduckgo.com/ip3/palomar.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'palomar', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45326,7 +45326,7 @@ export const SEED_OFFERS: Offer[] = [
       'MiraCosta College (miracosta.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.miracosta.edu/admissions/apply.html',
     logoUrl: 'https://icons.duckduckgo.com/ip3/miracosta.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'miracosta', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45390,7 +45390,7 @@ export const SEED_OFFERS: Offer[] = [
       'Southwestern College (swccd.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.swccd.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/swccd.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'swccd', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45454,7 +45454,7 @@ export const SEED_OFFERS: Offer[] = [
       'Berkeley City College (peralta.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://peralta.edu/berkeley/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/peralta.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'peralta', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45518,7 +45518,7 @@ export const SEED_OFFERS: Offer[] = [
       'Diablo Valley College (dvc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.dvc.edu/admissions',
     logoUrl: 'https://icons.duckduckgo.com/ip3/dvc.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'dvc', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45582,7 +45582,7 @@ export const SEED_OFFERS: Offer[] = [
       'De Anza College (deanza.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.deanza.edu/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/deanza.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'deanza', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45646,7 +45646,7 @@ export const SEED_OFFERS: Offer[] = [
       'Foothill College (foothill.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.foothill.edu/apply/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/foothill.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'foothill', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45710,7 +45710,7 @@ export const SEED_OFFERS: Offer[] = [
       'San Diego City College (sdcity.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.sdcity.edu/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=sdcity.edu&sz=64',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'sdcity', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45774,7 +45774,7 @@ export const SEED_OFFERS: Offer[] = [
       'Borough of Manhattan CC (bmcc.cuny.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.bmcc.cuny.edu/admissions/apply/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/cuny.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'bmcc', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
@@ -45838,7 +45838,7 @@ export const SEED_OFFERS: Offer[] = [
       'Houston Community College (hccs.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.hccs.edu/applying-and-paying/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/hccs.edu.ico',
-    category: 'guide',
+    category: 'edu',
     tags: ['cc', 'edu', 'college', 'hccs', 'us-cc', 'open-admission'],
     pricing: 'free',
     steps: [
