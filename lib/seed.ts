@@ -41307,7 +41307,7 @@ export const SEED_COURSES: Course[] = [
     updatedAt: daysAgo(0),
   },
   {
-    id: 'c159',
+    id: 'c160',
     slug: 'ielts-training-online',
     name: 'IELTS Training Online',
     description: 'A completely free IELTS preparation site with hundreds of practice tests following the Cambridge IELTS book format. Practice full-length Listening and Reading tests (Academic & General Training), take timed mock tests with answers and transcripts, and learn from band 8–9 sample answers for Speaking (Part 1 topics, Part 2 with audio recordings) and Writing (Task 2 band 7–8–9 samples). Proven to help students improve their band score by 0.5–1.5.',
@@ -41366,7 +41366,7 @@ export const SEED_COURSES: Course[] = [
     tagline: 'Source-grounded Azure system design: from primitives to production AI',
     url: 'https://github.com/DrHazemAli/enterprise-system-design',
     pricing: 'free',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/github.com.ico',
+    logoUrl: 'https://github.com/DrHazemAli.png',
     category: 'backend',
     difficulty: 'advanced',
     duration: 'Self-paced (11 modules)',
@@ -46529,7 +46529,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: '$2M with Google — build AI businesses with real users & revenue',
     description:
       'XPRIZE + Google $2M hackathon May 19-Aug 17, 2026: build AI business in 5 categories (Education, Entrepreneurship, Small Business, Financial Access, Professional Services). Grand $500k, 2nd $200k, 3×$100k, 15×$50k runner + 5×$50k category. Judged on business viability, AI-native ops, impact. Must launch real business with real users/revenue in 90 days. Finals Sep 25 LA.',
-    url: 'https://www.xprize.org/prizes/build-with-gemini',
+    url: 'https://www.geminixprize.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/xprize.org.ico',
     category: 'competition',
     tags: ['xprize', 'gemini', 'hackathon', 'google', '2m'],
@@ -46538,8 +46538,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Register on XPRIZE',
         description:
-          'Go to xprize.org/prizes/build-with-gemini → Register. Open worldwide.',
-        url: 'https://www.xprize.org/prizes/build-with-gemini',
+          'Go to geminixprize.com → Register. Open worldwide.',
+        url: 'https://www.geminixprize.com/',
       },
       {
         title: 'Build 90 days with real traction',
@@ -46558,8 +46558,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'سجّل في XPRIZE',
-        description: 'اذهب إلى xprize.org/prizes/build-with-gemini وسجّل.',
-        url: 'https://www.xprize.org/prizes/build-with-gemini',
+        description: 'اذهب إلى geminixprize.com وسجّل.',
+        url: 'https://www.geminixprize.com/',
       },
       {
         title: 'ابنِ 90 يوماً بزخم حقيقي',
@@ -47024,7 +47024,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: '$400k for 10% + $650k perks day 1 — 4-week sprint',
     description:
       'Antler Disrupt 4-week sprint Ho Chi Minh City Mar 30-Apr 20, 2026 (Spring) + other locations: $400k = $250k for 10% + $150k MFN SAFE, $650k perks day 1 ($4M after), no fee. Need working product + early traction. <3% acceptance, IC at Week 4.',
-    url: 'https://www.antler.co/academy/disrupt',
+    url: 'https://www.antler.co/academy',
     logoUrl: 'https://icons.duckduckgo.com/ip3/antler.co.ico',
     category: 'competition',
     tags: ['antler', 'disrupt', '$400k', '10percent', 'sprint'],
@@ -47033,8 +47033,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply on Antler Disrupt',
         description:
-          'Go to antler.co/academy/disrupt → Apply (rolling). Need product + traction.',
-        url: 'https://www.antler.co/academy/disrupt',
+          'Go to antler.co/academy → Apply (rolling). Need product + traction.',
+        url: 'https://www.antler.co/academy',
       },
       {
         title: '4-week sprint Ho Chi Minh',
@@ -47053,8 +47053,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم في Antler Disrupt',
-        description: 'اذهب إلى antler.co/academy/disrupt وقدّم — يحتاج منتجاً وزخماً.',
-        url: 'https://www.antler.co/academy/disrupt',
+        description: 'اذهب إلى antler.co/academy وقدّم — يحتاج منتجاً وزخماً.',
+        url: 'https://www.antler.co/academy',
       },
       {
         title: 'شارك 4 أسابيع',
@@ -47411,7 +47411,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Startup World Cup Morocco (Pegasus Tech Ventures + Technopark Casablanca): 131 Moroccan apps → 10 finalists → winner ORA Technologies (fintech) represents Morocco vs 65+ countries in Silicon Valley Grand Finale. 300+ attendees, networking.',
     url: 'https://www.startupworldcup.io/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/startupworldcup.io.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=startupworldcup.io&sz=64',
     category: 'competition',
     tags: ['startup-world-cup', 'morocco', 'pegasus', 'silicon-valley', 'technopark'],
     pricing: 'free',
@@ -47465,8 +47465,8 @@ export const SEED_OFFERS: Offer[] = [
     tagline: '$25k + OpenAI + CMU — Reborn Morocco won 2025',
     description:
       'NBA Africa + ALX Ventures + ServiceNow + OpenAI + CMU Africa: 700+ apps → 10 finalists → 3-month acceleration. 1st $25k + CMU incubation + $10k OpenAI credits + OpenAI immersion, 5th $2.5k. Reborn (Morocco, SportTech) 1st, Fitclan, Athlon (Egypt) among 2025 winners.',
-    url: 'https://www.alxafrica.com/programme/nba-africa-triple-double-accelerator/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/alxafrica.com.ico',
+    url: 'https://www.alxafrica.com/programmes',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=alxafrica.com&sz=64',
     category: 'competition',
     tags: ['nba', 'alx', 'accelerator', 'openai', 'cmu', '25k'],
     pricing: 'free',
@@ -47475,7 +47475,7 @@ export const SEED_OFFERS: Offer[] = [
         title: 'Apply on ALX',
         description:
           'Go to alxafrica.com → NBA Triple Double → Apply (700+ apps).',
-        url: 'https://www.alxafrica.com/programme/nba-africa-triple-double-accelerator/',
+        url: 'https://www.alxafrica.com/programmes',
       },
       {
         title: '3 months acceleration',
@@ -47495,7 +47495,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'قدّم في ALX',
         description: 'اذهب إلى alxafrica.com وقدّم.',
-        url: 'https://www.alxafrica.com/programme/nba-africa-triple-double-accelerator/',
+        url: 'https://www.alxafrica.com/programmes',
       },
       {
         title: '3 أشهر تسريع',
@@ -47521,7 +47521,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Baobab Network Nairobi — Africa leading accelerator: $100k lump sum for 12.5% equity + 12-week remote (2 weeks intensive + 3 months hands-on) + Demo Day. Portfolio: Colis.ma ($50k Morocco logistics 2023), VOVE ID (Morocco regtech 2025), Afrigility, Eazy Chain. No need to leave Africa, US incorporation optional.',
     url: 'https://thebaobabnetwork.com/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/thebaobabnetwork.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=thebaobabnetwork.com&sz=64',
     category: 'competition',
     tags: ['baobab', 'accelerator', '100k', '12.5percent', 'africa'],
     pricing: 'free',
@@ -47576,7 +47576,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Morocco Accelerator 3-month (Oct 2026) funded by Ministry Digital Transition, operated by Technopark + Plug and Play (Digital Morocco 2030): equity-free, fee-free mentorship, workshops, office at Technopark, corporate/investor intros, global ecosystem, eligible for Startup Venture Building non-dilutive financing via Tamwilcom. Prev. 80+ founders, 200+ mentorships, $5M+ raised, 19 grad 20M MAD, 2 to Silicon Valley Winter Summit. Moroccan founder/diaspora, traction + revenue, scalable tech. Closes Sep 15, 2026.',
     url: 'https://technopark.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/technopark.ma.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
     category: 'competition',
     tags: ['morocco-accelerator', 'technopark', 'plug-and-play', 'tamwilcom', 'free'],
     pricing: 'free',
@@ -47631,7 +47631,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Ramadan IA national hackathon by Ministry Digital Transition: 12 regions simultaneous, 3 days/region Feb-Mar. 1st TalibWay (AI school orientation), 2nd Bahriya (AI fishing rest periods), 3rd Solar (AI solar sand detection) in Dakhla, Grand Ichara (sign language) in Tangier. Winners get mentorship + pilot + GITEX showcase. Part of AI Made in Morocco sovereign roadmap.',
     url: 'https://www.mmsp.gov.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/mmsp.gov.ma.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=mmsp.gov.ma&sz=64',
     category: 'competition',
     tags: ['ramadan-ia', 'hackathon', 'morocco', 'ai-made-in-morocco', '12-regions'],
     pricing: 'free',
@@ -47685,8 +47685,8 @@ export const SEED_OFFERS: Offer[] = [
     tagline: '2nd national — ANCA CERT + DGSSI + Cisco XDR',
     description:
       'CyberStrike 2026 CTF & Hackathon at GITEX Africa Marrakech (ANCA CERT, DGSSI, Cisco XDR): national/regional African talent, rapid incident response, threat hunting, forensics, XDR. Ryane El Ouarrat 2nd national.',
-    url: 'https://www.ancacert.ma/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=ancacert.ma&sz=64',
+    url: 'https://www.dgssi.gov.ma/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=gitexafrica.com&sz=64',
     category: 'competition',
     tags: ['cyberstrike', 'ctf', 'gitex', 'anca', 'cisco'],
     pricing: 'free',
@@ -47695,7 +47695,7 @@ export const SEED_OFFERS: Offer[] = [
         title: 'Qualify via ANCA',
         description:
           'Watch ANCA CERT call for CyberStrike at GITEX Africa.',
-        url: 'https://www.ancacert.ma/',
+        url: 'https://www.dgssi.gov.ma/',
       },
       {
         title: 'Compete at GITEX Marrakech',
@@ -47715,7 +47715,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'تأهل عبر ANCA',
         description: 'تابع إعلان ANCA لـ CyberStrike.',
-        url: 'https://www.ancacert.ma/',
+        url: 'https://www.dgssi.gov.ma/',
       },
       {
         title: 'نافس في جيتكس',
@@ -47796,7 +47796,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Boost Up Lab Casablanca (Technopark, Ministry Digital Transition — Digital Morocco 2030): 6 months pre-incubation to turn idea into concrete project, business model, solution, with experts/mentors, ending Demo Day. Part of national Boost Up Lab. Deadline Aug 23, 2026 for Casablanca cohort.',
     url: 'https://technopark.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/technopark.ma.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
     category: 'competition',
     tags: ['boost-up', 'pre-incubation', 'technopark', 'demo-day', '6-months'],
     pricing: 'free',
@@ -47850,8 +47850,8 @@ export const SEED_OFFERS: Offer[] = [
     tagline: '3-month accelerator, equity-free, OCP backed — Intelaka fast-track',
     description:
       'LaFactory Casablanca by Screendy (OCP Group): 3-month accelerator, equity-free mentoring, coworking, Intelaka fast-track application support. For scalable tech startups.',
-    url: 'https://www.lafactory.co/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=lafactory.co&sz=64',
+    url: 'https://www.lafactory.com/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=lafactory.com&sz=64',
     category: 'competition',
     tags: ['lafactory', 'screendy', 'ocp', 'accelerator', 'intelaka'],
     pricing: 'free',
@@ -47859,8 +47859,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply on LaFactory',
         description:
-          'Go to lafactory.co → Apply.',
-        url: 'https://www.lafactory.co/',
+          'Go to lafactory.com → Apply.',
+        url: 'https://www.lafactory.com/',
       },
       {
         title: '3 months equity-free',
@@ -47879,8 +47879,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم في LaFactory',
-        description: 'اذهب إلى lafactory.co وقدّم.',
-        url: 'https://www.lafactory.co/',
+        description: 'اذهب إلى lafactory.com وقدّم.',
+        url: 'https://www.lafactory.com/',
       },
       {
         title: '3 أشهر بدون أسهم',
@@ -47906,7 +47906,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'ALX Ventures Founder Academy (Casablanca, Accra, Nairobi): 3-month online + hub access for 18-35y, startup foundations, product, pitching, workshops, office hours, ALX Hubs. 1200 learners, 300 grads, 28 incubated to Demo Day grants. Priority Technopark incubation via ALX-Technopark partnership.',
     url: 'https://www.alxafrica.com/programme/founder-academy/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/alxafrica.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=alxafrica.com&sz=64',
     category: 'competition',
     tags: ['alx', 'founder-academy', '3-month', 'demo-day', 'alx-ventures'],
     pricing: 'free',
@@ -47961,7 +47961,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Technopark Maroc (MITC) since 2001 Casa/Rabat/Tanger: subsidized office/coworking for tech/Green/creative, 1800+ startups, 800+ projects, 250+ companies now. AWS/Azure/Google cloud credits, investor/export support, AUSIM Village stand at Assises Tanger Oct 7-9 (2m² + hosting). Apply at technopark.ma.',
     url: 'https://technopark.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/technopark.ma.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
     category: 'competition',
     tags: ['technopark', 'mitc', 'incubator', 'morocco', 'office'],
     pricing: 'free',
@@ -48070,8 +48070,8 @@ export const SEED_OFFERS: Offer[] = [
     tagline: '$50k-$200k pre-seed + 18 months incubation + BF loan',
     description:
       '212 Founders by CDG Invest — Morocco main VC pre-seed: $50k-$200k for Moroccan seed startups + 18 months incubation, office, mentoring, bridge loan. The reference for Moroccan seed funding.',
-    url: 'https://www.cdg-invest.ma/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=cdg-invest.ma&sz=64',
+    url: 'https://www.cdginvest.ma/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=212founders.ma&sz=64',
     category: 'competition',
     tags: ['212-founders', 'cdg-invest', 'pre-seed', 'morocco', 'bf-loan'],
     pricing: 'free',
@@ -48079,8 +48079,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply on CDG Invest',
         description:
-          'Go to cdg-invest.ma → 212 Founders → Apply.',
-        url: 'https://www.cdg-invest.ma/',
+          'Go to cdginvest.ma → 212 Founders → Apply.',
+        url: 'https://www.cdginvest.ma/',
       },
       {
         title: 'Pre-seed $50k-$200k',
@@ -48099,8 +48099,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم في CDG Invest',
-        description: 'اذهب إلى cdg-invest.ma وقدّم.',
-        url: 'https://www.cdg-invest.ma/',
+        description: 'اذهب إلى cdginvest.ma وقدّم.',
+        url: 'https://www.cdginvest.ma/',
       },
       {
         title: 'ما قبل البذرة 50-200 ألف $',
@@ -48126,7 +48126,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'UM6P Ventures (UM6P, Ben Guerir): deeptech lab access, prototyping, AgriTech/CleanTech investors, affiliated with Mohammed VI Polytechnic. For lab-heavy startups.',
     url: 'https://www.um6p.ma/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/um6p.ma.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=um6p.ma&sz=64',
     category: 'competition',
     tags: ['um6p', 'deeptech', 'lab', 'agritech', 'ben-guerir'],
     pricing: 'free',
