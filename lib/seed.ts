@@ -44382,7 +44382,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Santa Monica College (smc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.smc.edu/admissions/apply.php',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/smc.edu.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=smc.edu&sz=64',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'smc', 'us-cc', 'open-admission'],
     pricing: 'free',
@@ -44446,7 +44446,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Coastline College (coastline.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/coastline.edu.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=coastline.edu&sz=64',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'coastline', 'us-cc', 'open-admission'],
     pricing: 'free',
@@ -44574,7 +44574,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'El Camino College (elcamino.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.elcamino.edu/admissions/apply/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/elcamino.edu.ico',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/www.elcamino.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'elcamino', 'us-cc', 'open-admission'],
     pricing: 'free',
@@ -44702,7 +44702,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Glendale Community College (glendale.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.glendale.edu/apply',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/glendale.edu.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=glendale.edu&sz=64',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'glendale', 'us-cc', 'open-admission'],
     pricing: 'free',
@@ -44766,7 +44766,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Cerritos College (cerritos.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.cerritos.edu/admissions/apply.php',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/cerritos.edu.ico',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/www.cerritos.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'cerritos', 'us-cc', 'open-admission'],
     pricing: 'free',
@@ -45150,7 +45150,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Saddleback College (saddleback.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.saddleback.edu/admissions/apply',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/saddleback.edu.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=saddleback.edu&sz=64',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'saddleback', 'us-cc', 'open-admission'],
     pricing: 'free',
@@ -45726,7 +45726,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Borough of Manhattan CC (bmcc.cuny.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.bmcc.cuny.edu/admissions/apply/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=bmcc.cuny.edu&sz=64',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/cuny.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'bmcc', 'us-cc', 'open-admission'],
     pricing: 'free',
