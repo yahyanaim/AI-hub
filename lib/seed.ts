@@ -41732,6 +41732,813 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o9',
+    slug: 'github-student-developer-pack',
+    name: 'GitHub Student Developer Pack',
+    tagline: '20+ dev tools free while you are a student — Copilot, Codespaces, domains, hosting ($200k+ value)',
+    description:
+      'The benchmark student pack — verified students get free access to 20+ premium dev tools: GitHub Copilot Pro (free while student), GitHub Codespaces, Namecheap 1-year domain + SSL, DigitalOcean $200 credit, JetBrains (via pack), Stripe fee waiver, 1Password, and more. Renewable while enrolled. GitHub verifies via school email, student ID, or enrollment letter. Non-students can get it by legitimately enrolling in any accredited college/community college (US CC ~$40 gets a real .edu + ID in 2-3 days) — no paid .edu shop needed.',
+    url: 'https://education.github.com/pack',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/education.github.com.ico',
+    category: 'tool',
+    tags: ['github', 'copilot', 'student-pack', 'verified', 'cloud', 'domain'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check eligibility (13+ and enrolled)',
+        description:
+          'You must be 13+, enrolled in a degree/diploma course at an accredited school. K-12 and university both qualify. Faculty can apply via GitHub Education for Teachers.',
+        url: 'https://education.github.com/pack',
+      },
+      {
+        title: 'Get your student proof — two paths',
+        description:
+          'STUDENT: Use your school-issued .edu/.ac email OR prepare a file: student ID + enrollment letter/transcript with your full name, school name, and current date. NON-STUDENT: Enroll in an accredited community college (e.g., Dallas College, LA City College, Santa Monica College) for a cheap 1-credit online course — you will get a real .edu, ID, and enrollment letter in 24-72h. Alternative shops like edumailshop.com sell mailboxes but are revocable and against GitHub ToS — enroll legitimately instead.',
+        url: 'https://education.github.com/pack/join',
+      },
+      {
+        title: 'Apply at GitHub Education',
+        description:
+          'Go to education.github.com/pack → “Get benefits”. Sign in with GitHub, enter school name, verify with .edu email (instant) or “Use school-issued ID” to upload your files. GitHub usually approves in hours to 2 days. If rejected, re-upload a clearer PDF with date stamp.',
+        url: 'https://education.github.com/pack/join',
+      },
+      {
+        title: 'Link and claim each partner offer',
+        description:
+          'Once approved, scroll the pack page and click each benefit → “Get access”. Copilot enables instantly in your GitHub account. Namecheap/DigitalOcean etc. require you to create an account with the same email and link via the pack page. Claim before your student status expires.',
+      },
+      {
+        title: 'Renew annually & keep your proof',
+        description:
+          'Student status lasts ~12 months and is renewable while enrolled. Set a reminder to re-verify with a new enrollment letter. You keep domains/credits earned during the term even after graduation.',
+      },
+    ],
+    upvotes: 68,
+    bookmarks: 72,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o10',
+    slug: 'azure-for-students',
+    name: 'Microsoft Azure for Students',
+    tagline: '$100 credit + 12 months free + 25+ always-free services — no credit card required',
+    description:
+      'Azure for Students gives verified students $100 credit for 12 months, no credit card required at signup. Includes 25+ always-free services (App Service, Functions, Cosmos DB, VMs). Renewal requires re-verification. Students verify with school email via Microsoft. Non-students can qualify by enrolling in a CC/open university to get a .edu + enrollment proof, then use the same portal — Azure accepts both email and manual academic verification via SheerID/UNiDAYS.',
+    url: 'https://azure.microsoft.com/free/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/azure.microsoft.com.ico',
+    category: 'api-access',
+    tags: ['azure', 'microsoft', 'cloud', 'students', 'free-credit'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open Azure Students page',
+        description:
+          'Visit azure.microsoft.com/free/students. Click “Activate now” — you will be sent to the Microsoft Education verification flow.',
+        url: 'https://azure.microsoft.com/free/students',
+      },
+      {
+        title: 'Get verified — student vs non-student',
+        description:
+          'STUDENT: Sign in with your school .edu/Microsoft 365 Education email — auto-verified instantly. NON-STUDENT: Enroll in any accredited CC for a 1-credit course to get a .edu + student ID, then sign up with that email. If you have no .edu, choose “Verify with school ID” and upload enrollment letter + ID; Microsoft also routes some countries via SheerID/UNiDAYS.',
+      },
+      {
+        title: 'Create Azure account (no card)',
+        description:
+          'Complete the signup with phone verification. Unlike regular Azure Free, the student offer does NOT require a credit card at start. Add a card later only if you need to go pay-as-you-go after $100 runs out.',
+      },
+      {
+        title: 'Activate $100 credit and start building',
+        description:
+          'Go to portal.azure.com → Subscriptions → you will see “Azure for Students” with $100. Deploy a VM, App Service, or Functions. Use Cost Management to track burn-down. Always-free services stay free after credit expires.',
+      },
+      {
+        title: 'Renew after 12 months',
+        description:
+          'Credit expires in 12 months. To renew, you must still be enrolled — re-verify with updated enrollment proof. Graduates can move to Azure Free (no credit but still free services).',
+      },
+    ],
+    upvotes: 36,
+    bookmarks: 48,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o11',
+    slug: 'aws-educate',
+    name: 'AWS Educate',
+    tagline: '$100 AWS credit + hands-on labs + job board + cert discounts for students',
+    description:
+      'AWS Educate is Amazon’s student cloud program: $75-$100 credits (refreshed annually), access to 20+ Career Pathways, hands-on labs, and 50% off AWS Certified Cloud Practitioner. Verifies via school .edu or enrollment doc. Non-students can qualify by taking a cheap accredited course to get a student email/ID, then apply — AWS Educate accepts transcript + ID, not just .edu.',
+    url: 'https://aws.amazon.com/education/awseducate/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/aws.amazon.com.ico',
+    category: 'api-access',
+    tags: ['aws', 'cloud', 'students', 'credits', 'certification'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create an AWS Educate account',
+        description:
+          'Go to aws.amazon.com/education/awseducate → “Join AWS Educate”. Choose Student. You will need a school email or to select “I don’t have a school email”.',
+        url: 'https://aws.amazon.com/education/awseducate/',
+      },
+      {
+        title: 'Provide student proof',
+        description:
+          'STUDENT: Enter .edu email — instant if recognized. Or upload student ID + enrollment proof (must show name, school, current term). NON-STUDENT: Register at a CC for 1 class → get .edu + enrollment letter (usually PDF in 1-2 days) → upload that. Some .edu shops work but AWS now checks enrollment date, so a real transcript is safest.',
+      },
+      {
+        title: 'Wait for approval and claim credits',
+        description:
+          'Approval takes minutes to 24h. Check your email for “AWS Educate Application Approved”. Log in to aws.amazon.com/education/awseducate → “My Credits” → copy promo code → apply in Billing → Credits.',
+      },
+      {
+        title: 'Complete labs and get cert discount',
+        description:
+          'Enter the AWS Educate portal → “Builder Labs” and “Career Pathways”. Completing a pathway unlocks the 50% certification voucher in “Benefits”.',
+      },
+      {
+        title: 'Renew annually while enrolled',
+        description:
+          'Credits expire in 12 months. Re-verify each year with fresh proof. After graduation credits stop but labs stay accessible as alumni.',
+      },
+    ],
+    upvotes: 31,
+    bookmarks: 42,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o12',
+    slug: 'cloudflare-for-students',
+    name: 'Cloudflare for Students',
+    tagline: '12 months of Cloudflare Pro free — Workers, R2, Pages, Zero Trust',
+    description:
+      'Cloudflare gives verified students a free year of Pro plan perks: unlimited Workers requests, R2 storage, Pages builds, Stream, and Zero Trust seat. Verifies via UNiDAYS or student email. Non-students can get it by enrolling in a community college to get a UNiDAYS-eligible .edu, then verify via UNiDAYS with enrollment proof.',
+    url: 'https://www.cloudflare.com/students/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/cloudflare.com.ico',
+    category: 'api-access',
+    tags: ['cloudflare', 'cdn', 'workers', 'students', 'hosting'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open the student page',
+        description:
+          'Visit cloudflare.com/students → “Verify with UNiDAYS”. UNiDAYS is the official verifier for Cloudflare.',
+        url: 'https://www.cloudflare.com/students/',
+      },
+      {
+        title: 'Create UNiDAYS and get verified',
+        description:
+          'STUDENT: Sign up at myunidays.com with .edu email or search your school and upload ID/enrollment letter — instant if email matches. NON-STUDENT: Enroll in a CC to get a .edu accepted by UNiDAYS (most US CCs are listed) + upload your student ID. UNiDAYS approves in minutes.',
+      },
+      {
+        title: 'Claim Cloudflare promo',
+        description:
+          'After UNiDAYS approves, you are redirected back to Cloudflare with a promo code. In Cloudflare dashboard → Billing → Apply code. Pro features auto-enable on one zone.',
+      },
+      {
+        title: 'Enable Workers, R2, Pages',
+        description:
+          'Go to dash.cloudflare.com → Workers & Pages → Create Worker. R2 → Create bucket (10GB free + student boost). Pages → Connect GitHub. No card needed for the student tier.',
+      },
+      {
+        title: 'Renew next year',
+        description:
+          'Benefit is 12 months. Keep your CC enrollment active and re-verify via UNiDAYS before expiry to extend.',
+      },
+    ],
+    upvotes: 22,
+    bookmarks: 28,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o13',
+    slug: 'shodan-academic',
+    name: 'Shodan Academic',
+    tagline: 'Free Shodan membership upgrade for researchers & students with .edu',
+    description:
+      'Shodan grants a free ongoing membership upgrade to students/researchers who register with a .edu/.ac address: unlimited search results, API credits, and history. Manual upgrade via support email. Works with any academic email from edumailshop/normal college. Non-students can obtain it by creating a US CC .edu mailbox.',
+    url: 'https://help.shodan.io/the-basics/academic-upgrade',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/shodan.io.ico',
+    category: 'api-access',
+    tags: ['shodan', 'security', 'iot', 'academic', 'osint'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create a Shodan account with .edu',
+        description:
+          'STUDENT: Register at account.shodan.io with your .edu/.ac email. NON-STUDENT: Get a CC .edu (e.g., via enrollment or mailbox service) and register with that address. Free accounts work, but .edu unlocks the upgrade.',
+        url: 'https://account.shodan.io/register',
+      },
+      {
+        title: 'Email support for academic upgrade',
+        description:
+          'Send an email to support@shodan.io from your .edu address: subject “Academic Upgrade — your_username”, include your Shodan username and proof of enrollment if your email domain is new. Response in 1-2 days.',
+      },
+      {
+        title: 'Verify and use upgraded quotas',
+        description:
+          'Once upgraded, your dashboard shows higher API query credits and export limits. Use via shodan search CLI or API at developer.shodan.io. Keep the .edu mailbox active for re-checks.',
+      },
+    ],
+    upvotes: 18,
+    bookmarks: 24,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o14',
+    slug: 'hyperbolic-ai-student',
+    name: 'Hyperbolic AI',
+    tagline: '$15 free inference + GPU credits with .edu — DeepSeek R1, Qwen, Llama API',
+    description:
+      'Hyperbolic offers $15 in inference credits and discounted GPU rentals for students who verify with .edu. Gives OpenAI-compatible API access to DeepSeek-R1, Qwen, Llama. Low barrier: any .edu works via email verification.',
+    url: 'https://app.hyperbolic.ai/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/hyperbolic.ai.ico',
+    category: 'api-access',
+    tags: ['hyperbolic', 'api', 'gpu', 'deepseek', 'inference'],
+    pricing: 'freemium',
+    steps: [
+      {
+        title: 'Sign up with .edu',
+        description:
+          'Visit app.hyperbolic.ai → Sign up with your .edu email (student or CC .edu). Verify via email link. NON-STUDENT: Use a CC .edu mailbox — verification is email-only, no file check.',
+        url: 'https://app.hyperbolic.ai/',
+      },
+      {
+        title: 'Claim student credits',
+        description:
+          'Go to Billing → Apply promo “STUDENT15” or contact support via Discord #student-verification with your .edu. Credits auto-apply and show in balance.',
+      },
+      {
+        title: 'Call the OpenAI-compatible endpoint',
+        description:
+          'Use https://api.hyperbolic.ai/v1 with your API key, model “deepseek-ai/DeepSeek-R1”. Drop-in for any OpenAI SDK — just swap base URL and key.',
+      },
+    ],
+    upvotes: 14,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o15',
+    slug: 'chatgpt-plus-student',
+    name: 'ChatGPT Plus for Students',
+    tagline: 'Free ChatGPT Plus ( $20/mo ) for verified students — GPT-4o with higher limits',
+    description:
+      'OpenAI offers ChatGPT Plus free for students via SheerID/UNiDAYS in supported countries (US, UK, CA etc.). Includes GPT-4o, higher message limits, file uploads, and Code Interpreter. Outside eligible countries, use a US CC enrollment to get US SheerID verification. Regularly extended, redeem before expiry shown on page.',
+    url: 'https://chatgpt.com/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/chatgpt.com.ico',
+    category: 'api-access',
+    tags: ['openai', 'chatgpt', 'students', 'plus', 'gpt-4'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open the student page',
+        description:
+          'Go to chatgpt.com/students or chatgpt.com/use-cases/students → “Claim Student Offer”. You will be sent to SheerID.',
+        url: 'https://chatgpt.com/students',
+      },
+      {
+        title: 'Verify — student vs non-student',
+        description:
+          'STUDENT: Enter school name + .edu email — SheerID auto-verifies. NON-STUDENT: Enroll in a US CC (accredited) to get a .edu + enrollment letter → upload letter + ID when SheerID asks for “upload document”. US address required — use campus or forwarder if asked.',
+      },
+      {
+        title: 'Redeem Plus',
+        description:
+          'After approval, click “Redeem” → your ChatGPT account upgrades to Plus. Check Settings → Subscription shows “Student — free until [date]”. Cancel auto-renew if you will not stay enrolled.',
+      },
+      {
+        title: 'Use until renewal required',
+        description:
+          'Offer is typically 6-12 months. Requires re-verification after expiry. If you graduate or drop, Plus reverts to Free but you keep chat history.',
+      },
+    ],
+    upvotes: 41,
+    bookmarks: 53,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o16',
+    slug: 'cursor-pro-student',
+    name: 'Cursor Pro for Students',
+    tagline: '1 year Cursor Pro free — AI code editor with agent mode',
+    description:
+      'Cursor gives students 1 year of Pro free: unlimited completions, agent mode, codebase-aware chat, and Max models. Verifies via SheerID with .edu or file. Non-students can qualify with a CC .edu + enrollment proof — Cursor’s SheerID accepts file upload, no .edu email strictly required.',
+    url: 'https://cursor.com/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/cursor.com.ico',
+    category: 'tool',
+    tags: ['cursor', 'ide', 'ai-editor', 'students', 'autocompletion'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Go to Cursor Students',
+        description:
+          'Visit cursor.com/students → “Verify student status”.',
+        url: 'https://cursor.com/students',
+      },
+      {
+        title: 'Verify via SheerID',
+        description:
+          'STUDENT: Enter .edu → instant. File fallback: upload student ID + enrollment letter (name + school + date). NON-STUDENT: Enroll in CC → get ID + letter → upload. Cursor accepts most accredited schools worldwide, not only US.',
+      },
+      {
+        title: 'Sync Pro to your account',
+        description:
+          'After approval, sign in to Cursor with the same email → Settings → Subscription shows Pro. Restart Cursor to enable agent mode and higher limits.',
+      },
+      {
+        title: 'Renew annually',
+        description:
+          'Valid 12 months, renewable while enrolled. Keep proof for next year.',
+      },
+    ],
+    upvotes: 38,
+    bookmarks: 45,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o17',
+    slug: 'perplexity-pro-student',
+    name: 'Perplexity Pro for Students',
+    tagline: '1 year Perplexity Pro free — 300+ Pro searches/day + file upload',
+    description:
+      'Perplexity gives verified students 1 year of Pro free (normally $20/mo): 300+ Pro searches/day, file upload, image generation, and API. Verifies via SheerID/ .edu. Non-students can get it with a CC .edu + SheerID file upload — widely approved.',
+    url: 'https://www.perplexity.ai/education',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/perplexity.ai.ico',
+    category: 'api-access',
+    tags: ['perplexity', 'search', 'pro', 'students', 'research'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open education page',
+        description:
+          'Visit perplexity.ai → footer “Students” or perplexity.ai/education → “Claim Pro”.',
+        url: 'https://www.perplexity.ai/education',
+      },
+      {
+        title: 'Verify student status',
+        description:
+          'STUDENT: .edu email → auto. NON-STUDENT: CC enrollment letter + ID upload via SheerID. Perplexity’s SheerID flow allows manual review if domain not found — upload a PDF transcript with current term.',
+      },
+      {
+        title: 'Activate Pro',
+        description:
+          'Once approved, your account flips to Pro. Verify at Settings → Subscription → “Pro — Student”. Use web or API at perplexity.ai/settings/api.',
+      },
+    ],
+    upvotes: 27,
+    bookmarks: 31,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o18',
+    slug: 'v0-by-vercel-student',
+    name: 'V0 by Vercel for Students',
+    tagline: 'Premium V0 AI credits free for students — text-to-React in seconds',
+    description:
+      'Vercel gives students free V0 credits: generate production-ready React + Tailwind + shadcn components from text or image, iterate with chat, export code. Verifies with .edu or GitHub Student. Non-students can use GitHub Student Pack approval (file) to claim without .edu.',
+    url: 'https://v0.app/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/v0.app.ico',
+    category: 'tool',
+    tags: ['v0', 'vercel', 'react', 'ui-gen', 'students'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign in to V0',
+        description:
+          'Go to v0.app/students → Sign in with Vercel/GitHub account.',
+        url: 'https://v0.app/students',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: .edu email auto-verifies. NON-STUDENT: Click “Verify with GitHub Student Pack” if approved, or upload enrollment letter — V0 accepts either.',
+      },
+      {
+        title: 'Generate UI',
+        description:
+          'Your account gets premium credits monthly. Type a prompt → V0 builds component → Copy code or deploy to Vercel in one click.',
+      },
+    ],
+    upvotes: 19,
+    bookmarks: 22,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o19',
+    slug: 'kiro-dev-student',
+    name: 'Kiro.dev Student Program',
+    tagline: 'Free Kiro AI IDE for students — agentic coding with file proof accepted',
+    description:
+      'Kiro.dev (agentic IDE) offers free Pro access for students: agent coding, codebase chat, and Claude/GPT routing. Requires school email + file proof for some schools. Accepts US CC enrollments — ideal for non-students using file verification path.',
+    url: 'https://kiro.dev/students/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/kiro.dev.ico',
+    category: 'tool',
+    tags: ['kiro', 'ide', 'agent', 'students', 'coding'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply at Kiro Students',
+        description:
+          'Visit kiro.dev/students → “Apply”.',
+        url: 'https://kiro.dev/students/',
+      },
+      {
+        title: 'Provide proof',
+        description:
+          'STUDENT: .edu + student ID. NON-STUDENT: Enroll in CC → upload enrollment letter + ID (must show full name + school + current date). Kiro uses manual review — photo of physical ID accepted if PDF unclear.',
+      },
+      {
+        title: 'Activate license',
+        description:
+          'After approval (email in 1-3 days), sign in to Kiro IDE with same email → License auto-applies. Check Settings → About → “Student”.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o20',
+    slug: 'dify-ai-education',
+    name: 'Dify.AI Education',
+    tagline: 'Professional plan free 1 year — LLM app & agent builder',
+    description:
+      'Dify gives verified students 1 year of Professional free: build and deploy LLM apps/agents with datasets, tools, and hosting. Verifies with .edu email. Non-students can get it with any CC .edu mailbox (email-only verification).',
+    url: 'https://dify.ai/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/dify.ai.ico',
+    category: 'api-access',
+    tags: ['dify', 'llm', 'agent', 'students', 'no-code'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .edu',
+        description:
+          'Register at cloud.dify.ai with .edu email. Verify via email link. NON-STUDENT: Use CC .edu mailbox — Dify only checks email domain, no file needed.',
+        url: 'https://dify.ai/',
+      },
+      {
+        title: 'Apply for Education plan',
+        description:
+          'In Dify dashboard → Settings → Education → “Apply” → confirm enrollment. Support auto-approves .edu domains within hours.',
+      },
+      {
+        title: 'Build apps',
+        description:
+          'Create an AI app → Add models (OpenAI/Gemini) → Publish. Pro limits: higher docs, workflows, and seats.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o21',
+    slug: 'firecrawl-student',
+    name: 'Firecrawl Student Program',
+    tagline: 'Free Firecrawl credits for students — scrape & crawl API for LLM apps',
+    description:
+      'Firecrawl (YC-backed scraping API) gives students free credits: turn any URL into clean markdown/JSON for RAG. Perfect for agent builders. Verifies with .edu email.',
+    url: 'https://www.firecrawl.dev/student-program',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/firecrawl.dev.ico',
+    category: 'api-access',
+    tags: ['firecrawl', 'scraping', 'api', 'rag', 'students'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .edu',
+        description:
+          'Go to firecrawl.dev/student-program → Sign up with .edu email. NON-STUDENT: CC .edu works — email-only check.',
+        url: 'https://www.firecrawl.dev/student-program',
+      },
+      {
+        title: 'Get API key',
+        description:
+          'After verification, dashboard → API Keys → Copy key. Test with curl /v1/scrape.',
+      },
+      {
+        title: 'Build with free credits',
+        description:
+          'Free tier includes 100k tokens/month while student status active. Upgrade automatically when needed.',
+      },
+    ],
+    upvotes: 13,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o22',
+    slug: 'windsurf-student',
+    name: 'Windsurf Student',
+    tagline: 'Free Windsurf Pro (Codeium) — agentic AI editor with Cascade',
+    description:
+      'Windsurf by Codeium gives students free Pro: Cascade agent, autocomplete, and codebase understanding. Verify with .edu or GitHub Student. Non-students can use GitHub Pack approval to claim.',
+    url: 'https://windsurf.com/editor',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/windsurf.com.ico',
+    category: 'tool',
+    tags: ['windsurf', 'codeium', 'editor', 'students', 'agent'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Download Windsurf',
+        description:
+          'Visit windsurf.com/editor → Download.',
+        url: 'https://windsurf.com/editor',
+      },
+      {
+        title: 'Verify student status',
+        description:
+          'In app → Settings → Student → Verify with .edu or “Use GitHub Student”. NON-STUDENT: Approve GitHub Pack first (file), then link here.',
+      },
+      {
+        title: 'Activate Pro',
+        description:
+          'Pro enables instantly. Check status in Account → Pro. Renewable while enrolled.',
+      },
+    ],
+    upvotes: 17,
+    bookmarks: 20,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o23',
+    slug: 'jetbrains-student-pack',
+    name: 'JetBrains Student Pack',
+    tagline: 'All JetBrains IDEs free 1 year, renewable — IntelliJ, PyCharm, WebStorm, Rider',
+    description:
+      'JetBrains gives students free access to all 15+ IDEs (IntelliJ IDEA Ultimate, PyCharm Pro, WebStorm, Rider, GoLand, etc.) for 1 year, renewable. Verifies via .edu or file (ID + enrollment). Non-students can qualify with CC enrollment — JetBrains accepts enrollment letter + ID without strict .edu domain check.',
+    url: 'https://www.jetbrains.com/shop/eform/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/jetbrains.com.ico',
+    category: 'tool',
+    tags: ['jetbrains', 'ide', 'intellij', 'pycharm', 'students'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply at JetBrains',
+        description:
+          'Go to jetbrains.com/shop/eform/students → “Apply”.',
+        url: 'https://www.jetbrains.com/shop/eform/students',
+      },
+      {
+        title: 'Prove enrollment — two options',
+        description:
+          'OPTION 1: Official university email (.edu) → instant. OPTION 2: “Official document” → upload student ID + enrollment letter/transcript showing name + school + current date. NON-STUDENT: Enroll in CC for 1 course → get ID + transcript PDF → upload via Option 2. Most CCs approved in hours.',
+      },
+      {
+        title: 'Activate license in Toolbox',
+        description:
+          'After approval, you get a JetBrains Account email. Install Toolbox App → Log in → All IDEs show “Licensed”. License auto-renews annually while you re-upload proof.',
+      },
+      {
+        title: 'Renew before expiry',
+        description:
+          'License is 12 months. 2 weeks before expiry JetBrains emails — just re-upload fresh enrollment proof to renew.',
+      },
+    ],
+    upvotes: 52,
+    bookmarks: 58,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o24',
+    slug: 'figma-education',
+    name: 'Figma Education',
+    tagline: 'Free Figma Organization for students — Figma + FigJam + 3 editors',
+    description:
+      'Figma Education gives verified students free Organization plan: Figma Design, FigJam, Dev Mode, and team libraries. Verifies via school email or manual doc. Non-students can qualify with CC enrollment + file proof — Figma manually reviews ID + schedule.',
+    url: 'https://www.figma.com/education/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/figma.com.ico',
+    category: 'tool',
+    tags: ['figma', 'design', 'ui-ux', 'students', 'figjam'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply with Figma',
+        description:
+          'Visit figma.com/education → “Apply for Education Status”. Sign in with Figma account.',
+        url: 'https://www.figma.com/education/',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: Enter school name + .edu email → auto. NON-STUDENT: Choose “No school email” → upload student ID + enrollment proof (schedule with dates). Figma supports 2000+ schools including CCs.',
+      },
+      {
+        title: 'Create Education team',
+        description:
+          'Once approved (1-3 days), Figma asks to create an Education team — do it. Your personal team converts to Organization with 3 free editors and unlimited files. Invite classmates.',
+      },
+      {
+        title: 'Renew while enrolled',
+        description:
+          'Status is 1-2 years. Re-verify when you change schools or graduate.',
+      },
+    ],
+    upvotes: 44,
+    bookmarks: 51,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o25',
+    slug: 'notion-education-plus',
+    name: 'Notion Education Plus',
+    tagline: 'Free Notion Plus + AI for students — unlimited blocks, uploads, AI',
+    description:
+      'Notion gives students free Plus plan: unlimited blocks/file uploads, 100GB+ history, and free Notion AI (normally $8/mo). Verifies via .edu email instantly. Non-students can get it with any .edu mailbox (email-only). Team members with .edu also get free Plus when added to your workspace.',
+    url: 'https://www.notion.com/product/notion-for-education',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/notion.com.ico',
+    category: 'tool',
+    tags: ['notion', 'productivity', 'education', 'ai', 'workspace'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create Notion account with .edu',
+        description:
+          'Sign up at notion.so with your .edu email (or change email in Settings → My Account → Email). NON-STUDENT: Create a CC .edu mailbox and use that as your Notion email — email check only.',
+        url: 'https://www.notion.com/product/notion-for-education',
+      },
+      {
+        title: 'Claim Education plan',
+        description:
+          'Go to Notion Settings → Upgrade → Education → “Get free Education plan”. Notion auto-detects .edu domain and upgrades instantly to Plus. No file upload needed.',
+      },
+      {
+        title: 'Enable Notion AI free',
+        description:
+          'In same Education page, toggle “Notion AI” free. Works while your Plus is active. Invite friends with .edu to give them Plus too.',
+      },
+    ],
+    upvotes: 39,
+    bookmarks: 46,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o26',
+    slug: 'canva-education-pro',
+    name: 'Canva Pro Education',
+    tagline: 'Free Canva Pro for students — 140M templates, Magic AI, Brand Kit',
+    description:
+      'Canva gives verified students free Pro: 140M+ templates, Magic Write/Resize, 1TB storage, and team Brand Kit. Verifies via Canva Education portal with school name + ID. Non-students can qualify with CC ID + enrollment screenshot — manual review approves most.',
+    url: 'https://www.canva.com/education/students/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/canva.com.ico',
+    category: 'tool',
+    tags: ['canva', 'design', 'templates', 'students', 'ai'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply via Canva Education',
+        description:
+          'Visit canva.com/education/students → “Claim verification”. Sign in with Canva.',
+        url: 'https://www.canva.com/education/students/',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: Search school → verify with .edu or upload ID + enrollment letter. NON-STUDENT: CC enrollment + student ID photo (show name + school + term) → manual approval in 1-2 days.',
+      },
+      {
+        title: 'Activate Pro',
+        description:
+          'After approval, Canva adds “Education Pro” to your account. Check Billing → “Education — Free”. Create designs with Pro unlocked and invite 2 classmates to share.',
+      },
+    ],
+    upvotes: 28,
+    bookmarks: 33,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o27',
+    slug: 'autodesk-education',
+    name: 'Autodesk Education',
+    tagline: 'Full Autodesk suite free 1 year — AutoCAD, Maya, Revit, Fusion 360',
+    description:
+      'Autodesk gives students free 1-year license to 20+ products: AutoCAD, Maya, 3ds Max, Revit, Inventor, Fusion 360. Verifies via SheerID with .edu or file. Non-students can enroll in CC drafting/design course to get enrollment proof — SheerID accepts file upload, not only email.',
+    url: 'https://www.autodesk.com/education/edu-software/overview',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/autodesk.com.ico',
+    category: 'tool',
+    tags: ['autodesk', 'autocad', 'maya', 'revit', 'students', 'cad'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create Autodesk Education account',
+        description:
+          'Go to autodesk.com/education/edu-software/overview → “Get product”. Create account.',
+        url: 'https://www.autodesk.com/education/edu-software/overview',
+      },
+      {
+        title: 'Verify with SheerID',
+        description:
+          'Click “Verify” → SheerID. STUDENT: .edu auto. NON-STUDENT: “Upload document” → student ID + enrollment letter (must list school + full name + current date). CC enrollments pass if accredited.',
+      },
+      {
+        title: 'Download and activate',
+        description:
+          'After verification, choose product → Download → Install → Sign in with same email. License auto-activates for 12 months. Use Autodesk Access app to manage installs.',
+      },
+      {
+        title: 'Renew annually',
+        description:
+          'License expires in 12 months; re-verify with fresh enrollment to renew.',
+      },
+    ],
+    upvotes: 24,
+    bookmarks: 29,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o28',
+    slug: 'zed-pro-student',
+    name: 'Zed Pro for Students',
+    tagline: '1 year Zed Pro free — fast Rust editor with AI + multiplayer',
+    description:
+      'Zed gives verified students 1 year of Pro free: AI edit/chat, multiplayer collab, and premium themes. Verifies via .edu or GitHub Student. Non-students can use GitHub Pack approval (file) to claim without .edu.',
+    url: 'https://zed.dev/education',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/zed.dev.ico',
+    category: 'tool',
+    tags: ['zed', 'editor', 'rust', 'students', 'collaboration'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Download Zed and sign in',
+        description:
+          'Visit zed.dev/education → Download Zed → Sign in.',
+        url: 'https://zed.dev/education',
+      },
+      {
+        title: 'Verify student status',
+        description:
+          'Click “Verify” → .edu email or “Verify with GitHub Student”. NON-STUDENT: Get GitHub Pack via file (CC enrollment) then link — Zed accepts that path.',
+      },
+      {
+        title: 'Enable Pro',
+        description:
+          'After verification, Zed → Settings → Subscription shows Pro. Features enable instantly. Renewable while enrolled.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
