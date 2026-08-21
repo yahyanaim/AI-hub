@@ -45846,6 +45846,557 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o73',
+    slug: 'huggingface-student',
+    name: 'Hugging Face Student',
+    tagline: 'Pro free for students — private models + $100 inference credits',
+    description:
+      'Hugging Face gives verified students free Pro (normally $9/mo): unlimited private models/datasets, Inference Endpoints, and $100 credits for Serverless Inference API. Verifies via .edu email. Non-students can get it with any CC .EDU mailbox (email-only).',
+    url: 'https://huggingface.co/join',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/huggingface.co.ico',
+    category: 'api-access',
+    tags: ['huggingface', 'students', 'inference', 'models', 'api'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .EDU',
+        description:
+          'Go to huggingface.co/join → Sign up with .EDU email. STUDENT: use school .EDU. NON-STUDENT: use CC .EDU mailbox — email domain only.',
+        url: 'https://huggingface.co/join',
+      },
+      {
+        title: 'Apply for Student Pro',
+        description:
+          'In Settings → Billing → “Student Program” → Verify. Hugging Face auto-detects .EDU domains and upgrades to Pro within hours.',
+      },
+      {
+        title: 'Use Pro + credits',
+        description:
+          'Create private repos, deploy Inference Endpoints, call Serverless Inference API at huggingface.co/docs/inference. $100 credits appear in Billing.',
+      },
+    ],
+    nameAr: 'Hugging Face للطلاب',
+    taglineAr: 'Pro مجاناً للطلاب — نماذج خاصة + 100$ رصيد استدلال',
+    descriptionAr: 'يمنح Hugging Face الطلاب Pro مجاناً: نماذج ومجموعات بيانات خاصة غير محدودة و $100 رصيد لـ Serverless Inference. يتحقق ببريد .EDU فقط.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .EDU',
+        description: 'اذهب إلى huggingface.co/join وسجّل ببريد .EDU (CC يعمل لغير الطلاب).',
+        url: 'https://huggingface.co/join',
+      },
+      {
+        title: 'اطلب Pro للطلاب',
+        description: 'الإعدادات → الفوترة → "Student Program" → يترقى تلقائياً للنطاقات .EDU.',
+      },
+      {
+        title: 'استخدم Pro والرصيد',
+        description: 'أنشئ مستودعات خاصة واستدعِ واجهة الاستدلال — يظهر الرصيد 100$ في الفوترة.',
+      },
+    ],
+    upvotes: 18,
+    bookmarks: 22,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o74',
+    slug: 'openrouter-student',
+    name: 'OpenRouter Student',
+    tagline: '$25 credit + free tier for 200+ LLMs via one API',
+    description:
+      'OpenRouter gives students $25 credit plus permanent free tier for 200+ LLMs (GPT-4o, Claude 3.5, Gemini, Llama) via OpenAI-compatible API. Verifies via .EDU email. Non-students can get it with CC .EDU mailbox (email-only).',
+    url: 'https://openrouter.ai/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/openrouter.ai.ico',
+    category: 'api-access',
+    tags: ['openrouter', 'api', 'llm', 'students', 'credits'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .EDU',
+        description:
+          'Visit openrouter.ai → Sign up with .EDU email. NON-STUDENT: use CC .EDU mailbox.',
+        url: 'https://openrouter.ai/',
+      },
+      {
+        title: 'Claim student credit',
+        description:
+          'Go to Credits → “Student Program” → Enter .EDU — $25 auto-applies. Check Dashboard → Credits.',
+      },
+      {
+        title: 'Call the unified API',
+        description:
+          'Use https://openrouter.ai/api/v1 with your key, model “openai/gpt-4o” or “anthropic/claude-3.5-sonnet”. Free models remain free after credit.',
+      },
+    ],
+    nameAr: 'OpenRouter للطلاب',
+    taglineAr: '25$ رصيد + طبقة مجانية لـ 200+ نموذج عبر API واحد',
+    descriptionAr: 'يمنح OpenRouter الطلاب 25$ رصيداً وطبقة مجانية دائمة لـ 200+ نموذج عبر واجهة OpenAI متوافقة. يتحقق ببريد .EDU فقط.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .EDU',
+        description: 'اذهب إلى openrouter.ai وسجّل ببريد .EDU.',
+        url: 'https://openrouter.ai/',
+      },
+      {
+        title: 'اطلب رصيد الطلاب',
+        description: 'الرصيد → "Student Program" → أدخل .EDU — يُضاف 25$ تلقائياً.',
+      },
+      {
+        title: 'استدعِ API الموحد',
+        description: 'استخدم https://openrouter.ai/api/v1 بمفتاحك ونموذج openai/gpt-4o.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o75',
+    slug: 'replicate-student',
+    name: 'Replicate Student',
+    tagline: '$50 credit for open-source model API — SDXL, Llama, Whisper',
+    description:
+      'Replicate gives verified students $50 credit for its API: run SDXL, Llama 3, Whisper, and 1000+ open models pay-per-second via API. Verifies with .EDU email or GitHub Student. Non-students can get it via CC .EDU mailbox or GitHub Pack file.',
+    url: 'https://replicate.com/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/replicate.com.ico',
+    category: 'api-access',
+    tags: ['replicate', 'api', 'sdxl', 'llama', 'students'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .EDU or GitHub Student',
+        description:
+          'Go to replicate.com/students → Sign up with .EDU email or link GitHub already approved for Pack.',
+        url: 'https://replicate.com/students',
+      },
+      {
+        title: 'Claim $50 credit',
+        description:
+          'After verification, check Billing → Credits → $50 appears. No card required for the student tier.',
+      },
+      {
+        title: 'Run models via API',
+        description:
+          'Use replicate API at api.replicate.com/v1/predictions with your token. Pay per second after credit.',
+      },
+    ],
+    nameAr: 'Replicate للطلاب',
+    taglineAr: 'رصيد 50$ لواجهة النماذج المفتوحة — SDXL و Llama',
+    descriptionAr: 'يمنح Replicate الطلاب 50$ رصيداً لواجهته: شغّل SDXL و Llama 3 و 1000+ نموذج عبر API. يتحقق ببريد .EDU أو GitHub Student.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .EDU أو GitHub',
+        description: 'اذهب إلى replicate.com/students وسجّل ببريد .EDU أو اربط GitHub.',
+        url: 'https://replicate.com/students',
+      },
+      {
+        title: 'اطلب 50$',
+        description: 'بعد التحقق، الفوترة → Credits → يظهر 50$.',
+      },
+      {
+        title: 'شغّل النماذج عبر API',
+        description: 'استخدم api.replicate.com/v1/predictions برمزك.',
+      },
+    ],
+    upvotes: 15,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o76',
+    slug: 'supabase-student',
+    name: 'Supabase Student',
+    tagline: '$50 credit + free Postgres/Auth for 1 year via .EDU',
+    description:
+      'Supabase gives students $50 credit plus free tier for 1 year: hosted Postgres, Auth, Storage, and Realtime via .EDU email. Non-students can get it with CC .EDU mailbox (email-only).',
+    url: 'https://supabase.com/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/supabase.com.ico',
+    category: 'api-access',
+    tags: ['supabase', 'postgres', 'students', 'backend', 'credits'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .EDU',
+        description:
+          'Visit supabase.com/students → Sign up with .EDU email. NON-STUDENT: use CC .EDU mailbox.',
+        url: 'https://supabase.com/students',
+      },
+      {
+        title: 'Create project and claim credit',
+        description:
+          'Create a Supabase project → Settings → Billing → “Student credit” → $50 auto-applies for .EDU domains.',
+      },
+      {
+        title: 'Build with free tier',
+        description:
+          'Use Postgres, Auth, and Storage for 1 year free. Credit covers overages after free limits.',
+      },
+    ],
+    nameAr: 'Supabase للطلاب',
+    taglineAr: 'رصيد 50$ + Postgres مجاناً لسنة ببريد .EDU',
+    descriptionAr: 'يمنح Supabase الطلاب 50$ رصيداً وطبقة مجانية لسنة: Postgres و Auth و Storage. يتحقق ببريد .EDU فقط.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .EDU',
+        description: 'اذهب إلى supabase.com/students وسجّل ببريد .EDU.',
+        url: 'https://supabase.com/students',
+      },
+      {
+        title: 'أنشئ مشروعاً واطلب الرصيد',
+        description: 'أنشئ مشروعاً → الإعدادات → الفوترة → "Student credit" → يُضاف 50$ تلقائياً.',
+      },
+      {
+        title: 'ابنِ بالطبقة المجانية',
+        description: 'استخدم Postgres و Auth لسنة مجاناً — الرصيد يغطي التجاوز.',
+      },
+    ],
+    upvotes: 14,
+    bookmarks: 17,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o77',
+    slug: 'mongodb-atlas-student',
+    name: 'MongoDB Atlas Student',
+    tagline: '$50 Atlas credit + free 512MB cluster via GitHub Pack',
+    description:
+      'MongoDB Atlas via GitHub Student Pack: $50 credit for Atlas + free 512MB shared cluster forever. Verifies via GitHub Student linkage — get Pack first via CC file (o9), then claim.',
+    url: 'https://www.mongodb.com/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/mongodb.com.ico',
+    category: 'api-access',
+    tags: ['mongodb', 'atlas', 'students', 'database', 'credits'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Get GitHub Student Pack first',
+        description:
+          'Follow o9 to get Pack approved (via .EDU or CC file). Atlas credit is inside the pack.',
+        url: 'https://education.github.com/pack',
+      },
+      {
+        title: 'Claim on MongoDB',
+        description:
+          'In GitHub Pack → MongoDB → “Get access” → redirected to mongodb.com where $50 promo auto-applies. Create Atlas account with same email.',
+      },
+      {
+        title: 'Deploy free cluster',
+        description:
+          'Create a free 512MB Atlas cluster — credit burns only for larger clusters. Free cluster stays forever.',
+      },
+    ],
+    nameAr: 'MongoDB Atlas للطلاب',
+    taglineAr: 'رصيد 50$ + عنقود 512MB مجاناً عبر GitHub Pack',
+    descriptionAr: 'MongoDB Atlas عبر GitHub Pack: رصيد 50$ وعنقود 512MB مجاني للأبد. يتحقق عبر ربط GitHub Student.',
+    stepsAr: [
+      {
+        title: 'احصل على GitHub Pack أولاً',
+        description: 'اتبع o9 للحصول على الموافقة.',
+        url: 'https://education.github.com/pack',
+      },
+      {
+        title: 'اطلب في MongoDB',
+        description: 'GitHub Pack → MongoDB → "Get access" → يُطبق الرمز تلقائياً.',
+      },
+      {
+        title: 'أنشئ عنقوداً مجانياً',
+        description: 'أنشئ عنقود 512MB مجاني — الرصيد للعناقيد الأكبر فقط.',
+      },
+    ],
+    upvotes: 13,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o78',
+    slug: 'vercel-pro-student',
+    name: 'Vercel Pro Student',
+    tagline: 'Pro features + $100 credit for students via GitHub Pack/.EDU',
+    description:
+      'Vercel gives students Pro-like features and $100 credit via GitHub Student Pack or .EDU: hobby deployments with higher limits, analytics, and team seats. Verifies via GitHub Pack linkage or .EDU email.',
+    url: 'https://vercel.com/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/vercel.com.ico',
+    category: 'tool',
+    tags: ['vercel', 'hosting', 'students', 'nextjs', 'credits'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Link GitHub Student or .EDU',
+        description:
+          'Go to vercel.com/students → Sign in with GitHub already approved for Pack, or verify with .EDU email.',
+        url: 'https://vercel.com/students',
+      },
+      {
+        title: 'Claim Pro credit',
+        description:
+          'After verification, check Billing → Credits → $100 appears for .EDU/GitHub Pack accounts.',
+      },
+      {
+        title: 'Deploy with Pro limits',
+        description:
+          'Deploy Next.js app → Pro bandwidth/edge limits apply while student status active.',
+      },
+    ],
+    nameAr: 'Vercel Pro للطلاب',
+    taglineAr: 'مزايا Pro + رصيد 100$ للطلاب',
+    descriptionAr: 'يمنح Vercel الطلاب مزايا Pro ورصيد 100$ عبر GitHub Pack أو .EDU: نشر بحدود أعلى وتحليلات.',
+    stepsAr: [
+      {
+        title: 'اربط GitHub أو .EDU',
+        description: 'اذهب إلى vercel.com/students وسجّل بحساب GitHub الموافق عليه أو بريد .EDU.',
+        url: 'https://vercel.com/students',
+      },
+      {
+        title: 'اطلب رصيد Pro',
+        description: 'بعد التحقق، الفوترة → Credits → يظهر 100$.',
+      },
+      {
+        title: 'انشر بحدود Pro',
+        description: 'انشر تطبيق Next.js — تطبق حدود Pro أثناء حالة الطالب.',
+      },
+    ],
+    upvotes: 15,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o79',
+    slug: '1password-student',
+    name: '1Password Student',
+    tagline: '1 year free Families (5 accounts) via GitHub Pack',
+    description:
+      '1Password via GitHub Student Pack: 1 year free Families plan (5 accounts, vaults, 1GB storage). Verifies via GitHub Student linkage — get Pack first via CC file (o9).',
+    url: 'https://1password.com/students/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/1password.com.ico',
+    category: 'tool',
+    tags: ['1password', 'security', 'students', 'vault', 'github-pack'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Get GitHub Pack first',
+        description:
+          'Follow o9 to get Pack approved.',
+        url: 'https://education.github.com/pack',
+      },
+      {
+        title: 'Claim on 1Password',
+        description:
+          'GitHub Pack → 1Password → “Get access” → Create 1Password Families account with same email → 1yr free auto-applies.',
+      },
+      {
+        title: 'Invite family',
+        description:
+          'Invite 4 family members to vaults. Renew yearly while Pack active.',
+      },
+    ],
+    nameAr: '1Password للطلاب',
+    taglineAr: 'سنة مجانية لعائلة (5 حسابات) عبر GitHub Pack',
+    descriptionAr: '1Password عبر GitHub Pack: سنة مجانية لخطة العائلة (5 حسابات، خزائن، 1GB). يتحقق عبر ربط GitHub Student.',
+    stepsAr: [
+      {
+        title: 'احصل على GitHub Pack أولاً',
+        description: 'اتبع o9 للحصول على الموافقة.',
+        url: 'https://education.github.com/pack',
+      },
+      {
+        title: 'اطلب في 1Password',
+        description: 'GitHub Pack → 1Password → "Get access" → أنشئ حساب عائلة.',
+      },
+      {
+        title: 'ادعُ العائلة',
+        description: 'ادعُ 4 أفراد للخزائن — يتجدد سنوياً أثناء نشاط Pack.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o80',
+    slug: 'miro-education',
+    name: 'Miro Education',
+    tagline: 'Free Education plan (100+ boards, AI) via .EDU/file',
+    description:
+      'Miro gives verified students free Education plan: 100+ boards, Miro AI, and team workspaces. Verifies via school email or file (ID + enrollment). Non-students can qualify with CC enrollment + file proof.',
+    url: 'https://miro.com/education/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/miro.com.ico',
+    category: 'tool',
+    tags: ['miro', 'whiteboard', 'students', 'collaboration', 'ai'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply at Miro Education',
+        description:
+          'Visit miro.com/education/ → “Apply for free Education”.',
+        url: 'https://miro.com/education/',
+      },
+      {
+        title: 'Verify',
+        description:
+          'STUDENT: .EDU email → auto. NON-STUDENT: “No school email” → upload student ID + enrollment letter. CC accepted, 1-3 day review.',
+      },
+      {
+        title: 'Create Education team',
+        description:
+          'After approval, create Education team — 100+ boards unlock. Invite classmates.',
+      },
+    ],
+    nameAr: 'Miro للتعليم',
+    taglineAr: 'خطة تعليم مجانية (100+ لوحة، AI)',
+    descriptionAr: 'يمنح Miro الطلاب خطة تعليم مجانية: 100+ لوحة و Miro AI ومساحات فريق. يتحقق عبر بريد أو ملف.',
+    stepsAr: [
+      {
+        title: 'قدّم في Miro للتعليم',
+        description: 'اذهب إلى miro.com/education/ → "Apply".',
+        url: 'https://miro.com/education/',
+      },
+      {
+        title: 'تحقق',
+        description: 'طالب: .EDU → تلقائي. غير طالب: ارفع بطاقة + خطاب — تقبل CC.',
+      },
+      {
+        title: 'أنشئ فريق التعليم',
+        description: 'بعد الموافقة، أنشئ فريقاً — تفتح 100+ لوحة.',
+      },
+    ],
+    upvotes: 11,
+    bookmarks: 14,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o81',
+    slug: 'linear-for-students',
+    name: 'Linear for Students',
+    tagline: 'Free Standard for 1 year via .EDU — issue tracking for teams',
+    description:
+      'Linear gives verified students free Standard for 1 year: unlimited issues, cycles, and integrations. Verifies via .EDU email. Non-students can get it with CC .EDU mailbox (email-only).',
+    url: 'https://linear.app/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/linear.app.ico',
+    category: 'tool',
+    tags: ['linear', 'project-management', 'students', 'tracking', 'team'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with .EDU',
+        description:
+          'Visit linear.app/students → Sign up with .EDU email. NON-STUDENT: use CC .EDU mailbox.',
+        url: 'https://linear.app/students',
+      },
+      {
+        title: 'Create workspace and verify',
+        description:
+          'Create Linear workspace → Settings → Billing → “Student” → auto-verifies for .EDU domains.',
+      },
+      {
+        title: 'Track issues',
+        description:
+          'Invite team and use Standard features for 1 year. Renew with fresh .EDU.',
+      },
+    ],
+    nameAr: 'Linear للطلاب',
+    taglineAr: 'Standard مجاناً لسنة — تتبع مهام الفرق',
+    descriptionAr: 'يمنح Linear الطلاب Standard مجاناً لسنة: مهام ودورات وتكامل غير محدود. يتحقق ببريد .EDU فقط.',
+    stepsAr: [
+      {
+        title: 'سجّل ببريد .EDU',
+        description: 'اذهب إلى linear.app/students وسجّل ببريد .EDU.',
+        url: 'https://linear.app/students',
+      },
+      {
+        title: 'أنشئ مساحة وتحقق',
+        description: 'أنشئ مساحة → الإعدادات → الفوترة → "Student" → يتحقق تلقائياً.',
+      },
+      {
+        title: 'تتبع المهام',
+        description: 'ادعُ الفريق واستخدم مزايا Standard لسنة.',
+      },
+    ],
+    upvotes: 10,
+    bookmarks: 13,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o82',
+    slug: 'warp-terminal-student',
+    name: 'Warp Terminal Student',
+    tagline: 'Free Pro (AI + themes) via .EDU/GitHub Pack for 1 year',
+    description:
+      'Warp gives students free Pro for 1 year: AI command search, themes, and team sharing. Verifies via .EDU email or GitHub Student. Non-students can get it via CC .EDU mailbox or GitHub Pack file.',
+    url: 'https://www.warp.dev/students',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/warp.dev.ico',
+    category: 'tool',
+    tags: ['warp', 'terminal', 'students', 'ai', 'productivity'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Download Warp and sign up',
+        description:
+          'Visit warp.dev/students → Download Warp → Sign up with .EDU email or link GitHub Student.',
+        url: 'https://www.warp.dev/students',
+      },
+      {
+        title: 'Verify',
+        description:
+          'Click Verify → .EDU email or GitHub Student. CC .EDU and Pack file both accepted.',
+      },
+      {
+        title: 'Enable Pro',
+        description:
+          'After verification, Settings → Subscription shows Pro. Renewable while enrolled.',
+      },
+    ],
+    nameAr: 'Warp للطلاب',
+    taglineAr: 'Pro مجاناً (AI وثيمات) لسنة',
+    descriptionAr: 'يمنح Warp الطلاب Pro مجاناً لسنة: بحث أوامر AI وثيمات ومشاركة فريق. يتحقق عبر .EDU أو GitHub Student.',
+    stepsAr: [
+      {
+        title: 'حمّل Warp وسجّل',
+        description: 'اذهب إلى warp.dev/students → حمّل وسجّل ببريد .EDU أو اربط GitHub.',
+        url: 'https://www.warp.dev/students',
+      },
+      {
+        title: 'تحقق',
+        description: 'اضغط Verify → بريد .EDU أو GitHub Student.',
+      },
+      {
+        title: 'فعّل Pro',
+        description: 'بعد التحقق، الإعدادات → الاشتراك يظهر Pro.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
