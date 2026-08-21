@@ -44164,6 +44164,88 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o47',
+    slug: 'how-to-get-us-community-college-edu',
+    name: 'How to Get a US Community College .EDU (American CC Guide)',
+    tagline: 'Legit American CC enrollment in 24-72h — unlock 40+ student offers with .edu + ID',
+    description:
+      'The master guide for non-students: how to legitimately get an accredited US Community College .EDU mailbox + student ID + enrollment letter in 24-72h for ~$0-$60, and which offers on AI Hunt you can then claim. No paid mailbox shop needed. Covers open-admission CCs (Dallas College, LA City College, Santa Monica College, Coastline, Rio Hondo, El Camino, Pierce, Cerritos) that issue Microsoft 365 .EDU, Canvas portal access, and official transcripts. Lists 40+ offers on this site unlockable with that single CC enrollment (GitHub Pack, Azure $100, AWS Educate $100, Cloudflare Pro, JetBrains, Figma, Notion Plus, Canva, Autodesk, Zed, Gemini, ChatGPT Plus, Cursor, Perplexity, V0, Shodan, Hyperbolic, Consensus, Julius, Microsoft 365, Adobe 60% off, Apple 200GB, MATLAB, Replit, DigitalOcean $200, Namecheap domain, Sketch, YouTube/Amazon Prime, and more). Includes SheerID/UNiDAYS/manual file tips to get approved first try.',
+    url: 'https://www.aacc.nche.edu/college-finder/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=aacc.nche.edu&sz=64',
+    category: 'guide',
+    tags: ['cc', 'community-college', 'edu', 'american', 'guide', 'how-to', 'sheerid', 'unidays'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Pick an open-admission CC (no SAT needed)',
+        description:
+          'Choose one accredited CC with online enrollment and instant .EDU: Dallas College (dallascollege.edu), Los Angeles City College (lacitycollege.edu), Santa Monica College (smc.edu), Coastline College (coastline.edu), Rio Hondo (riohondo.edu), El Camino (elcamino.edu). All are regionally accredited and accepted by SheerID/GitHub/JetBrains. Check aacc.nche.edu/college-finder for list.',
+        url: 'https://www.aacc.nche.edu/college-finder/',
+      },
+      {
+        title: 'Apply as non-degree / dual-enrollment student (15 min)',
+        description:
+          'On the CC site click Apply → OpenCCC (California) or Dallas College App. Select “Non-degree / Personal Enrichment” or “Concurrent enrollment”. Use your real name + passport; address can be your home country + US mailing forwarder if asked. No essay, no transcript needed for 1 course.',
+      },
+      {
+        title: 'Enroll in 1 cheap online course ($0-$60)',
+        description:
+          'After admission (often same day), log into Canvas/myCollege portal and enroll in 1 one-credit online class: e.g., Couns 1, CS 101, Art 101, College Success. Many CCs offer free tuition for first-time or promise-program students; otherwise ~$46/unit in CA = $46 total. You do NOT need to finish — enrollment alone generates proof.',
+      },
+      {
+        title: 'Collect your 3 proofs in 24-72h',
+        description:
+          'Within 1-3 days you will get: (1) @student.cc.edu Microsoft 365 .EDU mailbox (check myCollege → Email), (2) Student ID (downloadable PDF in portal → Student Services → ID), (3) Enrollment verification letter / class schedule PDF (with name + school + current term + date). Download all as color PDFs — SheerID/GitHub require date within 30 days.',
+      },
+      {
+        title: 'Use the 3 proofs to unlock offers — which ones?',
+        description:
+          'With one CC enrollment you can claim all these on AI Hunt: EMAIL-ONLY (Notion, Hyperbolic, Dify, Firecrawl, Consensus, Julius, Mathpix, Shodan-email) — just use .EDU mailbox. SHEERID FILE (GitHub Pack, JetBrains, Autodesk, Adobe, Cursor, ChatGPT Plus, Perplexity, Gemini US, YouTube/Amazon Prime) — upload ID + enrollment letter PDF. UNiDAYS (Cloudflare, GoodNotes) — add school in UNiDAYS and verify with file. GitHub Pack then unlocks DigitalOcean $200 + Namecheap .me + Replit 50% automatically. Microsoft 365 appears automatically with your new .EDU. Keep Canvas enrollment active until all verifications pass, then you may drop the class (check refund deadline to keep proof date fresh).',
+      },
+      {
+        title: 'Renew yearly & stay compliant',
+        description:
+          'All offers are 12 months. Before expiry, re-enroll in another 1-credit course to get a fresh dated letter and re-verify via SheerID/UNiDAYS. Keep your .EDU mailbox active (log in monthly). This is legitimate enrollment — never buy a sold .EDU mailbox (edumailshop etc.) — it can be revoked and violates ToS. Your real transcript is the safest proof.',
+      },
+    ],
+    nameAr: 'كيف تحصل على بريد .EDU من كلية مجتمع أمريكية (دليل CC)',
+    taglineAr: 'التسجيل في كلية مجتمع أمريكية معتمدة خلال 24-72 ساعة — افتح 40+ عرض طلابي ببريد .EDU',
+    descriptionAr: 'الدليل الشامل لغير الطلاب: كيف تحصل بشكل شرعي على بريد .EDU من كلية مجتمع أمريكية معتمدة + بطاقة طالب + خطاب تسجيل خلال 24-72 ساعة مقابل ~0-60$، وقائمة العروض التي يمكنك فتحها في AI Hunt بذلك التسجيل الواحد. بدون متاجر بريد مدفوعة. يغطي كليات مفتوحة القبول (Dallas College، LA City College، Santa Monica، Coastline، Rio Hondo، El Camino...) التي تصدر Microsoft 365 .EDU و Canvas وكشف رسمي. يفتح 40+ عرضاً: GitHub Pack، Azure 100$، AWS 100$، Cloudflare Pro، JetBrains، Figma، Notion Plus، Canva، Autodesk، Zed، Gemini، ChatGPT Plus، Cursor، Perplexity، V0، Shodan، Hyperbolic وغيرها.',
+    stepsAr: [
+      {
+        title: 'اختر كلية مفتوحة القبول (بدون SAT)',
+        description: 'اختر كلية معتمدة بتسجيل إلكتروني وبريد .EDU فوري: Dallas College، LA City College، Santa Monica College، Coastline، Rio Hondo، El Camino. كلها معتمدة ومقبولة في SheerID/GitHub. راجع aacc.nche.edu/college-finder.',
+        url: 'https://www.aacc.nche.edu/college-finder/',
+      },
+      {
+        title: 'قدّم كطالب غير متفرغ (15 دقيقة)',
+        description: 'في موقع الكلية اضغط Apply → OpenCCC أو Dallas App. اختر "Non-degree / Personal Enrichment". استخدم اسمك الحقيقي وجوازك؛ العنوان يمكن أن يكون بلدك مع عنوان أمريكي للمراسلة.',
+      },
+      {
+        title: 'سجّل في مقرر واحد رخيص ($0-$60)',
+        description: 'بعد القبول (غالباً نفس اليوم)، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت (Couns 1، CS 101...). كثير من الكليات مجانية للمستجدين وإلا ~46$ للوحدة في كاليفورنيا. لا تحتاج لإنهاء المقرر — التسجيل وحده يولد الإثبات.',
+      },
+      {
+        title: 'اجمع إثباتاتك الثلاثة خلال 24-72 ساعة',
+        description: 'ستحصل على: (1) بريد @student.cc.edu عبر Microsoft 365، (2) بطاقة طالب PDF قابلة للتنزيل، (3) خطاب/جدول تسجيل PDF باسمك والمدرسة والتاريخ. حمّلها كملفات ملونة — يطلب SheerID تاريخاً خلال 30 يوماً.',
+      },
+      {
+        title: 'استخدمها لفتح العروض — ما الذي يفتح؟',
+        description: 'بتسجيل واحد تفتح: بالبريد فقط (Notion، Hyperbolic، Dify، Firecrawl، Consensus، Julius، Mathpix، Shodan). عبر SheerID بملف (GitHub Pack، JetBrains، Autodesk، Adobe، Cursor، ChatGPT Plus، Perplexity، Gemini أمريكا، YouTube/Amazon). عبر UNiDAYS (Cloudflare، GoodNotes). ثم GitHub Pack يفتح DigitalOcean 200$ + Namecheap .me + Replit 50% تلقائياً.',
+      },
+      {
+        title: 'جدّد سنوياً والتزم',
+        description: 'كل العروض 12 شهراً. قبل الانتهاء، سجّل في مقرر واحد جديد للحصول على خطاب بتاريخ جديد وأعد التحقق. حافظ على بريد .EDU نشطاً. هذا تسجيل شرعي — لا تشترِ بريداً مباعاً قد يُسحب وينتهك الشروط.',
+      },
+    ],
+    upvotes: 58,
+    bookmarks: 64,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
