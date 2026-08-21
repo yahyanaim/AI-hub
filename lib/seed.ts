@@ -41638,42 +41638,43 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o7',
     slug: 'gemini-for-students',
     name: 'Gemini for Students',
-    tagline: 'Free Gemini Advanced + 2TB storage for 12 months — Google One AI Premium for verified students',
+    tagline: 'Free Google AI Pro (US: 5TB + 4× Gemini) or AI Plus (Global: 400GB + 2× Gemini) for 1 year — verified college students',
     description:
-      'Google’s official student offer: get 12 months of Google One AI Premium free as a verified college student. Includes Gemini Advanced with Gemini 2.5 Pro, 2TB of Google Drive / Photos / Gmail storage, NotebookLM Plus with higher limits, Gemini in Docs/Sheets/Slides/Gmail, and Veo 3 Fast for video generation. Normally $19.99/month — free for students 18+ until your free year ends, then auto-cancels unless you confirm. Verify through SheerID with your .edu email or student ID; works for eligible undergraduate and graduate students in supported countries.',
-    url: 'https://one.google.com/join/ai-student',
+      'Google’s official 2026 student offer — live since Aug 19, 2026 and redeemable until Dec 31, 2026. In the US you get 12 months of Google AI Pro free (normally $19.99/mo): 4× higher usage limits in Gemini, 5 TB of Google Drive/Photos/Gmail storage, Gemini Spark agentic platform, Gemini Omni, Gemini in Gmail/Docs/Sheets, Google Health Premium, plus the new Student Hub (study notebooks with custom learning plans, interactive visualizations, personalized quizzes & performance tracker), unlimited uploads and Gemini Live. Outside the US (160+ countries including Morocco, MENA, EU, Asia) you get 12 months of Google AI Plus free: 2× higher Gemini limits, 400 GB storage, Gemini Omni, and the same Student Hub with unlimited notebooks/visualizations. Must be 18+, verified each year via SheerID with your college .edu or student ID, and requires a payment method — auto-renews at standard price unless you cancel. Offer Terms at one.google.com/offer/studentoffer8.',
+    url: 'https://gemini.google/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/gemini.google.com.ico',
     category: 'learning',
-    tags: ['gemini', 'google', 'students', 'free', 'ai-premium', 'notebooklm'],
+    tags: ['gemini', 'google', 'students', 'free', 'ai-pro', 'ai-plus', 'student-hub'],
     pricing: 'free',
     steps: [
       {
-        title: 'Open the student offer page',
+        title: 'Pick your student hub',
         description:
-          'Go to one.google.com/join/ai-student (or gemini.google.com/students) and click "Get student offer" to start eligibility check.',
-        url: 'https://one.google.com/join/ai-student',
+          'US students: open gemini.google/us/students (AI Pro). Everyone else (incl. Morocco/MENA): open gemini.google/students and choose your country/language — you will get AI Plus. Both pages have a "Claim Free Student Plan" button.',
+        url: 'https://gemini.google/students/',
       },
       {
-        title: 'Verify you are a student (SheerID)',
+        title: 'Click Claim Free Student Plan → Verify via SheerID',
         description:
-          'Click Verify eligibility — you will be sent to SheerID. Verify with your college .edu email, enrollment document, or student ID. Must be 18+ and enrolled at an accredited college/university in a supported country.',
-        url: 'https://one.google.com/join/ai-student',
+          'You will be sent to one.google.com/ai-student → SheerID. Verify with your college email (.edu), enrollment letter, or student ID. Must be 18+ and enrolled at an accredited college/university. Second-year re-verification is required to keep the benefit.',
+        url: 'https://one.google.com/ai-student?plans=1%2C2',
       },
       {
-        title: 'Claim Google One AI Premium',
+        title: 'Add a payment method and redeem (before Dec 31, 2026)',
         description:
-          'Once verified, accept the Google One AI Premium promotion. Your account is upgraded instantly: Gemini Advanced (2.5 Pro), 2TB storage across Drive/Photos/Gmail, and NotebookLM Plus.',
+          'A valid card is required at sign-up even though the year is free. US: AI Pro will auto-charge $19.99/mo after 12 months; Global: AI Plus at local price. Cancel anytime before renewal to avoid charges. See Offer Terms for full conditions.',
+        url: 'https://one.google.com/offer/studentoffer8?g1_landing_page=0',
       },
       {
-        title: 'Use Gemini everywhere',
+        title: 'Open Gemini Student Hub',
         description:
-          'Open gemini.google.com for chat, use Gemini in Gmail/Docs/Sheets/Slides to draft and summarize, and use NotebookLM at notebooklm.google.com for your uploaded PDFs/slides with source-grounded answers.',
+          'Go to gemini.google.com → Student hub. Upload syllabi, lecture notes, PDFs & slides: Gemini creates a tailored study notebook, learning plan, interactive visualizations, practice quizzes, and performance tracking. All uploads are unlimited during the student plan.',
         url: 'https://gemini.google.com',
       },
       {
-        title: 'Set a renewal reminder',
+        title: 'Use Pro/Plus everywhere',
         description:
-          'Your free year ends after 12 months and requires re-verification to keep the discount. Set a calendar reminder for month 11 — Google will also email you before it renews at the standard $19.99/mo unless you cancel.',
+          'US (Pro): 4× Gemini limits, 5 TB storage, Gemini Spark (agent builder), Gemini Omni, Gemini in Gmail/Docs/Sheets/Slides & Gemini Live. Global (Plus): 2× limits, 400 GB, Gemini Omni. Turn any notes into study guides, quizzes, summaries or audio podcasts in one click.',
       },
     ],
     upvotes: 42,
