@@ -83,6 +83,8 @@ interface SubmitRepoInput {
   pricing: Pricing
 }
 
+export type OffersLang = 'en' | 'ar'
+
 interface AppContextValue {
   // data
   tools: Tool[]
@@ -95,6 +97,9 @@ interface AppContextValue {
   comments: Comment[]
   currentUser: User | null
   recentSearches: string[]
+  // i18n - offers only (Option A)
+  offersLang: OffersLang
+  setOffersLang: (lang: OffersLang) => void
 
   // auth
   signIn: (username: string) => void
@@ -182,11 +187,34 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [pendingAction, setPendingAction] = useState<
     AppContextValue['pendingAction']
   >(null)
+  const [offersLang, setOffersLang] = useState<OffersLang>('en')
   const [detailModalToolId, setDetailModalToolId] = useState<string | null>(null)
   const [detailModalRepoId, setDetailModalRepoId] = useState<string | null>(null)
   const [detailModalCourseId, setDetailModalCourseId] = useState<string | null>(null)
   const openDetailModalForCourse = useCallback((id: string) => setDetailModalCourseId(id), [])
   const closeDetailModalForCourse = useCallback(() => setDetailModalCourseId(null), [])
+
+  // Hydrate lang from localStorage + URL ?lang=ar
+  useEffect(() => {
+    try {
+      const urlLang = new URLSearchParams(window.location.search).get('lang') as OffersLang | null
+      if (urlLang === 'ar' || urlLang === 'en') setOffersLang(urlLang)
+      else {
+        const saved = localStorage.getItem('ai-hunt-offers-lang') as OffersLang | null
+        if (saved === 'ar' || saved === 'en') setOffersLang(saved)
+      }
+    } catch {}
+  }, [])
+  useEffect(() => {
+    try { localStorage.setItem('ai-hunt-offers-lang', offersLang); } catch {}
+    // keep URL in sync without reload
+    try {
+      const url = new URL(window.location.href)
+      if (offersLang === 'ar') url.searchParams.set('lang', 'ar')
+      else url.searchParams.delete('lang')
+      window.history.replaceState({}, '', url.toString())
+    } catch {}
+  }, [offersLang])
 
   // Hydrate from localStorage on mount
   useEffect(() => {
@@ -686,6 +714,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     comments: state.comments,
     currentUser,
     recentSearches: state.recentSearches,
+    offersLang,
+    setOffersLang,
     signIn,
     signOut,
     getUser,

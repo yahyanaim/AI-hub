@@ -10,41 +10,47 @@ import { useApp } from '@/lib/store'
 import { cn } from '@/lib/utils'
 import type { Offer } from '@/types'
 
-export function OfferCard({ offer, className }: { offer: Offer; className?: string }) {
-  const { getUser } = useApp()
+export function OfferCard({ offer, className, lang }: { offer: Offer; className?: string; lang?: 'en' | 'ar' }) {
+  const { getUser, offersLang } = useApp()
   const submitter = getUser(offer.submittedBy)
+  const l = lang ?? offersLang
+  const isAr = l === 'ar'
+  const displayName = isAr && offer.nameAr ? offer.nameAr : offer.name
+  const displayTagline = isAr && offer.taglineAr ? offer.taglineAr : offer.tagline
+  const displayDesc = isAr && offer.descriptionAr ? offer.descriptionAr : offer.description
 
   return (
     <article
+      dir={isAr ? 'rtl' : 'ltr'}
       className={cn(
         'group relative flex cursor-pointer flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
         className
       )}
-      aria-label={`${offer.name} — open details`}
+      aria-label={`${displayName} — open details`}
     >
       <Link
-        href={`/offers/${offer.slug}`}
+        href={`/offers/${offer.slug}${isAr ? '?lang=ar' : ''}`}
         className="absolute inset-0 z-10"
-        aria-label={`${offer.name} — open details`}
+        aria-label={`${displayName} — open details`}
       >
-        <span className="sr-only">{offer.name}</span>
+        <span className="sr-only">{displayName}</span>
       </Link>
 
       <div className="relative mb-3 flex items-start gap-3.5">
-        <Logo src={offer.logoUrl} name={offer.name} size={56} />
+        <Logo src={offer.logoUrl} name={displayName} size={56} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
             <h3 className="truncate font-heading text-base font-bold text-foreground transition-colors group-hover:text-brand-orange">
-              {offer.name}
+              {displayName}
             </h3>
           </div>
           <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">
-            {offer.tagline}
+            {displayTagline}
           </p>
           <div className="mt-1 flex items-center gap-3 text-xs text-muted-foreground">
             <span className="flex items-center gap-1">
               <ListChecks className="h-3.5 w-3.5" />
-              {offer.steps.length} steps
+              {(isAr && offer.stepsAr ? offer.stepsAr.length : offer.steps.length)} {isAr ? 'خطوات' : 'steps'}
             </span>
             {offer.featured && (
               <span className={cn(
@@ -64,7 +70,7 @@ export function OfferCard({ offer, className }: { offer: Offer; className?: stri
       </div>
 
       <p className="mb-4 line-clamp-2 min-h-[2.5rem] text-sm leading-relaxed text-muted-foreground">
-        {offer.description}
+        {displayDesc}
       </p>
 
       <div className="mt-auto flex items-center justify-between border-t border-border/50 pt-3">

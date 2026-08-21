@@ -252,6 +252,11 @@ export interface Offer {
   featured: boolean
   createdAt: string
   updatedAt: string
+  // Arabic (Option A - bilingual offers)
+  nameAr?: string
+  taglineAr?: string
+  descriptionAr?: string
+  stepsAr?: OfferStep[]
 }
 
 export interface User {

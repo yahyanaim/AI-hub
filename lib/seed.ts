@@ -41677,6 +41677,35 @@ export const SEED_OFFERS: Offer[] = [
           'US (Pro): 4× Gemini limits, 5 TB storage, Gemini Spark (agent builder), Gemini Omni, Gemini in Gmail/Docs/Sheets/Slides & Gemini Live. Global (Plus): 2× limits, 400 GB, Gemini Omni. Turn any notes into study guides, quizzes, summaries or audio podcasts in one click.',
       },
     ],
+    nameAr: 'جيميناي للطلاب',
+    taglineAr: 'جوجل AI Pro مجاناً لمدة سنة (أمريكا: 5TB و 4× جيميناي) أو AI Plus عالمياً (400GB و 2× جيميناي) — للطلاب الجامعيين',
+    descriptionAr: 'عرض جوجل الرسمي لعام 2026 — متاح منذ 19 أغسطس 2026 حتى 31 ديسمبر 2026. في أمريكا تحصل على Google AI Pro مجاناً لمدة 12 شهراً (بقيمة 19.99$ شهرياً): حدود استخدام 4× في جيميناي، 5 تيرابايت تخزين في درايف/صور/جيميل، منصة Gemini Spark، Gemini Omni، جيميناي في جيميل/دوكس/شيتس، Google Health Premium، ومركز الطالب الجديد (دفاتر دراسية بخطط تعلم مخصصة، مرئيات تفاعلية، اختبارات شخصية وتتبع الأداء) مع تحميلات غير محدودة و Gemini Live. خارج أمريكا (160+ دولة تشمل المغرب والشرق الأوسط وأوروبا) تحصل على Google AI Plus مجاناً: حدود 2×، 400GB، Gemini Omni ونفس مركز الطالب. يجب أن تكون 18+ ويتم التحقق سنوياً عبر SheerID ببريدك الجامعي .edu أو بطاقة الطالب، مع بطاقة دفع — يتجدد تلقائياً إلا إذا ألغيت.',
+    stepsAr: [
+      {
+        title: 'اختر مركز الطلاب المناسب',
+        description: 'طلاب أمريكا: افتح gemini.google/us/students (AI Pro). باقي الدول (بما فيها المغرب): افتح gemini.google/students واختر بلدك/لغتك — ستحصل على AI Plus. كلا الصفحتين بها زر "Claim Free Student Plan".',
+        url: 'https://gemini.google/students/',
+      },
+      {
+        title: 'اضغط "Claim" وتحقق عبر SheerID',
+        description: 'سيتم نقلك إلى one.google.com/ai-student → SheerID. تحقق ببريدك الجامعي (.edu) أو خطاب التسجيل أو بطاقة الطالب. يجب أن تكون 18+ ومسجلاً في جامعة معتمدة. التحقق السنوي مطلوب للتجديد.',
+        url: 'https://one.google.com/ai-student?plans=1%2C2',
+      },
+      {
+        title: 'أضف بطاقة دفع واسترد العرض (قبل 31 ديسمبر 2026)',
+        description: 'بطاقة صالحة مطلوبة رغم أن السنة مجانية. أمريكا: سيتم تحصيل 19.99$ بعد 12 شهراً، عالمياً بسعر Plus المحلي. يمكنك الإلغاء قبل التجديد لتجنب الرسوم.',
+        url: 'https://one.google.com/offer/studentoffer8?g1_landing_page=0',
+      },
+      {
+        title: 'افتح مركز الطالب في جيميناي',
+        description: 'اذهب إلى gemini.google.com → Student hub. ارفع المناهج والملاحظات والـ PDF: ينشئ جيميناي دفتر دراسة مخصص، خطة تعلم، مرئيات تفاعلية، اختبارات وتتبع أداء — تحميلات غير محدودة.',
+        url: 'https://gemini.google.com',
+      },
+      {
+        title: 'استخدم Pro/Plus في كل مكان',
+        description: 'أمريكا (Pro): حدود 4×، 5TB، Spark، Omni، جيميناي في جيميل/دوكس/Live. عالمياً (Plus): حدود 2×، 400GB، Omni. حوّل أي ملاحظات إلى أدلة دراسية واختبارات وملخصات وبودكاست صوتي.',
+      },
+    ],
     upvotes: 42,
     bookmarks: 56,
     submittedBy: 'u6',
@@ -41772,6 +41801,34 @@ export const SEED_OFFERS: Offer[] = [
         title: 'Renew annually & keep your proof',
         description:
           'Student status lasts ~12 months and is renewable while enrolled. Set a reminder to re-verify with a new enrollment letter. You keep domains/credits earned during the term even after graduation.',
+      },
+    ],
+    nameAr: 'حزمة مطور الطلاب من GitHub',
+    taglineAr: 'أكثر من 20 أداة مطور مجاناً أثناء الدراسة — Copilot و Codespaces ودومين واستضافة (قيمة +200 ألف $)',
+    descriptionAr: 'الحزمة المرجعية للطلاب — يتحقق الطلاب ويحصلون مجاناً على 20+ أداة مميزة: GitHub Copilot Pro مجاناً أثناء الدراسة، Codespaces، دومين Namecheap سنة + SSL، رصيد DigitalOcean 200$، JetBrains عبر الحزمة، إعفاء رسوم Stripe، 1Password والمزيد. قابلة للتجديد أثناء الدراسة. يتحقق GitHub عبر بريد .edu أو بطاقة الطالب أو خطاب التسجيل. غير الطلاب يمكنهم التسجيل في كلية مجتمع معتمدة (CC أمريكية ~40$ تحصل على .edu حقيقي + هوية خلال 2-3 أيام).',
+    stepsAr: [
+      {
+        title: 'تحقق من الأهلية (13+ ومسجل)',
+        description: 'يجب أن تكون 13+ ومسجلاً في شهادة/دبلوم في مدرسة معتمدة. المدارس والجامعات مؤهلة. يمكن للأساتذة التقديم عبر GitHub Education للمعلمين.',
+        url: 'https://education.github.com/pack',
+      },
+      {
+        title: 'جهّز إثبات الطالب — مساران',
+        description: 'طالب: استخدم بريدك .edu أو جهّز ملفاً: بطاقة الطالب + خطاب/كشف تسجيل باسمك الكامل واسم المدرسة والتاريخ الحالي. غير طالب: سجّل في كلية مجتمع معتمدة (Dallas College، LA City College) لمقرر واحد رخيص — ستحصل على .edu حقيقي وهوية وخطاب خلال 24-72 ساعة.',
+        url: 'https://education.github.com/pack/join',
+      },
+      {
+        title: 'قدّم في GitHub Education',
+        description: 'اذهب إلى education.github.com/pack → "Get benefits". سجّل دخولك، أدخل اسم المدرسة، تحقق ببريد .edu (فوري) أو "Use school-issued ID" لرفع ملفاتك. الموافقة خلال ساعات إلى يومين.',
+        url: 'https://education.github.com/pack/join',
+      },
+      {
+        title: 'اربط واطلب كل عرض شريك',
+        description: 'بعد الموافقة، مرّر الصفحة واضغط كل ميزة → "Get access". Copilot يتفعل فوراً. Namecheap/DigitalOcean يتطلبان حساباً بنفس البريد وربطه عبر صفحة الحزمة.',
+      },
+      {
+        title: 'جدّد سنوياً واحتفظ بالإثبات',
+        description: 'حالة الطالب 12 شهراً قابلة للتجديد أثناء التسجيل. ضع تذكيراً لإعادة التحقق بخطاب جديد. تحتفظ بالدومينات والأرصدة المكتسبة حتى بعد التخرج.',
       },
     ],
     upvotes: 68,
@@ -42337,6 +42394,28 @@ export const SEED_OFFERS: Offer[] = [
           'License is 12 months. 2 weeks before expiry JetBrains emails — just re-upload fresh enrollment proof to renew.',
       },
     ],
+    nameAr: 'حزمة JetBrains للطلاب',
+    taglineAr: 'جميع IDEs من JetBrains مجاناً لمدة سنة قابلة للتجديد — IntelliJ و PyCharm و WebStorm و Rider',
+    descriptionAr: 'تمنح JetBrains الطلاب وصولاً مجانياً لكل IDEs الـ 15+ (IntelliJ Ultimate، PyCharm Pro، WebStorm، Rider، GoLand...) لسنة قابلة للتجديد. تحقق عبر .edu أو ملف (بطاقة + خطاب تسجيل). غير الطلاب يمكنهم التسجيل في كلية مجتمع — تقبل JetBrains خطاب التسجيل + البطاقة دون تدقيق صارم للنطاق.',
+    stepsAr: [
+      {
+        title: 'قدّم في JetBrains',
+        description: 'اذهب إلى jetbrains.com/shop/eform/students → "Apply".',
+        url: 'https://www.jetbrains.com/shop/eform/students',
+      },
+      {
+        title: 'أثبت التسجيل — خياران',
+        description: 'الخيار 1: بريد جامعي .edu → فوري. الخيار 2: "Official document" → ارفع بطاقة الطالب + خطاب/كشف تسجيل باسمك والمدرسة والتاريخ. غير طالب: سجّل في CC لمقرر واحد → احصل على البطاقة والكشف وارفعه عبر الخيار 2.',
+      },
+      {
+        title: 'فعّل الترخيص في Toolbox',
+        description: 'بعد الموافقة، تصلك رسالة حساب JetBrains. ثبّت Toolbox App → سجّل دخولك → ستظهر كل IDEs "Licensed".',
+      },
+      {
+        title: 'جدّد قبل الانتهاء',
+        description: 'الترخيص 12 شهراً. قبل أسبوعين ترسل JetBrains تنبيهاً — فقط أعد رفع إثبات جديد للتجديد.',
+      },
+    ],
     upvotes: 52,
     bookmarks: 58,
     submittedBy: 'u6',
@@ -42414,6 +42493,24 @@ export const SEED_OFFERS: Offer[] = [
         title: 'Enable Notion AI free',
         description:
           'In same Education page, toggle “Notion AI” free. Works while your Plus is active. Invite friends with .edu to give them Plus too.',
+      },
+    ],
+    nameAr: 'نوشن للطلاب Plus',
+    taglineAr: 'نوشن Plus + الذكاء الاصطناعي مجاناً للطلاب — بلوكات وتحميلات غير محدودة',
+    descriptionAr: 'يمنح نوشن الطلاب خطة Plus مجاناً: بلوكات وتحميلات ملفات غير محدودة، سجل 100GB+، و Notion AI مجاناً (عادة 8$ شهرياً). يتحقق فوراً عبر بريد .edu. غير الطلاب يمكنهم الحصول عليه بأي بريد .edu لكلية مجتمع (تحقق بالبريد فقط).',
+    stepsAr: [
+      {
+        title: 'أنشئ حساب نوشن ببريد .edu',
+        description: 'سجّل في notion.so ببريدك .edu (أو غيّر البريد في الإعدادات). غير طالب: أنشئ بريد .edu من كلية مجتمع واستخدمه — التحقق بالبريد فقط.',
+        url: 'https://www.notion.com/product/notion-for-education',
+      },
+      {
+        title: 'اطلب خطة التعليم',
+        description: 'اذهب إلى الإعدادات → الترقية → التعليم → "احصل على خطة التعليم مجاناً". يكتشف نوشن نطاق .edu ويرقيك فوراً إلى Plus.',
+      },
+      {
+        title: 'فعّل Notion AI مجاناً',
+        description: 'في نفس صفحة التعليم، فعّل Notion AI مجاناً. يعمل طالما Plus نشط. ادعُ أصدقاء ببريد .edu ليحصلوا على Plus أيضاً.',
       },
     ],
     upvotes: 39,
