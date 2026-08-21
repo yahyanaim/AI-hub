@@ -196,6 +196,10 @@ export interface Course {
   featured: boolean
   createdAt: string
   updatedAt: string
+  nameAr?: string
+  taglineAr?: string
+  descriptionAr?: string
+  stepsAr?: RoadmapStep[]
 }
 
 export interface Repo {
