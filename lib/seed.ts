@@ -44186,7 +44186,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply as non-degree / dual-enrollment student (15 min) — IMPORTANT: disable VPN for OpenCCC',
         description:
-          'On the CC site click Apply → OpenCCC (California) or Dallas College App. Select “Non-degree / Personal Enrichment”. Use your real name + passport; address can be your home country + US forwarder if asked. No essay needed. ⚠️ OpenCCCApply (home.cccapply.org) BLOCKS VPN/proxy/Tor — you will see “proxy connection detected” error 1775… if you use VPN/anonymizer. Disable VPN, Tor, and anonymizing plugins, use your normal residential IP or mobile data for this step only. If you must use VPN (Morocco), pick Dallas College, Houston CC, or BMCC instead — they do NOT use OpenCCC and work fine with VPN.',
+          'On the CC site click Apply → OpenCCC (California) or Dallas College App. Select “Non-degree / Personal Enrichment”. Use your real name + passport; address can be your home country + US forwarder if asked. No essay needed. ⚠️ OpenCCCApply (home.cccapply.org) BLOCKS VPN/proxy/Tor — you will see “proxy connection detected” error 1775… if you use VPN/anonymizer. Disable VPN, Tor, anonymizing plugins, iCloud Private Relay (Settings → iCloud → Private Relay OFF on iPhone/Mac), and ad-blockers (uBlock/Privacy Badger/AdGuard), use your normal residential IP or mobile data for this step only — try incognito Chrome with no extensions or switch WiFi ↔ mobile data. Maroc Telecom/Orange/Inwi sometimes use transparent proxy that triggers this even without VPN. If you must use VPN (Morocco), pick Dallas College, Houston CC, or BMCC instead — they do NOT use OpenCCC and work fine with VPN.',
       },
       {
         title: 'Enroll in 1 cheap online course ($0-$60)',
@@ -44220,7 +44220,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'قدّم كطالب غير متفرغ (15 دقيقة) — مهم: عطّل VPN لـ OpenCCC',
-        description: 'اضغط Apply → OpenCCC (كاليفورنيا) أو Dallas App. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. ⚠️ OpenCCC يحظر VPN/البروكسي/Tor — ستظهر رسالة "proxy connection detected" خطأ 1775… إذا استخدمت VPN. عطّل VPN/Tor والإضافات المجهولة واستخدم اتصالك العادي أو بيانات الهاتف لهذه الخطوة فقط. إذا كنت مضطراً لاستخدام VPN في المغرب، اختر Dallas College أو Houston CC أو BMCC — لا تستخدم OpenCCC وتعمل مع VPN.',
+        description: 'اضغط Apply → OpenCCC (كاليفورنيا) أو Dallas App. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. ⚠️ OpenCCC يحظر VPN/البروكسي/Tor — ستظهر رسالة "proxy connection detected" خطأ 1775… إذا استخدمت VPN. عطّل VPN/Tor و iCloud Private Relay (الإعدادات → iCloud → إيقاف) والإضافات المجهولة وحجب الإعلانات، واستخدم اتصالك العادي أو بيانات الهاتف — جرّب متصفحاً خاصاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. مزودو المغرب أحياناً يستخدمون بروكسي شفاف يسبب الحظر حتى بدون VPN. إذا كنت مضطراً لاستخدام VPN في المغرب، اختر Dallas College أو Houston CC أو BMCC — لا تستخدم OpenCCC وتعمل مع VPN.',
       },
       {
         title: 'سجّل في مقرر واحد رخيص ($0-$60)',
@@ -44262,7 +44262,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Dallas College (15 min)',
         description:
-          'Go to https://www.dallascollege.edu/admissions/application → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.dallascollege.edu/admissions/application → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
@@ -44287,7 +44287,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Dallas College',
-        description: 'اذهب إلى https://www.dallascollege.edu/admissions/application → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.dallascollege.edu/admissions/application → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
@@ -44326,7 +44326,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Los Angeles City College (15 min)',
         description:
-          'Go to https://www.lacitycollege.edu/Admissions/Apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.lacitycollege.edu/Admissions/Apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.lacitycollege.edu/Admissions/Apply',
       },
       {
@@ -44351,7 +44351,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Los Angeles City College',
-        description: 'اذهب إلى https://www.lacitycollege.edu/Admissions/Apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.lacitycollege.edu/Admissions/Apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.lacitycollege.edu/Admissions/Apply',
       },
       {
@@ -44390,7 +44390,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Santa Monica College (15 min)',
         description:
-          'Go to https://www.smc.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.smc.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.smc.edu/',
       },
       {
@@ -44415,7 +44415,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Santa Monica College',
-        description: 'اذهب إلى https://www.smc.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.smc.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.smc.edu/',
       },
       {
@@ -44454,7 +44454,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Coastline College (15 min)',
         description:
-          'Go to https://www.coastline.edu/admissions-aid/apply-now.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.coastline.edu/admissions-aid/apply-now.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
       },
       {
@@ -44479,7 +44479,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Coastline College',
-        description: 'اذهب إلى https://www.coastline.edu/admissions-aid/apply-now.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.coastline.edu/admissions-aid/apply-now.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
       },
       {
@@ -44518,7 +44518,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Rio Hondo College (15 min)',
         description:
-          'Go to https://www.riohondo.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.riohondo.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.riohondo.edu/admissions/',
       },
       {
@@ -44543,7 +44543,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Rio Hondo College',
-        description: 'اذهب إلى https://www.riohondo.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.riohondo.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.riohondo.edu/admissions/',
       },
       {
@@ -44582,7 +44582,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to El Camino College (15 min)',
         description:
-          'Go to https://www.elcamino.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.elcamino.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.elcamino.edu/admissions/',
       },
       {
@@ -44607,7 +44607,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى El Camino College',
-        description: 'اذهب إلى https://www.elcamino.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.elcamino.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.elcamino.edu/admissions/',
       },
       {
@@ -44646,7 +44646,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Pasadena City College (15 min)',
         description:
-          'Go to https://pasadena.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://pasadena.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://pasadena.edu/admissions/',
       },
       {
@@ -44671,7 +44671,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Pasadena City College',
-        description: 'اذهب إلى https://pasadena.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://pasadena.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://pasadena.edu/admissions/',
       },
       {
@@ -44710,7 +44710,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Glendale Community College (15 min)',
         description:
-          'Go to https://www.glendale.edu/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.glendale.edu/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.glendale.edu/apply',
       },
       {
@@ -44735,7 +44735,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Glendale Community College',
-        description: 'اذهب إلى https://www.glendale.edu/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.glendale.edu/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.glendale.edu/apply',
       },
       {
@@ -44774,7 +44774,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Cerritos College (15 min)',
         description:
-          'Go to https://www.cerritos.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.cerritos.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.cerritos.edu/admissions/',
       },
       {
@@ -44799,7 +44799,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Cerritos College',
-        description: 'اذهب إلى https://www.cerritos.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.cerritos.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.cerritos.edu/admissions/',
       },
       {
@@ -44838,7 +44838,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Pierce College (15 min)',
         description:
-          'Go to https://www.piercecollege.edu/admissions/apply.asp → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.piercecollege.edu/admissions/apply.asp → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.piercecollege.edu/admissions/apply.asp',
       },
       {
@@ -44863,7 +44863,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Pierce College',
-        description: 'اذهب إلى https://www.piercecollege.edu/admissions/apply.asp → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.piercecollege.edu/admissions/apply.asp → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.piercecollege.edu/admissions/apply.asp',
       },
       {
@@ -44902,7 +44902,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Cypress College (15 min)',
         description:
-          'Go to https://www.cypresscollege.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.cypresscollege.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.cypresscollege.edu/admissions/apply/',
       },
       {
@@ -44927,7 +44927,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Cypress College',
-        description: 'اذهب إلى https://www.cypresscollege.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.cypresscollege.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.cypresscollege.edu/admissions/apply/',
       },
       {
@@ -44966,7 +44966,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Fullerton College (15 min)',
         description:
-          'Go to https://www.fullcoll.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.fullcoll.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.fullcoll.edu/admissions/',
       },
       {
@@ -44991,7 +44991,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Fullerton College',
-        description: 'اذهب إلى https://www.fullcoll.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.fullcoll.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.fullcoll.edu/admissions/',
       },
       {
@@ -45030,7 +45030,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Orange Coast College (15 min)',
         description:
-          'Go to https://www.orangecoastcollege.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.orangecoastcollege.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.orangecoastcollege.edu/admissions',
       },
       {
@@ -45055,7 +45055,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Orange Coast College',
-        description: 'اذهب إلى https://www.orangecoastcollege.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.orangecoastcollege.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.orangecoastcollege.edu/admissions',
       },
       {
@@ -45094,7 +45094,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Irvine Valley College (15 min)',
         description:
-          'Go to https://www.ivc.edu/admissions/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.ivc.edu/admissions/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.ivc.edu/admissions/apply',
       },
       {
@@ -45119,7 +45119,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Irvine Valley College',
-        description: 'اذهب إلى https://www.ivc.edu/admissions/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.ivc.edu/admissions/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.ivc.edu/admissions/apply',
       },
       {
@@ -45158,7 +45158,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Saddleback College (15 min)',
         description:
-          'Go to https://www.saddleback.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.saddleback.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.saddleback.edu/admissions',
       },
       {
@@ -45183,7 +45183,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Saddleback College',
-        description: 'اذهب إلى https://www.saddleback.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.saddleback.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.saddleback.edu/admissions',
       },
       {
@@ -45222,7 +45222,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Palomar College (15 min)',
         description:
-          'Go to https://www.palomar.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.palomar.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.palomar.edu/admissions',
       },
       {
@@ -45247,7 +45247,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Palomar College',
-        description: 'اذهب إلى https://www.palomar.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.palomar.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.palomar.edu/admissions',
       },
       {
@@ -45286,7 +45286,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to MiraCosta College (15 min)',
         description:
-          'Go to https://www.miracosta.edu/admissions/apply.html → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.miracosta.edu/admissions/apply.html → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.miracosta.edu/admissions/apply.html',
       },
       {
@@ -45311,7 +45311,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى MiraCosta College',
-        description: 'اذهب إلى https://www.miracosta.edu/admissions/apply.html → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.miracosta.edu/admissions/apply.html → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.miracosta.edu/admissions/apply.html',
       },
       {
@@ -45350,7 +45350,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Southwestern College (15 min)',
         description:
-          'Go to https://www.swccd.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.swccd.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.swccd.edu/admissions/',
       },
       {
@@ -45375,7 +45375,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Southwestern College',
-        description: 'اذهب إلى https://www.swccd.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.swccd.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.swccd.edu/admissions/',
       },
       {
@@ -45414,7 +45414,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Berkeley City College (15 min)',
         description:
-          'Go to https://peralta.edu/berkeley/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://peralta.edu/berkeley/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://peralta.edu/berkeley/',
       },
       {
@@ -45439,7 +45439,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Berkeley City College',
-        description: 'اذهب إلى https://peralta.edu/berkeley/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://peralta.edu/berkeley/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://peralta.edu/berkeley/',
       },
       {
@@ -45478,7 +45478,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Diablo Valley College (15 min)',
         description:
-          'Go to https://www.dvc.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.dvc.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.dvc.edu/admissions',
       },
       {
@@ -45503,7 +45503,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Diablo Valley College',
-        description: 'اذهب إلى https://www.dvc.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.dvc.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.dvc.edu/admissions',
       },
       {
@@ -45542,7 +45542,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to De Anza College (15 min)',
         description:
-          'Go to https://www.deanza.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.deanza.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.deanza.edu/',
       },
       {
@@ -45567,7 +45567,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى De Anza College',
-        description: 'اذهب إلى https://www.deanza.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.deanza.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.deanza.edu/',
       },
       {
@@ -45606,7 +45606,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Foothill College (15 min)',
         description:
-          'Go to https://www.foothill.edu/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.foothill.edu/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.foothill.edu/apply/',
       },
       {
@@ -45631,7 +45631,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Foothill College',
-        description: 'اذهب إلى https://www.foothill.edu/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.foothill.edu/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.foothill.edu/apply/',
       },
       {
@@ -45670,7 +45670,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to San Diego City College (15 min)',
         description:
-          'Go to https://www.sdcity.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.sdcity.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.sdcity.edu/',
       },
       {
@@ -45695,7 +45695,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى San Diego City College',
-        description: 'اذهب إلى https://www.sdcity.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.sdcity.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.sdcity.edu/',
       },
       {
@@ -45734,7 +45734,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Borough of Manhattan CC (15 min)',
         description:
-          'Go to https://www.bmcc.cuny.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.bmcc.cuny.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.bmcc.cuny.edu/admissions/apply/',
       },
       {
@@ -45759,7 +45759,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Borough of Manhattan CC',
-        description: 'اذهب إلى https://www.bmcc.cuny.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.bmcc.cuny.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.bmcc.cuny.edu/admissions/apply/',
       },
       {
@@ -45798,7 +45798,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Houston Community College (15 min)',
         description:
-          'Go to https://www.hccs.edu/applying-and-paying/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (DISABLE VPN/proxy/Tor — OpenCCC blocks anonymizing services with error 1775, use residential IP/mobile data), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.hccs.edu/applying-and-paying/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.hccs.edu/applying-and-paying/',
       },
       {
@@ -45823,7 +45823,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Houston Community College',
-        description: 'اذهب إلى https://www.hccs.edu/applying-and-paying/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (عطّل VPN/البروكسي/Tor — يحظره OpenCCC بخطأ 1775، استخدم اتصالك العادي).',
+        description: 'اذهب إلى https://www.hccs.edu/applying-and-paying/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.hccs.edu/applying-and-paying/',
       },
       {
