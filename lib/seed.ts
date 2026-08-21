@@ -44381,7 +44381,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'SMC — top transfer CC, high SheerID acceptance',
     description:
       'Santa Monica College (smc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.smc.edu/admissions/apply.php',
+    url: 'https://www.smc.edu/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=smc.edu&sz=64',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'smc', 'us-cc', 'open-admission'],
@@ -44390,8 +44390,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Santa Monica College (15 min)',
         description:
-          'Go to https://www.smc.edu/admissions/apply.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.smc.edu/admissions/apply.php',
+          'Go to https://www.smc.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.smc.edu/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -44415,8 +44415,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Santa Monica College',
-        description: 'اذهب إلى https://www.smc.edu/admissions/apply.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.smc.edu/admissions/apply.php',
+        description: 'اذهب إلى https://www.smc.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.smc.edu/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -44509,7 +44509,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Rio Hondo — OpenCCC, low fees, quick ID',
     description:
       'Rio Hondo College (riohondo.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.riohondo.edu/admissions/apply-now/',
+    url: 'https://www.riohondo.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/riohondo.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'riohondo', 'us-cc', 'open-admission'],
@@ -44518,8 +44518,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Rio Hondo College (15 min)',
         description:
-          'Go to https://www.riohondo.edu/admissions/apply-now/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.riohondo.edu/admissions/apply-now/',
+          'Go to https://www.riohondo.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.riohondo.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -44543,8 +44543,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Rio Hondo College',
-        description: 'اذهب إلى https://www.riohondo.edu/admissions/apply-now/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.riohondo.edu/admissions/apply-now/',
+        description: 'اذهب إلى https://www.riohondo.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.riohondo.edu/admissions/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -44573,7 +44573,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'El Camino — $46/unit, Microsoft 365 .EDU',
     description:
       'El Camino College (elcamino.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.elcamino.edu/admissions/apply/',
+    url: 'https://www.elcamino.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/www.elcamino.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'elcamino', 'us-cc', 'open-admission'],
@@ -44582,8 +44582,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to El Camino College (15 min)',
         description:
-          'Go to https://www.elcamino.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.elcamino.edu/admissions/apply/',
+          'Go to https://www.elcamino.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.elcamino.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -44607,8 +44607,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى El Camino College',
-        description: 'اذهب إلى https://www.elcamino.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.elcamino.edu/admissions/apply/',
+        description: 'اذهب إلى https://www.elcamino.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.elcamino.edu/admissions/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -44637,7 +44637,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Pasadena City — large CA CC, auto .EDU',
     description:
       'Pasadena City College (pasadena.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://pasadena.edu/admissions/apply.php',
+    url: 'https://pasadena.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/pasadena.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'pasadena', 'us-cc', 'open-admission'],
@@ -44646,8 +44646,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Pasadena City College (15 min)',
         description:
-          'Go to https://pasadena.edu/admissions/apply.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://pasadena.edu/admissions/apply.php',
+          'Go to https://pasadena.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://pasadena.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -44671,8 +44671,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Pasadena City College',
-        description: 'اذهب إلى https://pasadena.edu/admissions/apply.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://pasadena.edu/admissions/apply.php',
+        description: 'اذهب إلى https://pasadena.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://pasadena.edu/admissions/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -44765,7 +44765,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Cerritos — $46/unit, SheerID OK',
     description:
       'Cerritos College (cerritos.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.cerritos.edu/admissions/apply.php',
+    url: 'https://www.cerritos.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/www.cerritos.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'cerritos', 'us-cc', 'open-admission'],
@@ -44774,8 +44774,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Cerritos College (15 min)',
         description:
-          'Go to https://www.cerritos.edu/admissions/apply.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.cerritos.edu/admissions/apply.php',
+          'Go to https://www.cerritos.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.cerritos.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -44799,8 +44799,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Cerritos College',
-        description: 'اذهب إلى https://www.cerritos.edu/admissions/apply.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.cerritos.edu/admissions/apply.php',
+        description: 'اذهب إلى https://www.cerritos.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.cerritos.edu/admissions/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45021,7 +45021,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'OCC — Costa Mesa, large, .EDU',
     description:
       'Orange Coast College (orangecoastcollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.orangecoastcollege.edu/admissions/',
+    url: 'https://www.orangecoastcollege.edu/admissions',
     logoUrl: 'https://icons.duckduckgo.com/ip3/orangecoastcollege.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'orangecoastcollege', 'us-cc', 'open-admission'],
@@ -45030,8 +45030,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Orange Coast College (15 min)',
         description:
-          'Go to https://www.orangecoastcollege.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.orangecoastcollege.edu/admissions/',
+          'Go to https://www.orangecoastcollege.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.orangecoastcollege.edu/admissions',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45055,8 +45055,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Orange Coast College',
-        description: 'اذهب إلى https://www.orangecoastcollege.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.orangecoastcollege.edu/admissions/',
+        description: 'اذهب إلى https://www.orangecoastcollege.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.orangecoastcollege.edu/admissions',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45149,7 +45149,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Saddleback — Mission Viejo, .EDU 24h',
     description:
       'Saddleback College (saddleback.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.saddleback.edu/admissions/apply',
+    url: 'https://www.saddleback.edu/admissions',
     logoUrl: 'https://www.google.com/s2/favicons?domain=saddleback.edu&sz=64',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'saddleback', 'us-cc', 'open-admission'],
@@ -45158,8 +45158,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Saddleback College (15 min)',
         description:
-          'Go to https://www.saddleback.edu/admissions/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.saddleback.edu/admissions/apply',
+          'Go to https://www.saddleback.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.saddleback.edu/admissions',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45183,8 +45183,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Saddleback College',
-        description: 'اذهب إلى https://www.saddleback.edu/admissions/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.saddleback.edu/admissions/apply',
+        description: 'اذهب إلى https://www.saddleback.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.saddleback.edu/admissions',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45213,7 +45213,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Palomar — San Diego area, OpenCCC',
     description:
       'Palomar College (palomar.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.palomar.edu/apply/',
+    url: 'https://www.palomar.edu/admissions',
     logoUrl: 'https://icons.duckduckgo.com/ip3/palomar.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'palomar', 'us-cc', 'open-admission'],
@@ -45222,8 +45222,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Palomar College (15 min)',
         description:
-          'Go to https://www.palomar.edu/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.palomar.edu/apply/',
+          'Go to https://www.palomar.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.palomar.edu/admissions',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45247,8 +45247,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Palomar College',
-        description: 'اذهب إلى https://www.palomar.edu/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.palomar.edu/apply/',
+        description: 'اذهب إلى https://www.palomar.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.palomar.edu/admissions',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45341,7 +45341,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Southwestern College — Chula Vista, $46/unit',
     description:
       'Southwestern College (swccd.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.swccd.edu/admissions/apply.aspx',
+    url: 'https://www.swccd.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/swccd.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'swccd', 'us-cc', 'open-admission'],
@@ -45350,8 +45350,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Southwestern College (15 min)',
         description:
-          'Go to https://www.swccd.edu/admissions/apply.aspx → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.swccd.edu/admissions/apply.aspx',
+          'Go to https://www.swccd.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.swccd.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45375,8 +45375,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Southwestern College',
-        description: 'اذهب إلى https://www.swccd.edu/admissions/apply.aspx → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.swccd.edu/admissions/apply.aspx',
+        description: 'اذهب إلى https://www.swccd.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.swccd.edu/admissions/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45405,7 +45405,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Berkeley City — Peralta district, Bay Area .EDU',
     description:
       'Berkeley City College (peralta.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://peralta.edu/berkeley/admissions',
+    url: 'https://peralta.edu/berkeley/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/peralta.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'peralta', 'us-cc', 'open-admission'],
@@ -45414,8 +45414,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Berkeley City College (15 min)',
         description:
-          'Go to https://peralta.edu/berkeley/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://peralta.edu/berkeley/admissions',
+          'Go to https://peralta.edu/berkeley/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://peralta.edu/berkeley/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45439,8 +45439,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Berkeley City College',
-        description: 'اذهب إلى https://peralta.edu/berkeley/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://peralta.edu/berkeley/admissions',
+        description: 'اذهب إلى https://peralta.edu/berkeley/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://peralta.edu/berkeley/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45469,7 +45469,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'DVC — Pleasant Hill, high GitHub acceptance',
     description:
       'Diablo Valley College (dvc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.dvc.edu/enrollment/apply.html',
+    url: 'https://www.dvc.edu/admissions',
     logoUrl: 'https://icons.duckduckgo.com/ip3/dvc.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'dvc', 'us-cc', 'open-admission'],
@@ -45478,8 +45478,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Diablo Valley College (15 min)',
         description:
-          'Go to https://www.dvc.edu/enrollment/apply.html → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.dvc.edu/enrollment/apply.html',
+          'Go to https://www.dvc.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.dvc.edu/admissions',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45503,8 +45503,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Diablo Valley College',
-        description: 'اذهب إلى https://www.dvc.edu/enrollment/apply.html → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.dvc.edu/enrollment/apply.html',
+        description: 'اذهب إلى https://www.dvc.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.dvc.edu/admissions',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45533,7 +45533,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'De Anza — Cupertino/Silicon Valley, .EDU',
     description:
       'De Anza College (deanza.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.deanza.edu/apply-and-register/',
+    url: 'https://www.deanza.edu/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/deanza.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'deanza', 'us-cc', 'open-admission'],
@@ -45542,8 +45542,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to De Anza College (15 min)',
         description:
-          'Go to https://www.deanza.edu/apply-and-register/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.deanza.edu/apply-and-register/',
+          'Go to https://www.deanza.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.deanza.edu/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45567,8 +45567,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى De Anza College',
-        description: 'اذهب إلى https://www.deanza.edu/apply-and-register/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.deanza.edu/apply-and-register/',
+        description: 'اذهب إلى https://www.deanza.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.deanza.edu/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45661,7 +45661,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'SD City College — San Diego, .EDU',
     description:
       'San Diego City College (sdcity.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.sdcity.edu/admissions/apply.aspx',
+    url: 'https://www.sdcity.edu/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=sdcity.edu&sz=64',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'sdcity', 'us-cc', 'open-admission'],
@@ -45670,8 +45670,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to San Diego City College (15 min)',
         description:
-          'Go to https://www.sdcity.edu/admissions/apply.aspx → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.sdcity.edu/admissions/apply.aspx',
+          'Go to https://www.sdcity.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.sdcity.edu/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45695,8 +45695,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى San Diego City College',
-        description: 'اذهب إلى https://www.sdcity.edu/admissions/apply.aspx → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.sdcity.edu/admissions/apply.aspx',
+        description: 'اذهب إلى https://www.sdcity.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.sdcity.edu/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -45789,7 +45789,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'HCC — Houston, TX, .EDU + Canvas',
     description:
       'Houston Community College (hccs.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://www.hccs.edu/applying-and-paying/application/',
+    url: 'https://www.hccs.edu/applying-and-paying/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/hccs.edu.ico',
     category: 'guide',
     tags: ['cc', 'edu', 'college', 'hccs', 'us-cc', 'open-admission'],
@@ -45798,8 +45798,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Houston Community College (15 min)',
         description:
-          'Go to https://www.hccs.edu/applying-and-paying/application/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
-        url: 'https://www.hccs.edu/applying-and-paying/application/',
+          'Go to https://www.hccs.edu/applying-and-paying/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account, for Texas use Dallas/CUNY portal.',
+        url: 'https://www.hccs.edu/applying-and-paying/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -45823,8 +45823,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Houston Community College',
-        description: 'اذهب إلى https://www.hccs.edu/applying-and-paying/application/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
-        url: 'https://www.hccs.edu/applying-and-paying/application/',
+        description: 'اذهب إلى https://www.hccs.edu/applying-and-paying/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC.',
+        url: 'https://www.hccs.edu/applying-and-paying/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
