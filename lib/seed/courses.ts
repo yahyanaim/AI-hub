@@ -4030,7 +4030,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'beginner',
-    duration: 'Self-paced (100 days)',
+    duration: '~150h',
     roadmap: [
       { title: 'Days 1–15: Python foundations', topics: ['Syntax & data types', 'Functions & OOP', 'Strings, files, exceptions'], duration: '~2 weeks' },
       { title: 'Days 16–45: Applied Python', topics: ['Advanced language features', 'Databases & MySQL', 'Concurrent programming'], duration: '~4 weeks' },
@@ -4056,7 +4056,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'beginner',
-    duration: 'Self-paced (~15h)',
+    duration: '~15h',
     roadmap: [
       { title: 'LLM fundamentals', topics: ['How LLMs work', 'Prompt engineering', 'Responsible AI'], duration: 'Lessons 1–7' },
       { title: 'Building applications', topics: ['Text & chat apps', 'Function calling', 'Search + vector DBs'], duration: 'Lessons 8–13' },
@@ -4081,7 +4081,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'advanced',
-    duration: 'Self-paced (~40h)',
+    duration: '~40h',
     roadmap: [
       { title: 'Foundations', topics: ['PyTorch refresher', 'Tokenization & embeddings', 'Attention mechanism'], duration: 'Ch. 1–3' },
       { title: 'Architecture', topics: ['GPT transformer from scratch', 'Pretraining loop', 'Evaluation'], duration: 'Ch. 4–5' },
@@ -4106,7 +4106,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'beginner',
-    duration: 'Self-paced (12 weeks)',
+    duration: '~48h',
     roadmap: [
       { title: 'Intro & data', topics: ['ML history & fairness', 'Data handling with NumPy/pandas', 'Data visualization'], duration: 'Weeks 1–3' },
       { title: 'Core algorithms', topics: ['Linear & logistic regression', 'Decision trees & clustering', 'Classification metrics'], duration: 'Weeks 4–8' },
@@ -4131,7 +4131,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'intermediate',
-    duration: 'Self-paced (reference)',
+    duration: '~20h',
     roadmap: [
       { title: 'Core patterns', topics: ['Chat completions done right', 'Function/tool calling', 'Structured outputs'], duration: 'Start here' },
       { title: 'Retrieval', topics: ['Embeddings & search', 'RAG recipes', 'Caching & cost control'], duration: 'Build phase' },
@@ -4156,7 +4156,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'advanced',
-    duration: 'Self-paced (~25h)',
+    duration: '~25h',
     roadmap: [
       { title: 'Concepts', topics: ['Diffusion models intuition', 'Latent vs pixel space', 'Conditioning (CLIP)'], duration: 'Paper + code reading' },
       { title: 'Hands-on', topics: ['Running inference locally', 'Samplers & schedulers', 'img2img & inpainting'], duration: 'Experiments' },
@@ -4181,7 +4181,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'intermediate',
-    duration: 'Self-paced (~12h)',
+    duration: '~12h',
     roadmap: [
       { title: 'Agent foundations', topics: ['What makes an agent', 'Agentic design patterns', 'Tool use'], duration: 'Lessons 1–4' },
       { title: 'Frameworks', topics: ['AutoGen', 'Semantic Kernel', 'Azure AI Agent Service'], duration: 'Lessons 5–8' },
@@ -4206,7 +4206,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'beginner',
-    duration: 'Self-paced (12 weeks)',
+    duration: '~48h',
     roadmap: [
       { title: 'Classical AI & symbolic', topics: ['Knowledge representation', 'Search strategies', 'Genetic algorithms'], duration: 'Weeks 1–3' },
       { title: 'Neural networks & vision', topics: ['Perceptrons → CNNs', 'PyTorch/TensorFlow labs', 'Object detection & segmentation'], duration: 'Weeks 4–8' },
@@ -4231,7 +4231,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'intermediate',
-    duration: 'Self-paced (~18h)',
+    duration: '~18h',
     roadmap: [
       { title: 'Live RAG', topics: ['Real-time indexing', 'Document sync pipelines', 'Vector stores in motion'], duration: 'Templates 1–6' },
       { title: 'Enterprise patterns', topics: ['Document knowledge bases', 'Private/internal search', 'Observability hooks'], duration: 'Templates 7–14' },
@@ -4256,7 +4256,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128',
     category: 'learn-from-repos',
     difficulty: 'advanced',
-    duration: 'Self-paced (~15h)',
+    duration: '~15h',
     roadmap: [
       { title: 'Understand SAM', topics: ['Promptable segmentation concept', 'Model & data engine design', 'Zero-shot behavior'], duration: 'Paper first' },
       { title: 'Hands-on', topics: ['Install & run checkpoints', 'Point/box prompts', 'Automatic mask generation'], duration: 'Inference lab' },
