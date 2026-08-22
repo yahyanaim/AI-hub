@@ -173,7 +173,7 @@ export function RepoDetail({ slug }: { slug: string }) {
             <h1 className="font-heading text-3xl font-bold tracking-tight">
               {repo.name}
             </h1>
-            <p className="mt-2 max-w-2xl text-base text-muted-foreground">
+            <p className="mt-2 w-full text-base leading-relaxed text-muted-foreground">
               {repo.tagline}
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-2">

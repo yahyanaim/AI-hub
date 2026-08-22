@@ -78,7 +78,7 @@ export function DevToolDetail({ slug }: { slug: string }) {
                 </span>
               )}
             </div>
-            <p className="mt-2 max-w-2xl text-base text-muted-foreground">
+            <p className="mt-2 w-full text-base leading-relaxed text-muted-foreground">
               {devtool.tagline}
             </p>
 

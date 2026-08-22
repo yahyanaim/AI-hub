@@ -89,7 +89,7 @@ export function ToolDetail({
                 </span>
               )}
             </div>
-            <p className="mt-2 max-w-2xl text-base text-muted-foreground">
+            <p className="mt-2 w-full text-base leading-relaxed text-muted-foreground">
               {tool.tagline}
             </p>
 
