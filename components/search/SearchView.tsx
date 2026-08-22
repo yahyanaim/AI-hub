@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Search, SearchX, X } from 'lucide-react'
 import { useApp } from '@/lib/store'
@@ -8,13 +8,15 @@ import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
 import { CourseCard } from '@/components/cards/CourseCard'
+import { OfferCard } from '@/components/cards/OfferCard'
 import {
   TOOL_CATEGORY_LABELS,
   DEVTOOL_CATEGORY_LABELS,
   REPO_CATEGORY_LABELS,
   COURSE_CATEGORY_LABELS,
+  OFFER_CATEGORY_LABELS,
 } from '@/types'
-import type { Tool, DevTool, Repo, Course } from '@/types'
+import type { Tool, DevTool, Repo, Course, Offer } from '@/types'
 import { cn } from '@/lib/utils'
 
 function tokenize(s: string): string[] {
@@ -64,6 +66,7 @@ const TABS = [
   { value: 'devtool', label: 'Dev Tools' },
   { value: 'course', label: 'Courses' },
   { value: 'repo', label: 'Repos' },
+  { value: 'offer', label: 'Offers' },
 ] as const
 
 type TabValue = (typeof TABS)[number]['value']
@@ -71,9 +74,15 @@ type TabValue = (typeof TABS)[number]['value']
 export function SearchView() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const { tools, devTools, courses, repos } = useApp()
+  const { tools, devTools, courses, repos, offers, hydrated } = useApp()
   const [query, setQuery] = useState(searchParams.get('q') ?? '')
   const [tab, setTab] = useState<TabValue>('all')
+
+  // Re-sync input when the URL ?q= changes (e.g. new palette search on same page)
+  const qParam = searchParams.get('q') ?? ''
+  useEffect(() => {
+    setQuery(qParam)
+  }, [qParam])
 
   const q = query.trim().toLowerCase()
   const queryWords = tokenize(q)
@@ -100,6 +109,7 @@ export function SearchView() {
     () =>
       rankItems(courses, queryWords, (c) => [
         c.name, c.tagline, c.description, c.duration, c.difficulty,
+        c.nameAr ?? '', c.taglineAr ?? '', c.descriptionAr ?? '',
         COURSE_CATEGORY_LABELS[c.category as keyof typeof COURSE_CATEGORY_LABELS] ?? '',
         ...(c.roadmap?.flatMap((s) => [s.title, ...(s.topics ?? [])]) ?? []),
       ]),
@@ -115,11 +125,22 @@ export function SearchView() {
     [repos, queryWords],
   )
 
+  const offerResults = useMemo(
+    () =>
+      rankItems(offers, queryWords, (o) => [
+        o.name, o.tagline, o.description, ...o.tags,
+        o.nameAr ?? '', o.taglineAr ?? '', o.descriptionAr ?? '',
+        OFFER_CATEGORY_LABELS[o.category as keyof typeof OFFER_CATEGORY_LABELS] ?? '',
+      ]),
+    [offers, queryWords],
+  )
+
   const total =
     toolResults.length +
     devToolResults.length +
     courseResults.length +
-    repoResults.length
+    repoResults.length +
+    offerResults.length
 
   const showing =
     tab === 'tool'
@@ -130,7 +151,9 @@ export function SearchView() {
           ? courseResults.length
           : tab === 'repo'
             ? repoResults.length
-            : total
+            : tab === 'offer'
+              ? offerResults.length
+              : total
 
   return (
     <div className="container-page py-8">
@@ -195,12 +218,18 @@ export function SearchView() {
         {q && total === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <SearchX className="mb-3 h-10 w-10 text-muted-foreground" />
-            <p className="text-sm text-muted-foreground">
-              No results for &ldquo;{query}&rdquo;.
-            </p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Try a different query or browse the categories.
-            </p>
+            {!hydrated ? (
+              <p className="text-sm text-muted-foreground">Loading library…</p>
+            ) : (
+              <>
+                <p className="text-sm text-muted-foreground">
+                  No results for &ldquo;{query}&rdquo;.
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Try a different query or browse the categories.
+                </p>
+              </>
+            )}
           </div>
         )}
 
@@ -257,6 +286,19 @@ export function SearchView() {
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {repoResults.map((r) => (
                     <RepoCard key={r.id} repo={r} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {(tab === 'all' || tab === 'offer') && offerResults.length > 0 && (
+              <section className="mb-10">
+                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Offers ({offerResults.length})
+                </h2>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {offerResults.map((o) => (
+                    <OfferCard key={o.id} offer={o} />
                   ))}
                 </div>
               </section>

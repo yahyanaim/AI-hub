@@ -12,21 +12,23 @@ import {
   DEVTOOL_CATEGORY_LABELS,
   REPO_CATEGORY_LABELS,
   COURSE_CATEGORY_LABELS,
+  OFFER_CATEGORY_LABELS,
   type Tool,
   type DevTool,
   type Repo,
   type Course,
+  type Offer,
 } from '@/types'
 
 interface SearchResult {
-  type: 'tool' | 'devtool' | 'course' | 'repo'
+  type: 'tool' | 'devtool' | 'course' | 'repo' | 'offer'
   id: string
   slug: string
   title: string
   subtitle: string
   meta?: string
   href: string
-  item: Tool | DevTool | Repo | Course
+  item: Tool | DevTool | Repo | Course | Offer
 }
 
 function tokenize(s: string): string[] {
@@ -35,8 +37,8 @@ function tokenize(s: string): string[] {
 
 function matchesQuery(queryWords: string[], fields: string[]): boolean {
   if (!queryWords.length) return false
-  const lowerFields = fields.map((f) => f.toLowerCase())
-  return queryWords.some((word) => lowerFields.some((f) => f.includes(word)))
+  const lowerFields = fields.filter(Boolean).map((f) => f.toLowerCase())
+  return queryWords.every((word) => lowerFields.some((f) => f.includes(word)))
 }
 
 export function CommandPalette() {
@@ -47,6 +49,8 @@ export function CommandPalette() {
     devTools,
     courses,
     repos,
+    offers,
+    hydrated,
     recentSearches,
     addRecentSearch,
     clearRecentSearches,
@@ -91,85 +95,119 @@ export function CommandPalette() {
   const results = useMemo<SearchResult[]>(() => {
     if (!queryWords.length) return []
 
-    const toolResults: SearchResult[] = tools
-      .filter((t) =>
-        matchesQuery(queryWords, [
-          t.name, t.tagline, t.description, ...t.tags,
-          TOOL_CATEGORY_LABELS[t.category as keyof typeof TOOL_CATEGORY_LABELS] ?? '',
-        ])
-      )
-      .slice(0, 4)
-      .map((t) => ({
-        type: 'tool' as const,
-        id: t.id,
-        slug: t.slug,
-        title: t.name,
-        subtitle: t.tagline,
-        meta: formatNumber(t.upvotes) + ' upvotes',
-        href: `/tools/${t.slug}`,
-        item: t,
-      }))
+    const build = (strict: boolean): SearchResult[] => {
+      const match = (fields: string[]) =>
+        strict
+          ? matchesQuery(queryWords, fields)
+          : queryWords.some((word) =>
+              fields.filter(Boolean).some((f) => f.toLowerCase().includes(word))
+            )
 
-    const devToolResults: SearchResult[] = devTools
-      .filter((d) =>
-        matchesQuery(queryWords, [
-          d.name, d.tagline, d.description, ...d.tags,
-          DEVTOOL_CATEGORY_LABELS[d.category as keyof typeof DEVTOOL_CATEGORY_LABELS] ?? '',
-        ])
-      )
-      .slice(0, 4)
-      .map((d) => ({
-        type: 'devtool' as const,
-        id: d.id,
-        slug: d.slug,
-        title: d.name,
-        subtitle: d.tagline,
-        meta: formatNumber(d.upvotes) + ' upvotes',
-        href: `/devtool/${d.slug}`,
-        item: d,
-      }))
+      const toolResults: SearchResult[] = tools
+        .filter((t) =>
+          match([
+            t.name, t.tagline, t.description, ...t.tags,
+            TOOL_CATEGORY_LABELS[t.category as keyof typeof TOOL_CATEGORY_LABELS] ?? '',
+          ])
+        )
+        .slice(0, 4)
+        .map((t) => ({
+          type: 'tool' as const,
+          id: t.id,
+          slug: t.slug,
+          title: t.name,
+          subtitle: t.tagline,
+          meta: formatNumber(t.upvotes) + ' upvotes',
+          href: `/tools/${t.slug}`,
+          item: t,
+        }))
 
-    const courseResults: SearchResult[] = courses
-      .filter((c) =>
-        matchesQuery(queryWords, [
-          c.name, c.tagline, c.description, c.difficulty, c.duration,
-          COURSE_CATEGORY_LABELS[c.category as keyof typeof COURSE_CATEGORY_LABELS] ?? '',
-          ...(c.roadmap?.flatMap((s) => [s.title, ...(s.topics ?? [])]) ?? []),
-        ])
-      )
-      .slice(0, 4)
-      .map((c) => ({
-        type: 'course' as const,
-        id: c.id,
-        slug: c.slug,
-        title: c.name,
-        subtitle: c.tagline,
-        meta: c.duration,
-        href: `/courses/${c.category}/${c.slug}`,
-        item: c,
-      }))
+      const devToolResults: SearchResult[] = devTools
+        .filter((d) =>
+          match([
+            d.name, d.tagline, d.description, ...d.tags,
+            DEVTOOL_CATEGORY_LABELS[d.category as keyof typeof DEVTOOL_CATEGORY_LABELS] ?? '',
+          ])
+        )
+        .slice(0, 4)
+        .map((d) => ({
+          type: 'devtool' as const,
+          id: d.id,
+          slug: d.slug,
+          title: d.name,
+          subtitle: d.tagline,
+          meta: formatNumber(d.upvotes) + ' upvotes',
+          href: `/devtool/${d.slug}`,
+          item: d,
+        }))
 
-    const repoResults: SearchResult[] = repos
-      .filter((r) =>
-        matchesQuery(queryWords, [
-          r.name, r.description, ...(r.tags ?? []),
-          REPO_CATEGORY_LABELS[r.category as keyof typeof REPO_CATEGORY_LABELS] ?? '',
-        ])
-      )
-      .slice(0, 4)
-      .map((r) => ({
-        type: 'repo' as const,
-        id: r.id,
-        slug: r.slug,
-        title: r.name,
-        subtitle: r.tagline ?? r.description,
-        meta: formatNumber(r.upvotes) + ' upvotes',
-        href: `/edittools/${r.slug}`,
-        item: r,
-      }))
+      const courseResults: SearchResult[] = courses
+        .filter((c) =>
+          match([
+            c.name, c.tagline, c.description, c.difficulty, c.duration,
+            c.nameAr ?? '', c.taglineAr ?? '', c.descriptionAr ?? '',
+            COURSE_CATEGORY_LABELS[c.category as keyof typeof COURSE_CATEGORY_LABELS] ?? '',
+            ...(c.roadmap?.flatMap((s) => [s.title, ...(s.topics ?? [])]) ?? []),
+          ])
+        )
+        .slice(0, 4)
+        .map((c) => ({
+          type: 'course' as const,
+          id: c.id,
+          slug: c.slug,
+          title: c.name,
+          subtitle: c.tagline,
+          meta: c.duration,
+          href: `/courses/${c.category}/${c.slug}`,
+          item: c,
+        }))
 
-    return [...toolResults, ...devToolResults, ...courseResults, ...repoResults]
-  }, [queryWords, tools, devTools, courses, repos])
+      const repoResults: SearchResult[] = repos
+        .filter((r) =>
+          match([
+            r.name, r.description, ...(r.tags ?? []),
+            REPO_CATEGORY_LABELS[r.category as keyof typeof REPO_CATEGORY_LABELS] ?? '',
+          ])
+        )
+        .slice(0, 4)
+        .map((r) => ({
+          type: 'repo' as const,
+          id: r.id,
+          slug: r.slug,
+          title: r.name,
+          subtitle: r.tagline ?? r.description,
+          meta: formatNumber(r.upvotes) + ' upvotes',
+          href: `/edittools/${r.slug}`,
+          item: r,
+        }))
+
+      const offerResults: SearchResult[] = offers
+        .filter((o) =>
+          match([
+            o.name, o.tagline, o.description, ...o.tags,
+            o.nameAr ?? '', o.taglineAr ?? '', o.descriptionAr ?? '',
+            OFFER_CATEGORY_LABELS[o.category as keyof typeof OFFER_CATEGORY_LABELS] ?? '',
+          ])
+        )
+        .slice(0, 4)
+        .map((o) => ({
+          type: 'offer' as const,
+          id: o.id,
+          slug: o.slug,
+          title: o.name,
+          subtitle: o.tagline,
+          meta: formatNumber(o.upvotes) + ' upvotes',
+          href: `/offers/${o.slug}`,
+          item: o,
+        }))
+
+      return [...toolResults, ...devToolResults, ...courseResults, ...repoResults, ...offerResults]
+    }
+
+    // Strict (all words must match) first; loosen if nothing found.
+    const strict = build(true)
+    return strict.length ? strict : build(false)
+  }, [queryWords, tools, devTools, courses, repos, offers])
 
   const grouped = useMemo(() => {
     const g: Record<string, SearchResult[]> = {}
@@ -271,18 +309,24 @@ export function CommandPalette() {
           {query.trim() && results.length === 0 && (
             <div className="px-4 py-12 text-center">
               <p className="text-sm text-muted-foreground">
-                No results for &ldquo;{query}&rdquo;.
+                {!hydrated ? 'Loading library…' : (
+                  <>
+                    No results for &ldquo;{query}&rdquo;.
+                  </>
+                )}
               </p>
-              <Link
-                href={`/search?q=${encodeURIComponent(query)}`}
-                onClick={() => {
-                  addRecentSearch(query.trim())
-                  setPaletteOpen(false)
-                }}
-                className="mt-3 inline-flex items-center gap-1 text-sm text-accent hover:underline"
-              >
-                Full search <ArrowRight className="h-3 w-3" />
-              </Link>
+              {hydrated && (
+                <Link
+                  href={`/search?q=${encodeURIComponent(query)}`}
+                  onClick={() => {
+                    addRecentSearch(query.trim())
+                    setPaletteOpen(false)
+                  }}
+                  className="mt-3 inline-flex items-center gap-1 text-sm text-accent hover:underline"
+                >
+                  Full search <ArrowRight className="h-3 w-3" />
+                </Link>
+              )}
             </div>
           )}
 
@@ -294,7 +338,9 @@ export function CommandPalette() {
                   ? 'Dev Tools'
                   : group === 'course'
                     ? 'Courses'
-                    : 'Repos'
+                    : group === 'offer'
+                      ? 'Offers'
+                      : 'Repos'
             return (
               <div key={group} className="mb-1">
                 <div className="px-2 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">

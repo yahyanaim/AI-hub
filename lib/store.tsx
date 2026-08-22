@@ -97,6 +97,7 @@ interface AppContextValue {
   comments: Comment[]
   currentUser: User | null
   recentSearches: string[]
+  hydrated: boolean
   // i18n - offers only (Option A)
   offersLang: OffersLang
   setOffersLang: (lang: OffersLang) => void
@@ -753,6 +754,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     closeDetailModalForRepo: () => setDetailModalRepoId(null),
     courses: state.courses,
     offers: state.offers,
+    hydrated,
     detailModalCourseId,
     openDetailModalForCourse,
     closeDetailModalForCourse,
