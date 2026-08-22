@@ -7963,21 +7963,22 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.datacamp.com/campaign/free-access-week-august-2026',
       },
       {
-        title: 'Beginners — start here',
+        title: 'Track 1 · AI Fundamentals (For Beginners)',
         description:
-          'Intro to Python · Intro to SQL · Introduction to Power BI · Understanding Cloud Computing · Claude Code 101. Finish Intro to Python first — everything else builds on it.',
+          'Python + Data Fundamentals (~28h of content). On DataCamp take: Intro to Python → Intermediate Python → Intro to Data / data fundamentals courses. No prerequisites.',
         url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science',
       },
       {
-        title: 'Intermediate — level up fast',
+        title: 'Track 2 · AI Engineering with LangChain (Intermediate) ⭐ Highly Recommended',
         description:
-          'Supervised Learning with scikit-learn · Working with the OpenAI API · Prompt Engineering with LangChain · Intro to Deep Learning with PyTorch · Software Development with Claude Code.',
-        url: 'https://www.datacamp.com/courses/supervised-learning-with-scikit-learn',
+          'Developing AI applications & AI software engineering using tools like GitHub Copilot and Replit. On DataCamp take: Prompt Engineering with LangChain → Working with the OpenAI API → Claude Code 101 → Software Development with Claude Code. Make real progress here — this is the hireable skill set.',
+        url: 'https://www.datacamp.com/courses/prompt-engineering-with-langchain',
       },
       {
-        title: 'Advanced + portfolio & certificates',
+        title: 'Track 3 · Data Skills for Business',
         description:
-          'Grab the expensive stuff you would never pay for casually: MLOps with Airflow/MLflow, intro to dbt, Winning a Kaggle Competition — plus real-world projects and certification exams (Data Analyst / AI Engineer) while access lasts.',
+          'Intro to SQL → Data-Driven Decision-Making in SQL → Introduction to Power BI. Practical business data literacy: querying, dashboards and decisions — no heavy math.',
+        url: 'https://www.datacamp.com/courses/intro-to-sql',
       },
     ],
     nameAr: 'أسبوع DataCamp المجاني — 24 إلى 30 غشت',
@@ -7990,17 +7991,19 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.datacamp.com/campaign/free-access-week-august-2026',
       },
       {
-        title: 'للمبتدئين — ابدأ هنا',
-        description: 'Intro to Python · Intro to SQL · Power BI · Claude Code 101. أكمل Intro to Python أولاً.',
+        title: 'المسار 1 · أساسيات الذكاء الاصطناعي (للمبتدئين)',
+        description: 'بايثون وأساسيات البيانات (~28 ساعة). على DataCamp: Intro to Python ← Intermediate Python ← دورات أساسيات البيانات. بدون متطلبات سابقة.',
         url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science',
       },
       {
-        title: 'للمتوسطين — ارتقِ بسرعة',
-        description: 'Supervised Learning scikit-learn · OpenAI API · Prompt Engineering LangChain · PyTorch.',
+        title: 'المسار 2 · هندسة AI مع LangChain (متوسط) ⭐ موصى به بشدة',
+        description: 'تطوير تطبيقات الذكاء الاصطناعي والهندسة البرمجية بأدوات مثل Copilot وReplit. على DataCamp: Prompt Engineering LangChain ← OpenAI API ← Claude Code 101. حقق تقدماً حقيقياً هنا — هذه مهارة يطلبها سوق العمل.',
+        url: 'https://www.datacamp.com/courses/prompt-engineering-with-langchain',
       },
       {
-        title: 'متقدم + المشاريع والشهادات',
-        description: 'استفد من المكلف: MLOps مع Airflow/MLflow وdbt ومسابقة Kaggle + مشاريع واختبارات الشهادات قبل انتهاء الفترة.',
+        title: 'المسار 3 · مهارات البيانات للأعمال',
+        description: 'Intro to SQL ← Data-Driven Decision-Making in SQL ← Power BI. إلمام عملي ببيانات الأعمال: استعلام ولوحات وقرارات بدون رياضيات معقدة.',
+        url: 'https://www.datacamp.com/courses/intro-to-sql',
       },
     ],
     upvotes: 38,

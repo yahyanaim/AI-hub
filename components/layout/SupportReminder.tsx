@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Heart, Share2, Check, Sparkles } from 'lucide-react'
+import { Heart, Share2, Check } from 'lucide-react'
 
 export function SupportReminder() {
   const [copied, setCopied] = useState(false)
@@ -34,55 +34,50 @@ export function SupportReminder() {
   }
 
   return (
-    <div className="relative mt-14 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-orange via-orange-500 to-amber-400 px-6 py-12 text-center shadow-2xl shadow-brand-orange/30 sm:px-10 sm:py-14">
-      {/* Decorative floating hearts */}
-      <Heart className="pointer-events-none absolute -left-4 -top-4 h-24 w-24 rotate-[-20deg] text-white/10" fill="currentColor" />
-      <Heart className="pointer-events-none absolute -bottom-6 -right-2 h-32 w-32 rotate-[15deg] text-white/10" fill="currentColor" />
-      <Sparkles className="pointer-events-none absolute right-[18%] top-6 h-6 w-6 animate-pulse text-white/40" />
-      <Sparkles className="pointer-events-none absolute bottom-8 left-[15%] h-5 w-5 animate-pulse text-white/40" style={{ animationDelay: '0.7s' }} />
+    <div className="relative mt-14 overflow-hidden rounded-3xl border border-brand-orange/20 bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center shadow-sm backdrop-blur-sm sm:px-10">
+      {/* Soft decorative hearts */}
+      <Heart className="pointer-events-none absolute -left-3 -top-3 h-20 w-20 rotate-[-18deg] text-brand-orange/5" fill="currentColor" />
+      <Heart className="pointer-events-none absolute -bottom-5 -right-2 h-24 w-24 rotate-[15deg] text-brand-orange/5" fill="currentColor" />
 
       <div className="relative">
-        <span className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-          <Heart className="h-8 w-8 animate-bounce text-white" fill="currentColor" />
+        <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-orange/10">
+          <Heart className="h-6 w-6 text-brand-orange" fill="currentColor" />
         </span>
 
-        <h3 className="font-heading text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        <h3 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
           AI Hunt is 100% free
         </h3>
-        <p className="mx-auto mt-3 max-w-xl text-lg font-medium leading-snug text-white/95">
+        <p className="mt-2 text-base text-muted-foreground">
           No ads · No tracking · No data collection — ever.
         </p>
-        <p className="mx-auto mt-1.5 max-w-md text-base text-white/80">
-          If it helped you, keep it alive for everyone:
-        </p>
 
-        <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             href="/support"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-8 py-3.5 text-base font-bold text-brand-orange shadow-lg transition-transform hover:scale-[1.03] active:scale-[0.98] sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-7 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
           >
-            <Heart className="h-5 w-5" fill="currentColor" />
+            <Heart className="h-4 w-4" fill="currentColor" />
             Donate &amp; Support
           </Link>
           <button
             onClick={handleShare}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white/70 bg-transparent px-8 py-3.5 text-base font-bold text-white transition-colors hover:bg-white/10 sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-7 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-auto"
           >
             {copied ? (
               <>
-                <Check className="h-5 w-5" />
+                <Check className="h-4 w-4 text-green-600" />
                 Link copied!
               </>
             ) : (
               <>
-                <Share2 className="h-5 w-5" />
+                <Share2 className="h-4 w-4" />
                 Share the platform
               </>
             )}
           </button>
         </div>
 
-        <p className="mt-4 text-xs font-medium uppercase tracking-widest text-white/70">
+        <p className="mt-3.5 text-xs text-muted-foreground/80">
           Even one share makes a difference 🧡
         </p>
       </div>
