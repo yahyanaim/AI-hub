@@ -8,7 +8,6 @@ import { Dropdown, ChipFilter, ClearButton } from '@/components/layout/FilterBar
 import type { FilterOption } from '@/components/layout/FilterBar'
 export type { FilterOption }
 import { ViewToggle } from '@/components/layout/ViewToggle'
-import { SupportReminder } from '@/components/layout/SupportReminder'
 import { cn } from '@/lib/utils'
 
 type SortKey = 'trending' | 'top' | 'new' | 'bookmarked'
@@ -367,9 +366,6 @@ export function ListingView<T extends { id: string }>({
           </button>
         </div>
       )}
-
-      {/* Free / no-ads reminder */}
-      <SupportReminder />
     </div>
   )
 }

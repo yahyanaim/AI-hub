@@ -2,7 +2,22 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Heart, Share2, Check } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Share2, Check, Brain, Code, Rocket, Zap, Sparkles, Terminal, Globe, Star } from 'lucide-react'
+
+const PAYPAL_EMAIL = 'yahyanaim2001@gmail.com'
+const PAYPAL_LINK = `https://www.paypal.com/myaccount/transfer/homepage/pay?recipient=${PAYPAL_EMAIL}`
+
+const FLOATING_ICONS = [
+  { Icon: Brain, x: '6%', y: '18%', size: 22, delay: 0, duration: 6, opacity: 0.16 },
+  { Icon: Rocket, x: '88%', y: '14%', size: 20, delay: 0.5, duration: 7, opacity: 0.15 },
+  { Icon: Code, x: '12%', y: '70%', size: 19, delay: 0.8, duration: 6.5, opacity: 0.14 },
+  { Icon: Zap, x: '90%', y: '62%', size: 17, delay: 0.3, duration: 5.5, opacity: 0.13 },
+  { Icon: Terminal, x: '30%', y: '8%', size: 16, delay: 1.0, duration: 7, opacity: 0.13 },
+  { Icon: Globe, x: '72%', y: '82%', size: 18, delay: 0.6, duration: 7.5, opacity: 0.14 },
+  { Icon: Star, x: '45%', y: '4%', size: 14, delay: 0.2, duration: 6, opacity: 0.15 },
+  { Icon: Sparkles, x: '60%', y: '90%', size: 15, delay: 0.9, duration: 6.8, opacity: 0.13 },
+]
 
 export function SupportReminder() {
   const [copied, setCopied] = useState(false)
@@ -10,8 +25,8 @@ export function SupportReminder() {
   const handleShare = async () => {
     const url = typeof window !== 'undefined' ? window.location.href : ''
     const shareData = {
-      title: 'AI Hunt',
-      text: 'AI Hunt - free curated AI tools, courses & offers. No ads, no tracking.',
+      title: 'AI Hub Tools',
+      text: 'AI Hub Tools - free curated AI tools, courses & offers. No ads, no tracking.',
       url,
     }
     try {
@@ -34,30 +49,52 @@ export function SupportReminder() {
   }
 
   return (
-    <div className="relative mt-14 overflow-hidden rounded-3xl border border-brand-orange/20 bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center shadow-sm backdrop-blur-sm sm:px-10">
-      {/* Soft decorative hearts */}
-      <Heart className="pointer-events-none absolute -left-3 -top-3 h-20 w-20 rotate-[-18deg] text-brand-orange/5" fill="currentColor" />
-      <Heart className="pointer-events-none absolute -bottom-5 -right-2 h-24 w-24 rotate-[15deg] text-brand-orange/5" fill="currentColor" />
+    <div className="relative mt-14 overflow-hidden rounded-xl border border-brand-orange/20 bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-accent/40 hover:shadow-[0_0_24px_var(--accent-glow)]">
+      {/* Floating icons */}
+      <div className="pointer-events-none absolute inset-0 select-none">
+        {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-brand-orange"
+            style={{ left: x, top: y, opacity }}
+            animate={{
+              y: [0, -12, 0, 10, 0],
+              opacity: [opacity, opacity * 1.6, opacity, opacity * 1.3, opacity],
+            }}
+            transition={{
+              duration,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay,
+            }}
+          >
+            <Icon size={size} />
+          </motion.div>
+        ))}
+      </div>
 
       <div className="relative">
-        <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-brand-orange/10">
-          <Heart className="h-6 w-6 text-brand-orange" fill="currentColor" />
-        </span>
-
         <h3 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-          AI Hunt is 100% free
+          AI Hub Tools is 100% free
         </h3>
         <p className="mt-2 text-base text-muted-foreground">
-          No ads · No tracking · No data collection - ever.
+          No ads · No tracking · No data collection — ever.
         </p>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link
-            href="/support"
+          <a
+            href={PAYPAL_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-7 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
           >
-            <Heart className="h-4 w-4" fill="currentColor" />
             Donate &amp; Support
+          </a>
+          <Link
+            href="/support"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-7 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-auto"
+          >
+            More ways to help
           </Link>
           <button
             onClick={handleShare}
