@@ -58,6 +58,11 @@ body {
   min-height: 100vh;
 }
 
+/* Justify all paragraphs by default (explicit text-center/left utilities still win) */
+p {
+  text-align: justify;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
