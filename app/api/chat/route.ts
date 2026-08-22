@@ -127,9 +127,75 @@ Delivering the roadmap is not the end. Every conversation is a continuation, not
 ## Course Catalog (use exact names from here):
 ${COURSE_CATALOG}`
 
+// ---- Public-endpoint guards (tune after launch based on real usage) ----
+const RATE_LIMIT_MAX_REQUESTS = 20 // requests...
+const RATE_LIMIT_WINDOW_MS = 60_000 // ...per this window, per IP
+const MAX_MESSAGES_COUNT = 40 // reject payloads with more messages than this
+const MAX_MESSAGE_CHARS = 4000 // reject any single message longer than this
+const MAX_CONTEXT_MESSAGES = 20 // only send the last N messages to the model
+
+// In-memory sliding window: ip -> timestamps of recent requests
+const rateLimitMap = new Map<string, number[]>()
+
+function getClientIp(request: Request): string {
+  const fwd = request.headers.get('x-forwarded-for')
+  if (fwd) return fwd.split(',')[0].trim()
+  return request.headers.get('x-real-ip') ?? 'unknown'
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const hits = (rateLimitMap.get(ip) ?? []).filter(
+    (ts) => now - ts < RATE_LIMIT_WINDOW_MS
+  )
+  if (hits.length >= RATE_LIMIT_MAX_REQUESTS) {
+    rateLimitMap.set(ip, hits)
+    return true
+  }
+  hits.push(now)
+  rateLimitMap.set(ip, hits)
+  // Opportunistic cleanup so the map doesn't grow unbounded
+  if (rateLimitMap.size > 5000) {
+    for (const [key, timestamps] of rateLimitMap) {
+      if (timestamps.every((ts) => now - ts >= RATE_LIMIT_WINDOW_MS)) {
+        rateLimitMap.delete(key)
+      }
+    }
+  }
+  return false
+}
+
 export async function POST(request: Request) {
   try {
-    const { messages } = await request.json()
+    const ip = getClientIp(request)
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please wait a minute and try again.' },
+        { status: 429 }
+      )
+    }
+
+    const body = await request.json().catch(() => null)
+    const { messages } = body ?? {}
+
+    if (
+      !Array.isArray(messages) ||
+      messages.length === 0 ||
+      messages.length > MAX_MESSAGES_COUNT ||
+      messages.some(
+        (m: unknown) =>
+          !m ||
+          typeof m !== 'object' ||
+          typeof (m as { role?: unknown }).role !== 'string' ||
+          typeof (m as { content?: unknown }).content !== 'string' ||
+          ((m as { content: string }).content ?? '').length > MAX_MESSAGE_CHARS
+      )
+    ) {
+      return NextResponse.json(
+        { error: `Invalid messages payload (max ${MAX_MESSAGES_COUNT} messages, ${MAX_MESSAGE_CHARS} characters each).` },
+        { status: 400 }
+      )
+    }
 
     if (!API_KEY) {
       return NextResponse.json(
@@ -138,11 +204,16 @@ export async function POST(request: Request) {
       )
     }
 
+    // Never trust client-supplied system prompts; cap context to control token cost
+    const conversation = messages
+      .filter((m: { role: string }) => m.role === 'user' || m.role === 'assistant')
+      .slice(-MAX_CONTEXT_MESSAGES)
+
     const payload = {
       model: 'meta/llama-3.1-70b-instruct',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
-        ...messages,
+        ...conversation,
       ],
       max_tokens: 2048,
       temperature: 0.70,
