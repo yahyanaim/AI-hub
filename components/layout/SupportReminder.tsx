@@ -5,9 +5,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Share2, Check, Brain, Code, Rocket, Zap, Sparkles, Terminal, Globe, Star } from 'lucide-react'
 
-const PAYPAL_EMAIL = 'yahyanaim2001@gmail.com'
-const PAYPAL_LINK = `https://www.paypal.com/myaccount/transfer/homepage/pay?recipient=${PAYPAL_EMAIL}`
-
 const FLOATING_ICONS = [
   { Icon: Brain, x: '6%', y: '18%', size: 22, delay: 0, duration: 6, opacity: 0.16 },
   { Icon: Rocket, x: '88%', y: '14%', size: 20, delay: 0.5, duration: 7, opacity: 0.15 },
@@ -49,7 +46,7 @@ export function SupportReminder() {
   }
 
   return (
-    <div className="relative mt-14 overflow-hidden rounded-xl border border-brand-orange/20 bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-accent/40 hover:shadow-[0_0_24px_var(--accent-glow)]">
+    <div className="relative mt-14 overflow-hidden rounded-xl border-2 border-brand-orange/60 bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-accent/40 hover:shadow-[0_0_24px_var(--accent-glow)]">
       {/* Floating icons */}
       <div className="pointer-events-none absolute inset-0 select-none">
         {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
@@ -82,19 +79,11 @@ export function SupportReminder() {
         </p>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={PAYPAL_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-7 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
-          >
-            Donate &amp; Support
-          </a>
           <Link
             href="/support"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-7 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-7 py-3 text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.02] hover:border-accent/40 hover:shadow-[0_0_24px_var(--accent-glow)] active:scale-[0.98] sm:w-auto"
           >
-            More ways to help
+            Donate &amp; Support
           </Link>
           <button
             onClick={handleShare}
