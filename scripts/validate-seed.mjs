@@ -1,9 +1,14 @@
 // CI check: fails if any seed namespace has duplicate ids or slugs.
 // Run: node scripts/validate-seed.mjs
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { parseNamespaces, duplicates } from './seed-parse.mjs'
 
-const source = readFileSync(new URL('../lib/seed.ts', import.meta.url), 'utf8')
+const seedDir = new URL('../lib/seed/', import.meta.url)
+const source = readdirSync(seedDir)
+  .filter((f) => f.endsWith('.ts') && f !== 'index.ts' && f !== '_shared.ts')
+  .sort()
+  .map((f) => readFileSync(new URL(f, seedDir), 'utf8'))
+  .join('\n')
 const parsed = parseNamespaces(source)
 
 let failed = false

@@ -4,7 +4,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { parseNamespaces, duplicates } from './seed-parse.mjs'
 
-const path = new URL('../lib/seed.ts', import.meta.url)
+const path = new URL('../lib/seed/index.ts', import.meta.url)
 let source = readFileSync(path, 'utf8')
 const parsed = parseNamespaces(source)
 
