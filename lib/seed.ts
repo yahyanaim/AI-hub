@@ -38171,7 +38171,7 @@ export const SEED_COURSES: Course[] = [
     logoUrl: 'https://github.com/DrHazemAli.png',
     category: 'backend',
     difficulty: 'advanced',
-    duration: 'Self-paced (11 modules)',
+    duration: 'Self-paced',
     roadmap: [
       { title: 'Engineering Foundation — Build judgment', topics: ['Execution & debugging', 'Disassembly', 'SOLID & Clean Architecture', 'Workload review'], duration: 'Self-paced', url: 'https://github.com/DrHazemAli/enterprise-system-design/blob/main/foundation/README.md' },
       { title: '00 Ground Zero — Cloud & Azure Resource Manager', topics: ['Cloud primitives', 'Azure Resource Manager', 'Name → Request → Resource flow', 'Identity & network boundaries'], duration: 'Self-paced', url: 'https://github.com/DrHazemAli/enterprise-system-design/blob/main/reference/00-ground-zero/00-cloud-computing-and-azure-resource-manager.md' },
