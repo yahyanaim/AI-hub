@@ -46,7 +46,7 @@ export function SupportReminder() {
   }
 
   return (
-    <div className="relative mt-14 overflow-hidden rounded-xl border-2 border-brand-orange/60 bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-accent/40 hover:shadow-[0_0_24px_var(--accent-glow)]">
+    <div className="relative mt-14 overflow-hidden rounded-xl border border-brand-orange/60 bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-accent hover:shadow-[0_0_24px_var(--accent-glow)]">
       {/* Floating icons */}
       <div className="pointer-events-none absolute inset-0 select-none">
         {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
