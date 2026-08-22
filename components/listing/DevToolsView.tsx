@@ -29,10 +29,12 @@ export function DevToolsView() {
         <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Dev Tools
         </h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Essential tools for modern development workflows &mdash; from IDEs
-          and debugging to CI/CD and monitoring.
-        </p>
+        <div className="mt-3 w-full rounded-xl border border-border bg-card px-4 py-3">
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Essential tools for modern development workflows &mdash; from IDEs
+            and debugging to CI/CD and monitoring.
+          </p>
+        </div>
       </div>
 
       {/* All dev tools (including starter packs as a regular category) */}
