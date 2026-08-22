@@ -65,6 +65,7 @@ export type DevToolCategory =
   | 'payment'
   | 'project-management'
   | 'remote-desktop'
+  | 'remote-work'
   | 'screenshot'
   | 'search'
   | 'security'
@@ -360,6 +361,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   payment: 'Payment',
   'project-management': 'Project Management',
   'remote-desktop': 'Remote Desktop',
+  'remote-work': 'Remote Work',
   screenshot: 'Screenshot APIs',
   search: 'Search',
   security: 'Security',

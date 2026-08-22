@@ -7554,4 +7554,224 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o130',
+    slug: 'bourses-ministere-enseignement-superieur',
+    name: 'Ministry of Higher Education Bourses (Mérite & Fidélité)',
+    tagline: 'Official Moroccan government scholarships — merit abroad + loyalty grants',
+    description:
+      'The Moroccan Ministry of Higher Education (ENSSUP) runs the national scholarship system for public-university laureates: the Bourse de Mérite funds the top-ranked graduates to continue master\'s and PhD studies in prestigious universities abroad, while Bourses de Fidélité/Excellence support students continuing in Moroccan institutions. Selection is strictly based on yearly rankings and diploma honors; calls open each summer after results via your academy and the ministry platform.',
+    url: 'https://www.enssup.gov.ma/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=enssup.gov.ma&sz=64',
+    category: 'scholarship',
+    tags: ['morocco', 'government', 'merit', 'bourse', 'laureats'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Rank high in your institution',
+        description:
+          'Eligibility is ranking-based: finish in the top of your promotion (licence/master/engineering cycle) with honors.',
+      },
+      {
+        title: 'Watch the summer call',
+        description:
+          'Calls publish on enssup.gov.ma and through university academies right after annual results (July–September).',
+        url: 'https://www.enssup.gov.ma/',
+      },
+      {
+        title: 'Submit via your academy',
+        description:
+          'Hand in transcripts, diplomas and ID at your academy within the deadline; mérite winners get country + university placement abroad.',
+      },
+    ],
+    nameAr: 'منح وزارة التعليم العالي — الجدارة والوفاء',
+    taglineAr: 'منح حكومية مغربية رسمية — الجدارة للدراسة بالخارج ومنح الوفاء محلياً',
+    descriptionAr: 'تدير وزارة التعليم العالي المنظومة الوطنية للمنح لنابغي الجامعات والمدارس العليا المغربية: منحة الجدارة تموّل مواصلين الماستر والدكتوراه في جامعات مرموقة بالخارج، ومنح الوفاء والتميز تدعم المواصلين داخل المغرب. الانتقاء يعتمد على الترتيب السنوي وميزة الشهادة، وتُفتح الدعوات صيفاً عبر الأكاديميات والمنصة الوزارية.',
+    stepsAr: [
+      {
+        title: 'تحقق ترتيباً متقدماً',
+        description: 'الأهلية قائمة على الترتيب: اكنز ضمن أوائل دفعتك بميزة شرف.',
+      },
+      {
+        title: 'راقب دعوة الصيف',
+        description: 'تنشر الدعوات على enssup.gov.ma وعبر الأكاديميات بعد النتائج (يوليو-شتنبر).',
+        url: 'https://www.enssup.gov.ma/',
+      },
+      {
+        title: 'قدّم عبر أكاديميتك',
+        description: 'سلّم الكشوف والشهادات وبطاقة التعريف في الأجل؛ المقبولون في الجدارة يُوجهون للخارج.',
+      },
+    ],
+    upvotes: 18,
+    bookmarks: 26,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o131',
+    slug: 'fondation-ocp-scholarships',
+    name: 'Fondation OCP Scholarships',
+    tagline: 'Excellence scholarships for Moroccan engineers & scientists — OCP Group foundation',
+    description:
+      'Fondation OCP supports Morocco\'s future engineers and scientists through excellence scholarships and academic partnerships (notably with UM6P): funding for engineering cycles, master\'s and PhD programs in Morocco and abroad, in fields aligned with the group\'s ecosystem — mining, chemistry, agriculture, data/AI, energy and industrial management. Calls target high-potential students, often with social-criteria considerations alongside academic merit.',
+    url: 'https://www.ocpgroup.ma/fondation-ocp',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=ocpgroup.ma&sz=64',
+    category: 'scholarship',
+    tags: ['morocco', 'ocp', 'engineering', 'excellence', 'scholarship'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Follow the foundation calls',
+        description:
+          'Scholarship campaigns are announced on the OCP Foundation pages when intakes open — requirements vary per program.',
+        url: 'https://www.ocpgroup.ma/fondation-ocp',
+      },
+      {
+        title: 'Build a merit + impact file',
+        description:
+          'Strong scientific results, a clear field alignment (mining, agri, AI, energy…) and social-impact motivation strengthen candidacy.',
+      },
+      {
+        title: 'Apply online & interview',
+        description:
+          'Submit the dossier on the platform; shortlisted candidates pass selection interviews before final awarding.',
+      },
+    ],
+    nameAr: 'منح مؤسسة OCP',
+    taglineAr: 'منح التميز للمهندسين والعلماء المغاربة — مؤسسة مجموعة المكتب الشريف',
+    descriptionAr: 'دعم مؤسسة OCP لجيل المستقبل من المهندسين والعلماء المغاربة عبر منح التميز والشراكات الأكاديمية (ومنها UM6P): تمويل الأطوار الهندسية والماستر والدكتوراه بالمغرب وخارجه في تخصصات كالتعدين والكيمياء والفلاحة والذكاء الاصطناعي والطاقة، بمعايير جدارة ووضعية اجتماعية.',
+    stepsAr: [
+      {
+        title: 'تابع دعوات المؤسسة',
+        description: 'تُعلن الحملات على صفحات مؤسسة OCP عند انفتاح الإدخالات بحسب كل برنامج.',
+        url: 'https://www.ocpgroup.ma/fondation-ocp',
+      },
+      {
+        title: 'جهّز ملف جدارة وأثر',
+        description: 'نتائج علمية قوية وتخصص منسجم (تعدين، فلاحة، ذكاء اصطناعي، طاقة) وحافز اجتماعي.',
+      },
+      {
+        title: 'قدّم إلكترونياً وقابل اللجنة',
+        description: 'أرسل الملف عبر المنصة ثم مقابلات الانتقاء قبل منح المنحة النهائي.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 22,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o132',
+    slug: 'phosboucraa-foundation-scholarships',
+    name: 'Phosboucraâ Foundation Scholarships',
+    tagline: 'Dedicated bourses for students from Morocco\'s southern provinces',
+    description:
+      'The Phosboucraâ Foundation (OCP Group) runs education programs dedicated to the southern provinces (Laâyoune-Sakia El Hamra, Dakhla-Oued Ed-Dahab, Guelmim-Oued Noun…): excellence scholarships for licence, master\'s and engineering studies in Morocco and abroad, plus language preparation and mentorship tracks. Goal: build local talent pipelines in management, engineering, and digital skills.',
+    url: 'https://www.phosboucraafoundation.org/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=phosboucraafoundation.org&sz=64',
+    category: 'scholarship',
+    tags: ['morocco', 'southern-provinces', 'scholarship', 'foundation'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check residency eligibility',
+        description:
+          'Open primarily to students originating from or residing in the southern provinces.',
+        url: 'https://www.phosboucraafoundation.org/',
+      },
+      {
+        title: 'Prepare your academic file',
+        description:
+          'Bac/licence results, orientation choices and language level; some tracks include prep semesters.',
+      },
+      {
+        title: 'Apply during campaign windows',
+        description:
+          'Applications open periodically on the foundation site; selections combine merit and regional criteria.',
+      },
+    ],
+    nameAr: 'منح مؤسسة فوسبوكرا',
+    taglineAr: 'منح مخصصة لطلبة الأقاليم الجنوبية للمغرب',
+    descriptionAr: 'مؤسسة فوسبوكرا (مجموعة OCP) تشغل برامج تعليمية مخصصة لأقاليم الجنوب (العيون، الداخلة، كلميم…): منح التميز لليسانس والماستر والأطوار الهندسية بالمغرب وخارجه، مع مسارات تحضيرية للغة وإرشاد. الهدف بناء رأس المال البشري المحلي في التدبير والهندسة والمهارات الرقمية.',
+    stepsAr: [
+      {
+        title: 'تحقق من شرط الإقامة',
+        description: 'مفتوحة أساساً لطلبة الأقاليم الجنوبية بالأصل أو بالإقامة.',
+        url: 'https://www.phosboucraafoundation.org/',
+      },
+      {
+        title: 'جهّز ملفك الدراسي',
+        description: 'نتائج الباكالوريا أو الليسانس ورغبات التوجيه ومستوى اللغة.',
+      },
+      {
+        title: 'قدّم في فتح الحملات',
+        description: 'تُفتح الترشيحات دورياً على موقع المؤسسة ويجمع الانتقاء بين الجدارة والمعايير الجهوية.',
+      },
+    ],
+    upvotes: 13,
+    bookmarks: 17,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o133',
+    slug: 'tanger-med-foundation-bourses',
+    name: 'Tanger Med Foundation Bourses',
+    tagline: 'Merit & excellence bourses for top bac students from northern Morocco',
+    description:
+      'The Tanger Med Foundation awards merit and excellence scholarships to outstanding baccalaureate holders from the northern regions (Tanger-Tétouan-Al Hoceima and beyond) entering Moroccan public engineering, business and science schools. Selection combines bac grade, school ranking and family income criteria; the bourse covers registration, living support and sometimes transport throughout the multi-year cycle.',
+    url: 'https://www.tangermed.com/en/foundation',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=tangermed.com&sz=64',
+    category: 'scholarship',
+    tags: ['morocco', 'tanger-med', 'northern-region', 'bac', 'excellence'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Score high on your bac',
+        description:
+          'Target recent bac holders (sciences/technical streams) with strong grades from northern-region high schools.',
+        url: 'https://www.tangermed.com/en/foundation',
+      },
+      {
+        title: 'Gather the dossier',
+        description:
+          'Bac transcript, school certificates, family income documentation and CNIE as specified by the call.',
+      },
+      {
+        title: 'Apply & follow selection',
+        description:
+          'Files are reviewed against merit + social criteria; awardees keep the bourse across years subject to results.',
+      },
+    ],
+    nameAr: 'منح مؤسسة طنجة المتوسط',
+    taglineAr: 'منح الجدارة والتميز لمتفوقي الباكالوريا من جهات الشمال',
+    descriptionAr: 'تمنح مؤسسة طنجة المتوسط منح الجدارة والتميز لحاملي الباكالوريا المتفوقين من الجهات الشمالية (طنجة-تطوان-الحسيمة وما حولها) الملتحقين بالمدارس الوطنية للعلوم والتطبيقية والتجارة، بمعايير نقط الباك وترتيب المدرسة والوضعية الاجتماعية، وتغطي التسجيل والدعم المعيشي طيلة الدورة.',
+    stepsAr: [
+      {
+        title: 'حقق نتيجة باقوية',
+        description: 'موجهة لحاملي باكالوريا العلوم والتقنية بمعدلات مرتفعة من ثانويات الشمال.',
+        url: 'https://www.tangermed.com/en/foundation',
+      },
+      {
+        title: 'جهّز الملف',
+        description: 'كشف نقط الباك، شهادات مدرسية، وثائق المدخول وبطاقة التعريف حسب الدعوة.',
+      },
+      {
+        title: 'قدّم وتابع الانتقاء',
+        description: 'الانتقاء يجمع بين الجدارة والمعايير الاجتماعية وتستمر المنحة سنوات حسب النتائج.',
+      },
+    ],
+    upvotes: 13,
+    bookmarks: 16,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
