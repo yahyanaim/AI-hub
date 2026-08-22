@@ -7774,4 +7774,173 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o134',
+    slug: 'ai-fundamentals-for-beginners-track',
+    name: 'AI Fundamentals — For Beginners (Highly Recommended)',
+    tagline: 'Python + data fundamentals, ~28h of content — your zero-to-AI on-ramp',
+    description:
+      'The starting track we recommend to every aspiring AI engineer with no background yet: Python programming fundamentals plus data fundamentals — around 28 hours of structured content covering Python syntax, working with data, statistics basics, and how ML/AI systems consume that data. Finish this before touching LLM frameworks; it is the foundation everything else in AI engineering builds on. Free resources mapped step-by-step below.',
+    url: 'https://www.kaggle.com/learn',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=kaggle.com&sz=64',
+    category: 'learning',
+    tags: ['ai-fundamentals', 'python', 'data', 'beginners', 'recommended'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Learn Python basics first (~12h)',
+        description:
+          'Syntax, lists/dicts, functions, loops and file handling — use the Python-100-Days repo (Days 1–15) or Kaggle\'s free Python course.',
+        url: 'https://www.kaggle.com/learn/python',
+      },
+      {
+        title: 'Add data fundamentals (~16h)',
+        description:
+          'pandas, cleaning, descriptive statistics and visualization — Kaggle pandas + intro to data courses cover exactly this.',
+        url: 'https://www.kaggle.com/learn/pandas',
+      },
+      {
+        title: 'Bridge into AI',
+        description:
+          'Finish with Microsoft AI-For-Beginners lessons 1–8 to connect your new Python/data skills to real AI systems.',
+      },
+    ],
+    nameAr: 'أساسيات الذكاء الاصطناعي — للمبتدئين (موصى به بشدة)',
+    taglineAr: 'بايثون وأساسيات البيانات، ~28 ساعة محتوى — بوابتك إلى عالم الذكاء الاصطناعي',
+    descriptionAr: 'المسار الذي ننصح به كل من يريد دخول هندسة الذكاء الاصطناعي بدون خلفية: أساسيات بايثون ثم أساسيات البيانات — حوالي 28 ساعة منظمة تغطي البرمجة والتعامل مع البيانات والإحصاء وكيف تستخدمها أنظمة الذكاء الاصطناعي. أكمله قبل الانتقال إلى أطر عمل LLM.',
+    stepsAr: [
+      {
+        title: 'ابدأ ببايثون (~12 ساعة)',
+        description: 'الأساسيات والقوائم والدوال — استخدم مستودع Python-100-Days أو دورة كاغل المجانية.',
+        url: 'https://www.kaggle.com/learn/python',
+      },
+      {
+        title: 'أضف أساسيات البيانات (~16 ساعة)',
+        description: 'pandas والتنظيف والإحصاء والرسوم — دورات كاغل تغطيها بالضبط.',
+        url: 'https://www.kaggle.com/learn/pandas',
+      },
+      {
+        title: 'انتقل إلى الذكاء الاصطناعي',
+        description: 'اختم بدروس Microsoft AI-For-Beginners 1–8 لربط مهاراتك بأنظمة AI حقيقية.',
+      },
+    ],
+    upvotes: 25,
+    bookmarks: 24,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o135',
+    slug: 'ai-engineering-langchain-intermediate',
+    name: 'AI Engineering with LangChain — For Intermediate (Highly Recommended)',
+    tagline: 'Build & ship AI applications: RAG, agents, tool use + AI-assisted coding (Copilot/Replit)',
+    description:
+      'The intermediate track for turning AI knowledge into working products: AI software engineering with LangChain (chains, RAG pipelines, agents, tool integration) while using AI coding assistants like GitHub Copilot and Replit Agent to accelerate development. This is the skill set companies actually hire for right now — moving from "I know about LLMs" to "I ship AI applications." Make progress here after fundamentals.',
+    url: 'https://academy.langchain.com/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=academy.langchain.com&sz=64',
+    category: 'learning',
+    tags: ['langchain', 'ai-engineering', 'rag', 'agents', 'copilot', 'recommended'],
+    pricing: 'freemium',
+    steps: [
+      {
+        title: 'LangChain Academy courses (free)',
+        description:
+          'Take Introduction to LangGraph and chatbot courses — official hands-on modules from the LangChain team.',
+        url: 'https://academy.langchain.com/',
+      },
+      {
+        title: 'Build with AI pair-programming',
+        description:
+          'Use GitHub Copilot or Replit Agent inside a real project: wire an LLM chain to your own data with RAG.',
+      },
+      {
+        title: 'Ship one complete app',
+        description:
+          'Deploy a small but complete AI app (chat-with-your-docs or an agent with tools) — this becomes your portfolio piece.',
+      },
+    ],
+    nameAr: 'هندسة الذكاء الاصطناعي مع LangChain — للمتوسطين (موصى به بشدة)',
+    taglineAr: 'ابنِ وأطلق تطبيقات AI: RAG والوكلاء والأدوات + برمجة بمساعدة Copilot/Replit',
+    descriptionAr: 'المسار المتوسط لتحويل معرفتك بالذكاء الاصطناعي إلى منتجات فعلية: هندسة تطبيقات AI باستخدام LangChain (سلاسل وأنابيب RAG والوكلاء وتكامل الأدوات) مع استخدام مساعدات البرمجة مثل GitHub Copilot وReplit لتسريع التطوير. هذه هي المهارة التي تبحث عنها الشركات الآن — الانتقال من أعرف عن LLMs إلى أُطلق تطبيقات AI.',
+    stepsAr: [
+      {
+        title: 'دورات LangChain Academy (مجانية)',
+        description: 'ابدأ بمقدمة LangGraph ودورات الشات بوت — وحدات رسمية عملية من فريق LangChain.',
+        url: 'https://academy.langchain.com/',
+      },
+      {
+        title: 'ابنِ ببرمجة مساعدة بالذكاء',
+        description: 'استخدم Copilot أو Replit Agent في مشروع حقيقي: اربط سلسلة LLM ببياناتك عبر RAG.',
+      },
+      {
+        title: 'أطلق تطبيقاً كاملاً',
+        description: 'انشر تطبيق AI صغيراً مكتملاً (دردشة مع مستنداتك أو وكيل بأدوات) ليكون قطعة معرض أعمالك.',
+      },
+    ],
+    upvotes: 28,
+    bookmarks: 26,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o136',
+    slug: 'data-skills-for-business',
+    name: 'Data Skills for Business',
+    tagline: 'Practical data literacy: spreadsheets → SQL → dashboards → AI-assisted analysis',
+    description:
+      'A pragmatic track for professionals and founders who need to make data-driven decisions without becoming engineers: structuring and cleaning business data, SQL querying essentials, spreadsheet mastery, dashboard building (Looker Studio / Power BI), and using AI tools to analyze and summarize business data. No heavy math — just the exact skills that turn raw numbers into decisions.',
+    url: 'https://www.kaggle.com/learn',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=kaggle.com&sz=64',
+    category: 'learning',
+    tags: ['data', 'business', 'sql', 'dashboards', 'analytics'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Data cleaning & analysis basics',
+        description:
+          'Start with Kaggle\'s Data Cleaning and Intro to Data courses — structure any messy business dataset.',
+        url: 'https://www.kaggle.com/learn',
+      },
+      {
+        title: 'SQL essentials',
+        description:
+          'Learn to query company databases directly — Intro to SQL + Advanced SQL on Kaggle covers the daily-use 80%.',
+        url: 'https://www.kaggle.com/learn/intro-to-sql',
+      },
+      {
+        title: 'Dashboards + AI assist',
+        description:
+          'Visualize results in Looker Studio or Power BI, then use AI tools to generate summaries, trends and reports faster.',
+      },
+    ],
+    nameAr: 'مهارات البيانات للأعمال',
+    taglineAr: 'إلمام عملي بالبيانات: جداول ← SQL ← لوحات تحكم ← تحليل بمساعدة الذكاء الاصطناعي',
+    descriptionAr: 'مسار عملي للمهنيين والمؤسسين الذين يحتاجون قرارات مبنية على البيانات دون أن يصبحوا مهندسين: تنظيف بيانات العمل وأساسيات SQL وإتقان الجداول وبناء لوحات المتابعة واستخدام أدوات الذكاء الاصطناعي لتحليل بيانات نشاطك وتلخيصها. بدون رياضيات معقدة — فقط المهارات التي تحول الأرقام إلى قرارات.',
+    stepsAr: [
+      {
+        title: 'أساسيات التنظيف والتحليل',
+        description: 'ابدأ بدورتي Data Cleaning وIntro to Data على كاغل لتنظيم أي بيانات عمل فوضوية.',
+        url: 'https://www.kaggle.com/learn',
+      },
+      {
+        title: 'أساسيات SQL',
+        description: 'تعلّم استعلام قواعد بيانات شركتك مباشرة — مقدمة SQL وAdvanced SQL يغطيان 80% اليومية.',
+        url: 'https://www.kaggle.com/learn/intro-to-sql',
+      },
+      {
+        title: 'لوحات التحكم ومساعدة AI',
+        description: 'اعرض النتائج في Looker Studio أو Power BI ثم استخدم أدوات AI للتلخيص والتقارير.',
+      },
+    ],
+    upvotes: 21,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
