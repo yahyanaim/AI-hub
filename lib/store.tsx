@@ -234,7 +234,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     } catch {}
   }, [offersLang])
 
-  // Seed id registry — lets the saver strip seed items and store only user deltas
+  // Seed id registry - lets the saver strip seed items and store only user deltas
   const seedIdsRef = useRef<Record<
     'tools' | 'devTools' | 'prompts' | 'repos' | 'courses' | 'offers' | 'comments',
     Set<string>
@@ -271,7 +271,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         try {
           delta = JSON.parse(raw) as StoredDelta
         } catch {
-          delta = null // corrupt state — start clean
+          delta = null // corrupt state - start clean
         }
       }
 

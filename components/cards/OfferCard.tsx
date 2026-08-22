@@ -22,12 +22,12 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
         'group relative flex cursor-pointer flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
         className
       )}
-      aria-label={`${offer.name} — open details`}
+      aria-label={`${offer.name} - open details`}
     >
       <Link
         href={`/offers/${offer.slug}`}
         className="absolute inset-0 z-10"
-        aria-label={`${offer.name} — open details`}
+        aria-label={`${offer.name} - open details`}
       >
         <span className="sr-only">{offer.name}</span>
       </Link>

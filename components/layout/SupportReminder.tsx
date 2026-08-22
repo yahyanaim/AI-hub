@@ -11,7 +11,7 @@ export function SupportReminder() {
     const url = typeof window !== 'undefined' ? window.location.href : ''
     const shareData = {
       title: 'AI Hunt',
-      text: 'AI Hunt — free curated AI tools, courses & offers. No ads, no tracking.',
+      text: 'AI Hunt - free curated AI tools, courses & offers. No ads, no tracking.',
       url,
     }
     try {
@@ -48,7 +48,7 @@ export function SupportReminder() {
           AI Hunt is 100% free
         </h3>
         <p className="mt-2 text-base text-muted-foreground">
-          No ads · No tracking · No data collection — ever.
+          No ads · No tracking · No data collection - ever.
         </p>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">

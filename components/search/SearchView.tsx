@@ -170,7 +170,7 @@ export function SearchView() {
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search anything — 'HTML', 'React', 'SEO'…"
+            placeholder="Search anything - 'HTML', 'React', 'SEO'…"
             className="input pl-12 py-3 text-base"
             autoFocus
             onKeyDown={(e) => {

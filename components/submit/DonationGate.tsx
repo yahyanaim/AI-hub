@@ -102,7 +102,7 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
                 disabled={!supported}
                 className="mt-3 w-full rounded-lg border border-border bg-card py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {supported ? "I've supported — continue" : 'Donate via PayPal first'}
+                {supported ? "I've supported - continue" : 'Donate via PayPal first'}
               </button>
             </div>
           </motion.div>

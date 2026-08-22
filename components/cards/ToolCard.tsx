@@ -39,7 +39,7 @@ export function ToolCard({
         'group relative flex cursor-pointer flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
         className
       )}
-      aria-label={`${tool.name} — open details`}
+      aria-label={`${tool.name} - open details`}
     >
       {/* ===== Header: icon with optional rank badge ===== */}
       <div className="relative mb-3 flex items-start gap-3.5">

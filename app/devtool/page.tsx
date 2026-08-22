@@ -7,16 +7,16 @@ const baseUrl = 'https://aihubtools.vercel.app'
 
 export const metadata: Metadata = {
   title: 'Developer Tools Directory',
-  description: 'Discover essential developer tools — IDEs, code editors, testing frameworks, CI/CD platforms, monitoring solutions, databases, API tools, and more. Curated for software engineers.',
+  description: 'Discover essential developer tools - IDEs, code editors, testing frameworks, CI/CD platforms, monitoring solutions, databases, API tools, and more. Curated for software engineers.',
   openGraph: {
-    title: 'Developer Tools Directory — AI Hunt',
+    title: 'Developer Tools Directory - AI Hunt',
     description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, databases, and more. Curated for engineers.',
     url: `${baseUrl}/devtool`,
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Dev Tools' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Developer Tools Directory — AI Hunt',
+    title: 'Developer Tools Directory - AI Hunt',
     description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, and more.',
     images: ['/og.png'],
   },

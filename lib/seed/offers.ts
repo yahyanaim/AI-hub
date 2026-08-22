@@ -9,9 +9,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o1',
     slug: 'future-skills-academy',
     name: 'Future Skills Academy',
-    tagline: 'Free skills program for the Arab region — UNDP & MBRF',
+    tagline: 'Free skills program for the Arab region - UNDP & MBRF',
     description:
-      'A completely free, online upskilling program by the UNDP Regional Bureau for Arab States and the Mohammed bin Rashid Al Maktoum Knowledge Foundation. Aimed at learners across the Arab region — from fresh graduates and job seekers to public/private sector professionals and entrepreneurs. Covers Transferable Skills, Entrepreneurship Skills, and Advanced Technical Skills, delivered through Coursera. Successful applicants get free access to selected courses and earn certificates.',
+      'A completely free, online upskilling program by the UNDP Regional Bureau for Arab States and the Mohammed bin Rashid Al Maktoum Knowledge Foundation. Aimed at learners across the Arab region - from fresh graduates and job seekers to public/private sector professionals and entrepreneurs. Covers Transferable Skills, Entrepreneurship Skills, and Advanced Technical Skills, delivered through Coursera. Successful applicants get free access to selected courses and earn certificates.',
     url: 'https://www.knowledge4all.com/FutureSkills4All/overview',
     logoUrl: 'https://icons.duckduckgo.com/ip3/knowledge4all.com.ico',
     category: 'learning',
@@ -26,7 +26,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Open the Apply page',
         description:
-          'Visit the program’s Apply page on Knowledge for All to find the individual online application form and complete it accurately — enrollment is free.',
+          'Visit the program’s Apply page on Knowledge for All to find the individual online application form and complete it accurately - enrollment is free.',
         url: 'https://www.knowledge4all.com/FutureSkills4All/apply',
       },
       {
@@ -37,7 +37,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Activate your Coursera account',
         description:
-          'Follow the instructions in the email to set up your Coursera account — the program’s e-learning platform. Your free course access is granted through this account.',
+          'Follow the instructions in the email to set up your Coursera account - the program’s e-learning platform. Your free course access is granted through this account.',
       },
       {
         title: 'Begin your learning journey',
@@ -46,7 +46,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'أكاديمية مهارات المستقبل',
-    taglineAr: 'برنامج مهارات مجاني للمنطقة العربية — الأمم المتحدة الإنمائية ومؤسسة محمد بن راشد',
+    taglineAr: 'برنامج مهارات مجاني للمنطقة العربية - الأمم المتحدة الإنمائية ومؤسسة محمد بن راشد',
     descriptionAr: 'برنامج مجاني بالكامل عبر الإنترنت من المكتب الإقليمي لبرنامج الأمم المتحدة الإنمائي ومؤسسة محمد بن راشد للمعرفة. موجه لحديثي التخرج والباحثين عن عمل والمهنيين ورواد الأعمال في المنطقة العربية. يغطي المهارات القابلة للنقل وريادة الأعمال والمهارات التقنية المتقدمة عبر كورسيرا مع شهادات مجانية.',
     stepsAr: [
       {
@@ -55,7 +55,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'افتح صفحة التقديم',
-        description: 'اذهب إلى صفحة التقديم في Knowledge4All واملأ نموذج الطلب بدقة — التسجيل مجاني.',
+        description: 'اذهب إلى صفحة التقديم في Knowledge4All واملأ نموذج الطلب بدقة - التسجيل مجاني.',
         url: 'https://www.knowledge4all.com/FutureSkills4All/apply'
       },
       {
@@ -64,7 +64,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'فعّل حساب كورسيرا',
-        description: 'اتبع تعليمات الرسالة لإنشاء حساب كورسيرا — ستحصل على وصول مجاني للمقررات.'
+        description: 'اتبع تعليمات الرسالة لإنشاء حساب كورسيرا - ستحصل على وصول مجاني للمقررات.'
       },
       {
         title: 'ابدأ رحلة التعلم',
@@ -82,9 +82,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o2',
     slug: 'tokenrouter-unified-ai-hub',
     name: 'TokenRouter',
-    tagline: 'Kimi K3 free + one API for 300+ models — convert LLMs to OpenAI/Claude/Gemini format',
+    tagline: 'Kimi K3 free + one API for 300+ models - convert LLMs to OpenAI/Claude/Gemini format',
     description:
-      'A unified AI model hub that converts leading LLMs into OpenAI-, Claude-, and Gemini-compatible APIs. Right now TokenRouter runs a free tier of Kimi K3 — a frontier reasoning model — on its own B300/GB300 deployment. Route requests across 300+ models from a single key, compare providers, and manage everything from one dashboard. Includes docs, release notes, and a model directory. Ideal for developers who want frontier models at no cost and model-agnostic access without vendor lock-in.',
+      'A unified AI model hub that converts leading LLMs into OpenAI-, Claude-, and Gemini-compatible APIs. Right now TokenRouter runs a free tier of Kimi K3 - a frontier reasoning model - on its own B300/GB300 deployment. Route requests across 300+ models from a single key, compare providers, and manage everything from one dashboard. Includes docs, release notes, and a model directory. Ideal for developers who want frontier models at no cost and model-agnostic access without vendor lock-in.',
     url: 'https://www.tokenrouter.com/',
     logoUrl: 'https://www.tokenrouter.com/logo-without-title.png',
     category: 'tool',
@@ -100,7 +100,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Open API Keys and create a key',
         description:
-          'In the dashboard, go to API Keys and generate a key. Keep it safe — it authenticates all your routed requests.',
+          'In the dashboard, go to API Keys and generate a key. Keep it safe - it authenticates all your routed requests.',
         url: 'https://www.tokenrouter.com/api-keys',
       },
       {
@@ -112,7 +112,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Point your client at the unified endpoint',
         description:
-          'Use https://api.tokenrouter.com/v1 as the base URL with model moonshotai/kimi-k3-free in any OpenAI/Claude/Gemini-compatible SDK — Cursor, Claude Code, Cline, Aider, Hermes, even OpenCode. Swap the endpoint and model name and your existing code keeps working.',
+          'Use https://api.tokenrouter.com/v1 as the base URL with model moonshotai/kimi-k3-free in any OpenAI/Claude/Gemini-compatible SDK - Cursor, Claude Code, Cline, Aider, Hermes, even OpenCode. Swap the endpoint and model name and your existing code keeps working.',
         url: 'https://www.tokenrouter.com/docs',
       },
       {
@@ -123,7 +123,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'TokenRouter',
-    taglineAr: 'Kimi K3 مجاناً + واجهة موحدة لـ 300+ نموذج — حوّل LLMs إلى OpenAI/Claude/Gemini',
+    taglineAr: 'Kimi K3 مجاناً + واجهة موحدة لـ 300+ نموذج - حوّل LLMs إلى OpenAI/Claude/Gemini',
     descriptionAr: 'مركز نماذج موحد يحوّل أبرز النماذج إلى واجهات متوافقة مع OpenAI وClaude وGemini. حالياً يوفر Kimi K3 مجاناً على خوادم B300/GB300. وجّه الطلبات عبر 300+ نموذج بمفتاح واحد، وقارن المزودين من لوحة واحدة.',
     stepsAr: [
       {
@@ -165,7 +165,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'NVIDIA NIM',
     tagline: 'Free OpenAI-compatible inference across 100+ models on DGX Cloud',
     description:
-      'NVIDIA’s free inference platform at build.nvidia.com. Join the NVIDIA Developer Program to get API access to 100+ leading models (Nemotron, GLM, MiniMax, DeepSeek and more) served on DGX Cloud. Every model exposes an OpenAI-compatible endpoint, so switching models is just a string change. New developers get 1,000–5,000 free inference credits with roughly 40 requests/minute per model — perfect for prototyping and building agents.',
+      'NVIDIA’s free inference platform at build.nvidia.com. Join the NVIDIA Developer Program to get API access to 100+ leading models (Nemotron, GLM, MiniMax, DeepSeek and more) served on DGX Cloud. Every model exposes an OpenAI-compatible endpoint, so switching models is just a string change. New developers get 1,000-5,000 free inference credits with roughly 40 requests/minute per model - perfect for prototyping and building agents.',
     url: 'https://build.nvidia.com/models',
     logoUrl: 'https://icons.duckduckgo.com/ip3/build.nvidia.com.ico',
     category: 'api-access',
@@ -181,7 +181,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Join the NVIDIA Developer program (free)',
         description:
-          'Create an account on build.nvidia.com and join the NVIDIA Developer Program. This unlocks the hosted NIM APIs and can award 1,000–5,000 free inference credits.',
+          'Create an account on build.nvidia.com and join the NVIDIA Developer Program. This unlocks the hosted NIM APIs and can award 1,000-5,000 free inference credits.',
         url: 'https://build.nvidia.com/',
       },
       {
@@ -197,7 +197,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Prototype within the free tier',
         description:
-          'Each model is rate-limited (roughly 40 req/min) and credits are consumed per request. Perfect for prototypes, agents, and experiments — move to paid or self-hosted NIM for production.',
+          'Each model is rate-limited (roughly 40 req/min) and credits are consumed per request. Perfect for prototypes, agents, and experiments - move to paid or self-hosted NIM for production.',
       },
     ],
     nameAr: 'NVIDIA NIM',
@@ -224,7 +224,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'جرّب ضمن الحد المجاني',
-        description: 'كل نموذج محدود بنحو 40 طلب/دقيقة — مثالي للنماذج الأولية والوكلاء.'
+        description: 'كل نموذج محدود بنحو 40 طلب/دقيقة - مثالي للنماذج الأولية والوكلاء.'
       }
     ],
     upvotes: 28,
@@ -238,9 +238,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o4',
     slug: 'dahl-inference',
     name: 'Dahl Inference',
-    tagline: 'Powerful models, simple API access — MiniMax, Kimi, GLM & more',
+    tagline: 'Powerful models, simple API access - MiniMax, Kimi, GLM & more',
     description:
-      'Dahl Inference is a model catalog that makes powerful open models easy to use through a single, simple API. It hosts strong models — MiniMax M2.7, Kimi K2.6, GLM 5.2 — with straightforward routing behind one key. Browse the catalog at inference.dahl.global/models, try the chat playground, and integrate with docs at docs.dahl.global. Endpoints are OpenAI-compatible for easy drops into existing code.',
+      'Dahl Inference is a model catalog that makes powerful open models easy to use through a single, simple API. It hosts strong models - MiniMax M2.7, Kimi K2.6, GLM 5.2 - with straightforward routing behind one key. Browse the catalog at inference.dahl.global/models, try the chat playground, and integrate with docs at docs.dahl.global. Endpoints are OpenAI-compatible for easy drops into existing code.',
     url: 'https://inference.dahl.global/models',
     logoUrl: 'https://icons.duckduckgo.com/ip3/inference.dahl.global.ico',
     category: 'api-access',
@@ -261,7 +261,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Try the chat playground',
         description:
-          'Use /chat to test the models interactively before wiring up your code — confirm the response quality and latency.',
+          'Use /chat to test the models interactively before wiring up your code - confirm the response quality and latency.',
         url: 'https://inference.dahl.global/chat',
       },
       {
@@ -278,7 +278,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Dahl Inference',
-    taglineAr: 'نماذج قوية عبر API بسيط — MiniMax و Kimi و GLM والمزيد',
+    taglineAr: 'نماذج قوية عبر API بسيط - MiniMax و Kimi و GLM والمزيد',
     descriptionAr: 'كتالوج Dahl يسهّل استخدام النماذج القوية عبر مفتاح واحد: MiniMax M2.7 و Kimi K2.6 و GLM 5.2 مع توجيه بسيط وواجهة OpenAI متوافقة.',
     stepsAr: [
       {
@@ -317,9 +317,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o5',
     slug: 'flux-3-early-access',
     name: 'FLUX 3 Early Access',
-    tagline: 'Black Forest Labs\u2019 multimodal model — video, image, audio & action in early access',
+    tagline: 'Black Forest Labs\u2019 multimodal model - video, image, audio & action in early access',
     description:
-      'FLUX 3 is Black Forest Labs\u2019 new multimodal foundation model that jointly learns from images, video, and audio in a single unified architecture. FLUX 3 Video (with native audio generation, up to 20-second clips) is available now through a gated early access program — anyone can apply, but BFL approves requests by use case. Capabilities include text-to-video, image-to-video, video continuation, keyframe control, multilingual dialogue, and agentic clip chaining. In early evaluations it was preferred over Runway Gen-4.5 in 77% of comparisons and Luma Ray 3.2 in 93%. Early access is free to apply; video generation is pay-as-you-go (from $0.06/sec draft HD). FLUX 3 Image, FLUX 3 Action, and the open-weight FLUX 3 Dev follow over the coming weeks.',
+      'FLUX 3 is Black Forest Labs\u2019 new multimodal foundation model that jointly learns from images, video, and audio in a single unified architecture. FLUX 3 Video (with native audio generation, up to 20-second clips) is available now through a gated early access program - anyone can apply, but BFL approves requests by use case. Capabilities include text-to-video, image-to-video, video continuation, keyframe control, multilingual dialogue, and agentic clip chaining. In early evaluations it was preferred over Runway Gen-4.5 in 77% of comparisons and Luma Ray 3.2 in 93%. Early access is free to apply; video generation is pay-as-you-go (from $0.06/sec draft HD). FLUX 3 Image, FLUX 3 Action, and the open-weight FLUX 3 Dev follow over the coming weeks.',
     url: 'https://bfl.ai/models/flux-3',
     logoUrl: 'https://icons.duckduckgo.com/ip3/bfl.ai.ico',
     category: 'tool',
@@ -335,7 +335,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Request early access',
         description:
-          'Submit the early access form on the model page. The program is free and open to anyone, but access is discretionary — Black Forest Labs approves based on your use case and fit.',
+          'Submit the early access form on the model page. The program is free and open to anyone, but access is discretionary - Black Forest Labs approves based on your use case and fit.',
       },
       {
         title: 'Describe your use case',
@@ -345,7 +345,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Wait for BFL approval',
         description:
-          'There is no published wait time or approval criteria. Apply early and check your inbox — approval grants access through the BFL dashboard and API.',
+          'There is no published wait time or approval criteria. Apply early and check your inbox - approval grants access through the BFL dashboard and API.',
       },
       {
         title: 'Generate with FLUX 3 Video',
@@ -354,8 +354,8 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'FLUX 3 وصول مبكر',
-    taglineAr: 'نموذج Black Forest Labs متعدد الوسائط — فيديو وصور وصوت',
-    descriptionAr: 'FLUX 3 نموذج أساسي متعدد الوسائط يتعلم من الصور والفيديو والصوت معاً. FLUX 3 Video متاح الآن عبر وصول مبكر مجاني للتقديم — توليد حتى 20 ثانية مع صوت أصلي، تحويل نص/صورة إلى فيديو، وتسلسل لقطات.',
+    taglineAr: 'نموذج Black Forest Labs متعدد الوسائط - فيديو وصور وصوت',
+    descriptionAr: 'FLUX 3 نموذج أساسي متعدد الوسائط يتعلم من الصور والفيديو والصوت معاً. FLUX 3 Video متاح الآن عبر وصول مبكر مجاني للتقديم - توليد حتى 20 ثانية مع صوت أصلي، تحويل نص/صورة إلى فيديو، وتسلسل لقطات.',
     stepsAr: [
       {
         title: 'افتح صفحة FLUX 3',
@@ -364,7 +364,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'اطلب الوصول المبكر',
-        description: 'قدّم نموذج الوصول المبكر — مجاني ومفتوح للجميع لكن الموافقة حسب حالة الاستخدام.'
+        description: 'قدّم نموذج الوصول المبكر - مجاني ومفتوح للجميع لكن الموافقة حسب حالة الاستخدام.'
       },
       {
         title: 'اشرح حالة الاستخدام',
@@ -372,11 +372,11 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'انتظر موافقة BFL',
-        description: 'لا توجد مدة معلنة — قدّم مبكراً وتابع بريدك.'
+        description: 'لا توجد مدة معلنة - قدّم مبكراً وتابع بريدك.'
       },
       {
         title: 'ولّد بفيديو FLUX 3',
-        description: 'بعد الموافقة، ولّد فيديوهات حتى 20 ثانية بالصوت الأصلي — الدفع حسب الاستخدام من 0.06$ للثانية.'
+        description: 'بعد الموافقة، ولّد فيديوهات حتى 20 ثانية بالصوت الأصلي - الدفع حسب الاستخدام من 0.06$ للثانية.'
       }
     ],
     upvotes: 18,
@@ -390,9 +390,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o6',
     slug: 'opencode-with-ox-alpha',
     name: 'OpenCode + Ox Alpha (Free)',
-    tagline: 'Free open-source coding agent powered by Ox Alpha — free stealth model on OpenCode Zen',
+    tagline: 'Free open-source coding agent powered by Ox Alpha - free stealth model on OpenCode Zen',
     description:
-      'OpenCode is a free, open-source AI coding agent for the terminal, desktop, and web that reads your repo, edits files, and runs commands. Ox Alpha Free (`x-preview-f-free`) is a stealth model served through OpenCode Zen that is completely free during its preview period — input, output, and cached tokens are all $0 — and its provider follows a zero-retention policy, so your code is never used for model training. Pair them for a full agentic coding setup at literally no cost: connect via `/connect`, pick OpenCode Zen, paste your API key, then select the model with `/models`.',
+      'OpenCode is a free, open-source AI coding agent for the terminal, desktop, and web that reads your repo, edits files, and runs commands. Ox Alpha Free (`x-preview-f-free`) is a stealth model served through OpenCode Zen that is completely free during its preview period - input, output, and cached tokens are all $0 - and its provider follows a zero-retention policy, so your code is never used for model training. Pair them for a full agentic coding setup at literally no cost: connect via `/connect`, pick OpenCode Zen, paste your API key, then select the model with `/models`.',
     url: 'https://opencode.ai/zen',
     logoUrl: 'https://icons.duckduckgo.com/ip3/opencode.ai.ico',
     category: 'tool',
@@ -408,7 +408,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Create an OpenCode Zen account and API key',
         description:
-          'Sign in to OpenCode Zen and copy your API key. No paid credits needed — Ox Alpha Free is $0 during its preview period.',
+          'Sign in to OpenCode Zen and copy your API key. No paid credits needed - Ox Alpha Free is $0 during its preview period.',
         url: 'https://opencode.ai/auth',
       },
       {
@@ -424,12 +424,12 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Start building',
         description:
-          'Describe a task in plain language and let OpenCode read your repo, edit files, run commands, and iterate. Both the agent and the model are free — nothing to pay.',
+          'Describe a task in plain language and let OpenCode read your repo, edit files, run commands, and iterate. Both the agent and the model are free - nothing to pay.',
       },
     ],
     nameAr: 'OpenCode + Ox Alpha (مجاني)',
     taglineAr: 'وكيل برمجة مفتوح المصدر مجاني مدعوم بنموذج Ox Alpha المجاني على OpenCode Zen',
-    descriptionAr: 'OpenCode وكيل برمجة مجاني للطرفية وسطح المكتب والويب يقرأ المستودع ويعدّل الملفات وينفذ الأوامر. نموذج Ox Alpha Free عبر OpenCode Zen مجاني تماماً خلال فترة المعاينة — المدخلات والمخرجات كلها بـ 0$ — ومزوده يتبع سياسة عدم الاحتفاظ بالبيانات فلا يُستخدم كودك في التدريب. اربطهما عبر /connect واختر النموذج من /models.',
+    descriptionAr: 'OpenCode وكيل برمجة مجاني للطرفية وسطح المكتب والويب يقرأ المستودع ويعدّل الملفات وينفذ الأوامر. نموذج Ox Alpha Free عبر OpenCode Zen مجاني تماماً خلال فترة المعاينة - المدخلات والمخرجات كلها بـ 0$ - ومزوده يتبع سياسة عدم الاحتفاظ بالبيانات فلا يُستخدم كودك في التدريب. اربطهما عبر /connect واختر النموذج من /models.',
     stepsAr: [
       {
         title: 'ثبّت OpenCode',
@@ -438,7 +438,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'أنشئ حساب OpenCode Zen ومفتاح API',
-        description: 'سجّل الدخول إلى OpenCodeZen وانسخ مفتاح API — لا حاجة لأي رصيد.',
+        description: 'سجّل الدخول إلى OpenCodeZen وانسخ مفتاح API - لا حاجة لأي رصيد.',
         url: 'https://opencode.ai/auth'
       },
       {
@@ -451,7 +451,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'ابدأ البناء',
-        description: 'صف مهمتك بلغة طبيعية ودع OpenCode يقرأ ويعدّل وينفذ ويكرر — وكيل ونموذج مجاناً.'
+        description: 'صف مهمتك بلغة طبيعية ودع OpenCode يقرأ ويعدّل وينفذ ويكرر - وكيل ونموذج مجاناً.'
       }
     ],
     upvotes: 12,
@@ -465,9 +465,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o7',
     slug: 'gemini-for-students',
     name: 'Gemini for Students',
-    tagline: 'Free Google AI Pro (US: 5TB + 4× Gemini) or AI Plus (Global: 400GB + 2× Gemini) for 1 year — verified college students',
+    tagline: 'Free Google AI Pro (US: 5TB + 4× Gemini) or AI Plus (Global: 400GB + 2× Gemini) for 1 year - verified college students',
     description:
-      'Google’s official 2026 student offer — live since Aug 19, 2026 and redeemable until Dec 31, 2026. In the US you get 12 months of Google AI Pro free (normally $19.99/mo): 4× higher usage limits in Gemini, 5 TB of Google Drive/Photos/Gmail storage, Gemini Spark agentic platform, Gemini Omni, Gemini in Gmail/Docs/Sheets, Google Health Premium, plus the new Student Hub (study notebooks with custom learning plans, interactive visualizations, personalized quizzes & performance tracker), unlimited uploads and Gemini Live. Outside the US (160+ countries including Morocco, MENA, EU, Asia) you get 12 months of Google AI Plus free: 2× higher Gemini limits, 400 GB storage, Gemini Omni, and the same Student Hub with unlimited notebooks/visualizations. Must be 18+, verified each year via SheerID with your college .edu or student ID, and requires a payment method — auto-renews at standard price unless you cancel. Offer Terms at one.google.com/offer/studentoffer8.',
+      'Google’s official 2026 student offer - live since Aug 19, 2026 and redeemable until Dec 31, 2026. In the US you get 12 months of Google AI Pro free (normally $19.99/mo): 4× higher usage limits in Gemini, 5 TB of Google Drive/Photos/Gmail storage, Gemini Spark agentic platform, Gemini Omni, Gemini in Gmail/Docs/Sheets, Google Health Premium, plus the new Student Hub (study notebooks with custom learning plans, interactive visualizations, personalized quizzes & performance tracker), unlimited uploads and Gemini Live. Outside the US (160+ countries including Morocco, MENA, EU, Asia) you get 12 months of Google AI Plus free: 2× higher Gemini limits, 400 GB storage, Gemini Omni, and the same Student Hub with unlimited notebooks/visualizations. Must be 18+, verified each year via SheerID with your college .edu or student ID, and requires a payment method - auto-renews at standard price unless you cancel. Offer Terms at one.google.com/offer/studentoffer8.',
     url: 'https://gemini.google/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/gemini.google.com.ico',
     category: 'learning',
@@ -477,7 +477,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Pick your student hub',
         description:
-          'US students: open gemini.google/us/students (AI Pro). Everyone else (incl. Morocco/MENA): open gemini.google/students and choose your country/language — you will get AI Plus. Both pages have a "Claim Free Student Plan" button.',
+          'US students: open gemini.google/us/students (AI Pro). Everyone else (incl. Morocco/MENA): open gemini.google/students and choose your country/language - you will get AI Plus. Both pages have a "Claim Free Student Plan" button.',
         url: 'https://gemini.google/students/',
       },
       {
@@ -505,12 +505,12 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'جيميناي للطلاب',
-    taglineAr: 'جوجل AI Pro مجاناً لمدة سنة (أمريكا: 5TB و 4× جيميناي) أو AI Plus عالمياً (400GB و 2× جيميناي) — للطلاب الجامعيين',
-    descriptionAr: 'عرض جوجل الرسمي لعام 2026 — متاح منذ 19 أغسطس 2026 حتى 31 ديسمبر 2026. في أمريكا تحصل على Google AI Pro مجاناً لمدة 12 شهراً (بقيمة 19.99$ شهرياً): حدود استخدام 4× في جيميناي، 5 تيرابايت تخزين في درايف/صور/جيميل، منصة Gemini Spark، Gemini Omni، جيميناي في جيميل/دوكس/شيتس، Google Health Premium، ومركز الطالب الجديد (دفاتر دراسية بخطط تعلم مخصصة، مرئيات تفاعلية، اختبارات شخصية وتتبع الأداء) مع تحميلات غير محدودة و Gemini Live. خارج أمريكا (160+ دولة تشمل المغرب والشرق الأوسط وأوروبا) تحصل على Google AI Plus مجاناً: حدود 2×، 400GB، Gemini Omni ونفس مركز الطالب. يجب أن تكون 18+ ويتم التحقق سنوياً عبر SheerID ببريدك الجامعي .edu أو بطاقة الطالب، مع بطاقة دفع — يتجدد تلقائياً إلا إذا ألغيت.',
+    taglineAr: 'جوجل AI Pro مجاناً لمدة سنة (أمريكا: 5TB و 4× جيميناي) أو AI Plus عالمياً (400GB و 2× جيميناي) - للطلاب الجامعيين',
+    descriptionAr: 'عرض جوجل الرسمي لعام 2026 - متاح منذ 19 أغسطس 2026 حتى 31 ديسمبر 2026. في أمريكا تحصل على Google AI Pro مجاناً لمدة 12 شهراً (بقيمة 19.99$ شهرياً): حدود استخدام 4× في جيميناي، 5 تيرابايت تخزين في درايف/صور/جيميل، منصة Gemini Spark، Gemini Omni، جيميناي في جيميل/دوكس/شيتس، Google Health Premium، ومركز الطالب الجديد (دفاتر دراسية بخطط تعلم مخصصة، مرئيات تفاعلية، اختبارات شخصية وتتبع الأداء) مع تحميلات غير محدودة و Gemini Live. خارج أمريكا (160+ دولة تشمل المغرب والشرق الأوسط وأوروبا) تحصل على Google AI Plus مجاناً: حدود 2×، 400GB، Gemini Omni ونفس مركز الطالب. يجب أن تكون 18+ ويتم التحقق سنوياً عبر SheerID ببريدك الجامعي .edu أو بطاقة الطالب، مع بطاقة دفع - يتجدد تلقائياً إلا إذا ألغيت.',
     stepsAr: [
       {
         title: 'اختر مركز الطلاب المناسب',
-        description: 'طلاب أمريكا: افتح gemini.google/us/students (AI Pro). باقي الدول (بما فيها المغرب): افتح gemini.google/students واختر بلدك/لغتك — ستحصل على AI Plus. كلا الصفحتين بها زر "Claim Free Student Plan".',
+        description: 'طلاب أمريكا: افتح gemini.google/us/students (AI Pro). باقي الدول (بما فيها المغرب): افتح gemini.google/students واختر بلدك/لغتك - ستحصل على AI Plus. كلا الصفحتين بها زر "Claim Free Student Plan".',
         url: 'https://gemini.google/students/',
       },
       {
@@ -525,7 +525,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'افتح مركز الطالب في جيميناي',
-        description: 'اذهب إلى gemini.google.com → Student hub. ارفع المناهج والملاحظات والـ PDF: ينشئ جيميناي دفتر دراسة مخصص، خطة تعلم، مرئيات تفاعلية، اختبارات وتتبع أداء — تحميلات غير محدودة.',
+        description: 'اذهب إلى gemini.google.com → Student hub. ارفع المناهج والملاحظات والـ PDF: ينشئ جيميناي دفتر دراسة مخصص، خطة تعلم، مرئيات تفاعلية، اختبارات وتتبع أداء - تحميلات غير محدودة.',
         url: 'https://gemini.google.com',
       },
       {
@@ -544,9 +544,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o8',
     slug: 'muse-spark',
     name: 'Muse Spark',
-    tagline: 'Free agentic coding AI by Meta — 1M tokens free for OpenCode & terminal agents',
+    tagline: 'Free agentic coding AI by Meta - 1M tokens free for OpenCode & terminal agents',
     description:
-      'Muse Spark is Meta’s agentic coding model built for autonomous engineering loops: it reads your repo, plans multi-step changes, edits files, runs tests, and iterates. Muse Spark 1.2 is the contributor-free tier — sign up and get ~1M free tokens to power OpenCode, Hermes, OpenClaw and other terminal agents with zero subscription. Connect via OpenCode /connect or any OpenAI-compatible base URL, pick muse-spark-1.2, and start shipping.',
+      'Muse Spark is Meta’s agentic coding model built for autonomous engineering loops: it reads your repo, plans multi-step changes, edits files, runs tests, and iterates. Muse Spark 1.2 is the contributor-free tier - sign up and get ~1M free tokens to power OpenCode, Hermes, OpenClaw and other terminal agents with zero subscription. Connect via OpenCode /connect or any OpenAI-compatible base URL, pick muse-spark-1.2, and start shipping.',
     url: 'https://www.meta.ai/muse-spark',
     logoUrl: 'https://icons.duckduckgo.com/ip3/meta.ai.ico',
     category: 'tool',
@@ -578,11 +578,11 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Ship with the agent loop',
         description:
-          'Describe your task in plain language — Muse Spark will explore the codebase, edit files, run commands, and verify with builds/tests, all in one autonomous loop.',
+          'Describe your task in plain language - Muse Spark will explore the codebase, edit files, run commands, and verify with builds/tests, all in one autonomous loop.',
       },
     ],
     nameAr: 'Muse Spark',
-    taglineAr: 'ذكاء برمجي وكيلي مجاني من Meta — مليون رمز مجاناً لـ OpenCode',
+    taglineAr: 'ذكاء برمجي وكيلي مجاني من Meta - مليون رمز مجاناً لـ OpenCode',
     descriptionAr: 'Muse Spark نموذج وكيلي من Meta للهندسة المستقلة: يقرأ المستودع ويخطط ويعدّل وينفذ الاختبارات ويكرر. المستوى المجاني للمساهمين يعطي ~مليون رمز مجاناً لتشغيل OpenCode و Hermes و OpenClaw بدون اشتراك.',
     stepsAr: [
       {
@@ -592,7 +592,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'أنشئ مفتاح API',
-        description: 'أنشئ مفتاحاً — المستوى المجاني يضم ~مليون رمز للبدء.'
+        description: 'أنشئ مفتاحاً - المستوى المجاني يضم ~مليون رمز للبدء.'
       },
       {
         title: 'اربط من OpenCode',
@@ -619,9 +619,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o9',
     slug: 'github-student-developer-pack',
     name: 'GitHub Student Developer Pack',
-    tagline: '20+ dev tools free while you are a student — Copilot, Codespaces, domains, hosting ($200k+ value)',
+    tagline: '20+ dev tools free while you are a student - Copilot, Codespaces, domains, hosting ($200k+ value)',
     description:
-      'The benchmark student pack — verified students get free access to 20+ premium dev tools: GitHub Copilot Pro (free while student), GitHub Codespaces, Namecheap 1-year domain + SSL, DigitalOcean $200 credit, JetBrains (via pack), Stripe fee waiver, 1Password, and more. Renewable while enrolled. GitHub verifies via school email, student ID, or enrollment letter. Non-students can get it by legitimately enrolling in any accredited college/community college (US CC ~$40 gets a real .edu + ID in 2-3 days) — no paid .edu shop needed.',
+      'The benchmark student pack - verified students get free access to 20+ premium dev tools: GitHub Copilot Pro (free while student), GitHub Codespaces, Namecheap 1-year domain + SSL, DigitalOcean $200 credit, JetBrains (via pack), Stripe fee waiver, 1Password, and more. Renewable while enrolled. GitHub verifies via school email, student ID, or enrollment letter. Non-students can get it by legitimately enrolling in any accredited college/community college (US CC ~$40 gets a real .edu + ID in 2-3 days) - no paid .edu shop needed.',
     url: 'https://education.github.com/pack',
     logoUrl: 'https://icons.duckduckgo.com/ip3/education.github.com.ico',
     category: 'tool',
@@ -635,9 +635,9 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://education.github.com/pack',
       },
       {
-        title: 'Get your student proof — two paths',
+        title: 'Get your student proof - two paths',
         description:
-          'STUDENT: Use your school-issued .edu/.ac email OR prepare a file: student ID + enrollment letter/transcript with your full name, school name, and current date. NON-STUDENT: Enroll in an accredited community college (e.g., Dallas College, LA City College, Santa Monica College) for a cheap 1-credit online course — you will get a real .edu, ID, and enrollment letter in 24-72h. Alternative shops like edumailshop.com sell mailboxes but are revocable and against GitHub ToS — enroll legitimately instead.',
+          'STUDENT: Use your school-issued .edu/.ac email OR prepare a file: student ID + enrollment letter/transcript with your full name, school name, and current date. NON-STUDENT: Enroll in an accredited community college (e.g., Dallas College, LA City College, Santa Monica College) for a cheap 1-credit online course - you will get a real .edu, ID, and enrollment letter in 24-72h. Alternative shops like edumailshop.com sell mailboxes but are revocable and against GitHub ToS - enroll legitimately instead.',
         url: 'https://education.github.com/pack/join',
       },
       {
@@ -658,8 +658,8 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'حزمة مطور الطلاب من GitHub',
-    taglineAr: 'أكثر من 20 أداة مطور مجاناً أثناء الدراسة — Copilot و Codespaces ودومين واستضافة (قيمة +200 ألف $)',
-    descriptionAr: 'الحزمة المرجعية للطلاب — يتحقق الطلاب ويحصلون مجاناً على 20+ أداة مميزة: GitHub Copilot Pro مجاناً أثناء الدراسة، Codespaces، دومين Namecheap سنة + SSL، رصيد DigitalOcean 200$، JetBrains عبر الحزمة، إعفاء رسوم Stripe، 1Password والمزيد. قابلة للتجديد أثناء الدراسة. يتحقق GitHub عبر بريد .edu أو بطاقة الطالب أو خطاب التسجيل. غير الطلاب يمكنهم التسجيل في كلية مجتمع معتمدة (CC أمريكية ~40$ تحصل على .edu حقيقي + هوية خلال 2-3 أيام).',
+    taglineAr: 'أكثر من 20 أداة مطور مجاناً أثناء الدراسة - Copilot و Codespaces ودومين واستضافة (قيمة +200 ألف $)',
+    descriptionAr: 'الحزمة المرجعية للطلاب - يتحقق الطلاب ويحصلون مجاناً على 20+ أداة مميزة: GitHub Copilot Pro مجاناً أثناء الدراسة، Codespaces، دومين Namecheap سنة + SSL، رصيد DigitalOcean 200$، JetBrains عبر الحزمة، إعفاء رسوم Stripe، 1Password والمزيد. قابلة للتجديد أثناء الدراسة. يتحقق GitHub عبر بريد .edu أو بطاقة الطالب أو خطاب التسجيل. غير الطلاب يمكنهم التسجيل في كلية مجتمع معتمدة (CC أمريكية ~40$ تحصل على .edu حقيقي + هوية خلال 2-3 أيام).',
     stepsAr: [
       {
         title: 'تحقق من الأهلية (13+ ومسجل)',
@@ -667,8 +667,8 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://education.github.com/pack',
       },
       {
-        title: 'جهّز إثبات الطالب — مساران',
-        description: 'طالب: استخدم بريدك .edu أو جهّز ملفاً: بطاقة الطالب + خطاب/كشف تسجيل باسمك الكامل واسم المدرسة والتاريخ الحالي. غير طالب: سجّل في كلية مجتمع معتمدة (Dallas College، LA City College) لمقرر واحد رخيص — ستحصل على .edu حقيقي وهوية وخطاب خلال 24-72 ساعة.',
+        title: 'جهّز إثبات الطالب - مساران',
+        description: 'طالب: استخدم بريدك .edu أو جهّز ملفاً: بطاقة الطالب + خطاب/كشف تسجيل باسمك الكامل واسم المدرسة والتاريخ الحالي. غير طالب: سجّل في كلية مجتمع معتمدة (Dallas College، LA City College) لمقرر واحد رخيص - ستحصل على .edu حقيقي وهوية وخطاب خلال 24-72 ساعة.',
         url: 'https://education.github.com/pack/join',
       },
       {
@@ -696,9 +696,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o10',
     slug: 'azure-for-students',
     name: 'Microsoft Azure for Students',
-    tagline: '$100 credit + 12 months free + 25+ always-free services — no credit card required',
+    tagline: '$100 credit + 12 months free + 25+ always-free services - no credit card required',
     description:
-      'Azure for Students gives verified students $100 credit for 12 months, no credit card required at signup. Includes 25+ always-free services (App Service, Functions, Cosmos DB, VMs). Renewal requires re-verification. Students verify with school email via Microsoft. Non-students can qualify by enrolling in a CC/open university to get a .edu + enrollment proof, then use the same portal — Azure accepts both email and manual academic verification via SheerID/UNiDAYS.',
+      'Azure for Students gives verified students $100 credit for 12 months, no credit card required at signup. Includes 25+ always-free services (App Service, Functions, Cosmos DB, VMs). Renewal requires re-verification. Students verify with school email via Microsoft. Non-students can qualify by enrolling in a CC/open university to get a .edu + enrollment proof, then use the same portal - Azure accepts both email and manual academic verification via SheerID/UNiDAYS.',
     url: 'https://azure.microsoft.com/free/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/azure.microsoft.com.ico',
     category: 'api-access',
@@ -708,13 +708,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Open Azure Students page',
         description:
-          'Visit azure.microsoft.com/free/students. Click “Activate now” — you will be sent to the Microsoft Education verification flow.',
+          'Visit azure.microsoft.com/free/students. Click “Activate now” - you will be sent to the Microsoft Education verification flow.',
         url: 'https://azure.microsoft.com/free/students',
       },
       {
-        title: 'Get verified — student vs non-student',
+        title: 'Get verified - student vs non-student',
         description:
-          'STUDENT: Sign in with your school .edu/Microsoft 365 Education email — auto-verified instantly. NON-STUDENT: Enroll in any accredited CC for a 1-credit course to get a .edu + student ID, then sign up with that email. If you have no .edu, choose “Verify with school ID” and upload enrollment letter + ID; Microsoft also routes some countries via SheerID/UNiDAYS.',
+          'STUDENT: Sign in with your school .edu/Microsoft 365 Education email - auto-verified instantly. NON-STUDENT: Enroll in any accredited CC for a 1-credit course to get a .edu + student ID, then sign up with that email. If you have no .edu, choose “Verify with school ID” and upload enrollment letter + ID; Microsoft also routes some countries via SheerID/UNiDAYS.',
       },
       {
         title: 'Create Azure account (no card)',
@@ -729,11 +729,11 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Renew after 12 months',
         description:
-          'Credit expires in 12 months. To renew, you must still be enrolled — re-verify with updated enrollment proof. Graduates can move to Azure Free (no credit but still free services).',
+          'Credit expires in 12 months. To renew, you must still be enrolled - re-verify with updated enrollment proof. Graduates can move to Azure Free (no credit but still free services).',
       },
     ],
     nameAr: 'Azure للطلاب',
-    taglineAr: 'رصيد 100$ + 12 شهر مجاناً + 25+ خدمة مجانية دائماً — بدون بطاقة',
+    taglineAr: 'رصيد 100$ + 12 شهر مجاناً + 25+ خدمة مجانية دائماً - بدون بطاقة',
     descriptionAr: 'Azure للطلاب يمنح 100$ رصيد لـ 12 شهراً بدون بطاقة عند التسجيل، مع 25+ خدمة مجانية دائماً. يتجدد بالتحقق. غير الطلاب يمكنهم التسجيل في كلية مجتمع للحصول على .edu.',
     stepsAr: [
       {
@@ -742,7 +742,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://azure.microsoft.com/free/students'
       },
       {
-        title: 'تحقق — طالب أو غير طالب',
+        title: 'تحقق - طالب أو غير طالب',
         description: 'طالب: سجّل ببريد .edu → فوري. غير طالب: سجّل في CC للحصول على .edu وهوية، أو ارفع خطاباً وبطاقة عبر SheerID/UNiDAYS.'
       },
       {
@@ -755,7 +755,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'جدّد بعد 12 شهراً',
-        description: 'الرصيد ينتهي بعد 12 شهراً — أعد التحقق بإثبات جديد.'
+        description: 'الرصيد ينتهي بعد 12 شهراً - أعد التحقق بإثبات جديد.'
       }
     ],
     upvotes: 36,
@@ -771,7 +771,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'AWS Educate',
     tagline: '$100 AWS credit + hands-on labs + job board + cert discounts for students',
     description:
-      'AWS Educate is Amazon’s student cloud program: $75-$100 credits (refreshed annually), access to 20+ Career Pathways, hands-on labs, and 50% off AWS Certified Cloud Practitioner. Verifies via school .edu or enrollment doc. Non-students can qualify by taking a cheap accredited course to get a student email/ID, then apply — AWS Educate accepts transcript + ID, not just .edu.',
+      'AWS Educate is Amazon’s student cloud program: $75-$100 credits (refreshed annually), access to 20+ Career Pathways, hands-on labs, and 50% off AWS Certified Cloud Practitioner. Verifies via school .edu or enrollment doc. Non-students can qualify by taking a cheap accredited course to get a student email/ID, then apply - AWS Educate accepts transcript + ID, not just .edu.',
     url: 'https://aws.amazon.com/education/awseducate/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/aws.amazon.com.ico',
     category: 'api-access',
@@ -787,7 +787,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Provide student proof',
         description:
-          'STUDENT: Enter .edu email — instant if recognized. Or upload student ID + enrollment proof (must show name, school, current term). NON-STUDENT: Register at a CC for 1 class → get .edu + enrollment letter (usually PDF in 1-2 days) → upload that. Some .edu shops work but AWS now checks enrollment date, so a real transcript is safest.',
+          'STUDENT: Enter .edu email - instant if recognized. Or upload student ID + enrollment proof (must show name, school, current term). NON-STUDENT: Register at a CC for 1 class → get .edu + enrollment letter (usually PDF in 1-2 days) → upload that. Some .edu shops work but AWS now checks enrollment date, so a real transcript is safest.',
       },
       {
         title: 'Wait for approval and claim credits',
@@ -828,7 +828,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'جدّد سنوياً',
-        description: 'الرصيد ينتهي بعد 12 شهراً — أعد التحقق كل سنة.'
+        description: 'الرصيد ينتهي بعد 12 شهراً - أعد التحقق كل سنة.'
       }
     ],
     upvotes: 31,
@@ -842,7 +842,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o12',
     slug: 'cloudflare-for-students',
     name: 'Cloudflare for Students',
-    tagline: '12 months of Cloudflare Pro free — Workers, R2, Pages, Zero Trust',
+    tagline: '12 months of Cloudflare Pro free - Workers, R2, Pages, Zero Trust',
     description:
       'Cloudflare gives verified students a free year of Pro plan perks: unlimited Workers requests, R2 storage, Pages builds, Stream, and Zero Trust seat. Verifies via UNiDAYS or student email. Non-students can get it by enrolling in a community college to get a UNiDAYS-eligible .edu, then verify via UNiDAYS with enrollment proof.',
     url: 'https://www.cloudflare.com/students/',
@@ -860,7 +860,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Create UNiDAYS and get verified',
         description:
-          'STUDENT: Sign up at myunidays.com with .edu email or search your school and upload ID/enrollment letter — instant if email matches. NON-STUDENT: Enroll in a CC to get a .edu accepted by UNiDAYS (most US CCs are listed) + upload your student ID. UNiDAYS approves in minutes.',
+          'STUDENT: Sign up at myunidays.com with .edu email or search your school and upload ID/enrollment letter - instant if email matches. NON-STUDENT: Enroll in a CC to get a .edu accepted by UNiDAYS (most US CCs are listed) + upload your student ID. UNiDAYS approves in minutes.',
       },
       {
         title: 'Claim Cloudflare promo',
@@ -879,7 +879,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Cloudflare للطلاب',
-    taglineAr: '12 شهر من Cloudflare Pro مجاناً — Workers و R2 و Pages',
+    taglineAr: '12 شهر من Cloudflare Pro مجاناً - Workers و R2 و Pages',
     descriptionAr: 'Cloudflare يمنح الطلاب سنة مجانية من مزايا Pro: طلبات Workers غير محدودة، تخزين R2، بناء Pages، وقناة Zero Trust. يتحقق عبر UNiDAYS.',
     stepsAr: [
       {
@@ -893,7 +893,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'اطلب عرض Cloudflare',
-        description: 'بعد موافقة UNiDAYS ستُعاد إلى Cloudflare برمز ترويجي — طبّقه في الفوترة.'
+        description: 'بعد موافقة UNiDAYS ستُعاد إلى Cloudflare برمز ترويجي - طبّقه في الفوترة.'
       },
       {
         title: 'فعّل Workers و R2 و Pages',
@@ -901,7 +901,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'جدّد السنة القادمة',
-        description: 'المزايا 12 شهراً — أعد التحقق عبر UNiDAYS قبل الانتهاء.'
+        description: 'المزايا 12 شهراً - أعد التحقق عبر UNiDAYS قبل الانتهاء.'
       }
     ],
     upvotes: 22,
@@ -933,7 +933,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Email support for academic upgrade',
         description:
-          'Send an email to support@shodan.io from your .edu address: subject “Academic Upgrade — your_username”, include your Shodan username and proof of enrollment if your email domain is new. Response in 1-2 days.',
+          'Send an email to support@shodan.io from your .edu address: subject “Academic Upgrade - your_username”, include your Shodan username and proof of enrollment if your email domain is new. Response in 1-2 days.',
       },
       {
         title: 'Verify and use upgraded quotas',
@@ -970,7 +970,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o14',
     slug: 'hyperbolic-ai-student',
     name: 'Hyperbolic AI',
-    tagline: '$15 free inference + GPU credits with .edu — DeepSeek R1, Qwen, Llama API',
+    tagline: '$15 free inference + GPU credits with .edu - DeepSeek R1, Qwen, Llama API',
     description:
       'Hyperbolic offers $15 in inference credits and discounted GPU rentals for students who verify with .edu. Gives OpenAI-compatible API access to DeepSeek-R1, Qwen, Llama. Low barrier: any .edu works via email verification.',
     url: 'https://app.hyperbolic.ai/',
@@ -982,7 +982,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Sign up with .edu',
         description:
-          'Visit app.hyperbolic.ai → Sign up with your .edu email (student or CC .edu). Verify via email link. NON-STUDENT: Use a CC .edu mailbox — verification is email-only, no file check.',
+          'Visit app.hyperbolic.ai → Sign up with your .edu email (student or CC .edu). Verify via email link. NON-STUDENT: Use a CC .edu mailbox - verification is email-only, no file check.',
         url: 'https://app.hyperbolic.ai/',
       },
       {
@@ -993,11 +993,11 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Call the OpenAI-compatible endpoint',
         description:
-          'Use https://api.hyperbolic.ai/v1 with your API key, model “deepseek-ai/DeepSeek-R1”. Drop-in for any OpenAI SDK — just swap base URL and key.',
+          'Use https://api.hyperbolic.ai/v1 with your API key, model “deepseek-ai/DeepSeek-R1”. Drop-in for any OpenAI SDK - just swap base URL and key.',
       },
     ],
     nameAr: 'Hyperbolic AI',
-    taglineAr: 'رصيد 15$ مجاناً + GPU ببريد .edu — DeepSeek R1 و Qwen',
+    taglineAr: 'رصيد 15$ مجاناً + GPU ببريد .edu - DeepSeek R1 و Qwen',
     descriptionAr: 'يقدّم Hyperbolic رصيد 15$ وGPU مخفّض للطلاب ببريد .edu عبر واجهة OpenAI متوافقة لـ DeepSeek-R1 و Qwen و Llama.',
     stepsAr: [
       {
@@ -1025,7 +1025,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o15',
     slug: 'chatgpt-plus-student',
     name: 'ChatGPT Plus for Students',
-    tagline: 'Free ChatGPT Plus ( $20/mo ) for verified students — GPT-4o with higher limits',
+    tagline: 'Free ChatGPT Plus ( $20/mo ) for verified students - GPT-4o with higher limits',
     description:
       'OpenAI offers ChatGPT Plus free for students via SheerID/UNiDAYS in supported countries (US, UK, CA etc.). Includes GPT-4o, higher message limits, file uploads, and Code Interpreter. Outside eligible countries, use a US CC enrollment to get US SheerID verification. Regularly extended, redeem before expiry shown on page.',
     url: 'https://chatgpt.com/students',
@@ -1041,14 +1041,14 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://chatgpt.com/students',
       },
       {
-        title: 'Verify — student vs non-student',
+        title: 'Verify - student vs non-student',
         description:
-          'STUDENT: Enter school name + .edu email — SheerID auto-verifies. NON-STUDENT: Enroll in a US CC (accredited) to get a .edu + enrollment letter → upload letter + ID when SheerID asks for “upload document”. US address required — use campus or forwarder if asked.',
+          'STUDENT: Enter school name + .edu email - SheerID auto-verifies. NON-STUDENT: Enroll in a US CC (accredited) to get a .edu + enrollment letter → upload letter + ID when SheerID asks for “upload document”. US address required - use campus or forwarder if asked.',
       },
       {
         title: 'Redeem Plus',
         description:
-          'After approval, click “Redeem” → your ChatGPT account upgrades to Plus. Check Settings → Subscription shows “Student — free until [date]”. Cancel auto-renew if you will not stay enrolled.',
+          'After approval, click “Redeem” → your ChatGPT account upgrades to Plus. Check Settings → Subscription shows “Student - free until [date]”. Cancel auto-renew if you will not stay enrolled.',
       },
       {
         title: 'Use until renewal required',
@@ -1057,7 +1057,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'ChatGPT Plus للطلاب',
-    taglineAr: 'ChatGPT Plus مجاناً للطلاب — GPT-4o بحدود أعلى',
+    taglineAr: 'ChatGPT Plus مجاناً للطلاب - GPT-4o بحدود أعلى',
     descriptionAr: 'يقدّم OpenAI Plus مجاناً للطلاب عبر SheerID/UNiDAYS في دول مدعومة: GPT-4o، حدود أعلى، رفع ملفات، وأداة كود. غير الطلاب يمكنهم التسجيل في CC أمريكية للحصول على تحقق SheerID أمريكي.',
     stepsAr: [
       {
@@ -1066,7 +1066,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://chatgpt.com/students'
       },
       {
-        title: 'تحقق — طالب أو غير طالب',
+        title: 'تحقق - طالب أو غير طالب',
         description: 'طالب: أدخل .edu → فوري. غير طالب: سجّل في CC أمريكية واحصل على .edu وخطاب وارفعه في SheerID.'
       },
       {
@@ -1089,9 +1089,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o16',
     slug: 'cursor-pro-student',
     name: 'Cursor Pro for Students',
-    tagline: '1 year Cursor Pro free — AI code editor with agent mode',
+    tagline: '1 year Cursor Pro free - AI code editor with agent mode',
     description:
-      'Cursor gives students 1 year of Pro free: unlimited completions, agent mode, codebase-aware chat, and Max models. Verifies via SheerID with .edu or file. Non-students can qualify with a CC .edu + enrollment proof — Cursor’s SheerID accepts file upload, no .edu email strictly required.',
+      'Cursor gives students 1 year of Pro free: unlimited completions, agent mode, codebase-aware chat, and Max models. Verifies via SheerID with .edu or file. Non-students can qualify with a CC .edu + enrollment proof - Cursor’s SheerID accepts file upload, no .edu email strictly required.',
     url: 'https://cursor.com/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/cursor.com.ico',
     category: 'tool',
@@ -1121,7 +1121,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Cursor Pro للطلاب',
-    taglineAr: 'سنة Cursor Pro مجاناً — محرر AI مع وضع الوكيل',
+    taglineAr: 'سنة Cursor Pro مجاناً - محرر AI مع وضع الوكيل',
     descriptionAr: 'يمنح Cursor الطلاب سنة Pro مجاناً: إكمال غير محدود، وضع الوكيل، دردشة تفهم قاعدة الكود. يتحقق عبر SheerID.',
     stepsAr: [
       {
@@ -1131,7 +1131,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'تحقق عبر SheerID',
-        description: 'طالب: .edu → فوري. غير طالب: سجّل في CC وارفعه خطاباً وبطاقة — يقبل معظم المدارس.'
+        description: 'طالب: .edu → فوري. غير طالب: سجّل في CC وارفعه خطاباً وبطاقة - يقبل معظم المدارس.'
       },
       {
         title: 'زامن Pro مع حسابك',
@@ -1153,9 +1153,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o17',
     slug: 'perplexity-pro-student',
     name: 'Perplexity Pro for Students',
-    tagline: '1 year Perplexity Pro free — 300+ Pro searches/day + file upload',
+    tagline: '1 year Perplexity Pro free - 300+ Pro searches/day + file upload',
     description:
-      'Perplexity gives verified students 1 year of Pro free (normally $20/mo): 300+ Pro searches/day, file upload, image generation, and API. Verifies via SheerID/ .edu. Non-students can get it with a CC .edu + SheerID file upload — widely approved.',
+      'Perplexity gives verified students 1 year of Pro free (normally $20/mo): 300+ Pro searches/day, file upload, image generation, and API. Verifies via SheerID/ .edu. Non-students can get it with a CC .edu + SheerID file upload - widely approved.',
     url: 'https://www.perplexity.ai/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/perplexity.ai.ico',
     category: 'api-access',
@@ -1171,16 +1171,16 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Verify student status',
         description:
-          'STUDENT: .edu email → auto. NON-STUDENT: CC enrollment letter + ID upload via SheerID. Perplexity’s SheerID flow allows manual review if domain not found — upload a PDF transcript with current term.',
+          'STUDENT: .edu email → auto. NON-STUDENT: CC enrollment letter + ID upload via SheerID. Perplexity’s SheerID flow allows manual review if domain not found - upload a PDF transcript with current term.',
       },
       {
         title: 'Activate Pro',
         description:
-          'Once approved, your account flips to Pro. Verify at Settings → Subscription → “Pro — Student”. Use web or API at perplexity.ai/settings/api.',
+          'Once approved, your account flips to Pro. Verify at Settings → Subscription → “Pro - Student”. Use web or API at perplexity.ai/settings/api.',
       },
     ],
     nameAr: 'Perplexity Pro للطلاب',
-    taglineAr: 'سنة Perplexity Pro مجاناً — 300+ بحث Pro يومياً',
+    taglineAr: 'سنة Perplexity Pro مجاناً - 300+ بحث Pro يومياً',
     descriptionAr: 'يمنح Perplexity الطلاب سنة Pro مجاناً: 300+ بحث Pro، رفع ملفات، وتوليد صور و API. يتحقق عبر SheerID.',
     stepsAr: [
       {
@@ -1190,7 +1190,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'تحقق',
-        description: 'طالب: .edu → تلقائي. غير طالب: ارفع خطاباً وبطاقة عبر SheerID — يسمح بالمراجعة اليدوية.'
+        description: 'طالب: .edu → تلقائي. غير طالب: ارفع خطاباً وبطاقة عبر SheerID - يسمح بالمراجعة اليدوية.'
       },
       {
         title: 'فعّل Pro',
@@ -1208,7 +1208,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o18',
     slug: 'v0-by-vercel-student',
     name: 'V0 by Vercel for Students',
-    tagline: 'Premium V0 AI credits free for students — text-to-React in seconds',
+    tagline: 'Premium V0 AI credits free for students - text-to-React in seconds',
     description:
       'Vercel gives students free V0 credits: generate production-ready React + Tailwind + shadcn components from text or image, iterate with chat, export code. Verifies with .edu or GitHub Student. Non-students can use GitHub Student Pack approval (file) to claim without .edu.',
     url: 'https://v0.app/students',
@@ -1226,7 +1226,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Verify',
         description:
-          'STUDENT: .edu email auto-verifies. NON-STUDENT: Click “Verify with GitHub Student Pack” if approved, or upload enrollment letter — V0 accepts either.',
+          'STUDENT: .edu email auto-verifies. NON-STUDENT: Click “Verify with GitHub Student Pack” if approved, or upload enrollment letter - V0 accepts either.',
       },
       {
         title: 'Generate UI',
@@ -1235,7 +1235,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'V0 من Vercel للطلاب',
-    taglineAr: 'رصيد V0 مجاناً للطلاب — حوّل النص إلى React',
+    taglineAr: 'رصيد V0 مجاناً للطلاب - حوّل النص إلى React',
     descriptionAr: 'يمنح Vercel الطلاب رصيداً مجانياً: ولّد مكونات React + Tailwind + shadcn من نص أو صورة وصدّر الكود. يتحقق عبر .edu أو GitHub Student.',
     stepsAr: [
       {
@@ -1263,9 +1263,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o19',
     slug: 'kiro-dev-student',
     name: 'Kiro.dev Student Program',
-    tagline: 'Free Kiro AI IDE for students — agentic coding with file proof accepted',
+    tagline: 'Free Kiro AI IDE for students - agentic coding with file proof accepted',
     description:
-      'Kiro.dev (agentic IDE) offers free Pro access for students: agent coding, codebase chat, and Claude/GPT routing. Requires school email + file proof for some schools. Accepts US CC enrollments — ideal for non-students using file verification path.',
+      'Kiro.dev (agentic IDE) offers free Pro access for students: agent coding, codebase chat, and Claude/GPT routing. Requires school email + file proof for some schools. Accepts US CC enrollments - ideal for non-students using file verification path.',
     url: 'https://kiro.dev/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/kiro.dev.ico',
     category: 'tool',
@@ -1281,7 +1281,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Provide proof',
         description:
-          'STUDENT: .edu + student ID. NON-STUDENT: Enroll in CC → upload enrollment letter + ID (must show full name + school + current date). Kiro uses manual review — photo of physical ID accepted if PDF unclear.',
+          'STUDENT: .edu + student ID. NON-STUDENT: Enroll in CC → upload enrollment letter + ID (must show full name + school + current date). Kiro uses manual review - photo of physical ID accepted if PDF unclear.',
       },
       {
         title: 'Activate license',
@@ -1290,7 +1290,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Kiro.dev للطلاب',
-    taglineAr: 'Kiro IDE مجاناً للطلاب — تحقق عبر ملف مقبول',
+    taglineAr: 'Kiro IDE مجاناً للطلاب - تحقق عبر ملف مقبول',
     descriptionAr: 'يمنح Kiro.dev الطلاب وصول Pro مجاناً: برمجة وكيلية ودردشة قاعدة كود وتوجيه نماذج. يقبل تسجيل CC عبر ملف.',
     stepsAr: [
       {
@@ -1318,7 +1318,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o20',
     slug: 'dify-ai-education',
     name: 'Dify.AI Education',
-    tagline: 'Professional plan free 1 year — LLM app & agent builder',
+    tagline: 'Professional plan free 1 year - LLM app & agent builder',
     description:
       'Dify gives verified students 1 year of Professional free: build and deploy LLM apps/agents with datasets, tools, and hosting. Verifies with .edu email. Non-students can get it with any CC .edu mailbox (email-only verification).',
     url: 'https://dify.ai/',
@@ -1330,7 +1330,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Sign up with .edu',
         description:
-          'Register at cloud.dify.ai with .edu email. Verify via email link. NON-STUDENT: Use CC .edu mailbox — Dify only checks email domain, no file needed.',
+          'Register at cloud.dify.ai with .edu email. Verify via email link. NON-STUDENT: Use CC .edu mailbox - Dify only checks email domain, no file needed.',
         url: 'https://dify.ai/',
       },
       {
@@ -1345,7 +1345,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Dify.AI للتعليم',
-    taglineAr: 'خطة Professional مجاناً لسنة — بناء تطبيقات LLM',
+    taglineAr: 'خطة Professional مجاناً لسنة - بناء تطبيقات LLM',
     descriptionAr: 'يمنح Dify الطلاب سنة Professional مجاناً: بناء ونشر تطبيقات LLM مع قواعد بيانات وأدوات. يتحقق ببريد .edu فقط.',
     stepsAr: [
       {
@@ -1373,7 +1373,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o21',
     slug: 'firecrawl-student',
     name: 'Firecrawl Student Program',
-    tagline: 'Free Firecrawl credits for students — scrape & crawl API for LLM apps',
+    tagline: 'Free Firecrawl credits for students - scrape & crawl API for LLM apps',
     description:
       'Firecrawl (YC-backed scraping API) gives students free credits: turn any URL into clean markdown/JSON for RAG. Perfect for agent builders. Verifies with .edu email.',
     url: 'https://www.firecrawl.dev/student-program',
@@ -1385,7 +1385,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Sign up with .edu',
         description:
-          'Go to firecrawl.dev/student-program → Sign up with .edu email. NON-STUDENT: CC .edu works — email-only check.',
+          'Go to firecrawl.dev/student-program → Sign up with .edu email. NON-STUDENT: CC .edu works - email-only check.',
         url: 'https://www.firecrawl.dev/student-program',
       },
       {
@@ -1400,7 +1400,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Firecrawl للطلاب',
-    taglineAr: 'رصيد Firecrawl مجاناً — واجهة كشط للـ LLM',
+    taglineAr: 'رصيد Firecrawl مجاناً - واجهة كشط للـ LLM',
     descriptionAr: 'يمنح Firecrawl الطلاب رصيداً مجانياً: حوّل أي رابط إلى markdown/JSON نظيف لـ RAG. مثالي لبناء الوكلاء. يتحقق ببريد .edu.',
     stepsAr: [
       {
@@ -1428,7 +1428,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o22',
     slug: 'windsurf-student',
     name: 'Windsurf Student',
-    tagline: 'Free Windsurf Pro (Codeium) — agentic AI editor with Cascade',
+    tagline: 'Free Windsurf Pro (Codeium) - agentic AI editor with Cascade',
     description:
       'Windsurf by Codeium gives students free Pro: Cascade agent, autocomplete, and codebase understanding. Verify with .edu or GitHub Student. Non-students can use GitHub Pack approval to claim.',
     url: 'https://windsurf.com/editor',
@@ -1455,7 +1455,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Windsurf للطلاب',
-    taglineAr: 'Windsurf Pro مجاناً (Codeium) — محرر وكيلي',
+    taglineAr: 'Windsurf Pro مجاناً (Codeium) - محرر وكيلي',
     descriptionAr: 'يمنح Windsurf الطلاب Pro مجاناً: وكيل Cascade وإكمال وتفهم قاعدة الكود. يتحقق عبر .edu أو GitHub Student.',
     stepsAr: [
       {
@@ -1483,9 +1483,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o23',
     slug: 'jetbrains-student-pack',
     name: 'JetBrains Student Pack',
-    tagline: 'All JetBrains IDEs free 1 year, renewable — IntelliJ, PyCharm, WebStorm, Rider',
+    tagline: 'All JetBrains IDEs free 1 year, renewable - IntelliJ, PyCharm, WebStorm, Rider',
     description:
-      'JetBrains gives students free access to all 15+ IDEs (IntelliJ IDEA Ultimate, PyCharm Pro, WebStorm, Rider, GoLand, etc.) for 1 year, renewable. Verifies via .edu or file (ID + enrollment). Non-students can qualify with CC enrollment — JetBrains accepts enrollment letter + ID without strict .edu domain check.',
+      'JetBrains gives students free access to all 15+ IDEs (IntelliJ IDEA Ultimate, PyCharm Pro, WebStorm, Rider, GoLand, etc.) for 1 year, renewable. Verifies via .edu or file (ID + enrollment). Non-students can qualify with CC enrollment - JetBrains accepts enrollment letter + ID without strict .edu domain check.',
     url: 'https://www.jetbrains.com/shop/eform/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/jetbrains.com.ico',
     category: 'tool',
@@ -1499,7 +1499,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.jetbrains.com/shop/eform/students',
       },
       {
-        title: 'Prove enrollment — two options',
+        title: 'Prove enrollment - two options',
         description:
           'OPTION 1: Official university email (.edu) → instant. OPTION 2: “Official document” → upload student ID + enrollment letter/transcript showing name + school + current date. NON-STUDENT: Enroll in CC for 1 course → get ID + transcript PDF → upload via Option 2. Most CCs approved in hours.',
       },
@@ -1511,12 +1511,12 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Renew before expiry',
         description:
-          'License is 12 months. 2 weeks before expiry JetBrains emails — just re-upload fresh enrollment proof to renew.',
+          'License is 12 months. 2 weeks before expiry JetBrains emails - just re-upload fresh enrollment proof to renew.',
       },
     ],
     nameAr: 'حزمة JetBrains للطلاب',
-    taglineAr: 'جميع IDEs من JetBrains مجاناً لمدة سنة قابلة للتجديد — IntelliJ و PyCharm و WebStorm و Rider',
-    descriptionAr: 'تمنح JetBrains الطلاب وصولاً مجانياً لكل IDEs الـ 15+ (IntelliJ Ultimate، PyCharm Pro، WebStorm، Rider، GoLand...) لسنة قابلة للتجديد. تحقق عبر .edu أو ملف (بطاقة + خطاب تسجيل). غير الطلاب يمكنهم التسجيل في كلية مجتمع — تقبل JetBrains خطاب التسجيل + البطاقة دون تدقيق صارم للنطاق.',
+    taglineAr: 'جميع IDEs من JetBrains مجاناً لمدة سنة قابلة للتجديد - IntelliJ و PyCharm و WebStorm و Rider',
+    descriptionAr: 'تمنح JetBrains الطلاب وصولاً مجانياً لكل IDEs الـ 15+ (IntelliJ Ultimate، PyCharm Pro، WebStorm، Rider، GoLand...) لسنة قابلة للتجديد. تحقق عبر .edu أو ملف (بطاقة + خطاب تسجيل). غير الطلاب يمكنهم التسجيل في كلية مجتمع - تقبل JetBrains خطاب التسجيل + البطاقة دون تدقيق صارم للنطاق.',
     stepsAr: [
       {
         title: 'قدّم في JetBrains',
@@ -1524,7 +1524,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.jetbrains.com/shop/eform/students',
       },
       {
-        title: 'أثبت التسجيل — خياران',
+        title: 'أثبت التسجيل - خياران',
         description: 'الخيار 1: بريد جامعي .edu → فوري. الخيار 2: "Official document" → ارفع بطاقة الطالب + خطاب/كشف تسجيل باسمك والمدرسة والتاريخ. غير طالب: سجّل في CC لمقرر واحد → احصل على البطاقة والكشف وارفعه عبر الخيار 2.',
       },
       {
@@ -1533,7 +1533,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'جدّد قبل الانتهاء',
-        description: 'الترخيص 12 شهراً. قبل أسبوعين ترسل JetBrains تنبيهاً — فقط أعد رفع إثبات جديد للتجديد.',
+        description: 'الترخيص 12 شهراً. قبل أسبوعين ترسل JetBrains تنبيهاً - فقط أعد رفع إثبات جديد للتجديد.',
       },
     ],
     upvotes: 52,
@@ -1547,9 +1547,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o24',
     slug: 'figma-education',
     name: 'Figma Education',
-    tagline: 'Free Figma Organization for students — Figma + FigJam + 3 editors',
+    tagline: 'Free Figma Organization for students - Figma + FigJam + 3 editors',
     description:
-      'Figma Education gives verified students free Organization plan: Figma Design, FigJam, Dev Mode, and team libraries. Verifies via school email or manual doc. Non-students can qualify with CC enrollment + file proof — Figma manually reviews ID + schedule.',
+      'Figma Education gives verified students free Organization plan: Figma Design, FigJam, Dev Mode, and team libraries. Verifies via school email or manual doc. Non-students can qualify with CC enrollment + file proof - Figma manually reviews ID + schedule.',
     url: 'https://www.figma.com/education/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/figma.com.ico',
     category: 'tool',
@@ -1570,7 +1570,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Create Education team',
         description:
-          'Once approved (1-3 days), Figma asks to create an Education team — do it. Your personal team converts to Organization with 3 free editors and unlimited files. Invite classmates.',
+          'Once approved (1-3 days), Figma asks to create an Education team - do it. Your personal team converts to Organization with 3 free editors and unlimited files. Invite classmates.',
       },
       {
         title: 'Renew while enrolled',
@@ -1579,7 +1579,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Figma للتعليم',
-    taglineAr: 'مؤسسة Figma مجاناً للطلاب — Figma + FigJam و 3 محررين',
+    taglineAr: 'مؤسسة Figma مجاناً للطلاب - Figma + FigJam و 3 محررين',
     descriptionAr: 'تمنح Figma الطلاب خطة مؤسسة مجانية: Figma Design و FigJam و Dev Mode ومكتبات الفريق. تحقق عبر بريد أو ملف. غير الطلاب يمكنهم التسجيل في CC ورفع الملفات.',
     stepsAr: [
       {
@@ -1593,11 +1593,11 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'أنشئ فريق التعليم',
-        description: 'بعد الموافقة خلال 1-3 أيام، أنشئ فريق التعليم — يتحول إلى مؤسسة مع 3 محررين وملفات غير محدودة.'
+        description: 'بعد الموافقة خلال 1-3 أيام، أنشئ فريق التعليم - يتحول إلى مؤسسة مع 3 محررين وملفات غير محدودة.'
       },
       {
         title: 'جدّد أثناء الدراسة',
-        description: 'الحالة 1-2 سنة — أعد التحقق عند تغيير المدرسة.'
+        description: 'الحالة 1-2 سنة - أعد التحقق عند تغيير المدرسة.'
       }
     ],
     upvotes: 44,
@@ -1611,7 +1611,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o25',
     slug: 'notion-education-plus',
     name: 'Notion Education Plus',
-    tagline: 'Free Notion Plus + AI for students — unlimited blocks, uploads, AI',
+    tagline: 'Free Notion Plus + AI for students - unlimited blocks, uploads, AI',
     description:
       'Notion gives students free Plus plan: unlimited blocks/file uploads, 100GB+ history, and free Notion AI (normally $8/mo). Verifies via .edu email instantly. Non-students can get it with any .edu mailbox (email-only). Team members with .edu also get free Plus when added to your workspace.',
     url: 'https://www.notion.com/product/notion-for-education',
@@ -1623,7 +1623,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Create Notion account with .edu',
         description:
-          'Sign up at notion.so with your .edu email (or change email in Settings → My Account → Email). NON-STUDENT: Create a CC .edu mailbox and use that as your Notion email — email check only.',
+          'Sign up at notion.so with your .edu email (or change email in Settings → My Account → Email). NON-STUDENT: Create a CC .edu mailbox and use that as your Notion email - email check only.',
         url: 'https://www.notion.com/product/notion-for-education',
       },
       {
@@ -1638,12 +1638,12 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'نوشن للطلاب Plus',
-    taglineAr: 'نوشن Plus + الذكاء الاصطناعي مجاناً للطلاب — بلوكات وتحميلات غير محدودة',
+    taglineAr: 'نوشن Plus + الذكاء الاصطناعي مجاناً للطلاب - بلوكات وتحميلات غير محدودة',
     descriptionAr: 'يمنح نوشن الطلاب خطة Plus مجاناً: بلوكات وتحميلات ملفات غير محدودة، سجل 100GB+، و Notion AI مجاناً (عادة 8$ شهرياً). يتحقق فوراً عبر بريد .edu. غير الطلاب يمكنهم الحصول عليه بأي بريد .edu لكلية مجتمع (تحقق بالبريد فقط).',
     stepsAr: [
       {
         title: 'أنشئ حساب نوشن ببريد .edu',
-        description: 'سجّل في notion.so ببريدك .edu (أو غيّر البريد في الإعدادات). غير طالب: أنشئ بريد .edu من كلية مجتمع واستخدمه — التحقق بالبريد فقط.',
+        description: 'سجّل في notion.so ببريدك .edu (أو غيّر البريد في الإعدادات). غير طالب: أنشئ بريد .edu من كلية مجتمع واستخدمه - التحقق بالبريد فقط.',
         url: 'https://www.notion.com/product/notion-for-education',
       },
       {
@@ -1666,9 +1666,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o26',
     slug: 'canva-education-pro',
     name: 'Canva Pro Education',
-    tagline: 'Free Canva Pro for students — 140M templates, Magic AI, Brand Kit',
+    tagline: 'Free Canva Pro for students - 140M templates, Magic AI, Brand Kit',
     description:
-      'Canva gives verified students free Pro: 140M+ templates, Magic Write/Resize, 1TB storage, and team Brand Kit. Verifies via Canva Education portal with school name + ID. Non-students can qualify with CC ID + enrollment screenshot — manual review approves most.',
+      'Canva gives verified students free Pro: 140M+ templates, Magic Write/Resize, 1TB storage, and team Brand Kit. Verifies via Canva Education portal with school name + ID. Non-students can qualify with CC ID + enrollment screenshot - manual review approves most.',
     url: 'https://www.canva.com/education/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/canva.com.ico',
     category: 'tool',
@@ -1689,11 +1689,11 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Activate Pro',
         description:
-          'After approval, Canva adds “Education Pro” to your account. Check Billing → “Education — Free”. Create designs with Pro unlocked and invite 2 classmates to share.',
+          'After approval, Canva adds “Education Pro” to your account. Check Billing → “Education - Free”. Create designs with Pro unlocked and invite 2 classmates to share.',
       },
     ],
     nameAr: 'Canva Pro للتعليم',
-    taglineAr: 'Canva Pro مجاناً للطلاب — 140M قالب و Magic AI',
+    taglineAr: 'Canva Pro مجاناً للطلاب - 140M قالب و Magic AI',
     descriptionAr: 'تمنح Canva الطلاب Pro مجاناً: 140M+ قالب، Magic Write/Resize، 1TB و Brand Kit. تحقق عبر بوابة التعليم.',
     stepsAr: [
       {
@@ -1721,9 +1721,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o27',
     slug: 'autodesk-education',
     name: 'Autodesk Education',
-    tagline: 'Full Autodesk suite free 1 year — AutoCAD, Maya, Revit, Fusion 360',
+    tagline: 'Full Autodesk suite free 1 year - AutoCAD, Maya, Revit, Fusion 360',
     description:
-      'Autodesk gives students free 1-year license to 20+ products: AutoCAD, Maya, 3ds Max, Revit, Inventor, Fusion 360. Verifies via SheerID with .edu or file. Non-students can enroll in CC drafting/design course to get enrollment proof — SheerID accepts file upload, not only email.',
+      'Autodesk gives students free 1-year license to 20+ products: AutoCAD, Maya, 3ds Max, Revit, Inventor, Fusion 360. Verifies via SheerID with .edu or file. Non-students can enroll in CC drafting/design course to get enrollment proof - SheerID accepts file upload, not only email.',
     url: 'https://www.autodesk.com/education/edu-software/overview',
     logoUrl: 'https://icons.duckduckgo.com/ip3/autodesk.com.ico',
     category: 'tool',
@@ -1753,7 +1753,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Autodesk للتعليم',
-    taglineAr: 'حزمة Autodesk كاملة مجاناً لسنة — AutoCAD و Maya و Revit',
+    taglineAr: 'حزمة Autodesk كاملة مجاناً لسنة - AutoCAD و Maya و Revit',
     descriptionAr: 'تمنح Autodesk الطلاب ترخيص سنة مجانية لـ 20+ منتج: AutoCAD و Maya و 3ds Max و Revit و Inventor و Fusion 360. تحقق عبر SheerID.',
     stepsAr: [
       {
@@ -1771,7 +1771,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'جدّد سنوياً',
-        description: 'ينتهي بعد 12 شهراً — أعد التحقق بخطاب جديد.'
+        description: 'ينتهي بعد 12 شهراً - أعد التحقق بخطاب جديد.'
       }
     ],
     upvotes: 24,
@@ -1785,7 +1785,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o28',
     slug: 'zed-pro-student',
     name: 'Zed Pro for Students',
-    tagline: '1 year Zed Pro free — fast Rust editor with AI + multiplayer',
+    tagline: '1 year Zed Pro free - fast Rust editor with AI + multiplayer',
     description:
       'Zed gives verified students 1 year of Pro free: AI edit/chat, multiplayer collab, and premium themes. Verifies via .edu or GitHub Student. Non-students can use GitHub Pack approval (file) to claim without .edu.',
     url: 'https://zed.dev/education',
@@ -1803,7 +1803,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Verify student status',
         description:
-          'Click “Verify” → .edu email or “Verify with GitHub Student”. NON-STUDENT: Get GitHub Pack via file (CC enrollment) then link — Zed accepts that path.',
+          'Click “Verify” → .edu email or “Verify with GitHub Student”. NON-STUDENT: Get GitHub Pack via file (CC enrollment) then link - Zed accepts that path.',
       },
       {
         title: 'Enable Pro',
@@ -1812,7 +1812,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Zed Pro للطلاب',
-    taglineAr: 'سنة Zed Pro مجاناً — محرر Rust سريع مع AI',
+    taglineAr: 'سنة Zed Pro مجاناً - محرر Rust سريع مع AI',
     descriptionAr: 'يمنح Zed الطلاب سنة Pro مجاناً: تحرير/دردشة AI، تعاون متعدد، وثيمات مميزة. يتحقق عبر .edu أو GitHub Student.',
     stepsAr: [
       {
@@ -1856,9 +1856,9 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.microsoft.com/education/products/office',
       },
       {
-        title: 'Get access — student vs non-student',
+        title: 'Get access - student vs non-student',
         description:
-          'STUDENT: Enter .edu → receive verification link → create M365 Education account. NON-STUDENT: Enroll in a CC that supports Microsoft Education (e.g., Coastline, Rio Hondo) — after 24h you get a @student.cc.edu Microsoft 365 login → use that to sign in. No file upload path — must be email domain approved by Microsoft.',
+          'STUDENT: Enter .edu → receive verification link → create M365 Education account. NON-STUDENT: Enroll in a CC that supports Microsoft Education (e.g., Coastline, Rio Hondo) - after 24h you get a @student.cc.edu Microsoft 365 login → use that to sign in. No file upload path - must be email domain approved by Microsoft.',
       },
       {
         title: 'Install Office and use OneDrive',
@@ -1876,7 +1876,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.microsoft.com/education/products/office'
       },
       {
-        title: 'احصل على الوصول — طالب أو غير طالب',
+        title: 'احصل على الوصول - طالب أو غير طالب',
         description: 'طالب: أدخل .edu → رابط تحقق. غير طالب: سجّل في CC تدعم Microsoft Education للحصول على حساب M365.'
       },
       {
@@ -1895,9 +1895,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o30',
     slug: 'adobe-creative-cloud-student',
     name: 'Adobe Creative Cloud Student',
-    tagline: '60%+ off Creative Cloud Pro — Photoshop, Illustrator, Premiere, 20+ apps',
+    tagline: '60%+ off Creative Cloud Pro - Photoshop, Illustrator, Premiere, 20+ apps',
     description:
-      'Adobe Creative Cloud Pro for Students/Teachers: ~60% off (~$19.99/mo vs $59.99). Includes Photoshop, Illustrator, Premiere Pro, After Effects, XD, 100GB cloud. Verifies via SheerID/UNiDAYS with .edu or file. Non-students can qualify with CC enrollment + ID/transcript — SheerID accepts file proof and approves most accredited CCs.',
+      'Adobe Creative Cloud Pro for Students/Teachers: ~60% off (~$19.99/mo vs $59.99). Includes Photoshop, Illustrator, Premiere Pro, After Effects, XD, 100GB cloud. Verifies via SheerID/UNiDAYS with .edu or file. Non-students can qualify with CC enrollment + ID/transcript - SheerID accepts file proof and approves most accredited CCs.',
     url: 'https://www.adobe.com/creativecloud/buy/students.html',
     logoUrl: 'https://www.google.com/s2/favicons?domain=adobe.com&sz=64',
     category: 'tool',
@@ -1911,7 +1911,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.adobe.com/creativecloud/buy/students.html',
       },
       {
-        title: 'Verify — email or document',
+        title: 'Verify - email or document',
         description:
           'STUDENT: Enter .edu → instant via SheerID. NON-STUDENT: Choose “Upload document” → student ID + enrollment letter showing name + school + current date. CC enrollments are accepted; keep the PDF in English/color scan.',
       },
@@ -1922,7 +1922,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Adobe Creative Cloud للطلاب',
-    taglineAr: 'خصم 60%+ على Creative Cloud Pro — فوتوشوب و 20+ تطبيق',
+    taglineAr: 'خصم 60%+ على Creative Cloud Pro - فوتوشوب و 20+ تطبيق',
     descriptionAr: 'Adobe Creative Cloud Pro للطلاب ~60% خصم (~19.99$ بدل 59.99$). يضم Photoshop و Illustrator و Premiere و 100GB. يتحقق عبر SheerID.',
     stepsAr: [
       {
@@ -1931,7 +1931,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.adobe.com/creativecloud/buy/students.html'
       },
       {
-        title: 'تحقق — بريد أو مستند',
+        title: 'تحقق - بريد أو مستند',
         description: 'طالب: .edu → فوري. غير طالب: اختر "Upload document" → بطاقة + خطاب.'
       },
       {
@@ -1952,7 +1952,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'Apple Education: 200GB iCloud',
     tagline: 'Permanent 200GB iCloud storage free for teachers & students via Apple School Manager',
     description:
-      'Apple offers 200GB iCloud free (permanent while enrolled) for students/teacherswhose school uses Apple School Manager. The school admin assigns the Managed Apple ID → 200GB quota appears in Settings. For personal Apple IDs, students can claim Apple Music Student ($5.99) + iCloud+ features. Non-students can ask their CC IT desk to issue a Managed Apple ID after enrollment — many CCs support ASM.',
+      'Apple offers 200GB iCloud free (permanent while enrolled) for students/teacherswhose school uses Apple School Manager. The school admin assigns the Managed Apple ID → 200GB quota appears in Settings. For personal Apple IDs, students can claim Apple Music Student ($5.99) + iCloud+ features. Non-students can ask their CC IT desk to issue a Managed Apple ID after enrollment - many CCs support ASM.',
     url: 'https://www.apple.com/education/k12/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/apple.com.ico',
     category: 'tool',
@@ -1962,18 +1962,18 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Ask your school IT for Managed Apple ID',
         description:
-          'STUDENT: Contact IT/helpdesk → “Request Managed Apple ID via Apple School Manager for iCloud 200GB”. They will invite your school email. NON-STUDENT: After CC enrollment, ask IT for ASM account — CCs using ASM can create one in minutes.',
+          'STUDENT: Contact IT/helpdesk → “Request Managed Apple ID via Apple School Manager for iCloud 200GB”. They will invite your school email. NON-STUDENT: After CC enrollment, ask IT for ASM account - CCs using ASM can create one in minutes.',
         url: 'https://www.apple.com/education/k12/',
       },
       {
         title: 'Sign in on iPhone/Mac',
         description:
-          'On iOS: Settings → Sign in with Managed Apple ID → iCloud shows 200GB. Use for Photos, Drive, Backup. Personal iCloud stays separate — you can keep both.',
+          'On iOS: Settings → Sign in with Managed Apple ID → iCloud shows 200GB. Use for Photos, Drive, Backup. Personal iCloud stays separate - you can keep both.',
       },
       {
         title: 'Manage via School Manager',
         description:
-          'Admins manage storage at school.apple.com. Students cannot buy more — 200GB is the cap while enrolled. Graduates lose quota after account removed.',
+          'Admins manage storage at school.apple.com. Students cannot buy more - 200GB is the cap while enrolled. Graduates lose quota after account removed.',
       },
     ],
     nameAr: 'Apple للتعليم: 200GB iCloud',
@@ -2005,9 +2005,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o32',
     slug: 'matlab-student-suite',
     name: 'MATLAB Student Suite',
-    tagline: 'MATLAB + Simulink + 10 toolboxes for students — $49 license, free via campus',
+    tagline: 'MATLAB + Simulink + 10 toolboxes for students - $49 license, free via campus',
     description:
-      'MathWorks MATLAB Student Suite: MATLAB, Simulink, and 10 toolboxes for $49 (or free if your campus has a Campus-Wide License — check with .edu). Includes online MATLAB, 1TB Drive. Verifies via .edu email or campus SSO. Non-students can get it via CC Math course — MathWorks accepts any accredited .edu, and many CCs have campus license covering you free.',
+      'MathWorks MATLAB Student Suite: MATLAB, Simulink, and 10 toolboxes for $49 (or free if your campus has a Campus-Wide License - check with .edu). Includes online MATLAB, 1TB Drive. Verifies via .edu email or campus SSO. Non-students can get it via CC Math course - MathWorks accepts any accredited .edu, and many CCs have campus license covering you free.',
     url: 'https://www.mathworks.com/products/matlab/student.html',
     logoUrl: 'https://icons.duckduckgo.com/ip3/mathworks.com.ico',
     category: 'tool',
@@ -2017,22 +2017,22 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Check campus license first',
         description:
-          'Visit mathworks.com/academia → Enter school .edu → “Is my campus licensed?” If yes, you get MATLAB free with school login — no $49 needed.',
+          'Visit mathworks.com/academia → Enter school .edu → “Is my campus licensed?” If yes, you get MATLAB free with school login - no $49 needed.',
         url: 'https://www.mathworks.com/products/matlab/student.html',
       },
       {
-        title: 'Get MATLAB — student vs non-student',
+        title: 'Get MATLAB - student vs non-student',
         description:
           'STUDENT: Create MathWorks Account with .edu → verify via email OTP. NON-STUDENT: Enroll in CC Math/Engineering 1-credit → get .edu + campus SSO → register; MathWorks approves CC .edu domains like any university.',
       },
       {
         title: 'Download or use online',
         description:
-          'Go to mathworks.com → Downloads → MATLAB R2024b → license activates via account. Or use matlab.mathworks.com online — no install needed.',
+          'Go to mathworks.com → Downloads → MATLAB R2024b → license activates via account. Or use matlab.mathworks.com online - no install needed.',
       },
     ],
     nameAr: 'MATLAB للطلاب',
-    taglineAr: 'MATLAB + Simulink + 10 صناديق للطلاب — 49$ أو مجاناً عبر الحرم',
+    taglineAr: 'MATLAB + Simulink + 10 صناديق للطلاب - 49$ أو مجاناً عبر الحرم',
     descriptionAr: 'حزمة MATLAB للطلاب: MATLAB و Simulink و 10 صناديق بـ 49$ أو مجاناً إذا كان الحرم لديه ترخيص شامل. يتحقق عبر .edu أو SSO الحرم.',
     stepsAr: [
       {
@@ -2041,7 +2041,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.mathworks.com/products/matlab/student.html'
       },
       {
-        title: 'احصل على MATLAB — طالب أو غير طالب',
+        title: 'احصل على MATLAB - طالب أو غير طالب',
         description: 'طالب: أنشئ حساب MathWorks ببريد .edu. غير طالب: سجّل في CC لمادة رياضيات للحصول على .edu.'
       },
       {
@@ -2072,7 +2072,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Link GitHub Student or .edu',
         description:
-          'STUDENT: Sign in to replit.com/students with GitHub already approved for Student Pack — Replit auto-detects. Or verify with .edu email. NON-STUDENT: Approve GitHub Pack first via CC file (see o9), then return to Replit to claim.',
+          'STUDENT: Sign in to replit.com/students with GitHub already approved for Student Pack - Replit auto-detects. Or verify with .edu email. NON-STUDENT: Approve GitHub Pack first via CC file (see o9), then return to Replit to claim.',
         url: 'https://replit.com/students',
       },
       {
@@ -2083,7 +2083,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Code in browser',
         description:
-          'Create a Repl → choose language → use AI chat to generate code. Deploy with one click — hosting included.',
+          'Create a Repl → choose language → use AI chat to generate code. Deploy with one click - hosting included.',
       },
     ],
     nameAr: 'Replit للطلاب',
@@ -2092,7 +2092,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'اربط GitHub Student أو .edu',
-        description: 'سجّل في replit.com/students بحساب GitHub الموافق عليه — يكتشف تلقائياً.',
+        description: 'سجّل في replit.com/students بحساب GitHub الموافق عليه - يكتشف تلقائياً.',
         url: 'https://replit.com/students'
       },
       {
@@ -2115,9 +2115,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o34',
     slug: 'digitalocean-student',
     name: 'DigitalOcean Student',
-    tagline: '$200 credit for 12 months via GitHub Student Pack — droplets, DBs, Spaces',
+    tagline: '$200 credit for 12 months via GitHub Student Pack - droplets, DBs, Spaces',
     description:
-      'DigitalOcean via GitHub Student Pack: $200 credit for 12 months to run droplets, managed DBs, Spaces object storage, and App Platform. Verifies via GitHub Student linkage — no separate .edu check. Non-students qualify by first getting GitHub Pack via CC file (o9).',
+      'DigitalOcean via GitHub Student Pack: $200 credit for 12 months to run droplets, managed DBs, Spaces object storage, and App Platform. Verifies via GitHub Student linkage - no separate .edu check. Non-students qualify by first getting GitHub Pack via CC file (o9).',
     url: 'https://www.digitalocean.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/digitalocean.com.ico',
     category: 'api-access',
@@ -2138,7 +2138,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Deploy',
         description:
-          'Create a $6 Droplet or App Platform app — credit burns first. Track in Billing → Credits. Credit expires in 12 months.',
+          'Create a $6 Droplet or App Platform app - credit burns first. Track in Billing → Credits. Credit expires in 12 months.',
       },
     ],
     nameAr: 'DigitalOcean للطلاب',
@@ -2156,7 +2156,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'انشر',
-        description: 'أنشئ Droplet بـ 6$ أو تطبيق — الرصيد يُستهلك أولاً وينتهي بعد 12 شهراً.'
+        description: 'أنشئ Droplet بـ 6$ أو تطبيق - الرصيد يُستهلك أولاً وينتهي بعد 12 شهراً.'
       }
     ],
     upvotes: 22,
@@ -2225,9 +2225,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o36',
     slug: 'sketch-education',
     name: 'Sketch Education',
-    tagline: 'Free Sketch for students — native macOS UI design with team workspace',
+    tagline: 'Free Sketch for students - native macOS UI design with team workspace',
     description:
-      'Sketch gives verified students free Education license: macOS app + web workspace, team libraries, and prototype sharing. Verifies via school email or file. Non-students can get it with CC enrollment + ID upload — manual review approves most accredited schools.',
+      'Sketch gives verified students free Education license: macOS app + web workspace, team libraries, and prototype sharing. Verifies via school email or file. Non-students can get it with CC enrollment + ID upload - manual review approves most accredited schools.',
     url: 'https://www.sketch.com/education/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/sketch.com.ico',
     category: 'tool',
@@ -2252,7 +2252,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Sketch للتعليم',
-    taglineAr: 'Sketch مجاناً للطلاب — تصميم واجهات على macOS',
+    taglineAr: 'Sketch مجاناً للطلاب - تصميم واجهات على macOS',
     descriptionAr: 'يمنح Sketch الطلاب ترخيص تعليم مجاني: تطبيق macOS ومساحة ويب ومكتبات فريق ومشاركة نماذج. يتحقق عبر بريد أو ملف.',
     stepsAr: [
       {
@@ -2280,9 +2280,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o37',
     slug: 'youtube-premium-student',
     name: 'YouTube Premium Student',
-    tagline: '1 month free + 50% off Premium — no ads, background play, offline',
+    tagline: '1 month free + 50% off Premium - no ads, background play, offline',
     description:
-      'YouTube Premium Student: first month free, then ~50% off (~$7.99 vs $13.99). Includes ad-free YouTube + YouTube Music, background play, offline downloads, and picture-in-picture. Verifies via SheerID with .edu or file. Non-students can qualify with CC enrollment + ID — SheerID accepts enrollment letter + student ID for most US CCs.',
+      'YouTube Premium Student: first month free, then ~50% off (~$7.99 vs $13.99). Includes ad-free YouTube + YouTube Music, background play, offline downloads, and picture-in-picture. Verifies via SheerID with .edu or file. Non-students can qualify with CC enrollment + ID - SheerID accepts enrollment letter + student ID for most US CCs.',
     url: 'https://www.youtube.com/premium/student',
     logoUrl: 'https://icons.duckduckgo.com/ip3/youtube.com.ico',
     category: 'tool',
@@ -2296,7 +2296,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.youtube.com/premium/student',
       },
       {
-        title: 'Verify — student vs non-student',
+        title: 'Verify - student vs non-student',
         description:
           'STUDENT: Enter school name + .edu → instant. NON-STUDENT: Enroll in an accredited CC for 1 credit → get .edu + ID + enrollment letter → when SheerID asks for document upload, upload PDF (name + school + current term).',
       },
@@ -2307,7 +2307,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'يوتيوب بريميوم للطلاب',
-    taglineAr: 'شهر مجاناً + خصم 50% — بدون إعلانات وتشغيل في الخلفية وتحميل',
+    taglineAr: 'شهر مجاناً + خصم 50% - بدون إعلانات وتشغيل في الخلفية وتحميل',
     descriptionAr: 'يوتيوب بريميوم للطلاب: شهر أول مجاناً ثم خصم ~50% (~7.99$). يشمل يوتيوب وYouTube Music بدون إعلانات، تشغيل في الخلفية، تحميل للمشاهدة دون إنترنت، وصورة داخل صورة. يتحقق عبر SheerID ببريد .edu أو ملف. غير الطلاب يمكنهم التسجيل في كلية مجتمع للحصول على إثبات.',
     stepsAr: [
       {
@@ -2316,7 +2316,7 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.youtube.com/premium/student',
       },
       {
-        title: 'تحقق — طالب أو غير طالب',
+        title: 'تحقق - طالب أو غير طالب',
         description: 'طالب: أدخل اسم المدرسة + .edu → فوري. غير طالب: سجّل في CC معتمدة واحصل على .edu وبطاقة وخطاب → ارفع PDF عند طلب SheerID.',
       },
       {
@@ -2335,9 +2335,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o38',
     slug: 'amazon-prime-student',
     name: 'Amazon Prime Student',
-    tagline: '6 months free Prime then 50% off — free delivery, Prime Video, plus 30% off Luna',
+    tagline: '6 months free Prime then 50% off - free delivery, Prime Video, plus 30% off Luna',
     description:
-      'Amazon Prime Student: 6 months free (no charge), then 50% off ($7.49/mo vs $14.99). Includes free delivery, Prime Video, Prime Reading, and exclusive deals. Verifies via .edu email or SheerID file. Non-students can enroll in a CC to get .edu + enrollment proof — Amazon accepts upload of enrollment letter + ID via SheerID.',
+      'Amazon Prime Student: 6 months free (no charge), then 50% off ($7.49/mo vs $14.99). Includes free delivery, Prime Video, Prime Reading, and exclusive deals. Verifies via .edu email or SheerID file. Non-students can enroll in a CC to get .edu + enrollment proof - Amazon accepts upload of enrollment letter + ID via SheerID.',
     url: 'https://www.amazon.com/joinstudent',
     logoUrl: 'https://icons.duckduckgo.com/ip3/amazon.com.ico',
     category: 'tool',
@@ -2362,7 +2362,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'أمازون برايم للطلاب',
-    taglineAr: '6 أشهر مجاناً ثم خصم 50% — توصيل مجاني وبرايم فيديو',
+    taglineAr: '6 أشهر مجاناً ثم خصم 50% - توصيل مجاني وبرايم فيديو',
     descriptionAr: 'أمازون برايم للطلاب: 6 أشهر مجاناً ثم خصم 50% (7.49$ مقابل 14.99$). يشمل توصيل مجاني، Prime Video، قراءة، وعروض خاصة. يتحقق عبر .edu أو SheerID بملف. غير الطلاب يمكنهم التسجيل في كلية مجتمع للحصول على إثبات.',
     stepsAr: [
       {
@@ -2390,9 +2390,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o39',
     slug: 'consensus-academic',
     name: 'Consensus Academic',
-    tagline: '1 year Consensus Pro free with .edu — AI search over 200M papers',
+    tagline: '1 year Consensus Pro free with .edu - AI search over 200M papers',
     description:
-      'Consensus gives students 1 year of Pro free (normally $12/mo): AI synthesis over 200M research papers, study snapshots, and citation search. Verifies with .edu email instantly. Non-students can get it with any CC .edu mailbox — email-only verification.',
+      'Consensus gives students 1 year of Pro free (normally $12/mo): AI synthesis over 200M research papers, study snapshots, and citation search. Verifies with .edu email instantly. Non-students can get it with any CC .edu mailbox - email-only verification.',
     url: 'https://consensus.app/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/consensus.app.ico',
     category: 'learning',
@@ -2402,13 +2402,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Sign up with .edu',
         description:
-          'Go to consensus.app → Sign up with .edu email. STUDENT: use school .edu. NON-STUDENT: use CC .edu mailbox — verification is email domain only.',
+          'Go to consensus.app → Sign up with .edu email. STUDENT: use school .edu. NON-STUDENT: use CC .edu mailbox - verification is email domain only.',
         url: 'https://consensus.app/',
       },
       {
         title: 'Claim Pro',
         description:
-          'Check email for Pro upgrade link or go to Settings → Billing → “Education — Pro”. Pro unlocks unlimited AI summaries and filters.',
+          'Check email for Pro upgrade link or go to Settings → Billing → “Education - Pro”. Pro unlocks unlimited AI summaries and filters.',
       },
       {
         title: 'Search papers',
@@ -2417,12 +2417,12 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'كونسنسس الأكاديمي',
-    taglineAr: 'سنة Pro مجاناً ببريد .edu — بحث ذكي في 200M ورقة',
+    taglineAr: 'سنة Pro مجاناً ببريد .edu - بحث ذكي في 200M ورقة',
     descriptionAr: 'يمنح كونسنسس الطلاب سنة Pro مجاناً: تلخيص ذكي لأكثر من 200M ورقة بحثية، لقطات دراسة، وبحث بالاستشهادات. يتحقق فوراً ببريد .edu.',
     stepsAr: [
       {
         title: 'سجّل ببريد .edu',
-        description: 'اذهب إلى consensus.app → سجّل ببريد .edu. غير طالب: استخدم بريد CC — التحقق بالبريد فقط.',
+        description: 'اذهب إلى consensus.app → سجّل ببريد .edu. غير طالب: استخدم بريد CC - التحقق بالبريد فقط.',
         url: 'https://consensus.app/',
       },
       {
@@ -2445,7 +2445,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o40',
     slug: 'julius-ai-student',
     name: 'Julius AI Student',
-    tagline: 'Free Julius Pro for students — chat with data, charts, and analysis',
+    tagline: 'Free Julius Pro for students - chat with data, charts, and analysis',
     description:
       'Julius AI gives verified students free Pro: chat with CSVs/Excel/Sheets, auto-charts, and data cleaning. Verifies with .edu email. Non-students can get it with CC .edu mailbox (email-only).',
     url: 'https://julius.ai/',
@@ -2457,7 +2457,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Sign up with .edu',
         description:
-          'Visit julius.ai → Sign up with .edu email. NON-STUDENT: use CC .edu — email verification only.',
+          'Visit julius.ai → Sign up with .edu email. NON-STUDENT: use CC .edu - email verification only.',
         url: 'https://julius.ai/',
       },
       {
@@ -2472,7 +2472,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'جوليوس AI للطلاب',
-    taglineAr: 'Pro مجاناً للطلاب — حلّل بياناتك بالدردشة',
+    taglineAr: 'Pro مجاناً للطلاب - حلّل بياناتك بالدردشة',
     descriptionAr: 'يمنح Julius الطلاب Pro مجاناً: دردشة مع ملفات CSV/Excel، رسوم تلقائية وتنظيف بيانات. يتحقق ببريد .edu فقط.',
     stepsAr: [
       {
@@ -2500,9 +2500,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o41',
     slug: 'goodnotes-education',
     name: 'GoodNotes Education',
-    tagline: '1 year GoodNotes Pro free for students — iPad/Mac notes + AI',
+    tagline: '1 year GoodNotes Pro free for students - iPad/Mac notes + AI',
     description:
-      'GoodNotes gives verified students 1 year of Pro free: unlimited notebooks, AI handwriting search, and iCloud sync. Verifies via UNiDAYS with .edu or file. Non-students can qualify with CC enrollment + UNiDAYS file upload — most CCs are listed.',
+      'GoodNotes gives verified students 1 year of Pro free: unlimited notebooks, AI handwriting search, and iCloud sync. Verifies via UNiDAYS with .edu or file. Non-students can qualify with CC enrollment + UNiDAYS file upload - most CCs are listed.',
     url: 'https://www.goodnotes.com/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/goodnotes.com.ico',
     category: 'tool',
@@ -2527,7 +2527,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'GoodNotes للطلاب',
-    taglineAr: 'سنة Pro مجاناً — دفتر iPad مع بحث بخط اليد و AI',
+    taglineAr: 'سنة Pro مجاناً - دفتر iPad مع بحث بخط اليد و AI',
     descriptionAr: 'يمنح GoodNotes الطلاب سنة Pro مجاناً: دفاتر غير محدودة، بحث بخط اليد وAI، ومزامنة iCloud. يتحقق عبر UNiDAYS.',
     stepsAr: [
       {
@@ -2537,7 +2537,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'تحقق عبر UNiDAYS',
-        description: 'طالب: أدخل .edu → فوري. غير طالب: ارفع بطاقة + خطاب تسجيل — يوافق على CC خلال دقائق.',
+        description: 'طالب: أدخل .edu → فوري. غير طالب: ارفع بطاقة + خطاب تسجيل - يوافق على CC خلال دقائق.',
       },
       {
         title: 'استرد Pro',
@@ -2555,9 +2555,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o42',
     slug: 'mathpix-student',
     name: 'Mathpix Student',
-    tagline: '500+ OCR snips/month free for students — LaTeX + formula search',
+    tagline: '500+ OCR snips/month free for students - LaTeX + formula search',
     description:
-      'Mathpix Snip gives students 500+ OCR conversions/month free (normally 100). Snap handwritten or PDF math → LaTeX, Word, and search. Verifies with .edu email. Non-students can get it with CC .edu mailbox — email-only.',
+      'Mathpix Snip gives students 500+ OCR conversions/month free (normally 100). Snap handwritten or PDF math → LaTeX, Word, and search. Verifies with .edu email. Non-students can get it with CC .edu mailbox - email-only.',
     url: 'https://mathpix.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/mathpix.com.ico',
     category: 'learning',
@@ -2582,7 +2582,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Mathpix للطلاب',
-    taglineAr: '500+ تحويل OCR شهرياً مجاناً — LaTeX وبحث صيغ',
+    taglineAr: '500+ تحويل OCR شهرياً مجاناً - LaTeX وبحث صيغ',
     descriptionAr: 'يمنح Mathpix الطلاب 500+ تحويل OCR شهرياً مجاناً (بدل 100). التقط معادلاتك → LaTeX. يتحقق ببريد .edu فقط.',
     stepsAr: [
       {
@@ -2610,9 +2610,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o43',
     slug: 'shapr3d-education',
     name: 'Shapr3D Education',
-    tagline: '1 year Shapr3D Pro free — CAD on iPad/Mac with file proof',
+    tagline: '1 year Shapr3D Pro free - CAD on iPad/Mac with file proof',
     description:
-      'Shapr3D gives students 1 year of Pro free: full CAD modeling on iPad/Mac/Win. Verifies via school email or file (ID + enrollment). Non-students can qualify with CC enrollment + ID upload — manual review approves most accredited CCs.',
+      'Shapr3D gives students 1 year of Pro free: full CAD modeling on iPad/Mac/Win. Verifies via school email or file (ID + enrollment). Non-students can qualify with CC enrollment + ID upload - manual review approves most accredited CCs.',
     url: 'https://www.shapr3d.com/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/shapr3d.com.ico',
     category: 'tool',
@@ -2637,7 +2637,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Shapr3D للطلاب',
-    taglineAr: 'سنة Pro مجاناً — CAD على iPad/Mac',
+    taglineAr: 'سنة Pro مجاناً - CAD على iPad/Mac',
     descriptionAr: 'يمنح Shapr3D الطلاب سنة Pro مجاناً: نمذجة CAD كاملة على iPad/Mac. يتحقق عبر .edu أو ملف.',
     stepsAr: [
       {
@@ -2647,7 +2647,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'تحقق',
-        description: 'طالب: .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب — تقبل CC.',
+        description: 'طالب: .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب - تقبل CC.',
       },
       {
         title: 'ثبّت Shapr3D',
@@ -2665,9 +2665,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o44',
     slug: 'tower-git-student',
     name: 'Tower Git Student',
-    tagline: '1 year Tower free for students — Git client for Mac & Windows',
+    tagline: '1 year Tower free for students - Git client for Mac & Windows',
     description:
-      'Tower gives students free license for 1 year: powerful Git GUI for Mac/Win with drag-and-drop, merge, and PR flows. Verifies via school email or file. Non-students can get it with CC ID + enrollment — manual approval.',
+      'Tower gives students free license for 1 year: powerful Git GUI for Mac/Win with drag-and-drop, merge, and PR flows. Verifies via school email or file. Non-students can get it with CC ID + enrollment - manual approval.',
     url: 'https://www.git-tower.com/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/git-tower.com.ico',
     category: 'tool',
@@ -2683,7 +2683,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Verify',
         description:
-          'STUDENT: .edu → instant. NON-STUDENT: Upload student ID + enrollment letter — Tower manually approves CCs.',
+          'STUDENT: .edu → instant. NON-STUDENT: Upload student ID + enrollment letter - Tower manually approves CCs.',
       },
       {
         title: 'Activate Tower',
@@ -2692,7 +2692,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Tower للطلاب',
-    taglineAr: 'سنة Tower مجاناً — عميل Git لـ Mac و Windows',
+    taglineAr: 'سنة Tower مجاناً - عميل Git لـ Mac و Windows',
     descriptionAr: 'يمنح Tower الطلاب ترخيصاً مجانياً لسنة: واجهة Git قوية مع سحب وإفلات ودمج. يتحقق عبر .edu أو ملف.',
     stepsAr: [
       {
@@ -2702,7 +2702,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'تحقق',
-        description: 'طالب: .edu → فوري. غير طالب: ارفع بطاقة + خطاب — موافقة يدوية.',
+        description: 'طالب: .edu → فوري. غير طالب: ارفع بطاقة + خطاب - موافقة يدوية.',
       },
       {
         title: 'فعّل Tower',
@@ -2720,9 +2720,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o45',
     slug: 'craft-docs-education',
     name: 'Craft Docs Education',
-    tagline: 'Free Craft Pro for students — docs + AI with file proof',
+    tagline: 'Free Craft Pro for students - docs + AI with file proof',
     description:
-      'Craft gives verified students free Pro: docs, calendar, AI writing, and team workspace. Verifies via school email or file. Non-students can qualify with CC enrollment + file proof — Craft manually reviews.',
+      'Craft gives verified students free Pro: docs, calendar, AI writing, and team workspace. Verifies via school email or file. Non-students can qualify with CC enrollment + file proof - Craft manually reviews.',
     url: 'https://www.craft.do/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/craft.do.ico',
     category: 'tool',
@@ -2747,7 +2747,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Craft للطلاب',
-    taglineAr: 'Craft Pro مجاناً — مستندات + AI',
+    taglineAr: 'Craft Pro مجاناً - مستندات + AI',
     descriptionAr: 'يمنح Craft الطلاب Pro مجاناً: مستندات وتقويم وذكاء اصطناعي. يتحقق عبر .edu أو ملف.',
     stepsAr: [
       {
@@ -2757,7 +2757,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'تحقق',
-        description: 'طالب: .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب — تقبل CC.',
+        description: 'طالب: .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب - تقبل CC.',
       },
       {
         title: 'فعّل Pro',
@@ -2775,9 +2775,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o46',
     slug: 'ilovepdf-education',
     name: 'iLovePDF Education',
-    tagline: 'Premium 1 year free for students — edit, merge, OCR PDFs',
+    tagline: 'Premium 1 year free for students - edit, merge, OCR PDFs',
     description:
-      'iLovePDF gives verified students Premium free for 1 year: edit, merge, split, compress, OCR, and sign PDFs with high limits. Verifies via school email or file upload. Non-students can qualify with CC ID + enrollment — manual review approves most.',
+      'iLovePDF gives verified students Premium free for 1 year: edit, merge, split, compress, OCR, and sign PDFs with high limits. Verifies via school email or file upload. Non-students can qualify with CC ID + enrollment - manual review approves most.',
     url: 'https://www.ilovepdf.com/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/ilovepdf.com.ico',
     category: 'tool',
@@ -2802,7 +2802,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'iLovePDF للطلاب',
-    taglineAr: 'Premium سنة مجاناً — تحرير ودمج وOCR للـ PDF',
+    taglineAr: 'Premium سنة مجاناً - تحرير ودمج وOCR للـ PDF',
     descriptionAr: 'يمنح iLovePDF الطلاب Premium مجاناً لسنة: تحرير ودمج وضغط وOCR وتوقيع PDF بحدود عالية. يتحقق عبر .edu أو ملف.',
     stepsAr: [
       {
@@ -2812,7 +2812,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'تحقق',
-        description: 'طالب: أدخل .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب — تقبل CC.',
+        description: 'طالب: أدخل .edu → تلقائي. غير طالب: ارفع بطاقة + خطاب - تقبل CC.',
       },
       {
         title: 'استخدم Premium',
@@ -2830,9 +2830,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o47',
     slug: 'how-to-get-us-community-college-edu',
     name: 'How to Get a US Community College .EDU (American CC Guide)',
-    tagline: 'Legit American CC enrollment in 24-72h — unlock 40+ student offers with .edu + ID',
+    tagline: 'Legit American CC enrollment in 24-72h - unlock 40+ student offers with .edu + ID',
     description:
-      'The master guide for non-students: how to legitimately get an accredited US Community College .EDU mailbox + student ID + enrollment letter in 24-72h for ~$0-$60, and which offers on AI Hunt you can then claim. No paid mailbox shop needed.\\n\\n**All colleges below issue .EDU + Microsoft 365 + Canvas + transcript and are accepted by SheerID/GitHub/JetBrains/Adobe. Open-admission, no SAT, online apply in 15 min:**\\n\\n**Texas:** Dallas College (dallascollege.edu) — dallascollege.edu/admissions/application — $0 first semester many students\\n**California (all via OpenCCCApply — home.cccapply.org):** LA City College (lacitycollege.edu), Santa Monica College (smc.edu), Coastline (coastline.edu), Rio Hondo (riohondo.edu), El Camino (elcamino.edu), Pasadena City (pasadena.edu), Glendale (glendale.edu), Cerritos (cerritos.edu), Pierce College (piercecollege.edu), Cypress (cypresscollege.edu), Fullerton (fullcoll.edu), Orange Coast (orangecoastcollege.edu), Irvine Valley (ivc.edu), Saddleback (saddleback.edu), Palomar (palomar.edu), MiraCosta (miracosta.edu), Southwestern (swccd.edu), Berkeley City (peralta.edu/berkeley), Diablo Valley (dvc.edu), De Anza (deanza.edu), Foothill (foothill.edu), San Diego City (sdcity.edu), Mt San Antonio (mtsac.edu), Long Beach City (lbcc.edu)\\n**Other states:** Borough of Manhattan CC (bmcc.cuny.edu, NY), LaGuardia CC (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill CC (bhcc.edu, MA), Community College of Philadelphia (ccp.edu, PA)\\n\\n**Pick any ONE — you only need one CC to unlock all 40+ offers:** GitHub Pack, Azure $100, AWS Educate $100, Cloudflare Pro, JetBrains, Figma, Notion Plus, Canva, Autodesk, Zed, Gemini, ChatGPT Plus, Cursor, Perplexity, V0, Shodan, Hyperbolic, Consensus, Julius, Microsoft 365, Adobe 60% off, Apple 200GB, MATLAB, Replit, DigitalOcean $200, Namecheap domain, Sketch, YouTube/Amazon Prime, iLovePDF, Craft, Tower, Shapr3D, Mathpix, GoodNotes, Firecrawl, Dify, Kiro, Windsurf, Consensus, and more. Includes SheerID/UNiDAYS/manual file tips to get approved first try.',
+      'The master guide for non-students: how to legitimately get an accredited US Community College .EDU mailbox + student ID + enrollment letter in 24-72h for ~$0-$60, and which offers on AI Hunt you can then claim. No paid mailbox shop needed.\\n\\n**All colleges below issue .EDU + Microsoft 365 + Canvas + transcript and are accepted by SheerID/GitHub/JetBrains/Adobe. Open-admission, no SAT, online apply in 15 min:**\\n\\n**Texas:** Dallas College (dallascollege.edu) - dallascollege.edu/admissions/application - $0 first semester many students\\n**California (all via OpenCCCApply - home.cccapply.org):** LA City College (lacitycollege.edu), Santa Monica College (smc.edu), Coastline (coastline.edu), Rio Hondo (riohondo.edu), El Camino (elcamino.edu), Pasadena City (pasadena.edu), Glendale (glendale.edu), Cerritos (cerritos.edu), Pierce College (piercecollege.edu), Cypress (cypresscollege.edu), Fullerton (fullcoll.edu), Orange Coast (orangecoastcollege.edu), Irvine Valley (ivc.edu), Saddleback (saddleback.edu), Palomar (palomar.edu), MiraCosta (miracosta.edu), Southwestern (swccd.edu), Berkeley City (peralta.edu/berkeley), Diablo Valley (dvc.edu), De Anza (deanza.edu), Foothill (foothill.edu), San Diego City (sdcity.edu), Mt San Antonio (mtsac.edu), Long Beach City (lbcc.edu)\\n**Other states:** Borough of Manhattan CC (bmcc.cuny.edu, NY), LaGuardia CC (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill CC (bhcc.edu, MA), Community College of Philadelphia (ccp.edu, PA)\\n\\n**Pick any ONE - you only need one CC to unlock all 40+ offers:** GitHub Pack, Azure $100, AWS Educate $100, Cloudflare Pro, JetBrains, Figma, Notion Plus, Canva, Autodesk, Zed, Gemini, ChatGPT Plus, Cursor, Perplexity, V0, Shodan, Hyperbolic, Consensus, Julius, Microsoft 365, Adobe 60% off, Apple 200GB, MATLAB, Replit, DigitalOcean $200, Namecheap domain, Sketch, YouTube/Amazon Prime, iLovePDF, Craft, Tower, Shapr3D, Mathpix, GoodNotes, Firecrawl, Dify, Kiro, Windsurf, Consensus, and more. Includes SheerID/UNiDAYS/manual file tips to get approved first try.',
     url: 'https://www.dallascollege.edu/admissions/application',
     logoUrl: 'https://icons.duckduckgo.com/ip3/dallascollege.edu.ico',
     category: 'edu',
@@ -2840,65 +2840,65 @@ export const SEED_OFFERS: Offer[] = [
     pricing: 'free',
     steps: [
       {
-        title: 'Pick an open-admission CC (no SAT needed) — full list below',
+        title: 'Pick an open-admission CC (no SAT needed) - full list below',
         description:
-          'Choose ONE accredited CC from this list — all issue .EDU + Canvas + transcript and are accepted by SheerID/GitHub: Texas: Dallas College (dallascollege.edu/admissions/application) | California OpenCCC (home.cccapply.org): LA City College, Santa Monica College, Coastline, Rio Hondo, El Camino, Pasadena City, Glendale, Cerritos, Pierce, Cypress, Fullerton, Orange Coast, Irvine Valley, Saddleback, Palomar, MiraCosta, Southwestern, Berkeley City, Diablo Valley, De Anza, Foothill, San Diego City, Mt SAC, Long Beach City | Other states: BMCC (bmcc.cuny.edu, NY), LaGuardia (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill (bhcc.edu, MA), CCP (ccp.edu, PA). All open-admission, no SAT, online 15-min apply. Copy any college name + “apply” into Google to get direct link, or use Dallas College link below as universal fallback (works for internationals).',
+          'Choose ONE accredited CC from this list - all issue .EDU + Canvas + transcript and are accepted by SheerID/GitHub: Texas: Dallas College (dallascollege.edu/admissions/application) | California OpenCCC (home.cccapply.org): LA City College, Santa Monica College, Coastline, Rio Hondo, El Camino, Pasadena City, Glendale, Cerritos, Pierce, Cypress, Fullerton, Orange Coast, Irvine Valley, Saddleback, Palomar, MiraCosta, Southwestern, Berkeley City, Diablo Valley, De Anza, Foothill, San Diego City, Mt SAC, Long Beach City | Other states: BMCC (bmcc.cuny.edu, NY), LaGuardia (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill (bhcc.edu, MA), CCP (ccp.edu, PA). All open-admission, no SAT, online 15-min apply. Copy any college name + “apply” into Google to get direct link, or use Dallas College link below as universal fallback (works for internationals).',
         url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
-        title: 'Apply as non-degree / dual-enrollment student (15 min) — IMPORTANT: disable VPN for OpenCCC',
+        title: 'Apply as non-degree / dual-enrollment student (15 min) - IMPORTANT: disable VPN for OpenCCC',
         description:
-          'On the CC site click Apply → OpenCCC (California) or Dallas College App. Select “Non-degree / Personal Enrichment”. Use your real name + passport; address can be your home country + US forwarder if asked. No essay needed. ⚠️ OpenCCCApply (home.cccapply.org) BLOCKS VPN/proxy/Tor — you will see “proxy connection detected” error 1775… if you use VPN/anonymizer. Disable VPN, Tor, anonymizing plugins, iCloud Private Relay (Settings → iCloud → Private Relay OFF on iPhone/Mac), and ad-blockers (uBlock/Privacy Badger/AdGuard), use your normal residential IP or mobile data for this step only — try incognito Chrome with no extensions or switch WiFi ↔ mobile data. Maroc Telecom/Orange/Inwi sometimes use transparent proxy that triggers this even without VPN. If you must use VPN (Morocco), pick Dallas College, Houston CC, or BMCC instead — they do NOT use OpenCCC and work fine with VPN.',
+          'On the CC site click Apply → OpenCCC (California) or Dallas College App. Select “Non-degree / Personal Enrichment”. Use your real name + passport; address can be your home country + US forwarder if asked. No essay needed. ⚠️ OpenCCCApply (home.cccapply.org) BLOCKS VPN/proxy/Tor - you will see “proxy connection detected” error 1775… if you use VPN/anonymizer. Disable VPN, Tor, anonymizing plugins, iCloud Private Relay (Settings → iCloud → Private Relay OFF on iPhone/Mac), and ad-blockers (uBlock/Privacy Badger/AdGuard), use your normal residential IP or mobile data for this step only - try incognito Chrome with no extensions or switch WiFi ↔ mobile data. Maroc Telecom/Orange/Inwi sometimes use transparent proxy that triggers this even without VPN. If you must use VPN (Morocco), pick Dallas College, Houston CC, or BMCC instead - they do NOT use OpenCCC and work fine with VPN.',
       },
       {
         title: 'Enroll in 1 cheap online course ($0-$60)',
         description:
-          'After admission (often same day), log into Canvas/myCollege portal and enroll in 1 one-credit online class: e.g., Couns 1, CS 101, Art 101, College Success. Many CCs offer free tuition for first-time or promise-program students; otherwise ~$46/unit in CA = $46 total. You do NOT need to finish — enrollment alone generates proof.',
+          'After admission (often same day), log into Canvas/myCollege portal and enroll in 1 one-credit online class: e.g., Couns 1, CS 101, Art 101, College Success. Many CCs offer free tuition for first-time or promise-program students; otherwise ~$46/unit in CA = $46 total. You do NOT need to finish - enrollment alone generates proof.',
       },
       {
         title: 'Collect your 3 proofs in 24-72h',
         description:
-          'Within 1-3 days you will get: (1) @student.cc.edu Microsoft 365 .EDU mailbox (check myCollege → Email), (2) Student ID (downloadable PDF in portal → Student Services → ID), (3) Enrollment verification letter / class schedule PDF (with name + school + current term + date). Download all as color PDFs — SheerID/GitHub require date within 30 days.',
+          'Within 1-3 days you will get: (1) @student.cc.edu Microsoft 365 .EDU mailbox (check myCollege → Email), (2) Student ID (downloadable PDF in portal → Student Services → ID), (3) Enrollment verification letter / class schedule PDF (with name + school + current term + date). Download all as color PDFs - SheerID/GitHub require date within 30 days.',
       },
       {
-        title: 'Use the 3 proofs to unlock offers — which ones?',
+        title: 'Use the 3 proofs to unlock offers - which ones?',
         description:
-          'With one CC enrollment you can claim all these on AI Hunt: EMAIL-ONLY (Notion, Hyperbolic, Dify, Firecrawl, Consensus, Julius, Mathpix, Shodan-email) — just use .EDU mailbox. SHEERID FILE (GitHub Pack, JetBrains, Autodesk, Adobe, Cursor, ChatGPT Plus, Perplexity, Gemini US, YouTube/Amazon Prime) — upload ID + enrollment letter PDF. UNiDAYS (Cloudflare, GoodNotes) — add school in UNiDAYS and verify with file. GitHub Pack then unlocks DigitalOcean $200 + Namecheap .me + Replit 50% automatically. Microsoft 365 appears automatically with your new .EDU. Keep Canvas enrollment active until all verifications pass, then you may drop the class (check refund deadline to keep proof date fresh).',
+          'With one CC enrollment you can claim all these on AI Hunt: EMAIL-ONLY (Notion, Hyperbolic, Dify, Firecrawl, Consensus, Julius, Mathpix, Shodan-email) - just use .EDU mailbox. SHEERID FILE (GitHub Pack, JetBrains, Autodesk, Adobe, Cursor, ChatGPT Plus, Perplexity, Gemini US, YouTube/Amazon Prime) - upload ID + enrollment letter PDF. UNiDAYS (Cloudflare, GoodNotes) - add school in UNiDAYS and verify with file. GitHub Pack then unlocks DigitalOcean $200 + Namecheap .me + Replit 50% automatically. Microsoft 365 appears automatically with your new .EDU. Keep Canvas enrollment active until all verifications pass, then you may drop the class (check refund deadline to keep proof date fresh).',
       },
       {
         title: 'Renew yearly & stay compliant',
         description:
-          'All offers are 12 months. Before expiry, re-enroll in another 1-credit course to get a fresh dated letter and re-verify via SheerID/UNiDAYS. Keep your .EDU mailbox active (log in monthly). This is legitimate enrollment — never buy a sold .EDU mailbox (edumailshop etc.) — it can be revoked and violates ToS. Your real transcript is the safest proof.',
+          'All offers are 12 months. Before expiry, re-enroll in another 1-credit course to get a fresh dated letter and re-verify via SheerID/UNiDAYS. Keep your .EDU mailbox active (log in monthly). This is legitimate enrollment - never buy a sold .EDU mailbox (edumailshop etc.) - it can be revoked and violates ToS. Your real transcript is the safest proof.',
       },
     ],
     nameAr: 'كيف تحصل على بريد .EDU من كلية مجتمع أمريكية (دليل CC)',
-    taglineAr: 'التسجيل في كلية مجتمع أمريكية معتمدة خلال 24-72 ساعة — افتح 40+ عرض طلابي ببريد .EDU',
-    descriptionAr: 'الدليل الشامل لغير الطلاب: كيف تحصل بشكل شرعي على بريد .EDU من كلية مجتمع أمريكية معتمدة + بطاقة طالب + خطاب تسجيل خلال 24-72 ساعة مقابل ~0-60$، وقائمة العروض التي يمكنك فتحها في AI Hunt بذلك التسجيل الواحد. بدون متاجر بريد مدفوعة.\\n\\n**جميع الكليات التالية تعطي .EDU + Microsoft 365 + Canvas + كشف ومقبولة في SheerID/GitHub:**\\n\\nتكساس: Dallas College — dallascollege.edu/admissions/application\\nكاليفورنيا (عبر OpenCCC — home.cccapply.org): LA City College، Santa Monica، Coastline، Rio Hondo، El Camino، Pasadena City، Glendale، Cerritos، Pierce، Cypress، Fullerton، Orange Coast، Irvine Valley، Saddleback، Palomar، MiraCosta، Southwestern، Berkeley City، Diablo Valley، De Anza، Foothill، San Diego City، Mt SAC، Long Beach City\\nولايات أخرى: BMCC بنيويورك، LaGuardia بنيويورك، Houston CC بتكساس، Bunker Hill بماساتشوستس، CCP بفيلادلفيا\\n\\nاختر واحدة فقط — تسجيل واحد يفتح 40+ عرضاً: GitHub Pack، Azure 100$، AWS 100$، Cloudflare Pro، JetBrains، Figma، Notion Plus، Canva، Autodesk، Zed، Gemini، ChatGPT Plus، Cursor، Perplexity، V0، Shodan، Hyperbolic وغيرها.',
+    taglineAr: 'التسجيل في كلية مجتمع أمريكية معتمدة خلال 24-72 ساعة - افتح 40+ عرض طلابي ببريد .EDU',
+    descriptionAr: 'الدليل الشامل لغير الطلاب: كيف تحصل بشكل شرعي على بريد .EDU من كلية مجتمع أمريكية معتمدة + بطاقة طالب + خطاب تسجيل خلال 24-72 ساعة مقابل ~0-60$، وقائمة العروض التي يمكنك فتحها في AI Hunt بذلك التسجيل الواحد. بدون متاجر بريد مدفوعة.\\n\\n**جميع الكليات التالية تعطي .EDU + Microsoft 365 + Canvas + كشف ومقبولة في SheerID/GitHub:**\\n\\nتكساس: Dallas College - dallascollege.edu/admissions/application\\nكاليفورنيا (عبر OpenCCC - home.cccapply.org): LA City College، Santa Monica، Coastline، Rio Hondo، El Camino، Pasadena City، Glendale، Cerritos، Pierce، Cypress، Fullerton، Orange Coast، Irvine Valley، Saddleback، Palomar، MiraCosta، Southwestern، Berkeley City، Diablo Valley، De Anza، Foothill، San Diego City، Mt SAC، Long Beach City\\nولايات أخرى: BMCC بنيويورك، LaGuardia بنيويورك، Houston CC بتكساس، Bunker Hill بماساتشوستس، CCP بفيلادلفيا\\n\\nاختر واحدة فقط - تسجيل واحد يفتح 40+ عرضاً: GitHub Pack، Azure 100$، AWS 100$، Cloudflare Pro، JetBrains، Figma، Notion Plus، Canva، Autodesk، Zed، Gemini، ChatGPT Plus، Cursor، Perplexity، V0، Shodan، Hyperbolic وغيرها.',
     stepsAr: [
       {
-        title: 'اختر كلية مفتوحة القبول (بدون SAT) — القائمة الكاملة',
-        description: 'اختر واحدة من هذه القائمة — كلها تعطي .EDU ومقبولة: Dallas College، LA City College، Santa Monica، Coastline، Rio Hondo، El Camino، Pasadena City، Glendale، Cerritos، Pierce، Cypress، Fullerton، Orange Coast، Irvine Valley، Saddleback، Palomar، MiraCosta، Southwestern، Berkeley City، Diablo Valley، De Anza، Foothill، San Diego City، Mt SAC، Long Beach City (كاليفورنيا عبر home.cccapply.org) + BMCC و LaGuardia بنيويورك و Houston CC و Bunker Hill و CCP. كلها بدون SAT وتسجيل 15 دقيقة عبر الإنترنت.',
+        title: 'اختر كلية مفتوحة القبول (بدون SAT) - القائمة الكاملة',
+        description: 'اختر واحدة من هذه القائمة - كلها تعطي .EDU ومقبولة: Dallas College، LA City College، Santa Monica، Coastline، Rio Hondo، El Camino، Pasadena City، Glendale، Cerritos، Pierce، Cypress، Fullerton، Orange Coast، Irvine Valley، Saddleback، Palomar، MiraCosta، Southwestern، Berkeley City، Diablo Valley، De Anza، Foothill، San Diego City، Mt SAC، Long Beach City (كاليفورنيا عبر home.cccapply.org) + BMCC و LaGuardia بنيويورك و Houston CC و Bunker Hill و CCP. كلها بدون SAT وتسجيل 15 دقيقة عبر الإنترنت.',
         url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
-        title: 'قدّم كطالب غير متفرغ (15 دقيقة) — مهم: عطّل VPN لـ OpenCCC',
-        description: 'اضغط Apply → OpenCCC (كاليفورنيا) أو Dallas App. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. ⚠️ OpenCCC يحظر VPN/البروكسي/Tor — ستظهر رسالة "proxy connection detected" خطأ 1775… إذا استخدمت VPN. عطّل VPN/Tor و iCloud Private Relay (الإعدادات → iCloud → إيقاف) والإضافات المجهولة وحجب الإعلانات، واستخدم اتصالك العادي أو بيانات الهاتف — جرّب متصفحاً خاصاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. مزودو المغرب أحياناً يستخدمون بروكسي شفاف يسبب الحظر حتى بدون VPN. إذا كنت مضطراً لاستخدام VPN في المغرب، اختر Dallas College أو Houston CC أو BMCC — لا تستخدم OpenCCC وتعمل مع VPN.',
+        title: 'قدّم كطالب غير متفرغ (15 دقيقة) - مهم: عطّل VPN لـ OpenCCC',
+        description: 'اضغط Apply → OpenCCC (كاليفورنيا) أو Dallas App. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. ⚠️ OpenCCC يحظر VPN/البروكسي/Tor - ستظهر رسالة "proxy connection detected" خطأ 1775… إذا استخدمت VPN. عطّل VPN/Tor و iCloud Private Relay (الإعدادات → iCloud → إيقاف) والإضافات المجهولة وحجب الإعلانات، واستخدم اتصالك العادي أو بيانات الهاتف - جرّب متصفحاً خاصاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. مزودو المغرب أحياناً يستخدمون بروكسي شفاف يسبب الحظر حتى بدون VPN. إذا كنت مضطراً لاستخدام VPN في المغرب، اختر Dallas College أو Houston CC أو BMCC - لا تستخدم OpenCCC وتعمل مع VPN.',
       },
       {
         title: 'سجّل في مقرر واحد رخيص ($0-$60)',
-        description: 'بعد القبول (غالباً نفس اليوم)، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت (Couns 1، CS 101...). كثير من الكليات مجانية للمستجدين وإلا ~46$ للوحدة في كاليفورنيا. لا تحتاج لإنهاء المقرر — التسجيل وحده يولد الإثبات.',
+        description: 'بعد القبول (غالباً نفس اليوم)، ادخل Canvas وسجّل في مقرر واحد عبر الإنترنت (Couns 1، CS 101...). كثير من الكليات مجانية للمستجدين وإلا ~46$ للوحدة في كاليفورنيا. لا تحتاج لإنهاء المقرر - التسجيل وحده يولد الإثبات.',
       },
       {
         title: 'اجمع إثباتاتك الثلاثة خلال 24-72 ساعة',
-        description: 'ستحصل على: (1) بريد @student.cc.edu عبر Microsoft 365، (2) بطاقة طالب PDF قابلة للتنزيل، (3) خطاب/جدول تسجيل PDF باسمك والمدرسة والتاريخ. حمّلها كملفات ملونة — يطلب SheerID تاريخاً خلال 30 يوماً.',
+        description: 'ستحصل على: (1) بريد @student.cc.edu عبر Microsoft 365، (2) بطاقة طالب PDF قابلة للتنزيل، (3) خطاب/جدول تسجيل PDF باسمك والمدرسة والتاريخ. حمّلها كملفات ملونة - يطلب SheerID تاريخاً خلال 30 يوماً.',
       },
       {
-        title: 'استخدمها لفتح العروض — ما الذي يفتح؟',
+        title: 'استخدمها لفتح العروض - ما الذي يفتح؟',
         description: 'بتسجيل واحد تفتح: بالبريد فقط (Notion، Hyperbolic، Dify، Firecrawl، Consensus، Julius، Mathpix، Shodan). عبر SheerID بملف (GitHub Pack، JetBrains، Autodesk، Adobe، Cursor، ChatGPT Plus، Perplexity، Gemini أمريكا، YouTube/Amazon). عبر UNiDAYS (Cloudflare، GoodNotes). ثم GitHub Pack يفتح DigitalOcean 200$ + Namecheap .me + Replit 50% تلقائياً.',
       },
       {
         title: 'جدّد سنوياً والتزم',
-        description: 'كل العروض 12 شهراً. قبل الانتهاء، سجّل في مقرر واحد جديد للحصول على خطاب بتاريخ جديد وأعد التحقق. حافظ على بريد .EDU نشطاً. هذا تسجيل شرعي — لا تشترِ بريداً مباعاً قد يُسحب وينتهك الشروط.',
+        description: 'كل العروض 12 شهراً. قبل الانتهاء، سجّل في مقرر واحد جديد للحصول على خطاب بتاريخ جديد وأعد التحقق. حافظ على بريد .EDU نشطاً. هذا تسجيل شرعي - لا تشترِ بريداً مباعاً قد يُسحب وينتهك الشروط.',
       },
     ],
     upvotes: 58,
@@ -2911,8 +2911,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o48',
     slug: 'dallas-college-edu',
-    name: 'Dallas College — .EDU Mailbox',
-    tagline: 'Dallas College — #1 for internationals, $0 first semester, instant .EDU',
+    name: 'Dallas College - .EDU Mailbox',
+    tagline: 'Dallas College - #1 for internationals, $0 first semester, instant .EDU',
     description:
       'Dallas College (dallascollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.dallascollege.edu/admissions/application',
@@ -2924,13 +2924,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Dallas College (15 min)',
         description:
-          'Go to https://www.dallascollege.edu/admissions/application → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.dallascollege.edu/admissions/application → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -2943,13 +2943,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Dallas كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Dallas College — تسجيل 24-72 ساعة',
+    nameAr: 'Dallas كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Dallas College - تسجيل 24-72 ساعة',
     descriptionAr: 'Dallas College (dallascollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Dallas College',
-        description: 'اذهب إلى https://www.dallascollege.edu/admissions/application → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.dallascollege.edu/admissions/application → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
@@ -2975,8 +2975,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o49',
     slug: 'lacc-edu',
-    name: 'Los Angeles City College — .EDU Mailbox',
-    tagline: 'LACC — OpenCCC, LA district, .EDU + Canvas in 24h',
+    name: 'Los Angeles City College - .EDU Mailbox',
+    tagline: 'LACC - OpenCCC, LA district, .EDU + Canvas in 24h',
     description:
       'Los Angeles City College (lacitycollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.lacitycollege.edu/Admissions/Apply',
@@ -2988,13 +2988,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Los Angeles City College (15 min)',
         description:
-          'Go to https://www.lacitycollege.edu/Admissions/Apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.lacitycollege.edu/Admissions/Apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.lacitycollege.edu/Admissions/Apply',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3007,13 +3007,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Los Angeles City كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Los Angeles City College — تسجيل 24-72 ساعة',
+    nameAr: 'Los Angeles City كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Los Angeles City College - تسجيل 24-72 ساعة',
     descriptionAr: 'Los Angeles City College (lacitycollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Los Angeles City College',
-        description: 'اذهب إلى https://www.lacitycollege.edu/Admissions/Apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.lacitycollege.edu/Admissions/Apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.lacitycollege.edu/Admissions/Apply',
       },
       {
@@ -3039,8 +3039,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o50',
     slug: 'smc-edu',
-    name: 'Santa Monica College — .EDU Mailbox',
-    tagline: 'SMC — top transfer CC, high SheerID acceptance',
+    name: 'Santa Monica College - .EDU Mailbox',
+    tagline: 'SMC - top transfer CC, high SheerID acceptance',
     description:
       'Santa Monica College (smc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.smc.edu/',
@@ -3052,13 +3052,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Santa Monica College (15 min)',
         description:
-          'Go to https://www.smc.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.smc.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.smc.edu/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3071,13 +3071,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Santa Monica كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Santa Monica College — تسجيل 24-72 ساعة',
+    nameAr: 'Santa Monica كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Santa Monica College - تسجيل 24-72 ساعة',
     descriptionAr: 'Santa Monica College (smc.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Santa Monica College',
-        description: 'اذهب إلى https://www.smc.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.smc.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.smc.edu/',
       },
       {
@@ -3103,8 +3103,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o51',
     slug: 'coastline-edu',
-    name: 'Coastline College — .EDU Mailbox',
-    tagline: 'Coastline — 100% online, .EDU in 24h',
+    name: 'Coastline College - .EDU Mailbox',
+    tagline: 'Coastline - 100% online, .EDU in 24h',
     description:
       'Coastline College (coastline.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
@@ -3116,13 +3116,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Coastline College (15 min)',
         description:
-          'Go to https://www.coastline.edu/admissions-aid/apply-now.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.coastline.edu/admissions-aid/apply-now.php → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3135,13 +3135,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Coastline كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Coastline College — تسجيل 24-72 ساعة',
+    nameAr: 'Coastline كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Coastline College - تسجيل 24-72 ساعة',
     descriptionAr: 'Coastline College (coastline.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Coastline College',
-        description: 'اذهب إلى https://www.coastline.edu/admissions-aid/apply-now.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.coastline.edu/admissions-aid/apply-now.php → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.coastline.edu/admissions-aid/apply-now.php',
       },
       {
@@ -3167,8 +3167,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o52',
     slug: 'rio-hondo-edu',
-    name: 'Rio Hondo College — .EDU Mailbox',
-    tagline: 'Rio Hondo — OpenCCC, low fees, quick ID',
+    name: 'Rio Hondo College - .EDU Mailbox',
+    tagline: 'Rio Hondo - OpenCCC, low fees, quick ID',
     description:
       'Rio Hondo College (riohondo.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.riohondo.edu/admissions/',
@@ -3180,13 +3180,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Rio Hondo College (15 min)',
         description:
-          'Go to https://www.riohondo.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.riohondo.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.riohondo.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3199,13 +3199,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Rio Hondo كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Rio Hondo College — تسجيل 24-72 ساعة',
+    nameAr: 'Rio Hondo كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Rio Hondo College - تسجيل 24-72 ساعة',
     descriptionAr: 'Rio Hondo College (riohondo.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Rio Hondo College',
-        description: 'اذهب إلى https://www.riohondo.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.riohondo.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.riohondo.edu/admissions/',
       },
       {
@@ -3231,8 +3231,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o53',
     slug: 'el-camino-edu',
-    name: 'El Camino College — .EDU Mailbox',
-    tagline: 'El Camino — $46/unit, Microsoft 365 .EDU',
+    name: 'El Camino College - .EDU Mailbox',
+    tagline: 'El Camino - $46/unit, Microsoft 365 .EDU',
     description:
       'El Camino College (elcamino.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.elcamino.edu/admissions/',
@@ -3244,13 +3244,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to El Camino College (15 min)',
         description:
-          'Go to https://www.elcamino.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.elcamino.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.elcamino.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3263,13 +3263,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'El Camino كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من El Camino College — تسجيل 24-72 ساعة',
+    nameAr: 'El Camino كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من El Camino College - تسجيل 24-72 ساعة',
     descriptionAr: 'El Camino College (elcamino.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى El Camino College',
-        description: 'اذهب إلى https://www.elcamino.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.elcamino.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.elcamino.edu/admissions/',
       },
       {
@@ -3295,8 +3295,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o54',
     slug: 'pasadena-city-edu',
-    name: 'Pasadena City College — .EDU Mailbox',
-    tagline: 'Pasadena City — large CA CC, auto .EDU',
+    name: 'Pasadena City College - .EDU Mailbox',
+    tagline: 'Pasadena City - large CA CC, auto .EDU',
     description:
       'Pasadena City College (pasadena.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://pasadena.edu/admissions/',
@@ -3308,13 +3308,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Pasadena City College (15 min)',
         description:
-          'Go to https://pasadena.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://pasadena.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://pasadena.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3327,13 +3327,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Pasadena City كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Pasadena City College — تسجيل 24-72 ساعة',
+    nameAr: 'Pasadena City كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Pasadena City College - تسجيل 24-72 ساعة',
     descriptionAr: 'Pasadena City College (pasadena.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Pasadena City College',
-        description: 'اذهب إلى https://pasadena.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://pasadena.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://pasadena.edu/admissions/',
       },
       {
@@ -3359,8 +3359,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o55',
     slug: 'glendale-cc-edu',
-    name: 'Glendale Community College — .EDU Mailbox',
-    tagline: 'Glendale — OpenCCC, fast Canvas access',
+    name: 'Glendale Community College - .EDU Mailbox',
+    tagline: 'Glendale - OpenCCC, fast Canvas access',
     description:
       'Glendale Community College (glendale.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.glendale.edu/apply',
@@ -3372,13 +3372,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Glendale Community College (15 min)',
         description:
-          'Go to https://www.glendale.edu/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.glendale.edu/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.glendale.edu/apply',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3391,13 +3391,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Glendale Community كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Glendale Community College — تسجيل 24-72 ساعة',
+    nameAr: 'Glendale Community كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Glendale Community College - تسجيل 24-72 ساعة',
     descriptionAr: 'Glendale Community College (glendale.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Glendale Community College',
-        description: 'اذهب إلى https://www.glendale.edu/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.glendale.edu/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.glendale.edu/apply',
       },
       {
@@ -3423,8 +3423,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o56',
     slug: 'cerritos-edu',
-    name: 'Cerritos College — .EDU Mailbox',
-    tagline: 'Cerritos — $46/unit, SheerID OK',
+    name: 'Cerritos College - .EDU Mailbox',
+    tagline: 'Cerritos - $46/unit, SheerID OK',
     description:
       'Cerritos College (cerritos.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.cerritos.edu/admissions/',
@@ -3436,13 +3436,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Cerritos College (15 min)',
         description:
-          'Go to https://www.cerritos.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.cerritos.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.cerritos.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3455,13 +3455,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Cerritos كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Cerritos College — تسجيل 24-72 ساعة',
+    nameAr: 'Cerritos كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Cerritos College - تسجيل 24-72 ساعة',
     descriptionAr: 'Cerritos College (cerritos.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Cerritos College',
-        description: 'اذهب إلى https://www.cerritos.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.cerritos.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.cerritos.edu/admissions/',
       },
       {
@@ -3487,8 +3487,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o57',
     slug: 'pierce-college-edu',
-    name: 'Pierce College — .EDU Mailbox',
-    tagline: 'Pierce College — LA district, .EDU in 48h',
+    name: 'Pierce College - .EDU Mailbox',
+    tagline: 'Pierce College - LA district, .EDU in 48h',
     description:
       'Pierce College (piercecollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.piercecollege.edu/admissions/apply.asp',
@@ -3500,13 +3500,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Pierce College (15 min)',
         description:
-          'Go to https://www.piercecollege.edu/admissions/apply.asp → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.piercecollege.edu/admissions/apply.asp → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.piercecollege.edu/admissions/apply.asp',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3519,13 +3519,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Pierce كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Pierce College — تسجيل 24-72 ساعة',
+    nameAr: 'Pierce كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Pierce College - تسجيل 24-72 ساعة',
     descriptionAr: 'Pierce College (piercecollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Pierce College',
-        description: 'اذهب إلى https://www.piercecollege.edu/admissions/apply.asp → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.piercecollege.edu/admissions/apply.asp → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.piercecollege.edu/admissions/apply.asp',
       },
       {
@@ -3551,8 +3551,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o58',
     slug: 'cypress-edu',
-    name: 'Cypress College — .EDU Mailbox',
-    tagline: 'Cypress — North Orange, OpenCCC',
+    name: 'Cypress College - .EDU Mailbox',
+    tagline: 'Cypress - North Orange, OpenCCC',
     description:
       'Cypress College (cypresscollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.cypresscollege.edu/admissions/apply/',
@@ -3564,13 +3564,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Cypress College (15 min)',
         description:
-          'Go to https://www.cypresscollege.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.cypresscollege.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.cypresscollege.edu/admissions/apply/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3583,13 +3583,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Cypress كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Cypress College — تسجيل 24-72 ساعة',
+    nameAr: 'Cypress كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Cypress College - تسجيل 24-72 ساعة',
     descriptionAr: 'Cypress College (cypresscollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Cypress College',
-        description: 'اذهب إلى https://www.cypresscollege.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.cypresscollege.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.cypresscollege.edu/admissions/apply/',
       },
       {
@@ -3615,8 +3615,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o59',
     slug: 'fullerton-edu',
-    name: 'Fullerton College — .EDU Mailbox',
-    tagline: 'Fullerton — Fullerton, CA, .EDU instant',
+    name: 'Fullerton College - .EDU Mailbox',
+    tagline: 'Fullerton - Fullerton, CA, .EDU instant',
     description:
       'Fullerton College (fullerton.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.fullcoll.edu/admissions/',
@@ -3628,13 +3628,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Fullerton College (15 min)',
         description:
-          'Go to https://www.fullcoll.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.fullcoll.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.fullcoll.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3647,13 +3647,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Fullerton كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Fullerton College — تسجيل 24-72 ساعة',
+    nameAr: 'Fullerton كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Fullerton College - تسجيل 24-72 ساعة',
     descriptionAr: 'Fullerton College (fullerton.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Fullerton College',
-        description: 'اذهب إلى https://www.fullcoll.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.fullcoll.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.fullcoll.edu/admissions/',
       },
       {
@@ -3679,8 +3679,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o60',
     slug: 'orange-coast-edu',
-    name: 'Orange Coast College — .EDU Mailbox',
-    tagline: 'OCC — Costa Mesa, large, .EDU',
+    name: 'Orange Coast College - .EDU Mailbox',
+    tagline: 'OCC - Costa Mesa, large, .EDU',
     description:
       'Orange Coast College (orangecoastcollege.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.orangecoastcollege.edu/admissions',
@@ -3692,13 +3692,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Orange Coast College (15 min)',
         description:
-          'Go to https://www.orangecoastcollege.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.orangecoastcollege.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.orangecoastcollege.edu/admissions',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3711,13 +3711,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Orange Coast كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Orange Coast College — تسجيل 24-72 ساعة',
+    nameAr: 'Orange Coast كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Orange Coast College - تسجيل 24-72 ساعة',
     descriptionAr: 'Orange Coast College (orangecoastcollege.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Orange Coast College',
-        description: 'اذهب إلى https://www.orangecoastcollege.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.orangecoastcollege.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.orangecoastcollege.edu/admissions',
       },
       {
@@ -3743,8 +3743,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o61',
     slug: 'ivc-edu',
-    name: 'Irvine Valley College — .EDU Mailbox',
-    tagline: 'IVC — Irvine, .EDU + transcript PDF',
+    name: 'Irvine Valley College - .EDU Mailbox',
+    tagline: 'IVC - Irvine, .EDU + transcript PDF',
     description:
       'Irvine Valley College (ivc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.ivc.edu/admissions/apply',
@@ -3756,13 +3756,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Irvine Valley College (15 min)',
         description:
-          'Go to https://www.ivc.edu/admissions/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.ivc.edu/admissions/apply → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.ivc.edu/admissions/apply',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3775,13 +3775,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Irvine Valley كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Irvine Valley College — تسجيل 24-72 ساعة',
+    nameAr: 'Irvine Valley كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Irvine Valley College - تسجيل 24-72 ساعة',
     descriptionAr: 'Irvine Valley College (ivc.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Irvine Valley College',
-        description: 'اذهب إلى https://www.ivc.edu/admissions/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.ivc.edu/admissions/apply → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.ivc.edu/admissions/apply',
       },
       {
@@ -3807,8 +3807,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o62',
     slug: 'saddleback-edu',
-    name: 'Saddleback College — .EDU Mailbox',
-    tagline: 'Saddleback — Mission Viejo, .EDU 24h',
+    name: 'Saddleback College - .EDU Mailbox',
+    tagline: 'Saddleback - Mission Viejo, .EDU 24h',
     description:
       'Saddleback College (saddleback.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.saddleback.edu/admissions',
@@ -3820,13 +3820,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Saddleback College (15 min)',
         description:
-          'Go to https://www.saddleback.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.saddleback.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.saddleback.edu/admissions',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3839,13 +3839,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Saddleback كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Saddleback College — تسجيل 24-72 ساعة',
+    nameAr: 'Saddleback كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Saddleback College - تسجيل 24-72 ساعة',
     descriptionAr: 'Saddleback College (saddleback.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Saddleback College',
-        description: 'اذهب إلى https://www.saddleback.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.saddleback.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.saddleback.edu/admissions',
       },
       {
@@ -3871,8 +3871,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o63',
     slug: 'palomar-edu',
-    name: 'Palomar College — .EDU Mailbox',
-    tagline: 'Palomar — San Diego area, OpenCCC',
+    name: 'Palomar College - .EDU Mailbox',
+    tagline: 'Palomar - San Diego area, OpenCCC',
     description:
       'Palomar College (palomar.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.palomar.edu/admissions',
@@ -3884,13 +3884,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Palomar College (15 min)',
         description:
-          'Go to https://www.palomar.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.palomar.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.palomar.edu/admissions',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3903,13 +3903,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Palomar كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Palomar College — تسجيل 24-72 ساعة',
+    nameAr: 'Palomar كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Palomar College - تسجيل 24-72 ساعة',
     descriptionAr: 'Palomar College (palomar.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Palomar College',
-        description: 'اذهب إلى https://www.palomar.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.palomar.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.palomar.edu/admissions',
       },
       {
@@ -3935,8 +3935,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o64',
     slug: 'miracosta-edu',
-    name: 'MiraCosta College — .EDU Mailbox',
-    tagline: 'MiraCosta — Oceanside, .EDU quick',
+    name: 'MiraCosta College - .EDU Mailbox',
+    tagline: 'MiraCosta - Oceanside, .EDU quick',
     description:
       'MiraCosta College (miracosta.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.miracosta.edu/admissions/apply.html',
@@ -3948,13 +3948,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to MiraCosta College (15 min)',
         description:
-          'Go to https://www.miracosta.edu/admissions/apply.html → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.miracosta.edu/admissions/apply.html → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.miracosta.edu/admissions/apply.html',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -3967,13 +3967,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'MiraCosta كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من MiraCosta College — تسجيل 24-72 ساعة',
+    nameAr: 'MiraCosta كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من MiraCosta College - تسجيل 24-72 ساعة',
     descriptionAr: 'MiraCosta College (miracosta.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى MiraCosta College',
-        description: 'اذهب إلى https://www.miracosta.edu/admissions/apply.html → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.miracosta.edu/admissions/apply.html → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.miracosta.edu/admissions/apply.html',
       },
       {
@@ -3999,8 +3999,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o65',
     slug: 'southwestern-edu',
-    name: 'Southwestern College — .EDU Mailbox',
-    tagline: 'Southwestern College — Chula Vista, $46/unit',
+    name: 'Southwestern College - .EDU Mailbox',
+    tagline: 'Southwestern College - Chula Vista, $46/unit',
     description:
       'Southwestern College (swccd.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.swccd.edu/admissions/',
@@ -4012,13 +4012,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Southwestern College (15 min)',
         description:
-          'Go to https://www.swccd.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.swccd.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.swccd.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -4031,13 +4031,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Southwestern كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Southwestern College — تسجيل 24-72 ساعة',
+    nameAr: 'Southwestern كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Southwestern College - تسجيل 24-72 ساعة',
     descriptionAr: 'Southwestern College (swccd.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Southwestern College',
-        description: 'اذهب إلى https://www.swccd.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.swccd.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.swccd.edu/admissions/',
       },
       {
@@ -4063,8 +4063,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o66',
     slug: 'berkeley-city-edu',
-    name: 'Berkeley City College — .EDU Mailbox',
-    tagline: 'Berkeley City — Peralta district, Bay Area .EDU',
+    name: 'Berkeley City College - .EDU Mailbox',
+    tagline: 'Berkeley City - Peralta district, Bay Area .EDU',
     description:
       'Berkeley City College (peralta.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://peralta.edu/berkeley/',
@@ -4076,13 +4076,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Berkeley City College (15 min)',
         description:
-          'Go to https://peralta.edu/berkeley/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://peralta.edu/berkeley/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://peralta.edu/berkeley/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -4095,13 +4095,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Berkeley City كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Berkeley City College — تسجيل 24-72 ساعة',
+    nameAr: 'Berkeley City كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Berkeley City College - تسجيل 24-72 ساعة',
     descriptionAr: 'Berkeley City College (peralta.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Berkeley City College',
-        description: 'اذهب إلى https://peralta.edu/berkeley/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://peralta.edu/berkeley/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://peralta.edu/berkeley/',
       },
       {
@@ -4127,8 +4127,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o67',
     slug: 'dvc-edu',
-    name: 'Diablo Valley College — .EDU Mailbox',
-    tagline: 'DVC — Pleasant Hill, high GitHub acceptance',
+    name: 'Diablo Valley College - .EDU Mailbox',
+    tagline: 'DVC - Pleasant Hill, high GitHub acceptance',
     description:
       'Diablo Valley College (dvc.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.dvc.edu/admissions',
@@ -4140,13 +4140,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Diablo Valley College (15 min)',
         description:
-          'Go to https://www.dvc.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.dvc.edu/admissions → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.dvc.edu/admissions',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -4159,13 +4159,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Diablo Valley كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Diablo Valley College — تسجيل 24-72 ساعة',
+    nameAr: 'Diablo Valley كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Diablo Valley College - تسجيل 24-72 ساعة',
     descriptionAr: 'Diablo Valley College (dvc.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Diablo Valley College',
-        description: 'اذهب إلى https://www.dvc.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.dvc.edu/admissions → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.dvc.edu/admissions',
       },
       {
@@ -4191,8 +4191,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o68',
     slug: 'de-anza-edu',
-    name: 'De Anza College — .EDU Mailbox',
-    tagline: 'De Anza — Cupertino/Silicon Valley, .EDU',
+    name: 'De Anza College - .EDU Mailbox',
+    tagline: 'De Anza - Cupertino/Silicon Valley, .EDU',
     description:
       'De Anza College (deanza.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.deanza.edu/',
@@ -4204,13 +4204,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to De Anza College (15 min)',
         description:
-          'Go to https://www.deanza.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.deanza.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.deanza.edu/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -4223,13 +4223,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'De Anza كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من De Anza College — تسجيل 24-72 ساعة',
+    nameAr: 'De Anza كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من De Anza College - تسجيل 24-72 ساعة',
     descriptionAr: 'De Anza College (deanza.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى De Anza College',
-        description: 'اذهب إلى https://www.deanza.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.deanza.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.deanza.edu/',
       },
       {
@@ -4255,8 +4255,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o69',
     slug: 'foothill-edu',
-    name: 'Foothill College — .EDU Mailbox',
-    tagline: 'Foothill — Los Altos, .EDU in 24h',
+    name: 'Foothill College - .EDU Mailbox',
+    tagline: 'Foothill - Los Altos, .EDU in 24h',
     description:
       'Foothill College (foothill.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.foothill.edu/apply/',
@@ -4268,13 +4268,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Foothill College (15 min)',
         description:
-          'Go to https://www.foothill.edu/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.foothill.edu/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.foothill.edu/apply/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -4287,13 +4287,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Foothill كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Foothill College — تسجيل 24-72 ساعة',
+    nameAr: 'Foothill كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Foothill College - تسجيل 24-72 ساعة',
     descriptionAr: 'Foothill College (foothill.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Foothill College',
-        description: 'اذهب إلى https://www.foothill.edu/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.foothill.edu/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.foothill.edu/apply/',
       },
       {
@@ -4319,8 +4319,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o70',
     slug: 'sdcity-edu',
-    name: 'San Diego City College — .EDU Mailbox',
-    tagline: 'SD City College — San Diego, .EDU',
+    name: 'San Diego City College - .EDU Mailbox',
+    tagline: 'SD City College - San Diego, .EDU',
     description:
       'San Diego City College (sdcity.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.sdcity.edu/',
@@ -4332,13 +4332,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to San Diego City College (15 min)',
         description:
-          'Go to https://www.sdcity.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.sdcity.edu/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.sdcity.edu/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -4351,13 +4351,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'San Diego City كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من San Diego City College — تسجيل 24-72 ساعة',
+    nameAr: 'San Diego City كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من San Diego City College - تسجيل 24-72 ساعة',
     descriptionAr: 'San Diego City College (sdcity.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى San Diego City College',
-        description: 'اذهب إلى https://www.sdcity.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.sdcity.edu/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.sdcity.edu/',
       },
       {
@@ -4383,8 +4383,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o71',
     slug: 'bmcc-edu',
-    name: 'Borough of Manhattan CC — .EDU Mailbox',
-    tagline: 'BMCC — CUNY New York, .EDU for GitHub/Azure',
+    name: 'Borough of Manhattan CC - .EDU Mailbox',
+    tagline: 'BMCC - CUNY New York, .EDU for GitHub/Azure',
     description:
       'Borough of Manhattan CC (bmcc.cuny.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.bmcc.cuny.edu/admissions/apply/',
@@ -4396,13 +4396,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Borough of Manhattan CC (15 min)',
         description:
-          'Go to https://www.bmcc.cuny.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.bmcc.cuny.edu/admissions/apply/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.bmcc.cuny.edu/admissions/apply/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -4415,13 +4415,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'كلية مانهاتن — بريد .EDU',
-    taglineAr: 'بريد .EDU من Borough of Manhattan CC — تسجيل 24-72 ساعة',
+    nameAr: 'كلية مانهاتن - بريد .EDU',
+    taglineAr: 'بريد .EDU من Borough of Manhattan CC - تسجيل 24-72 ساعة',
     descriptionAr: 'Borough of Manhattan CC (bmcc.cuny.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Borough of Manhattan CC',
-        description: 'اذهب إلى https://www.bmcc.cuny.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.bmcc.cuny.edu/admissions/apply/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.bmcc.cuny.edu/admissions/apply/',
       },
       {
@@ -4447,8 +4447,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o72',
     slug: 'hcc-edu',
-    name: 'Houston Community College — .EDU Mailbox',
-    tagline: 'HCC — Houston, TX, .EDU + Canvas',
+    name: 'Houston Community College - .EDU Mailbox',
+    tagline: 'HCC - Houston, TX, .EDU + Canvas',
     description:
       'Houston Community College (hccs.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via college portal. Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
     url: 'https://www.hccs.edu/applying-and-paying/',
@@ -4460,13 +4460,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Houston Community College (15 min)',
         description:
-          'Go to https://www.hccs.edu/applying-and-paying/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN — your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+          'Go to https://www.hccs.edu/applying-and-paying/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
         url: 'https://www.hccs.edu/applying-and-paying/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
         description:
-          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish — enrollment generates proof.',
+          'After admission (often same day), log into Canvas and enroll in 1 one-credit online course (College Success/Couns 1). Many offer free first semester; otherwise ~$46 in CA. You do NOT need to finish - enrollment generates proof.',
       },
       {
         title: 'Collect .EDU + ID + letter in 24-72h',
@@ -4479,13 +4479,13 @@ export const SEED_OFFERS: Offer[] = [
           'Use .EDU mailbox for Notion/Hyperbolic/Dify; upload ID + letter PDF to SheerID for GitHub Pack/JetBrains/Autodesk/Adobe/Cursor/ChatGPT/Gemini/YouTube; verify via UNiDAYS for Cloudflare/GoodNotes. See o47 guide for full list. Keep enrollment active until verified.',
       },
     ],
-    nameAr: 'Houston Community كلية — بريد .EDU',
-    taglineAr: 'بريد .EDU من Houston Community College — تسجيل 24-72 ساعة',
+    nameAr: 'Houston Community كلية - بريد .EDU',
+    taglineAr: 'بريد .EDU من Houston Community College - تسجيل 24-72 ساعة',
     descriptionAr: 'Houston Community College (hccs.edu) كلية مجتمع أمريكية معتمدة تعطي بريد .EDU عبر Microsoft 365 + Canvas + خطاب تسجيل رسمي مقابل ~0-46$. قبول مفتوح بدون SAT وتسجيل 15 دقيقة عبر OpenCCC. بعد التسجيل في مقرر واحد تحصل على .EDU خلال 24-72 ساعة وتفتح 40+ عرضاً في AI Hunt (GitHub Pack، Azure، AWS، JetBrains...). راجع الدليل o47 للقائمة الكاملة.',
     stepsAr: [
       {
         title: 'قدّم إلى Houston Community College',
-        description: 'اذهب إلى https://www.hccs.edu/applying-and-paying/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN — بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        description: 'اذهب إلى https://www.hccs.edu/applying-and-paying/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
         url: 'https://www.hccs.edu/applying-and-paying/',
       },
       {
@@ -4513,7 +4513,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o73',
     slug: 'huggingface-student',
     name: 'Hugging Face Student',
-    tagline: 'Pro free for students — private models + $100 inference credits',
+    tagline: 'Pro free for students - private models + $100 inference credits',
     description:
       'Hugging Face gives verified students free Pro (normally $9/mo): unlimited private models/datasets, Inference Endpoints, and $100 credits for Serverless Inference API. Verifies via .edu email. Non-students can get it with any CC .EDU mailbox (email-only).',
     url: 'https://huggingface.co/join',
@@ -4525,7 +4525,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Sign up with .EDU',
         description:
-          'Go to huggingface.co/join → Sign up with .EDU email. STUDENT: use school .EDU. NON-STUDENT: use CC .EDU mailbox — email domain only.',
+          'Go to huggingface.co/join → Sign up with .EDU email. STUDENT: use school .EDU. NON-STUDENT: use CC .EDU mailbox - email domain only.',
         url: 'https://huggingface.co/join',
       },
       {
@@ -4540,7 +4540,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Hugging Face للطلاب',
-    taglineAr: 'Pro مجاناً للطلاب — نماذج خاصة + 100$ رصيد استدلال',
+    taglineAr: 'Pro مجاناً للطلاب - نماذج خاصة + 100$ رصيد استدلال',
     descriptionAr: 'يمنح Hugging Face الطلاب Pro مجاناً: نماذج ومجموعات بيانات خاصة غير محدودة و $100 رصيد لـ Serverless Inference. يتحقق ببريد .EDU فقط.',
     stepsAr: [
       {
@@ -4554,7 +4554,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'استخدم Pro والرصيد',
-        description: 'أنشئ مستودعات خاصة واستدعِ واجهة الاستدلال — يظهر الرصيد 100$ في الفوترة.',
+        description: 'أنشئ مستودعات خاصة واستدعِ واجهة الاستدلال - يظهر الرصيد 100$ في الفوترة.',
       },
     ],
     upvotes: 18,
@@ -4586,7 +4586,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Claim student credit',
         description:
-          'Go to Credits → “Student Program” → Enter .EDU — $25 auto-applies. Check Dashboard → Credits.',
+          'Go to Credits → “Student Program” → Enter .EDU - $25 auto-applies. Check Dashboard → Credits.',
       },
       {
         title: 'Call the unified API',
@@ -4605,7 +4605,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'اطلب رصيد الطلاب',
-        description: 'الرصيد → "Student Program" → أدخل .EDU — يُضاف 25$ تلقائياً.',
+        description: 'الرصيد → "Student Program" → أدخل .EDU - يُضاف 25$ تلقائياً.',
       },
       {
         title: 'استدعِ API الموحد',
@@ -4623,7 +4623,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o75',
     slug: 'replicate-student',
     name: 'Replicate Student',
-    tagline: '$50 credit for open-source model API — SDXL, Llama, Whisper',
+    tagline: '$50 credit for open-source model API - SDXL, Llama, Whisper',
     description:
       'Replicate gives verified students $50 credit for its API: run SDXL, Llama 3, Whisper, and 1000+ open models pay-per-second via API. Verifies with .EDU email or GitHub Student. Non-students can get it via CC .EDU mailbox or GitHub Pack file.',
     url: 'https://replicate.com/students',
@@ -4650,7 +4650,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Replicate للطلاب',
-    taglineAr: 'رصيد 50$ لواجهة النماذج المفتوحة — SDXL و Llama',
+    taglineAr: 'رصيد 50$ لواجهة النماذج المفتوحة - SDXL و Llama',
     descriptionAr: 'يمنح Replicate الطلاب 50$ رصيداً لواجهته: شغّل SDXL و Llama 3 و 1000+ نموذج عبر API. يتحقق ببريد .EDU أو GitHub Student.',
     stepsAr: [
       {
@@ -4719,7 +4719,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'ابنِ بالطبقة المجانية',
-        description: 'استخدم Postgres و Auth لسنة مجاناً — الرصيد يغطي التجاوز.',
+        description: 'استخدم Postgres و Auth لسنة مجاناً - الرصيد يغطي التجاوز.',
       },
     ],
     upvotes: 14,
@@ -4735,7 +4735,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'MongoDB Atlas Student',
     tagline: '$50 Atlas credit + free 512MB cluster via GitHub Pack',
     description:
-      'MongoDB Atlas via GitHub Student Pack: $50 credit for Atlas + free 512MB shared cluster forever. Verifies via GitHub Student linkage — get Pack first via CC file (o9), then claim.',
+      'MongoDB Atlas via GitHub Student Pack: $50 credit for Atlas + free 512MB shared cluster forever. Verifies via GitHub Student linkage - get Pack first via CC file (o9), then claim.',
     url: 'https://www.mongodb.com/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/mongodb.com.ico',
     category: 'api-access',
@@ -4756,7 +4756,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Deploy free cluster',
         description:
-          'Create a free 512MB Atlas cluster — credit burns only for larger clusters. Free cluster stays forever.',
+          'Create a free 512MB Atlas cluster - credit burns only for larger clusters. Free cluster stays forever.',
       },
     ],
     nameAr: 'MongoDB Atlas للطلاب',
@@ -4774,7 +4774,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'أنشئ عنقوداً مجانياً',
-        description: 'أنشئ عنقود 512MB مجاني — الرصيد للعناقيد الأكبر فقط.',
+        description: 'أنشئ عنقود 512MB مجاني - الرصيد للعناقيد الأكبر فقط.',
       },
     ],
     upvotes: 13,
@@ -4829,7 +4829,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'انشر بحدود Pro',
-        description: 'انشر تطبيق Next.js — تطبق حدود Pro أثناء حالة الطالب.',
+        description: 'انشر تطبيق Next.js - تطبق حدود Pro أثناء حالة الطالب.',
       },
     ],
     upvotes: 15,
@@ -4845,7 +4845,7 @@ export const SEED_OFFERS: Offer[] = [
     name: '1Password Student',
     tagline: '1 year free Families (5 accounts) via GitHub Pack',
     description:
-      '1Password via GitHub Student Pack: 1 year free Families plan (5 accounts, vaults, 1GB storage). Verifies via GitHub Student linkage — get Pack first via CC file (o9).',
+      '1Password via GitHub Student Pack: 1 year free Families plan (5 accounts, vaults, 1GB storage). Verifies via GitHub Student linkage - get Pack first via CC file (o9).',
     url: 'https://1password.com/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/1password.com.ico',
     category: 'tool',
@@ -4884,7 +4884,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'ادعُ العائلة',
-        description: 'ادعُ 4 أفراد للخزائن — يتجدد سنوياً أثناء نشاط Pack.',
+        description: 'ادعُ 4 أفراد للخزائن - يتجدد سنوياً أثناء نشاط Pack.',
       },
     ],
     upvotes: 12,
@@ -4921,7 +4921,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Create Education team',
         description:
-          'After approval, create Education team — 100+ boards unlock. Invite classmates.',
+          'After approval, create Education team - 100+ boards unlock. Invite classmates.',
       },
     ],
     nameAr: 'Miro للتعليم',
@@ -4935,11 +4935,11 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'تحقق',
-        description: 'طالب: .EDU → تلقائي. غير طالب: ارفع بطاقة + خطاب — تقبل CC.',
+        description: 'طالب: .EDU → تلقائي. غير طالب: ارفع بطاقة + خطاب - تقبل CC.',
       },
       {
         title: 'أنشئ فريق التعليم',
-        description: 'بعد الموافقة، أنشئ فريقاً — تفتح 100+ لوحة.',
+        description: 'بعد الموافقة، أنشئ فريقاً - تفتح 100+ لوحة.',
       },
     ],
     upvotes: 11,
@@ -4953,7 +4953,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o81',
     slug: 'linear-for-students',
     name: 'Linear for Students',
-    tagline: 'Free Standard for 1 year via .EDU — issue tracking for teams',
+    tagline: 'Free Standard for 1 year via .EDU - issue tracking for teams',
     description:
       'Linear gives verified students free Standard for 1 year: unlimited issues, cycles, and integrations. Verifies via .EDU email. Non-students can get it with CC .EDU mailbox (email-only).',
     url: 'https://linear.app/students',
@@ -4980,7 +4980,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Linear للطلاب',
-    taglineAr: 'Standard مجاناً لسنة — تتبع مهام الفرق',
+    taglineAr: 'Standard مجاناً لسنة - تتبع مهام الفرق',
     descriptionAr: 'يمنح Linear الطلاب Standard مجاناً لسنة: مهام ودورات وتكامل غير محدود. يتحقق ببريد .EDU فقط.',
     stepsAr: [
       {
@@ -5064,7 +5064,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o83',
     slug: 'revenuecat-shipaton-2026',
     name: 'RevenueCat Shipaton 2026',
-    tagline: '$740k cash + Times Square billboard + NYC trip — ship apps with RevenueCat',
+    tagline: '$740k cash + Times Square billboard + NYC trip - ship apps with RevenueCat',
     description:
       'RevenueCat global hackathon Aug 1-Sep 30, 2026: ship an iOS/Android/macOS app using RevenueCat SDK for at least one purchase. $740k cash, $1M+ total including sponsor prizes. Grand $100k + NYC Shippies red carpet + Times Square billboard + 9to5Mac press. Category 1sts $20k-$30k. Student-only Next Gen category requires no App Store release. Sponsors: Replit, OneSignal, JetBrains, Stripe, Samsung.',
     url: 'https://revenuecat-shipaton-2026.devpost.com/',
@@ -5096,7 +5096,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'RevenueCat Shipaton 2026',
-    taglineAr: '740 ألف $ + لوحة Times Square + رحلة نيويورك — أطلق تطبيقاتك',
+    taglineAr: '740 ألف $ + لوحة Times Square + رحلة نيويورك - أطلق تطبيقاتك',
     descriptionAr: 'هاكاثون عالمي 1 أغسطس - 30 سبتمبر 2026: أطلق تطبيق iOS/Android باستخدام RevenueCat SDK. جوائز 740 ألف $ نقداً وأكثر من مليون إجمالي، الجائزة الكبرى 100 ألف $ + نيويورك + Times Square.',
     stepsAr: [
       {
@@ -5128,7 +5128,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o84',
     slug: 'xprize-build-with-gemini',
     name: 'XPRIZE Build with Gemini',
-    tagline: '$2M with Google — build AI businesses with real users & revenue',
+    tagline: '$2M with Google - build AI businesses with real users & revenue',
     description:
       'XPRIZE + Google $2M hackathon May 19-Aug 17, 2026: build AI business in 5 categories (Education, Entrepreneurship, Small Business, Financial Access, Professional Services). Grand $500k, 2nd $200k, 3×$100k, 15×$50k runner + 5×$50k category. Judged on business viability, AI-native ops, impact. Must launch real business with real users/revenue in 90 days. Finals Sep 25 LA.',
     url: 'https://www.geminixprize.com/',
@@ -5146,7 +5146,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Build 90 days with real traction',
         description:
-          'May 19-Aug 17 build: launch business, acquire users, generate revenue. Projections alone fail — need real traction.',
+          'May 19-Aug 17 build: launch business, acquire users, generate revenue. Projections alone fail - need real traction.',
       },
       {
         title: 'Submit and Hacker Fund screen',
@@ -5155,7 +5155,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'XPRIZE ابنِ مع Gemini',
-    taglineAr: 'مليونا $ مع جوجل — ابنِ شركات ذكاء اصطناعي بمستخدمين حقيقيين',
+    taglineAr: 'مليونا $ مع جوجل - ابنِ شركات ذكاء اصطناعي بمستخدمين حقيقيين',
     descriptionAr: 'هاكاثون XPRIZE وجوجل 2 مليون $ من 19 مايو إلى 17 أغسطس 2026: ابنِ شركة ذكاء اصطناعي في 5 فئات. الجائزة الكبرى 500 ألف $.',
     stepsAr: [
       {
@@ -5165,7 +5165,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'ابنِ 90 يوماً بزخم حقيقي',
-        description: 'أطلق عملاً واحصل على مستخدمين وإيرادات حقيقية — التوقعات وحدها لا تكفي.',
+        description: 'أطلق عملاً واحصل على مستخدمين وإيرادات حقيقية - التوقعات وحدها لا تكفي.',
       },
       {
         title: 'قدّم وانتظر النهائي في LA',
@@ -5183,9 +5183,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o85',
     slug: 'treehacks-2026',
     name: 'TreeHacks 2026',
-    tagline: '$1,030,875 at Stanford — largest US collegiate hackathon',
+    tagline: '$1,030,875 at Stanford - largest US collegiate hackathon',
     description:
-      'Stanford TreeHacks Feb 14-15, 2026 — invite-only collegiate, $1,030,875 pool. YC interview, OpenAI lunch + 1yr ChatGPT Pro, Anthropic/Modal credits, Human Capital $50k per member (up to $200k), Cloudflare $250k credits, HeyGen, etc. Invite via application.',
+      'Stanford TreeHacks Feb 14-15, 2026 - invite-only collegiate, $1,030,875 pool. YC interview, OpenAI lunch + 1yr ChatGPT Pro, Anthropic/Modal credits, Human Capital $50k per member (up to $200k), Cloudflare $250k credits, HeyGen, etc. Invite via application.',
     url: 'https://treehacks-2026.devpost.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/devpost.com.ico',
     category: 'competition',
@@ -5206,12 +5206,12 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Demo and win',
         description:
-          'Present to judges — YC 1st gets guaranteed interview, 2nd/3rd office hours. Human Capital fellowship $50k per member.',
+          'Present to judges - YC 1st gets guaranteed interview, 2nd/3rd office hours. Human Capital fellowship $50k per member.',
       },
     ],
     nameAr: 'TreeHacks 2026',
-    taglineAr: '1,030,875$ في ستانفورد — أكبر هاكاثون جامعي أمريكي',
-    descriptionAr: 'هاكاثون ستانفورد 14-15 فبراير 2026 بدعوة فقط — جوائز أكثر من مليون $. مقابلة YC مضمونة.',
+    taglineAr: '1,030,875$ في ستانفورد - أكبر هاكاثون جامعي أمريكي',
+    descriptionAr: 'هاكاثون ستانفورد 14-15 فبراير 2026 بدعوة فقط - جوائز أكثر من مليون $. مقابلة YC مضمونة.',
     stepsAr: [
       {
         title: 'قدّم للحصول على دعوة',
@@ -5220,7 +5220,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'شارك في 14-15 فبراير بستانفورد',
-        description: '36 ساعة حضورياً — مسارات OpenAI و Anthropic و YC.',
+        description: '36 ساعة حضورياً - مسارات OpenAI و Anthropic و YC.',
       },
       {
         title: 'اعرض مشروعك',
@@ -5238,7 +5238,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o86',
     slug: 'sui-overflow-2026',
     name: 'Sui Overflow 2026',
-    tagline: 'Virtual global hackathon — $30k per track + $70k pools',
+    tagline: 'Virtual global hackathon - $30k per track + $70k pools',
     description:
       'Sui Overflow virtual 2026: build AI agents, DeFi/payments, DeepBook, EVE on Sui. Per track $30k 1st/$15k 2nd/$10k 3rd/$7.5k 4th + specialized $70k/$50k pools. Global online.',
     url: 'https://overflow.sui.io/',
@@ -5261,11 +5261,11 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Submit virtually',
         description:
-          'Submit online — per track $30k 1st. Community voting + panel judging.',
+          'Submit online - per track $30k 1st. Community voting + panel judging.',
       },
     ],
     nameAr: 'Sui Overflow 2026',
-    taglineAr: 'هاكاثون افتراضي عالمي — 30 ألف $ لكل مسار',
+    taglineAr: 'هاكاثون افتراضي عالمي - 30 ألف $ لكل مسار',
     descriptionAr: 'هاكاثون Sui الافتراضي: ابنِ وكلاء AI و DeFi على Sui. 30 ألف $ للمركز الأول بكل مسار.',
     stepsAr: [
       {
@@ -5279,7 +5279,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'قدّم افتراضياً',
-        description: 'قدّم عبر الإنترنت — تصويت مجتمع + تحكيم.',
+        description: 'قدّم عبر الإنترنت - تصويت مجتمع + تحكيم.',
       },
     ],
     upvotes: 12,
@@ -5330,7 +5330,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'ابنِ بـ Mistral',
-        description: 'استخدم رصيد Mistral المقدم — جوائز ElevenLabs.',
+        description: 'استخدم رصيد Mistral المقدم - جوائز ElevenLabs.',
       },
       {
         title: 'النهائي العالمي',
@@ -5347,8 +5347,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o88',
     slug: 'gloo-ai-hackathon-2026',
-    name: 'Gloo AI Hackathon 2026 — Build for Good',
-    tagline: '$200k, no coding required — Boulder, Oct 6-8',
+    name: 'Gloo AI Hackathon 2026 - Build for Good',
+    tagline: '$200k, no coding required - Boulder, Oct 6-8',
     description:
       'Gloo AI for Good Oct 6-8, 2026 Boulder, Colorado: $200k pool, no coding required, for Faith & Flourishing builders. Start building Sep 8.',
     url: 'https://gloo.com/ai/hackathon',
@@ -5366,16 +5366,16 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Start building Sep 8',
         description:
-          'No code required — build AI for Good projects.',
+          'No code required - build AI for Good projects.',
       },
       {
         title: 'Join Oct 6-8 in Boulder',
         description:
-          'Limelight Hotel Boulder — compete for $200k.',
+          'Limelight Hotel Boulder - compete for $200k.',
       },
     ],
     nameAr: 'Gloo AI هاكاثون 2026',
-    taglineAr: '200 ألف $ بدون برمجة — بولدر 6-8 أكتوبر',
+    taglineAr: '200 ألف $ بدون برمجة - بولدر 6-8 أكتوبر',
     descriptionAr: 'هاكاثون Gloo للخير 6-8 أكتوبر 2026 بولدر: 200 ألف $ بدون حاجة لبرمجة.',
     stepsAr: [
       {
@@ -5385,11 +5385,11 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'ابدأ 8 سبتمبر',
-        description: 'لا حاجة لبرمجة — ابنِ مشروع AI للخير.',
+        description: 'لا حاجة لبرمجة - ابنِ مشروع AI للخير.',
       },
       {
         title: 'شارك في بولدر',
-        description: 'فندق Limelight — نافس على 200 ألف $.',
+        description: 'فندق Limelight - نافس على 200 ألف $.',
       },
     ],
     upvotes: 10,
@@ -5403,7 +5403,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o89',
     slug: 'vslive-microsoft-ai-hackathon-2026',
     name: 'VSLive! Microsoft AI Hackathon 2026',
-    tagline: '$25k at Microsoft HQ Redmond — Azure OpenAI + Copilot',
+    tagline: '$25k at Microsoft HQ Redmond - Azure OpenAI + Copilot',
     description:
       'VSLive Microsoft AI Hackathon July 28-29, 2026 at Microsoft HQ Building 98 Redmond: $25k pool ($6k Grand, $2k Team/Solo). Build enterprise AI on Azure OpenAI, Copilot, agents, .NET. Free for VSLive attendees, $50 community in-person only.',
     url: 'https://vslive.com/events/microsofthq-2026/hackathon.aspx',
@@ -5430,17 +5430,17 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'VSLive! هاكاثون مايكروسوفت AI 2026',
-    taglineAr: '25 ألف $ في مقر مايكروسوفت — Azure OpenAI',
+    taglineAr: '25 ألف $ في مقر مايكروسوفت - Azure OpenAI',
     descriptionAr: 'هاكاثون VSLive 28-29 يوليو 2026 في مقر مايكروسوفت ريدموند: 25 ألف $ (6 آلاف كبرى).',
     stepsAr: [
       {
         title: 'سجّل لـ VSLive',
-        description: 'اذهب إلى vslive.com وسجّل — مجاني للحضور.',
+        description: 'اذهب إلى vslive.com وسجّل - مجاني للحضور.',
         url: 'https://vslive.com/events/microsofthq-2026/hackathon.aspx',
       },
       {
         title: 'شارك 28-29 يوليو',
-        description: 'في مبنى 98 — ابنِ على Azure OpenAI.',
+        description: 'في مبنى 98 - ابنِ على Azure OpenAI.',
       },
       {
         title: 'افوز بـ 6 آلاف $',
@@ -5495,11 +5495,11 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'شارك 17 أغسطس - 3 سبتمبر',
-        description: 'ابنِ مشاريع API/Cloud/AI — تحديات Perfect Corp و SerpApi.',
+        description: 'ابنِ مشاريع API/Cloud/AI - تحديات Perfect Corp و SerpApi.',
       },
       {
         title: 'اعرض 2-3 سبتمبر',
-        description: 'حضورياً في Santa Clara — الجائزة 12.5 ألف $.',
+        description: 'حضورياً في Santa Clara - الجائزة 12.5 ألف $.',
       },
     ],
     upvotes: 11,
@@ -5513,7 +5513,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o91',
     slug: 'y-combinator-fall-2026',
     name: 'Y Combinator Fall 2026',
-    tagline: '$500k for 7% + $375k MFN — SF, Demo Day',
+    tagline: '$500k for 7% + $375k MFN - SF, Demo Day',
     description:
       'Y Combinator Fall 2026 batch Oct-Dec SF: $500k standard deal = $125k for 7% + $375k uncapped MFN SAFE (committed day accepted, not batch start). Deadline July 27, 2026 8pm PT, decisions by Aug 28, 10-min Zoom interview, Demo Day fundraising compression. Apply at ycombinator.com/apply. Early Decision for Winter/Spring/Summer 2027.',
     url: 'https://www.ycombinator.com/apply',
@@ -5531,7 +5531,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Interview (10 min Zoom)',
         description:
-          'If invited, 10-min Zoom with 2-3 partners in Aug/Sep — decision often same day.',
+          'If invited, 10-min Zoom with 2-3 partners in Aug/Sep - decision often same day.',
       },
       {
         title: 'Get $500k and join batch Oct-Dec SF',
@@ -5540,7 +5540,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Y Combinator خريف 2026',
-    taglineAr: '500 ألف $ مقابل 7% + 375 ألف MFN — سان فرانسيسكو',
+    taglineAr: '500 ألف $ مقابل 7% + 375 ألف MFN - سان فرانسيسكو',
     descriptionAr: 'دفعة YC خريف 2026 أكتوبر-ديسمبر سان فرانسيسكو: 500 ألف $ = 125 ألف مقابل 7% + 375 ألف MFN. آخر موعد 27 يوليو 2026.',
     stepsAr: [
       {
@@ -5550,11 +5550,11 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'مقابلة 10 دقائق',
-        description: 'زووم مع شريكين — القرار غالباً نفس اليوم.',
+        description: 'زووم مع شريكين - القرار غالباً نفس اليوم.',
       },
       {
         title: 'احصل على 500 ألف $ وانضم',
-        description: '500 ألف $ تُحجز يوم القبول — 3 أشهر في SF ثم Demo Day.',
+        description: '500 ألف $ تُحجز يوم القبول - 3 أشهر في SF ثم Demo Day.',
       },
     ],
     upvotes: 32,
@@ -5568,7 +5568,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o92',
     slug: 'techstars-accelerator',
     name: 'Techstars Accelerator',
-    tagline: '$220k for ~6% — global vertical accelerators',
+    tagline: '$220k for ~6% - global vertical accelerators',
     description:
       'Techstars $220k = $20k for 5% CEA + $200k uncapped MFN SAFE (~6% total, adds ~1% at $20M pre). Global vertical programs (London fintech, Boston AI, etc.). No Demo Day lift like YC, but 74% raise within 3 years. Pick for industry/city network you lack.',
     url: 'https://www.techstars.com/accelerators',
@@ -5595,7 +5595,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Techstars مسرّعة',
-    taglineAr: '220 ألف $ مقابل ~6% — مسرعات عالمية متخصصة',
+    taglineAr: '220 ألف $ مقابل ~6% - مسرعات عالمية متخصصة',
     descriptionAr: 'Techstars 220 ألف $ = 20 ألف مقابل 5% + 200 ألف MFN (~6%). برامج عمودية عالمية.',
     stepsAr: [
       {
@@ -5605,11 +5605,11 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'قدّم بزخم وفريق',
-        description: 'قدّم عرضاً وزخماً — لا حاجة لشريك مؤسس.',
+        description: 'قدّم عرضاً وزخماً - لا حاجة لشريك مؤسس.',
       },
       {
         title: 'انضم 3 أشهر',
-        description: 'شبكة مرشدين + 220 ألف $ — ليس ضغط Demo Day كـ YC.',
+        description: 'شبكة مرشدين + 220 ألف $ - ليس ضغط Demo Day كـ YC.',
       },
     ],
     upvotes: 14,
@@ -5623,7 +5623,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o93',
     slug: 'antler-disrupt-2026',
     name: 'Antler Disrupt 2026',
-    tagline: '$400k for 10% + $650k perks day 1 — 4-week sprint',
+    tagline: '$400k for 10% + $650k perks day 1 - 4-week sprint',
     description:
       'Antler Disrupt 4-week sprint Ho Chi Minh City Mar 30-Apr 20, 2026 (Spring) + other locations: $400k = $250k for 10% + $150k MFN SAFE, $650k perks day 1 ($4M after), no fee. Need working product + early traction. <3% acceptance, IC at Week 4.',
     url: 'https://www.antler.co/academy',
@@ -5644,27 +5644,27 @@ export const SEED_OFFERS: Offer[] = [
           'Mar 30-Apr 20, 2026 Ho Chi Minh. GTM, enterprise intros, IC prep. Fewer than 3% selected.',
       },
       {
-        title: 'IC Week 4 — $400k',
+        title: 'IC Week 4 - $400k',
         description:
-          'Present to IC — majority yes = $400k invested immediately + $650k perks + Elevate follow-on.',
+          'Present to IC - majority yes = $400k invested immediately + $650k perks + Elevate follow-on.',
       },
     ],
     nameAr: 'Antler Disrupt 2026',
-    taglineAr: '400 ألف $ مقابل 10% + 650 ألف مزايا — 4 أسابيع',
+    taglineAr: '400 ألف $ مقابل 10% + 650 ألف مزايا - 4 أسابيع',
     descriptionAr: 'Antler Disrupt 4 أسابيع في هو تشي منه 30 مارس - 20 أبريل 2026: 400 ألف $ = 250 ألف مقابل 10% + 150 ألف MFN.',
     stepsAr: [
       {
         title: 'قدّم في Antler Disrupt',
-        description: 'اذهب إلى antler.co/academy وقدّم — يحتاج منتجاً وزخماً.',
+        description: 'اذهب إلى antler.co/academy وقدّم - يحتاج منتجاً وزخماً.',
         url: 'https://www.antler.co/academy',
       },
       {
         title: 'شارك 4 أسابيع',
-        description: 'هو تشي منه — GTM وIntro لمؤسسات.',
+        description: 'هو تشي منه - GTM وIntro لمؤسسات.',
       },
       {
-        title: 'لجنة الاستثمار — 400 ألف $',
-        description: 'عرض أمام اللجنة — أغلبية نعم = استثمار فوري.',
+        title: 'لجنة الاستثمار - 400 ألف $',
+        description: 'عرض أمام اللجنة - أغلبية نعم = استثمار فوري.',
       },
     ],
     upvotes: 16,
@@ -5678,7 +5678,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o94',
     slug: 'antler-residency-uk-india-singapore',
     name: 'Antler Residency (UK / India / Singapore)',
-    tagline: 'UK £210k net, India ₹4Cr, SG up to $400k — inception stage',
+    tagline: 'UK £210k net, India ₹4Cr, SG up to $400k - inception stage',
     description:
       'Antler Residency 6-8 weeks inception: UK London £210k net (£125k 8.5% + £85k note, £40k fee) + up to £330k follow-on, India 3 weeks → ₹4Cr (~$480k) + $1M perks (deadline Feb 19, 2026), Singapore up to $400k ($150k first). Pre-team/pre-product accepted, <1% in UK. 80% raise within 9mo.',
     url: 'https://www.antler.co/residency/uk',
@@ -5694,9 +5694,9 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.antler.co/residency/uk',
       },
       {
-        title: 'Residency 6-8 weeks — find co-founder',
+        title: 'Residency 6-8 weeks - find co-founder',
         description:
-          'Residency builds team/idea pre-incorporation — EF/Antler are co-founder products, not fundraising bets.',
+          'Residency builds team/idea pre-incorporation - EF/Antler are co-founder products, not fundraising bets.',
       },
       {
         title: 'IC and raise with Elevate',
@@ -5705,16 +5705,16 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'إقامة Antler (UK / الهند / سنغافورة)',
-    taglineAr: 'UK 210 ألف £، الهند 4 كرور، سنغافورة 400 ألف $ — مرحلة التأسيس',
+    taglineAr: 'UK 210 ألف £، الهند 4 كرور، سنغافورة 400 ألف $ - مرحلة التأسيس',
     descriptionAr: 'إقامة Antler 6-8 أسابيع: UK 210 ألف £ صافي، الهند 3 أسابيع → 4 كرور، سنغافورة حتى 400 ألف $. قبول قبل الفريق/المنتج.',
     stepsAr: [
       {
         title: 'اختر الإقامة وقدّم',
-        description: 'UK: antler.co/residency/uk — 8 أسابيع لندن.',
+        description: 'UK: antler.co/residency/uk - 8 أسابيع لندن.',
         url: 'https://www.antler.co/residency/uk',
       },
       {
-        title: 'الإقامة — ابحث عن شريك',
+        title: 'الإقامة - ابحث عن شريك',
         description: 'بناء الفريق والفكرة قبل التأسيس.',
       },
       {
@@ -5733,7 +5733,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o95',
     slug: '500-global-flagship',
     name: '500 Global Flagship',
-    tagline: '$150k for 6% — SF flagship, diligence-based',
+    tagline: '$150k for 6% - SF flagship, diligence-based',
     description:
       '500 Global Flagship SF: $150k for 6% (subject to diligence). 500 Global has 2600+ companies, not fundraising compression like YC but strong network. Apply via 500.co.',
     url: 'https://flagship.aplica.500.co/',
@@ -5751,7 +5751,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Diligence and batch',
         description:
-          '500 reviews traction/team — terms subject to diligence.',
+          '500 reviews traction/team - terms subject to diligence.',
       },
       {
         title: 'Join SF flagship',
@@ -5760,8 +5760,8 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: '500 Global Flagship',
-    taglineAr: '150 ألف $ مقابل 6% — رائد سان فرانسيسكو',
-    descriptionAr: '500 Global Flagship SF: 150 ألف $ مقابل 6% — شبكة 2600+ شركة.',
+    taglineAr: '150 ألف $ مقابل 6% - رائد سان فرانسيسكو',
+    descriptionAr: '500 Global Flagship SF: 150 ألف $ مقابل 6% - شبكة 2600+ شركة.',
     stepsAr: [
       {
         title: 'قدّم في 500 Flagship',
@@ -5788,7 +5788,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o96',
     slug: 'a16z-speedrun',
     name: 'a16z Speedrun',
-    tagline: '$500k-$1M for 10% — gaming/AI speedrun + $500k follow-on',
+    tagline: '$500k-$1M for 10% - gaming/AI speedrun + $500k follow-on',
     description:
       'a16z Speedrun: $500k for 10% (up to $1M total) + $500k follow-on within 18 months if you raise next round. For gaming/AI startups, 12 weeks LA/SF, Demo Day with a16z network.',
     url: 'https://a16z.com/speedrun/',
@@ -5815,7 +5815,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'a16z Speedrun',
-    taglineAr: '500 ألف - مليون $ مقابل 10% — ألعاب و AI',
+    taglineAr: '500 ألف - مليون $ مقابل 10% - ألعاب و AI',
     descriptionAr: 'a16z Speedrun: 500 ألف $ مقابل 10% حتى مليون + 500 ألف متابعة خلال 18 شهراً.',
     stepsAr: [
       {
@@ -5843,7 +5843,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o97',
     slug: 'techstars-founder-catalyst',
     name: 'Techstars Founder Catalyst',
-    tagline: '10-week pre-accelerator, no equity — idea stage',
+    tagline: '10-week pre-accelerator, no equity - idea stage',
     description:
       'Techstars Founder Catalyst 10-week pre-accelerator, virtual, part-time: training, mentors, network for pre-funding idea stage (<$400k raised). No equity. Current: Global Fall 2026, Alabama, EIT Urban Mobility. Apply at techstars.com/founder-catalyst.',
     url: 'https://www.techstars.com/founder-catalyst',
@@ -5866,12 +5866,12 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: '10 weeks virtual',
         description:
-          'Part-time virtual — sharpen idea, customer discovery, next level prep.',
+          'Part-time virtual - sharpen idea, customer discovery, next level prep.',
       },
     ],
     nameAr: 'Techstars Founder Catalyst',
-    taglineAr: '10 أسابيع قبل المسرّعة — بدون أسهم — مرحلة الفكرة',
-    descriptionAr: 'Techstars Founder Catalyst 10 أسابيع قبل المسرّعة افتراضياً: تدريب ومرشدون لمن هم <400 ألف $ — بدون أسهم.',
+    taglineAr: '10 أسابيع قبل المسرّعة - بدون أسهم - مرحلة الفكرة',
+    descriptionAr: 'Techstars Founder Catalyst 10 أسابيع قبل المسرّعة افتراضياً: تدريب ومرشدون لمن هم <400 ألف $ - بدون أسهم.',
     stepsAr: [
       {
         title: 'اختر برنامج Catalyst',
@@ -5880,11 +5880,11 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'قدّم (<400 ألف $)',
-        description: 'قدّم بفكرة وفريق — بدون أسهم.',
+        description: 'قدّم بفكرة وفريق - بدون أسهم.',
       },
       {
         title: '10 أسابيع افتراضياً',
-        description: 'دوام جزئي — صقل الفكرة.',
+        description: 'دوام جزئي - صقل الفكرة.',
       },
     ],
     upvotes: 9,
@@ -5898,7 +5898,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o98',
     slug: 'entrepreneur-first',
     name: 'Entrepreneur First (EF)',
-    tagline: '$150k for 8-10% — co-founder matching pre-team',
+    tagline: '$150k for 8-10% - co-founder matching pre-team',
     description:
       'Entrepreneur First London/Paris/Berlin: $150k for 8-10% (8% + optional $125k MFN). Pre-team/pre-idea, co-founder matching is the product, not fundraising. Best for solo technical talent without team. If you already have co-founder + traction, skip EF.',
     url: 'https://www.joinef.com/',
@@ -5916,7 +5916,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Cohort co-founder matching',
         description:
-          'EF forms teams in cohort — its actual product.',
+          'EF forms teams in cohort - its actual product.',
       },
       {
         title: 'Get $150k and build',
@@ -5925,12 +5925,12 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Entrepreneur First',
-    taglineAr: '150 ألف $ مقابل 8-10% — مطابقة شريك مؤسس',
-    descriptionAr: 'Entrepreneur First لندن/باريس/برلين: 150 ألف $ مقابل 8-10% — مطابقة شريك قبل الفريق.',
+    taglineAr: '150 ألف $ مقابل 8-10% - مطابقة شريك مؤسس',
+    descriptionAr: 'Entrepreneur First لندن/باريس/برلين: 150 ألف $ مقابل 8-10% - مطابقة شريك قبل الفريق.',
     stepsAr: [
       {
         title: 'قدّم إلى EF',
-        description: 'اذهب إلى joinef.com وقدّم — فرد بدون فريق.',
+        description: 'اذهب إلى joinef.com وقدّم - فرد بدون فريق.',
         url: 'https://www.joinef.com/',
       },
       {
@@ -5954,7 +5954,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o99',
     slug: 'supernova-gitex-africa-2026',
     name: 'SUPERNOVA Challenge @ GITEX Africa 2026',
-    tagline: 'Largest Africa startup competition — 100+ countries → Silicon Valley',
+    tagline: 'Largest Africa startup competition - 100+ countries → Silicon Valley',
     description:
       'SUPERNOVA is the flagship startup competition at GITEX Africa Marrakech (largest Africa tech event, 100+ countries). Moroccan Woliz won 2026 FinTech & Blockchain prize. Past winners raised significant funding and gained international investor attention.',
     url: 'https://gitexafrica.com/',
@@ -5981,7 +5981,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'تحدي SUPERNOVA في جيتكس أفريقيا 2026',
-    taglineAr: 'أكبر مسابقة شركات ناشئة في أفريقيا — 100+ دولة → وادي السيليكون',
+    taglineAr: 'أكبر مسابقة شركات ناشئة في أفريقيا - 100+ دولة → وادي السيليكون',
     descriptionAr: 'SUPERNOVA هي المسابقة الرئيسية في جيتكس أفريقيا مراكش (أكبر حدث تقني أفريقي). فازت Woliz المغربية بجائزة FinTech 2026.',
     stepsAr: [
       {
@@ -6046,7 +6046,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'النهائي الوطني بالدار البيضاء',
-        description: 'اعرض في تكنوبارك — 10 نهائيين.',
+        description: 'اعرض في تكنوبارك - 10 نهائيين.',
       },
       {
         title: 'النهائي في وادي السيليكون',
@@ -6064,7 +6064,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o101',
     slug: 'nba-africa-triple-double-alx',
     name: 'NBA Africa Triple Double Accelerator x ALX',
-    tagline: '$25k + OpenAI + CMU — Reborn Morocco won 2025',
+    tagline: '$25k + OpenAI + CMU - Reborn Morocco won 2025',
     description:
       'NBA Africa + ALX Ventures + ServiceNow + OpenAI + CMU Africa: 700+ apps → 10 finalists → 3-month acceleration. 1st $25k + CMU incubation + $10k OpenAI credits + OpenAI immersion, 5th $2.5k. Reborn (Morocco, SportTech) 1st, Fitclan, Athlon (Egypt) among 2025 winners.',
     url: 'https://www.alxafrica.com/programmes',
@@ -6082,16 +6082,16 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: '3 months acceleration',
         description:
-          '10 finalists from Egypt, Kenya, Morocco, Nigeria, SA — mentorship + OpenAI + CMU.',
+          '10 finalists from Egypt, Kenya, Morocco, Nigeria, SA - mentorship + OpenAI + CMU.',
       },
       {
         title: 'Final and prizes',
         description:
-          'Demo Day — 1st $25k + CMU incubation + OpenAI immersion.',
+          'Demo Day - 1st $25k + CMU incubation + OpenAI immersion.',
       },
     ],
     nameAr: 'NBA Africa Triple Double مع ALX',
-    taglineAr: '25 ألف $ + OpenAI + CMU — فاز Reborn المغرب 2025',
+    taglineAr: '25 ألف $ + OpenAI + CMU - فاز Reborn المغرب 2025',
     descriptionAr: 'NBA Africa + ALX + OpenAI + CMU: 700+ طلب → 10 نهائيين → 3 أشهر تسريع. المركز الأول 25 ألف $ + حضانة CMU.',
     stepsAr: [
       {
@@ -6101,7 +6101,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: '3 أشهر تسريع',
-        description: '10 نهائيين من 5 دول — إرشاد + OpenAI.',
+        description: '10 نهائيين من 5 دول - إرشاد + OpenAI.',
       },
       {
         title: 'النهائي والجوائز',
@@ -6119,9 +6119,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o102',
     slug: 'baobab-network-accelerator',
     name: 'Baobab Network Accelerator',
-    tagline: '$100k for 12.5% + $50k Morocco examples — 12 weeks remote',
+    tagline: '$100k for 12.5% + $50k Morocco examples - 12 weeks remote',
     description:
-      'Baobab Network Nairobi — Africa leading accelerator: $100k lump sum for 12.5% equity + 12-week remote (2 weeks intensive + 3 months hands-on) + Demo Day. Portfolio: Colis.ma ($50k Morocco logistics 2023), VOVE ID (Morocco regtech 2025), Afrigility, Eazy Chain. No need to leave Africa, US incorporation optional.',
+      'Baobab Network Nairobi - Africa leading accelerator: $100k lump sum for 12.5% equity + 12-week remote (2 weeks intensive + 3 months hands-on) + Demo Day. Portfolio: Colis.ma ($50k Morocco logistics 2023), VOVE ID (Morocco regtech 2025), Afrigility, Eazy Chain. No need to leave Africa, US incorporation optional.',
     url: 'https://thebaobabnetwork.com/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=thebaobabnetwork.com&sz=64',
     category: 'competition',
@@ -6146,12 +6146,12 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'مسرّعة Baobab Network',
-    taglineAr: '100 ألف $ مقابل 12.5% — 12 أسبوعاً عن بعد',
+    taglineAr: '100 ألف $ مقابل 12.5% - 12 أسبوعاً عن بعد',
     descriptionAr: 'Baobab نيروبي: 100 ألف $ مقابل 12.5% + 12 أسبوعاً عن بعد + Demo Day. أمثلة مغربية Colis.ma و VOVE ID.',
     stepsAr: [
       {
         title: 'قدّم في Baobab',
-        description: 'اذهب إلى thebaobabnetwork.com وقدّم — يجب أن يكون لك وجود في أفريقيا.',
+        description: 'اذهب إلى thebaobabnetwork.com وقدّم - يجب أن يكون لك وجود في أفريقيا.',
         url: 'https://thebaobabnetwork.com/',
       },
       {
@@ -6174,7 +6174,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o103',
     slug: 'morocco-accelerator-cohort3',
     name: 'Morocco Accelerator Cohort 3',
-    tagline: 'Equity-free 3 months + Tamwilcom non-dilutive — Technopark + Plug and Play',
+    tagline: 'Equity-free 3 months + Tamwilcom non-dilutive - Technopark + Plug and Play',
     description:
       'Morocco Accelerator 3-month (Oct 2026) funded by Ministry Digital Transition, operated by Technopark + Plug and Play (Digital Morocco 2030): equity-free, fee-free mentorship, workshops, office at Technopark, corporate/investor intros, global ecosystem, eligible for Startup Venture Building non-dilutive financing via Tamwilcom. Prev. 80+ founders, 200+ mentorships, $5M+ raised, 19 grad 20M MAD, 2 to Silicon Valley Winter Summit. Moroccan founder/diaspora, traction + revenue, scalable tech. Closes Sep 15, 2026.',
     url: 'https://technopark.ma/',
@@ -6229,7 +6229,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o105',
     slug: 'cyberstrike-2026-ctf',
     name: 'CyberStrike 2026 CTF @ GITEX Africa',
-    tagline: '2nd national — ANCA CERT + DGSSI + Cisco XDR',
+    tagline: '2nd national - ANCA CERT + DGSSI + Cisco XDR',
     description:
       'CyberStrike 2026 CTF & Hackathon at GITEX Africa Marrakech (ANCA CERT, DGSSI, Cisco XDR): national/regional African talent, rapid incident response, threat hunting, forensics, XDR. Ryane El Ouarrat 2nd national.',
     url: 'https://www.dgssi.gov.ma/',
@@ -6256,8 +6256,8 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'CyberStrike 2026 CTF في جيتكس',
-    taglineAr: 'المركز الثاني وطنياً — ANCA + DGSSI + Cisco',
-    descriptionAr: 'CyberStrike 2026 CTF في جيتكس مراكش: ANCA و DGSSI و Cisco XDR — استجابة سريعة وتتبع تهديدات.',
+    taglineAr: 'المركز الثاني وطنياً - ANCA + DGSSI + Cisco',
+    descriptionAr: 'CyberStrike 2026 CTF في جيتكس مراكش: ANCA و DGSSI و Cisco XDR - استجابة سريعة وتتبع تهديدات.',
     stepsAr: [
       {
         title: 'تأهل عبر ANCA',
@@ -6284,9 +6284,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o107',
     slug: 'boost-up-lab-casablanca',
     name: 'Boost Up Lab Casablanca',
-    tagline: '6 months pre-incubation — idea to Demo Day — Technopark + Ministry',
+    tagline: '6 months pre-incubation - idea to Demo Day - Technopark + Ministry',
     description:
-      'Boost Up Lab Casablanca (Technopark, Ministry Digital Transition — Digital Morocco 2030): 6 months pre-incubation to turn idea into concrete project, business model, solution, with experts/mentors, ending Demo Day. Part of national Boost Up Lab. Deadline Aug 23, 2026 for Casablanca cohort.',
+      'Boost Up Lab Casablanca (Technopark, Ministry Digital Transition - Digital Morocco 2030): 6 months pre-incubation to turn idea into concrete project, business model, solution, with experts/mentors, ending Demo Day. Part of national Boost Up Lab. Deadline Aug 23, 2026 for Casablanca cohort.',
     url: 'https://technopark.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
     category: 'competition',
@@ -6311,7 +6311,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Boost Up Lab الدار البيضاء',
-    taglineAr: '6 أشهر ما قبل الحضانة — من الفكرة إلى Demo Day',
+    taglineAr: '6 أشهر ما قبل الحضانة - من الفكرة إلى Demo Day',
     descriptionAr: 'Boost Up Lab الدار البيضاء 6 أشهر ما قبل الحضانة: حول فكرتك إلى مشروع مع مرشدين و Demo Day. آخر موعد 23 أغسطس 2026.',
     stepsAr: [
       {
@@ -6339,7 +6339,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o108',
     slug: 'lafactory-casablanca',
     name: 'LaFactory by Screendy (Casablanca)',
-    tagline: '3-month accelerator, equity-free, OCP backed — Intelaka fast-track',
+    tagline: '3-month accelerator, equity-free, OCP backed - Intelaka fast-track',
     description:
       'LaFactory Casablanca by Screendy (OCP Group): 3-month accelerator, equity-free mentoring, coworking, Intelaka fast-track application support. For scalable tech startups.',
     url: 'https://www.lafactory.com/',
@@ -6366,7 +6366,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'LaFactory الدار البيضاء',
-    taglineAr: '3 أشهر تسريع بدون أسهم — بدعم OCP',
+    taglineAr: '3 أشهر تسريع بدون أسهم - بدعم OCP',
     descriptionAr: 'LaFactory بالدار البيضاء: 3 أشهر تسريع بدون أسهم، إرشاد و Intelaka.',
     stepsAr: [
       {
@@ -6394,7 +6394,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o109',
     slug: 'alx-ventures-founder-academy',
     name: 'ALX Ventures Founder Academy',
-    tagline: '3-month Founder Academy — 300 grads, 28 incubated → Demo Day grants',
+    tagline: '3-month Founder Academy - 300 grads, 28 incubated → Demo Day grants',
     description:
       'ALX Ventures Founder Academy (Casablanca, Accra, Nairobi): 3-month online + hub access for 18-35y, startup foundations, product, pitching, workshops, office hours, ALX Hubs. 1200 learners, 300 grads, 28 incubated to Demo Day grants. Priority Technopark incubation via ALX-Technopark partnership.',
     url: 'https://www.alxafrica.com/programme/founder-academy/',
@@ -6412,7 +6412,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: '3 months online + hubs',
         description:
-          'Startup foundations, product, customers, growth — workshops + office hours + Casablanca Hub.',
+          'Startup foundations, product, customers, growth - workshops + office hours + Casablanca Hub.',
       },
       {
         title: 'Demo Day grants + Technopark',
@@ -6421,7 +6421,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'أكاديمية ALX للمؤسسين',
-    taglineAr: '3 أشهر — 300 خريج، 28 محتضن → منح Demo Day',
+    taglineAr: '3 أشهر - 300 خريج، 28 محتضن → منح Demo Day',
     descriptionAr: 'أكاديمية ALX للمؤسسين 3 أشهر أونلاين + Hubs للشباب 18-35: تأسيس وم product و pitching.',
     stepsAr: [
       {
@@ -6449,7 +6449,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o110',
     slug: 'technopark-morocco',
     name: 'Technopark Maroc (MITC)',
-    tagline: 'Subsidized office + 1800 startups — Casa/Rabat/Tanger + AWS/Azure/Google',
+    tagline: 'Subsidized office + 1800 startups - Casa/Rabat/Tanger + AWS/Azure/Google',
     description:
       'Technopark Maroc (MITC) since 2001 Casa/Rabat/Tanger: subsidized office/coworking for tech/Green/creative, 1800+ startups, 800+ projects, 250+ companies now. AWS/Azure/Google cloud credits, investor/export support, AUSIM Village stand at Assises Tanger Oct 7-9 (2m² + hosting). Apply at technopark.ma.',
     url: 'https://technopark.ma/',
@@ -6476,7 +6476,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'تكنوبارك المغرب',
-    taglineAr: 'مكتب مدعّم + 1800 شركة ناشئة — الدار البيضاء/الرباط/طنجة',
+    taglineAr: 'مكتب مدعّم + 1800 شركة ناشئة - الدار البيضاء/الرباط/طنجة',
     descriptionAr: 'تكنوبارك منذ 2001: مكتب مدعّم لـ 1800+ شركة، رصيد سحابي AWS/Azure/Google.',
     stepsAr: [
       {
@@ -6506,7 +6506,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'Réseau Entreprendre Maroc',
     tagline: 'Free 1-on-1 mentoring by 250 business leaders + honor loan (prêt d\'honneur)',
     description:
-      'Réseau Entreprendre Maroc pairs you with an experienced volunteer business leader for free, personalized, long-term mentoring to structure and grow your company. Financing comes as an interest-free honor loan (prêt d\'honneur) — 44M+ MAD granted to date. Track record since 2005: 450 entrepreneurs accompanied, 3,000+ jobs created or saved. Open to Moroccan founders at creation or growth stage; apply online via the deposit-a-request form.',
+      'Réseau Entreprendre Maroc pairs you with an experienced volunteer business leader for free, personalized, long-term mentoring to structure and grow your company. Financing comes as an interest-free honor loan (prêt d\'honneur) - 44M+ MAD granted to date. Track record since 2005: 450 entrepreneurs accompanied, 3,000+ jobs created or saved. Open to Moroccan founders at creation or growth stage; apply online via the deposit-a-request form.',
     url: 'https://www.reseau-entreprendre.org/maroc/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=reseau-entreprendre.org&sz=64',
     category: 'competition',
@@ -6516,7 +6516,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Submit your application',
         description:
-          'Fill the online request form — project presentation, stage and needs. No cost to apply.',
+          'Fill the online request form - project presentation, stage and needs. No cost to apply.',
         url: 'https://www.reseau-entreprendre.org/maroc/deposer-une-demande/',
       },
       {
@@ -6536,7 +6536,7 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم طلبك',
-        description: 'املأ استمارة الطلب عبر الإنترنت — التقديم مجاني.',
+        description: 'املأ استمارة الطلب عبر الإنترنت - التقديم مجاني.',
         url: 'https://www.reseau-entreprendre.org/maroc/deposer-une-demande/',
       },
       {
@@ -6561,7 +6561,7 @@ export const SEED_OFFERS: Offer[] = [
     name: '212 Founders (CDG Invest)',
     tagline: '$50k-$200k pre-seed + 18 months incubation + BF loan',
     description:
-      '212 Founders by CDG Invest — Morocco main VC pre-seed: $50k-$200k for Moroccan seed startups + 18 months incubation, office, mentoring, bridge loan. The reference for Moroccan seed funding.',
+      '212 Founders by CDG Invest - Morocco main VC pre-seed: $50k-$200k for Moroccan seed startups + 18 months incubation, office, mentoring, bridge loan. The reference for Moroccan seed funding.',
     url: 'https://www.cdginvest.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=212founders.ma&sz=64',
     category: 'competition',
@@ -6614,7 +6614,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o113',
     slug: 'um6p-ventures',
     name: 'UM6P Ventures',
-    tagline: 'Deeptech lab access + AgriTech/CleanTech investors — Ben Guerir',
+    tagline: 'Deeptech lab access + AgriTech/CleanTech investors - Ben Guerir',
     description:
       'UM6P Ventures (UM6P, Ben Guerir): deeptech lab access, prototyping, AgriTech/CleanTech investors, affiliated with Mohammed VI Polytechnic. For lab-heavy startups.',
     url: 'https://www.um6p.ma/',
@@ -6669,7 +6669,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o114',
     slug: 'impact-lab-marrakech',
     name: 'Impact Lab (Marrakech)',
-    tagline: 'Impact investors + development funds — social enterprise',
+    tagline: 'Impact investors + development funds - social enterprise',
     description:
       'Impact Lab Marrakech: connects social enterprises to impact investors and international development funds. For social/environmental startups.',
     url: 'https://www.impactlab.africa/',
@@ -6696,7 +6696,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Impact Lab مراكش',
-    taglineAr: 'مستثمرو أثر + صناديق تنمية — ريادة اجتماعية',
+    taglineAr: 'مستثمرو أثر + صناديق تنمية - ريادة اجتماعية',
     descriptionAr: 'Impact Lab مراكش: يربط الشركات الاجتماعية بمستثمري الأثر وصناديق التنمية الدولية.',
     stepsAr: [
       {
@@ -6724,7 +6724,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o115',
     slug: 'intelaka-forsa-morocco',
     name: 'Intelaka & Forsa (Morocco Government)',
-    tagline: 'Intelaka up to 1.2M MAD loan + Forsa 100k MAD grant — any idea',
+    tagline: 'Intelaka up to 1.2M MAD loan + Forsa 100k MAD grant - any idea',
     description:
       'Government Intelaka (1.2M MAD loan with guarantee via banks) + Forsa (100k MAD grant via forsa.ma) for any Moroccan with an idea. No tech filter, open to all sectors. Apply via bank list (Intelaka) and forsa.ma portal.',
     url: 'https://www.forsa.ma/',
@@ -6751,8 +6751,8 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'انطلاقة وفُرصة (حكومة المغرب)',
-    taglineAr: 'انطلاقة حتى 1.2M درهم قرض + فرصة 100 ألف درهم منحة — لأي فكرة',
-    descriptionAr: 'انطلاقة (1.2M درهم قرض بضمان) + فرصة (100 ألف درهم منحة عبر forsa.ma) لأي مغربي لديه فكرة — بدون فلتر تقني.',
+    taglineAr: 'انطلاقة حتى 1.2M درهم قرض + فرصة 100 ألف درهم منحة - لأي فكرة',
+    descriptionAr: 'انطلاقة (1.2M درهم قرض بضمان) + فرصة (100 ألف درهم منحة عبر forsa.ma) لأي مغربي لديه فكرة - بدون فلتر تقني.',
     stepsAr: [
       {
         title: 'اختر انطلاقة أو فرصة',
@@ -6778,8 +6778,8 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o116',
     slug: 'academia-raqmya',
-    name: 'Academia Raqmya — Morocco Digital Academy',
-    tagline: 'Free national digital learning platform — ADD & Ministry of Digital Transition',
+    name: 'Academia Raqmya - Morocco Digital Academy',
+    tagline: 'Free national digital learning platform - ADD & Ministry of Digital Transition',
     description:
       'Academia Raqmya (الأكاديمية الرقمية) is Morocco\'s national inclusive e-learning platform, built by the Digital Development Agency (ADD) under the Ministry of Digital Transition. 100% free courses in AI, cybersecurity, data, development, digital marketing and administration for the general public, civil servants, and companies (SMEs & startups), with certificates of completion. Available in Arabic and French, with iOS/Android apps.',
     url: 'https://academiaraqmya.gov.ma/',
@@ -6790,7 +6790,7 @@ export const SEED_OFFERS: Offer[] = [
     steps: [
       {
         title: 'Create your free account',
-        description: 'Sign up at academiaraqmya.gov.ma with your email — open to everyone (public, administrations, companies).',
+        description: 'Sign up at academiaraqmya.gov.ma with your email - open to everyone (public, administrations, companies).',
         url: 'https://academiaraqmya.gov.ma/',
       },
       {
@@ -6803,12 +6803,12 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'الأكاديمية الرقمية',
-    taglineAr: 'منصة التعلم الرقمي الوطنية المجانية — الوكالة التنمية الرقمية ووزارة الانتقال الرقمي',
+    taglineAr: 'منصة التعلم الرقمي الوطنية المجانية - الوكالة التنمية الرقمية ووزارة الانتقال الرقمي',
     descriptionAr: 'الأكاديمية الرقمية هي منصة التعلم الإلكتروني الوطنية الشاملة، من وكالة التنمية الرقمية بوزارة الانتقال الرقمي. دورات مجانية 100% في الذكاء الاصطناعي والأمن السيبراني والبيانات والتطوير والتسويق الرقمي للعموم والإدارات والمقاولات، مع شهادات إتمام. متوفرة بالعربية والفرنسية مع تطبيقات للهاتف.',
     stepsAr: [
       {
         title: 'أنشئ حسابك المجاني',
-        description: 'سجّل في academiaraqmya.gov.ma ببريدك الإلكتروني — مفتوحة للجميع.',
+        description: 'سجّل في academiaraqmya.gov.ma ببريدك الإلكتروني - مفتوحة للجميع.',
         url: 'https://academiaraqmya.gov.ma/',
       },
       {
@@ -6833,7 +6833,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'Maroc Entrepreneurs Network',
     tagline: 'Community network connecting Moroccan founders, mentors & investors',
     description:
-      'Maroc Entrepreneurs is a non-profit network that connects Moroccan entrepreneurs and project holders with mentors, experts, investors, and each other. Members get networking events, pitch practice, experience sharing, and access to a community of founders across Morocco and the diaspora — useful for finding co-founders, first customers, and funding intros.',
+      'Maroc Entrepreneurs is a non-profit network that connects Moroccan entrepreneurs and project holders with mentors, experts, investors, and each other. Members get networking events, pitch practice, experience sharing, and access to a community of founders across Morocco and the diaspora - useful for finding co-founders, first customers, and funding intros.',
     url: 'https://marocentrepreneurs.com/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=marocentrepreneurs.com&sz=64',
     category: 'competition',
@@ -6882,10 +6882,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o118',
     slug: 'f6s-startup-programs',
-    name: 'F6S — Startup Programs & Grants Hub',
+    name: 'F6S - Startup Programs & Grants Hub',
     tagline: 'One profile, thousands of startup programs, grants, credits & accelerators worldwide',
     description:
-      'F6S is the platform where founders apply to thousands of startup programs: accelerators, grants, competitions, free credits (AWS, Google, Microsoft…) and investor matching — including many programs open to Moroccan and MENA founders. Create one free founder profile and apply to multiple programs without re-filling your deck each time. Also useful to discover which international programs are currently accepting applications.',
+      'F6S is the platform where founders apply to thousands of startup programs: accelerators, grants, competitions, free credits (AWS, Google, Microsoft…) and investor matching - including many programs open to Moroccan and MENA founders. Create one free founder profile and apply to multiple programs without re-filling your deck each time. Also useful to discover which international programs are currently accepting applications.',
     url: 'https://f6s.com',
     logoUrl: 'https://www.google.com/s2/favicons?domain=f6s.com&sz=64',
     category: 'competition',
@@ -6895,7 +6895,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Create your founder profile',
         description:
-          'Sign up free on F6S and complete your startup profile once — pitch, team, stage.',
+          'Sign up free on F6S and complete your startup profile once - pitch, team, stage.',
         url: 'https://f6s.com',
       },
       {
@@ -6906,16 +6906,16 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply with one click',
         description:
-          'Apply to programs using your saved profile — no repeated forms; track application status in your dashboard.',
+          'Apply to programs using your saved profile - no repeated forms; track application status in your dashboard.',
       },
     ],
-    nameAr: 'F6S — منصة برامج ومنح الشركات الناشئة',
+    nameAr: 'F6S - منصة برامج ومنح الشركات الناشئة',
     taglineAr: 'ملف واحد لآلاف البرامج والمنح والحاضنات وأرصدة مجانية عالمياً',
-    descriptionAr: 'F6S هي المنصة التي يتقدم منها المؤسسون إلى آلاف البرامج: حاضنات ومنح ومسابقات وأرصدة مجانية (AWS وGoogle وMicrosoft) ومطابقة مع المستثمرين — بما فيها برامج مفتوحة للمؤسسين المغاربة والمِنطقة. أنشئ ملفاً مجانياً وقدّم لعدة برامج دون إعادة ملء ملفك في كل مرة.',
+    descriptionAr: 'F6S هي المنصة التي يتقدم منها المؤسسون إلى آلاف البرامج: حاضنات ومنح ومسابقات وأرصدة مجانية (AWS وGoogle وMicrosoft) ومطابقة مع المستثمرين - بما فيها برامج مفتوحة للمؤسسين المغاربة والمِنطقة. أنشئ ملفاً مجانياً وقدّم لعدة برامج دون إعادة ملء ملفك في كل مرة.',
     stepsAr: [
       {
         title: 'أنشئ ملف المؤسس',
-        description: 'سجّل مجاناً وأكمل ملف شركتك مرة واحدة — العرض والفريق والمرحلة.',
+        description: 'سجّل مجاناً وأكمل ملف شركتك مرة واحدة - العرض والفريق والمرحلة.',
         url: 'https://f6s.com',
       },
       {
@@ -6940,7 +6940,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'TechnoVentures by Technopark Morocco',
     tagline: '7-month venture-building program for Moroccan tech startups at POC/MVP stage',
     description:
-      'TechnoVentures is deployed by Technopark Morocco under its Startup Venture Building offer. The 7-month program targets innovative Moroccan tech startups that already have a POC or MVP and want to accelerate productization, market entry, and scale-up. Founders get structured venture-building support — workshops, mentoring, and access to the Technopark ecosystem — to turn an early prototype into a fundable, growing company.',
+      'TechnoVentures is deployed by Technopark Morocco under its Startup Venture Building offer. The 7-month program targets innovative Moroccan tech startups that already have a POC or MVP and want to accelerate productization, market entry, and scale-up. Founders get structured venture-building support - workshops, mentoring, and access to the Technopark ecosystem - to turn an early prototype into a fundable, growing company.',
     url: 'https://www.start-up.ma/programmes-pour-startups/technoventures/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=start-up.ma&sz=64',
     category: 'competition',
@@ -6950,7 +6950,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Check eligibility',
         description:
-          'Moroccan tech startup with a working POC or MVP and a scalable idea — pre-product ideas are not the target.',
+          'Moroccan tech startup with a working POC or MVP and a scalable idea - pre-product ideas are not the target.',
       },
       {
         title: 'Apply to the cohort',
@@ -6993,7 +6993,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o120',
     slug: 'sport-arena-challenge',
     name: 'Sport Arena Challenge',
-    tagline: '2-day sportech hackathon — ideation, workshops & mentorship for young builders',
+    tagline: '2-day sportech hackathon - ideation, workshops & mentorship for young builders',
     description:
       'Sport Arena Challenge is a two-day hackathon dedicated to sport-tech, designed to spark innovation and entrepreneurship among young people. Teams move from ideation through hands-on workshops and mentorship to concrete working solutions, pitching at the end of the weekend. Open to students and young professionals interested in the intersection of sports and technology.',
     url: 'https://www.start-up.ma/programmes-pour-startups/sport-arena-challenge/',
@@ -7005,7 +7005,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Register your team',
         description:
-          'Sign up via the program page when registrations open — teams of builders, designers and sport enthusiasts welcome.',
+          'Sign up via the program page when registrations open - teams of builders, designers and sport enthusiasts welcome.',
         url: 'https://www.start-up.ma/programmes-pour-startups/sport-arena-challenge/',
       },
       {
@@ -7020,12 +7020,12 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'سبورت أرينا تشالنج',
-    taglineAr: 'هاكاثون رياضي تقني ليومين — تأليف وورشات وإرشاد للشباب',
+    taglineAr: 'هاكاثون رياضي تقني ليومين - تأليف وورشات وإرشاد للشباب',
     descriptionAr: 'سبورت أرينا تشالنج هاكاثون ليومين مخصص للرياضة والتقنية، يهدف إلى تحفيز الابتكار وريادة الأعمال لدى الشباب. تنتقل الفرق من التأليف عبر ورشات عملية وإرشاد إلى حلول ملموسة وعرضها أمام لجنة التحكيم.',
     stepsAr: [
       {
         title: 'سجّل فريقك',
-        description: 'التسجيل عبر صفحة البرنامج عند فتح الباب — فرق من مطورين ومصممين وعشاق الرياضة.',
+        description: 'التسجيل عبر صفحة البرنامج عند فتح الباب - فرق من مطورين ومصممين وعشاق الرياضة.',
         url: 'https://www.start-up.ma/programmes-pour-startups/sport-arena-challenge/',
       },
       {
@@ -7047,10 +7047,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o121',
     slug: 'grants-for-women-founders',
-    name: 'Grants for Women Founders — Amber, WomensNet, Galaxy & more',
-    tagline: 'Monthly cash grants ($5k–$10k+) for women entrepreneurs — no equity taken',
+    name: 'Grants for Women Founders - Amber, WomensNet, Galaxy & more',
+    tagline: 'Monthly cash grants ($5k-$10k+) for women entrepreneurs - no equity taken',
     description:
-      'A bundle of recurring grant programs for women founders you can apply to from Morocco: the Amber Grant (prestigious monthly + annual grant for women-owned businesses), the WomensNet Startup Grant (monthly funding for early-stage women entrepreneurs), Galaxy Grants (fast grants for women & minority founders), the Breakthrough Grant ($5,000 for one ambitious woman entrepreneur), and the IFW Universal Funding application (apply once, get matched with funding, scholarships and mentorship opportunities year-round). Grants are non-dilutive — you keep 100% of your company.',
+      'A bundle of recurring grant programs for women founders you can apply to from Morocco: the Amber Grant (prestigious monthly + annual grant for women-owned businesses), the WomensNet Startup Grant (monthly funding for early-stage women entrepreneurs), Galaxy Grants (fast grants for women & minority founders), the Breakthrough Grant ($5,000 for one ambitious woman entrepreneur), and the IFW Universal Funding application (apply once, get matched with funding, scholarships and mentorship opportunities year-round). Grants are non-dilutive - you keep 100% of your company.',
     url: 'https://www.start-up.ma/programmes-pour-startups/amber-grant-pour-les-femmes/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=start-up.ma&sz=64',
     category: 'competition',
@@ -7060,7 +7060,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Amber Grant',
         description:
-          'Apply to the monthly Amber Grant for women-owned businesses — winners are also considered for the annual award.',
+          'Apply to the monthly Amber Grant for women-owned businesses - winners are also considered for the annual award.',
         url: 'https://www.start-up.ma/programmes-pour-startups/amber-grant-pour-les-femmes/',
       },
       {
@@ -7072,7 +7072,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Galaxy + Breakthrough grants',
         description:
-          'Quick-application grants for women and minority founders — including the $5,000 Breakthrough Grant.',
+          'Quick-application grants for women and minority founders - including the $5,000 Breakthrough Grant.',
         url: 'https://www.start-up.ma/programmes-pour-startups/galaxy-grants/',
       },
       {
@@ -7082,13 +7082,13 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://www.start-up.ma/programmes-pour-startups/ifw-universal-funding-and-grant/',
       },
     ],
-    nameAr: 'منح للمؤسِّسات — آمبر وومانزنت وجالاكسي والمزيد',
-    taglineAr: 'منح نقدية شهرية (5000 إلى 10000 دولار وأكثر) للنساء رائدات الأعمال — بدون تنازل عن الأسهم',
+    nameAr: 'منح للمؤسِّسات - آمبر وومانزنت وجالاكسي والمزيد',
+    taglineAr: 'منح نقدية شهرية (5000 إلى 10000 دولار وأكثر) للنساء رائدات الأعمال - بدون تنازل عن الأسهم',
     descriptionAr: 'حزمة برامج منح متجددة للمؤسِّسات يمكن التقديم لها من المغرب: جائزة آمبر الشهرية والسنوية المرغوبة، منحة ستارت أب جرانت من WomensNet، منح جالاكسي السريعة للنساء والأقليات، منحة الاختراق بقيمة 5000 دولار، وطلب IFW الموحد الذي يربطك تلقائياً بفرص التمويل والمنح والإرشاد طوال العام. المنح لا تقتطع أي حصة من شركتك.',
     stepsAr: [
       {
         title: 'جائزة آمبر',
-        description: 'قدّم للمنحة الشهرية للشركات التي تقودها نساء — الفائزات مرشحات للجائزة السنوية.',
+        description: 'قدّم للمنحة الشهرية للشركات التي تقودها نساء - الفائزات مرشحات للجائزة السنوية.',
         url: 'https://www.start-up.ma/programmes-pour-startups/amber-grant-pour-les-femmes/',
       },
       {
@@ -7098,7 +7098,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'منحتا جالاكسي والاختراق',
-        description: 'منح بتقديم سريع للنساء والأقليات — بينها منحة الاختراق بقيمة 5000 دولار.',
+        description: 'منح بتقديم سريع للنساء والأقليات - بينها منحة الاختراق بقيمة 5000 دولار.',
         url: 'https://www.start-up.ma/programmes-pour-startups/galaxy-grants/',
       },
       {
@@ -7118,9 +7118,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o122',
     slug: 'chinese-government-scholarship-csc',
     name: 'Chinese Government Scholarship (CSC)',
-    tagline: 'Full ride in China — tuition + dorm + monthly stipend, no IELTS required for many programs',
+    tagline: 'Full ride in China - tuition + dorm + monthly stipend, no IELTS required for many programs',
     description:
-      'The Chinese Government Scholarship (CSC) covers full tuition, on-campus housing, medical insurance and a monthly stipend (≈2,500–3,500 RMB) for bachelor\'s, master\'s and PhD studies at 280+ Chinese universities. English-taught programs are widely available and most do not require IELTS. Moroccan students apply either through the Chinese Embassy in Rabat (bilateral track) or directly to universities (Type B) via the official Campus China portal. Annual window: roughly December–April.',
+      'The Chinese Government Scholarship (CSC) covers full tuition, on-campus housing, medical insurance and a monthly stipend (≈2,500-3,500 RMB) for bachelor\'s, master\'s and PhD studies at 280+ Chinese universities. English-taught programs are widely available and most do not require IELTS. Moroccan students apply either through the Chinese Embassy in Rabat (bilateral track) or directly to universities (Type B) via the official Campus China portal. Annual window: roughly December-April.',
     url: 'https://www.campuschina.org/',
     logoUrl: '/logos/csc.svg',
     category: 'scholarship',
@@ -7145,7 +7145,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'المنحة الصينية الحكومية CSC',
-    taglineAr: 'دراسة مجانية كاملة في الصين — رسوم + سكن + منحة شهرية، بدون آيلتس في أغلب البرامج',
+    taglineAr: 'دراسة مجانية كاملة في الصين - رسوم + سكن + منحة شهرية، بدون آيلتس في أغلب البرامج',
     descriptionAr: 'منحة الحكومة الصينية تغطي الرسوم الدراسية والسكن والتأمين ومنحة شهرية لبكالوريوس وماستر ودكتوراه في أكثر من 280 جامعة صينية، مع برامج بالإنجليزية لا تتطلب غالباً آيلتس. الترشح عبر السفارة الصينية بالرباط أو مباشرة للجامعات عبر بوابة Campus China، في الفترة من ديسمبر إلى أبريل تقريباً.',
     stepsAr: [
       {
@@ -7172,7 +7172,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o123',
     slug: 'campus-france-maroc',
-    name: 'Campus France Maroc — Études en France',
+    name: 'Campus France Maroc - Études en France',
     tagline: 'The mandatory gateway to French universities + access to French bourses',
     description:
       'Every Moroccan student applying to French higher education goes through the "Études en France" platform managed by Campus France Maroc. It centralizes program choices (up to 7), application fees, the Campus France interview in Rabat, and is required for the student visa. It is also the entry point for French scholarships: BGF (Bourse du Gouvernement Français), Eiffel (nominated by schools), and regional bourses.',
@@ -7228,9 +7228,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o124',
     slug: 'erasmus-mundus-joint-masters',
     name: 'Erasmus Mundus Joint Masters',
-    tagline: 'Full EU scholarship: tuition + ~€1,400/month + travel, study in 2–3 countries',
+    tagline: 'Full EU scholarship: tuition + ~€1,400/month + travel, study in 2-3 countries',
     description:
-      'Erasmus Mundus Joint Masters are prestigious 1–2 year master\'s programs run by consortia of European universities. The EU scholarship covers full tuition, health insurance, travel/installation costs and a monthly allowance around €1,400 — you study in at least two different European countries and receive a joint degree. Fully open to Moroccan students; there is no central application — you apply directly to each consortium (usually Oct–Jan for the following autumn).',
+      'Erasmus Mundus Joint Masters are prestigious 1-2 year master\'s programs run by consortia of European universities. The EU scholarship covers full tuition, health insurance, travel/installation costs and a monthly allowance around €1,400 - you study in at least two different European countries and receive a joint degree. Fully open to Moroccan students; there is no central application - you apply directly to each consortium (usually Oct-Jan for the following autumn).',
     url: 'https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters-scholarships',
     logoUrl: 'https://www.google.com/s2/favicons?domain=erasmus-plus.ec.europa.eu&sz=64',
     category: 'scholarship',
@@ -7251,12 +7251,12 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply directly to consortia',
         description:
-          'Each consortium has its own deadline (mostly Oct–Jan); scholarship results land spring — no separate scholarship form needed.',
+          'Each consortium has its own deadline (mostly Oct-Jan); scholarship results land spring - no separate scholarship form needed.',
       },
     ],
     nameAr: 'ماستر إيراسموس موندوس المشترك',
-    taglineAr: 'منحة أوروبية كاملة: رسوم + ~1400 يورو شهرياً + السفر، دراسة في 2–3 دول',
-    descriptionAr: 'إيراسموس موندوس ماستers مرموقة تُدار من تحالفات جامعات أوروبية: المنحة تغطي الرسوم والتأمين والسفر وبدل شهري حوالي 1400 يورو، وتدرس في بلدين أوروبيين على الأقل مع شهادة مشتركة. مفتوحة للطلبة المغاربة — الترشح مباشرة لدى كل تحالف بين أكتوبر ويناير.',
+    taglineAr: 'منحة أوروبية كاملة: رسوم + ~1400 يورو شهرياً + السفر، دراسة في 2-3 دول',
+    descriptionAr: 'إيراسموس موندوس ماستers مرموقة تُدار من تحالفات جامعات أوروبية: المنحة تغطي الرسوم والتأمين والسفر وبدل شهري حوالي 1400 يورو، وتدرس في بلدين أوروبيين على الأقل مع شهادة مشتركة. مفتوحة للطلبة المغاربة - الترشح مباشرة لدى كل تحالف بين أكتوبر ويناير.',
     stepsAr: [
       {
         title: 'تصفح قائمة البرامج',
@@ -7282,10 +7282,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o125',
     slug: 'chevening-scholarship-uk',
-    name: 'Chevening Scholarships — UK Government',
-    tagline: 'Fully-funded one-year master\'s in the UK — leadership-focused, no tuition cost',
+    name: 'Chevening Scholarships - UK Government',
+    tagline: 'Fully-funded one-year master\'s in the UK - leadership-focused, no tuition cost',
     description:
-      'Chevening is the UK government\'s global scholarship: full tuition at any UK university, monthly stipend, flights and visa for a one-year master\'s. Aimed at people with leadership potential — you need an undergraduate degree, at least 2 years (2,800 hours) of work experience, and to apply to 3 UK courses. Applications open every August–November. Moroccan applicants compete globally but Chevening actively seeks Maghreb candidates.',
+      'Chevening is the UK government\'s global scholarship: full tuition at any UK university, monthly stipend, flights and visa for a one-year master\'s. Aimed at people with leadership potential - you need an undergraduate degree, at least 2 years (2,800 hours) of work experience, and to apply to 3 UK courses. Applications open every August-November. Moroccan applicants compete globally but Chevening actively seeks Maghreb candidates.',
     url: 'https://www.chevening.org/scholarships/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=chevening.org&sz=64',
     category: 'scholarship',
@@ -7301,7 +7301,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Write 4 strong essays',
         description:
-          'Leadership, networking, studying-in-UK and career-plan essays decide the first round — start in July before applications open Aug–Nov.',
+          'Leadership, networking, studying-in-UK and career-plan essays decide the first round - start in July before applications open Aug-Nov.',
       },
       {
         title: 'Secure unconditional offers',
@@ -7310,7 +7310,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'منحة تشيفنينغ الحكومية البريطانية',
-    taglineAr: 'ماستر سنة واحدة ممولة بالكامل في بريطانيا — تركز على القيادة',
+    taglineAr: 'ماستر سنة واحدة ممولة بالكامل في بريطانيا - تركز على القيادة',
     descriptionAr: 'تشيفنينغ منحة الحكومة البريطانية تغطي الرسوم الكاملة وراتباً شهرياً وطيراناً وتأشيرة لماستر بسنة واحدة. تتطلب شهادة بكالوريوس وخبرة عمل سنتين على الأقل والترشح لثلاث جامعات بريطانية. فتح الترشحات كل عام من أغسطس إلى نوفمبر.',
     stepsAr: [
       {
@@ -7337,10 +7337,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o126',
     slug: 'daad-epos-germany',
-    name: 'DAAD EPOS — Germany Development Scholarships',
+    name: 'DAAD EPOS - Germany Development Scholarships',
     tagline: 'Funded postgrad master\'s in Germany (~€992/month) for future development leaders',
     description:
-      'EPOS is DAAD\'s flagship scholarship for development-related postgraduate courses taught in English at German universities: tuition-free studies plus ≈€992/month for masters, German/EU travel allowance, insurance, and optional German language course. Designed for professionals from developing countries — including Morocco — with a bachelor\'s and usually 2 years of relevant work experience. Each course has its own deadline (mostly Aug–Oct).',
+      'EPOS is DAAD\'s flagship scholarship for development-related postgraduate courses taught in English at German universities: tuition-free studies plus ≈€992/month for masters, German/EU travel allowance, insurance, and optional German language course. Designed for professionals from developing countries - including Morocco - with a bachelor\'s and usually 2 years of relevant work experience. Each course has its own deadline (mostly Aug-Oct).',
     url: 'https://www.daad.de/en/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=daad.de&sz=64',
     category: 'scholarship',
@@ -7350,7 +7350,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Pick an EPOS-listed course',
         description:
-          'Browse the DAAD scholarship database filtered to EPOS courses — engineering, economics, environment, governance and more.',
+          'Browse the DAAD scholarship database filtered to EPOS courses - engineering, economics, environment, governance and more.',
         url: 'https://www.daad.de/en/',
       },
       {
@@ -7392,10 +7392,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o127',
     slug: 'fulbright-macece-usa',
-    name: 'Fulbright Foreign Student Program — USA (MACECE)',
+    name: 'Fulbright Foreign Student Program - USA (MACECE)',
     tagline: 'Fully-funded US master\'s/PhD via the Moroccan-American Commission',
     description:
-      'The Fulbright Foreign Student Program, administered in Morocco by MACECE (Moroccan-American Commission for Educational and Cultural Exchange), funds graduate study in the United States: tuition, living stipend, airfare and health benefits. Selection is competitive and merit-based — TOEFL/GRE preparation matters. The annual call typically opens in spring with national interviews for finalists.',
+      'The Fulbright Foreign Student Program, administered in Morocco by MACECE (Moroccan-American Commission for Educational and Cultural Exchange), funds graduate study in the United States: tuition, living stipend, airfare and health benefits. Selection is competitive and merit-based - TOEFL/GRE preparation matters. The annual call typically opens in spring with national interviews for finalists.',
     url: 'https://macece.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=macece.ma&sz=64',
     category: 'scholarship',
@@ -7411,7 +7411,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Build test scores early',
         description:
-          'Prepare TOEFL iBT and GRE/GMAT — strong scores are decisive for both Fulbright and university admission.',
+          'Prepare TOEFL iBT and GRE/GMAT - strong scores are decisive for both Fulbright and university admission.',
       },
       {
         title: 'Apply & interview nationally',
@@ -7419,7 +7419,7 @@ export const SEED_OFFERS: Offer[] = [
           'Submit the online dossier (essays, recommendations, transcripts); shortlisted candidates interview with the commission.',
       },
     ],
-    nameAr: 'برنامج فولبرايت — الولايات المتحدة (MACECE)',
+    nameAr: 'برنامج فولبرايت - الولايات المتحدة (MACECE)',
     taglineAr: 'ماستر أو دكتوراه ممولة بالكامل في أمريكا عبر اللجنة المغربية الأمريكية',
     descriptionAr: 'برنامج فولبرايت للطلبة الأجانب تديره بالمغرب اللجنة المغربية الأمريكية للتبادل التربوي والثقافي، ويمول الدراسات العليا بأمريكا: رسوم وراتب شهري وسفر وتأمين. الانتقاء بالجدارة ويتطلب تحضيراً مبكراً للـTOEFL والGRE، مع إعلان سنوي في الربيع ومقابلات وطنية.',
     stepsAr: [
@@ -7447,10 +7447,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o128',
     slug: 'eiffel-excellence-scholarship',
-    name: 'Eiffel Excellence Scholarship — France',
-    tagline: '€1,181/month master\'s or €1,700/month PhD — nominated by top French schools',
+    name: 'Eiffel Excellence Scholarship - France',
+    tagline: '€1,181/month master\'s or €1,700/month PhD - nominated by top French schools',
     description:
-      'The Eiffel Excellence Scholarship is France\'s elite award for top international students: €1,181/month at master\'s level (plus flights, insurance and cultural activities) or €1,700/month at PhD level. You cannot apply directly — you must apply to a French public institution and convince it to nominate you for Eiffel. Campuses submit candidacies once a year (typically January); priority fields include engineering, economics, law and political science.',
+      'The Eiffel Excellence Scholarship is France\'s elite award for top international students: €1,181/month at master\'s level (plus flights, insurance and cultural activities) or €1,700/month at PhD level. You cannot apply directly - you must apply to a French public institution and convince it to nominate you for Eiffel. Campuses submit candidacies once a year (typically January); priority fields include engineering, economics, law and political science.',
     url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence',
     logoUrl: 'https://www.google.com/s2/favicons?domain=campusfrance.org&sz=64',
     category: 'scholarship',
@@ -7466,17 +7466,17 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Get admitted & nominated',
         description:
-          'Only the institution can nominate you — excellence (grades, rank) and a clean study plan are decisive.',
+          'Only the institution can nominate you - excellence (grades, rank) and a clean study plan are decisive.',
       },
       {
         title: 'Institution submits by ~January',
         description:
-          'Campuses send Eiffel files annually; results in March–April before the academic year starts.',
+          'Campuses send Eiffel files annually; results in March-April before the academic year starts.',
       },
     ],
-    nameAr: 'منحة إيفيل للتميز — فرنسا',
-    taglineAr: '1181 يورو شهرياً للماستر و1700 للدكتوراه — بترشيح من المدارس الفرنسية العليا',
-    descriptionAr: 'إيفيل منحة النخبة الفرنسية للطلبة الدوليين المتميزين: 1181 يورو شهرياً في الماستر أو 1700 في الدكتوراه مع السفر والتأمين. لا يمكن التقديم مباشرة — يجب الحصول على قبول من مؤسسة فرنسية وإقناعها بترشيحك، وتقدم المؤسسات ملفاتها سنوياً في يناير غالباً.',
+    nameAr: 'منحة إيفيل للتميز - فرنسا',
+    taglineAr: '1181 يورو شهرياً للماستر و1700 للدكتوراه - بترشيح من المدارس الفرنسية العليا',
+    descriptionAr: 'إيفيل منحة النخبة الفرنسية للطلبة الدوليين المتميزين: 1181 يورو شهرياً في الماستر أو 1700 في الدكتوراه مع السفر والتأمين. لا يمكن التقديم مباشرة - يجب الحصول على قبول من مؤسسة فرنسية وإقناعها بترشيحك، وتقدم المؤسسات ملفاتها سنوياً في يناير غالباً.',
     stepsAr: [
       {
         title: 'استهدف مؤسسات مشاركة',
@@ -7485,7 +7485,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'احصل على القبول والترشيح',
-        description: 'المؤسسة وحدها تترشحك — النقط والترتيب وخطة الدراسة حاسمة.',
+        description: 'المؤسسة وحدها تترشحك - النقط والترتيب وخطة الدراسة حاسمة.',
       },
       {
         title: 'تُرسل الملفات في يناير',
@@ -7502,10 +7502,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o129',
     slug: 'amci-bilateral-scholarships',
-    name: 'AMCI — Bilateral Government Scholarships',
+    name: 'AMCI - Bilateral Government Scholarships',
     tagline: 'Morocco\'s official agency for foreign-government scholarships (Hungary, Romania, Türkiye…)',
     description:
-      'AMCI (Agence Marocaine de Coopération Internationale), under the Ministry of Foreign Affairs, manages all bilateral scholarship offers that foreign governments grant to Moroccan students — Stipendium Hungaricum (Hungary), Romania, Türkiye Bursları coordination, Russia, China Type A, Cuba, and more. Calls are published on amci.ma and relayed through university delegations; dossiers are submitted via your academy when the call opens.',
+      'AMCI (Agence Marocaine de Coopération Internationale), under the Ministry of Foreign Affairs, manages all bilateral scholarship offers that foreign governments grant to Moroccan students - Stipendium Hungaricum (Hungary), Romania, Türkiye Bursları coordination, Russia, China Type A, Cuba, and more. Calls are published on amci.ma and relayed through university delegations; dossiers are submitted via your academy when the call opens.',
     url: 'https://amci.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=amci.ma&sz=64',
     category: 'scholarship',
@@ -7515,7 +7515,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Track calls on amci.ma',
         description:
-          'Bilateral offers open irregularly — monitor the site and your regional academy announcements.',
+          'Bilateral offers open irregularly - monitor the site and your regional academy announcements.',
         url: 'https://amci.ma/',
       },
       {
@@ -7530,12 +7530,12 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'الوكالة المغربية للتعاون الدولي AMCI',
-    taglineAr: 'الجهة الرسمية لمنح الحكومات الأجنبية — هنغاريا ورومانيا وتركيا وغيرها',
+    taglineAr: 'الجهة الرسمية لمنح الحكومات الأجنبية - هنغاريا ورومانيا وتركيا وغيرها',
     descriptionAr: 'تدير الوكالة المغربية للتعاون الدولي جميع المنح الثنائية التي تقدمها حكومات أجنبية للطلبة المغاربة: Stipendium Hungaricum الهنغارية ورومانيا وتركيا وروسيا والصين (مسار السفارة) وغيرها. تنشر الدعوات على موقع الوكالة وتُودع الملفات عبر المديريات الإقليمية عند انفتاح الدعوة.',
     stepsAr: [
       {
         title: 'تابع الدعوات على amci.ma',
-        description: 'الدعوات تنفتح في مواعيد غير ثابتة — راقب الموقع والأكاديميات الجهوية.',
+        description: 'الدعوات تنفتح في مواعيد غير ثابتة - راقب الموقع والأكاديميات الجهوية.',
         url: 'https://amci.ma/',
       },
       {
@@ -7558,7 +7558,7 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o130',
     slug: 'bourses-ministere-enseignement-superieur',
     name: 'Ministry of Higher Education Bourses (Mérite & Fidélité)',
-    tagline: 'Official Moroccan government scholarships — merit abroad + loyalty grants',
+    tagline: 'Official Moroccan government scholarships - merit abroad + loyalty grants',
     description:
       'The Moroccan Ministry of Higher Education (ENSSUP) runs the national scholarship system for public-university laureates: the Bourse de Mérite funds the top-ranked graduates to continue master\'s and PhD studies in prestigious universities abroad, while Bourses de Fidélité/Excellence support students continuing in Moroccan institutions. Selection is strictly based on yearly rankings and diploma honors; calls open each summer after results via your academy and the ministry platform.',
     url: 'https://www.enssup.gov.ma/',
@@ -7575,7 +7575,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Watch the summer call',
         description:
-          'Calls publish on enssup.gov.ma and through university academies right after annual results (July–September).',
+          'Calls publish on enssup.gov.ma and through university academies right after annual results (July-September).',
         url: 'https://www.enssup.gov.ma/',
       },
       {
@@ -7584,8 +7584,8 @@ export const SEED_OFFERS: Offer[] = [
           'Hand in transcripts, diplomas and ID at your academy within the deadline; mérite winners get country + university placement abroad.',
       },
     ],
-    nameAr: 'منح وزارة التعليم العالي — الجدارة والوفاء',
-    taglineAr: 'منح حكومية مغربية رسمية — الجدارة للدراسة بالخارج ومنح الوفاء محلياً',
+    nameAr: 'منح وزارة التعليم العالي - الجدارة والوفاء',
+    taglineAr: 'منح حكومية مغربية رسمية - الجدارة للدراسة بالخارج ومنح الوفاء محلياً',
     descriptionAr: 'تدير وزارة التعليم العالي المنظومة الوطنية للمنح لنابغي الجامعات والمدارس العليا المغربية: منحة الجدارة تموّل مواصلين الماستر والدكتوراه في جامعات مرموقة بالخارج، ومنح الوفاء والتميز تدعم المواصلين داخل المغرب. الانتقاء يعتمد على الترتيب السنوي وميزة الشهادة، وتُفتح الدعوات صيفاً عبر الأكاديميات والمنصة الوزارية.',
     stepsAr: [
       {
@@ -7613,9 +7613,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o131',
     slug: 'fondation-ocp-scholarships',
     name: 'Fondation OCP Scholarships',
-    tagline: 'Excellence scholarships for Moroccan engineers & scientists — OCP Group foundation',
+    tagline: 'Excellence scholarships for Moroccan engineers & scientists - OCP Group foundation',
     description:
-      'Fondation OCP supports Morocco\'s future engineers and scientists through excellence scholarships and academic partnerships (notably with UM6P): funding for engineering cycles, master\'s and PhD programs in Morocco and abroad, in fields aligned with the group\'s ecosystem — mining, chemistry, agriculture, data/AI, energy and industrial management. Calls target high-potential students, often with social-criteria considerations alongside academic merit.',
+      'Fondation OCP supports Morocco\'s future engineers and scientists through excellence scholarships and academic partnerships (notably with UM6P): funding for engineering cycles, master\'s and PhD programs in Morocco and abroad, in fields aligned with the group\'s ecosystem - mining, chemistry, agriculture, data/AI, energy and industrial management. Calls target high-potential students, often with social-criteria considerations alongside academic merit.',
     url: 'https://www.ocpgroup.ma/fondation-ocp',
     logoUrl: '/logos/ocp.svg',
     category: 'scholarship',
@@ -7625,7 +7625,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Follow the foundation calls',
         description:
-          'Scholarship campaigns are announced on the OCP Foundation pages when intakes open — requirements vary per program.',
+          'Scholarship campaigns are announced on the OCP Foundation pages when intakes open - requirements vary per program.',
         url: 'https://www.ocpgroup.ma/fondation-ocp',
       },
       {
@@ -7640,7 +7640,7 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'منح مؤسسة OCP',
-    taglineAr: 'منح التميز للمهندسين والعلماء المغاربة — مؤسسة مجموعة المكتب الشريف',
+    taglineAr: 'منح التميز للمهندسين والعلماء المغاربة - مؤسسة مجموعة المكتب الشريف',
     descriptionAr: 'دعم مؤسسة OCP لجيل المستقبل من المهندسين والعلماء المغاربة عبر منح التميز والشراكات الأكاديمية (ومنها UM6P): تمويل الأطوار الهندسية والماستر والدكتوراه بالمغرب وخارجه في تخصصات كالتعدين والكيمياء والفلاحة والذكاء الاصطناعي والطاقة، بمعايير جدارة ووضعية اجتماعية.',
     stepsAr: [
       {
@@ -7777,10 +7777,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o134',
     slug: 'ai-fundamentals-for-beginners-track',
-    name: 'AI Fundamentals — For Beginners (Highly Recommended)',
-    tagline: 'Python + data fundamentals, ~28h of content — your zero-to-AI on-ramp',
+    name: 'AI Fundamentals - For Beginners (Highly Recommended)',
+    tagline: 'Python + data fundamentals, ~28h of content - your zero-to-AI on-ramp',
     description:
-      'The starting track we recommend to every aspiring AI engineer with no background yet: Python programming fundamentals plus data fundamentals — around 28 hours of structured content covering Python syntax, working with data, statistics basics, and how ML/AI systems consume that data. Finish this before touching LLM frameworks; it is the foundation everything else in AI engineering builds on. Free resources mapped step-by-step below.',
+      'The starting track we recommend to every aspiring AI engineer with no background yet: Python programming fundamentals plus data fundamentals - around 28 hours of structured content covering Python syntax, working with data, statistics basics, and how ML/AI systems consume that data. Finish this before touching LLM frameworks; it is the foundation everything else in AI engineering builds on. Free resources mapped step-by-step below.',
     url: 'https://www.kaggle.com/learn',
     logoUrl: 'https://www.google.com/s2/favicons?domain=kaggle.com&sz=64',
     category: 'learning',
@@ -7790,38 +7790,38 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Learn Python basics first (~12h)',
         description:
-          'Syntax, lists/dicts, functions, loops and file handling — use the Python-100-Days repo (Days 1–15) or Kaggle\'s free Python course.',
+          'Syntax, lists/dicts, functions, loops and file handling - use the Python-100-Days repo (Days 1-15) or Kaggle\'s free Python course.',
         url: 'https://www.kaggle.com/learn/python',
       },
       {
         title: 'Add data fundamentals (~16h)',
         description:
-          'pandas, cleaning, descriptive statistics and visualization — Kaggle pandas + intro to data courses cover exactly this.',
+          'pandas, cleaning, descriptive statistics and visualization - Kaggle pandas + intro to data courses cover exactly this.',
         url: 'https://www.kaggle.com/learn/pandas',
       },
       {
         title: 'Bridge into AI',
         description:
-          'Finish with Microsoft AI-For-Beginners lessons 1–8 to connect your new Python/data skills to real AI systems.',
+          'Finish with Microsoft AI-For-Beginners lessons 1-8 to connect your new Python/data skills to real AI systems.',
       },
     ],
-    nameAr: 'أساسيات الذكاء الاصطناعي — للمبتدئين (موصى به بشدة)',
-    taglineAr: 'بايثون وأساسيات البيانات، ~28 ساعة محتوى — بوابتك إلى عالم الذكاء الاصطناعي',
-    descriptionAr: 'المسار الذي ننصح به كل من يريد دخول هندسة الذكاء الاصطناعي بدون خلفية: أساسيات بايثون ثم أساسيات البيانات — حوالي 28 ساعة منظمة تغطي البرمجة والتعامل مع البيانات والإحصاء وكيف تستخدمها أنظمة الذكاء الاصطناعي. أكمله قبل الانتقال إلى أطر عمل LLM.',
+    nameAr: 'أساسيات الذكاء الاصطناعي - للمبتدئين (موصى به بشدة)',
+    taglineAr: 'بايثون وأساسيات البيانات، ~28 ساعة محتوى - بوابتك إلى عالم الذكاء الاصطناعي',
+    descriptionAr: 'المسار الذي ننصح به كل من يريد دخول هندسة الذكاء الاصطناعي بدون خلفية: أساسيات بايثون ثم أساسيات البيانات - حوالي 28 ساعة منظمة تغطي البرمجة والتعامل مع البيانات والإحصاء وكيف تستخدمها أنظمة الذكاء الاصطناعي. أكمله قبل الانتقال إلى أطر عمل LLM.',
     stepsAr: [
       {
         title: 'ابدأ ببايثون (~12 ساعة)',
-        description: 'الأساسيات والقوائم والدوال — استخدم مستودع Python-100-Days أو دورة كاغل المجانية.',
+        description: 'الأساسيات والقوائم والدوال - استخدم مستودع Python-100-Days أو دورة كاغل المجانية.',
         url: 'https://www.kaggle.com/learn/python',
       },
       {
         title: 'أضف أساسيات البيانات (~16 ساعة)',
-        description: 'pandas والتنظيف والإحصاء والرسوم — دورات كاغل تغطيها بالضبط.',
+        description: 'pandas والتنظيف والإحصاء والرسوم - دورات كاغل تغطيها بالضبط.',
         url: 'https://www.kaggle.com/learn/pandas',
       },
       {
         title: 'انتقل إلى الذكاء الاصطناعي',
-        description: 'اختم بدروس Microsoft AI-For-Beginners 1–8 لربط مهاراتك بأنظمة AI حقيقية.',
+        description: 'اختم بدروس Microsoft AI-For-Beginners 1-8 لربط مهاراتك بأنظمة AI حقيقية.',
       },
     ],
     upvotes: 25,
@@ -7834,10 +7834,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o135',
     slug: 'ai-engineering-langchain-intermediate',
-    name: 'AI Engineering with LangChain — For Intermediate (Highly Recommended)',
+    name: 'AI Engineering with LangChain - For Intermediate (Highly Recommended)',
     tagline: 'Build & ship AI applications: RAG, agents, tool use + AI-assisted coding (Copilot/Replit)',
     description:
-      'The intermediate track for turning AI knowledge into working products: AI software engineering with LangChain (chains, RAG pipelines, agents, tool integration) while using AI coding assistants like GitHub Copilot and Replit Agent to accelerate development. This is the skill set companies actually hire for right now — moving from "I know about LLMs" to "I ship AI applications." Make progress here after fundamentals.',
+      'The intermediate track for turning AI knowledge into working products: AI software engineering with LangChain (chains, RAG pipelines, agents, tool integration) while using AI coding assistants like GitHub Copilot and Replit Agent to accelerate development. This is the skill set companies actually hire for right now - moving from "I know about LLMs" to "I ship AI applications." Make progress here after fundamentals.',
     url: 'https://academy.langchain.com/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=academy.langchain.com&sz=64',
     category: 'learning',
@@ -7847,7 +7847,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'LangChain Academy courses (free)',
         description:
-          'Take Introduction to LangGraph and chatbot courses — official hands-on modules from the LangChain team.',
+          'Take Introduction to LangGraph and chatbot courses - official hands-on modules from the LangChain team.',
         url: 'https://academy.langchain.com/',
       },
       {
@@ -7858,16 +7858,16 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Ship one complete app',
         description:
-          'Deploy a small but complete AI app (chat-with-your-docs or an agent with tools) — this becomes your portfolio piece.',
+          'Deploy a small but complete AI app (chat-with-your-docs or an agent with tools) - this becomes your portfolio piece.',
       },
     ],
-    nameAr: 'هندسة الذكاء الاصطناعي مع LangChain — للمتوسطين (موصى به بشدة)',
+    nameAr: 'هندسة الذكاء الاصطناعي مع LangChain - للمتوسطين (موصى به بشدة)',
     taglineAr: 'ابنِ وأطلق تطبيقات AI: RAG والوكلاء والأدوات + برمجة بمساعدة Copilot/Replit',
-    descriptionAr: 'المسار المتوسط لتحويل معرفتك بالذكاء الاصطناعي إلى منتجات فعلية: هندسة تطبيقات AI باستخدام LangChain (سلاسل وأنابيب RAG والوكلاء وتكامل الأدوات) مع استخدام مساعدات البرمجة مثل GitHub Copilot وReplit لتسريع التطوير. هذه هي المهارة التي تبحث عنها الشركات الآن — الانتقال من أعرف عن LLMs إلى أُطلق تطبيقات AI.',
+    descriptionAr: 'المسار المتوسط لتحويل معرفتك بالذكاء الاصطناعي إلى منتجات فعلية: هندسة تطبيقات AI باستخدام LangChain (سلاسل وأنابيب RAG والوكلاء وتكامل الأدوات) مع استخدام مساعدات البرمجة مثل GitHub Copilot وReplit لتسريع التطوير. هذه هي المهارة التي تبحث عنها الشركات الآن - الانتقال من أعرف عن LLMs إلى أُطلق تطبيقات AI.',
     stepsAr: [
       {
         title: 'دورات LangChain Academy (مجانية)',
-        description: 'ابدأ بمقدمة LangGraph ودورات الشات بوت — وحدات رسمية عملية من فريق LangChain.',
+        description: 'ابدأ بمقدمة LangGraph ودورات الشات بوت - وحدات رسمية عملية من فريق LangChain.',
         url: 'https://academy.langchain.com/',
       },
       {
@@ -7892,7 +7892,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'Data Skills for Business',
     tagline: 'Practical data literacy: spreadsheets → SQL → dashboards → AI-assisted analysis',
     description:
-      'A pragmatic track for professionals and founders who need to make data-driven decisions without becoming engineers: structuring and cleaning business data, SQL querying essentials, spreadsheet mastery, dashboard building (Looker Studio / Power BI), and using AI tools to analyze and summarize business data. No heavy math — just the exact skills that turn raw numbers into decisions.',
+      'A pragmatic track for professionals and founders who need to make data-driven decisions without becoming engineers: structuring and cleaning business data, SQL querying essentials, spreadsheet mastery, dashboard building (Looker Studio / Power BI), and using AI tools to analyze and summarize business data. No heavy math - just the exact skills that turn raw numbers into decisions.',
     url: 'https://www.kaggle.com/learn',
     logoUrl: 'https://www.google.com/s2/favicons?domain=kaggle.com&sz=64',
     category: 'learning',
@@ -7902,13 +7902,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Data cleaning & analysis basics',
         description:
-          'Start with Kaggle\'s Data Cleaning and Intro to Data courses — structure any messy business dataset.',
+          'Start with Kaggle\'s Data Cleaning and Intro to Data courses - structure any messy business dataset.',
         url: 'https://www.kaggle.com/learn',
       },
       {
         title: 'SQL essentials',
         description:
-          'Learn to query company databases directly — Intro to SQL + Advanced SQL on Kaggle covers the daily-use 80%.',
+          'Learn to query company databases directly - Intro to SQL + Advanced SQL on Kaggle covers the daily-use 80%.',
         url: 'https://www.kaggle.com/learn/intro-to-sql',
       },
       {
@@ -7919,7 +7919,7 @@ export const SEED_OFFERS: Offer[] = [
     ],
     nameAr: 'مهارات البيانات للأعمال',
     taglineAr: 'إلمام عملي بالبيانات: جداول ← SQL ← لوحات تحكم ← تحليل بمساعدة الذكاء الاصطناعي',
-    descriptionAr: 'مسار عملي للمهنيين والمؤسسين الذين يحتاجون قرارات مبنية على البيانات دون أن يصبحوا مهندسين: تنظيف بيانات العمل وأساسيات SQL وإتقان الجداول وبناء لوحات المتابعة واستخدام أدوات الذكاء الاصطناعي لتحليل بيانات نشاطك وتلخيصها. بدون رياضيات معقدة — فقط المهارات التي تحول الأرقام إلى قرارات.',
+    descriptionAr: 'مسار عملي للمهنيين والمؤسسين الذين يحتاجون قرارات مبنية على البيانات دون أن يصبحوا مهندسين: تنظيف بيانات العمل وأساسيات SQL وإتقان الجداول وبناء لوحات المتابعة واستخدام أدوات الذكاء الاصطناعي لتحليل بيانات نشاطك وتلخيصها. بدون رياضيات معقدة - فقط المهارات التي تحول الأرقام إلى قرارات.',
     stepsAr: [
       {
         title: 'أساسيات التنظيف والتحليل',
@@ -7928,7 +7928,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'أساسيات SQL',
-        description: 'تعلّم استعلام قواعد بيانات شركتك مباشرة — مقدمة SQL وAdvanced SQL يغطيان 80% اليومية.',
+        description: 'تعلّم استعلام قواعد بيانات شركتك مباشرة - مقدمة SQL وAdvanced SQL يغطيان 80% اليومية.',
         url: 'https://www.kaggle.com/learn/intro-to-sql',
       },
       {
@@ -7946,10 +7946,10 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o137',
     slug: 'datacamp-free-access-week',
-    name: 'DataCamp Free Access Week — Aug 24–30',
-    tagline: '700+ premium data & AI courses, 160+ projects and certifications — free for one week, no credit card',
+    name: 'DataCamp Free Access Week - Aug 24-30',
+    tagline: '700+ premium data & AI courses, 160+ projects and certifications - free for one week, no credit card',
     description:
-      'DataCamp opens its entire Premium platform for free from Aug 24 to Aug 30, 2026: 700+ interactive courses (Python, SQL, R, Power BI, Claude Code, OpenAI API, MLOps…), 160+ real-world projects for your portfolio, skill tracks, and industry-recognized certifications. Everything runs in the browser — nothing to install. Normally $39/month; during Free Access Week you get it all with just a free account. Our advice below maps exactly what to take based on your level.',
+      'DataCamp opens its entire Premium platform for free from Aug 24 to Aug 30, 2026: 700+ interactive courses (Python, SQL, R, Power BI, Claude Code, OpenAI API, MLOps…), 160+ real-world projects for your portfolio, skill tracks, and industry-recognized certifications. Everything runs in the browser - nothing to install. Normally $39/month; during Free Access Week you get it all with just a free account. Our advice below maps exactly what to take based on your level.',
     url: 'https://www.datacamp.com/campaign/free-access-week-august-2026',
     logoUrl: 'https://www.google.com/s2/favicons?domain=datacamp.com&sz=64',
     category: 'learning',
@@ -7957,9 +7957,9 @@ export const SEED_OFFERS: Offer[] = [
     pricing: 'free',
     steps: [
       {
-        title: 'Create your account NOW (Aug 24–30)',
+        title: 'Create your account NOW (Aug 24-30)',
         description:
-          'Sign up free at the campaign page during the window — Premium unlocks instantly, no credit card required.',
+          'Sign up free at the campaign page during the window - Premium unlocks instantly, no credit card required.',
         url: 'https://www.datacamp.com/campaign/free-access-week-august-2026',
       },
       {
@@ -7971,23 +7971,23 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Track 2 · AI Engineering with LangChain (Intermediate) ⭐ Highly Recommended',
         description:
-          'Developing AI applications & AI software engineering using tools like GitHub Copilot and Replit. On DataCamp take: Prompt Engineering with LangChain → Working with the OpenAI API → Claude Code 101 → Software Development with Claude Code. Make real progress here — this is the hireable skill set.',
+          'Developing AI applications & AI software engineering using tools like GitHub Copilot and Replit. On DataCamp take: Prompt Engineering with LangChain → Working with the OpenAI API → Claude Code 101 → Software Development with Claude Code. Make real progress here - this is the hireable skill set.',
         url: 'https://www.datacamp.com/courses/prompt-engineering-with-langchain',
       },
       {
         title: 'Track 3 · Data Skills for Business',
         description:
-          'Intro to SQL → Data-Driven Decision-Making in SQL → Introduction to Power BI. Practical business data literacy: querying, dashboards and decisions — no heavy math.',
+          'Intro to SQL → Data-Driven Decision-Making in SQL → Introduction to Power BI. Practical business data literacy: querying, dashboards and decisions - no heavy math.',
         url: 'https://www.datacamp.com/courses/intro-to-sql',
       },
     ],
-    nameAr: 'أسبوع DataCamp المجاني — 24 إلى 30 غشت',
-    taglineAr: 'أكثر من 700 دورة بيانات وذكاء اصطناعي و160 مشروعاً وشهادات — مجاناً لأسبوع كامل وبطاقة بنكية غير مطلوبة',
-    descriptionAr: 'تفتح DataCamp منصتها المدفوعة بالكامل مجاناً من 24 إلى 30 غشت 2026: أكثر من 700 دورة تفاعلية (بايثون، SQL، Power BI، Claude Code، OpenAI API، MLOps…) و160 مشروعاً واقعياً وشهادات معتمدة. كل شيء يعمل في المتصفح بدون تثبيت — عادة 39$ شهرياً. نصائحنا أدناه تحدد بالضبط ما تأخذه حسب مستواك.',
+    nameAr: 'أسبوع DataCamp المجاني - 24 إلى 30 غشت',
+    taglineAr: 'أكثر من 700 دورة بيانات وذكاء اصطناعي و160 مشروعاً وشهادات - مجاناً لأسبوع كامل وبطاقة بنكية غير مطلوبة',
+    descriptionAr: 'تفتح DataCamp منصتها المدفوعة بالكامل مجاناً من 24 إلى 30 غشت 2026: أكثر من 700 دورة تفاعلية (بايثون، SQL، Power BI، Claude Code، OpenAI API، MLOps…) و160 مشروعاً واقعياً وشهادات معتمدة. كل شيء يعمل في المتصفح بدون تثبيت - عادة 39$ شهرياً. نصائحنا أدناه تحدد بالضبط ما تأخذه حسب مستواك.',
     stepsAr: [
       {
-        title: 'أنشئ حسابك الآن (24–30 غشت)',
-        description: 'سجّل مجاناً في صفحة الحملة خلال الفترة — يُفتح البريميوم فوراً بدون بطاقة بنكية.',
+        title: 'أنشئ حسابك الآن (24-30 غشت)',
+        description: 'سجّل مجاناً في صفحة الحملة خلال الفترة - يُفتح البريميوم فوراً بدون بطاقة بنكية.',
         url: 'https://www.datacamp.com/campaign/free-access-week-august-2026',
       },
       {
@@ -7997,7 +7997,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'المسار 2 · هندسة AI مع LangChain (متوسط) ⭐ موصى به بشدة',
-        description: 'تطوير تطبيقات الذكاء الاصطناعي والهندسة البرمجية بأدوات مثل Copilot وReplit. على DataCamp: Prompt Engineering LangChain ← OpenAI API ← Claude Code 101. حقق تقدماً حقيقياً هنا — هذه مهارة يطلبها سوق العمل.',
+        description: 'تطوير تطبيقات الذكاء الاصطناعي والهندسة البرمجية بأدوات مثل Copilot وReplit. على DataCamp: Prompt Engineering LangChain ← OpenAI API ← Claude Code 101. حقق تقدماً حقيقياً هنا - هذه مهارة يطلبها سوق العمل.',
         url: 'https://www.datacamp.com/courses/prompt-engineering-with-langchain',
       },
       {

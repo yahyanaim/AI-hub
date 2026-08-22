@@ -23,7 +23,7 @@ export function OffersView() {
           title: 'Offers & Deals',
           eyebrow: 'Offers',
           description:
-            'Free programs, developer tools, and API access worth claiming. Each offer includes a step-by-step guide — student vs non-student paths + how to get EDU proof. Hover any title or description to auto-translate to Arabic.',
+            'Free programs, developer tools, and API access worth claiming. Each offer includes a step-by-step guide - student vs non-student paths + how to get EDU proof. Hover any title or description to auto-translate to Arabic.',
           categoryLabel: 'Category',
           categoryOptions,
           itemLabel: 'offers',

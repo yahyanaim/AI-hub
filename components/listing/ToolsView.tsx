@@ -21,7 +21,7 @@ export function ToolsView() {
         title: 'AI Tools',
         eyebrow: 'Discover',
         description:
-          'Browse the best AI products across categories — from code editors to image generators. Upvote your favorites.',
+          'Browse the best AI products across categories - from code editors to image generators. Upvote your favorites.',
         categoryLabel: 'Category',
         categoryOptions,
         extraFilters: 'pricing',

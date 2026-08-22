@@ -78,7 +78,7 @@ export function SupportPage() {
               PayPal
             </div>
             <p className="mb-3 text-xs leading-snug text-muted-foreground">
-              One-click donation worldwide — card payments accepted without an account.
+              One-click donation worldwide - card payments accepted without an account.
             </p>
             <a
               href={PAYPAL_LINK}

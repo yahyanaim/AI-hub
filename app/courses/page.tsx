@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   title: 'Coding Courses & Learning Paths',
   description: 'Discover the best free and paid coding courses, learning paths, and roadmaps for web development, AI, data science, and backend engineering. Curated for developers.',
   openGraph: {
-    title: 'Coding Courses & Learning Paths — AI Hunt',
+    title: 'Coding Courses & Learning Paths - AI Hunt',
     description: 'Discover the best free and paid coding courses, roadmaps, and learning paths for developers. Curated by the community.',
     url: `${baseUrl}/courses`,
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Courses' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Coding Courses & Learning Paths — AI Hunt',
+    title: 'Coding Courses & Learning Paths - AI Hunt',
     description: 'Discover the best free and paid coding courses and roadmaps for developers.',
     images: ['/og.png'],
   },

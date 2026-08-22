@@ -67,7 +67,7 @@ export function DonationGateChat({ open, onDismiss }: { open: boolean; onDismiss
                 disabled={!supported}
                 className="mt-3 w-full rounded-lg border border-border bg-card py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {supported ? "I've supported — start chatting" : 'Click Ko-fi link above first'}
+                {supported ? "I've supported - start chatting" : 'Click Ko-fi link above first'}
               </button>
             </div>
           </motion.div>

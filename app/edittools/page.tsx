@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   title: 'Open Source GitHub Repos & LLM Tools',
   description: 'Explore top open-source GitHub repositories for AI, LLMs, fine-tuning, RAG, agent frameworks, vector databases, and machine learning. Community-voted and curated.',
   openGraph: {
-    title: 'Open Source Repos & LLM Tools — AI Hunt',
+    title: 'Open Source Repos & LLM Tools - AI Hunt',
     description: 'Discover top open-source GitHub repos for AI, LLMs, RAG, agent frameworks, vector databases, and ML tools.',
     url: `${baseUrl}/edittools`,
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Open Source Repos' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Open Source Repos & LLM Tools — AI Hunt',
+    title: 'Open Source Repos & LLM Tools - AI Hunt',
     description: 'Discover top open-source GitHub repos for AI, LLMs, RAG, and ML tools.',
     images: ['/og.png'],
   },

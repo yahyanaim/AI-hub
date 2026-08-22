@@ -23,7 +23,7 @@ export const SEED_COMMENTS: Comment[] = [
     id: 'c4',
     itemId: 'r1',
     userId: 'u5',
-    body: 'Abstraction overhead is real — reach for it on real orchestration, not single calls. LangGraph is great for agents.',
+    body: 'Abstraction overhead is real - reach for it on real orchestration, not single calls. LangGraph is great for agents.',
     createdAt: daysAgo(5),
   },
 ]

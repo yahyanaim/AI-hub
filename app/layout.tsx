@@ -18,8 +18,8 @@ const baseUrl = 'https://aihubtools.vercel.app'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'AI Hunt — Discover AI Tools, Dev Tools & Learning Resources',
-    template: '%s — AI Hunt',
+    default: 'AI Hunt - Discover AI Tools, Dev Tools & Learning Resources',
+    template: '%s - AI Hunt',
   },
   description:
     'AI Hunt is a community-driven platform to discover and share the best AI tools, developer tools, open-source GitHub repos, and coding courses. Find top-rated resources for developers, ranked by the community.',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
   openGraph: {
-    title: 'AI Hunt — Discover AI Tools & Developer Resources',
+    title: 'AI Hunt - Discover AI Tools & Developer Resources',
     description:
       'Community-driven platform to discover and share AI tools, dev tools, GitHub repos, and coding courses. Trusted by developers worldwide.',
     url: baseUrl,
@@ -61,13 +61,13 @@ export const metadata: Metadata = {
         url: '/og.png',
         width: 1200,
         height: 630,
-        alt: 'AI Hunt — Discover AI Tools & Developer Resources',
+        alt: 'AI Hunt - Discover AI Tools & Developer Resources',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Hunt — Discover AI Tools & Developer Resources',
+    title: 'AI Hunt - Discover AI Tools & Developer Resources',
     description:
       'Community-driven platform for AI tools, dev tools, GitHub repos, and coding courses.',
     images: ['/og.png'],

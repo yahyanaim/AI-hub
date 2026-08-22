@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: { category: string 
       title: `${label} Courses`,
       description: `Explore the best curated ${label.toLowerCase()} courses, learning paths, and roadmaps for developers.`,
       openGraph: {
-        title: `${label} Courses — AI Hunt`,
+        title: `${label} Courses - AI Hunt`,
         description: `Curated ${label.toLowerCase()} courses and roadmaps for developers.`,
         url: `${baseUrl}/courses/${category}`,
         images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Courses' }],

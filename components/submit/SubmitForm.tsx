@@ -736,7 +736,7 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
       <span className="w-28 shrink-0 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {label}
       </span>
-      <span className="flex-1 break-words text-sm text-foreground">{value || '—'}</span>
+      <span className="flex-1 break-words text-sm text-foreground">{value || '-'}</span>
     </div>
   )
 }
