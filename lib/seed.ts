@@ -45314,6 +45314,446 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o122',
+    slug: 'chinese-government-scholarship-csc',
+    name: 'Chinese Government Scholarship (CSC)',
+    tagline: 'Full ride in China — tuition + dorm + monthly stipend, no IELTS required for many programs',
+    description:
+      'The Chinese Government Scholarship (CSC) covers full tuition, on-campus housing, medical insurance and a monthly stipend (≈2,500–3,500 RMB) for bachelor\'s, master\'s and PhD studies at 280+ Chinese universities. English-taught programs are widely available and most do not require IELTS. Moroccan students apply either through the Chinese Embassy in Rabat (bilateral track) or directly to universities (Type B) via the official Campus China portal. Annual window: roughly December–April.',
+    url: 'https://www.campuschina.org/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=campuschina.org&sz=64',
+    category: 'scholarship',
+    tags: ['china', 'scholarship', 'full-ride', 'csc', 'study-abroad'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create your Campus China account',
+        description:
+          'Register on campuschina.org, pick up to a few universities/programs (Agency Type B = university direct; Type A = embassy track).',
+        url: 'https://www.campuschina.org/',
+      },
+      {
+        title: 'Prepare your documents',
+        description:
+          'Passport, diplomas & transcripts (notarized), study plan / research proposal, 2 recommendation letters, physical examination form, and a non-criminal record.',
+      },
+      {
+        title: 'Submit between Dec and Apr',
+        description:
+          'Apply before each university\'s deadline, track admission + scholarship status online, then get your JW201/JW202 form to apply for the X1/X2 visa at the Chinese Embassy in Rabat.',
+      },
+    ],
+    nameAr: 'المنحة الصينية الحكومية CSC',
+    taglineAr: 'دراسة مجانية كاملة في الصين — رسوم + سكن + منحة شهرية، بدون آيلتس في أغلب البرامج',
+    descriptionAr: 'منحة الحكومة الصينية تغطي الرسوم الدراسية والسكن والتأمين ومنحة شهرية لبكالوريوس وماستر ودكتوراه في أكثر من 280 جامعة صينية، مع برامج بالإنجليزية لا تتطلب غالباً آيلتس. الترشح عبر السفارة الصينية بالرباط أو مباشرة للجامعات عبر بوابة Campus China، في الفترة من ديسمبر إلى أبريل تقريباً.',
+    stepsAr: [
+      {
+        title: 'أنشئ حسابك على Campus China',
+        description: 'اختر عدة جامعات وبرامج (نوع A عبر السفارة أو نوع B مباشرة عبر الجامعة).',
+        url: 'https://www.campuschina.org/',
+      },
+      {
+        title: 'جهّز الوثائق',
+        description: 'جواز السفر، الشهادات وكشوف النقط، خطة الدراسة، رسالتا توصية، الفحص الطبي وعدم سوابق.',
+      },
+      {
+        title: 'قدّم بين ديسمبر وأبريل',
+        description: 'تابع حالة القبول والمنحة إلكترونياً ثم استخرج تأشيرة X1/X2 من السفارة الصينية بالرباط.',
+      },
+    ],
+    upvotes: 21,
+    bookmarks: 27,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o123',
+    slug: 'campus-france-maroc',
+    name: 'Campus France Maroc — Études en France',
+    tagline: 'The mandatory gateway to French universities + access to French bourses',
+    description:
+      'Every Moroccan student applying to French higher education goes through the "Études en France" platform managed by Campus France Maroc. It centralizes program choices (up to 7), application fees, the Campus France interview in Rabat, and is required for the student visa. It is also the entry point for French scholarships: BGF (Bourse du Gouvernement Français), Eiffel (nominated by schools), and regional bourses.',
+    url: 'https://maroc.campusfrance.org/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=maroc.campusfrance.org&sz=64',
+    category: 'scholarship',
+    tags: ['france', 'scholarship', 'campus-france', 'etudes-en-france', 'study-abroad'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create your Études en France file',
+        description:
+          'Register on the platform, fill your academic profile, and select up to 7 programs (licence/master/doctorat).',
+        url: 'https://maroc.campusfrance.org/',
+      },
+      {
+        title: 'Pay the fee & attend the interview',
+        description:
+          'Pay the Campus France authorization fee, then pass the motivational interview at Campus France Rabat/Casablanca; acceptances arrive on the platform.',
+      },
+      {
+        title: 'Get your visa & look for bourses',
+        description:
+          'With acceptance + BCE (Campus France authorization), apply for the VLS-TS student visa at TLScontact; check BGF and Eiffel deadlines in parallel.',
+      },
+    ],
+    nameAr: 'كامبوس فرانس المغرب',
+    taglineAr: 'البوابة الإلزامية للدراسة في فرنسا + الوصول إلى المنح الفرنسية',
+    descriptionAr: 'كل طالب مغربي متوجه لفرنسا يمر عبر منصة Études en France التي تديرها كامبوس فرانس المغرب: اختيار حتى 7 تكوينات، المقابلة بالرباط، ورخصة كامبوس فرانس اللازمة للتأشيرة. وهي أيضاً بوابة المنح الفرنسية مثل BGF ومنحة إيفيل للتميز.',
+    stepsAr: [
+      {
+        title: 'أنشئ ملفك على المنصة',
+        description: 'سجّل واملأ ملفك الأكاديمي واختر حتى 7 تكوينات (ليسانس/ماستر/دكتوراه).',
+        url: 'https://maroc.campusfrance.org/',
+      },
+      {
+        title: 'أداء الرسوم وأنجز المقابلة',
+        description: 'أداء رسم ترخيص كامبوس فرانس ثم المقابلة التحفيزية بالرباط أو الدار البيضاء.',
+      },
+      {
+        title: 'التأشيرة والمنح',
+        description: 'بعد القبول ورخصة كامبوس فرانس قدّم على تأشيرة الطالب وتابع مواعيد منح BGF وإيفيل.',
+      },
+    ],
+    upvotes: 18,
+    bookmarks: 24,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o124',
+    slug: 'erasmus-mundus-joint-masters',
+    name: 'Erasmus Mundus Joint Masters',
+    tagline: 'Full EU scholarship: tuition + ~€1,400/month + travel, study in 2–3 countries',
+    description:
+      'Erasmus Mundus Joint Masters are prestigious 1–2 year master\'s programs run by consortia of European universities. The EU scholarship covers full tuition, health insurance, travel/installation costs and a monthly allowance around €1,400 — you study in at least two different European countries and receive a joint degree. Fully open to Moroccan students; there is no central application — you apply directly to each consortium (usually Oct–Jan for the following autumn).',
+    url: 'https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters-scholarships',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=erasmus-plus.ec.europa.eu&sz=64',
+    category: 'scholarship',
+    tags: ['eu', 'erasmus', 'masters', 'full-ride', 'study-abroad'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Browse the EMJM catalogue',
+        description:
+          'Explore 150+ funded masters by field on the official catalogue and shortlist 3 programs (the max you can apply to).',
+        url: 'https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters-scholarships',
+      },
+      {
+        title: 'Prepare a strong dossier',
+        description:
+          'CV (Europass), motivation letters tailored per program, transcripts, 2 references and proof of English (IELTS/TOEFL).',
+      },
+      {
+        title: 'Apply directly to consortia',
+        description:
+          'Each consortium has its own deadline (mostly Oct–Jan); scholarship results land spring — no separate scholarship form needed.',
+      },
+    ],
+    nameAr: 'ماستر إيراسموس موندوس المشترك',
+    taglineAr: 'منحة أوروبية كاملة: رسوم + ~1400 يورو شهرياً + السفر، دراسة في 2–3 دول',
+    descriptionAr: 'إيراسموس موندوس ماستers مرموقة تُدار من تحالفات جامعات أوروبية: المنحة تغطي الرسوم والتأمين والسفر وبدل شهري حوالي 1400 يورو، وتدرس في بلدين أوروبيين على الأقل مع شهادة مشتركة. مفتوحة للطلبة المغاربة — الترشح مباشرة لدى كل تحالف بين أكتوبر ويناير.',
+    stepsAr: [
+      {
+        title: 'تصفح قائمة البرامج',
+        description: 'استكشف أكثر من 150 ماستر ممولاً حسب التخصص واختر 3 برامج كحد أقصى.',
+        url: 'https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters-scholarships',
+      },
+      {
+        title: 'جهّز ملفاً قوياً',
+        description: 'سيرة Europass، رسائل تحفيز مخصصة، كشوف النقط، رسالتا توصية وإثبات اللغة.',
+      },
+      {
+        title: 'قدّم مباشرة للتحالفات',
+        description: 'لكل تحالف موعده الخاص (أكتوبر-يناير غالباً) والنتائج في الربيع دون استمارة منحة منفصلة.',
+      },
+    ],
+    upvotes: 19,
+    bookmarks: 25,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o125',
+    slug: 'chevening-scholarship-uk',
+    name: 'Chevening Scholarships — UK Government',
+    tagline: 'Fully-funded one-year master\'s in the UK — leadership-focused, no tuition cost',
+    description:
+      'Chevening is the UK government\'s global scholarship: full tuition at any UK university, monthly stipend, flights and visa for a one-year master\'s. Aimed at people with leadership potential — you need an undergraduate degree, at least 2 years (2,800 hours) of work experience, and to apply to 3 UK courses. Applications open every August–November. Moroccan applicants compete globally but Chevening actively seeks Maghreb candidates.',
+    url: 'https://www.chevening.org/scholarships/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=chevening.org&sz=64',
+    category: 'scholarship',
+    tags: ['uk', 'chevening', 'masters', 'full-ride', 'leadership'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check eligibility early',
+        description:
+          'Bachelor\'s degree + 2 years work experience + return to Morocco for 2 years after the course.',
+        url: 'https://www.chevening.org/scholarships/',
+      },
+      {
+        title: 'Write 4 strong essays',
+        description:
+          'Leadership, networking, studying-in-UK and career-plan essays decide the first round — start in July before applications open Aug–Nov.',
+      },
+      {
+        title: 'Secure unconditional offers',
+        description:
+          'By July of the following year you must hold one unconditional UK offer; then pass the Chevening interview (spring).',
+      },
+    ],
+    nameAr: 'منحة تشيفنينغ الحكومية البريطانية',
+    taglineAr: 'ماستر سنة واحدة ممولة بالكامل في بريطانيا — تركز على القيادة',
+    descriptionAr: 'تشيفنينغ منحة الحكومة البريطانية تغطي الرسوم الكاملة وراتباً شهرياً وطيراناً وتأشيرة لماستر بسنة واحدة. تتطلب شهادة بكالوريوس وخبرة عمل سنتين على الأقل والترشح لثلاث جامعات بريطانية. فتح الترشحات كل عام من أغسطس إلى نوفمبر.',
+    stepsAr: [
+      {
+        title: 'تحقق من شروط الأهلية مبكراً',
+        description: 'باك+5 أو ما يعادله + خبرة سنتين + الالتزام بالعودة للمغرب سنتين بعد التخرج.',
+        url: 'https://www.chevening.org/scholarships/',
+      },
+      {
+        title: 'اكتب 4 مقالات قوية',
+        description: 'مقالات القيادة والتشبيك والدراسة بالمملكة والمسار المهني هي مرحلة الفرز الأولى.',
+      },
+      {
+        title: 'احصل على قبول نهائي',
+        description: 'يجب امتلاك قبول نهائي بحلول يوليو الموالي ثم اجتياز مقابلة تشيفنينغ في الربيع.',
+      },
+    ],
+    upvotes: 17,
+    bookmarks: 22,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o126',
+    slug: 'daad-epos-germany',
+    name: 'DAAD EPOS — Germany Development Scholarships',
+    tagline: 'Funded postgrad master\'s in Germany (~€992/month) for future development leaders',
+    description:
+      'EPOS is DAAD\'s flagship scholarship for development-related postgraduate courses taught in English at German universities: tuition-free studies plus ≈€992/month for masters, German/EU travel allowance, insurance, and optional German language course. Designed for professionals from developing countries — including Morocco — with a bachelor\'s and usually 2 years of relevant work experience. Each course has its own deadline (mostly Aug–Oct).',
+    url: 'https://www.daad.de/en/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=daad.de&sz=64',
+    category: 'scholarship',
+    tags: ['germany', 'daad', 'development', 'masters', 'full-funding'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Pick an EPOS-listed course',
+        description:
+          'Browse the DAAD scholarship database filtered to EPOS courses — engineering, economics, environment, governance and more.',
+        url: 'https://www.daad.de/en/',
+      },
+      {
+        title: 'Apply directly to the university',
+        description:
+          'Send the DAAD application form + documents to the course coordinator by its own deadline (check each course page).',
+      },
+      {
+        title: 'Interview & selection',
+        description:
+          'Shortlisted candidates interview with the committee; results come a few months later with pre-departure DAAD support.',
+      },
+    ],
+    nameAr: 'منحة دAAD الألمانية EPOS',
+    taglineAr: 'ماستر مدفوع في ألمانيا (~992 يورو شهرياً) لتخصصات التنمية',
+    descriptionAr: 'EPOS هي منحة الهيئة الألمانية للتبادل العلمي للدراسات المرتبطة بالتنمية باللغة الإنجليزية: دراسة مجانية + 992 يورو شهرياً + تأمين وسفر ودورة لغة ألمانية. موجهة لمهنيين من دول نامية منها المغرب، بشهادة باكالوريوس وخبرة سنتين غالباً، وترسل الملفات مباشرة لكل جامعة حسب مواعيدها.',
+    stepsAr: [
+      {
+        title: 'اختر برنامجاً من قائمة EPOS',
+        description: 'تصفح قاعدة بيانات DAAD مصفاة على برامج EPOS: هندسة واقتصاد وبيئة وحوكمة.',
+        url: 'https://www.daad.de/en/',
+      },
+      {
+        title: 'قدّم مباشرة للجامعة',
+        description: 'أرسل استمارة DAAD والوثائق لمنسق البرنامج قبل موعده الخاص (غالباً أغسطس-أكتوبر).',
+      },
+      {
+        title: 'المقابلة والانتقاء',
+        description: 'المقبولون مبدئياً يجرون مقابلة ثم تصل النتائج مع دعم ما قبل السفر.',
+      },
+    ],
+    upvotes: 15,
+    bookmarks: 20,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o127',
+    slug: 'fulbright-macece-usa',
+    name: 'Fulbright Foreign Student Program — USA (MACECE)',
+    tagline: 'Fully-funded US master\'s/PhD via the Moroccan-American Commission',
+    description:
+      'The Fulbright Foreign Student Program, administered in Morocco by MACECE (Moroccan-American Commission for Educational and Cultural Exchange), funds graduate study in the United States: tuition, living stipend, airfare and health benefits. Selection is competitive and merit-based — TOEFL/GRE preparation matters. The annual call typically opens in spring with national interviews for finalists.',
+    url: 'https://macece.ma/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=macece.ma&sz=64',
+    category: 'scholarship',
+    tags: ['usa', 'fulbright', 'macece', 'phd', 'masters'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Watch MACECE announcements',
+        description:
+          'Follow macece.ma for the annual call (usually spring); review field priorities and eligibility.',
+        url: 'https://macece.ma/',
+      },
+      {
+        title: 'Build test scores early',
+        description:
+          'Prepare TOEFL iBT and GRE/GMAT — strong scores are decisive for both Fulbright and university admission.',
+      },
+      {
+        title: 'Apply & interview nationally',
+        description:
+          'Submit the online dossier (essays, recommendations, transcripts); shortlisted candidates interview with the commission.',
+      },
+    ],
+    nameAr: 'برنامج فولبرايت — الولايات المتحدة (MACECE)',
+    taglineAr: 'ماستر أو دكتوراه ممولة بالكامل في أمريكا عبر اللجنة المغربية الأمريكية',
+    descriptionAr: 'برنامج فولبرايت للطلبة الأجانب تديره بالمغرب اللجنة المغربية الأمريكية للتبادل التربوي والثقافي، ويمول الدراسات العليا بأمريكا: رسوم وراتب شهري وسفر وتأمين. الانتقاء بالجدارة ويتطلب تحضيراً مبكراً للـTOEFL والGRE، مع إعلان سنوي في الربيع ومقابلات وطنية.',
+    stepsAr: [
+      {
+        title: 'تابع إعلانات MACECE',
+        description: 'راقب موقع اللجنة لإعلان الدعوة السنوية (غالباً في الربيع) وشروط الأهلية.',
+        url: 'https://macece.ma/',
+      },
+      {
+        title: 'جهّز اختباراتك مبكراً',
+        description: 'درجات TOEFL وGRE الجيدة حاسمة للمنحة وللقبول الجامعي.',
+      },
+      {
+        title: 'قدّم الملف وقابل اللجنة',
+        description: 'أرسل الملف الإلكتروني (مقالات وتوصيات وكشوف) ثم المقابلة الوطنية للمصنفين.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o128',
+    slug: 'eiffel-excellence-scholarship',
+    name: 'Eiffel Excellence Scholarship — France',
+    tagline: '€1,181/month master\'s or €1,700/month PhD — nominated by top French schools',
+    description:
+      'The Eiffel Excellence Scholarship is France\'s elite award for top international students: €1,181/month at master\'s level (plus flights, insurance and cultural activities) or €1,700/month at PhD level. You cannot apply directly — you must apply to a French public institution and convince it to nominate you for Eiffel. Campuses submit candidacies once a year (typically January); priority fields include engineering, economics, law and political science.',
+    url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=campusfrance.org&sz=64',
+    category: 'scholarship',
+    tags: ['france', 'eiffel', 'excellence', 'masters', 'phd'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Target Eiffel-participating institutions',
+        description:
+          'Shortlist French universities/grandes écoles and mention Eiffel ambition in your motivation letter.',
+        url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence',
+      },
+      {
+        title: 'Get admitted & nominated',
+        description:
+          'Only the institution can nominate you — excellence (grades, rank) and a clean study plan are decisive.',
+      },
+      {
+        title: 'Institution submits by ~January',
+        description:
+          'Campuses send Eiffel files annually; results in March–April before the academic year starts.',
+      },
+    ],
+    nameAr: 'منحة إيفيل للتميز — فرنسا',
+    taglineAr: '1181 يورو شهرياً للماستر و1700 للدكتوراه — بترشيح من المدارس الفرنسية العليا',
+    descriptionAr: 'إيفيل منحة النخبة الفرنسية للطلبة الدوليين المتميزين: 1181 يورو شهرياً في الماستر أو 1700 في الدكتوراه مع السفر والتأمين. لا يمكن التقديم مباشرة — يجب الحصول على قبول من مؤسسة فرنسية وإقناعها بترشيحك، وتقدم المؤسسات ملفاتها سنوياً في يناير غالباً.',
+    stepsAr: [
+      {
+        title: 'استهدف مؤسسات مشاركة',
+        description: 'اختر جامعات ومدارس فرنسية عليا وأشر إلى طموحك لمنحة إيفيل في رسالتك.',
+        url: 'https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence',
+      },
+      {
+        title: 'احصل على القبول والترشيح',
+        description: 'المؤسسة وحدها تترشحك — النقط والترتيب وخطة الدراسة حاسمة.',
+      },
+      {
+        title: 'تُرسل الملفات في يناير',
+        description: 'تقدم الكليات ملفات إيفيل سنوياً وتظهر النتائج في مارس-أبريل.',
+      },
+    ],
+    upvotes: 14,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o129',
+    slug: 'amci-bilateral-scholarships',
+    name: 'AMCI — Bilateral Government Scholarships',
+    tagline: 'Morocco\'s official agency for foreign-government scholarships (Hungary, Romania, Türkiye…)',
+    description:
+      'AMCI (Agence Marocaine de Coopération Internationale), under the Ministry of Foreign Affairs, manages all bilateral scholarship offers that foreign governments grant to Moroccan students — Stipendium Hungaricum (Hungary), Romania, Türkiye Bursları coordination, Russia, China Type A, Cuba, and more. Calls are published on amci.ma and relayed through university delegations; dossiers are submitted via your academy when the call opens.',
+    url: 'https://amci.ma/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=amci.ma&sz=64',
+    category: 'scholarship',
+    tags: ['morocco', 'amci', 'bilateral', 'hungary', 'romania'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Track calls on amci.ma',
+        description:
+          'Bilateral offers open irregularly — monitor the site and your regional academy announcements.',
+        url: 'https://amci.ma/',
+      },
+      {
+        title: 'Submit via your academy',
+        description:
+          'Dossiers go through the provincial education academy with transcripts, ID and medical forms as specified per call.',
+      },
+      {
+        title: 'Nomination & placement',
+        description:
+          'AMCI forwards ranked nominations to the donor country; placements and visas follow through the embassy.',
+      },
+    ],
+    nameAr: 'الوكالة المغربية للتعاون الدولي AMCI',
+    taglineAr: 'الجهة الرسمية لمنح الحكومات الأجنبية — هنغاريا ورومانيا وتركيا وغيرها',
+    descriptionAr: 'تدير الوكالة المغربية للتعاون الدولي جميع المنح الثنائية التي تقدمها حكومات أجنبية للطلبة المغاربة: Stipendium Hungaricum الهنغارية ورومانيا وتركيا وروسيا والصين (مسار السفارة) وغيرها. تنشر الدعوات على موقع الوكالة وتُودع الملفات عبر المديريات الإقليمية عند انفتاح الدعوة.',
+    stepsAr: [
+      {
+        title: 'تابع الدعوات على amci.ma',
+        description: 'الدعوات تنفتح في مواعيد غير ثابتة — راقب الموقع والأكاديميات الجهوية.',
+        url: 'https://amci.ma/',
+      },
+      {
+        title: 'قدّم عبر أكاديميتك',
+        description: 'تودع الملفات لدى الأكاديمية الإقليمية مع النقط والوثائق الطبية حسب كل دعوة.',
+      },
+      {
+        title: 'الترشيح والتوجيه',
+        description: 'تحيل الوكالة الترشيحات مرتبة للدولة المانحة ثم تتم إجراءات التأشيرة عبر السفارة.',
+      },
+    ],
+    upvotes: 15,
+    bookmarks: 21,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
