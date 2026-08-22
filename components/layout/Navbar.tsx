@@ -17,7 +17,6 @@ import { cn } from '@/lib/utils'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
 import { Button } from '@/components/ui/button'
-import { SupportModal } from '@/components/layout/SupportModal'
 
 const NAV_LINKS = [
   { href: '/tools', label: 'Tools' },
@@ -32,7 +31,6 @@ export function Navbar() {
   const { setPaletteOpen, currentUser, setAuthModalOpen, signOut } = useApp()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [supportOpen, setSupportOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -118,15 +116,15 @@ export function Navbar() {
           </button>
 
           {/* Support (Buy me a code) */}
-          <button
-            onClick={() => setSupportOpen(true)}
+          <Link
+            href="/support"
             className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-brand-orange/40 hover:text-brand-orange"
             aria-label="Support AI Hunt — Buy me a code"
             title="Buy me a code?"
           >
             <Coffee className="h-4 w-4" />
             <span className="hidden lg:inline">Support</span>
-          </button>
+          </Link>
 
           {/* Submit button */}
           <Link href="/submit" className="hidden sm:inline-flex rounded-full border border-brand-orange px-4 py-1.5 text-sm font-semibold text-brand-orange transition-all hover:bg-brand-orange/10 active:scale-[0.97]">
@@ -200,8 +198,6 @@ export function Navbar() {
           </nav>
         </div>
       )}
-
-      <SupportModal open={supportOpen} onClose={() => setSupportOpen(false)} />
     </header>
   )
 }
