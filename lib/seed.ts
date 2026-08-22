@@ -45134,6 +45134,186 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o119',
+    slug: 'technoventures-technopark',
+    name: 'TechnoVentures by Technopark Morocco',
+    tagline: '7-month venture-building program for Moroccan tech startups at POC/MVP stage',
+    description:
+      'TechnoVentures is deployed by Technopark Morocco under its Startup Venture Building offer. The 7-month program targets innovative Moroccan tech startups that already have a POC or MVP and want to accelerate productization, market entry, and scale-up. Founders get structured venture-building support — workshops, mentoring, and access to the Technopark ecosystem — to turn an early prototype into a fundable, growing company.',
+    url: 'https://www.start-up.ma/programmes-pour-startups/technoventures/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=start-up.ma&sz=64',
+    category: 'competition',
+    tags: ['technoventures', 'technopark', 'acceleration', 'morocco', 'mvp'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check eligibility',
+        description:
+          'Moroccan tech startup with a working POC or MVP and a scalable idea — pre-product ideas are not the target.',
+      },
+      {
+        title: 'Apply to the cohort',
+        description:
+          'Submit your application via the program page when the call is open; selection favors traction and team quality.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/technoventures/',
+      },
+      {
+        title: 'Build for 7 months',
+        description:
+          'Follow the venture-building track: productization, go-to-market, and scale-up support with Technopark mentors and partners.',
+      },
+    ],
+    nameAr: 'تكنوڤانتشرز من تكنوبارك المغرب',
+    taglineAr: 'برنامج بناء مشاريع لمدة 7 أشهر للشركات الناشئة المغربية في مرحلة POC/MVP',
+    descriptionAr: 'تكنوڤانتشرز برنامج من تكنوبارك المغرب ضمن عرض Startup Venture Building، يستهدف الشركات الناشئة التكنولوجية المغربية المبتكرة التي تملك نموذجاً أولياً وتريد تسريع الإطلاق والنمو. يشمل ورشات وإرشاداً والوصول إلى منظومة تكنوبارك لتحويل النموذج الأولي إلى شركة قابلة للتمويل والنمو.',
+    stepsAr: [
+      {
+        title: 'تحقق من شروط الأهلية',
+        description: 'شركة ناشئة مغربية تكنولوجية تملك POC أو MVP عامل وفكرة قابلة للتوسع.',
+      },
+      {
+        title: 'قدّم ترشيحك',
+        description: 'أرسل طلبك عبر صفحة البرنامج عند فتح الدعوة؛ الانتقاء يفضّل الجذب وجودة الفريق.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/technoventures/',
+      },
+      {
+        title: 'ابنِ على مدى 7 أشهر',
+        description: 'تابع مسار بناء المشروع: تطوير المنتج ودخول السوق والدعم مع موجهي تكنوبارك.',
+      },
+    ],
+    upvotes: 16,
+    bookmarks: 19,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o120',
+    slug: 'sport-arena-challenge',
+    name: 'Sport Arena Challenge',
+    tagline: '2-day sportech hackathon — ideation, workshops & mentorship for young builders',
+    description:
+      'Sport Arena Challenge is a two-day hackathon dedicated to sport-tech, designed to spark innovation and entrepreneurship among young people. Teams move from ideation through hands-on workshops and mentorship to concrete working solutions, pitching at the end of the weekend. Open to students and young professionals interested in the intersection of sports and technology.',
+    url: 'https://www.start-up.ma/programmes-pour-startups/sport-arena-challenge/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=start-up.ma&sz=64',
+    category: 'competition',
+    tags: ['sportech', 'hackathon', 'morocco', 'youth', 'competition'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Register your team',
+        description:
+          'Sign up via the program page when registrations open — teams of builders, designers and sport enthusiasts welcome.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/sport-arena-challenge/',
+      },
+      {
+        title: 'Hack for 2 days',
+        description:
+          'Ideate with mentors, join practical workshops, and build a concrete sportech solution with your team.',
+      },
+      {
+        title: 'Pitch your solution',
+        description:
+          'Demo in front of the jury at the end of the event and compete for the top prizes.',
+      },
+    ],
+    nameAr: 'سبورت أرينا تشالنج',
+    taglineAr: 'هاكاثون رياضي تقني ليومين — تأليف وورشات وإرشاد للشباب',
+    descriptionAr: 'سبورت أرينا تشالنج هاكاثون ليومين مخصص للرياضة والتقنية، يهدف إلى تحفيز الابتكار وريادة الأعمال لدى الشباب. تنتقل الفرق من التأليف عبر ورشات عملية وإرشاد إلى حلول ملموسة وعرضها أمام لجنة التحكيم.',
+    stepsAr: [
+      {
+        title: 'سجّل فريقك',
+        description: 'التسجيل عبر صفحة البرنامج عند فتح الباب — فرق من مطورين ومصممين وعشاق الرياضة.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/sport-arena-challenge/',
+      },
+      {
+        title: 'شارك في الهاكاثون ليومين',
+        description: 'ألّف مع الموجهين وشارك في الورشات وابنِ حلاً تقنياً رياضياً ملموساً.',
+      },
+      {
+        title: 'اعرض حلّك',
+        description: 'قدّم العرض أمام اللجنة في نهاية الحدث ونافس على الجوائز الأولى.',
+      },
+    ],
+    upvotes: 12,
+    bookmarks: 14,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o121',
+    slug: 'grants-for-women-founders',
+    name: 'Grants for Women Founders — Amber, WomensNet, Galaxy & more',
+    tagline: 'Monthly cash grants ($5k–$10k+) for women entrepreneurs — no equity taken',
+    description:
+      'A bundle of recurring grant programs for women founders you can apply to from Morocco: the Amber Grant (prestigious monthly + annual grant for women-owned businesses), the WomensNet Startup Grant (monthly funding for early-stage women entrepreneurs), Galaxy Grants (fast grants for women & minority founders), the Breakthrough Grant ($5,000 for one ambitious woman entrepreneur), and the IFW Universal Funding application (apply once, get matched with funding, scholarships and mentorship opportunities year-round). Grants are non-dilutive — you keep 100% of your company.',
+    url: 'https://www.start-up.ma/programmes-pour-startups/amber-grant-pour-les-femmes/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=start-up.ma&sz=64',
+    category: 'competition',
+    tags: ['grants', 'women-founders', 'funding', 'non-dilutive', 'startups'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Amber Grant',
+        description:
+          'Apply to the monthly Amber Grant for women-owned businesses — winners are also considered for the annual award.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/amber-grant-pour-les-femmes/',
+      },
+      {
+        title: 'Startup Grant (WomensNet)',
+        description:
+          'Apply to the monthly WomensNet grant for early-stage women-led companies.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/startup-grant/',
+      },
+      {
+        title: 'Galaxy + Breakthrough grants',
+        description:
+          'Quick-application grants for women and minority founders — including the $5,000 Breakthrough Grant.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/galaxy-grants/',
+      },
+      {
+        title: 'IFW universal application',
+        description:
+          'Submit one universal application and get matched automatically with partner funding, scholarships and mentorship all year.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/ifw-universal-funding-and-grant/',
+      },
+    ],
+    nameAr: 'منح للمؤسِّسات — آمبر وومانزنت وجالاكسي والمزيد',
+    taglineAr: 'منح نقدية شهرية (5000 إلى 10000 دولار وأكثر) للنساء رائدات الأعمال — بدون تنازل عن الأسهم',
+    descriptionAr: 'حزمة برامج منح متجددة للمؤسِّسات يمكن التقديم لها من المغرب: جائزة آمبر الشهرية والسنوية المرغوبة، منحة ستارت أب جرانت من WomensNet، منح جالاكسي السريعة للنساء والأقليات، منحة الاختراق بقيمة 5000 دولار، وطلب IFW الموحد الذي يربطك تلقائياً بفرص التمويل والمنح والإرشاد طوال العام. المنح لا تقتطع أي حصة من شركتك.',
+    stepsAr: [
+      {
+        title: 'جائزة آمبر',
+        description: 'قدّم للمنحة الشهرية للشركات التي تقودها نساء — الفائزات مرشحات للجائزة السنوية.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/amber-grant-pour-les-femmes/',
+      },
+      {
+        title: 'منحة ستارت أب (WomensNet)',
+        description: 'قدّم للمنحة الشهرية للشركات الناشئة في مراحلها الأولى بقيادة نسائية.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/startup-grant/',
+      },
+      {
+        title: 'منحتا جالاكسي والاختراق',
+        description: 'منح بتقديم سريع للنساء والأقليات — بينها منحة الاختراق بقيمة 5000 دولار.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/galaxy-grants/',
+      },
+      {
+        title: 'طلب IFW الموحد',
+        description: 'قدّم طلباً واحداً وسيتم ربطك تلقائياً بفرص التمويل والمنح والإرشاد طوال السنة.',
+        url: 'https://www.start-up.ma/programmes-pour-startups/ifw-universal-funding-and-grant/',
+      },
+    ],
+    upvotes: 14,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
 
 export const SEED_COMMENTS: Comment[] = [
