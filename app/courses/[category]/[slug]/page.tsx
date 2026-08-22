@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { redirect, notFound } from 'next/navigation'
 import { SEED_COURSES, SEED_USERS } from '@/lib/seed'
 import { CourseDetail } from '@/components/detail/CourseDetail'
+import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = 'https://aihubtools.vercel.app'
 
@@ -80,7 +81,7 @@ export default async function CourseDetailPage({ params }: { params: { category:
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <CourseDetail slug={slug} />
     </>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { SEED_OFFERS } from '@/lib/seed'
 import { OfferDetail } from '@/components/detail/OfferDetail'
+import { safeJsonLd } from '@/lib/json-ld'
 
 export async function generateStaticParams() {
   return SEED_OFFERS.map((offer) => ({ slug: offer.slug }))
@@ -54,7 +55,7 @@ export default async function OfferDetailPage({ params }: { params: { slug: stri
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       )}
       <OfferDetail slug={slug} />

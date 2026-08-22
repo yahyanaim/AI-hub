@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { OffersView } from '@/components/listing/OffersView'
+import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = 'https://aihubtools.vercel.app'
 
@@ -26,7 +27,7 @@ export default function OffersPage() {
   return (
     <>
       <Script id="schema-collection-offers" type="application/ld+json" dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
+        __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'Offers & Deals for Developers',

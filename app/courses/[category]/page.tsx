@@ -4,6 +4,7 @@ import { redirect, notFound } from 'next/navigation'
 import { SEED_COURSES } from '@/lib/seed'
 import { COURSE_CATEGORY_LABELS } from '@/types'
 import { CoursesView } from '@/components/listing/CoursesView'
+import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = 'https://aihubtools.vercel.app'
 
@@ -50,7 +51,7 @@ export default function CourseCategoryPage({ params }: { params: { category: str
   return (
     <>
       <Script id={`schema-collection-courses-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
+        __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: `${label} Courses`,

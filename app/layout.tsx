@@ -11,6 +11,7 @@ import { RepoDetailModal } from '@/components/detail/RepoDetail'
 import { CourseDetailModal } from '@/components/detail/CourseDetail'
 import { Analytics } from '@vercel/analytics/react'
 import { ChatBot } from '@/components/chat/ChatBot'
+import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = 'https://aihubtools.vercel.app'
 
@@ -114,7 +115,7 @@ export default function RootLayout({
           id="schema-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLd({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'AI Hunt',
@@ -140,7 +141,7 @@ export default function RootLayout({
           id="schema-organization"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLd({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'AI Hunt',
@@ -160,7 +161,7 @@ export default function RootLayout({
           id="schema-breadcrumb"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: safeJsonLd({
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
               name: 'AI Hunt Breadcrumb',

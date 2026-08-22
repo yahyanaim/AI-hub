@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { ReposView } from '@/components/listing/ReposView'
+import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = 'https://aihubtools.vercel.app'
 
@@ -26,7 +27,7 @@ export default function EditToolsPage() {
   return (
     <>
       <Script id="schema-collection-repos" type="application/ld+json" dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
+        __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'Open Source GitHub Repos & LLM Tools',

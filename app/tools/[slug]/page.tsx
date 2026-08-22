@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { SEED_TOOLS, SEED_USERS } from '@/lib/seed'
 import { ToolDetail } from '@/components/detail/ToolDetail'
+import { safeJsonLd } from '@/lib/json-ld'
 
 export async function generateStaticParams() {
   return SEED_TOOLS.map((tool) => ({ slug: tool.slug }))
@@ -64,7 +65,7 @@ export default async function ToolDetailPage({
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       )}
       <ToolDetail slug={slug} />

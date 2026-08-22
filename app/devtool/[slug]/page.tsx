@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { SEED_DEV_TOOLS, SEED_USERS } from '@/lib/seed'
 import { DevToolDetail } from '@/components/detail/DevToolDetail'
+import { safeJsonLd } from '@/lib/json-ld'
 
 export async function generateStaticParams() {
   return SEED_DEV_TOOLS.map((tool) => ({ slug: tool.slug }))
@@ -64,7 +65,7 @@ export default async function DevToolDetailPage({
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       )}
       <DevToolDetail slug={slug} />

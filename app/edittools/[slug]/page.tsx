@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { SEED_REPOS } from '@/lib/seed'
 import { RepoDetail } from '@/components/detail/RepoDetail'
+import { safeJsonLd } from '@/lib/json-ld'
 
 export async function generateStaticParams() {
   return SEED_REPOS.map((repo) => ({ slug: repo.slug }))
@@ -59,7 +60,7 @@ export default async function EditToolDetailPage({
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       )}
       <RepoDetail slug={slug} />
