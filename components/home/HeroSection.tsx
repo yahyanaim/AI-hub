@@ -49,10 +49,12 @@ interface HeroSectionProps {
   toolCount: number
   promptCount: number
   repoCount: number
+  courseCount: number
+  offerCount: number
 }
 
-export function HeroSection({ onSearch, toolCount, promptCount, repoCount }: HeroSectionProps) {
-  const totalCount = toolCount + promptCount + repoCount
+export function HeroSection({ onSearch, toolCount, promptCount, repoCount, courseCount, offerCount }: HeroSectionProps) {
+  const totalCount = toolCount + promptCount + repoCount + courseCount + offerCount
 
   return (
     <section className="relative overflow-hidden py-16 md:py-24">

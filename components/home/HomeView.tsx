@@ -10,7 +10,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { motion } from 'framer-motion'
 
 export function HomeView() {
-  const { tools, devTools, prompts, repos, setPaletteOpen } = useApp()
+  const { tools, devTools, prompts, repos, courses, offers, setPaletteOpen } = useApp()
 
   const todaysTools = [...tools]
     .sort((a, b) => b.upvotes - a.upvotes)
@@ -32,6 +32,8 @@ export function HomeView() {
         toolCount={tools.length}
         promptCount={devTools.length}
         repoCount={repos.length}
+        courseCount={courses.length}
+        offerCount={offers.length}
       />
 
       {/* Main content with sidebar */}
