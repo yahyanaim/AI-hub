@@ -169,7 +169,6 @@ export default function RootLayout({
                 { '@type': 'ListItem', position: 2, name: 'AI Tools', item: `${baseUrl}/tools` },
                 { '@type': 'ListItem', position: 3, name: 'Dev Tools', item: `${baseUrl}/devtool` },
                 { '@type': 'ListItem', position: 4, name: 'Courses', item: `${baseUrl}/courses` },
-                { '@type': 'ListItem', position: 5, name: 'Leaderboard', item: `${baseUrl}/leaderboard` },
               ],
             }),
           }}

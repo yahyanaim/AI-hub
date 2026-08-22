@@ -23,7 +23,6 @@ const NAV_LINKS = [
   { href: '/edittools', label: 'Editing Tools' },
   { href: '/courses', label: 'Courses' },
   { href: '/offers', label: 'Offers' },
-  { href: '/leaderboard', label: 'Leaderboard' },
 ]
 
 export function Navbar() {

@@ -44702,50 +44702,50 @@ export const SEED_OFFERS: Offer[] = [
   },
   {
     id: 'o111',
-    slug: 'orange-ai-garden-technopark',
-    name: 'Orange Maroc + Technopark AI Garden',
-    tagline: 'Orange cloud, connectivity, cybersec + pilot contracts — GITEX 2026',
+    slug: 'reseau-entreprendre-maroc',
+    name: 'Réseau Entreprendre Maroc',
+    tagline: 'Free 1-on-1 mentoring by 250 business leaders + honor loan (prêt d\'honneur)',
     description:
-      'Orange Maroc + Technopark AI Garden (signed GITEX Africa 2026): Orange cloud, connectivity, cybersec, business use cases, pilot contracts with Orange engineering + shared infra. Telco distribution to millions is key for MENA AI startups. Apply via Technopark.',
-    url: 'https://techafricanews.com/2026/04/09/orange-maroc-partners-technopark-to-accelerate-ai-and-digital-transformation/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=orange.ma&sz=64',
+      'Réseau Entreprendre Maroc pairs you with an experienced volunteer business leader for free, personalized, long-term mentoring to structure and grow your company. Financing comes as an interest-free honor loan (prêt d\'honneur) — 44M+ MAD granted to date. Track record since 2005: 450 entrepreneurs accompanied, 3,000+ jobs created or saved. Open to Moroccan founders at creation or growth stage; apply online via the deposit-a-request form.',
+    url: 'https://www.reseau-entreprendre.org/maroc/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=reseau-entreprendre.org&sz=64',
     category: 'competition',
-    tags: ['orange', 'ai-garden', 'technopark', 'pilot', 'telco'],
+    tags: ['reseau-entreprendre', 'mentoring', 'pret-honneur', 'morocco', 'funding'],
     pricing: 'free',
     steps: [
       {
-        title: 'Be Technopark incubated',
+        title: 'Submit your application',
         description:
-          'Join Technopark to be eligible for AI Garden.',
-        url: 'https://technopark.ma/',
+          'Fill the online request form — project presentation, stage and needs. No cost to apply.',
+        url: 'https://www.reseau-entreprendre.org/maroc/deposer-une-demande/',
       },
       {
-        title: 'Co-build pilot with Orange',
+        title: 'Meet the selection committee',
         description:
-          'Orange engineering + shared infra + business use cases.',
+          'Present your project to member business leaders; selected founders get matched with a dedicated mentor.',
       },
       {
-        title: 'Scale to telco distribution',
+        title: 'Get mentored + honor loan',
         description:
-          'Pilot → distribution to Orange millions + government/enterprise.',
+          'Free long-term 1-on-1 accompaniment from a veteran CEO plus an interest-free prêt d\'honneur when eligible.',
       },
     ],
-    nameAr: 'Orange المغرب + حديقة AI تكنوبارك',
-    taglineAr: 'سحابة Orange واتصال وأمن + عقود تجريبية',
-    descriptionAr: 'Orange + تكنوبارك حديقة AI: سحابة واتصال وأمن وعقود تجريبية مع مهندسي Orange.',
+    nameAr: 'شبكة رجال الأعمال المغرب',
+    taglineAr: 'تأطير مجاني من 250 قائد أعمال + قرض شرفي بدون فائدة',
+    descriptionAr: 'شبكة رجال الأعمال المغرب تربطك برائد أعمال متمرس متطوع للتأطير المجاني الشخصي طويل المدى، مع تمويل على شكل قرض شرفي بدون فوائد تجاوز 44 مليون درهم. منذ 2005: 450 رائد أعمال و3000 منصب شغل. مفتوحة للمؤسسين المغاربة في مرحلة الإنشاء أو النمو.',
     stepsAr: [
       {
-        title: 'كن محتضناً في تكنوبارك',
-        description: 'انضم لتكنوبارك لتكون مؤهلاً.',
-        url: 'https://technopark.ma/',
+        title: 'قدّم طلبك',
+        description: 'املأ استمارة الطلب عبر الإنترنت — التقديم مجاني.',
+        url: 'https://www.reseau-entreprendre.org/maroc/deposer-une-demande/',
       },
       {
-        title: 'ابنِ تجربة مع Orange',
-        description: 'هندسة Orange + بنية مشتركة.',
+        title: 'قابل لجنة الانتقاء',
+        description: 'اعرض مشروعك على أعضاء الشبكة؛ المقبولون يحصلون على مرشد مخصص.',
       },
       {
-        title: 'توسّع عبر شبكة الاتصالات',
-        description: 'تجربة → توزيع لملايين مشتركي Orange.',
+        title: 'استفد من التأطير والقرض الشرفي',
+        description: 'مرافقة فردية مجانية طويلة المدى + قرض شرفي بدون فائدة عند الأهلية.',
       },
     ],
     upvotes: 9,
@@ -45074,6 +45074,61 @@ export const SEED_OFFERS: Offer[] = [
     ],
     upvotes: 11,
     bookmarks: 13,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o118',
+    slug: 'f6s-startup-programs',
+    name: 'F6S — Startup Programs & Grants Hub',
+    tagline: 'One profile, thousands of startup programs, grants, credits & accelerators worldwide',
+    description:
+      'F6S is the platform where founders apply to thousands of startup programs: accelerators, grants, competitions, free credits (AWS, Google, Microsoft…) and investor matching — including many programs open to Moroccan and MENA founders. Create one free founder profile and apply to multiple programs without re-filling your deck each time. Also useful to discover which international programs are currently accepting applications.',
+    url: 'https://f6s.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=f6s.com&sz=64',
+    category: 'competition',
+    tags: ['f6s', 'grants', 'accelerators', 'credits', 'startups'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create your founder profile',
+        description:
+          'Sign up free on F6S and complete your startup profile once — pitch, team, stage.',
+        url: 'https://f6s.com',
+      },
+      {
+        title: 'Find matching programs',
+        description:
+          'Search programs open for applications: grants, accelerators, credits and competitions filtered by stage and region.',
+      },
+      {
+        title: 'Apply with one click',
+        description:
+          'Apply to programs using your saved profile — no repeated forms; track application status in your dashboard.',
+      },
+    ],
+    nameAr: 'F6S — منصة برامج ومنح الشركات الناشئة',
+    taglineAr: 'ملف واحد لآلاف البرامج والمنح والحاضنات وأرصدة مجانية عالمياً',
+    descriptionAr: 'F6S هي المنصة التي يتقدم منها المؤسسون إلى آلاف البرامج: حاضنات ومنح ومسابقات وأرصدة مجانية (AWS وGoogle وMicrosoft) ومطابقة مع المستثمرين — بما فيها برامج مفتوحة للمؤسسين المغاربة والمِنطقة. أنشئ ملفاً مجانياً وقدّم لعدة برامج دون إعادة ملء ملفك في كل مرة.',
+    stepsAr: [
+      {
+        title: 'أنشئ ملف المؤسس',
+        description: 'سجّل مجاناً وأكمل ملف شركتك مرة واحدة — العرض والفريق والمرحلة.',
+        url: 'https://f6s.com',
+      },
+      {
+        title: 'ابحث عن البرامج المناسبة',
+        description: 'صفّ البرامج المفتوحة للتقديم: منح وحاضنات وأرصدة ومسابقات حسب المرحلة والمنطقة.',
+      },
+      {
+        title: 'قدّم بضغطة واحدة',
+        description: 'قدّم عبر ملفك المحفوظ وتابع حالة الطلبات من لوحة التحكم.',
+      },
+    ],
+    upvotes: 13,
+    bookmarks: 15,
     submittedBy: 'u6',
     featured: false,
     createdAt: daysAgo(0),
