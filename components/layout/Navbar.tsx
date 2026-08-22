@@ -24,6 +24,7 @@ const NAV_LINKS = [
   { href: '/edittools', label: 'Editing Tools' },
   { href: '/courses', label: 'Courses' },
   { href: '/offers', label: 'Offers' },
+  { href: '/support', label: 'Support' },
 ]
 
 export function Navbar() {
@@ -76,12 +77,13 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                    'flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                     active
                       ? 'bg-secondary text-foreground'
                       : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
                   )}
                 >
+                  {link.href === '/support' && <Coffee className="h-3.5 w-3.5 text-brand-orange" />}
                   {link.label}
                 </Link>
               )
@@ -114,17 +116,6 @@ export function Navbar() {
           >
             <Search className="h-5 w-5" />
           </button>
-
-          {/* Support (Buy me a coffee) */}
-          <Link
-            href="/support"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-brand-orange/40 hover:text-brand-orange"
-            aria-label="Support AI Hunt — Buy me a coffee"
-            title="Buy me a coffee"
-          >
-            <Coffee className="h-4 w-4" />
-            <span className="hidden lg:inline">Support</span>
-          </Link>
 
           {/* Submit button */}
           <Link href="/submit" className="hidden sm:inline-flex rounded-full border border-brand-orange px-4 py-1.5 text-sm font-semibold text-brand-orange transition-all hover:bg-brand-orange/10 active:scale-[0.97]">
