@@ -15,15 +15,35 @@ npm start            # serve the production build
 
 ## Features
 
-- **48 courses** across Python, JavaScript, Computer Science, Frontend, Backend, DevOps, AI/ML, Cloud, and Mobile
-- **Course detail pages** with structured roadmaps, tags, and links to YouTube/freeCodeCamp sources
+- **1,800+ curated entries** — AI tools, dev tools, open-source repos, courses, offers & scholarships
+- **Course detail pages** with structured roadmaps, tags, and links to sources
 - **PDF roadmap export** — 3 template styles (Simple, Professional, Detailed)
-- **Course popup modal** with embedded resources and "Visit course" link
 - **Upvote & bookmark** system with localStorage persistence
 - **Category filtering** with flex-wrap chips (no horizontal scroll)
-- **Leaderboard** — weekly / monthly / all-time rankings
-- **Command palette** (⌘K) instant search
+- **Command palette** (⌘K) instant search across everything, incl. Arabic titles
 - **User profiles** — submitted / upvoted / bookmarked tabs
+- **AI Career Advisor** chat backed by NVIDIA inference
+
+## How data works (read before deploying)
+
+This project has **no shared backend or database**. Everything you see ships as
+static seed data from [`lib/seed/`](lib/seed/) and is rendered client-side.
+
+What this means in practice:
+
+- **Votes, bookmarks, submissions, and comments are stored per-browser** in
+  `localStorage`. What one visitor submits or upvotes is **not visible to anyone else**
+  and does not change the numbers other visitors see.
+- Clearing site data (or using another browser/device) resets all personal
+  contributions.
+- Seed content always comes fresh from the code on every deploy — user edits never
+  overwrite it (`lib/store.tsx` persists only small user deltas under key
+  `ai-hunt-state-v4`).
+- `/api/chat` is a stateless streaming proxy to an external LLM API — nothing said
+  there is stored server-side.
+
+If you need real multi-user persistence, you'll want to add a database and swap the
+store layer — the UI code is already isolated behind `AppProvider`.
 
 ## Tech stack
 
@@ -39,33 +59,32 @@ npm start            # serve the production build
 
 ## Data
 
-All course data lives in `lib/seed.ts` — 48 entries sourced from:
-- **CS50** (Harvard's Intro to CS, Python, AI, Web, SQL)
-- **MIT OCW** (6.100L, 6.NULL, Missing Semester)
-- **Stanford** (CS106B, CS144)
-- **freeCodeCamp** (full YouTube courses on Python, React, Django, TypeScript, Docker, AWS, etc.)
-- **University of Michigan** (Dr. Chuck's Python/Django/SQL courses)
+All content lives in `lib/seed/` as typed TypeScript modules (`tools.ts`,
+`dev-tools.ts`, `repos.ts`, `courses.ts`, `offers.ts`, `scholarship` offers included),
+re-exported by `lib/seed/index.ts` and validated in CI by
+`node scripts/validate-seed.mjs` (duplicate id/slug guard).
 
 ## File structure
 
 ```
 ai-hunt/
-├── app/                # Routes, layout, globals.css
+├── app/                # Routes, layout, globals.css, api/chat
 ├── components/
-│   ├── cards/          # CourseCard, PromptCard, RepoCard
-│   ├── detail/         # CourseDetail, PromptPlayground
-│   ├── home/           # HomeView
-│   ├── leaderboard/    # LeaderboardView
-│   ├── listing/        # ListingView + per-type views
+│   ├── cards/          # ToolCard, DevToolCard, RepoCard, CourseCard, OfferCard…
+│   ├── detail/         # Per-type detail views + comment thread
+│   ├── home/           # HeroSection, HomeView, Sidebar
+│   ├── listing/        # ListingView + per-type views (pagination, filters)
 │   ├── profile/        # ProfileView
-│   ├── search/         # CommandPalette, SearchView
-│   ├── submit/         # SubmitForm (4-step wizard)
-│   ├── interactive/    # UpvoteButton, BookmarkButton
-│   ├── layout/         # Navbar, Footer, FilterBar, ThemeManager
-│   └── ui/             # Avatar, Badges, Logo, Markdown
+│   ├── search/         # CommandPalette (⌘K), SearchView
+│   ├── submit/         # SubmitForm wizard + donation gate
+│   ├── chat/           # AI advisor chatbot
+│   ├── layout/         # Navbar, Footer, SupportPage, FilterBar…
+│   └── ui/             # Avatar, Badges, Logo, Markdown…
 ├── lib/
-│   ├── store.tsx       # AppProvider context + localStorage
-│   ├── seed.ts         # 48 courses seed data
+│   ├── store.tsx       # AppProvider context — seed data + localStorage user deltas
+│   ├── seed/           # Static content modules (re-exported via index.ts)
+│   ├── json-ld.ts      # Safe JSON-LD serializer for schema tags
 │   └── utils.ts        # Helpers
+├── scripts/            # validate-seed / dedupe-seed / split-seed
 └── types/index.ts
 ```
