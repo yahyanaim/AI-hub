@@ -7122,7 +7122,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'The Chinese Government Scholarship (CSC) covers full tuition, on-campus housing, medical insurance and a monthly stipend (≈2,500–3,500 RMB) for bachelor\'s, master\'s and PhD studies at 280+ Chinese universities. English-taught programs are widely available and most do not require IELTS. Moroccan students apply either through the Chinese Embassy in Rabat (bilateral track) or directly to universities (Type B) via the official Campus China portal. Annual window: roughly December–April.',
     url: 'https://www.campuschina.org/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=campuschina.org&sz=64',
+    logoUrl: '/logos/csc.svg',
     category: 'scholarship',
     tags: ['china', 'scholarship', 'full-ride', 'csc', 'study-abroad'],
     pricing: 'free',
@@ -7562,7 +7562,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'The Moroccan Ministry of Higher Education (ENSSUP) runs the national scholarship system for public-university laureates: the Bourse de Mérite funds the top-ranked graduates to continue master\'s and PhD studies in prestigious universities abroad, while Bourses de Fidélité/Excellence support students continuing in Moroccan institutions. Selection is strictly based on yearly rankings and diploma honors; calls open each summer after results via your academy and the ministry platform.',
     url: 'https://www.enssup.gov.ma/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=enssup.gov.ma&sz=64',
+    logoUrl: '/logos/enssup.svg',
     category: 'scholarship',
     tags: ['morocco', 'government', 'merit', 'bourse', 'laureats'],
     pricing: 'free',
@@ -7617,7 +7617,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Fondation OCP supports Morocco\'s future engineers and scientists through excellence scholarships and academic partnerships (notably with UM6P): funding for engineering cycles, master\'s and PhD programs in Morocco and abroad, in fields aligned with the group\'s ecosystem — mining, chemistry, agriculture, data/AI, energy and industrial management. Calls target high-potential students, often with social-criteria considerations alongside academic merit.',
     url: 'https://www.ocpgroup.ma/fondation-ocp',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=ocpgroup.ma&sz=64',
+    logoUrl: '/logos/ocp.svg',
     category: 'scholarship',
     tags: ['morocco', 'ocp', 'engineering', 'excellence', 'scholarship'],
     pricing: 'free',
@@ -7672,7 +7672,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'The Phosboucraâ Foundation (OCP Group) runs education programs dedicated to the southern provinces (Laâyoune-Sakia El Hamra, Dakhla-Oued Ed-Dahab, Guelmim-Oued Noun…): excellence scholarships for licence, master\'s and engineering studies in Morocco and abroad, plus language preparation and mentorship tracks. Goal: build local talent pipelines in management, engineering, and digital skills.',
     url: 'https://www.phosboucraafoundation.org/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=phosboucraafoundation.org&sz=64',
+    logoUrl: '/logos/phosboucraa.svg',
     category: 'scholarship',
     tags: ['morocco', 'southern-provinces', 'scholarship', 'foundation'],
     pricing: 'free',
@@ -7940,6 +7940,73 @@ export const SEED_OFFERS: Offer[] = [
     bookmarks: 19,
     submittedBy: 'u6',
     featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+  {
+    id: 'o137',
+    slug: 'datacamp-free-access-week',
+    name: 'DataCamp Free Access Week — Aug 24–30',
+    tagline: '700+ premium data & AI courses, 160+ projects and certifications — free for one week, no credit card',
+    description:
+      'DataCamp opens its entire Premium platform for free from Aug 24 to Aug 30, 2026: 700+ interactive courses (Python, SQL, R, Power BI, Claude Code, OpenAI API, MLOps…), 160+ real-world projects for your portfolio, skill tracks, and industry-recognized certifications. Everything runs in the browser — nothing to install. Normally $39/month; during Free Access Week you get it all with just a free account. Our advice below maps exactly what to take based on your level.',
+    url: 'https://www.datacamp.com/campaign/free-access-week-august-2026',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=datacamp.com&sz=64',
+    category: 'learning',
+    tags: ['datacamp', 'free-week', 'python', 'sql', 'ai', 'limited-time'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create your account NOW (Aug 24–30)',
+        description:
+          'Sign up free at the campaign page during the window — Premium unlocks instantly, no credit card required.',
+        url: 'https://www.datacamp.com/campaign/free-access-week-august-2026',
+      },
+      {
+        title: 'Beginners — start here',
+        description:
+          'Intro to Python · Intro to SQL · Introduction to Power BI · Understanding Cloud Computing · Claude Code 101. Finish Intro to Python first — everything else builds on it.',
+        url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science',
+      },
+      {
+        title: 'Intermediate — level up fast',
+        description:
+          'Supervised Learning with scikit-learn · Working with the OpenAI API · Prompt Engineering with LangChain · Intro to Deep Learning with PyTorch · Software Development with Claude Code.',
+        url: 'https://www.datacamp.com/courses/supervised-learning-with-scikit-learn',
+      },
+      {
+        title: 'Advanced + portfolio & certificates',
+        description:
+          'Grab the expensive stuff you would never pay for casually: MLOps with Airflow/MLflow, intro to dbt, Winning a Kaggle Competition — plus real-world projects and certification exams (Data Analyst / AI Engineer) while access lasts.',
+      },
+    ],
+    nameAr: 'أسبوع DataCamp المجاني — 24 إلى 30 غشت',
+    taglineAr: 'أكثر من 700 دورة بيانات وذكاء اصطناعي و160 مشروعاً وشهادات — مجاناً لأسبوع كامل وبطاقة بنكية غير مطلوبة',
+    descriptionAr: 'تفتح DataCamp منصتها المدفوعة بالكامل مجاناً من 24 إلى 30 غشت 2026: أكثر من 700 دورة تفاعلية (بايثون، SQL، Power BI، Claude Code، OpenAI API، MLOps…) و160 مشروعاً واقعياً وشهادات معتمدة. كل شيء يعمل في المتصفح بدون تثبيت — عادة 39$ شهرياً. نصائحنا أدناه تحدد بالضبط ما تأخذه حسب مستواك.',
+    stepsAr: [
+      {
+        title: 'أنشئ حسابك الآن (24–30 غشت)',
+        description: 'سجّل مجاناً في صفحة الحملة خلال الفترة — يُفتح البريميوم فوراً بدون بطاقة بنكية.',
+        url: 'https://www.datacamp.com/campaign/free-access-week-august-2026',
+      },
+      {
+        title: 'للمبتدئين — ابدأ هنا',
+        description: 'Intro to Python · Intro to SQL · Power BI · Claude Code 101. أكمل Intro to Python أولاً.',
+        url: 'https://www.datacamp.com/courses/intro-to-python-for-data-science',
+      },
+      {
+        title: 'للمتوسطين — ارتقِ بسرعة',
+        description: 'Supervised Learning scikit-learn · OpenAI API · Prompt Engineering LangChain · PyTorch.',
+      },
+      {
+        title: 'متقدم + المشاريع والشهادات',
+        description: 'استفد من المكلف: MLOps مع Airflow/MLflow وdbt ومسابقة Kaggle + مشاريع واختبارات الشهادات قبل انتهاء الفترة.',
+      },
+    ],
+    upvotes: 38,
+    bookmarks: 41,
+    submittedBy: 'u6',
+    featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
