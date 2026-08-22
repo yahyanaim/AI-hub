@@ -4,10 +4,10 @@ import { SupportPage } from '@/components/layout/SupportPage'
 const baseUrl = 'https://aihubtools.vercel.app'
 
 export const metadata: Metadata = {
-  title: 'Support AI Hunt — Buy me a code?',
+  title: 'Support AI Hunt — Buy me a coffee',
   description: 'Support AI Hunt via PayPal or direct bank transfer (CIH). Keep the platform free, ad-free, and independent.',
   openGraph: {
-    title: 'Support AI Hunt — Buy me a code?',
+    title: 'Support AI Hunt — Buy me a coffee',
     description: 'Support AI Hunt via PayPal or direct bank transfer (CIH).',
     url: `${baseUrl}/support`,
   },

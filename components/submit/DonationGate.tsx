@@ -64,7 +64,7 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
               </div>
 
               <h2 className="text-center font-heading text-xl font-bold text-foreground">
-                Buy me a code?
+                Buy me a coffee
               </h2>
               <p className="mt-2 text-center text-sm text-muted-foreground">
                 A small donation is required to submit. Your support keeps this project running and improving.
@@ -75,7 +75,7 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleSupport}
-                className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#0070BA] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#003087]"
+                className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
               >
                 <Mail className="h-5 w-5" />
                 Donate via PayPal

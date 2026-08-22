@@ -54,24 +54,24 @@ function CopyRow({
 
 export function SupportPage() {
   return (
-    <div className="container-page py-12">
+    <div className="container-page py-8">
       <div className="mx-auto max-w-3xl">
         {/* Hero */}
         <div className="text-center">
-          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-brand-orange/10">
-            <Code2 className="h-8 w-8 text-brand-orange" />
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-brand-orange/10">
+            <Code2 className="h-7 w-7 text-brand-orange" />
           </div>
           <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Buy me a code?
+            Buy me a coffee
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
+          <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground sm:text-base">
             AI Hunt is free and ad-free. Your support keeps it running, growing,
             and independent — every contribution matters.
           </p>
         </div>
 
         {/* Options */}
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {/* PayPal */}
           <div className="flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm">
             <div className="mb-1 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -85,7 +85,7 @@ export function SupportPage() {
               href={PAYPAL_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-[#0070BA] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#003087]"
+              className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
             >
               <Mail className="h-5 w-5" />
               Donate via PayPal
@@ -112,7 +112,7 @@ export function SupportPage() {
           </div>
         </div>
 
-        <p className="mt-10 text-center text-sm text-muted-foreground">
+        <p className="mt-6 text-center text-sm text-muted-foreground">
           شكراً لدعمك · Thank you for your support 🧡
         </p>
       </div>

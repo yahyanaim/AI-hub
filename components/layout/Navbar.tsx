@@ -115,12 +115,12 @@ export function Navbar() {
             <Search className="h-5 w-5" />
           </button>
 
-          {/* Support (Buy me a code) */}
+          {/* Support (Buy me a coffee) */}
           <Link
             href="/support"
             className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-brand-orange/40 hover:text-brand-orange"
-            aria-label="Support AI Hunt — Buy me a code"
-            title="Buy me a code?"
+            aria-label="Support AI Hunt — Buy me a coffee"
+            title="Buy me a coffee"
           >
             <Coffee className="h-4 w-4" />
             <span className="hidden lg:inline">Support</span>
