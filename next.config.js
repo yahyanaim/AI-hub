@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
+const { hosts: IMAGE_HOSTS } = require('./lib/image-hosts.json');
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: '**' },
-    ],
+    remotePatterns: IMAGE_HOSTS.map((hostname) => ({
+      protocol: 'https',
+      hostname,
+    })),
   },
 };
 

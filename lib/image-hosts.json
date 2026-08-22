@@ -1,0 +1,17 @@
+{
+  "_comment": "Single source of truth for allowed image hostnames. Used by next.config.js (next/image remotePatterns) and the submit form validation. First 9 entries come from an audit of lib/seed/*; the last 3 are pre-approved trusted hosts (GitHub avatars, YouTube thumbnails).",
+  "hosts": [
+    "icons.duckduckgo.com",
+    "www.google.com",
+    "cdn.jsdelivr.net",
+    "github.com",
+    "bolt.new",
+    "prowritingaid.com",
+    "www.cursor.com",
+    "www.deeplearning.ai",
+    "www.tokenrouter.com",
+    "avatars.githubusercontent.com",
+    "i.ytimg.com",
+    "img.youtube.com"
+  ]
+}

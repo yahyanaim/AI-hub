@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { DonationGate } from './DonationGate'
 import { useRouter } from 'next/navigation'
+import imageHosts from '@/lib/image-hosts.json'
 import {
   Wrench,
   TerminalSquare,
@@ -41,6 +42,8 @@ interface FormState {
   pricing: Pricing
 }
 
+const ALLOWED_IMAGE_HOSTS: readonly string[] = imageHosts.hosts
+
 const STEPS = ['Type', 'Source', 'Details', 'Review'] as const
 
 export function SubmitForm() {
@@ -49,6 +52,7 @@ export function SubmitForm() {
     useApp()
   const [showDonation, setShowDonation] = useState(false)
   const [pendingSubmit, setPendingSubmit] = useState(false)
+  const [logoError, setLogoError] = useState<string | null>(null)
   const [step, setStep] = useState<Step>(0)
   const [fetching, setFetching] = useState(false)
   const [tagInput, setTagInput] = useState('')
@@ -141,6 +145,20 @@ export function SubmitForm() {
   }
 
   const finishSubmit = () => {
+    // logoUrl must point at an allowlisted image host (see lib/image-hosts.json)
+    let host = ''
+    try {
+      host = new URL(form.logoUrl).hostname
+    } catch {
+      host = ''
+    }
+    if (!ALLOWED_IMAGE_HOSTS.includes(host)) {
+      setLogoError(
+        'The logo URL uses an image host we do not allow yet. Leave the URL empty to auto-generate a favicon, or contact us to request the host.'
+      )
+      return
+    }
+    setLogoError(null)
     setShowDonation(false)
     if (form.type === 'tool') {
       const tool = submitTool({
@@ -690,13 +708,20 @@ export function SubmitForm() {
               <ChevronRight className="h-4 w-4" />
             </button>
           ) : (
-            <button
-              onClick={handleSubmit}
-              className="inline-flex items-center gap-2 rounded-lg bg-brand-orange px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-orange/25 transition-all hover:bg-orange-600 hover:shadow-xl hover:shadow-brand-orange/30 active:scale-[0.97]"
-            >
-              <Check className="h-4 w-4" />
-              Submit
-            </button>
+            <div className="flex flex-col items-end gap-2">
+              {logoError && (
+                <p className="max-w-md text-right text-xs font-medium text-red-600 dark:text-red-400">
+                  {logoError}
+                </p>
+              )}
+              <button
+                onClick={handleSubmit}
+                className="inline-flex items-center gap-2 rounded-lg bg-brand-orange px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-orange/25 transition-all hover:bg-orange-600 hover:shadow-xl hover:shadow-brand-orange/30 active:scale-[0.97]"
+              >
+                <Check className="h-4 w-4" />
+                Submit
+              </button>
+            </div>
           )}
         </div>
       </div>
