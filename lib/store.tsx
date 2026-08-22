@@ -26,7 +26,24 @@ import { SEED_PROMPTS, SEED_COMMENTS } from '@/lib/seed'
 import { SEED_USERS } from '@/lib/seed-users'
 import { uuid, slugify } from '@/lib/utils'
 
-const STORAGE_KEY = 'ai-hunt-state-v3' // bump to force-clean stale localStorage when seeds remove items
+const STORAGE_KEY = 'ai-hunt-state-v4' // v4+: stores only user deltas, not seed data
+
+/**
+ * What we persist: ONLY user-specific data. Seed content (tools, courses,
+ * offers…) always comes fresh from lib/seed so code updates reach everyone.
+ */
+interface StoredDelta {
+  currentUserId: string | null
+  users: User[] // includes upvotedItems / bookmarkedItems / karma
+  recentSearches: string[]
+  addedTools: Tool[] // user-submitted items (ids not present in seed)
+  addedDevTools: DevTool[]
+  addedPrompts: Prompt[]
+  addedRepos: Repo[]
+  addedCourses: Course[]
+  addedOffers: Offer[]
+  addedComments: Comment[] // user comments on any item
+}
 
 interface PersistedState {
   tools: Tool[]
@@ -217,69 +234,98 @@ export function AppProvider({ children }: { children: ReactNode }) {
     } catch {}
   }, [offersLang])
 
-  // Hydrate from localStorage on mount
+  // Seed id registry — lets the saver strip seed items and store only user deltas
+  const seedIdsRef = useRef<Record<
+    'tools' | 'devTools' | 'prompts' | 'repos' | 'courses' | 'offers' | 'comments',
+    Set<string>
+  > | null>(null)
+
+  // Hydrate: fresh seed data from code + user deltas from localStorage on mount
   useEffect(() => {
     const load = async () => {
+      let raw: string | null = null
       try {
-        const raw = localStorage.getItem(STORAGE_KEY)
-        // Dynamically import large seed data (keeps client bundles small)
-        const seedMod = await import('@/lib/seed')
-        const seedTools = seedMod.SEED_TOOLS as Tool[]
-        const seedDevTools = seedMod.SEED_DEV_TOOLS as DevTool[]
-        const seedRepos = seedMod.SEED_REPOS as Repo[]
-        const seedCourses = seedMod.SEED_COURSES as Course[]
-        const seedOffers = seedMod.SEED_OFFERS as Offer[]
-        if (raw) {
-          const parsed = JSON.parse(raw) as PersistedState
-          // Merge seed updates into stored data (seed content wins for matching IDs, user-added items preserved)
-          const mergeSeeds = <T extends { id: string }>(stored: T[] | undefined, seedItems: T[]) =>
-            stored?.length
-              ? [
-                  ...seedItems.filter((s) => !stored.some((d) => d.id === s.id)),
-                  ...stored.filter((d) => !seedItems.some((s) => s.id === d.id)),
-                  ...seedItems.filter((s) => stored.some((d) => d.id === s.id)),
-                ]
-              : seedItems
-          setState({
-            ...parsed,
-            tools: mergeSeeds(parsed.tools, seedTools),
-            devTools: mergeSeeds(parsed.devTools, seedDevTools),
-            prompts: mergeSeeds(parsed.prompts, SEED_PROMPTS),
-            repos: mergeSeeds(parsed.repos, seedRepos),
-            courses: mergeSeeds(parsed.courses, seedCourses),
-            offers: mergeSeeds(parsed.offers, seedOffers),
-            users: parsed.users?.length ? parsed.users : SEED_USERS,
-            comments: parsed.comments ?? SEED_COMMENTS,
-          })
-        } else {
-          // First visit: use seed data directly
-          setState((prev) => ({
-            ...prev,
-            tools: seedTools,
-            devTools: seedDevTools,
-            repos: seedRepos,
-            courses: seedCourses,
-            offers: seedOffers,
-          }))
-        }
-      } catch {
-        // ignore corrupt state
+        raw = localStorage.getItem(STORAGE_KEY)
+      } catch {}
+      // Dynamically import large seed data (keeps client bundles small)
+      const seedMod = await import('@/lib/seed')
+      const seedTools = seedMod.SEED_TOOLS as Tool[]
+      const seedDevTools = seedMod.SEED_DEV_TOOLS as DevTool[]
+      const seedRepos = seedMod.SEED_REPOS as Repo[]
+      const seedCourses = seedMod.SEED_COURSES as Course[]
+      const seedOffers = seedMod.SEED_OFFERS as Offer[]
+      const seedComments = seedMod.SEED_COMMENTS as Comment[]
+
+      seedIdsRef.current = {
+        tools: new Set(seedTools.map((t) => t.id)),
+        devTools: new Set(seedDevTools.map((d) => d.id)),
+        prompts: new Set(seedMod.SEED_PROMPTS.map((p) => p.id)),
+        repos: new Set(seedRepos.map((r) => r.id)),
+        courses: new Set(seedCourses.map((c) => c.id)),
+        offers: new Set(seedOffers.map((o) => o.id)),
+        comments: new Set(seedComments.map((c) => c.id)),
       }
+
+      let delta: StoredDelta | null = null
+      if (raw) {
+        try {
+          delta = JSON.parse(raw) as StoredDelta
+        } catch {
+          delta = null // corrupt state — start clean
+        }
+      }
+
+      // Seed data always wins; only user-created extras are appended.
+      const mergeAdded = <T extends { id: string }>(seedItems: T[], added?: T[]) =>
+        added?.length
+          ? [...seedItems, ...added.filter((a) => !seedItems.some((s) => s.id === a.id))]
+          : seedItems
+
+      setState({
+        tools: mergeAdded(seedTools, delta?.addedTools),
+        devTools: mergeAdded(seedDevTools, delta?.addedDevTools),
+        prompts: mergeAdded(SEED_PROMPTS, delta?.addedPrompts),
+        repos: mergeAdded(seedRepos, delta?.addedRepos),
+        courses: mergeAdded(seedCourses, delta?.addedCourses),
+        offers: mergeAdded(seedOffers, delta?.addedOffers),
+        users: delta?.users?.length ? delta.users : SEED_USERS,
+        comments: mergeAdded(seedComments, delta?.addedComments),
+        currentUserId: delta?.currentUserId ?? null,
+        recentSearches: delta?.recentSearches ?? [],
+      })
       setHydrated(true)
     }
     load()
   }, [])
 
-  // Persist (debounced via microtask)
+  // Persist ONLY user deltas (debounced 200ms). Seed content is never written.
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   useEffect(() => {
     if (!hydrated) return
     if (saveTimer.current) clearTimeout(saveTimer.current)
     saveTimer.current = setTimeout(() => {
+      const ids = seedIdsRef.current
+      if (!ids) return
+      const delta: StoredDelta = {
+        currentUserId: state.currentUserId,
+        users: state.users, // small (~10 entries); carries votes/bookmarks/karma
+        recentSearches: state.recentSearches,
+        addedTools: state.tools.filter((t) => !ids.tools.has(t.id)),
+        addedDevTools: state.devTools.filter((d) => !ids.devTools.has(d.id)),
+        addedPrompts: state.prompts.filter((p) => !ids.prompts.has(p.id)),
+        addedRepos: state.repos.filter((r) => !ids.repos.has(r.id)),
+        addedCourses: state.courses.filter((c) => !ids.courses.has(c.id)),
+        addedOffers: state.offers.filter((o) => !ids.offers.has(o.id)),
+        addedComments: state.comments.filter((c) => !ids.comments.has(c.id)),
+      }
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-      } catch {
-        // storage full / unavailable
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(delta))
+      } catch (err) {
+        console.warn(
+          '[AI Hunt] Could not save your changes locally (storage full or blocked). ' +
+            'New submissions/votes may be lost after refresh.',
+          err
+        )
       }
     }, 200)
   }, [state, hydrated])
