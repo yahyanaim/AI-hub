@@ -74,7 +74,7 @@ export function SupportReminder() {
         <h3 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
           AI Hub Tools is 100% free
         </h3>
-        <p className="mt-2 text-base text-muted-foreground">
+        <p className="mt-2 text-center text-base text-muted-foreground">
           No ads · No tracking · No data collection — ever.
         </p>
 
@@ -103,7 +103,7 @@ export function SupportReminder() {
           </button>
         </div>
 
-        <p className="mt-3.5 text-xs text-muted-foreground/80">
+        <p className="mt-3.5 text-center text-xs text-muted-foreground/80">
           Even one share makes a difference 🧡
         </p>
       </div>
