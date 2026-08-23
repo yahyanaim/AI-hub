@@ -8013,4 +8013,59 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o138',
+    slug: 'openship-open-source-deployment',
+    name: 'Openship - Open-Source Deployment Platform',
+    tagline: 'Deploy like on Vercel but self-hosted - CLI, dashboard or desktop, zero lock-in',
+    description:
+      'Openship is an open-source deployment platform: install, connect and ship apps from a CLI, web dashboard or desktop app - on their cloud or fully self-hosted on your own servers. Plain Docker containers and standard manifests (openship.json reviewed in pull requests like the rest of your code), automatic HTTPS via Let\'s Encrypt, telemetry off by default, and Apache 2.0 licensing. Move projects between machines freely - no vendor lock-in, ever. A genuine open alternative for developers who want Vercel-style workflows without giving up control.',
+    url: 'https://openship.io',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=openship.io&sz=64',
+    category: 'tool',
+    tags: ['openship', 'deployment', 'self-hosted', 'open-source', 'docker'],
+    pricing: 'open-source',
+    steps: [
+      {
+        title: 'Pick cloud or self-hosted',
+        description:
+          'Use Openship Cloud to start instantly, or run the platform on your own server (Linux/macOS/Windows, ARM & x86).',
+        url: 'https://openship.io',
+      },
+      {
+        title: 'Connect and configure',
+        description:
+          'Install the CLI or desktop app, connect a server, and describe builds, env vars, domains and services in openship.json.',
+      },
+      {
+        title: 'Ship and stay free',
+        description:
+          'Deploy with one command - containers, certificates and domains are managed automatically; leave or migrate any time with zero lock-in.',
+      },
+    ],
+    nameAr: 'أوبن شيب - منصة نشر مفتوحة المصدر',
+    taglineAr: 'انشر تطبيقاتك مثل Vercel لكن على سيرفرك - CLI أو لوحة ويب أو تطبيق سطح مكتب، بدون أي حصر',
+    descriptionAr: 'أوبن شيب منصة نشر مفتوحة المصدر: ثبّت واربط وانشر تطبيقاتك عبر CLI أو لوحة ويب أو تطبيق سطح مكتب - على السحابة أو بالكامل على سيرفراتك الخاصة. حاويات Docker قياسية وملفات openship.json تُراجع في Pull Requests مثل بقية الكود، شهادات HTTPS تلقائية وتتبع معطّل افتراضياً ورخصة Apache 2.0 - انقل مشاريعك بحرية بدون احتكار.',
+    stepsAr: [
+      {
+        title: 'اختر سحابياً أو ذاتي الاستضافة',
+        description: 'ابدأ فوراً مع Openship Cloud أو شغّل المنصة على سيرفرك الخاص (Linux/macOS/Windows).',
+        url: 'https://openship.io',
+      },
+      {
+        title: 'اربط وجهّز الإعدادات',
+        description: 'ثبّت CLI أو تطبيق سطح المكتب ووصف البناء والمتغيرات والدومينات في openship.json.',
+      },
+      {
+        title: 'انشر وابقَ حرّاً',
+        description: 'انشر بأمر واحد - الحاويات والشهادات والدومينات تدار تلقائياً وهاجر متى شئت بدون احتكار.',
+      },
+    ],
+    upvotes: 17,
+    bookmarks: 15,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
