@@ -7616,7 +7616,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Excellence scholarships for Moroccan engineers & scientists - OCP Group foundation',
     description:
       'Fondation OCP supports Morocco\'s future engineers and scientists through excellence scholarships and academic partnerships (notably with UM6P): funding for engineering cycles, master\'s and PhD programs in Morocco and abroad, in fields aligned with the group\'s ecosystem - mining, chemistry, agriculture, data/AI, energy and industrial management. Calls target high-potential students, often with social-criteria considerations alongside academic merit.',
-    url: 'https://www.ocpgroup.ma/fondation-ocp',
+    url: 'https://www.ocpfoundation.org/en',
     logoUrl: '/logos/ocp.svg',
     category: 'scholarship',
     tags: ['morocco', 'ocp', 'engineering', 'excellence', 'scholarship'],
@@ -7626,7 +7626,7 @@ export const SEED_OFFERS: Offer[] = [
         title: 'Follow the foundation calls',
         description:
           'Scholarship campaigns are announced on the OCP Foundation pages when intakes open - requirements vary per program.',
-        url: 'https://www.ocpgroup.ma/fondation-ocp',
+        url: 'https://www.ocpfoundation.org/en/education-en',
       },
       {
         title: 'Build a merit + impact file',
@@ -7646,7 +7646,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'تابع دعوات المؤسسة',
         description: 'تُعلن الحملات على صفحات مؤسسة OCP عند انفتاح الإدخالات بحسب كل برنامج.',
-        url: 'https://www.ocpgroup.ma/fondation-ocp',
+        url: 'https://www.ocpfoundation.org/ar',
       },
       {
         title: 'جهّز ملف جدارة وأثر',
