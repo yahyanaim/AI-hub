@@ -1,6 +1,8 @@
 'use client'
 
 import { useMemo, useState, useEffect, useRef } from 'react'
+import { Suspense } from 'react'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { SearchX, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
 import { CardGrid } from '@/components/cards/CardPrimitives'
@@ -54,6 +56,8 @@ export interface ListingConfig {
   subcategoryLabel?: string
   subcategoryFilter?: (item: any, subcategory: string) => boolean
   initialCategory?: string
+  /** Mirror the selected category into ?category=<key> so filters are shareable */
+  syncCategoryToUrl?: boolean
   onCategoryChange?: (category: string) => void
 }
 
@@ -71,7 +75,7 @@ interface ListingViewProps<T> {
   pageSize?: number
 }
 
-export function ListingView<T extends { id: string }>({
+function ListingViewInner<T extends { id: string }>({
   items,
   config,
   renderCard,
@@ -88,9 +92,18 @@ export function ListingView<T extends { id: string }>({
   const storageKey = `listing-view:${config.itemLabel ?? config.title ?? 'default'}`
   const [saved] = useState<SavedListingState>(() => loadSavedState(storageKey))
 
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const urlCategory = searchParams.get('category')
+  const validUrlCategory =
+    config.syncCategoryToUrl && urlCategory && config.categoryOptions.some((o) => o.value === urlCategory)
+      ? urlCategory
+      : null
+
   const [sort, setSort] = useState<SortKey>(saved.sort ?? 'trending')
   const [category, setCategory] = useState(
-    config.initialCategory ?? saved.category ?? 'all'
+    config.initialCategory ?? validUrlCategory ?? saved.category ?? 'all'
   )
   const [pricing, setPricing] = useState(saved.pricing ?? 'all')
   const [language, setLanguage] = useState(saved.language ?? 'all')
@@ -154,6 +167,7 @@ export function ListingView<T extends { id: string }>({
   // React to external category changes (skip first run to preserve restored state)
   const firstCategoryRun = useRef(true)
   useEffect(() => {
+    if (config.syncCategoryToUrl) return // URL drives category instead
     if (firstCategoryRun.current) {
       firstCategoryRun.current = false
       return
@@ -161,7 +175,33 @@ export function ListingView<T extends { id: string }>({
     const next = config.initialCategory ?? 'all'
     setCategory(next)
     setPage(1)
-  }, [config.initialCategory])
+  }, [config.initialCategory, config.syncCategoryToUrl])
+
+  // Follow ?category= in the URL when syncing is enabled
+  const firstUrlRun = useRef(true)
+  useEffect(() => {
+    if (!config.syncCategoryToUrl) return
+    if (firstUrlRun.current) {
+      firstUrlRun.current = false
+      return
+    }
+    if (validUrlCategory && validUrlCategory !== category) {
+      setCategory(validUrlCategory)
+      setPage(1)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validUrlCategory, config.syncCategoryToUrl])
+
+  const setCategoryWithUrl = (v: string) => {
+    changeFilter(setCategory, v)
+    if (config.syncCategoryToUrl) {
+      const params = new URLSearchParams(searchParams.toString())
+      if (v === 'all') params.delete('category')
+      else params.set('category', v)
+      const qs = params.toString()
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
+    }
+  }
 
   const filtered = useMemo(() => {
     let arr = [...items]
@@ -228,6 +268,12 @@ export function ListingView<T extends { id: string }>({
     setLanguage('all')
     setSort('trending')
     setPage(1)
+    if (config.syncCategoryToUrl && urlCategory) {
+      const params = new URLSearchParams(searchParams.toString())
+      params.delete('category')
+      const qs = params.toString()
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
+    }
   }
 
   const changeFilter = <T,>(setter: (v: T) => void, value: T) => {
@@ -279,7 +325,7 @@ export function ListingView<T extends { id: string }>({
           options={[{ value: 'all', label: 'All' }, ...config.categoryOptions]}
           value={category}
           onChange={(v) => {
-            changeFilter(setCategory, v)
+            setCategoryWithUrl(v)
             config.onCategoryChange?.(v)
           }}
         />
@@ -375,5 +421,17 @@ export function ListingView<T extends { id: string }>({
         </div>
       )}
     </div>
+  )
+}
+
+/**
+ * Suspense boundary lives here (not in each page) because the inner component
+ * calls useSearchParams — required for static prerendering in Next 14.
+ */
+export function ListingView<T extends { id: string }>(props: ListingViewProps<T>) {
+  return (
+    <Suspense fallback={<div className="min-h-[60vh]" aria-hidden />}>
+      <ListingViewInner {...props} />
+    </Suspense>
   )
 }

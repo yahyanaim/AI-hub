@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { SITE_URL } from '@/lib/site'
 import Script from 'next/script'
 import { ToolsView } from '@/components/listing/ToolsView'
@@ -37,7 +38,9 @@ export default function ToolsPage() {
           about: { '@type': 'Thing', name: 'AI Tools' },
         }),
       }} />
-      <ToolsView />
+      <Suspense fallback={<div className="container-page py-16 text-center text-muted-foreground">Loading…</div>}>
+        <ToolsView />
+      </Suspense>
     </>
   )
 }

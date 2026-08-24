@@ -24,6 +24,7 @@ export function ToolsView() {
           'Browse the best AI products across categories - from code editors to image generators. Upvote your favorites.',
         categoryLabel: 'Category',
         categoryOptions,
+        syncCategoryToUrl: true,
         extraFilters: 'pricing',
         pricingOptions,
       }}
