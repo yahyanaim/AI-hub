@@ -6,7 +6,6 @@ import { AppProvider } from '@/lib/store'
 import { SITE_URL } from '@/lib/site'
 import { Navbar } from '@/components/layout/Navbar'
 import { FooterGate } from '@/components/layout/FooterGate'
-import { SupportReminder } from '@/components/layout/SupportReminder'
 import { CommandPalette } from '@/components/search/CommandPalette'
 import { AuthModal } from '@/components/auth/AuthModal'
 import { ToolDetailModal } from '@/components/detail/ToolDetailModal'
@@ -174,9 +173,6 @@ export default function RootLayout({
           <div className="relative z-10 flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>
-            <div className="container-page">
-              <SupportReminder />
-            </div>
             <FooterGate />
           </div>
           <CommandPalette />
