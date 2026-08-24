@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site'
 import { redirect } from 'next/navigation'
 
 const CATEGORY_TO_TYPE: Record<string, string> = {
@@ -33,7 +34,7 @@ const CATEGORY_TO_TYPE: Record<string, string> = {
   rag: '/edittools',
 }
 
-const baseUrl = 'https://aihubtools.vercel.app'
+const baseUrl = SITE_URL
 
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
   const cat = params.category

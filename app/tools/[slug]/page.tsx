@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { SEED_TOOLS, SEED_USERS } from '@/lib/seed'
 import { ToolDetail } from '@/components/detail/ToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'
+import { SITE_URL } from '@/lib/site'
 
 export async function generateStaticParams() {
   return SEED_TOOLS.map((tool) => ({ slug: tool.slug }))
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: tool.logoUrl ? [tool.logoUrl] : undefined,
     },
     alternates: {
-      canonical: `https://aihubtools.vercel.app/tools/${tool.slug}`,
+      canonical: `${SITE_URL}/tools/${tool.slug}`,
     },
   }
 }

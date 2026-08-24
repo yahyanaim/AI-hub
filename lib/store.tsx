@@ -22,8 +22,7 @@ import type {
   ItemType,
   Pricing,
 } from '@/types'
-import { SEED_PROMPTS, SEED_COMMENTS } from '@/lib/seed'
-import { SEED_USERS } from '@/lib/seed-users'
+import { SEED_USERS } from '@/lib/seed/users'
 import { uuid, slugify } from '@/lib/utils'
 
 const STORAGE_KEY = 'ai-hunt-state-v4' // v4+: stores only user deltas, not seed data
@@ -181,17 +180,19 @@ const EMPTY_DEV_TOOLS: DevTool[] = []
 const EMPTY_REPOS: Repo[] = []
 const EMPTY_COURSES: Course[] = []
 const EMPTY_OFFERS: Offer[] = []
+const EMPTY_PROMPTS: Prompt[] = []
+const EMPTY_COMMENTS: Comment[] = []
 
 function freshSeed(): PersistedState {
   return {
     tools: EMPTY_TOOLS,
     devTools: EMPTY_DEV_TOOLS,
-    prompts: SEED_PROMPTS,
+    prompts: EMPTY_PROMPTS,
     repos: EMPTY_REPOS,
     courses: EMPTY_COURSES,
     offers: EMPTY_OFFERS,
     users: SEED_USERS,
-    comments: SEED_COMMENTS,
+    comments: EMPTY_COMMENTS,
     currentUserId: null,
     recentSearches: [],
   }
@@ -254,12 +255,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const seedRepos = seedMod.SEED_REPOS as Repo[]
       const seedCourses = seedMod.SEED_COURSES as Course[]
       const seedOffers = seedMod.SEED_OFFERS as Offer[]
+      const seedPrompts = seedMod.SEED_PROMPTS as Prompt[]
       const seedComments = seedMod.SEED_COMMENTS as Comment[]
 
       seedIdsRef.current = {
         tools: new Set(seedTools.map((t) => t.id)),
         devTools: new Set(seedDevTools.map((d) => d.id)),
-        prompts: new Set(seedMod.SEED_PROMPTS.map((p) => p.id)),
+        prompts: new Set(seedPrompts.map((p) => p.id)),
         repos: new Set(seedRepos.map((r) => r.id)),
         courses: new Set(seedCourses.map((c) => c.id)),
         offers: new Set(seedOffers.map((o) => o.id)),
@@ -284,7 +286,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setState({
         tools: mergeAdded(seedTools, delta?.addedTools),
         devTools: mergeAdded(seedDevTools, delta?.addedDevTools),
-        prompts: mergeAdded(SEED_PROMPTS, delta?.addedPrompts),
+        prompts: mergeAdded(seedPrompts, delta?.addedPrompts),
         repos: mergeAdded(seedRepos, delta?.addedRepos),
         courses: mergeAdded(seedCourses, delta?.addedCourses),
         offers: mergeAdded(seedOffers, delta?.addedOffers),
@@ -375,32 +377,32 @@ export function AppProvider({ children }: { children: ReactNode }) {
     (itemType: ItemType, itemId: string) => {
       setState((prev) => {
         if (!prev.currentUserId) return prev
-        const nextUsers = prev.users.map((u) => {
-          if (u.id !== prev.currentUserId) return u
-          const already = u.bookmarkedItems.includes(itemId)
-          return {
-            ...u,
-            bookmarkedItems: already
-              ? u.bookmarkedItems.filter((id) => id !== itemId)
-              : [...u.bookmarkedItems, itemId],
-          }
-        })
-        const bump = (arr: Array<{ id: string; bookmarks?: number }>) =>
-          arr.map((item) => {
-            if (item.id !== itemId) return item
-            const cur = item.bookmarks ?? 0
-            const exists = (nextUsers.find((u) => u.id === prev.currentUserId)?.bookmarkedItems ?? []).includes(itemId)
-            return { ...item, bookmarks: exists ? cur + 1 : Math.max(0, cur - 1) }
-          })
+        const user = prev.users.find((u) => u.id === prev.currentUserId)
+        if (!user) return prev
+        const already = user.bookmarkedItems.includes(itemId)
+        const delta = already ? -1 : 1
+        const nextUsers = prev.users.map((u) =>
+          u.id === user.id
+            ? {
+                ...u,
+                bookmarkedItems: already
+                  ? u.bookmarkedItems.filter((id) => id !== itemId)
+                  : [...u.bookmarkedItems, itemId],
+              }
+            : u
+        )
+        const bumpBookmarks = <T extends { id: string; bookmarks?: number }>(item: T): T =>
+          item.id === itemId
+            ? { ...item, bookmarks: Math.max(0, (item.bookmarks ?? 0) + delta) }
+            : item
         return {
           ...prev,
           users: nextUsers,
-          tools: bump(prev.tools) as Tool[],
-          devTools: bump(prev.devTools) as DevTool[],
-          prompts: prev.prompts,
-          repos: bump(prev.repos) as Repo[],
-          courses: bump(prev.courses) as Course[],
-          offers: bump(prev.offers) as Offer[],
+          tools: prev.tools.map(bumpBookmarks),
+          devTools: prev.devTools.map(bumpBookmarks),
+          repos: prev.repos.map(bumpBookmarks),
+          courses: prev.courses.map(bumpBookmarks),
+          offers: prev.offers.map(bumpBookmarks),
         }
       })
     },
@@ -468,6 +470,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         submittedTools: [],
         submittedDevTools: [],
         submittedRepos: [],
+        submittedPrompts: [],
         karma: 0,
         createdAt: new Date().toISOString(),
       }
@@ -561,7 +564,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const users = submitter
         ? prev.users.map((u) =>
             u.id === submitter.id
-              ? { ...u, submittedDevTools: [...u.submittedDevTools, final.id] }
+              ? { ...u, submittedPrompts: [...(u.submittedPrompts ?? []), final.id] }
               : u
           )
         : prev.users
@@ -752,59 +755,101 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setPendingAction(null)
   }, [pendingAction, state.currentUserId, toggleUpvote, toggleBookmark])
 
-  const value: AppContextValue = {
-    tools: state.tools,
-    devTools: state.devTools,
-    prompts: state.prompts,
-    repos: state.repos,
-    users: state.users,
-    comments: state.comments,
-    currentUser,
-    recentSearches: state.recentSearches,
-    offersLang,
-    setOffersLang,
-    signIn,
-    signOut,
-    getUser,
-    getUserByUsername,
-    toggleUpvote,
-    toggleBookmark,
-    hasUpvoted,
-    hasBookmarked,
-    incrementCopies,
-    addComment,
-    getComments,
-    submitTool,
-    submitDevTool,
-    submitPrompt,
-    submitRepo,
-    deleteTool,
-    deleteDevTool,
-    deleteRepo,
-    getItemById,
-    getItemBySlug,
-    addRecentSearch,
-    clearRecentSearches,
-    authModalOpen,
-    setAuthModalOpen,
-    paletteOpen,
-    setPaletteOpen,
-    pendingAction,
-    setPendingAction,
-    resolvePendingAction,
-    detailModalToolId,
-    openDetailModal: (toolId: string) => setDetailModalToolId(toolId),
-    closeDetailModal: () => setDetailModalToolId(null),
-    detailModalRepoId,
-    openDetailModalForRepo: (repoId: string) => setDetailModalRepoId(repoId),
-    closeDetailModalForRepo: () => setDetailModalRepoId(null),
-    courses: state.courses,
-    offers: state.offers,
-    hydrated,
-    detailModalCourseId,
-    openDetailModalForCourse,
-    closeDetailModalForCourse,
-  }
+  // Memoized so provider-local UI state (modals, palette, lang…) doesn't
+  // re-render every consumer of useApp(); data consumers still update on
+  // state changes, which is unavoidable with a single combined store.
+  const value = useMemo<AppContextValue>(
+    () => ({
+      tools: state.tools,
+      devTools: state.devTools,
+      prompts: state.prompts,
+      repos: state.repos,
+      users: state.users,
+      comments: state.comments,
+      currentUser,
+      recentSearches: state.recentSearches,
+      offersLang,
+      setOffersLang,
+      signIn,
+      signOut,
+      getUser,
+      getUserByUsername,
+      toggleUpvote,
+      toggleBookmark,
+      hasUpvoted,
+      hasBookmarked,
+      incrementCopies,
+      addComment,
+      getComments,
+      submitTool,
+      submitDevTool,
+      submitPrompt,
+      submitRepo,
+      deleteTool,
+      deleteDevTool,
+      deleteRepo,
+      getItemById,
+      getItemBySlug,
+      addRecentSearch,
+      clearRecentSearches,
+      authModalOpen,
+      setAuthModalOpen,
+      paletteOpen,
+      setPaletteOpen,
+      pendingAction,
+      setPendingAction,
+      resolvePendingAction,
+      detailModalToolId,
+      openDetailModal: (toolId: string) => setDetailModalToolId(toolId),
+      closeDetailModal: () => setDetailModalToolId(null),
+      detailModalRepoId,
+      openDetailModalForRepo: (repoId: string) => setDetailModalRepoId(repoId),
+      closeDetailModalForRepo: () => setDetailModalRepoId(null),
+      courses: state.courses,
+      offers: state.offers,
+      hydrated,
+      detailModalCourseId,
+      openDetailModalForCourse,
+      closeDetailModalForCourse,
+    }),
+    [
+      state,
+      currentUser,
+      offersLang,
+      signIn,
+      signOut,
+      getUser,
+      getUserByUsername,
+      toggleUpvote,
+      toggleBookmark,
+      hasUpvoted,
+      hasBookmarked,
+      incrementCopies,
+      addComment,
+      getComments,
+      submitTool,
+      submitDevTool,
+      submitPrompt,
+      submitRepo,
+      deleteTool,
+      deleteDevTool,
+      deleteRepo,
+      getItemById,
+      getItemBySlug,
+      addRecentSearch,
+      clearRecentSearches,
+      resolvePendingAction,
+      authModalOpen,
+      paletteOpen,
+      pendingAction,
+      detailModalToolId,
+      detailModalRepoId,
+      detailModalCourseId,
+      hydrated,
+      openDetailModalForCourse,
+      closeDetailModalForCourse,
+    ]
+  )
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

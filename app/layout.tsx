@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { AppProvider } from '@/lib/store'
+import { SITE_URL } from '@/lib/site'
 import { Navbar } from '@/components/layout/Navbar'
 import { FooterGate } from '@/components/layout/FooterGate'
 import { SupportReminder } from '@/components/layout/SupportReminder'
@@ -14,7 +16,13 @@ import { Analytics } from '@vercel/analytics/react'
 import { ChatBot } from '@/components/chat/ChatBot'
 import { safeJsonLd } from '@/lib/json-ld'
 
-const baseUrl = 'https://aihubtools.vercel.app'
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const baseUrl = SITE_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -76,11 +84,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: baseUrl,
-    languages: {
-      en: baseUrl,
-      fr: baseUrl,
-      ar: baseUrl,
-    },
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION ?? '',
@@ -100,18 +103,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-        <link rel="alternate" hrefLang="en" href={baseUrl} />
-        <link rel="alternate" hrefLang="fr" href={baseUrl} />
-        <link rel="alternate" hrefLang="ar" href={baseUrl} />
-        <link rel="alternate" hrefLang="x-default" href={baseUrl} />
         <Script
           id="schema-website"
           type="application/ld+json"

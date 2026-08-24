@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { SEED_REPOS } from '@/lib/seed'
 import { RepoDetail } from '@/components/detail/RepoDetail'
 import { safeJsonLd } from '@/lib/json-ld'
+import { SITE_URL } from '@/lib/site'
 
 export async function generateStaticParams() {
   return SEED_REPOS.map((repo) => ({ slug: repo.slug }))
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: repo.logoUrl ? [repo.logoUrl] : undefined,
     },
     alternates: {
-      canonical: `https://aihubtools.vercel.app/edittools/${repo.slug}`,
+      canonical: `${SITE_URL}/edittools/${repo.slug}`,
     },
   }
 }

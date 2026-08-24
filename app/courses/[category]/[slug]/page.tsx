@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site'
 import { redirect, notFound } from 'next/navigation'
 import { SEED_COURSES, SEED_USERS } from '@/lib/seed'
 import { CourseDetail } from '@/components/detail/CourseDetail'
 import { safeJsonLd } from '@/lib/json-ld'
 
-const baseUrl = 'https://aihubtools.vercel.app'
+const baseUrl = SITE_URL
 
 export function generateStaticParams() {
   return SEED_COURSES.map((course) => ({ category: course.category, slug: course.slug }))

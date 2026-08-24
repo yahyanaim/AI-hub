@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site'
 import { SupportPage } from '@/components/layout/SupportPage'
 
-const baseUrl = 'https://aihubtools.vercel.app'
+const baseUrl = SITE_URL
 
 export const metadata: Metadata = {
   title: 'Support AI Hunt - Buy me a coffee',

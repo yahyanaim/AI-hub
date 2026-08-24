@@ -109,18 +109,27 @@ export function ListingView<T extends { id: string }>({
     }
   }, [storageKey, sort, category, pricing, language, view, page])
 
-  // Track scroll position so returning from a detail page restores it
+  // Track scroll position so returning from a detail page restores it.
+  // Writes are rAF-throttled: at most one sessionStorage write per frame.
   useEffect(() => {
     const scrollKey = `${storageKey}:scroll`
+    let raf = 0
     const onScroll = () => {
-      try {
-        sessionStorage.setItem(scrollKey, String(window.scrollY))
-      } catch {
-        // storage unavailable
-      }
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        raf = 0
+        try {
+          sessionStorage.setItem(scrollKey, String(window.scrollY))
+        } catch {
+          // storage unavailable
+        }
+      })
     }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
   }, [storageKey])
 
   // Restore scroll once the list has data and rendered
@@ -200,7 +209,6 @@ export function ListingView<T extends { id: string }>({
     getCreatedAt,
     getTrendingScore,
     config.customCategoryFilter,
-    config.subcategoryFilter,
   ])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))

@@ -231,10 +231,11 @@ export async function POST(request: Request) {
     })
 
     if (!apiResponse.ok) {
-      const text = await apiResponse.text()
+      // Log the upstream body server-side; never forward it to the client.
+      console.error('[chat] upstream error', apiResponse.status, await apiResponse.text())
       return NextResponse.json(
-        { error: `API error: ${apiResponse.status}`, details: text },
-        { status: apiResponse.status }
+        { error: 'The AI service is temporarily unavailable. Please try again shortly.' },
+        { status: 502 }
       )
     }
 
@@ -264,8 +265,9 @@ export async function POST(request: Request) {
       },
     })
   } catch (error: any) {
+    console.error('[chat] handler error', error)
     return NextResponse.json(
-      { error: 'Internal server error', details: error?.message },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site'
 import Script from 'next/script'
 import { ReposView } from '@/components/listing/ReposView'
 import { safeJsonLd } from '@/lib/json-ld'
 
-const baseUrl = 'https://aihubtools.vercel.app'
+const baseUrl = SITE_URL
 
 export const metadata: Metadata = {
   title: 'Open Source GitHub Repos & LLM Tools',

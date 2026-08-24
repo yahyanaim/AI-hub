@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/site'
 import { SubmitForm } from '@/components/submit/SubmitForm'
 
-const baseUrl = 'https://aihubtools.vercel.app'
+const baseUrl = SITE_URL
 
 export const metadata: Metadata = {
   title: 'Submit a Tool or Resource',

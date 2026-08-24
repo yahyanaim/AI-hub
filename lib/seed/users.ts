@@ -1,7 +1,4 @@
-import type {
-  User
-} from '@/types'
-
+import type { User } from '@/types'
 import { daysAgo } from './_shared'
 
 export const SEED_USERS: User[] = [
@@ -19,6 +16,7 @@ export const SEED_USERS: User[] = [
     submittedTools: ['t1', 't7', 't9', 't10', 't17', 't23', 't27', 't31', 't81', 't82', 't83', 't97'],
     submittedDevTools: ['d1', 'd5', 'd9', 'd13'],
     submittedRepos: ['r1'],
+    submittedPrompts: [],
     karma: 1840,
     createdAt: daysAgo(320),
   },
@@ -35,6 +33,7 @@ export const SEED_USERS: User[] = [
     submittedTools: ['t2', 't8', 't11', 't18', 't21', 't28', 't32', 't84', 't85', 't86', 't98'],
     submittedDevTools: ['d2', 'd6', 'd10', 'd14'],
     submittedRepos: ['r2', 'r5'],
+    submittedPrompts: [],
     karma: 1520,
     createdAt: daysAgo(280),
   },
@@ -50,6 +49,7 @@ export const SEED_USERS: User[] = [
     submittedTools: ['t3', 't5', 't12', 't13', 't19', 't24', 't29', 't33', 't80', 't87', 't88', 't89', 't99'],
     submittedDevTools: ['d3', 'd7', 'd11', 'd15'],
     submittedRepos: ['r3'],
+    submittedPrompts: [],
     karma: 1320,
     createdAt: daysAgo(200),
   },
@@ -65,6 +65,7 @@ export const SEED_USERS: User[] = [
     submittedTools: ['t4', 't14', 't15', 't22', 't25', 't34', 't90', 't91', 't92', 't100'],
     submittedDevTools: ['d4', 'd8', 'd12', 'd16'],
     submittedRepos: ['r4'],
+    submittedPrompts: [],
     karma: 980,
     createdAt: daysAgo(150),
   },
@@ -80,6 +81,7 @@ export const SEED_USERS: User[] = [
     submittedTools: ['t6', 't16', 't20', 't26', 't30', 't93', 't94', 't95', 't96'],
     submittedDevTools: ['d17', 'd18', 'd19', 'd20'],
     submittedRepos: ['r6'],
+    submittedPrompts: [],
     karma: 780,
     createdAt: daysAgo(120),
   },
@@ -95,6 +97,7 @@ export const SEED_USERS: User[] = [
     submittedTools: [],
     submittedDevTools: ['d409', 'd410', 'd411', 'd412', 'd413', 'd414', 'd415', 'd416', 'd417', 'd418', 'd419', 'd420', 'd421', 'd422', 'd423', 'd424', 'd425', 'd427', 'd428', 'd429', 'd430', 'd431', 'd432', 'd433', 'd434', 'd435', 'd436', 'd437', 'd438', 'd439', 'd440', 'd441', 'd442', 'd443', 'd444', 'd445', 'd446', 'd447', 'd448', 'd449', 'd450', 'd451', 'd452', 'd453', 'd454', 'd455', 'd456', 'd457', 'd458', 'd459', 'd460', 'd461', 'd462', 'd463', 'd464', 'd465', 'd466', 'd467', 'd468', 'd469', 'd473', 'd474', 'd475', 'd476', 'd477', 'd478', 'd479', 'd480', 'd481', 'd482', 'd483', 'd484', 'd485', 'd486', 'd487', 'd488', 'd489', 'd490', 'd491', 'd492', 'd493', 'd494', 'd495', 'd496', 'd497', 'd498', 'd499', 'd500', 'd501', 'd502', 'd503', 'd504', 'd505', 'd506', 'd507', 'd508', 'd509', 'd510', 'd511', 'd512', 'd513', 'd514', 'd515', 'd516', 'd517', 'd518', 'd519', 'd520', 'd521', 'd522', 'd523', 'd524', 'd525'],
     submittedRepos: [],
+    submittedPrompts: [],
     upvotedItems: [],
     bookmarkedItems: [],
     karma: 0,

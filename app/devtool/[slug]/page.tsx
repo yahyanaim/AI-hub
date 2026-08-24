@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { SEED_DEV_TOOLS, SEED_USERS } from '@/lib/seed'
 import { DevToolDetail } from '@/components/detail/DevToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'
+import { SITE_URL } from '@/lib/site'
 
 export async function generateStaticParams() {
   return SEED_DEV_TOOLS.map((tool) => ({ slug: tool.slug }))
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: tool.logoUrl ? [tool.logoUrl] : undefined,
     },
     alternates: {
-      canonical: `https://aihubtools.vercel.app/devtool/${tool.slug}`,
+      canonical: `${SITE_URL}/devtool/${tool.slug}`,
     },
   }
 }

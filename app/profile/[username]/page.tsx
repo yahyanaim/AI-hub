@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
-import { SEED_USERS } from '@/lib/seed-users'
+import { SITE_URL } from '@/lib/site'
+import { SEED_USERS } from '@/lib/seed/users'
 import { ProfileView } from '@/components/profile/ProfileView'
 
 export async function generateStaticParams() {
   return SEED_USERS.map((user) => ({ username: user.username }))
 }
 
-const baseUrl = 'https://aihubtools.vercel.app'
+const baseUrl = SITE_URL
 
 export async function generateMetadata({ params }: { params: { username: string } }): Promise<Metadata> {
   const user = SEED_USERS.find((u) => u.username === params.username)

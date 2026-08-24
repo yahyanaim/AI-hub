@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { SEED_OFFERS } from '@/lib/seed'
 import { OfferDetail } from '@/components/detail/OfferDetail'
 import { safeJsonLd } from '@/lib/json-ld'
+import { SITE_URL } from '@/lib/site'
 
 export async function generateStaticParams() {
   return SEED_OFFERS.map((offer) => ({ slug: offer.slug }))
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: offer.logoUrl ? [offer.logoUrl] : undefined,
     },
     alternates: {
-      canonical: `https://aihubtools.vercel.app/offers/${offer.slug}`,
+      canonical: `${SITE_URL}/offers/${offer.slug}`,
     },
   }
 }

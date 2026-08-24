@@ -221,6 +221,14 @@ export function CommandPalette() {
     setActiveIndex(0)
   }, [query])
 
+  // Keep the keyboard-selected row visible while navigating with arrows
+  useEffect(() => {
+    const list = listRef.current
+    if (!list || !paletteOpen) return
+    const el = list.querySelector<HTMLElement>(`[data-result-index="${activeIndex}"]`)
+    el?.scrollIntoView({ block: 'nearest' })
+  }, [activeIndex, paletteOpen])
+
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault()
@@ -352,6 +360,7 @@ export function CommandPalette() {
                   return (
                     <button
                       key={r.id}
+                      data-result-index={flatIndex}
                       onMouseEnter={() => setActiveIndex(flatIndex)}
                       onClick={() => go(r)}
                       className={cn(

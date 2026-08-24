@@ -24,10 +24,16 @@ export function ChatBot() {
   const [open, setOpen] = useState(false)
   const [showDonationGate, setShowDonationGate] = useState(false)
   const [error, setError] = useState('')
+  const [hasDonated, setHasDonated] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const hasDonated = typeof window !== 'undefined' && localStorage.getItem('ai-hunt-donated') === 'true'
+  // Read localStorage after mount to avoid a server/client hydration mismatch.
+  useEffect(() => {
+    try {
+      setHasDonated(localStorage.getItem('ai-hunt-donated') === 'true')
+    } catch {}
+  }, [])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
