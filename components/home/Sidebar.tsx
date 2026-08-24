@@ -61,7 +61,7 @@ export function Sidebar() {
           {topTools.map((tool, i) => (
             <Link
               key={tool.id}
-              href={`/tools/${tool.slug}`}
+              href={`/tools/${tool.category}/${tool.slug}`}
               className="group flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-secondary"
             >
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-bold text-muted-foreground">

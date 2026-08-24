@@ -118,7 +118,7 @@ export function CommandPalette() {
           title: t.name,
           subtitle: t.tagline,
           meta: formatNumber(t.upvotes) + ' upvotes',
-          href: `/tools/${t.slug}`,
+          href: `/tools/${t.category}/${t.slug}`,
           item: t,
         }))
 

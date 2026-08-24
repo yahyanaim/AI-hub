@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   const toolPages = SEED_TOOLS.map((tool) => ({
-    url: `${baseUrl}/tools/${tool.slug}`,
+    url: `${baseUrl}/tools/${tool.category}/${tool.slug}`,
     lastModified: new Date(tool.updatedAt),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
