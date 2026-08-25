@@ -24,7 +24,7 @@ import { CommentThread } from '@/components/detail/CommentThread'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
 import { RepoCard } from '@/components/cards/RepoCard'
-import { relativeTime, formatDate, formatNumber, downloadSkillMd } from '@/lib/utils'
+import { relativeTime, formatDate, formatNumber } from '@/lib/utils'
 import { use, useState, useEffect } from 'react'
 
 export function ToolDetail({
@@ -131,14 +131,15 @@ export function ToolDetail({
               variant="detail"
             />
             {tool.category === 'ai-skills' ? (
-              <button
-                onClick={() => downloadSkillMd(tool)}
+              <a
+                href={`/skills/${tool.slug}.md`}
+                download={`${tool.slug}.md`}
                 className="btn-primary"
                 aria-label="Download skill as markdown file"
               >
                 <Download className="h-4 w-4" />
                 Download .md
-              </button>
+              </a>
             ) : (
               <a
                 href={tool.url}

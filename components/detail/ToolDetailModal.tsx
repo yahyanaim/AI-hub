@@ -11,7 +11,7 @@ import { CategoryBadge, PricingBadge, Tag } from '@/components/ui/Badges'
 import { StarRating } from '@/components/ui/StarRating'
 import { UpvoteButton } from '@/components/interactive/UpvoteButton'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
-import { formatNumber, ratingFor, downloadSkillMd } from '@/lib/utils'
+import { formatNumber, ratingFor } from '@/lib/utils'
 
 export function ToolDetailModal() {
   const { detailModalToolId, closeDetailModal, tools, devTools, getUser } = useApp()
@@ -132,14 +132,15 @@ export function ToolDetailModal() {
                 <BookmarkButton itemType={isDevTool ? 'devtool' : 'tool'} itemId={tool.id} variant="detail" />
               </div>
               {!isDevTool && tool.category === 'ai-skills' ? (
-                <button
-                  onClick={() => downloadSkillMd(tool)}
+                <a
+                  href={`/skills/${tool.slug}.md`}
+                  download={`${tool.slug}.md`}
                   className="inline-flex items-center gap-1.5 rounded-lg bg-brand-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
                   aria-label="Download skill as markdown file"
                 >
                   Download .md
                   <Download className="h-4 w-4" />
-                </button>
+                </a>
               ) : (
                 <a
                   href={tool.url}
