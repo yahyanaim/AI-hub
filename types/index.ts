@@ -25,6 +25,7 @@ export type ToolCategory =
   | 'open-source-ai'
   | 'seo'
   | 'education'
+  | 'ai-skills'
   | 'other'
 
 export type DevToolCategory =
@@ -76,6 +77,7 @@ export type DevToolCategory =
   | 'templates'
   | 'testing'
   | 'translation'
+  | 'extension'
 
 export type EditToolCategory =
   | 'pdf'
@@ -322,6 +324,7 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
   'open-source-ai': 'Open Source AI',
   seo: 'SEO Tools',
   education: 'Education',
+  'ai-skills': 'AI Skills',
   other: 'Other',
 }
 
@@ -374,6 +377,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   templates: 'Templates',
   testing: 'Testing',
   translation: 'Translation',
+  extension: 'Extensions',
 }
 
 export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
