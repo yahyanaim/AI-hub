@@ -10,6 +10,7 @@ import {
   MessageSquare,
   Sparkles,
   Trash2,
+  Download,
 } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { useRouter } from 'next/navigation'
@@ -23,7 +24,7 @@ import { CommentThread } from '@/components/detail/CommentThread'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
 import { RepoCard } from '@/components/cards/RepoCard'
-import { relativeTime, formatDate, formatNumber } from '@/lib/utils'
+import { relativeTime, formatDate, formatNumber, downloadSkillMd } from '@/lib/utils'
 import { use, useState, useEffect } from 'react'
 
 export function ToolDetail({
@@ -129,15 +130,26 @@ export function ToolDetail({
               itemId={tool.id}
               variant="detail"
             />
-            <a
-              href={tool.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Visit
-            </a>
+            {tool.category === 'ai-skills' ? (
+              <button
+                onClick={() => downloadSkillMd(tool)}
+                className="btn-primary"
+                aria-label="Download skill as markdown file"
+              >
+                <Download className="h-4 w-4" />
+                Download .md
+              </button>
+            ) : (
+              <a
+                href={tool.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Visit
+              </a>
+            )}
             <button onClick={share} className="btn-secondary" aria-label="Share">
               <Share2 className="h-4 w-4" />
             </button>

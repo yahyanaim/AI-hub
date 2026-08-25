@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Star, ArrowUpRight } from 'lucide-react'
+import { X, Star, ArrowUpRight, Download } from 'lucide-react'
 import Link from 'next/link'
 import { useApp } from '@/lib/store'
 import { Logo } from '@/components/ui/Logo'
@@ -11,7 +11,7 @@ import { CategoryBadge, PricingBadge, Tag } from '@/components/ui/Badges'
 import { StarRating } from '@/components/ui/StarRating'
 import { UpvoteButton } from '@/components/interactive/UpvoteButton'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
-import { formatNumber, ratingFor } from '@/lib/utils'
+import { formatNumber, ratingFor, downloadSkillMd } from '@/lib/utils'
 
 export function ToolDetailModal() {
   const { detailModalToolId, closeDetailModal, tools, devTools, getUser } = useApp()
@@ -131,15 +131,26 @@ export function ToolDetailModal() {
                 <UpvoteButton itemType={isDevTool ? 'devtool' : 'tool'} itemId={tool.id} count={tool.upvotes} variant="detail" />
                 <BookmarkButton itemType={isDevTool ? 'devtool' : 'tool'} itemId={tool.id} variant="detail" />
               </div>
-              <a
-                href={tool.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-lg bg-brand-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
-              >
-                Visit
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
+              {!isDevTool && tool.category === 'ai-skills' ? (
+                <button
+                  onClick={() => downloadSkillMd(tool)}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-brand-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+                  aria-label="Download skill as markdown file"
+                >
+                  Download .md
+                  <Download className="h-4 w-4" />
+                </button>
+              ) : (
+                <a
+                  href={tool.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-brand-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+                >
+                  Visit
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              )}
             </div>
           </motion.div>
         </motion.div>
