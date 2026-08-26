@@ -8443,4 +8443,60 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o154',
+    slug: 'omniroute',
+    name: 'OmniRoute with Claude Code',
+    tagline: 'Run Claude Code on free and alternative AI providers through one local router',
+    description: `OmniRoute is a free, open local router that lets **Claude Code** talk to 160+ AI providers and models - including free-tier providers - while keeping Claude Code as your coding interface.
+
+**How it works:** Claude Code -> OmniRoute (localhost:20128) -> your chosen provider/model.
+
+**Highlights:**
+
+- Create separate profiles per model (e.g. glm52, kimi-k27, deepseek-pro) with \`omniroute setup-claude\`
+- Switch models without leaving Claude Code via \`omniroute launch --profile <name>\`
+- Auto fallback, compression, MCP/A2A support, desktop app and PWA
+- Your keys stay local; the dashboard runs at http://localhost:20128
+
+> Note: free access means a provider may expose Claude through its own service and limits - not "Claude Pro for free".`,
+    url: 'https://omniroute.online',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=omniroute.online&sz=64',
+    category: 'api-access',
+    tags: ['claude-code', 'free-tier', 'ai-router', 'local', 'multi-model'],
+    pricing: 'free',
+    steps: [
+      {
+        title: '1. Install Claude Code',
+        description: `Open Terminal and run: curl -fsSL https://claude.ai/install.sh | bash - then restart Terminal and verify with: claude --version`,
+        url: 'https://docs.claude.com/en/docs/claude-code/overview',
+      },
+      {
+        title: '2. Install & start OmniRoute',
+        description: `Run: npm install -g omniroute - then start it with: omniroute - and open http://localhost:20128 in your browser.`,
+        url: 'https://omniroute.online',
+      },
+      {
+        title: '3. Add a provider & create your API key',
+        description: `In the dashboard go to Providers -> Add Provider and connect the provider you want (free tiers supported). Then create an API key (looks like oma_live_xxx) - keep it private, never share or screenshot it.`,
+        url: 'https://omniroute.online',
+      },
+      {
+        title: '4. Let OmniRoute configure Claude Code',
+        description: `Run: omniroute setup-claude - this creates profiles under ~/.claude/profiles/ (one per connected model). Inspect them with: ls ~/.claude/profiles`,
+        url: 'https://omniroute.online',
+      },
+      {
+        title: '5. Launch Claude Code through OmniRoute',
+        description: `Run: omniroute launch --profile glm52 (or any profile you created). Claude Code now works through OmniRoute - switch models anytime by launching a different profile. Tip: Claude Code talks to http://localhost:20128 without /v1.`,
+        url: 'https://omniroute.online',
+      },
+    ],
+    upvotes: 34,
+    bookmarks: 18,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
