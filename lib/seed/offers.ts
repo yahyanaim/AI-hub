@@ -8461,7 +8461,7 @@ export const SEED_OFFERS: Offer[] = [
 
 > Note: free access means a provider may expose Claude through its own service and limits - not "Claude Pro for free".`,
     url: 'https://omniroute.online',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=omniroute.online&sz=64',
+    logoUrl: '/logos/omniroute.png',
     category: 'api-access',
     tags: ['claude-code', 'free-tier', 'ai-router', 'local', 'multi-model'],
     pricing: 'free',
@@ -8489,6 +8489,47 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: '5. Launch Claude Code through OmniRoute',
         description: `Run: omniroute launch --profile glm52 (or any profile you created). Claude Code now works through OmniRoute - switch models anytime by launching a different profile. Tip: Claude Code talks to http://localhost:20128 without /v1.`,
+        url: 'https://omniroute.online',
+      },
+    ],
+    nameAr: 'OmniRoute مع Claude Code',
+    taglineAr: 'شغّل Claude Code عبر مزودي ذكاء اصطناعي مجانيين وبدائلهم من خلال موجّه محلي واحد',
+    descriptionAr: `OmniRoute هو موجّه محلي مجاني ومفتوح يتيح لـ **Claude Code** التواصل مع أكثر من 160 مزود ونموذج ذكاء اصطناعي - بما في ذلك المزودين ذوي الخطط المجانية - مع إبقاء Claude Code واجهتك للبرمجة.
+
+**كيف يعمل:** Claude Code -> OmniRoute (localhost:20128) -> المزود/النموذج الذي تختاره.
+
+**أبرز الميزات:**
+
+- أنشئ ملفات تعريف منفصلة لكل نموذج (مثل glm52 و kimi-k27 و deepseek-pro) عبر \`omniroute setup-claude\`
+- بدّل النماذج دون مغادرة Claude Code عبر \`omniroute launch --profile <name>\`
+- تبديل تلقائي عند الأخطاء، ضغط، ودعم MCP/A2A، مع تطبيق سطح مكتب و PWA
+- مفاتيحك تبقى محلية؛ لوحة التحكم تعمل على http://localhost:20128
+
+> ملاحظة: الوصول المجاني يعني أن المزود قد يوفر Claude عبر خدمته الخاصة وبحدوده - وليس "Claude Pro مجاناً".`,
+    stepsAr: [
+      {
+        title: '1. ثبّت Claude Code',
+        description: `افتح الطرفية وشغّل: curl -fsSL https://claude.ai/install.sh | bash - ثم أعد فتح الطرفية وتحقق عبر: claude --version`,
+        url: 'https://docs.claude.com/en/docs/claude-code/overview',
+      },
+      {
+        title: '2. ثبّت OmniRoute وشغّله',
+        description: `نفّذ: npm install -g omniroute - ثم شغّله بالأمر: omniroute - وافتح http://localhost:20128 في المتصفح.`,
+        url: 'https://omniroute.online',
+      },
+      {
+        title: '3. أضف مزوداً وأنشئ مفتاح API',
+        description: `في لوحة التحكم انتقل إلى Providers <- Add Provider واربط المزود الذي تريده (تدعم الخطط المجانية). ثم أنشئ مفتاح API (يشبه oma_live_xxx) - احتفظ به سراً ولا تشاركه أو تلتقط له لقطة شاشة.`,
+        url: 'https://omniroute.online',
+      },
+      {
+        title: '4. دع OmniRoute يضبط Claude Code',
+        description: `نفّذ: omniroute setup-claude - سينشئ ملفات تعريف تحت ~/.claude/profiles/ (ملف لكل نموذج متصل). اعرضها عبر: ls ~/.claude/profiles`,
+        url: 'https://omniroute.online',
+      },
+      {
+        title: '5. شغّل Claude Code عبر OmniRoute',
+        description: `نفّذ: omniroute launch --profile glm52 (أو أي ملف تعريف أنشأته). سيعمل Claude Code الآن عبر OmniRoute - بدّل النماذج وقتما تشاء بتشغيل ملف تعريف آخر. ملاحظة: يتحدث Claude Code مع http://localhost:20128 دون /v1.`,
         url: 'https://omniroute.online',
       },
     ],
