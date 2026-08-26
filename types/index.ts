@@ -78,6 +78,7 @@ export type DevToolCategory =
   | 'testing'
   | 'translation'
   | 'extension'
+  | 'repo'
 
 export type EditToolCategory =
   | 'pdf'
@@ -378,6 +379,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   testing: 'Testing',
   translation: 'Translation',
   extension: 'Extensions',
+  repo: 'Repos',
 }
 
 export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
