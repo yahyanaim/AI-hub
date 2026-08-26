@@ -22457,4 +22457,26 @@ export const SEED_TOOLS: Tool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 't1601',
+    slug: 'appkittie',
+    name: 'AppKittie',
+    tagline: 'App market intelligence for iOS & Android - revenue, downloads, ads and ASO',
+    description: `**AppKittie** is app market intelligence for iOS and Android. Track app revenue, downloads, winning ads, viral videos, ASO keywords, and onboarding flows - all updated daily.
+
+- Monitor competitors' revenue and download estimates
+- Discover winning ad creatives and viral video campaigns
+- Research ASO keywords and track onboarding funnels`,
+    url: 'https://appkittie.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=appkittie.com&sz=64',
+    category: 'marketing',
+    tags: ['ai', 'app-intelligence', 'aso', 'competitor-research'],
+    pricing: 'freemium',
+    upvotes: 18,
+    bookmarks: 9,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ];
