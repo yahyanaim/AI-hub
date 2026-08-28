@@ -55,7 +55,7 @@ export function DevToolDetail({ slug }: { slug: string }) {
   return (
     <div className="container-page py-8">
       <Link
-        href="/devtool"
+        href="/dev-tools"
         className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-muted-foreground"
       >
         <ChevronLeft className="h-4 w-4" />
@@ -135,7 +135,7 @@ export function DevToolDetail({ slug }: { slug: string }) {
                 onClick={() => {
                   if (window.confirm(`Delete "${devtool.name}"?`)) {
                     deleteDevTool(devtool.id)
-                    router.push('/devtool')
+                    router.push('/dev-tools')
                   }
                 }}
                 className="btn-secondary text-red-500 hover:border-red-500/30 hover:bg-red-500/10"

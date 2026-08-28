@@ -162,7 +162,7 @@ export default function RootLayout({
               itemListElement: [
                 { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
                 { '@type': 'ListItem', position: 2, name: 'AI Tools', item: `${baseUrl}/tools` },
-                { '@type': 'ListItem', position: 3, name: 'Dev Tools', item: `${baseUrl}/devtool` },
+                { '@type': 'ListItem', position: 3, name: 'Dev Tools', item: `${baseUrl}/dev-tools` },
                 { '@type': 'ListItem', position: 4, name: 'Courses', item: `${baseUrl}/courses` },
               ],
             }),

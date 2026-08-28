@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },
     { url: `${baseUrl}/tools`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
-    { url: `${baseUrl}/devtool`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
+    { url: `${baseUrl}/dev-tools`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/edittools`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/courses`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/offers`, lastModified: new Date(), changeFrequency: 'daily' as const, priority: 0.9 },
@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const devToolPages = SEED_DEV_TOOLS.map((tool) => ({
-    url: `${baseUrl}/devtool/${tool.slug}`,
+    url: `${baseUrl}/dev-tools/${tool.slug}`,
     lastModified: new Date(tool.updatedAt),
     changeFrequency: 'weekly' as const,
     priority: 0.7,

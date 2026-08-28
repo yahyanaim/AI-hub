@@ -69,7 +69,7 @@ export function HomeView() {
             <SectionHeading
               eyebrow="Dev Tools"
               title="Trending dev tools"
-              href="/devtool"
+              href="/dev-tools"
             />
             <div className="grid gap-5 sm:grid-cols-2">
               {trendingDevTools.map((tool) => (

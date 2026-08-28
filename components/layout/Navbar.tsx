@@ -20,7 +20,7 @@ import { Button } from '@/components/ui/button'
 
 const NAV_LINKS = [
   { href: '/tools', label: 'Tools' },
-  { href: '/devtool', label: 'Dev Tools' },
+  { href: '/dev-tools', label: 'Dev Tools' },
   { href: '/edittools', label: 'Editing Tools' },
   { href: '/courses', label: 'Courses' },
   { href: '/offers', label: 'Offers' },

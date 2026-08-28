@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: tool.logoUrl ? [tool.logoUrl] : undefined,
     },
     alternates: {
-      canonical: `${SITE_URL}/devtool/${tool.slug}`,
+      canonical: `${SITE_URL}/dev-tools/${tool.slug}`,
     },
   }
 }

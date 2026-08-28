@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Developer Tools Directory - AI Hunt',
     description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, databases, and more. Curated for engineers.',
-    url: `${baseUrl}/devtool`,
+    url: `${baseUrl}/dev-tools`,
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Dev Tools' }],
   },
   twitter: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, and more.',
     images: ['/og.png'],
   },
-  alternates: { canonical: `${baseUrl}/devtool` },
+  alternates: { canonical: `${baseUrl}/dev-tools` },
 }
 
 export default function DevToolsPage() {
@@ -33,7 +33,7 @@ export default function DevToolsPage() {
           '@type': 'CollectionPage',
           name: 'Developer Tools Directory',
           description: 'Community-curated collection of essential developer tools.',
-          url: `${baseUrl}/devtool`,
+          url: `${baseUrl}/dev-tools`,
           about: { '@type': 'Thing', name: 'Developer Tools' },
         }),
       }} />

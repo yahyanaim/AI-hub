@@ -24,7 +24,7 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/tools" className="text-muted-foreground hover:text-foreground">Tools</Link></li>
-              <li><Link href="/devtool" className="text-muted-foreground hover:text-foreground">Dev Tools</Link></li>
+              <li><Link href="/dev-tools" className="text-muted-foreground hover:text-foreground">Dev Tools</Link></li>
               <li><Link href="/edittools" className="text-muted-foreground hover:text-foreground">Editing Tools</Link></li>
               <li><Link href="/courses" className="text-muted-foreground hover:text-foreground">Courses</Link></li>
               <li><Link href="/offers" className="text-muted-foreground hover:text-foreground">Offers</Link></li>
