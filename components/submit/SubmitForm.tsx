@@ -59,6 +59,7 @@ export function SubmitForm() {
   const [submitted, setSubmitted] = useState<{
     type: ItemType
     slug: string
+    category?: string
   } | null>(null)
 
   const [form, setForm] = useState<FormState>({
@@ -183,7 +184,7 @@ export function SubmitForm() {
         tags: form.tags,
         pricing: form.pricing,
       })
-      setSubmitted({ type: 'devtool', slug: devTool.slug })
+      setSubmitted({ type: 'devtool', slug: devTool.slug, category: devTool.category })
     } else if (form.type === 'repo') {
       const repo = submitRepo({
         name: form.name,
@@ -214,7 +215,7 @@ export function SubmitForm() {
         type={submitted.type}
         slug={submitted.slug}
         onView={() => {
-          if (submitted.type === 'devtool') router.push(`/dev-tools/${submitted.slug}`)
+          if (submitted.type === 'devtool') router.push(`/dev-tools/${submitted.category}/${submitted.slug}`)
           else if (submitted.type === 'repo') router.push(`/edittools/${submitted.slug}`)
           else router.push(`/${submitted.type}s/${submitted.slug}`)
         }}

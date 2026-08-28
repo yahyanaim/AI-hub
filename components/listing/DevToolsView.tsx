@@ -3,6 +3,7 @@
 import { ListingView, type FilterOption } from '@/components/listing/ListingView'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { useApp } from '@/lib/store'
+import { useRouter } from 'next/navigation'
 import {
   DEVTOOL_CATEGORY_LABELS,
   PRICING_LABELS,
@@ -16,8 +17,9 @@ const pricingOptions: FilterOption[] = Object.entries(PRICING_LABELS).map(
   ([value, label]) => ({ value, label })
 )
 
-export function DevToolsView() {
+export function DevToolsView({ initialCategory }: { initialCategory?: string }) {
   const { devTools } = useApp()
+  const router = useRouter()
 
   return (
     <div className="container-page py-8">
@@ -48,6 +50,10 @@ export function DevToolsView() {
           categoryOptions,
           extraFilters: 'pricing',
           pricingOptions,
+          initialCategory,
+          onCategoryChange: (cat) => {
+            router.push(cat === 'all' ? '/dev-tools' : `/dev-tools/${cat}`)
+          },
         }}
         renderCard={(devtool) => <DevToolCard devtool={devtool} />}
         getCategory={(t) => t.category}

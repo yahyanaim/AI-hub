@@ -5,10 +5,17 @@ import { safeJsonLd } from '@/lib/json-ld'
 import { SITE_URL } from '@/lib/site'
 
 export async function generateStaticParams() {
-  return SEED_DEV_TOOLS.map((tool) => ({ slug: tool.slug }))
+  return SEED_DEV_TOOLS.map((tool) => ({
+    category: tool.category,
+    slug: tool.slug,
+  }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string; slug: string }
+}): Promise<Metadata> {
   const tool = SEED_DEV_TOOLS.find((t) => t.slug === params.slug)
   if (!tool) return { title: 'Dev Tool Not Found' }
   return {
@@ -27,7 +34,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: tool.logoUrl ? [tool.logoUrl] : undefined,
     },
     alternates: {
-      canonical: `${SITE_URL}/dev-tools/${tool.slug}`,
+      canonical: `${SITE_URL}/dev-tools/${tool.category}/${tool.slug}`,
     },
   }
 }
@@ -35,7 +42,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function DevToolDetailPage({
   params,
 }: {
-  params: { slug: string }
+  params: { category: string; slug: string }
 }) {
   const { slug } = params
   const tool = SEED_DEV_TOOLS.find((t) => t.slug === slug)

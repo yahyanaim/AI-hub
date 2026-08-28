@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const devToolPages = SEED_DEV_TOOLS.map((tool) => ({
-    url: `${baseUrl}/dev-tools/${tool.slug}`,
+    url: `${baseUrl}/dev-tools/${tool.category}/${tool.slug}`,
     lastModified: new Date(tool.updatedAt),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
