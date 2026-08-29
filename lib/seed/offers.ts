@@ -8544,44 +8544,42 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o155',
     slug: 'genspark-free-trial',
     name: 'Genspark AI',
-    tagline: '14-day free trial + 100-200 daily credits forever on free plan',
+    tagline: 'First month free on Plus plan with 10,000 starting credits + unlimited chat/images for 2026',
     description: `Genspark is an AI Super Agent platform with access to premium models (GPT-5.2, Claude Opus 4.5, Gemini 3 Pro, Flux, Ideogram, Kling) for research, slides, images, video, and coding.
 
-**Current Offers:**
+**Current Offer:**
 
-- **Free Plan (Forever)**: 100-200 daily credits (resets every 24h), 1GB storage, unlimited AI chat & image generation (2026 promo), no credit card required
-- **14-Day Free Trial**: Full access to Plus/Pro features before billing starts
-- **20% Off Annual Plans**: Plus at $19.99/mo (save $60/yr), Pro at $199.99/mo (save $600/yr)
-- **Zero-Credit Chat & Images**: On paid plans, AI chat and image generation cost 0 credits through Dec 31, 2026
+- **First Month Free on Plus**: New users get the first month of Plus plan free (normally $24.99/mo) with 10,000 starting credits
+- **Unlimited Chat & Images for 2026**: On paid plans, AI chat and image generation cost 0 credits through December 31, 2026
+- **Free Plan (Forever)**: 100-200 daily credits (resets every 24h), 1GB storage, no credit card required
 
 **Plans:**
 - Free: $0 — 100-200 credits/day, 1GB
-- Plus: $24.99/mo ($19.99/mo annual) — 10,000 credits/mo, 50GB
+- Plus: $24.99/mo ($19.99/mo annual) — 10,000 credits/mo, 50GB, first month free
 - Pro: $249.99/mo ($199.99/mo annual) — 125,000 credits/mo, 1TB`,
     url: 'https://www.genspark.ai',
     logoUrl: 'https://www.google.com/s2/favicons?domain=genspark.ai&sz=64',
     category: 'tool',
-    tags: ['ai', 'super-agent', 'free-trial', 'daily-credits', 'annual-discount'],
+    tags: ['ai', 'super-agent', 'first-month-free', 'starting-credits', 'unlimited-chat-images-2026'],
     pricing: 'freemium',
     steps: [
       {
-        title: 'Sign up for free',
-        description: 'Visit genspark.ai and create an account with email or social login. No credit card needed for the free plan.',
+        title: 'Sign up for Genspark',
+        description: 'Visit genspark.ai and create an account with email or social login.',
         url: 'https://www.genspark.ai',
       },
       {
-        title: 'Claim daily credits',
-        description: 'Free plan gives 100-200 credits daily that reset every 24 hours. Use for AI chat, research, Sparkpages, and image generation.',
-      },
-      {
-        title: 'Start 14-day trial (optional)',
-        description: 'Upgrade to Plus or Pro to unlock the 14-day free trial with full paid features before any charge.',
+        title: 'Upgrade to Plus for first month free',
+        description: 'Choose the Plus plan to get your first month free with 10,000 starting credits. No charge for the first month.',
         url: 'https://www.genspark.ai/pricing',
       },
       {
-        title: 'Lock in annual discount',
-        description: 'Choose annual billing for 20% off: Plus at $19.99/mo or Pro at $199.99/mo. Works for new signups and free plan upgrades.',
-        url: 'https://www.genspark.ai/pricing',
+        title: 'Use unlimited chat & images',
+        description: 'On Plus/Pro plans, AI chat and image generation cost 0 credits through Dec 31, 2026. Credits only used for agent tasks, slides, video, and calls.',
+      },
+      {
+        title: 'Claim daily free credits (optional)',
+        description: 'Free plan gives 100-200 credits daily that reset every 24 hours. Use for light research, chat, and image generation.',
       },
     ],
     upvotes: 0,
