@@ -273,6 +273,8 @@ export async function POST(request: Request) {
         let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
         if (res.status === 401 || res.status === 403) {
           clientError = `AI auth failed (upstream ${res.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
+        } else if (res.status === 410) {
+          clientError = `NVIDIA Public API Endpoints not enabled for this account (410 Gone). Your key is valid but the org lacks permission — request enablement at forums.developer.nvidia.com or set DAHL_API_KEY/OPENAI_API_KEY as fallback. See build.nvidia.com.`
         } else if (res.status === 404 || res.status === 400 || res.status === 422) {
           const hint = body.slice(0, 200).replace(/\s+/g, ' ')
           clientError = `Model "${m}" rejected (upstream ${res.status}). ${hint}`
