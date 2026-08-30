@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const DEFAULT_MODEL = 'meta/llama-3.1-70b-instruct'
-const FALLBACK_MODELS = ['nvidia/llama-3.1-nemotron-70b-instruct', 'meta/llama-3.1-405b-instruct', 'meta/llama-3.1-8b-instruct']
+const DEFAULT_MODEL = 'moonshotai/kimi-k3'
+const FALLBACK_MODELS = ['meta/llama-3.1-70b-instruct', 'nvidia/llama-3.1-nemotron-70b-instruct', 'meta/llama-3.1-405b-instruct']
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
@@ -215,25 +215,33 @@ export async function POST(request: Request) {
     const primaryModel = process.env.NVIDIA_MODEL || DEFAULT_MODEL
 
     async function callNvidia(model: string): Promise<Response> {
-      const payload = {
+      // Normalize conversation to support vision (content as string or array) like your axios snippet
+      const normalizedConversation = conversation.map((m: { role: string; content: unknown }) => {
+        // If content already array (vision), pass through; else string
+        return m
+      })
+      const payload: Record<string, unknown> = {
         model,
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
-          ...conversation,
+          ...normalizedConversation,
         ],
-        max_tokens: 2048,
-        temperature: 0.70,
-        top_p: 0.95,
+        max_tokens: 16384,
+        temperature: 1,
         stream: true,
+        // kimi-k3 supports reasoning_effort; harmless for other models (ignored)
+        reasoning_effort: 'max',
+        seed: 0,
       }
       const controller = new AbortController()
-      const timeout = setTimeout(() => controller.abort(), 30_000)
+      const timeout = setTimeout(() => controller.abort(), 60_000)
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${API_KEY}`,
             'Content-Type': 'application/json',
+            'Accept': 'text/event-stream',
           },
           body: JSON.stringify(payload),
           signal: controller.signal,
@@ -241,7 +249,7 @@ export async function POST(request: Request) {
         return res
       } catch (e: unknown) {
         clearTimeout(timeout)
-        const msg = e instanceof Error && e.name === 'AbortError' ? 'Upstream timeout after 30s' : String(e)
+        const msg = e instanceof Error && e.name === 'AbortError' ? 'Upstream timeout after 60s' : String(e)
         console.error('[chat] fetch failed', model, msg)
         throw e
       } finally {
