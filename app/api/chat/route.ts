@@ -226,7 +226,7 @@ export async function POST(request: Request) {
           { role: 'system', content: SYSTEM_PROMPT },
           ...normalizedConversation,
         ],
-        max_tokens: 16384,
+        max_tokens: 4096,
         temperature: 1,
         stream: true,
         // kimi-k3 supports reasoning_effort; harmless for other models (ignored)
@@ -234,7 +234,7 @@ export async function POST(request: Request) {
         seed: 0,
       }
       const controller = new AbortController()
-      const timeout = setTimeout(() => controller.abort(), 60_000)
+      const timeout = setTimeout(() => controller.abort(), 45_000)
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
