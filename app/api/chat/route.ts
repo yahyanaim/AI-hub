@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const API_KEY = process.env.NVIDIA_API_KEY || process.env.DAHL_API_KEY
+const DEFAULT_MODEL = 'meta/llama-3.3-70b-instruct'
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
@@ -197,7 +197,9 @@ export async function POST(request: Request) {
       )
     }
 
+    const API_KEY = process.env.NVIDIA_API_KEY || process.env.DAHL_API_KEY
     if (!API_KEY) {
+      console.error('[chat] missing API key — set NVIDIA_API_KEY in Vercel env and redeploy')
       return NextResponse.json(
         { error: 'API key not configured' },
         { status: 500 }
@@ -209,8 +211,9 @@ export async function POST(request: Request) {
       .filter((m: { role: string }) => m.role === 'user' || m.role === 'assistant')
       .slice(-MAX_CONTEXT_MESSAGES)
 
+    const model = process.env.NVIDIA_MODEL || DEFAULT_MODEL
     const payload = {
-      model: 'meta/llama-3.1-70b-instruct',
+      model,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
         ...conversation,
@@ -221,20 +224,47 @@ export async function POST(request: Request) {
       stream: true,
     }
 
-    const apiResponse = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    })
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 30_000)
 
-    if (!apiResponse.ok) {
-      // Log the upstream body server-side; never forward it to the client.
-      console.error('[chat] upstream error', apiResponse.status, await apiResponse.text())
+    let apiResponse: Response
+    try {
+      apiResponse = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      })
+    } catch (e: unknown) {
+      clearTimeout(timeout)
+      const msg = e instanceof Error && e.name === 'AbortError' ? 'Upstream timeout after 30s' : String(e)
+      console.error('[chat] fetch failed', msg)
       return NextResponse.json(
         { error: 'The AI service is temporarily unavailable. Please try again shortly.' },
+        { status: 502 }
+      )
+    }
+    clearTimeout(timeout)
+
+    if (!apiResponse.ok) {
+      const upstreamBody = await apiResponse.text()
+      console.error('[chat] upstream error', apiResponse.status, upstreamBody)
+      // Map upstream status to actionable client message without leaking raw body
+      let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
+      if (apiResponse.status === 401 || apiResponse.status === 403) {
+        clientError = 'AI service authentication failed (invalid/expired API key). Please check NVIDIA_API_KEY on Vercel and redeploy.'
+      } else if (apiResponse.status === 404) {
+        clientError = `Model "${model}" not found. Update NVIDIA_MODEL env or fallback to meta/llama-3.3-70b-instruct.`
+      } else if (apiResponse.status === 429) {
+        clientError = 'AI service rate limited or quota exhausted. Try again in a minute or check build.nvidia.com credits.'
+      } else if (apiResponse.status >= 500) {
+        clientError = 'AI upstream is temporarily overloaded. Please retry in a few seconds.'
+      }
+      return NextResponse.json(
+        { error: clientError, upstreamStatus: apiResponse.status },
         { status: 502 }
       )
     }
@@ -264,8 +294,9 @@ export async function POST(request: Request) {
         'Connection': 'keep-alive',
       },
     })
-  } catch (error: any) {
-    console.error('[chat] handler error', error)
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error)
+    console.error('[chat] handler error', msg, error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
