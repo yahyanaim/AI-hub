@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const DEFAULT_MODEL = 'meta/llama-3.3-70b-instruct'
+const DEFAULT_MODEL = 'meta/llama-3_3-70b-instruct'
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
@@ -255,13 +255,16 @@ export async function POST(request: Request) {
       // Map upstream status to actionable client message without leaking raw body
       let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
       if (apiResponse.status === 401 || apiResponse.status === 403) {
-        clientError = 'AI service authentication failed (invalid/expired API key). Please check NVIDIA_API_KEY on Vercel and redeploy.'
-      } else if (apiResponse.status === 404) {
-        clientError = `Model "${model}" not found. Update NVIDIA_MODEL env or fallback to meta/llama-3.3-70b-instruct.`
+        clientError = `AI auth failed (upstream ${apiResponse.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
+      } else if (apiResponse.status === 400 || apiResponse.status === 404 || apiResponse.status === 422) {
+        const hint = upstreamBody.slice(0, 200).replace(/\s+/g, ' ')
+        clientError = `Model "${model}" rejected (upstream ${apiResponse.status}). ${hint} — Try NVIDIA_MODEL=meta/llama-3_3-70b-instruct`
       } else if (apiResponse.status === 429) {
-        clientError = 'AI service rate limited or quota exhausted. Try again in a minute or check build.nvidia.com credits.'
+        clientError = `AI rate limited/quota exhausted (upstream 429). Try in 60s or check build.nvidia.com credits.`
       } else if (apiResponse.status >= 500) {
-        clientError = 'AI upstream is temporarily overloaded. Please retry in a few seconds.'
+        clientError = `AI upstream overloaded (upstream ${apiResponse.status}). Retry in a few seconds.`
+      } else {
+        clientError = `AI service error (upstream ${apiResponse.status}). Please retry shortly.`
       }
       return NextResponse.json(
         { error: clientError, upstreamStatus: apiResponse.status },
