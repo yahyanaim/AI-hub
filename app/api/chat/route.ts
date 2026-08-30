@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const DEFAULT_MODEL = 'meta/llama-3_3-70b-instruct'
+const DEFAULT_MODEL = 'meta/llama-3.1-70b-instruct'
+const FALLBACK_MODELS = ['nvidia/llama-3.1-nemotron-70b-instruct', 'meta/llama-3.1-405b-instruct', 'meta/llama-3.1-8b-instruct']
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
@@ -211,71 +212,102 @@ export async function POST(request: Request) {
       .filter((m: { role: string }) => m.role === 'user' || m.role === 'assistant')
       .slice(-MAX_CONTEXT_MESSAGES)
 
-    const model = process.env.NVIDIA_MODEL || DEFAULT_MODEL
-    const payload = {
-      model,
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...conversation,
-      ],
-      max_tokens: 2048,
-      temperature: 0.70,
-      top_p: 0.95,
-      stream: true,
-    }
+    const primaryModel = process.env.NVIDIA_MODEL || DEFAULT_MODEL
 
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 30_000)
-
-    let apiResponse: Response
-    try {
-      apiResponse = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-      })
-    } catch (e: unknown) {
-      clearTimeout(timeout)
-      const msg = e instanceof Error && e.name === 'AbortError' ? 'Upstream timeout after 30s' : String(e)
-      console.error('[chat] fetch failed', msg)
-      return NextResponse.json(
-        { error: 'The AI service is temporarily unavailable. Please try again shortly.' },
-        { status: 502 }
-      )
-    }
-    clearTimeout(timeout)
-
-    if (!apiResponse.ok) {
-      const upstreamBody = await apiResponse.text()
-      console.error('[chat] upstream error', apiResponse.status, upstreamBody)
-      // Map upstream status to actionable client message without leaking raw body
-      let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
-      if (apiResponse.status === 401 || apiResponse.status === 403) {
-        clientError = `AI auth failed (upstream ${apiResponse.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
-      } else if (apiResponse.status === 400 || apiResponse.status === 404 || apiResponse.status === 422) {
-        const hint = upstreamBody.slice(0, 200).replace(/\s+/g, ' ')
-        clientError = `Model "${model}" rejected (upstream ${apiResponse.status}). ${hint} — Try NVIDIA_MODEL=meta/llama-3_3-70b-instruct`
-      } else if (apiResponse.status === 429) {
-        clientError = `AI rate limited/quota exhausted (upstream 429). Try in 60s or check build.nvidia.com credits.`
-      } else if (apiResponse.status >= 500) {
-        clientError = `AI upstream overloaded (upstream ${apiResponse.status}). Retry in a few seconds.`
-      } else {
-        clientError = `AI service error (upstream ${apiResponse.status}). Please retry shortly.`
+    async function callNvidia(model: string): Promise<Response> {
+      const payload = {
+        model,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...conversation,
+        ],
+        max_tokens: 2048,
+        temperature: 0.70,
+        top_p: 0.95,
+        stream: true,
       }
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 30_000)
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+        })
+        return res
+      } catch (e: unknown) {
+        clearTimeout(timeout)
+        const msg = e instanceof Error && e.name === 'AbortError' ? 'Upstream timeout after 30s' : String(e)
+        console.error('[chat] fetch failed', model, msg)
+        throw e
+      } finally {
+        clearTimeout(timeout)
+      }
+    }
+
+    let apiResponse: Response | null = null
+    let usedModel = primaryModel
+    let upstreamBody = ''
+    const modelsToTry = [primaryModel, ...FALLBACK_MODELS.filter(m => m !== primaryModel)]
+
+    for (const m of modelsToTry) {
+      try {
+        const res = await callNvidia(m)
+        if (res.ok) {
+          apiResponse = res
+          usedModel = m
+          break
+        }
+        const body = await res.text()
+        console.error('[chat] upstream error', m, res.status, body)
+        // Retry on model-not-found with fallback; fail fast on auth/rate-limit
+        if ((res.status === 404 || res.status === 400 || res.status === 422) && m !== modelsToTry[modelsToTry.length - 1]) {
+          upstreamBody = body
+          continue
+        }
+        // Non-retryable or last fallback failed
+        let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
+        if (res.status === 401 || res.status === 403) {
+          clientError = `AI auth failed (upstream ${res.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
+        } else if (res.status === 404 || res.status === 400 || res.status === 422) {
+          const hint = body.slice(0, 200).replace(/\s+/g, ' ')
+          clientError = `Model "${m}" rejected (upstream ${res.status}). ${hint}`
+        } else if (res.status === 429) {
+          clientError = `AI rate limited/quota exhausted (upstream 429). Try in 60s or check build.nvidia.com credits.`
+        } else if (res.status >= 500) {
+          clientError = `AI upstream overloaded (upstream ${res.status}). Retry in a few seconds.`
+        } else {
+          clientError = `AI service error (upstream ${res.status}). Please retry shortly.`
+        }
+        return NextResponse.json(
+          { error: clientError, upstreamStatus: res.status },
+          { status: 502 }
+        )
+      } catch (e: unknown) {
+        // fetch timeout/network — retry next model if available, else 502
+        if (m !== modelsToTry[modelsToTry.length - 1]) continue
+        return NextResponse.json(
+          { error: 'The AI service is temporarily unavailable. Please try again shortly.' },
+          { status: 502 }
+        )
+      }
+    }
+
+    if (!apiResponse || !apiResponse.ok) {
       return NextResponse.json(
-        { error: clientError, upstreamStatus: apiResponse.status },
+        { error: `All models failed (tried ${modelsToTry.join(', ')}). Last: ${upstreamBody.slice(0,120)}` },
         { status: 502 }
       )
     }
 
     const stream = new ReadableStream({
       async start(controller) {
-        const reader = apiResponse.body!.getReader()
-        const decoder = new TextDecoder()
+        console.log('[chat] streaming with model', usedModel)
+        const reader = apiResponse!.body!.getReader()
 
         try {
           while (true) {
