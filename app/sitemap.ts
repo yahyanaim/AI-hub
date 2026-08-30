@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/site'
 import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS, SEED_USERS } from '@/lib/seed'
+import { DEVTOOL_CATEGORY_LABELS } from '@/types'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_URL
@@ -27,6 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(tool.updatedAt),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
+  }))
+
+  const devToolCategoryPages = Object.keys(DEVTOOL_CATEGORY_LABELS).map((category) => ({
+    url: `${baseUrl}/dev-tools/${category}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
   }))
 
   const repoPages = SEED_REPOS.map((repo) => ({
@@ -57,5 +65,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticPages, ...toolPages, ...devToolPages, ...repoPages, ...coursePages, ...offerPages, ...userPages]
+  return [...staticPages, ...toolPages, ...devToolPages, ...devToolCategoryPages, ...repoPages, ...coursePages, ...offerPages, ...userPages]
 }

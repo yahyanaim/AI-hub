@@ -31,9 +31,14 @@ export async function generateMetadata({ params }: { params: { category: string 
     }
   }
 
+  // Legacy: old flat /dev-tools/<slug> or /devtool/<slug> — redirect handled in component, return fallback metadata here
   const legacy = SEED_DEV_TOOLS.find((t) => t.slug === category)
   if (legacy) {
-    redirect(`/dev-tools/${legacy.category}/${legacy.slug}`)
+    return {
+      title: legacy.name,
+      description: legacy.tagline,
+      alternates: { canonical: `${baseUrl}/dev-tools/${legacy.category}/${legacy.slug}` },
+    }
   }
 
   return { title: 'Dev Tools Not Found' }

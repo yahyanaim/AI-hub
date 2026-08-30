@@ -41,6 +41,7 @@ export function DevToolsView({ initialCategory }: { initialCategory?: string }) 
 
       {/* All dev tools (including starter packs as a regular category) */}
       <ListingView<DevTool>
+        key={initialCategory ?? 'all'}
         items={devTools}
         config={{
           title: '',

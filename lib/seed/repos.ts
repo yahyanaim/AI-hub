@@ -2924,7 +2924,7 @@ export const SEED_REPOS: Repo[] = [
     bookmarks: 24,
     submittedBy: 'u1',
     featured: false,
-createdAt: daysAgo(119),
+    createdAt: daysAgo(119),
     updatedAt: daysAgo(26),
   },
   // AI Research & Academic Tools

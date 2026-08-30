@@ -9,6 +9,12 @@ const nextConfig = {
       hostname,
     })),
   },
+  async redirects() {
+    return [
+      { source: '/devtool', destination: '/dev-tools', permanent: true },
+      { source: '/devtool/:path*', destination: '/dev-tools/:path*', permanent: true },
+    ]
+  },
 };
 
 module.exports = nextConfig;

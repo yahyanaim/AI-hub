@@ -215,8 +215,10 @@ export function SubmitForm() {
         type={submitted.type}
         slug={submitted.slug}
         onView={() => {
-          if (submitted.type === 'devtool') router.push(`/dev-tools/${submitted.category}/${submitted.slug}`)
-          else if (submitted.type === 'repo') router.push(`/edittools/${submitted.slug}`)
+          if (submitted.type === 'devtool') {
+            const cat = submitted.category ?? (form.category as string)
+            router.push(`/dev-tools/${cat}/${submitted.slug}`)
+          } else if (submitted.type === 'repo') router.push(`/edittools/${submitted.slug}`)
           else router.push(`/${submitted.type}s/${submitted.slug}`)
         }}
         onAnother={() => {

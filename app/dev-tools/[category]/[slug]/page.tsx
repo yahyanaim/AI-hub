@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { redirect, notFound } from 'next/navigation'
 import { SEED_DEV_TOOLS, SEED_USERS } from '@/lib/seed'
 import { DevToolDetail } from '@/components/detail/DevToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'
@@ -16,8 +17,13 @@ export async function generateMetadata({
 }: {
   params: { category: string; slug: string }
 }): Promise<Metadata> {
-  const tool = SEED_DEV_TOOLS.find((t) => t.slug === params.slug)
+  const { category, slug } = params
+  const tool = SEED_DEV_TOOLS.find((t) => t.slug === slug)
   if (!tool) return { title: 'Dev Tool Not Found' }
+
+  if (tool.category !== category) {
+    redirect(`/dev-tools/${tool.category}/${tool.slug}`)
+  }
   return {
     title: tool.name,
     description: tool.tagline,
@@ -44,11 +50,18 @@ export default async function DevToolDetailPage({
 }: {
   params: { category: string; slug: string }
 }) {
-  const { slug } = params
+  const { category, slug } = params
   const tool = SEED_DEV_TOOLS.find((t) => t.slug === slug)
-  const user = tool ? SEED_USERS.find((u) => u.id === tool.submittedBy) : null
 
-  const jsonLd = tool ? {
+  if (!tool) notFound()
+
+  if (tool.category !== category) {
+    redirect(`/dev-tools/${tool.category}/${tool.slug}`)
+  }
+
+  const user = SEED_USERS.find((u) => u.id === tool.submittedBy) ?? null
+
+  const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: tool.name,
@@ -66,16 +79,14 @@ export default async function DevToolDetailPage({
     } : undefined,
     url: tool.url,
     datePublished: tool.createdAt,
-  } : null
+  }
 
   return (
     <>
-      {jsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />
       <DevToolDetail slug={slug} />
     </>
   )
