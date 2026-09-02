@@ -4269,4 +4269,56 @@ export const SEED_COURSES: Course[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'c171',
+    slug: 'masar-program',
+    name: 'Masar by Sani & Google',
+    tagline: 'Saudi intensive tech program — 4 tracks in AI, Product & Design',
+    description: `Masar (مسار) is a free, intensive Saudi program by Sani (صانع) with Google and partners (Misk, Almarai, Jahez, KACST, KSU, MCIT, MOMI, NTDP, SDB) that helps tech enthusiasts build real skills, gain practical experience, and define their career path in the AI era.
+
+**4 Tracks led by expert path leaders:**
+- **AI-Native Product Management** (Nouf Alsaghir — ex-Microsoft/Okta) — AI product strategy, prototyping, success metrics, AI economics
+- **Agentic AI** (Ahmed Ghannam & Mahmoud Salhab) — LLMs, RAG, agentic workflows, evaluation
+- **AI Infrastructure** (Osama Alqahtani) — Kubernetes, LLM serving, high-performance inference, data centers & GPUs
+- **Product Design** (Ziyad Alruwayshid) — user journeys, interactive prototypes, AI-assisted design
+
+**Journey:** Application (May 5–Jun 2) → Selection & Onboarding of 120 participants (Jun 2–5) → Bootcamp (Jun 20–Jul 11) with hands-on sessions & tech leader dialogues → Build Phase with 60 finalists in cross-track teams building a real product with knowledge partner + 1:1 executive mentorship (Jul 18–29) → Demo Day & Graduation (Jul 30) with top 3 products awarded. 70% of alumni landed jobs within 6 months. <5% acceptance, mostly remote with select in-person days.`,
+    url: 'https://rsvp.withgoogle.com/events/masar/home',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=masarbysani.com&sz=64',
+    category: 'ai-engineering',
+    difficulty: 'intermediate',
+    duration: '6 weeks',
+    pricing: 'free',
+    roadmap: [
+      { title: 'Apply (May 5 – Jun 2)', topics: ['Choose your track', 'Show seriousness, motivation & fit', 'Optional video pitch recommended'], duration: 'Application', url: 'https://rsvp.withgoogle.com/events/masar/home' },
+      { title: 'Selection & Onboarding (Jun 2–5)', topics: ['120 selected from <5% acceptance', 'Program & commitment orientation'], duration: 'Selection' },
+      { title: 'Bootcamp (Jun 20 – Jul 11)', topics: ['Track-specialized intensive learning', 'Hands-on projects', 'Direct guidance from path leaders', 'Private dialogues with tech leaders'], duration: '3 weeks' },
+      { title: 'Build Phase (Jul 18–29)', topics: ['60 finalists → cross-track teams', 'Build a real tech product (app/web/AI tool)', 'Knowledge partner per team', '1:1 executive mentorship'], duration: '2 weeks' },
+      { title: 'Demo Day (Jul 30)', topics: ['Final graduation ceremony', 'Top 3 products awarded', 'Join Masar alumni community & network'], duration: 'Demo Day' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'مسار من صانع و Google',
+    taglineAr: 'برنامج تقني مكثف سعودي — 4 مسارات في الذكاء الاصطناعي والمنتجات والتصميم',
+    descriptionAr: `مسار هو برنامج سعودي مكثف مجاني من صانع بالشراكة مع Google وشركاء (مسك، المراعي، جاهز، كاكست، جامعة الملك سعود، وزارة الاتصالات، وزارة الصناعة، NTDP، بنك التنمية) يساعد المهتمين بالتقنية على اكتساب مهارات عملية وتجربة حقيقية ورسم مسارهم المهني في عصر الذكاء الاصطناعي.
+
+**4 مسارات بإشراف قادة خبراء:**
+- إدارة المنتجات المعتمدة على الذكاء الاصطناعي (نوف الصغير)
+- الذكاء الاصطناعي الوكيل (أحمد غنام ومحمود سلهب)
+- البنية التحتية للذكاء الاصطناعي (أسامة القحطاني)
+- تصميم المنتجات (زياد الرويشد)
+
+**الرحلة:** التقديم (5 مايو–2 يونيو) ← اختيار 120 مشاركاً (2–5 يونيو) ← معسكر تدريبي (20 يونيو–11 يوليو) ← مرحلة البناء مع 60 متأهلاً في فرق متعددة المسارات لبناء منتج حقيقي مع شريك معرفي وإرشاد فردي (18–29 يوليو) ← يوم العرض النهائي (30 يوليو). 70% من الخريجين حصلوا على وظائف خلال 6 أشهر.`,
+    stepsAr: [
+      { title: 'التقديم (5 مايو – 2 يونيو)', topics: ['اختر مسارك', 'أظهر الجدية والدافع والملاءمة', 'فيديو تعريفي اختياري يعزز طلبك'], duration: 'التقديم', url: 'https://rsvp.withgoogle.com/events/masar/home' },
+      { title: 'الاختيار والتأهيل (2–5 يونيو)', topics: ['اختيار 120 مشاركاً من <5% نسبة قبول', 'تأهيل حول البرنامج والالتزام'], duration: 'الاختيار' },
+      { title: 'المعسكر التدريبي (20 يونيو – 11 يوليو)', topics: ['تعلم مكثف داخل المسار', 'مشاريع عملية', 'توجيه مباشر من قادة المسارات', 'حوارات خاصة مع قادة التقنية'], duration: '3 أسابيع' },
+      { title: 'مرحلة البناء (18–29 يوليو)', topics: ['60 متأهلاً في فرق متعددة المسارات', 'بناء منتج تقني حقيقي', 'شريك معرفي لكل فريق', 'إرشاد فردي من تنفيذيين'], duration: 'أسبوعان' },
+      { title: 'يوم العرض النهائي (30 يوليو)', topics: ['حفل ختامي', 'اختيار أفضل 3 منتجات', 'الانضمام لمجتمع مسار'], duration: 'يوم العرض' },
+    ],
+  },
 ]
