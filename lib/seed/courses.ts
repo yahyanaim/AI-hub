@@ -4274,18 +4274,12 @@ export const SEED_COURSES: Course[] = [
     slug: 'masar-google',
     name: 'Masar by Google (مسار)',
     tagline: '100% Hands-on Coding | 100% Arabic | Zero Slides | Real Cloud Skills',
-    description: `Masar by Google (مسار) — Season 1: Integrating Generative AI into Applications with Gemini. 100% Hands-on Coding, 100% Arabic, Zero Slides, Real Cloud Skills. A 5-week live season taking you from cloud basics to building and securely deploying GenAI apps on Google Cloud.
+    description: `Masar by Google (مسار)
+100% Hands-on Coding | 100% Arabic | Zero Slides | Real Cloud Skills
 
-**Host:** Abdel Sghiouar — Senior Cloud Developer Advocate, Google Cloud (all episodes)
+🌟 Season 1: Integrating Generative AI into Applications with Gemini
+In this season, consisting of 5 weekly live episodes, we will take you on a practical journey from cloud basics to building GenAI applications and deploying them securely on Google Cloud.`,
 
-**Season 1 Agenda (5 live episodes, GMT+2/+1):**
-- **Sep 30, 2026 (6–7pm GMT+2): Getting Started with Google Antigravity & the Antigravity IDE** — Kickstart with zero Day 1 friction: set up local Antigravity IDE, init sandbox via Google Developer Program, run your first local Antigravity code.
-- **Oct 7, 2026 (6–7pm GMT+2): Deploying Microservices on Google Cloud with Antigravity** — Configure, package, and deploy a secure web microservice from local to a public Google Cloud URL with Antigravity.
-- **Oct 14, 2026 (6–7pm GMT+2): Data & State Integration in Antigravity Applications** — Connect robust backend databases, handle persistent state, and configure secure networking on Google Cloud.
-- **Oct 22, 2026 (6–7pm GMT+2): Building Intelligent Agents with the Agent Development Kit (ADK)** — Build autonomous AI agents with ADK capable of reasoning, planning, and calling APIs.
-- **Oct 28, 2026 (5–6pm GMT+1): Deploying, Managing, and Observing ADK Agents on Google Cloud Run** — Season finale: serverless deploy to Cloud Run, monitoring/logging telemetry, scale-to-zero for cost efficiency.
-
-Register at rsvp.withgoogle.com/events/masar/home.`,
     url: 'https://rsvp.withgoogle.com/events/masar/home',
     logoUrl: 'https://www.google.com/s2/favicons?domain=rsvp.withgoogle.com&sz=64',
     category: 'ai-engineering',
