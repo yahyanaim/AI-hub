@@ -4271,10 +4271,10 @@ export const SEED_COURSES: Course[] = [
   },
   {
     id: 'c171',
-    slug: 'masar-program',
-    name: 'Masar by Sani & Google',
-    tagline: 'Saudi intensive tech program — 4 tracks in AI, Product & Design',
-    description: `Masar (مسار) is a free, intensive Saudi program by Sani (صانع) with Google and partners (Misk, Almarai, Jahez, KACST, KSU, MCIT, MOMI, NTDP, SDB) that helps tech enthusiasts build real skills, gain practical experience, and define their career path in the AI era.
+    slug: 'masar-google',
+    name: 'Masar by Google',
+    tagline: 'Google intensive program — 4 tracks in AI, Product & Design',
+    description: `Masar by Google is a free, intensive program (hosted at rsvp.withgoogle.com/events/masar/home) that helps tech enthusiasts build real skills, gain practical experience, and define their career path in the AI era. Run with Sani (صانع) and partners (Misk, Almarai, Jahez, KACST, KSU, MCIT, MOMI, NTDP, SDB).
 
 **4 Tracks led by expert path leaders:**
 - **AI-Native Product Management** (Nouf Alsaghir — ex-Microsoft/Okta) — AI product strategy, prototyping, success metrics, AI economics
@@ -4282,9 +4282,9 @@ export const SEED_COURSES: Course[] = [
 - **AI Infrastructure** (Osama Alqahtani) — Kubernetes, LLM serving, high-performance inference, data centers & GPUs
 - **Product Design** (Ziyad Alruwayshid) — user journeys, interactive prototypes, AI-assisted design
 
-**Journey:** Application (May 5–Jun 2) → Selection & Onboarding of 120 participants (Jun 2–5) → Bootcamp (Jun 20–Jul 11) with hands-on sessions & tech leader dialogues → Build Phase with 60 finalists in cross-track teams building a real product with knowledge partner + 1:1 executive mentorship (Jul 18–29) → Demo Day & Graduation (Jul 30) with top 3 products awarded. 70% of alumni landed jobs within 6 months. <5% acceptance, mostly remote with select in-person days.`,
+**Journey (via rsvp.withgoogle.com):** Application (May 5–Jun 2) → Selection & Onboarding of 120 participants (Jun 2–5) → Bootcamp (Jun 20–Jul 11) with hands-on sessions & tech leader dialogues → Build Phase with 60 finalists in cross-track teams building a real product with knowledge partner + 1:1 executive mentorship (Jul 18–29) → Demo Day & Graduation (Jul 30) with top 3 products awarded. 70% of alumni landed jobs within 6 months. <5% acceptance, mostly remote with select in-person days.`,
     url: 'https://rsvp.withgoogle.com/events/masar/home',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=masarbysani.com&sz=64',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=rsvp.withgoogle.com&sz=64',
     category: 'ai-engineering',
     difficulty: 'intermediate',
     duration: '6 weeks',
@@ -4302,9 +4302,9 @@ export const SEED_COURSES: Course[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'مسار من صانع و Google',
-    taglineAr: 'برنامج تقني مكثف سعودي — 4 مسارات في الذكاء الاصطناعي والمنتجات والتصميم',
-    descriptionAr: `مسار هو برنامج سعودي مكثف مجاني من صانع بالشراكة مع Google وشركاء (مسك، المراعي، جاهز، كاكست، جامعة الملك سعود، وزارة الاتصالات، وزارة الصناعة، NTDP، بنك التنمية) يساعد المهتمين بالتقنية على اكتساب مهارات عملية وتجربة حقيقية ورسم مسارهم المهني في عصر الذكاء الاصطناعي.
+    nameAr: 'مسار من Google',
+    taglineAr: 'برنامج مكثف من Google — 4 مسارات في الذكاء الاصطناعي والمنتجات والتصميم',
+    descriptionAr: `مسار من Google هو برنامج مكثف مجاني (التسجيل عبر rsvp.withgoogle.com/events/masar/home) يساعد المهتمين بالتقنية على اكتساب مهارات عملية وتجربة حقيقية ورسم مسارهم المهني في عصر الذكاء الاصطناعي. بالشراكة مع صانع وشركاء (مسك، المراعي، جاهز، كاكست، جامعة الملك سعود، وزارة الاتصالات، وزارة الصناعة، NTDP، بنك التنمية).
 
 **4 مسارات بإشراف قادة خبراء:**
 - إدارة المنتجات المعتمدة على الذكاء الاصطناعي (نوف الصغير)
