@@ -8679,4 +8679,90 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
   },
+  {
+    id: 'o157',
+    slug: 'amd-member-perks',
+    name: 'AMD AI Developer Program — Member Perks',
+    tagline: '$100 cloud credits, DeepLearning.AI Pro, GPU sweepstakes & Discord',
+    description: `AMD AI Developer Program Member Perks — unlock exclusive benefits as a member at developer.amd.com/member-perks.
+
+**My Benefits:**
+- **$100 Free Cloud Credit** — AMD Developer Cloud credits (30 days after activation) or Fireworks AI credit (90 days) — choose direct GPU access (Instinct GPUs, vLLM/SGLang/PyTorch) or managed LLM endpoint (MiniMax, Kimi K)
+- **1 Month Free DeepLearning.AI Pro** — complimentary membership
+- **Win Big Monthly** — sweepstakes for AMD Radeon GPU or Ryzen AI PC
+- **Early Event Registration** — exclusive webinars & AMD events
+- **Connect & Collaborate** — private Discord with AMD engineers
+- **Monthly Insider Newsletter** — AI insights & product roadmaps
+
+**Earn Points:**
+Complete profile +100, AI Academy course +200, 5 courses +100 bonus, 10 courses +100 bonus, Featured Member +250, Attend AMD Event +500
+
+**Cloud Credit Options:** AMD Developer Cloud (raw Instinct GPU access) vs Fireworks (managed LLM endpoint, no setup).`,
+    url: 'https://developer.amd.com/member-perks/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=developer.amd.com&sz=64',
+    category: 'tool',
+    tags: ['amd', 'cloud-credits', 'gpu', 'deeplearning', 'discord', 'ai-developer'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Join AMD AI Developer Program',
+        description: 'Create a free account at developer.amd.com and complete your user profile (+100 pts).',
+        url: 'https://developer.amd.com/member-perks/',
+      },
+      {
+        title: 'Earn points via AI Academy',
+        description: 'Complete AI Academy courses (+200 each, +100 bonus at 5 & 10 courses) and attend AMD events (+500) to unlock perks.',
+        url: 'https://developer.amd.com/amd-ai-academy/',
+      },
+      {
+        title: 'Request your $100 cloud credit',
+        description: 'Go to Member Perks → Cloud Credit Options, choose AMD Developer Cloud or Fireworks AI, then fill the form at account.amd.com/en/member/ai-dev-program/cloud-credits.html. Receive email instructions after verification (AMD: 30 days expiry, Fireworks: 90 days).',
+        url: 'https://account.amd.com/en/member/ai-dev-program/cloud-credits.html',
+      },
+      {
+        title: 'Claim DeepLearning.AI Pro (1 month free)',
+        description: 'In Member Perks, click “Join to get this code” for DeepLearning.AI Pro Membership — 30 days free after enrollment.',
+        url: 'https://developer.amd.com/member-perks/',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'برنامج AMD للمطورين — مزايا الأعضاء',
+    taglineAr: '100$ رصيد سحابي، DeepLearning.AI Pro، سحب شهري على GPU وDiscord',
+    descriptionAr: `مزايا أعضاء برنامج AMD AI Developer — احصل على مزايا حصرية عبر developer.amd.com/member-perks.
+
+**المزايا:**
+- **100$ رصيد سحابي مجاني** — رصيد AMD Developer Cloud (30 يوم) أو Fireworks AI (90 يوم)
+- **شهر مجاني DeepLearning.AI Pro**
+- **سحب شهري** على GPU Radeon أو حاسوب Ryzen AI
+- **تسجيل مبكر للفعاليات** وDiscord خاص مع مهندسي AMD ورسالة إخبارية شهرية
+
+**كسب النقاط:** إكمال الملف +100، كل دورة AI Academy +200، إلخ.`,
+    stepsAr: [
+      {
+        title: 'انضم لبرنامج AMD AI Developer',
+        description: 'أنشئ حساباً مجانياً على developer.amd.com وأكمل ملفك (+100 نقطة).',
+        url: 'https://developer.amd.com/member-perks/',
+      },
+      {
+        title: 'اكسب النقاط عبر AI Academy',
+        description: 'أكمل دورات AI Academy (+200 لكل دورة) واحضر فعاليات AMD (+500).',
+        url: 'https://developer.amd.com/amd-ai-academy/',
+      },
+      {
+        title: 'اطلب رصيد 100$ السحابي',
+        description: 'اختر AMD Developer Cloud أو Fireworks AI ثم املأ النموذج عبر account.amd.com. ستصلك تعليمات التفعيل بالإيميل بعد التحقق.',
+        url: 'https://account.amd.com/en/member/ai-dev-program/cloud-credits.html',
+      },
+      {
+        title: 'احصل على DeepLearning.AI Pro مجاناً لشهر',
+        description: 'اضغط “Join to get this code” في صفحة المزايا للحصول على شهر مجاني.',
+        url: 'https://developer.amd.com/member-perks/',
+      },
+    ],
+  },
 ]
