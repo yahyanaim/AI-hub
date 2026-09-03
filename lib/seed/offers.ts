@@ -8623,4 +8623,60 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
   },
+
+  {
+    id: 'o156',
+    slug: 'gemini-pro-3month',
+    name: '3 Month free Gemini Pro',
+    tagline: '3-month Gemini Pro + Google Project Management course on Coursera',
+    description: `A 3-month plan combining Gemini Pro benefits with the Google Project Management course on Coursera.`,
+    url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=gemini.google.com&sz=64',
+    category: 'tool',
+    tags: ['gemini', 'google-ai-pro', 'coursera', 'project-management', 'free-trial'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Step 1 — Fill Out the Form',
+        description: 'Complete the form in the Recode application to apply for the offer.',
+        url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
+      },
+      {
+        title: 'Step 2 — Enroll in the Google Project Management Course',
+        description: 'Register for the Google Project Management Professional Certificate on Coursera.',
+        url: 'https://www.coursera.org/learn/project-management-foundations',
+      },
+      {
+        title: 'Step 3 — Claim Your 3-Month Google AI Pro Trial',
+        description: 'Go to Module 2 of the course and open the "Redeem Your Google AI Pro Trial" section. Follow the instructions to claim your 3-month Google AI Pro trial.',
+        url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: '3 أشهر مجاناً Gemini Pro',
+    taglineAr: 'خطة 3 أشهر تجمع مزايا Gemini Pro مع دورة إدارة المشاريع من Google على Coursera',
+    descriptionAr: `خطة 3 أشهر تجمع بين مزايا Gemini Pro ودورة Google لإدارة المشاريع على Coursera.`,
+    stepsAr: [
+      {
+        title: 'الخطوة 1 — املأ النموذج',
+        description: 'أكمل النموذج في تطبيق Recode للتقديم على العرض.',
+        url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
+      },
+      {
+        title: 'الخطوة 2 — سجل في دورة إدارة المشاريع من Google',
+        description: 'سجل في شهادة Google Project Management Professional على Coursera.',
+        url: 'https://www.coursera.org/learn/project-management-foundations',
+      },
+      {
+        title: 'الخطوة 3 — احصل على تجربة Google AI Pro لمدة 3 أشهر',
+        description: 'اذهب إلى الوحدة 2 من الدورة وافتح قسم "Redeem Your Google AI Pro Trial" واتبع التعليمات للحصول على تجربة 3 أشهر.',
+        url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
+      },
+    ],
+  },
 ]
