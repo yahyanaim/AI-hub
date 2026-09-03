@@ -4324,11 +4324,8 @@ In this season, consisting of 5 weekly live episodes, we will take you on a prac
     slug: 'ai-for-everyone',
     name: 'AI For Everyone',
     tagline: 'Andrew Ng — non-technical AI strategy for everyone',
-    description: `**DeepLearning.AI — Andrew Ng** — 2.5M+ enrolled, 4.8 (53k reviews), Beginner, 7 hours, 4 modules, Shareable certificate, 27 languages, Financial aid available.
+    description: `AI for non-technical learners — understand what AI can and cannot do, spot opportunities, and build an AI strategy with your team. By Andrew Ng, DeepLearning.AI.`,
 
-AI is not only for engineers. Learn what AI realistically can and cannot do, spot opportunities in your org, feel what building ML/data science projects is like, and build an AI strategy with your team — including ethics and societal impact.
-
-Taught in English, flexible schedule. Offered by DeepLearning.AI on Coursera.`,
     url: 'https://www.coursera.org/learn/ai-for-everyone',
     logoUrl: 'https://www.google.com/s2/favicons?domain=coursera.org&sz=64',
     category: 'ai-engineering',
@@ -4349,9 +4346,7 @@ Taught in English, flexible schedule. Offered by DeepLearning.AI on Coursera.`,
     updatedAt: daysAgo(0),
     nameAr: 'الذكاء الاصطناعي للجميع',
     taglineAr: 'آندرو نج — استراتيجية الذكاء الاصطناعي لغير التقنيين',
-    descriptionAr: `دورة DeepLearning.AI من آندرو نج — 2.5M+ مسجل، 4.8 (53 ألف تقييم)، مبتدئ، 7 ساعات، 4 وحدات، شهادة قابلة للمشاركة، 27 لغة، مساعدة مالية متاحة.
-
-الذكاء الاصطناعي ليس للمهندسين فقط. تعلم ما يمكن للذكاء الاصطناعي فعله وما لا يمكنه، اكتشاف الفرص في مؤسستك، وفهم بناء مشاريع تعلم الآلة وعلوم البيانات، وبناء استراتيجية ذكاء اصطناعي مع فريقك.`,
+    descriptionAr: `لغير التقنيين — فهم ما يمكن للذكاء الاصطناعي فعله وما لا يمكنه، واكتشاف الفرص وبناء استراتيجية مع فريقك. من آندرو نج، DeepLearning.AI.`,
     stepsAr: [
       { title: 'الأسبوع 1 — ما هو الذكاء الاصطناعي؟', topics: ['تعلم الآلة', 'ما هي البيانات؟', 'مصطلحات الذكاء الاصطناعي', 'ما الذي يجعل الشركة شركة ذكاء اصطناعي؟'], duration: 'ساعتان' },
       { title: 'الأسبوع 2 — بناء مشاريع الذكاء الاصطناعي', topics: ['سير عمل مشروع تعلم الآلة', 'سير عمل علوم البيانات', 'كيفية اختيار مشروع ذكاء اصطناعي'], duration: 'ساعة' },
