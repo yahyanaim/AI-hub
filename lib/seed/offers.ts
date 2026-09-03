@@ -8684,20 +8684,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'amd-member-perks',
     name: 'AMD AI Developer Program — Member Perks',
     tagline: '$100 cloud credits, DeepLearning.AI Pro, GPU sweepstakes & Discord',
-    description: `AMD AI Developer Program Member Perks — unlock exclusive benefits as a member at developer.amd.com/member-perks.
+    description: `Unlock $100 cloud credits, 1 month DeepLearning.AI Pro, monthly GPU sweepstakes and Discord access as an AMD AI Developer Program member at developer.amd.com/member-perks.`,
 
-**My Benefits:**
-- **$100 Free Cloud Credit** — AMD Developer Cloud credits (30 days after activation) or Fireworks AI credit (90 days) — choose direct GPU access (Instinct GPUs, vLLM/SGLang/PyTorch) or managed LLM endpoint (MiniMax, Kimi K)
-- **1 Month Free DeepLearning.AI Pro** — complimentary membership
-- **Win Big Monthly** — sweepstakes for AMD Radeon GPU or Ryzen AI PC
-- **Early Event Registration** — exclusive webinars & AMD events
-- **Connect & Collaborate** — private Discord with AMD engineers
-- **Monthly Insider Newsletter** — AI insights & product roadmaps
-
-**Earn Points:**
-Complete profile +100, AI Academy course +200, 5 courses +100 bonus, 10 courses +100 bonus, Featured Member +250, Attend AMD Event +500
-
-**Cloud Credit Options:** AMD Developer Cloud (raw Instinct GPU access) vs Fireworks (managed LLM endpoint, no setup).`,
     url: 'https://developer.amd.com/member-perks/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=developer.amd.com&sz=64',
     category: 'tool',
@@ -8733,15 +8721,8 @@ Complete profile +100, AI Academy course +200, 5 courses +100 bonus, 10 courses 
     updatedAt: daysAgo(0),
     nameAr: 'برنامج AMD للمطورين — مزايا الأعضاء',
     taglineAr: '100$ رصيد سحابي، DeepLearning.AI Pro، سحب شهري على GPU وDiscord',
-    descriptionAr: `مزايا أعضاء برنامج AMD AI Developer — احصل على مزايا حصرية عبر developer.amd.com/member-perks.
+    descriptionAr: `احصل على 100$ رصيد سحابي، شهر مجاني DeepLearning.AI Pro، سحب GPU شهري وDiscord كعضو في برنامج AMD AI Developer.`,
 
-**المزايا:**
-- **100$ رصيد سحابي مجاني** — رصيد AMD Developer Cloud (30 يوم) أو Fireworks AI (90 يوم)
-- **شهر مجاني DeepLearning.AI Pro**
-- **سحب شهري** على GPU Radeon أو حاسوب Ryzen AI
-- **تسجيل مبكر للفعاليات** وDiscord خاص مع مهندسي AMD ورسالة إخبارية شهرية
-
-**كسب النقاط:** إكمال الملف +100، كل دورة AI Academy +200، إلخ.`,
     stepsAr: [
       {
         title: 'انضم لبرنامج AMD AI Developer',
