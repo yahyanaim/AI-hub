@@ -4332,6 +4332,7 @@ In this season, consisting of 5 weekly live episodes, we will take you on a prac
     difficulty: 'beginner',
     duration: '7 hours',
     pricing: 'freemium',
+    tags: ['high-recommended', 'ai', 'andrew-ng', 'deeplearning'],
     roadmap: [
       { title: 'Week 1 — What is AI?', topics: ['Machine Learning', 'What is data?', 'Terminology of AI', 'What makes an AI company?', 'What ML can/can not do', 'Deep learning (non-technical)'], duration: '2h', url: 'https://www.coursera.org/learn/ai-for-everyone/lecture/SRwLN/week-1-introduction' },
       { title: 'Week 2 — Building AI Projects', topics: ['Workflow of ML project', 'Workflow of data science project', 'Every job function needs data', 'How to choose an AI project', 'Working with an AI team'], duration: '1h' },
