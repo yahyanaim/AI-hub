@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { SEED_TOOLS, SEED_USERS } from '@/lib/seed'
 import { ToolDetail } from '@/components/detail/ToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'

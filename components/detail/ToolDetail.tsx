@@ -41,7 +41,9 @@ export function ToolDetail({
 
   useEffect(() => {
     const found = tools.find((t) => t.slug === slug)
-    if (!found) setNotFoundFlag(true)
+    // Reset on every lookup: hydration merges local submissions after mount,
+    // so a slug missing from seed-only state may resolve a render later.
+    setNotFoundFlag(!found)
     setTool(found)
   }, [slug, tools])
 

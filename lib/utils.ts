@@ -80,24 +80,37 @@ export function ratingFor(upvotes: number, bookmarks: number): number {
   return Math.round(base * 10) / 10
 }
 
+// Escape text interpolated into innerHTML so future user-controlled fields
+// (or compromised seed data) can't break out into markup/script.
+export function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 export function downloadRoadmapPlan(course: { name: string; slug: string; tagline?: string; duration: string; difficulty: string; category: string; pricing: string; roadmap: { title: string; duration: string; url?: string; topics: string[] }[] }) {
   const el = document.createElement('div')
   el.style.cssText = 'position:fixed;left:-9999px;top:0;width:800px;background:#ffffff;padding:44px 48px;font-family:Inter,system-ui,sans-serif;color:#1e293b;line-height:1.5'
 
-  const formatLabel = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, ' ')
+  const formatLabel = (s: string) => escapeHtml(s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, ' '))
+  const esc = escapeHtml
+  const escUrl = (u: string) => esc(u).replace(/^javascript:/i, '')
 
   el.innerHTML = `
     <div style="border-bottom:2px solid #FF6B00;padding-bottom:20px;margin-bottom:28px">
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div>
-          <div style="font-size:22px;font-weight:700;color:#0f172a;letter-spacing:-0.02em">${course.name}</div>
-          ${course.tagline ? `<div style="font-size:13px;color:#64748b;margin-top:3px">${course.tagline}</div>` : ''}
+          <div style="font-size:22px;font-weight:700;color:#0f172a;letter-spacing:-0.02em">${esc(course.name)}</div>
+          ${course.tagline ? `<div style="font-size:13px;color:#64748b;margin-top:3px">${esc(course.tagline)}</div>` : ''}
         </div>
         <div style="display:inline-block;background:#FF6B00;color:#fff;font-size:11px;font-weight:600;line-height:26px;height:26px;padding:0 14px;border-radius:6px;letter-spacing:0.3px;text-transform:uppercase;vertical-align:middle">${course.difficulty ? formatLabel(course.difficulty) : ''}</div>
       </div>
       <div style="display:flex;gap:20px;margin-top:12px;font-size:12px;color:#64748b">
         <span style="display:flex;align-items:center;gap:4px">
-          <span style="font-weight:600;color:#475569">Duration:</span> ${course.duration}
+          <span style="font-weight:600;color:#475569">Duration:</span> ${esc(course.duration)}
         </span>
         <span style="display:flex;align-items:center;gap:4px">
           <span style="font-weight:600;color:#475569">Category:</span> ${course.category ? formatLabel(course.category) : ''}
@@ -110,7 +123,7 @@ export function downloadRoadmapPlan(course: { name: string; slug: string; taglin
 
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
       <div style="font-size:15px;font-weight:700;color:#0f172a">Learning Roadmap</div>
-      <div style="font-size:12px;color:#94a3b8;font-weight:500">${course.roadmap.length} steps ${course.duration ? '· ' + course.duration : ''}</div>
+      <div style="font-size:12px;color:#94a3b8;font-weight:500">${course.roadmap.length} steps ${course.duration ? '· ' + esc(course.duration) : ''}</div>
     </div>
 
     ${course.roadmap.map((step, i) => {
@@ -123,26 +136,31 @@ export function downloadRoadmapPlan(course: { name: string; slug: string; taglin
         </div>
         <div style="flex:1;min-width:0">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-size:15px;font-weight:600;color:#0f172a">${step.title}</span>
-            <span style="display:inline-block;font-size:11px;color:#64748b;font-weight:500;white-space:nowrap;background:#f8fafc;line-height:22px;height:22px;padding:0 10px;border-radius:4px;vertical-align:middle">${step.duration}</span>
+            <span style="font-size:15px;font-weight:600;color:#0f172a">${esc(step.title)}</span>
+            <span style="display:inline-block;font-size:11px;color:#64748b;font-weight:500;white-space:nowrap;background:#f8fafc;line-height:22px;height:22px;padding:0 10px;border-radius:4px;vertical-align:middle">${esc(step.duration)}</span>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px">
-            ${step.topics.map(t => `<span style="display:inline-block;padding:0 10px;border-radius:4px;background:#fef3e7;color:#c2410c;font-size:11px;font-weight:500;line-height:24px;height:24px;vertical-align:middle">${t}</span>`).join('')}
+            ${step.topics.map(t => `<span style="display:inline-block;padding:0 10px;border-radius:4px;background:#fef3e7;color:#c2410c;font-size:11px;font-weight:500;line-height:24px;height:24px;vertical-align:middle">${esc(t)}</span>`).join('')}
           </div>
-          ${step.url ? `<div style="margin-top:7px;font-size:11px;color:#FF6B00;font-weight:500">${step.url}</div>` : ''}
+          ${step.url ? `<div style="margin-top:7px;font-size:11px;color:#FF6B00;font-weight:500">${escUrl(step.url)}</div>` : ''}
         </div>
       </div>`}).join('')}
 
     <div style="margin-top:32px;padding-top:18px;border-top:1px solid #e2e8f0;font-size:10px;color:#94a3b8;text-align:center">
-      Generated by AI Hunt - ${course.name} Roadmap Plan
+      Generated by AI Hunt - ${esc(course.name)} Roadmap Plan
     </div>
   `
 
   document.body.appendChild(el)
 
+  // Cap render scale on very tall roadmaps to avoid canvas OOM on mobile:
+  // html2canvas memory grows with width × height × scale².
+  const contentHeight = el.scrollHeight || 1
+  const scale = Math.min(2, 6000 / contentHeight, 4096 / 800)
+
   import('html2canvas').then(({ default: html2canvas }) => {
     html2canvas(el, {
-      scale: 2,
+      scale,
       backgroundColor: '#ffffff',
       logging: false,
       useCORS: true,
@@ -152,22 +170,25 @@ export function downloadRoadmapPlan(course: { name: string; slug: string; taglin
         const imgData = canvas.toDataURL('image/png')
         const pdf = new jsPDF('p', 'mm', 'a4')
         const pdfW = pdf.internal.pageSize.getWidth()
+        const pageH = pdf.internal.pageSize.getHeight()
         const pdfH = (canvas.height * pdfW) / canvas.width
 
+        // Re-print the same bitmap shifted up by one page per iteration.
+        // position for page i is -i * pageH; heightLeft tracks the remainder.
         let heightLeft = pdfH
         let position = 0
 
         pdf.addImage(imgData, 'PNG', 0, position, pdfW, pdfH)
-        heightLeft -= pdf.internal.pageSize.getHeight()
+        heightLeft -= pageH
 
         while (heightLeft > 0) {
-          position = heightLeft - pdfH
+          position -= pageH
           pdf.addPage()
           pdf.addImage(imgData, 'PNG', 0, position, pdfW, pdfH)
-          heightLeft -= pdf.internal.pageSize.getHeight()
+          heightLeft -= pageH
         }
 
-        pdf.save(`${course.slug}-roadmap.pdf`)
+        pdf.save(`${slugify(course.slug) || 'roadmap'}-roadmap.pdf`)
       })
     })
   }).catch(() => {

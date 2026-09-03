@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState, useRef } from 'react'
+import { useDeferredValue, useEffect, useMemo, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Search, X, CornerDownLeft, ArrowRight, Clock } from 'lucide-react'
@@ -57,6 +57,9 @@ export function CommandPalette() {
   } = useApp()
   const router = useRouter()
   const [query, setQuery] = useState('')
+  // Defer expensive filtering (~2500 items + Arabic fields) so typing stays
+  // responsive; the list updates a render behind the input.
+  const deferredQuery = useDeferredValue(query)
   const [activeIndex, setActiveIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
@@ -90,7 +93,7 @@ export function CommandPalette() {
     }
   }, [paletteOpen])
 
-  const queryWords = useMemo(() => tokenize(query), [query])
+  const queryWords = useMemo(() => tokenize(deferredQuery), [deferredQuery])
 
   const results = useMemo<SearchResult[]>(() => {
     if (!queryWords.length) return []
@@ -277,6 +280,11 @@ export function CommandPalette() {
             placeholder="Search AI tools, dev tools, courses, repos…"
             className="w-full bg-transparent py-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             aria-label="Search query"
+            role="combobox"
+            aria-expanded="true"
+            aria-controls="palette-listbox"
+            aria-autocomplete="list"
+            aria-activedescendant={results.length ? `palette-option-${activeIndex}` : undefined}
           />
           <button
             onClick={() => setPaletteOpen(false)}
@@ -287,7 +295,7 @@ export function CommandPalette() {
           </button>
         </div>
 
-        <div ref={listRef} className="max-h-[60vh] overflow-y-auto p-2">
+        <div ref={listRef} id="palette-listbox" role="listbox" aria-label="Search results" className="max-h-[60vh] overflow-y-auto p-2">
           {showRecents && (
             <div className="mb-2">
               <div className="flex items-center justify-between px-2 py-1.5">
@@ -360,6 +368,9 @@ export function CommandPalette() {
                   return (
                     <button
                       key={r.id}
+                      id={`palette-option-${flatIndex}`}
+                      role="option"
+                      aria-selected={active}
                       data-result-index={flatIndex}
                       onMouseEnter={() => setActiveIndex(flatIndex)}
                       onClick={() => go(r)}

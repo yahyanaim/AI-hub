@@ -4321,7 +4321,7 @@ In this season, consisting of 5 weekly live episodes, we will take you on a prac
       { title: 'يوم العرض النهائي (30 يوليو)', topics: ['حفل ختامي', 'اختيار أفضل 3 منتجات', 'الانضمام لمجتمع مسار'], duration: 'يوم العرض' },
     ],
   },
-{
+  {
     id: 'c173',
     slug: 'google-ai-for-app-building',
     name: 'AI for App Building',

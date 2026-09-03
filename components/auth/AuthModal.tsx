@@ -9,11 +9,13 @@ export function AuthModal() {
   const { authModalOpen, setAuthModalOpen, signIn, resolvePendingAction } = useApp()
   const [username, setUsername] = useState('')
   const [mode, setMode] = useState<'signin' | 'pending'>('signin')
+  const [nameError, setNameError] = useState<string | null>(null)
 
   useEffect(() => {
     if (authModalOpen) {
       setUsername('')
       setMode('signin')
+      setNameError(null)
     }
   }, [authModalOpen])
 
@@ -40,6 +42,14 @@ export function AuthModal() {
           ? username || 'user'
           : username
     if (!name.trim()) return
+    // Mirror store sanitizing so invalid handles show an error instead of
+    // silently doing nothing (store ignores handles < 2 chars after cleanup).
+    const clean = name.trim().toLowerCase().replace(/[^a-z0-9_]/g, '')
+    if (clean.length < 2) {
+      setNameError('Use at least 2 letters, numbers or underscores.')
+      return
+    }
+    setNameError(null)
     signIn(name.trim())
     setAuthModalOpen(false)
     setTimeout(() => resolvePendingAction(), 0)
@@ -111,11 +121,15 @@ export function AuthModal() {
           >
             <input
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => { setUsername(e.target.value); setNameError(null) }}
               placeholder="your-username"
+              maxLength={24}
               className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-input"
               autoFocus
             />
+            {nameError && (
+              <p className="text-xs text-red-500" role="alert">{nameError}</p>
+            )}
             <button
               type="submit"
               disabled={!username.trim()}

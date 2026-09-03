@@ -100,7 +100,7 @@ export function CommentThread({ itemId }: { itemId: string }) {
                         {relativeTime(c.createdAt)}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground">{c.body}</p>
+                    <p className="whitespace-pre-wrap break-words text-sm text-muted-foreground">{c.body}</p>
                   </div>
                 </div>
               </div>

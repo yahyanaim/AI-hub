@@ -32,7 +32,9 @@ export function DevToolDetail({ slug }: { slug: string }) {
 
   useEffect(() => {
     const found = devTools.find((d) => d.slug === slug)
-    if (!found) setNotFoundFlag(true)
+    // Reset on every lookup: hydration merges local submissions after mount,
+    // so a slug missing from seed-only state may resolve a render later.
+    setNotFoundFlag(!found)
     setDevTool(found)
   }, [slug, devTools])
 

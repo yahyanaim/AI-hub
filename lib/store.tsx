@@ -27,6 +27,33 @@ import { uuid, slugify } from '@/lib/utils'
 
 const STORAGE_KEY = 'ai-hunt-state-v4' // v4+: stores only user deltas, not seed data
 
+// Local-only abuse guards (all data is per-browser localStorage).
+const MAX_COMMENT_LENGTH = 2000
+const MAX_COMMENTS_STORED = 500
+const MAX_USERS_STORED = 100
+const MIN_USERNAME_LENGTH = 2
+const MAX_USERNAME_LENGTH = 24
+
+/** Accept only http(s) URLs to avoid javascript:/data: payloads in submissions. */
+function assertHttpUrl(value: string, field: string): string {
+  const trimmed = value.trim()
+  try {
+    const parsed = new URL(trimmed)
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') throw new Error()
+    return trimmed
+  } catch {
+    throw new Error(`Invalid ${field}: must be an http(s) URL`)
+  }
+}
+
+/** Ensure a slug is unique within a collection by suffixing on collision. */
+function uniqueSlug(base: string, taken: Set<string>): string {
+  if (!taken.has(base)) return base
+  let i = 2
+  while (taken.has(`${base}-${i}`)) i++
+  return `${base}-${i}`
+}
+
 /**
  * What we persist: ONLY user-specific data. Seed content (tools, courses,
  * offers…) always comes fresh from lib/seed so code updates reach everyone.
@@ -300,6 +327,40 @@ export function AppProvider({ children }: { children: ReactNode }) {
     load()
   }, [])
 
+  // Cross-tab sync: when another tab writes deltas, merge them in.
+  useEffect(() => {
+    if (!hydrated) return
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== STORAGE_KEY || !e.newValue) return
+      try {
+        const delta = JSON.parse(e.newValue) as StoredDelta
+        setState((prev) => {
+          const mergeAdded = <T extends { id: string }>(current: T[], added?: T[]) =>
+            added?.length
+              ? [...current, ...added.filter((a) => !current.some((s) => s.id === a.id))]
+              : current
+          return {
+            ...prev,
+            users: delta.users?.length ? delta.users : prev.users,
+            currentUserId: delta.currentUserId ?? prev.currentUserId,
+            recentSearches: delta.recentSearches ?? prev.recentSearches,
+            tools: mergeAdded(prev.tools, delta.addedTools),
+            devTools: mergeAdded(prev.devTools, delta.addedDevTools),
+            prompts: mergeAdded(prev.prompts, delta.addedPrompts),
+            repos: mergeAdded(prev.repos, delta.addedRepos),
+            courses: mergeAdded(prev.courses, delta.addedCourses),
+            offers: mergeAdded(prev.offers, delta.addedOffers),
+            comments: mergeAdded(prev.comments, delta.addedComments).slice(0, MAX_COMMENTS_STORED),
+          }
+        })
+      } catch {
+        // Ignore corrupt cross-tab payloads.
+      }
+    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [hydrated])
+
   // Persist ONLY user deltas (debounced 200ms). Seed content is never written.
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   useEffect(() => {
@@ -430,14 +491,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const addComment = useCallback((itemId: string, body: string) => {
     setState((prev) => {
       if (!prev.currentUserId || !body.trim()) return prev
+      const trimmed = body.trim().slice(0, MAX_COMMENT_LENGTH)
       const comment: Comment = {
         id: uuid(),
         itemId,
         userId: prev.currentUserId,
-        body: body.trim(),
+        body: trimmed,
         createdAt: new Date().toISOString(),
       }
-      return { ...prev, comments: [comment, ...prev.comments] }
+      // Cap stored comments so one browser can't exhaust localStorage quota.
+      const comments = [comment, ...prev.comments].slice(0, MAX_COMMENTS_STORED)
+      return { ...prev, comments }
     })
   }, [])
 
@@ -454,15 +518,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // ---------------- Auth (local mock) ----------------
   const signIn = useCallback((username: string) => {
+    const raw = username.trim().slice(0, MAX_USERNAME_LENGTH)
+    const clean = raw.toLowerCase().replace(/[^a-z0-9_]/g, '')
+    // Reject empty/short handles (e.g. '___' sanitizes to '') and cap the
+    // local user list so fake accounts can't grow localStorage unboundedly.
+    if (clean.length < MIN_USERNAME_LENGTH) return
     setState((prev) => {
       const existing = prev.users.find(
-        (u) => u.username.toLowerCase() === username.toLowerCase()
+        (u) => u.username.toLowerCase() === clean
       )
       if (existing) return { ...prev, currentUserId: existing.id }
+      if (prev.users.length >= MAX_USERS_STORED) return prev
       const newUser: User = {
         id: uuid(),
-        username: username.toLowerCase().replace(/[^a-z0-9_]/g, ''),
-        displayName: username,
+        username: clean,
+        displayName: raw,
         avatarUrl: '',
         bio: '',
         upvotedItems: [],
@@ -497,16 +567,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // ---------------- Submit ----------------
   const submitTool = useCallback((input: SubmitToolInput): Tool => {
     const id = uuid()
-    const slug = slugify(input.name) || `tool-${id.slice(0, 6)}`
+    const url = assertHttpUrl(input.url, 'website URL')
+    const logoUrl = input.logoUrl.trim()
+    if (logoUrl) assertHttpUrl(logoUrl, 'logo URL')
+    const slugBase = slugify(input.name) || `tool-${id.slice(0, 6)}`
     const now = new Date().toISOString()
     const tool: Tool = {
       id,
-      slug,
+      slug: slugBase,
       name: input.name,
       tagline: input.tagline,
       description: input.description,
-      url: input.url,
-      logoUrl: input.logoUrl || '/placeholder-logo.svg',
+      url,
+      logoUrl: logoUrl || '/placeholder-logo.svg',
       category: input.category,
       tags: input.tags,
       pricing: input.pricing,
@@ -517,11 +590,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
       createdAt: now,
       updatedAt: now,
     }
+    let result = tool
     setState((prev) => {
       const submitter = prev.currentUserId
         ? prev.users.find((u) => u.id === prev.currentUserId)
         : undefined
-      const finalTool = { ...tool, submittedBy: submitter?.id ?? '' }
+      const slug = uniqueSlug(slugBase, new Set(prev.tools.map((t) => t.slug)))
+      const finalTool = { ...tool, slug, submittedBy: submitter?.id ?? '' }
+      result = finalTool
       const users = submitter
         ? prev.users.map((u) =>
             u.id === submitter.id
@@ -531,7 +607,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         : prev.users
       return { ...prev, tools: [finalTool, ...prev.tools], users }
     })
-    return tool
+    return result
   }, [])
 
   const submitPrompt = useCallback((input: SubmitPromptInput): Prompt => {
@@ -575,16 +651,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const submitDevTool = useCallback((input: SubmitDevToolInput): DevTool => {
     const id = uuid()
-    const slug = slugify(input.name) || `devtool-${id.slice(0, 6)}`
+    const url = assertHttpUrl(input.url, 'website URL')
+    const logoUrl = input.logoUrl.trim()
+    if (logoUrl) assertHttpUrl(logoUrl, 'logo URL')
+    const slugBase = slugify(input.name) || `devtool-${id.slice(0, 6)}`
     const now = new Date().toISOString()
     const devTool: DevTool = {
       id,
-      slug,
+      slug: slugBase,
       name: input.name,
       tagline: input.tagline,
       description: input.description,
-      url: input.url,
-      logoUrl: input.logoUrl || '/placeholder-logo.svg',
+      url,
+      logoUrl: logoUrl || '/placeholder-logo.svg',
       category: input.category,
       tags: input.tags,
       pricing: input.pricing,
@@ -595,11 +674,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
       createdAt: now,
       updatedAt: now,
     }
+    let result = devTool
     setState((prev) => {
       const submitter = prev.currentUserId
         ? prev.users.find((u) => u.id === prev.currentUserId)
         : undefined
-      const final = { ...devTool, submittedBy: submitter?.id ?? '' }
+      const slug = uniqueSlug(slugBase, new Set(prev.devTools.map((d) => d.slug)))
+      const final = { ...devTool, slug, submittedBy: submitter?.id ?? '' }
+      result = final
       const users = submitter
         ? prev.users.map((u) =>
             u.id === submitter.id
@@ -609,21 +691,24 @@ export function AppProvider({ children }: { children: ReactNode }) {
         : prev.users
       return { ...prev, devTools: [final, ...prev.devTools], users }
     })
-    return devTool
+    return result
   }, [])
 
   const submitRepo = useCallback((input: SubmitRepoInput): Repo => {
     const id = uuid()
-    const slug = slugify(input.name) || `repo-${id.slice(0, 6)}`
+    const url = assertHttpUrl(input.url, 'website URL')
+    const logoUrl = input.logoUrl.trim()
+    if (logoUrl) assertHttpUrl(logoUrl, 'logo URL')
+    const slugBase = slugify(input.name) || `repo-${id.slice(0, 6)}`
     const now = new Date().toISOString()
     const repo: Repo = {
       id,
-      slug,
+      slug: slugBase,
       name: input.name,
       tagline: input.tagline,
       description: input.description,
-      url: input.url,
-      logoUrl: input.logoUrl,
+      url,
+      logoUrl,
       category: input.category,
       tags: input.tags,
       pricing: input.pricing,
@@ -634,11 +719,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
       createdAt: now,
       updatedAt: now,
     }
+    let result = repo
     setState((prev) => {
       const submitter = prev.currentUserId
         ? prev.users.find((u) => u.id === prev.currentUserId)
         : undefined
-      const final = { ...repo, submittedBy: submitter?.id ?? '' }
+      const slug = uniqueSlug(slugBase, new Set(prev.repos.map((r) => r.slug)))
+      const final = { ...repo, slug, submittedBy: submitter?.id ?? '' }
+      result = final
       const users = submitter
         ? prev.users.map((u) =>
             u.id === submitter.id
@@ -648,14 +736,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
         : prev.users
       return { ...prev, repos: [final, ...prev.repos], users }
     })
-    return repo
+    return result
   }, [])
 
   // ---------------- Delete ----------------
+  // Anonymous submissions (submittedBy === '') are deletable from the same
+  // browser while signed out; signed-in users can delete only their own.
+  const canDelete = (submittedBy: string, currentUserId: string | null) =>
+    submittedBy === currentUserId || (submittedBy === '' && currentUserId === null)
+
   const deleteTool = useCallback((id: string) => {
     setState((prev) => {
       const item = prev.tools.find((t) => t.id === id)
-      if (!item || item.submittedBy !== prev.currentUserId) return prev
+      if (!item || !canDelete(item.submittedBy, prev.currentUserId)) return prev
       return {
         ...prev,
         tools: prev.tools.filter((t) => t.id !== id),
@@ -671,7 +764,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const deleteDevTool = useCallback((id: string) => {
     setState((prev) => {
       const item = prev.devTools.find((d) => d.id === id)
-      if (!item || item.submittedBy !== prev.currentUserId) return prev
+      if (!item || !canDelete(item.submittedBy, prev.currentUserId)) return prev
       return {
         ...prev,
         devTools: prev.devTools.filter((d) => d.id !== id),
@@ -687,7 +780,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const deleteRepo = useCallback((id: string) => {
     setState((prev) => {
       const item = prev.repos.find((r) => r.id === id)
-      if (!item || item.submittedBy !== prev.currentUserId) return prev
+      if (!item || !canDelete(item.submittedBy, prev.currentUserId)) return prev
       return {
         ...prev,
         repos: prev.repos.filter((r) => r.id !== id),

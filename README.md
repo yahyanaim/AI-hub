@@ -6,11 +6,14 @@ Built with Next.js 14 (App Router), TypeScript, and Tailwind CSS.
 
 ## Quick start
 
+This repo uses **pnpm** (`pnpm-lock.yaml` + CI run `pnpm --frozen-lockfile`).
+
 ```bash
-npm install
-npm run dev          # http://localhost:3000
-npm run build        # production build
-npm start            # serve the production build
+pnpm install
+pnpm dev            # http://localhost:3000
+pnpm build          # production build
+pnpm start          # serve the production build
+pnpm seed:check     # validate seed data (also runs in CI)
 ```
 
 ## Features

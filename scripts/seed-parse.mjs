@@ -35,9 +35,16 @@ function entryRanges(lines, from, to) {
   let cur = null
   for (let i = from; i < to; i++) {
     const line = lines[i]
-    if (cur === null && line === '  {') {
+    // Tolerant to indent changes: an entry opens on a line that is only `{`
+    // (any indentation) and closes on a line that is only `},` / `}`.
+    if (cur === null && /^\s*\{\s*$/.test(line)) {
       cur = i
-    } else if (cur !== null && /^  \},?\s*$/.test(line)) {
+    } else if (cur !== null && /^\s*\},?\s*$/.test(line)) {
+      // Guard against nested closers: only accept closers at the same
+      // indentation as the opener (top-level entries use 2-space indent).
+      const openIndent = lines[cur].match(/^\s*/)[0].length
+      const closeIndent = line.match(/^\s*/)[0].length
+      if (closeIndent !== openIndent) continue
       ranges.push([cur, i + 1])
       cur = null
     }

@@ -53,6 +53,7 @@ export function SubmitForm() {
   const [showDonation, setShowDonation] = useState(false)
   const [pendingSubmit, setPendingSubmit] = useState(false)
   const [logoError, setLogoError] = useState<string | null>(null)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [step, setStep] = useState<Step>(0)
   const [fetching, setFetching] = useState(false)
   const [tagInput, setTagInput] = useState('')
@@ -160,7 +161,9 @@ export function SubmitForm() {
       return
     }
     setLogoError(null)
+    setSubmitError(null)
     setShowDonation(false)
+    try {
     if (form.type === 'tool') {
       const tool = submitTool({
         name: form.name,
@@ -197,6 +200,11 @@ export function SubmitForm() {
         pricing: form.pricing,
       })
       setSubmitted({ type: 'repo', slug: repo.slug })
+    }
+    } catch (err) {
+      // Store-level validation (e.g. non-http URL) surfaces here.
+      setSubmitError(err instanceof Error ? err.message : 'Submission failed. Check your URLs and try again.')
+      return
     }
     setStep(3)
   }
@@ -646,7 +654,8 @@ export function SubmitForm() {
           <div>
             <h2 className="font-heading text-lg font-semibold">Review &amp; submit</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              New submissions enter a pending queue for review before going live in feeds.
+              Your submission goes live in this browser immediately. It stays
+              local — other visitors won&apos;t see it.
             </p>
 
             <div className="mt-6 space-y-4">
@@ -715,6 +724,11 @@ export function SubmitForm() {
               {logoError && (
                 <p className="max-w-md text-right text-xs font-medium text-red-600 dark:text-red-400">
                   {logoError}
+                </p>
+              )}
+              {submitError && (
+                <p className="max-w-md text-right text-xs font-medium text-red-600 dark:text-red-400" role="alert">
+                  {submitError}
                 </p>
               )}
               <button
