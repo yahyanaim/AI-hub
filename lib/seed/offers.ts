@@ -544,13 +544,13 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o8',
     slug: 'muse-spark',
     name: 'Muse Spark',
-    tagline: 'Free agentic coding AI by Meta - 1M tokens free for OpenCode & terminal agents',
+    tagline: 'Muse Spark 1.3 by Meta - free-tier agentic coding for OpenCode & terminal agents',
     description:
-      'Muse Spark is Meta’s agentic coding model built for autonomous engineering loops: it reads your repo, plans multi-step changes, edits files, runs tests, and iterates. Muse Spark 1.2 is the contributor-free tier - sign up and get ~1M free tokens to power OpenCode, Hermes, OpenClaw and other terminal agents with zero subscription. Connect via OpenCode /connect or any OpenAI-compatible base URL, pick muse-spark-1.2, and start shipping.',
+      'Muse Spark is Meta’s agentic coding model built for autonomous engineering loops: it reads your repo, plans multi-step changes, edits files, runs tests, and iterates. Muse Spark 1.3 (September 2026) beats 1.2 on coding and long-context work with ~20% fewer tool calls and ~25% fewer tokens per job, at unchanged pricing. Sign up for the free tier and power OpenCode, Hermes, OpenClaw and other terminal agents with zero subscription. Connect via OpenCode /connect or any OpenAI-compatible base URL, pick muse-spark-1.3, and start shipping.',
     url: 'https://www.meta.ai/muse-spark',
     logoUrl: 'https://icons.duckduckgo.com/ip3/meta.ai.ico',
     category: 'tool',
-    tags: ['meta', 'muse-spark', 'coding-agent', 'free', 'opencode', 'llm'],
+    tags: ['meta', 'muse-spark', 'muse-spark-1-3', 'coding-agent', 'free', 'opencode', 'llm'],
     pricing: 'free',
     steps: [
       {
@@ -562,7 +562,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Create an API key',
         description:
-          'In the dashboard, generate an API key for Muse Spark. The contributor-free tier includes roughly 1M free tokens to get started with no credit card required for the trial.',
+          'In the dashboard, generate an API key for Muse Spark. The free tier gets you started with no credit card required for the trial.',
       },
       {
         title: 'Connect from OpenCode',
@@ -571,9 +571,9 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://opencode.ai/docs',
       },
       {
-        title: 'Select muse-spark-1.2',
+        title: 'Select muse-spark-1.3',
         description:
-          'Run /models and choose muse-spark-1.2-contributor-free for zero-cost coding, or muse-spark-1.2 for higher rate limits. The model is fully instruction-tuned for file edits, shell execution, and repo search.',
+          'Run /models and choose muse-spark-1.3-contributor-free for zero-cost coding, or muse-spark-1.3 for higher rate limits. The xhigh reasoning mode is live now with max coming soon; the model is fully instruction-tuned for file edits, shell execution, and repo search.',
       },
       {
         title: 'Ship with the agent loop',
@@ -582,8 +582,8 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Muse Spark',
-    taglineAr: 'ذكاء برمجي وكيلي مجاني من Meta - مليون رمز مجاناً لـ OpenCode',
-    descriptionAr: 'Muse Spark نموذج وكيلي من Meta للهندسة المستقلة: يقرأ المستودع ويخطط ويعدّل وينفذ الاختبارات ويكرر. المستوى المجاني للمساهمين يعطي ~مليون رمز مجاناً لتشغيل OpenCode و Hermes و OpenClaw بدون اشتراك.',
+    taglineAr: 'Muse Spark 1.3 من Meta - ذكاء برمجي وكيلي بمستوى مجاني لـ OpenCode',
+    descriptionAr: 'Muse Spark نموذج وكيلي من Meta للهندسة المستقلة: يقرأ المستودع ويخطط ويعدّل وينفذ الاختبارات ويكرر. إصدار 1.3 (سبتمبر 2026) يتفوق على 1.2 في البرمجة والسياق الطويل بأدوات أقل ~20% ورموز أقل ~25% للمهمة نفسها وبنفس الأسعار. اشترك في المستوى المجاني وشغّل OpenCode و Hermes و OpenClaw بدون اشتراك.',
     stepsAr: [
       {
         title: 'افتح Muse Spark',
@@ -592,7 +592,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'أنشئ مفتاح API',
-        description: 'أنشئ مفتاحاً - المستوى المجاني يضم ~مليون رمز للبدء.'
+        description: 'أنشئ مفتاحاً - المستوى المجاني يكفي للبدء.'
       },
       {
         title: 'اربط من OpenCode',
@@ -600,8 +600,8 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://opencode.ai/docs'
       },
       {
-        title: 'اختر muse-spark-1.2',
-        description: 'شغّل /models واختر muse-spark-1.2-contributor-free.'
+        title: 'اختر muse-spark-1.3',
+        description: 'شغّل /models واختر muse-spark-1.3-contributor-free.'
       },
       {
         title: 'انطلق بحلقة الوكيل',
@@ -8743,6 +8743,69 @@ export const SEED_OFFERS: Offer[] = [
         title: 'احصل على DeepLearning.AI Pro مجاناً لشهر',
         description: 'اضغط “Join to get this code” في صفحة المزايا للحصول على شهر مجاني.',
         url: 'https://developer.amd.com/member-perks/',
+      },
+    ],
+  },
+  {
+    id: 'o158',
+    slug: 'glm-53-flash',
+    name: 'GLM-5.3-Flash',
+    tagline: 'Frontier coding intelligence at flash cost - 320B open model from $0.15/1M tokens',
+    description: `Z.ai's GLM-5.3-Flash (Aug 2026) is a 320B-parameter natively multimodal MoE (18B active) with a 1M-token context and MIT-licensed weights on Hugging Face. It beats GLM-5.2 across benchmarks at one-tenth the price and nears Claude Opus 4.8 on coding (84.3 Terminal-Bench 2.1, 63.4 DeepSWE) - scoring 57 on the Artificial Analysis Index at just $0.045/task. Note: "Flash" is not a distilled mini, it is a newly trained base. API from $0.15/1M input tokens, or 3x quota on the GLM Coding Plan; it quietly topped OpenRouter charts pre-launch as the anonymous "Ox Alpha".`,
+    url: 'https://z.ai/blog/glm-5.3-flash',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=z.ai&sz=64',
+    category: 'tool',
+    tags: ['z-ai', 'glm', 'glm-5-3-flash', 'coding-agent', 'open-weights', 'llm'],
+    pricing: 'freemium',
+    steps: [
+      {
+        title: 'Read the launch notes',
+        description: `Skim the Z.ai announcement for benchmarks, pricing, and the Ox Alpha backstory.`,
+        url: 'https://z.ai/blog/glm-5.3-flash',
+      },
+      {
+        title: 'Grab the open weights (optional)',
+        description: `Pull zai-org/GLM-5.3-Flash from Hugging Face (MIT license) to self-host with SGLang, vLLM, or TokenSpeed - or skip this and use the hosted API.`,
+        url: 'https://huggingface.co/zai-org/GLM-5.3-Flash',
+      },
+      {
+        title: 'Get API access',
+        description: `Create a Z.ai account and generate an API key at $0.15/1M input and $0.50/1M output tokens - or subscribe to the GLM Coding Plan (Lite $18/mo) for 3x the quota of GLM-5.3.`,
+        url: 'https://docs.z.ai/guides/vlm/glm-5.3-flash',
+      },
+      {
+        title: 'Use it in your agent',
+        description: `Point any OpenAI-compatible client at the Z.ai endpoint with model code glm-5.3-flash - it also serves via OpenRouter as z-ai/glm-5.3-flash.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'GLM-5.3-Flash',
+    taglineAr: 'ذكاء برمجي بمستوى الطليعة بسعر خاطف - نموذج مفتوح 320B من 0.15$ للمليون رمز',
+    descriptionAr: `GLM-5.3-Flash من Z.ai (أغسطس 2026) نموذج MoE متعدد الوسائط أصيلاً بـ 320 مليار معامل (18B نشطة) وسياق مليون رمز، بأوزان مفتوحة برخصة MIT على Hugging Face. يتفوق على GLM-5.2 بعُشر السعر ويقارب Claude Opus 4.8 في البرمجة. الـ API من 0.15$ للمليون رمز مع 3 أضعاف الحصة على خطة GLM Coding. انتبه: "Flash" ليس نسخة مصغرة بل أساس جديد مدرّب بالكامل.`,
+    stepsAr: [
+      {
+        title: 'اقرأ إعلان الإطلاق',
+        description: 'اطّلع على المعايير والأسعار وقصة Ox Alpha.',
+        url: 'https://z.ai/blog/glm-5.3-flash',
+      },
+      {
+        title: 'حمّل الأوزان المفتوحة (اختياري)',
+        description: 'اسحب النموذج من Hugging Face برخصة MIT للاستضافة الذاتية.',
+        url: 'https://huggingface.co/zai-org/GLM-5.3-Flash',
+      },
+      {
+        title: 'احصل على وصول API',
+        description: 'أنشئ حساب Z.ai بـ 0.15$ للمليون رمز أو اشترك في GLM Coding Plan.',
+        url: 'https://docs.z.ai/guides/vlm/glm-5.3-flash',
+      },
+      {
+        title: 'استخدمه في وكيلك',
+        description: 'وجّه أي عميل متوافق مع OpenAI إلى glm-5.3-flash.',
       },
     ],
   },
