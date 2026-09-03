@@ -4319,4 +4319,44 @@ In this season, consisting of 5 weekly live episodes, we will take you on a prac
       { title: 'يوم العرض النهائي (30 يوليو)', topics: ['حفل ختامي', 'اختيار أفضل 3 منتجات', 'الانضمام لمجتمع مسار'], duration: 'يوم العرض' },
     ],
   },
+  {
+    id: 'c172',
+    slug: 'ai-for-everyone',
+    name: 'AI For Everyone',
+    tagline: 'Andrew Ng — non-technical AI strategy for everyone',
+    description: `**DeepLearning.AI — Andrew Ng** — 2.5M+ enrolled, 4.8 (53k reviews), Beginner, 7 hours, 4 modules, Shareable certificate, 27 languages, Financial aid available.
+
+AI is not only for engineers. Learn what AI realistically can and cannot do, spot opportunities in your org, feel what building ML/data science projects is like, and build an AI strategy with your team — including ethics and societal impact.
+
+Taught in English, flexible schedule. Offered by DeepLearning.AI on Coursera.`,
+    url: 'https://www.coursera.org/learn/ai-for-everyone',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=coursera.org&sz=64',
+    category: 'ai-engineering',
+    difficulty: 'beginner',
+    duration: '7 hours',
+    pricing: 'freemium',
+    roadmap: [
+      { title: 'Week 1 — What is AI?', topics: ['Machine Learning', 'What is data?', 'Terminology of AI', 'What makes an AI company?', 'What ML can/can not do', 'Deep learning (non-technical)'], duration: '2h', url: 'https://www.coursera.org/learn/ai-for-everyone/lecture/SRwLN/week-1-introduction' },
+      { title: 'Week 2 — Building AI Projects', topics: ['Workflow of ML project', 'Workflow of data science project', 'Every job function needs data', 'How to choose an AI project', 'Working with an AI team'], duration: '1h' },
+      { title: 'Week 3 — Building AI In Your Company', topics: ['Case studies: Smart speaker & Self-driving car', 'Example roles of AI team', 'AI Transformation Playbook', 'Pitfalls to avoid', 'Survey of AI application areas & techniques'], duration: '2h' },
+      { title: 'Week 4 — AI and Society', topics: ['Realistic view of AI', 'Bias / Discrimination', 'Adversarial attacks', 'Adverse uses', 'AI and developing economies', 'AI and jobs'], duration: '2h' },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'الذكاء الاصطناعي للجميع',
+    taglineAr: 'آندرو نج — استراتيجية الذكاء الاصطناعي لغير التقنيين',
+    descriptionAr: `دورة DeepLearning.AI من آندرو نج — 2.5M+ مسجل، 4.8 (53 ألف تقييم)، مبتدئ، 7 ساعات، 4 وحدات، شهادة قابلة للمشاركة، 27 لغة، مساعدة مالية متاحة.
+
+الذكاء الاصطناعي ليس للمهندسين فقط. تعلم ما يمكن للذكاء الاصطناعي فعله وما لا يمكنه، اكتشاف الفرص في مؤسستك، وفهم بناء مشاريع تعلم الآلة وعلوم البيانات، وبناء استراتيجية ذكاء اصطناعي مع فريقك.`,
+    stepsAr: [
+      { title: 'الأسبوع 1 — ما هو الذكاء الاصطناعي؟', topics: ['تعلم الآلة', 'ما هي البيانات؟', 'مصطلحات الذكاء الاصطناعي', 'ما الذي يجعل الشركة شركة ذكاء اصطناعي؟'], duration: 'ساعتان' },
+      { title: 'الأسبوع 2 — بناء مشاريع الذكاء الاصطناعي', topics: ['سير عمل مشروع تعلم الآلة', 'سير عمل علوم البيانات', 'كيفية اختيار مشروع ذكاء اصطناعي'], duration: 'ساعة' },
+      { title: 'الأسبوع 3 — بناء الذكاء الاصطناعي في شركتك', topics: ['دراسات حالة', 'أدوار فريق الذكاء الاصطناعي', 'دليل التحول بالذكاء الاصطناعي'], duration: 'ساعتان' },
+      { title: 'الأسبوع 4 — الذكاء الاصطناعي والمجتمع', topics: ['التحيز', 'الهجمات العدائية', 'الذكاء الاصطناعي والوظائف'], duration: 'ساعتان' },
+    ],
+  },
 ]
