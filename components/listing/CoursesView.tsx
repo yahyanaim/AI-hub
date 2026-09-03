@@ -42,6 +42,12 @@ export function CoursesView({ initialCategory }: { initialCategory?: string }) {
         onCategoryChange: (cat) => {
           router.push(cat === 'all' ? '/courses' : `/courses/${cat}`)
         },
+        customCategoryFilter: (itemCategory, item, selectedCategory) => {
+          if (selectedCategory === 'high-recommended') {
+            return Boolean((item as Course).tags?.includes('high-recommended'))
+          }
+          return itemCategory === selectedCategory
+        },
       }}
       renderCard={(c) => <CourseCard course={c} />}
       getCategory={(c) => c.category}

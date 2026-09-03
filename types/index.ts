@@ -160,6 +160,7 @@ export interface Prompt {
 }
 
 export type CourseCategory =
+  | 'high-recommended'
   | 'fullstack'
   | 'backend'
   | 'frontend'
@@ -399,6 +400,7 @@ export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
 }
 
 export const COURSE_CATEGORY_LABELS: Record<CourseCategory, string> = {
+  'high-recommended': 'High Recommended',
   fullstack: 'Fullstack',
   backend: 'Back End',
   frontend: 'Front End',

@@ -4286,6 +4286,7 @@ In this season, consisting of 5 weekly live episodes, we will take you on a prac
     difficulty: 'beginner',
     duration: '5 weeks',
     pricing: 'free',
+    tags: ['high-recommended', 'google', 'gemini', 'cloud'], 
     roadmap: [
       { title: 'Ep.1 — Sep 30, 2026: Getting Started with Antigravity & IDE', topics: ['Setup local Antigravity IDE', 'Init sandbox via Google Developer Program', 'First local Antigravity code runs', 'Speaker: Abdel Sghiouar, Google Cloud'], duration: '1h (6–7pm GMT+2)', url: 'https://rsvp.withgoogle.com/events/masar/home' },
       { title: 'Ep.2 — Oct 7, 2026: Deploying Microservices with Antigravity', topics: ['Configure & package microservice', 'Deploy secure web service to public Google Cloud URL', 'Antigravity framework'], duration: '1h (6–7pm GMT+2)', url: 'https://rsvp.withgoogle.com/events/masar/home' },
