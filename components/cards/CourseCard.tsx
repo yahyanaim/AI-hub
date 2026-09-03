@@ -71,7 +71,7 @@ export function CourseCard({ course, className }: { course: Course; className?: 
         <CategoryBadge kind="course" category={course.category} />
         <PricingBadge pricing={course.pricing} />
         {(course as unknown as { tags?: string[] }).tags?.includes('high-recommended') && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-600 ring-1 ring-amber-500/20 dark:text-amber-400">
+          <span className="inline-flex items-center gap-1 rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-red-600 ring-1 ring-red-500/20 dark:text-red-400">
             <Award className="h-3 w-3" />
             High Recommended
           </span>
