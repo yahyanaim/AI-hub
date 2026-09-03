@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ExternalLink, Clock, BookOpen, Download } from 'lucide-react'
+import { ExternalLink, Clock, BookOpen, Download, Award } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
@@ -38,6 +38,12 @@ export function CourseCard({ course, className }: { course: Course; className?: 
             <h3 className="truncate font-heading text-base font-bold text-foreground transition-colors group-hover:text-brand-orange">
               {course.name}
             </h3>
+            {(course as unknown as { tags?: string[] }).tags?.includes('high-recommended') && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-600 ring-1 ring-amber-500/20 dark:text-amber-400">
+                <Award className="h-3 w-3" />
+                High Recommended
+              </span>
+            )}
           </div>
           <p className="mt-0.5 text-xs text-muted-foreground line-clamp-1">
             {course.tagline}

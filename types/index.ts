@@ -201,6 +201,7 @@ export interface Course {
   bookmarks: number
   submittedBy: string
   featured: boolean
+  tags?: string[]
   createdAt: string
   updatedAt: string
   nameAr?: string
