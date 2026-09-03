@@ -27,6 +27,7 @@ export type ToolCategory =
   | 'education'
   | 'ai-skills'
   | 'for-creators'
+  | 'no-code-platforms'
   | 'other'
 
 export type DevToolCategory =
@@ -331,6 +332,7 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
   education: 'Education',
   'ai-skills': 'AI Skills',
   'for-creators': 'For Creators',
+  'no-code-platforms': 'No Code Platforms',
   other: 'Other',
 }
 
