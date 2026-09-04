@@ -27,6 +27,7 @@ export function OffersView() {
           categoryLabel: 'Category',
           categoryOptions,
           itemLabel: 'offers',
+          defaultSort: 'new',
         }}
         renderCard={(o) => <OfferCard offer={o} />}
         getCategory={(o) => o.category}

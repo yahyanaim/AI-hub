@@ -53,7 +53,7 @@ export function Dropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <span className="text-muted-foreground">{label}:</span>
+        {label ? <span className="text-muted-foreground">{label}:</span> : null}
         <span className="font-medium">{selected?.label ?? value}</span>
         <ChevronDown
           className={cn('h-4 w-4 text-muted-foreground transition-transform', open && 'rotate-180')}

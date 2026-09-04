@@ -12,7 +12,7 @@ export type { FilterOption }
 import { ViewToggle } from '@/components/layout/ViewToggle'
 import { cn } from '@/lib/utils'
 
-type SortKey = 'trending' | 'top' | 'new' | 'bookmarked'
+export type SortKey = 'trending' | 'top' | 'new' | 'bookmarked'
 
 const SORT_OPTIONS: FilterOption[] = [
   { value: 'trending', label: 'Trending' },
@@ -56,6 +56,8 @@ export interface ListingConfig {
   subcategoryLabel?: string
   subcategoryFilter?: (item: any, subcategory: string) => boolean
   initialCategory?: string
+  /** Default sort for first-time visitors (returning visitors restore their saved sort) */
+  defaultSort?: SortKey
   /** Mirror the selected category into ?category=<key> so filters are shareable */
   syncCategoryToUrl?: boolean
   onCategoryChange?: (category: string) => void
@@ -88,8 +90,10 @@ function ListingViewInner<T extends { id: string }>({
   getTrendingScore,
   pageSize = PAGE_SIZE,
 }: ListingViewProps<T>) {
-  // Restore last-visited state (page/filters/view) when coming back to this listing
-  const storageKey = `listing-view:${config.itemLabel ?? config.title ?? 'default'}`
+  // Restore last-visited state (page/filters/view) when coming back to this listing.
+  // NOTE: `||` (not `??`) so empty-string titles fall through to the default key
+  // instead of colliding on `listing-view:` with other title-less listings.
+  const storageKey = `listing-view:${config.itemLabel || config.title || 'default'}`
   const [saved] = useState<SavedListingState>(() => loadSavedState(storageKey))
 
   const router = useRouter()
@@ -101,7 +105,7 @@ function ListingViewInner<T extends { id: string }>({
       ? urlCategory
       : null
 
-  const [sort, setSort] = useState<SortKey>(saved.sort ?? 'trending')
+  const [sort, setSort] = useState<SortKey>(saved.sort ?? config.defaultSort ?? 'trending')
   const [category, setCategory] = useState(
     config.initialCategory ?? validUrlCategory ?? saved.category ?? 'all'
   )
@@ -259,14 +263,15 @@ function ListingViewInner<T extends { id: string }>({
     if (page > totalPages) setPage(totalPages)
   }, [totalPages, page])
 
+  const defaultSort: SortKey = config.defaultSort ?? 'trending'
   const hasFilters =
-    category !== 'all' || pricing !== 'all' || language !== 'all' || sort !== 'trending'
+    category !== 'all' || pricing !== 'all' || language !== 'all' || sort !== defaultSort
 
   const clearFilters = () => {
     setCategory('all')
     setPricing('all')
     setLanguage('all')
-    setSort('trending')
+    setSort(defaultSort)
     setPage(1)
     if (config.syncCategoryToUrl && urlCategory) {
       const params = new URLSearchParams(searchParams.toString())

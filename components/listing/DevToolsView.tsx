@@ -49,6 +49,7 @@ export function DevToolsView({ initialCategory }: { initialCategory?: string }) 
           description: '',
           categoryLabel: 'Category',
           categoryOptions,
+          itemLabel: 'dev-tools',
           extraFilters: 'pricing',
           pricingOptions,
           initialCategory,

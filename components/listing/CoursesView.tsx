@@ -39,6 +39,7 @@ export function CoursesView({ initialCategory }: { initialCategory?: string }) {
         categoryOptions,
         itemLabel: 'courses',
         initialCategory,
+        defaultSort: 'new',
         onCategoryChange: (cat) => {
           router.push(cat === 'all' ? '/courses' : `/courses/${cat}`)
         },
