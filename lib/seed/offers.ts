@@ -5008,10 +5008,10 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o82',
     slug: 'warp-terminal-student',
     name: 'Warp Terminal Student',
-    tagline: 'Free Pro (AI + themes) via .EDU/GitHub Pack for 1 year',
+    tagline: 'AI-powered terminal free to start - students onboard free',
     description:
-      'Warp gives students free Pro for 1 year: AI command search, themes, and team sharing. Verifies via .EDU email or GitHub Student. Non-students can get it via CC .EDU mailbox or GitHub Pack file.',
-    url: 'https://www.warp.dev/students',
+      'Warp is an AI-powered terminal free to start: AI command search, themes, and team sharing with a free plan for everyone including students. Download, sign up, and build - no student verification needed.',
+    url: 'https://www.warp.dev',
     logoUrl: 'https://icons.duckduckgo.com/ip3/warp.dev.ico',
     category: 'tool',
     tags: ['warp', 'terminal', 'students', 'ai', 'productivity'],
@@ -5020,28 +5020,28 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Download Warp and sign up',
         description:
-          'Visit warp.dev/students → Download Warp → Sign up with .EDU email or link GitHub Student.',
-        url: 'https://www.warp.dev/students',
+          'Visit warp.dev → Download Warp → Sign up free with any email - students included.',
+        url: 'https://www.warp.dev',
       },
       {
-        title: 'Verify',
+        title: 'Use the free plan',
         description:
-          'Click Verify → .EDU email or GitHub Student. CC .EDU and Pack file both accepted.',
+          'The free plan covers AI command search, themes, and sharing - no verification needed.',
       },
       {
-        title: 'Enable Pro',
+        title: 'Upgrade only if needed',
         description:
-          'After verification, Settings → Subscription shows Pro. Renewable while enrolled.',
+          'Paid tiers add higher AI limits; compare on the pricing page if you outgrow free.',
       },
     ],
     nameAr: 'Warp للطلاب',
-    taglineAr: 'Pro مجاناً (AI وثيمات) لسنة',
-    descriptionAr: 'يمنح Warp الطلاب Pro مجاناً لسنة: بحث أوامر AI وثيمات ومشاركة فريق. يتحقق عبر .EDU أو GitHub Student.',
+    taglineAr: 'طرفية ذكية مجانية للبدء - للطلاب أيضاً',
+    descriptionAr: 'طرفية Warp الذكية مجانية للبدء: بحث أوامر AI وثيمات ومشاركة فريق بخطة مجانية للجميع بما فيهم الطلاب.',
     stepsAr: [
       {
         title: 'حمّل Warp وسجّل',
-        description: 'اذهب إلى warp.dev/students → حمّل وسجّل ببريد .EDU أو اربط GitHub.',
-        url: 'https://www.warp.dev/students',
+        description: 'اذهب إلى warp.dev → حمّل وسجّل مجاناً بأي بريد.',
+        url: 'https://www.warp.dev',
       },
       {
         title: 'تحقق',
