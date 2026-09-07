@@ -10446,11 +10446,11 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o192',
     slug: 'jumpshot-2026-panafrican',
-    name: 'Jumpshot 2026 (Pan-African Impact Challenge)',
-    tagline: 'Market-ready social/environmental startups: 3-month virtual accelerator + awards',
-    description: `Jumpshot (including the NBPA × UM6P edition) is a pan-African challenge for market-ready startups with measurable social or environmental impact: a 3-month virtual accelerator ending in final evaluation and awards. For African ventures ready to scale their impact.`,
+    name: 'Jump Shot 2026 – NBPA × UM6P ($160k Equity-Free)',
+    tagline: 'Pan-African impact startups: $160k prizes, 3-month accelerator, UNGA spotlight',
+    description: `Jump Shot by the NBPA Foundation with UM6P is a pan-African challenge for market-ready startups with measurable social/environmental impact: $160,000 equity-free across 6 winners, 3-month virtual accelerator, mentorship, and UNGA 2026 + U.S. exposure for the top winner. 12 eligible countries, live product with traction required. Apply on StartGate.`,
     url: 'https://dashboard.startgate.ma/challenges/jumpshot-2026',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=startgate.ma&sz=64',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=nbpa.com&sz=64',
     category: 'competition',
     tags: ['impact', 'accelerator', 'pan-african', 'virtual', 'awards'],
     pricing: 'free',
@@ -10475,9 +10475,9 @@ export const SEED_OFFERS: Offer[] = [
     featured: false,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'جمب شوت 2026 (تحدي أفريقي للأثر)',
-    taglineAr: 'شركات جاهزة بأثر اجتماعي/بيئي: تسريع افتراضي 3 أشهر + جوائز',
-    descriptionAr: `تحدي جمب شوت الأفريقي للشركات الجاهزة بأثر اجتماعي أو بيئي قابل للقياس: مسرّعة افتراضية 3 أشهر تنتهي بتقييم نهائي وجوائز.`,
+    nameAr: 'جمب شوت 2026 – NBPA × UM6P (160 ألف $ بدون أسهم)',
+    taglineAr: 'شركات أفريقية بأثر: جوائز 160 ألف $ وتسريع 3 أشهر وأضواء UNGA',
+    descriptionAr: `تحدي جمب شوت من مؤسسة NBPA مع UM6P للشركات الأفريقية الجاهزة بأثر اجتماعي/بيئي: 160.000$ بدون أسهم لـ 6 فائزين وتسريع افتراضي 3 أشهر وحضور UNGA 2026 للأول. 12 دولة مؤهلة ومنتج حي بجذب مثبت.`,
     stepsAr: [
       {
         title: 'تحقق من الملاءمة',
