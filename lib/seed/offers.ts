@@ -10502,7 +10502,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `GLM 5.3 is free right now on TokenRouter with no usage limits mentioned: open tokenrouter.com/models/z-ai/glm-5.3, create an account, generate an API key, add it to your AI agent with base URL api.tokenrouter.com/v1, select GLM 5.3 Free, and start prompting. Ideal for AI coding agents while free access lasts.`,
     url: 'https://www.tokenrouter.com/models/z-ai/glm-5.3',
     logoUrl: 'https://www.google.com/s2/favicons?domain=z.ai&sz=64',
-    category: 'tool',
+    category: 'api-access',
     tags: ['glm', 'tokenrouter', 'free', 'coding-agent', 'llm'],
     pricing: 'free',
     steps: [
