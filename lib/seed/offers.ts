@@ -7720,61 +7720,6 @@ export const SEED_OFFERS: Offer[] = [
     updatedAt: daysAgo(0),
   },
   {
-    id: 'o133',
-    slug: 'tanger-med-foundation-bourses',
-    name: 'Tanger Med Foundation Bourses',
-    tagline: 'Merit & excellence bourses for top bac students from northern Morocco',
-    description:
-      'The Tanger Med Foundation awards merit and excellence scholarships to outstanding baccalaureate holders from the northern regions (Tanger-Tétouan-Al Hoceima and beyond) entering Moroccan public engineering, business and science schools. Selection combines bac grade, school ranking and family income criteria; the bourse covers registration, living support and sometimes transport throughout the multi-year cycle.',
-    url: 'https://www.tangermed.com/en/foundation',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=tangermed.com&sz=64',
-    category: 'scholarship',
-    tags: ['morocco', 'tanger-med', 'northern-region', 'bac', 'excellence'],
-    pricing: 'free',
-    steps: [
-      {
-        title: 'Score high on your bac',
-        description:
-          'Target recent bac holders (sciences/technical streams) with strong grades from northern-region high schools.',
-        url: 'https://www.tangermed.com/en/foundation',
-      },
-      {
-        title: 'Gather the dossier',
-        description:
-          'Bac transcript, school certificates, family income documentation and CNIE as specified by the call.',
-      },
-      {
-        title: 'Apply & follow selection',
-        description:
-          'Files are reviewed against merit + social criteria; awardees keep the bourse across years subject to results.',
-      },
-    ],
-    nameAr: 'منح مؤسسة طنجة المتوسط',
-    taglineAr: 'منح الجدارة والتميز لمتفوقي الباكالوريا من جهات الشمال',
-    descriptionAr: 'تمنح مؤسسة طنجة المتوسط منح الجدارة والتميز لحاملي الباكالوريا المتفوقين من الجهات الشمالية (طنجة-تطوان-الحسيمة وما حولها) الملتحقين بالمدارس الوطنية للعلوم والتطبيقية والتجارة، بمعايير نقط الباك وترتيب المدرسة والوضعية الاجتماعية، وتغطي التسجيل والدعم المعيشي طيلة الدورة.',
-    stepsAr: [
-      {
-        title: 'حقق نتيجة باقوية',
-        description: 'موجهة لحاملي باكالوريا العلوم والتقنية بمعدلات مرتفعة من ثانويات الشمال.',
-        url: 'https://www.tangermed.com/en/foundation',
-      },
-      {
-        title: 'جهّز الملف',
-        description: 'كشف نقط الباك، شهادات مدرسية، وثائق المدخول وبطاقة التعريف حسب الدعوة.',
-      },
-      {
-        title: 'قدّم وتابع الانتقاء',
-        description: 'الانتقاء يجمع بين الجدارة والمعايير الاجتماعية وتستمر المنحة سنوات حسب النتائج.',
-      },
-    ],
-    upvotes: 13,
-    bookmarks: 16,
-    submittedBy: 'u6',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
-  {
     id: 'o134',
     slug: 'ai-fundamentals-for-beginners-track',
     name: 'AI Fundamentals - For Beginners (Highly Recommended)',
