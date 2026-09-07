@@ -9014,57 +9014,6 @@ export const SEED_OFFERS: Offer[] = [
     ],
   },
   {
-    id: 'o163',
-    slug: 'morocco-accelerator-cohort-3',
-    name: 'The Morocco Accelerator – Cohort 3 (Technopark × Plug and Play)',
-    tagline: '3-month accelerator, non-dilutive funding chances, global networks - cohort 3 open',
-    description: `The Morocco Accelerator by Technopark with Plug and Play (backed by the Ministry of Digital Transition, Digital Morocco 2030) scales Moroccan startups and diaspora founders in 3 months: growth mentoring, non-dilutive funding opportunities, and access to global innovation networks. Cohort 2 raised 20M+ MAD; winners flew to the Plug and Play Silicon Valley summit. Applications for cohort 3 are open.`,
-    url: 'https://technopark.ma',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
-    category: 'competition',
-    tags: ['acceleration', 'technopark', 'plug-and-play', 'morocco', 'diaspora'],
-    pricing: 'free',
-    steps: [
-      {
-        title: 'Check the call',
-        description: `Growth-stage Moroccan tech startups (plus diaspora) - follow Technopark channels for the cohort 3 call.`,
-        url: 'https://technopark.ma',
-      },
-      {
-        title: 'Apply with traction',
-        description: `Submit your application showing product, traction, and international ambition.`,
-      },
-      {
-        title: 'Scale for 3 months',
-        description: `Mentoring, corporate connections, investor access, and a shot at the Silicon Valley summit.`,
-      },
-    ],
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: true,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-    nameAr: 'مسرّعة المغرب – الدفعة 3',
-    taglineAr: 'مسرّعة 3 أشهر بتمويل غير مخفف وشبكات عالمية - الدفعة 3 مفتوحة',
-    descriptionAr: `مسرّعة المغرب من تكنوبارك مع Plug and Play (بدعم وزارة الانتقال الرقمي، المغرب الرقمي 2030) توسّع الشركات المغربية والجالية في 3 أشهر: إرشاد النمو وفرص تمويل غير مخفف وشبكات ابتكار عالمية. الدفعة 2 جمعت +20M درهم؛ التقديم للدفعة 3 مفتوح.`,
-    stepsAr: [
-      {
-        title: 'تابع الدعوة',
-        description: 'شركات تقنية مغربية في النمو (+ الجالية) - تابع قنوات تكنوبارك.',
-        url: 'https://technopark.ma',
-      },
-      {
-        title: 'قدّم بجذب مثبت',
-        description: 'أرسل ترشيحك مع المنتج والمؤشرات والطموح الدولي.',
-      },
-      {
-        title: 'توسّع في 3 أشهر',
-        description: 'إرشاد وربط شركات وولوج مستثمرين وفرصة قمة وادي السيليكون.',
-      },
-    ],
-  },
-  {
     id: 'o164',
     slug: 'iqlaa-icc-accelerator',
     name: 'Iqlaa – Cultural & Creative Industries Accelerator',
@@ -9428,8 +9377,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'nasa-space-apps-benguerir-2026',
     name: 'NASA Space Apps Challenge 2026 – Ben Guerir',
     tagline: 'Global NASA hackathon locally: solve real problems with open NASA data',
-    description: `Join the world's biggest hackathon from Ben Guerir: NASA Space Apps Challenge 2026 invites students, developers, and makers to solve real-world problems with NASA open data - teamwork, coding, and innovation over one weekend. Deadline September 30, 2026. Found via Civica.`,
-    url: 'https://www.civica.ma/opportunities/thdy-ns-lttbyqt-lfd-bn-jryr-nasa-space-apps-challenge-2026',
+    description: `Join the world's biggest hackathon from Ben Guerir: NASA Space Apps Challenge 2026 invites students, developers, and makers to solve real-world problems with NASA open data - teamwork, coding, and innovation over one weekend. Deadline September 30, 2026. See the official site to apply.`,
+    url: 'https://www.spaceappschallenge.org/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=nasa.gov&sz=64',
     category: 'competition',
     tags: ['hackathon', 'nasa', 'space', 'open-data', 'morocco'],
@@ -9438,7 +9387,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Form your team',
         description: `Gather developers, designers, and space fans - all levels welcome.`,
-        url: 'https://www.civica.ma/opportunities/thdy-ns-lttbyqt-lfd-bn-jryr-nasa-space-apps-challenge-2026',
+        url: 'https://www.spaceappschallenge.org/',
       },
       {
         title: 'Register before Sep 30',
@@ -9462,7 +9411,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'كوّن فريقك',
         description: 'اجمع مطورين ومصممين وعشاق الفضاء - كل المستويات.',
-        url: 'https://www.civica.ma/opportunities/thdy-ns-lttbyqt-lfd-bn-jryr-nasa-space-apps-challenge-2026',
+        url: 'https://www.spaceappschallenge.org/',
       },
       {
         title: 'سجّل قبل 30 شتنبر',
@@ -9479,8 +9428,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'mosip-decode-2026',
     name: 'MOSIP Decode 2026 (Online Hackathon)',
     tagline: 'Contribute to the global digital-ID open-source platform, learn from experts',
-    description: `Virtual hackathon for students to contribute to MOSIP, the globally recognised digital public good for national digital ID systems (adopted in 31 countries). Learn from industry experts, propose solutions, and ship open-source code. Deadline September 13, 2026. Found via Civica.`,
-    url: 'https://www.civica.ma/opportunities/mosip-decode-2026',
+    description: `Virtual hackathon for students to contribute to MOSIP, the globally recognised digital public good for national digital ID systems (adopted in 31 countries). Learn from industry experts, propose solutions, and ship open-source code. Deadline September 13, 2026. See the official site to apply.`,
+    url: 'https://www.mosip.io/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=mosip.io&sz=64',
     category: 'competition',
     tags: ['hackathon', 'open-source', 'digital-id', 'students', 'online'],
@@ -9488,8 +9437,8 @@ export const SEED_OFFERS: Offer[] = [
     steps: [
       {
         title: 'Register before Sep 13',
-        description: `Sign up through the Civica opportunity page.`,
-        url: 'https://www.civica.ma/opportunities/mosip-decode-2026',
+        description: `Register on the official page.`,
+        url: 'https://www.mosip.io/',
       },
       {
         title: 'Learn the platform',
@@ -9513,7 +9462,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل قبل 13 شتنبر',
         description: 'سجّل عبر صفحة الفرصة.',
-        url: 'https://www.civica.ma/opportunities/mosip-decode-2026',
+        url: 'https://www.mosip.io/',
       },
       {
         title: 'تعلّم المنصة',
@@ -9530,8 +9479,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'arab-youth-space-hackathon-2026',
     name: 'Arab Youth Space Hackathon 2026 (Challenge 813)',
     tagline: 'Turn space & Earth-observation data into real solutions - by Arab Youth Center & UAE Space Agency',
-    description: `The Arab Youth Center with the UAE Space Agency, National Space Academy, and Space42 opens registration for the Arab Youth Space Hackathon 2026: innovate with space and Earth-observation data. Deadline September 25, 2026, online. Found via Civica.`,
-    url: 'https://www.civica.ma/opportunities/hkthwn-lfd-llshbb-laarby-2026',
+    description: `The Arab Youth Center with the UAE Space Agency, National Space Academy, and Space42 opens registration for the Arab Youth Space Hackathon 2026: innovate with space and Earth-observation data. Deadline September 25, 2026, online. See the official site to apply.`,
+    url: 'https://space.gov.ae',
     logoUrl: 'https://www.google.com/s2/favicons?domain=arabyouthcenter.org&sz=64',
     category: 'competition',
     tags: ['hackathon', 'space', 'youth', 'arab', 'online'],
@@ -9539,8 +9488,8 @@ export const SEED_OFFERS: Offer[] = [
     steps: [
       {
         title: 'Register before Sep 25',
-        description: `Sign up through the Civica opportunity page.`,
-        url: 'https://www.civica.ma/opportunities/hkthwn-lfd-llshbb-laarby-2026',
+        description: `Register on the official page.`,
+        url: 'https://space.gov.ae',
       },
       {
         title: 'Build with space data',
@@ -9564,7 +9513,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل قبل 25 شتنبر',
         description: 'سجّل عبر صفحة الفرصة.',
-        url: 'https://www.civica.ma/opportunities/hkthwn-lfd-llshbb-laarby-2026',
+        url: 'https://space.gov.ae',
       },
       {
         title: 'ابنِ ببيانات الفضاء',
@@ -9581,9 +9530,9 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'euromedai-responsible-ai-cup-2026',
     name: 'EuroMedAI Responsible AI Cup 2.0 (MENA SMEs & Startups)',
     tagline: 'Competition for SMEs/startups building or using AI systems in MENA',
-    description: `EuroMedAI opens the Responsible AI Cup 2.0 for small companies and startups developing or using AI systems across the Middle East and North Africa. Compete, get evaluated on responsible-AI practices, and gain regional visibility. Deadline September 10, 2026. Found via Civica.`,
-    url: 'https://www.civica.ma/opportunities/aaln-msbq-euromedai-responsible-ai-cup-2.0',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
+    description: `EuroMedAI opens the Responsible AI Cup 2.0 for small companies and startups developing or using AI systems across the Middle East and North Africa. Compete, get evaluated on responsible-AI practices, and gain regional visibility. Deadline September 10, 2026. See the official site to apply.`,
+    url: 'https://egyptinnovate.com/en/challenge-center/responsible-ai-cup-20',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=egyptinnovate.com&sz=64',
     category: 'competition',
     tags: ['ai', 'competition', 'sme', 'startup', 'mena'],
     pricing: 'free',
@@ -9591,7 +9540,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Check eligibility',
         description: `SME or startup in MENA developing or using AI systems.`,
-        url: 'https://www.civica.ma/opportunities/aaln-msbq-euromedai-responsible-ai-cup-2.0',
+        url: 'https://egyptinnovate.com/en/challenge-center/responsible-ai-cup-20',
       },
       {
         title: 'Apply before Sep 10',
@@ -9615,7 +9564,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'تحقق من الأهلية',
         description: 'شركة صغرى أو ناشئة في MENA تستعمل الذكاء الاصطناعي.',
-        url: 'https://www.civica.ma/opportunities/aaln-msbq-euromedai-responsible-ai-cup-2.0',
+        url: 'https://egyptinnovate.com/en/challenge-center/responsible-ai-cup-20',
       },
       {
         title: 'قدّم قبل 10 شتنبر',
@@ -9633,7 +9582,7 @@ export const SEED_OFFERS: Offer[] = [
     name: "Rab'Hacks 2026 – Talent Call (Africa & Europe)",
     tagline: 'Innovation & entrepreneurship program: training, coaching, prototyping, Rabat final with cash prizes',
     description: `Rab'Hacks 2026 supports students, graduates, entrepreneurs, and companies across Africa and Europe with training, coaching, and prototyping for impact projects - ending in a Rabat final with financial prizes. Open call for talents listed on Civica.`,
-    url: 'https://www.civica.ma/opportunities/rab-hacks-2026-appel-aux-talents',
+    url: 'https://rabhacks.com/',
     logoUrl: 'https://www.start-up.ma/wp-content/uploads/2026/06/RABHACKS.png',
     category: 'competition',
     tags: ['hackathon', 'entrepreneurship', 'africa', 'rabat', 'prizes'],
@@ -9642,7 +9591,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Join the call',
         description: `Apply as a student, graduate, entrepreneur, or company.`,
-        url: 'https://www.civica.ma/opportunities/rab-hacks-2026-appel-aux-talents',
+        url: 'https://rabhacks.com/',
       },
       {
         title: 'Train and prototype',
@@ -9666,7 +9615,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'انضم للنداء',
         description: 'قدّم كطالب أو خريج أو مقاول أو شركة.',
-        url: 'https://www.civica.ma/opportunities/rab-hacks-2026-appel-aux-talents',
+        url: 'https://rabhacks.com/',
       },
       {
         title: 'تدرّب ونمذج',
@@ -9683,8 +9632,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'huawei-developer-competition-2025-morocco',
     name: 'Huawei Developer Competition 2025 (Morocco – $1k-$5k Prizes)',
     tagline: 'AI competition for Moroccan youth: $1,000-$5,000 prizes + $100-200 vouchers for all',
-    description: `Under the Huawei Morocco × Ministry of Youth agreement: join the Huawei Developer Competition 2025, build with AI, and win $1,000-$5,000 prizes. Every Moroccan participant gets $100-$200 vouchers. Listed on Civica.`,
-    url: 'https://www.civica.ma/opportunities/huawei-developer-competition-2025',
+    description: `Under the Huawei Morocco × Ministry of Youth agreement: join the Huawei Developer Competition 2025, build with AI, and win $1,000-$5,000 prizes. Every Moroccan participant gets $100-$200 vouchers. See the official site to apply.`,
+    url: 'https://developer.huawei.com/consumer/en/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=huawei.com&sz=64',
     category: 'competition',
     tags: ['ai', 'competition', 'huawei', 'morocco', 'prizes', 'students'],
@@ -9693,7 +9642,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Register as a Moroccan youth',
         description: `Open to young Moroccans interested in AI development.`,
-        url: 'https://www.civica.ma/opportunities/huawei-developer-competition-2025',
+        url: 'https://developer.huawei.com/consumer/en/',
       },
       {
         title: 'Build your AI project',
@@ -9717,7 +9666,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل كشاب مغربي',
         description: 'مفتوحة للشباب المغربي المهتم بالذكاء الاصطناعي.',
-        url: 'https://www.civica.ma/opportunities/huawei-developer-competition-2025',
+        url: 'https://developer.huawei.com/consumer/en/',
       },
       {
         title: 'ابنِ مشروعك',
@@ -9734,9 +9683,9 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'prime-pitch-competition-2025',
     name: 'Prime Pitch Competition 2025 (Global, Equity-Free Cash Prizes)',
     tagline: 'Online pitch contest: idea, prototype, or active startup - cash, coaching, zero equity',
-    description: `Global online competition for entrepreneurs with an idea, prototype, or running startup. Compete for significant equity-free cash prizes; top-10 finalists get coaching, mentoring, and pitch workshops. Listed on Civica.`,
-    url: 'https://www.civica.ma/opportunities/concours-de-pitch-prime-prime-pitch-competition-ppc-2025',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
+    description: `Global online competition for entrepreneurs with an idea, prototype, or running startup. Compete for significant equity-free cash prizes; top-10 finalists get coaching, mentoring, and pitch workshops. See the official site to apply.`,
+    url: 'https://www.bmprimecapital.com/pitchcomp',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=bmprimecapital.com&sz=64',
     category: 'competition',
     tags: ['pitch', 'competition', 'cash-prizes', 'equity-free', 'online', 'startup'],
     pricing: 'free',
@@ -9744,7 +9693,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Enter online',
         description: `Apply with your idea, prototype, or startup.`,
-        url: 'https://www.civica.ma/opportunities/concours-de-pitch-prime-prime-pitch-competition-ppc-2025',
+        url: 'https://www.bmprimecapital.com/pitchcomp',
       },
       {
         title: 'Reach the top 10',
@@ -9768,7 +9717,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'شارك أونلاين',
         description: 'قدّم بفكرتك أو نموذجك أو شركتك.',
-        url: 'https://www.civica.ma/opportunities/concours-de-pitch-prime-prime-pitch-competition-ppc-2025',
+        url: 'https://www.bmprimecapital.com/pitchcomp',
       },
       {
         title: 'بلغ العشرة الأوائل',
@@ -9785,8 +9734,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'hedera-africa-hackathon-2025',
     name: 'Hedera Africa Hackathon 2025 (Web3 – Training + Certification)',
     tagline: "Africa's massive Web3 hackathon on Hedera: grants, training, pro certificates",
-    description: `Huge African hackathon to build innovative Web3 solutions on the Hedera network: big grants, training, professional certificates, and access to expert networks to boost digital innovation across Africa. Listed on Civica.`,
-    url: 'https://www.civica.ma/opportunities/hedera-africa-hackathon-2025-world-s-largest-web3-hackathon',
+    description: `Huge African hackathon to build innovative Web3 solutions on the Hedera network: big grants, training, professional certificates, and access to expert networks to boost digital innovation across Africa. See the official site to apply.`,
+    url: 'https://hedera.com',
     logoUrl: 'https://www.google.com/s2/favicons?domain=hedera.com&sz=64',
     category: 'competition',
     tags: ['web3', 'hackathon', 'hedera', 'africa', 'grants'],
@@ -9794,8 +9743,8 @@ export const SEED_OFFERS: Offer[] = [
     steps: [
       {
         title: 'Register your team',
-        description: `Sign up through the Civica opportunity page.`,
-        url: 'https://www.civica.ma/opportunities/hedera-africa-hackathon-2025-world-s-largest-web3-hackathon',
+        description: `Register on the official page.`,
+        url: 'https://hedera.com',
       },
       {
         title: 'Build on Hedera',
@@ -9819,7 +9768,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل فريقك',
         description: 'سجّل عبر صفحة الفرصة.',
-        url: 'https://www.civica.ma/opportunities/hedera-africa-hackathon-2025-world-s-largest-web3-hackathon',
+        url: 'https://hedera.com',
       },
       {
         title: 'ابنِ على هيديرا',
@@ -9837,8 +9786,8 @@ export const SEED_OFFERS: Offer[] = [
     name: 'START Hack Tour (Europe’s Entrepreneurial Hackathon)',
     tagline: 'Build startups in teams: talks, tech workshops, entrepreneurship coaching',
     description: `START Hack, Europe's big entrepreneurial hackathon linked to St. Gallen: form teams, join talks and tech/business workshops, and learn entrepreneurship, creative thinking, and tech innovation hands-on. Listed on Civica - check the tour stop for Moroccans.`,
-    url: 'https://www.civica.ma/opportunities/start-hack-tour-st.-gallen',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
+    url: 'https://www.startglobal.org/start-hack',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=startglobal.org&sz=64',
     category: 'competition',
     tags: ['hackathon', 'entrepreneurship', 'europe', 'startup', 'students'],
     pricing: 'free',
@@ -9846,7 +9795,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Pick your tour stop',
         description: `Check the Civica page for the relevant stop and dates.`,
-        url: 'https://www.civica.ma/opportunities/start-hack-tour-st.-gallen',
+        url: 'https://www.startglobal.org/start-hack',
       },
       {
         title: 'Team up and build',
@@ -9870,7 +9819,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'اختر محطتك',
         description: 'تحقق من صفحة الفرصة للمحطة والتواريخ.',
-        url: 'https://www.civica.ma/opportunities/start-hack-tour-st.-gallen',
+        url: 'https://www.startglobal.org/start-hack',
       },
       {
         title: 'كوّن فريقاً وابنِ',
@@ -9887,8 +9836,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'arkx-salesforce-bootcamp-open-day',
     name: 'Arkx Open Day – Salesforce Developer Bootcamp (Rabat, State-Funded)',
     tagline: 'Bac+5 grads: free state-funded Salesforce bootcamp + job insertion in Rabat',
-    description: `Arkx Talent Factory's Rabat Open Day for Bac+5 graduates eyeing a Salesforce Developer Consultant career: orientation, bootcamp presentation, and enrollment into the 100% state-funded program (training, mentoring, job insertion). Listed on Civica.`,
-    url: 'https://www.civica.ma/opportunities/open-day-bootcamp-salesforce-developer-consultant-organise-par-arkx-talent-factory',
+    description: `Arkx Talent Factory's Rabat Open Day for Bac+5 graduates eyeing a Salesforce Developer Consultant career: orientation, bootcamp presentation, and enrollment into the 100% state-funded program (training, mentoring, job insertion). See the official site to apply.`,
+    url: 'https://tech-academy.arkx.group/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
     category: 'competition',
     tags: ['bootcamp', 'salesforce', 'rabat', 'employment', 'funded'],
@@ -9897,7 +9846,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Attend the Open Day',
         description: `Join the orientation day in Rabat - games, bootcamp presentation, surprises.`,
-        url: 'https://www.civica.ma/opportunities/open-day-bootcamp-salesforce-developer-consultant-organise-par-arkx-talent-factory',
+        url: 'https://tech-academy.arkx.group/',
       },
       {
         title: 'Enroll in the bootcamp',
@@ -9921,7 +9870,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'احضر اليوم المفتوح',
         description: 'انضم ليوم التوجيه بالرباط.',
-        url: 'https://www.civica.ma/opportunities/open-day-bootcamp-salesforce-developer-consultant-organise-par-arkx-talent-factory',
+        url: 'https://tech-academy.arkx.group/',
       },
       {
         title: 'سجّل في البوتكامب',
@@ -9938,8 +9887,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'netacad-summer-camp-ai-cybersecurity',
     name: 'NetAcad Summer Camp (ANAPEC × Cisco – Free AI & Cybersecurity)',
     tagline: '2-month free summer program: AI, coding, cybersecurity, networks + Cisco cert',
-    description: `ANAPEC with Cisco NetAcad runs a free 2-month summer program training Moroccan students in AI, programming, cybersecurity, and networking - hands-on NetAcad platform practice plus an official Cisco certificate on completion. Online. Listed on Civica.`,
-    url: 'https://www.civica.ma/opportunities/brnmj-netacad-summer-camp-2025-tkwyn-mjny-fy-ldhk-lstnaay-wl-mn-lsybrny',
+    description: `ANAPEC with Cisco NetAcad runs a free 2-month summer program training Moroccan students in AI, programming, cybersecurity, and networking - hands-on NetAcad platform practice plus an official Cisco certificate on completion. Online. See the official site to apply.`,
+    url: 'https://www.netacad.com',
     logoUrl: 'https://icons.duckduckgo.com/ip3/netacad.com.ico',
     category: 'competition',
     tags: ['bootcamp', 'ai', 'cybersecurity', 'cisco', 'certificate', 'free'],
@@ -9947,8 +9896,8 @@ export const SEED_OFFERS: Offer[] = [
     steps: [
       {
         title: 'Register online',
-        description: `Sign up through the Civica opportunity page.`,
-        url: 'https://www.civica.ma/opportunities/brnmj-netacad-summer-camp-2025-tkwyn-mjny-fy-ldhk-lstnaay-wl-mn-lsybrny',
+        description: `Sign up on the official page.`,
+        url: 'https://www.netacad.com',
       },
       {
         title: 'Train 2 months',
@@ -9971,8 +9920,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'سجّل أونلاين',
-        description: 'سجّل عبر صفحة الفرصة.',
-        url: 'https://www.civica.ma/opportunities/brnmj-netacad-summer-camp-2025-tkwyn-mjny-fy-ldhk-lstnaay-wl-mn-lsybrny',
+        description: 'سجّل عبر الصفحة الرسمية.',
+        url: 'https://www.netacad.com',
       },
       {
         title: 'تدرّب شهرين',
@@ -9981,6 +9930,414 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'احصل على الشهادة',
         description: 'أكمل البرنامج للشهادة الرسمية.',
+      },
+    ],
+  },
+  {
+    id: 'o182',
+    slug: '3rd-act-sb3s-tamwilcom',
+    name: '3rd Act Program – SB3S × Tamwilcom (750k MAD Honor Loan)',
+    tagline: 'Pre-acceleration + up to 750,000 MAD honor loan + VC readiness (Innov Invest)',
+    description: `3rd Act by SB3S with Tamwilcom (Innov Invest fund) backs Moroccan pre-acceleration startups under 5 years old: tailored mentoring, practical workshops, expert network, and up to 750,000 MAD in honor loan plus systematic preparation for a first VC round. AgriTech, HealthTech, CleanTech, Industry 4.0 and more.`,
+    url: 'https://www.sb3s.com/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=sb3s.com&sz=64',
+    category: 'competition',
+    tags: ['acceleration', 'tamwilcom', 'honor-loan', 'morocco', 'vc-ready'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check eligibility',
+        description: `Moroccan startup under 5 years, pre-acceleration stage, innovative high-growth project.`,
+        url: 'https://www.sb3s.com/',
+      },
+      {
+        title: 'Apply to the cohort',
+        description: `Submit your file during the call; 20 startups pitch to join each cohort.`,
+      },
+      {
+        title: 'Get funded and ready',
+        description: `Mentoring plus up to 750k MAD honor loan and VC-round preparation.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'برنامج 3rd Act – SB3S × تمويلكم',
+    taglineAr: 'تسريع أولي + حتى 750 ألف درهم قرض شرف + جاهزية VC',
+    descriptionAr: `برنامج 3rd Act من SB3S مع تمويلكم (صندوق Innov Invest) للشركات المغربية قبل التسريع تحت 5 سنوات: مواكبة مخصصة وورشات وشبكة خبراء حتى 750.000 درهم قرض شرف وتحضير منهجي لأول جولة تمويل.`,
+    stepsAr: [
+      {
+        title: 'تحقق من الأهلية',
+        description: 'شركة مغربية تحت 5 سنوات قبل التسريع بمشروع مبتكر.',
+        url: 'https://www.sb3s.com/',
+      },
+      {
+        title: 'قدّم للدفعة',
+        description: 'أرسل ملفك أثناء الدعوة؛ 20 شركة تعرض أمام اللجنة.',
+      },
+      {
+        title: 'تموّل واستعد',
+        description: 'مواكبة حتى 750 ألف درهم قرض شرف وتحضير VC.',
+      },
+    ],
+  },
+  {
+    id: 'o183',
+    slug: 'women-in-cleantech-morocco',
+    name: 'Women in Cleantech Morocco (ClimateLaunchpad Track)',
+    tagline: 'Turn your climate idea into a cleantech startup - training + mentorship for women',
+    description: `Women in Cleantech Morocco empowers women innovators in Drâa-Tafilalet, Souss-Massa, and Fès-Meknès to turn early climate ideas into impactful cleantech startups: training, mentorship, and climate-ecosystem access via the ClimateLaunchpad application process. Join a community of Moroccan female founders.`,
+    url: 'https://climatelaunchpad.org/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=climatelaunchpad.org&sz=64',
+    category: 'competition',
+    tags: ['cleantech', 'women', 'climate', 'morocco', 'startup'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check regions',
+        description: `Women innovators from Drâa-Tafilalet, Souss-Massa, or Fès-Meknès with a climate idea.`,
+        url: 'https://climatelaunchpad.org/',
+      },
+      {
+        title: 'Apply via ClimateLaunchpad',
+        description: `One application process covers both tracks; reviewers flag Women in Cleantech profiles.`,
+      },
+      {
+        title: 'Build your startup',
+        description: `Training, mentoring, and ecosystem access to launch your cleantech company.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'نساء التقنية النظيفة المغرب',
+    taglineAr: 'حوّلي فكرتك المناخية لشركة نظيفة - تكوين وإرشاد للنساء',
+    descriptionAr: `برنامج نساء التقنية النظيفة المغرب للنساء المبتكرات في درعة-تافيلالت وسوس-ماسة وفاس-مكناس لتحويل الأفكار المناخية لشركات ناشئة: تكوين وإرشاد وولوج المنظومة عبر مسار ClimateLaunchpad.`,
+    stepsAr: [
+      {
+        title: 'تحققي من الجهات',
+        description: 'مبتكرات من درعة-تافيلالت أو سوس-ماسة أو فاس-مكناس.',
+        url: 'https://climatelaunchpad.org/',
+      },
+      {
+        title: 'قدّمي عبر ClimateLaunchpad',
+        description: 'مسار تقديم واحد يغطي البرنامجين.',
+      },
+      {
+        title: 'ابنِ شركتك',
+        description: 'تكوين وإرشاد وولوج المنظومة لإطلاق شركتك النظيفة.',
+      },
+    ],
+  },
+  {
+    id: 'o184',
+    slug: 'ostx-morocco-ideation-technopark',
+    name: 'OSTX Morocco – Startup Ideation (Open Startup × Technopark)',
+    tagline: '4-week idea-to-startup sprint for 18-35: bootcamp, mentorship, certification',
+    description: `OSTX Morocco by Open Startup with Technopark turns raw ideas into validated startups in 4 weeks: 2-day intensive bootcamp plus 3 weeks of assignments and mentorship, final pitch, and certification. For Moroccan youth 18-35 - students, graduates, employed or not. Hybrid format.`,
+    url: 'https://open-startup.org',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=open-startup.org&sz=64',
+    category: 'competition',
+    tags: ['ideation', 'bootcamp', 'technopark', 'youth', 'morocco'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply with your idea',
+        description: `18-35, early-stage idea needing structure - individuals or teams.`,
+        url: 'https://open-startup.org',
+      },
+      {
+        title: 'Bootcamp + assignments',
+        description: `2-day intensive plus 3 weeks of mentored validation work.`,
+      },
+      {
+        title: 'Pitch and certify',
+        description: `Final pitch, evaluation, and recognition.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'OSTX المغرب – تأليف الشركات (Open Startup)',
+    taglineAr: 'سباق 4 أسابيع من الفكرة للشركة لـ 18-35: بوتكامب وشهادة',
+    descriptionAr: `برنامج OSTX المغرب من Open Startup مع تكنوبارك يحوّل الأفكار الخام لشركات متحقق منها في 4 أسابيع: بوتكامب مكثف يومين + 3 أسابيع مواكبة وعرض نهائي وشهادة. لشباب 18-35.`,
+    stepsAr: [
+      {
+        title: 'قدّم بفكرتك',
+        description: '18-35 سنة بفكرة أولية تحتاج هيكلة.',
+        url: 'https://open-startup.org',
+      },
+      {
+        title: 'بوتكامب ومهام',
+        description: 'يومان مكثفان + 3 أسابيع تحقق بمواكبة.',
+      },
+      {
+        title: 'اعرض واحصل على شهادة',
+        description: 'عرض نهائي وتقييم واعتراف.',
+      },
+    ],
+  },
+  {
+    id: 'o185',
+    slug: 'hackdays-2026-euromed-fes',
+    name: "Hack'Days 2026 (Euromed Innovation Center, Fès)",
+    tagline: 'Hackathon + startup bootcamp: prototype, validate, pitch - Fès-Meknès, Drâa, Oriental',
+    description: `Hack'Days 2026 by the Euromed Innovation Center (Euro-Mediterranean University of Fes) supports founders and startup teams in Fès-Meknès, Drâa-Tafilalet, and Oriental: selected teams join a bootcamp to prototype, validate, and pitch high-potential tech solutions, with mentoring and post-bootcamp support for emerging startups.`,
+    url: 'https://ueuromed.org',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=ueuromed.org&sz=64',
+    category: 'competition',
+    tags: ['hackathon', 'bootcamp', 'fes', 'startup', 'prototype'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check regions',
+        description: `Based in Fès-Meknès, Drâa-Tafilalet, or Oriental with an innovative project.`,
+        url: 'https://ueuromed.org',
+      },
+      {
+        title: 'Hack and prototype',
+        description: `Join the hackathon and build your solution with mentors.`,
+      },
+      {
+        title: 'Bootcamp and pitch',
+        description: `Selected teams validate ideas and pitch, with post-program support.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'هاك دايز 2026 (المركز الأورومتوسطي، فاس)',
+    taglineAr: 'هاكاثون + بوتكامب: نمذج وتحقق واعرض - فاس ودرعة والشرق',
+    descriptionAr: `هاك دايز 2026 من مركز الابتكار الأورومتوسطي (الجامعة الأورومتوسطية بفاس) لحاملي المشاريع بفاس-مكناس ودرعة-تافيلالت والشرق: بوتكامب للنمذجة والتحقق والعرض مع مواكبة ودعم بعدي.`,
+    stepsAr: [
+      {
+        title: 'تحقق من الجهات',
+        description: 'مقيم بفاس-مكناس أو درعة-تافيلالت أو الشرق بمشروع مبتكر.',
+        url: 'https://ueuromed.org',
+      },
+      {
+        title: 'هاكر ونمذج',
+        description: 'شارك في الهاكاثون وابنِ حلّك مع الموجهين.',
+      },
+      {
+        title: 'بوتكامب واعرض',
+        description: 'الفرق المنتقاة تتحقق وتعرض مع دعم بعدي.',
+      },
+    ],
+  },
+  {
+    id: 'o186',
+    slug: 'orange-summer-challenge-2026',
+    name: 'Orange Summer Challenge 2026 (IA as a Business Accelerator)',
+    tagline: '12-week AI startup sprint with Orange: build, test, and market real use cases',
+    description: `Orange Summer Challenge 2026 pairs startups with young talent to build AI solutions for real Orange business units over 12 weeks (July-September): technical and business mentoring, testing with Orange teams, a path to market, and a possible Orange Fab acceleration afterwards. Run by Orange Digital Center Middle East & Africa.`,
+    url: 'https://www.civica.ma/opportunities/6a145f700d4b4b9c7d8262ee/orange-summer-challenge-2026-edition-ia-as-a-business-accelerator',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=orange.com&sz=64',
+    category: 'competition',
+    tags: ['ai', 'orange', 'startup', 'accelerator', '12-weeks'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Form your squad',
+        description: `AI startups plus young builders ready for 12 weeks of work.`,
+        url: 'https://www.civica.ma/opportunities/6a145f700d4b4b9c7d8262ee/orange-summer-challenge-2026-edition-ia-as-a-business-accelerator',
+      },
+      {
+        title: 'Build with Orange',
+        description: `Develop and test AI solutions with Orange business units and experts.`,
+      },
+      {
+        title: 'Go to market via Fab',
+        description: `Market-ready solutions can continue into Orange Fab acceleration.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'تحدي أورنج الصيفي 2026 (الذكاء كمسرّع أعمال)',
+    taglineAr: 'سباق ذكاء 12 أسبوعاً مع أورنج: ابنِ واختبر وسوّق حالات حقيقية',
+    descriptionAr: `تحدي أورنج الصيفي 2026 يجمع الشركات الناشئة والمواهب لبناء حلول ذكاء اصطناعي لوحدات أورنج على 12 أسبوعاً (يوليوز-شتنبر): مواكبة تقنية وتجارية ومسار للسوق واحتمال Orange Fab بعده.`,
+    stepsAr: [
+      {
+        title: 'كوّن فريقك',
+        description: 'شركات ذكاء ناشئة ومواهب جاهزة لـ 12 أسبوعاً.',
+        url: 'https://www.civica.ma/opportunities/6a145f700d4b4b9c7d8262ee/orange-summer-challenge-2026-edition-ia-as-a-business-accelerator',
+      },
+      {
+        title: 'ابنِ مع أورنج',
+        description: 'طوّر واختبر حلول الذكاء مع فرق أورنج.',
+      },
+      {
+        title: 'ادخل السوق عبر Fab',
+        description: 'الحلول الجاهزة قد تكمل في تسريع Orange Fab.',
+      },
+    ],
+  },
+  {
+    id: 'o187',
+    slug: 'innovaction-tetouan-2026',
+    name: 'InnovAction Entrepreneuriat 2026 (Tétouan – JCI)',
+    tagline: 'Pitch your project to the northern ecosystem jury: visibility + network',
+    description: `InnovAction 2026 by JCI Tétouan is the northern entrepreneurship competition: young founders and project holders pitch before a jury and the local ecosystem, closing a full program of training and ecosystem events. Visibility, professional network, and investor connections in the Tangier-Tétouan region.`,
+    url: 'https://www.civica.ma/opportunities/6a34179263f3ee6bc7578df7/2-edition-de-la-competition-d-entrepreneuriat-innovaction-2026',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
+    category: 'competition',
+    tags: ['pitch', 'tetouan', 'jci', 'entrepreneurship', 'network'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Prepare your pitch',
+        description: `Young founder or project holder targeting the northern ecosystem.`,
+        url: 'https://www.civica.ma/opportunities/6a34179263f3ee6bc7578df7/2-edition-de-la-competition-d-entrepreneuriat-innovaction-2026',
+      },
+      {
+        title: 'Pitch to the jury',
+        description: `Present your project and defend it live.`,
+      },
+      {
+        title: 'Plug into the ecosystem',
+        description: `Visibility, network, and follow-up opportunities.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'إنوف أكشن 2026 (تطوان)',
+    taglineAr: 'اعرض مشروعك على لجنة الشمال: ظهور وشبكة',
+    descriptionAr: `مسابقة إنوف أكشن 2026 من JCI تطوان لريادة الشمال: يعرض الشباب مشاريعهم أمام لجنة ومنظومة محلية، ختام برنامج تكويني كامل. ظهور وشبكة مهنية وصلات مستثمرين.`,
+    stepsAr: [
+      {
+        title: 'حضّر عرضك',
+        description: 'مؤسس شاب يستهدف منظومة الشمال.',
+        url: 'https://www.civica.ma/opportunities/6a34179263f3ee6bc7578df7/2-edition-de-la-competition-d-entrepreneuriat-innovaction-2026',
+      },
+      {
+        title: 'اعرض أمام اللجنة',
+        description: 'قدّم مشروعك ودافع عنه مباشرة.',
+      },
+      {
+        title: 'اندمج في المنظومة',
+        description: 'ظهور وشبكة وفرص متابعة.',
+      },
+    ],
+  },
+  {
+    id: 'o188',
+    slug: 'casablanca-smart-city-startups-10ans',
+    name: 'Casablanca Smart City – Startup Village (10th Anniversary)',
+    tagline: '25 startups get a booth in the tech village + royal-patronage spotlight',
+    description: `For the 10th anniversary of Casablanca Smart City (under royal patronage): 25 innovative startups win a dedicated booth in the tech village plus maximum visibility at the year's top tech event. Organized by Casablanca Events & Animation with the City of Casablanca, Hack & Pitch, and La Startup Station. Limited seats.`,
+    url: 'https://www.civica.ma/opportunities/6a1f38020d4b4b9c7d8b0b7f/nd-llshrkt-lnshy-lmbtkr-dfaa-bmshrwaak-l~-lsdr-fy-hdth-casablanca-smart-city',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
+    category: 'competition',
+    tags: ['smart-city', 'casablanca', 'showcase', 'booth', 'startup'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Apply early',
+        description: `Only 25 startups selected - innovative product required.`,
+        url: 'https://www.civica.ma/opportunities/6a1f38020d4b4b9c7d8b0b7f/nd-llshrkt-lnshy-lmbtkr-dfaa-bmshrwaak-l~-lsdr-fy-hdth-casablanca-smart-city',
+      },
+      {
+        title: 'Exhibit in the village',
+        description: `Get your own booth in the tech village during the event.`,
+      },
+      {
+        title: 'Shine nationally',
+        description: `Peak visibility with city, media, and ecosystem leaders.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'الدار البيضاء الذكية – قرية الشركات (10 سنوات)',
+    taglineAr: '25 شركة تحصل على جناح في القرية التقنية + أضواء وطنية',
+    descriptionAr: `للاحتفال بـ 10 سنوات على الدار البيضاء الذكية (برعاية ملكية): 25 شركة مبتكرة تحصل على جناح خاص في القرية التقنية وظهور أقصى في أبرز حدث تقني. تنظيم Casablanca Events والمدينة وHack & Pitch. مقاعد محدودة.`,
+    stepsAr: [
+      {
+        title: 'قدّم مبكراً',
+        description: '25 شركة فقط - منتج مبتكر مطلوب.',
+        url: 'https://www.civica.ma/opportunities/6a1f38020d4b4b9c7d8b0b7f/nd-llshrkt-lnshy-lmbtkr-dfaa-bmshrwaak-l~-lsdr-fy-hdth-casablanca-smart-city',
+      },
+      {
+        title: 'اعرض في القرية',
+        description: 'جناح خاص في القرية التقنية أثناء الحدث.',
+      },
+      {
+        title: 'تألق وطنياً',
+        description: 'ظهور أقصى مع المدينة والإعلام والمنظومة.',
+      },
+    ],
+  },
+  {
+    id: 'o189',
+    slug: 'technovation-girls-morocco-2026',
+    name: 'Technovation Girls Morocco 2026 (Global App Challenge)',
+    tagline: 'Girls 12-18: team up, build a community app, learn entrepreneurship + tech',
+    description: `Technovation Girls Morocco is part of the global Technovation Challenge empowering girls to become tech innovators: teams of girls 12-18 identify a community problem, build a mobile-app solution, and learn entrepreneurship - mentored by industry professionals through app design, business plan, and final pitch. Rabat hybrid format.`,
+    url: 'https://www.technovation.org/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=technovation.org&sz=64',
+    category: 'competition',
+    tags: ['girls', 'apps', 'entrepreneurship', 'mentorship', 'global'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Form a girls team',
+        description: `Girls 12-18 plus a mentor 18+ - pick a community problem.`,
+        url: 'https://www.technovation.org/',
+      },
+      {
+        title: 'Build app + plan',
+        description: `Design the app, write the business plan, prepare the pitch.`,
+      },
+      {
+        title: 'Compete globally',
+        description: `Morocco edition feeds into the worldwide Technovation finals.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'تكنوفيشن للفتيات المغرب 2026',
+    taglineAr: 'فتيات 12-18: ابنِ تطبيقاً مجتمعياً وتعلّمي الريادة',
+    descriptionAr: `تكنوفيشن للفتيات المغرب جزء من التحدي العالمي لتمكين الفتيات مبتكرات تقنيات: فرق 12-18 تحدد مشكلة مجتمعية وتبني تطبيقاً جوالاً وتتعلم الريادة - بإرشاد مهنيين عبر التصميم وخطة العمل والعرض.`,
+    stepsAr: [
+      {
+        title: 'كوّن فريق فتيات',
+        description: 'فتيات 12-18 مع موجه +18 - اخترن مشكلة مجتمعية.',
+        url: 'https://www.technovation.org/',
+      },
+      {
+        title: 'ابنِ التطبيق والخطة',
+        description: 'صمّم التطبيق واكتب خطة العمل وحضّر العرض.',
+      },
+      {
+        title: 'نافس عالمياً',
+        description: 'نسخة المغرب تؤهل لنهائيات تكنوفيشن العالمية.',
       },
     ],
   },
