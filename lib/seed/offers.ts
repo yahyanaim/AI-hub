@@ -10500,7 +10500,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'Kimi K3 Free – 50M Tokens on TokenRouter',
     tagline: 'Use frontier Kimi K3 free: 50M tokens, no card, 2-minute setup',
     description: `TokenRouter is giving 50 million free tokens to try Kimi K3 - a frontier open-weight reasoning model - with no credit card and no trial expiry mentioned. Sign up, create an API key, and plug it into Cursor, Claude Code, Cline, or any OpenAI-library tool with base URL api.tokenrouter.com/v1 and model moonshotai/kimi-k3-free. Claim it while the free offer lasts.`,
-    url: 'https://www.tokenrouter.com/',
+    url: 'https://www.tokenrouter.com/models/moonshotai/kimi-k3',
     logoUrl: 'https://www.google.com/s2/favicons?domain=moonshot.ai&sz=64',
     category: 'tool',
     tags: ['kimi', 'tokenrouter', 'free-tokens', 'coding-agent', 'llm'],
@@ -10509,7 +10509,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Create your account',
         description: `Sign up on TokenRouter - no credit card required, setup takes about 2 minutes.`,
-        url: 'https://www.tokenrouter.com/',
+        url: 'https://www.tokenrouter.com/models/moonshotai/kimi-k3',
       },
       {
         title: 'Generate an API key',
@@ -10533,7 +10533,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'أنشئ حسابك',
         description: 'سجّل في TokenRouter - بدون بطاقة بنكية والإعداد بدقيقتين.',
-        url: 'https://www.tokenrouter.com/',
+        url: 'https://www.tokenrouter.com/models/moonshotai/kimi-k3',
       },
       {
         title: 'أنشئ مفتاح API',
