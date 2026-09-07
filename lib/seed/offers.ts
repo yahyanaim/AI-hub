@@ -9377,8 +9377,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'nasa-space-apps-benguerir-2026',
     name: 'NASA Space Apps Challenge 2026 – Ben Guerir',
     tagline: 'Global NASA hackathon locally: solve real problems with open NASA data',
-    description: `Join the world's biggest hackathon from Ben Guerir: NASA Space Apps Challenge 2026 invites students, developers, and makers to solve real-world problems with NASA open data - teamwork, coding, and innovation over one weekend. Deadline September 30, 2026. See the official site to apply.`,
-    url: 'https://www.spaceappschallenge.org/',
+    description: `Join the world's biggest hackathon from Ben Guerir: NASA Space Apps Challenge 2026 invites students, developers, and makers to solve real-world problems with NASA open data - teamwork, coding, and innovation over one weekend. Deadline September 30, 2026. Found via Civica.`,
+    url: 'https://www.civica.ma/opportunities/6a9b730e1f4cbf4c89d50082/thdy-ns-lttbyqt-lfd-bn-jryr-nasa-space-apps-challenge-2026',
     logoUrl: 'https://www.google.com/s2/favicons?domain=nasa.gov&sz=64',
     category: 'competition',
     tags: ['hackathon', 'nasa', 'space', 'open-data', 'morocco'],
@@ -9387,7 +9387,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Form your team',
         description: `Gather developers, designers, and space fans - all levels welcome.`,
-        url: 'https://www.spaceappschallenge.org/',
+        url: 'https://www.civica.ma/opportunities/6a9b730e1f4cbf4c89d50082/thdy-ns-lttbyqt-lfd-bn-jryr-nasa-space-apps-challenge-2026',
       },
       {
         title: 'Register before Sep 30',
@@ -9411,7 +9411,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'كوّن فريقك',
         description: 'اجمع مطورين ومصممين وعشاق الفضاء - كل المستويات.',
-        url: 'https://www.spaceappschallenge.org/',
+        url: 'https://www.civica.ma/opportunities/6a9b730e1f4cbf4c89d50082/thdy-ns-lttbyqt-lfd-bn-jryr-nasa-space-apps-challenge-2026',
       },
       {
         title: 'سجّل قبل 30 شتنبر',
@@ -9428,8 +9428,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'mosip-decode-2026',
     name: 'MOSIP Decode 2026 (Online Hackathon)',
     tagline: 'Contribute to the global digital-ID open-source platform, learn from experts',
-    description: `Virtual hackathon for students to contribute to MOSIP, the globally recognised digital public good for national digital ID systems (adopted in 31 countries). Learn from industry experts, propose solutions, and ship open-source code. Deadline September 13, 2026. See the official site to apply.`,
-    url: 'https://www.mosip.io/',
+    description: `Virtual hackathon for students to contribute to MOSIP, the globally recognised digital public good for national digital ID systems (adopted in 31 countries). Learn from industry experts, propose solutions, and ship open-source code. Deadline September 13, 2026. Found via Civica.`,
+    url: 'https://www.civica.ma/opportunities/6a9872541f4cbf4c89cb19a9/mosip-decode-2026',
     logoUrl: 'https://www.google.com/s2/favicons?domain=mosip.io&sz=64',
     category: 'competition',
     tags: ['hackathon', 'open-source', 'digital-id', 'students', 'online'],
@@ -9437,8 +9437,8 @@ export const SEED_OFFERS: Offer[] = [
     steps: [
       {
         title: 'Register before Sep 13',
-        description: `Register on the official page.`,
-        url: 'https://www.mosip.io/',
+        description: `Sign up through the Civica opportunity page.`,
+        url: 'https://www.civica.ma/opportunities/6a9872541f4cbf4c89cb19a9/mosip-decode-2026',
       },
       {
         title: 'Learn the platform',
@@ -9462,7 +9462,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل قبل 13 شتنبر',
         description: 'سجّل عبر صفحة الفرصة.',
-        url: 'https://www.mosip.io/',
+        url: 'https://www.civica.ma/opportunities/6a9872541f4cbf4c89cb19a9/mosip-decode-2026',
       },
       {
         title: 'تعلّم المنصة',
@@ -9479,8 +9479,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'arab-youth-space-hackathon-2026',
     name: 'Arab Youth Space Hackathon 2026 (Challenge 813)',
     tagline: 'Turn space & Earth-observation data into real solutions - by Arab Youth Center & UAE Space Agency',
-    description: `The Arab Youth Center with the UAE Space Agency, National Space Academy, and Space42 opens registration for the Arab Youth Space Hackathon 2026: innovate with space and Earth-observation data. Deadline September 25, 2026, online. See the official site to apply.`,
-    url: 'https://space.gov.ae',
+    description: `The Arab Youth Center with the UAE Space Agency, National Space Academy, and Space42 opens registration for the Arab Youth Space Hackathon 2026: innovate with space and Earth-observation data. Deadline September 25, 2026, online. Found via Civica.`,
+    url: 'https://www.civica.ma/opportunities/6a8f4275f90c58ffb1c7888a/hkthwn-lfd-llshbb-laarby-2026',
     logoUrl: 'https://www.google.com/s2/favicons?domain=arabyouthcenter.org&sz=64',
     category: 'competition',
     tags: ['hackathon', 'space', 'youth', 'arab', 'online'],
@@ -9488,8 +9488,8 @@ export const SEED_OFFERS: Offer[] = [
     steps: [
       {
         title: 'Register before Sep 25',
-        description: `Register on the official page.`,
-        url: 'https://space.gov.ae',
+        description: `Sign up through the Civica opportunity page.`,
+        url: 'https://www.civica.ma/opportunities/6a8f4275f90c58ffb1c7888a/hkthwn-lfd-llshbb-laarby-2026',
       },
       {
         title: 'Build with space data',
@@ -9513,7 +9513,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل قبل 25 شتنبر',
         description: 'سجّل عبر صفحة الفرصة.',
-        url: 'https://space.gov.ae',
+        url: 'https://www.civica.ma/opportunities/6a8f4275f90c58ffb1c7888a/hkthwn-lfd-llshbb-laarby-2026',
       },
       {
         title: 'ابنِ ببيانات الفضاء',
@@ -9530,8 +9530,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'euromedai-responsible-ai-cup-2026',
     name: 'EuroMedAI Responsible AI Cup 2.0 (MENA SMEs & Startups)',
     tagline: 'Competition for SMEs/startups building or using AI systems in MENA',
-    description: `EuroMedAI opens the Responsible AI Cup 2.0 for small companies and startups developing or using AI systems across the Middle East and North Africa. Compete, get evaluated on responsible-AI practices, and gain regional visibility. Deadline September 10, 2026. See the official site to apply.`,
-    url: 'https://egyptinnovate.com/en/challenge-center/responsible-ai-cup-20',
+    description: `EuroMedAI opens the Responsible AI Cup 2.0 for small companies and startups developing or using AI systems across the Middle East and North Africa. Compete, get evaluated on responsible-AI practices, and gain regional visibility. Deadline September 10, 2026. Found via Civica.`,
+    url: 'https://www.civica.ma/opportunities/6a8d7ff6f90c58ffb1c0e8df/aaln-msbq-euromedai-responsible-ai-cup-2.0',
     logoUrl: 'https://www.google.com/s2/favicons?domain=egyptinnovate.com&sz=64',
     category: 'competition',
     tags: ['ai', 'competition', 'sme', 'startup', 'mena'],
@@ -9540,7 +9540,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Check eligibility',
         description: `SME or startup in MENA developing or using AI systems.`,
-        url: 'https://egyptinnovate.com/en/challenge-center/responsible-ai-cup-20',
+        url: 'https://www.civica.ma/opportunities/6a8d7ff6f90c58ffb1c0e8df/aaln-msbq-euromedai-responsible-ai-cup-2.0',
       },
       {
         title: 'Apply before Sep 10',
@@ -9564,7 +9564,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'تحقق من الأهلية',
         description: 'شركة صغرى أو ناشئة في MENA تستعمل الذكاء الاصطناعي.',
-        url: 'https://egyptinnovate.com/en/challenge-center/responsible-ai-cup-20',
+        url: 'https://www.civica.ma/opportunities/6a8d7ff6f90c58ffb1c0e8df/aaln-msbq-euromedai-responsible-ai-cup-2.0',
       },
       {
         title: 'قدّم قبل 10 شتنبر',
@@ -9582,7 +9582,7 @@ export const SEED_OFFERS: Offer[] = [
     name: "Rab'Hacks 2026 – Talent Call (Africa & Europe)",
     tagline: 'Innovation & entrepreneurship program: training, coaching, prototyping, Rabat final with cash prizes',
     description: `Rab'Hacks 2026 supports students, graduates, entrepreneurs, and companies across Africa and Europe with training, coaching, and prototyping for impact projects - ending in a Rabat final with financial prizes. Open call for talents listed on Civica.`,
-    url: 'https://rabhacks.com/',
+    url: 'https://www.civica.ma/opportunities/69889ee1731e34082165b6c6/rab-hacks-2026-appel-aux-talents',
     logoUrl: 'https://www.start-up.ma/wp-content/uploads/2026/06/RABHACKS.png',
     category: 'competition',
     tags: ['hackathon', 'entrepreneurship', 'africa', 'rabat', 'prizes'],
@@ -9591,7 +9591,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Join the call',
         description: `Apply as a student, graduate, entrepreneur, or company.`,
-        url: 'https://rabhacks.com/',
+        url: 'https://www.civica.ma/opportunities/69889ee1731e34082165b6c6/rab-hacks-2026-appel-aux-talents',
       },
       {
         title: 'Train and prototype',
@@ -9615,7 +9615,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'انضم للنداء',
         description: 'قدّم كطالب أو خريج أو مقاول أو شركة.',
-        url: 'https://rabhacks.com/',
+        url: 'https://www.civica.ma/opportunities/69889ee1731e34082165b6c6/rab-hacks-2026-appel-aux-talents',
       },
       {
         title: 'تدرّب ونمذج',
@@ -9632,8 +9632,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'huawei-developer-competition-2025-morocco',
     name: 'Huawei Developer Competition 2025 (Morocco – $1k-$5k Prizes)',
     tagline: 'AI competition for Moroccan youth: $1,000-$5,000 prizes + $100-200 vouchers for all',
-    description: `Under the Huawei Morocco × Ministry of Youth agreement: join the Huawei Developer Competition 2025, build with AI, and win $1,000-$5,000 prizes. Every Moroccan participant gets $100-$200 vouchers. See the official site to apply.`,
-    url: 'https://developer.huawei.com/consumer/en/',
+    description: `Under the Huawei Morocco × Ministry of Youth agreement: join the Huawei Developer Competition 2025, build with AI, and win $1,000-$5,000 prizes. Every Moroccan participant gets $100-$200 vouchers. Listed on Civica.`,
+    url: 'https://www.civica.ma/opportunities/68e50a8353ae1796858efbca/huawei-developer-competition-2025',
     logoUrl: 'https://www.google.com/s2/favicons?domain=huawei.com&sz=64',
     category: 'competition',
     tags: ['ai', 'competition', 'huawei', 'morocco', 'prizes', 'students'],
@@ -9642,7 +9642,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Register as a Moroccan youth',
         description: `Open to young Moroccans interested in AI development.`,
-        url: 'https://developer.huawei.com/consumer/en/',
+        url: 'https://www.civica.ma/opportunities/68e50a8353ae1796858efbca/huawei-developer-competition-2025',
       },
       {
         title: 'Build your AI project',
@@ -9666,7 +9666,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل كشاب مغربي',
         description: 'مفتوحة للشباب المغربي المهتم بالذكاء الاصطناعي.',
-        url: 'https://developer.huawei.com/consumer/en/',
+        url: 'https://www.civica.ma/opportunities/68e50a8353ae1796858efbca/huawei-developer-competition-2025',
       },
       {
         title: 'ابنِ مشروعك',
@@ -9683,8 +9683,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'prime-pitch-competition-2025',
     name: 'Prime Pitch Competition 2025 (Global, Equity-Free Cash Prizes)',
     tagline: 'Online pitch contest: idea, prototype, or active startup - cash, coaching, zero equity',
-    description: `Global online competition for entrepreneurs with an idea, prototype, or running startup. Compete for significant equity-free cash prizes; top-10 finalists get coaching, mentoring, and pitch workshops. See the official site to apply.`,
-    url: 'https://www.bmprimecapital.com/pitchcomp',
+    description: `Global online competition for entrepreneurs with an idea, prototype, or running startup. Compete for significant equity-free cash prizes; top-10 finalists get coaching, mentoring, and pitch workshops. Listed on Civica.`,
+    url: 'https://www.civica.ma/opportunities/68def2bb8f69b693c83beaaf/concours-de-pitch-prime-prime-pitch-competition-ppc-2025',
     logoUrl: 'https://www.google.com/s2/favicons?domain=bmprimecapital.com&sz=64',
     category: 'competition',
     tags: ['pitch', 'competition', 'cash-prizes', 'equity-free', 'online', 'startup'],
@@ -9693,7 +9693,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Enter online',
         description: `Apply with your idea, prototype, or startup.`,
-        url: 'https://www.bmprimecapital.com/pitchcomp',
+        url: 'https://www.civica.ma/opportunities/68def2bb8f69b693c83beaaf/concours-de-pitch-prime-prime-pitch-competition-ppc-2025',
       },
       {
         title: 'Reach the top 10',
@@ -9717,7 +9717,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'شارك أونلاين',
         description: 'قدّم بفكرتك أو نموذجك أو شركتك.',
-        url: 'https://www.bmprimecapital.com/pitchcomp',
+        url: 'https://www.civica.ma/opportunities/68def2bb8f69b693c83beaaf/concours-de-pitch-prime-prime-pitch-competition-ppc-2025',
       },
       {
         title: 'بلغ العشرة الأوائل',
@@ -9734,8 +9734,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'hedera-africa-hackathon-2025',
     name: 'Hedera Africa Hackathon 2025 (Web3 – Training + Certification)',
     tagline: "Africa's massive Web3 hackathon on Hedera: grants, training, pro certificates",
-    description: `Huge African hackathon to build innovative Web3 solutions on the Hedera network: big grants, training, professional certificates, and access to expert networks to boost digital innovation across Africa. See the official site to apply.`,
-    url: 'https://hedera.com',
+    description: `Huge African hackathon to build innovative Web3 solutions on the Hedera network: big grants, training, professional certificates, and access to expert networks to boost digital innovation across Africa. Listed on Civica.`,
+    url: 'https://www.civica.ma/opportunities/68b62ea400a47483e83a8a08/hedera-africa-hackathon-2025-world-s-largest-web3-hackathon',
     logoUrl: 'https://www.google.com/s2/favicons?domain=hedera.com&sz=64',
     category: 'competition',
     tags: ['web3', 'hackathon', 'hedera', 'africa', 'grants'],
@@ -9743,8 +9743,8 @@ export const SEED_OFFERS: Offer[] = [
     steps: [
       {
         title: 'Register your team',
-        description: `Register on the official page.`,
-        url: 'https://hedera.com',
+        description: `Sign up through the Civica opportunity page.`,
+        url: 'https://www.civica.ma/opportunities/68b62ea400a47483e83a8a08/hedera-africa-hackathon-2025-world-s-largest-web3-hackathon',
       },
       {
         title: 'Build on Hedera',
@@ -9768,7 +9768,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل فريقك',
         description: 'سجّل عبر صفحة الفرصة.',
-        url: 'https://hedera.com',
+        url: 'https://www.civica.ma/opportunities/68b62ea400a47483e83a8a08/hedera-africa-hackathon-2025-world-s-largest-web3-hackathon',
       },
       {
         title: 'ابنِ على هيديرا',
@@ -9786,7 +9786,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'START Hack Tour (Europe’s Entrepreneurial Hackathon)',
     tagline: 'Build startups in teams: talks, tech workshops, entrepreneurship coaching',
     description: `START Hack, Europe's big entrepreneurial hackathon linked to St. Gallen: form teams, join talks and tech/business workshops, and learn entrepreneurship, creative thinking, and tech innovation hands-on. Listed on Civica - check the tour stop for Moroccans.`,
-    url: 'https://www.startglobal.org/start-hack',
+    url: 'https://www.civica.ma/opportunities/68a222b627ac831c57b9a5f0/start-hack-tour-st.-gallen',
     logoUrl: 'https://www.google.com/s2/favicons?domain=startglobal.org&sz=64',
     category: 'competition',
     tags: ['hackathon', 'entrepreneurship', 'europe', 'startup', 'students'],
@@ -9795,7 +9795,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Pick your tour stop',
         description: `Check the Civica page for the relevant stop and dates.`,
-        url: 'https://www.startglobal.org/start-hack',
+        url: 'https://www.civica.ma/opportunities/68a222b627ac831c57b9a5f0/start-hack-tour-st.-gallen',
       },
       {
         title: 'Team up and build',
@@ -9819,7 +9819,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'اختر محطتك',
         description: 'تحقق من صفحة الفرصة للمحطة والتواريخ.',
-        url: 'https://www.startglobal.org/start-hack',
+        url: 'https://www.civica.ma/opportunities/68a222b627ac831c57b9a5f0/start-hack-tour-st.-gallen',
       },
       {
         title: 'كوّن فريقاً وابنِ',
@@ -9836,8 +9836,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'arkx-salesforce-bootcamp-open-day',
     name: 'Arkx Open Day – Salesforce Developer Bootcamp (Rabat, State-Funded)',
     tagline: 'Bac+5 grads: free state-funded Salesforce bootcamp + job insertion in Rabat',
-    description: `Arkx Talent Factory's Rabat Open Day for Bac+5 graduates eyeing a Salesforce Developer Consultant career: orientation, bootcamp presentation, and enrollment into the 100% state-funded program (training, mentoring, job insertion). See the official site to apply.`,
-    url: 'https://tech-academy.arkx.group/',
+    description: `Arkx Talent Factory's Rabat Open Day for Bac+5 graduates eyeing a Salesforce Developer Consultant career: orientation, bootcamp presentation, and enrollment into the 100% state-funded program (training, mentoring, job insertion). Listed on Civica.`,
+    url: 'https://www.civica.ma/opportunities/688415d290bebe70fd8b0711/open-day-bootcamp-salesforce-developer-consultant-organise-par-arkx-talent-factory',
     logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
     category: 'competition',
     tags: ['bootcamp', 'salesforce', 'rabat', 'employment', 'funded'],
@@ -9846,7 +9846,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Attend the Open Day',
         description: `Join the orientation day in Rabat - games, bootcamp presentation, surprises.`,
-        url: 'https://tech-academy.arkx.group/',
+        url: 'https://www.civica.ma/opportunities/688415d290bebe70fd8b0711/open-day-bootcamp-salesforce-developer-consultant-organise-par-arkx-talent-factory',
       },
       {
         title: 'Enroll in the bootcamp',
@@ -9870,7 +9870,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'احضر اليوم المفتوح',
         description: 'انضم ليوم التوجيه بالرباط.',
-        url: 'https://tech-academy.arkx.group/',
+        url: 'https://www.civica.ma/opportunities/688415d290bebe70fd8b0711/open-day-bootcamp-salesforce-developer-consultant-organise-par-arkx-talent-factory',
       },
       {
         title: 'سجّل في البوتكامب',
@@ -9887,8 +9887,8 @@ export const SEED_OFFERS: Offer[] = [
     slug: 'netacad-summer-camp-ai-cybersecurity',
     name: 'NetAcad Summer Camp (ANAPEC × Cisco – Free AI & Cybersecurity)',
     tagline: '2-month free summer program: AI, coding, cybersecurity, networks + Cisco cert',
-    description: `ANAPEC with Cisco NetAcad runs a free 2-month summer program training Moroccan students in AI, programming, cybersecurity, and networking - hands-on NetAcad platform practice plus an official Cisco certificate on completion. Online. See the official site to apply.`,
-    url: 'https://www.netacad.com',
+    description: `ANAPEC with Cisco NetAcad runs a free 2-month summer program training Moroccan students in AI, programming, cybersecurity, and networking - hands-on NetAcad platform practice plus an official Cisco certificate on completion. Online. Listed on Civica.`,
+    url: 'https://www.civica.ma/opportunities/688363ae90bebe70fd88f6a7/brnmj-netacad-summer-camp-2025-tkwyn-mjny-fy-ldhk-lstnaay-wl-mn-lsybrny',
     logoUrl: 'https://icons.duckduckgo.com/ip3/netacad.com.ico',
     category: 'competition',
     tags: ['bootcamp', 'ai', 'cybersecurity', 'cisco', 'certificate', 'free'],
@@ -9897,7 +9897,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Register online',
         description: `Sign up on the official page.`,
-        url: 'https://www.netacad.com',
+        url: 'https://www.civica.ma/opportunities/688363ae90bebe70fd88f6a7/brnmj-netacad-summer-camp-2025-tkwyn-mjny-fy-ldhk-lstnaay-wl-mn-lsybrny',
       },
       {
         title: 'Train 2 months',
@@ -9921,7 +9921,7 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'سجّل أونلاين',
         description: 'سجّل عبر الصفحة الرسمية.',
-        url: 'https://www.netacad.com',
+        url: 'https://www.civica.ma/opportunities/688363ae90bebe70fd88f6a7/brnmj-netacad-summer-camp-2025-tkwyn-mjny-fy-ldhk-lstnaay-wl-mn-lsybrny',
       },
       {
         title: 'تدرّب شهرين',

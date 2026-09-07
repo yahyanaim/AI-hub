@@ -258,10 +258,15 @@ function ListingViewInner<T extends { id: string }>({
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
   const paginated = filtered.slice((page - 1) * pageSize, page * pageSize)
 
-  // Keep restored page valid if the item count shrinks
+  // Keep restored page valid if the item count shrinks. Must wait until the
+  // store has hydrated: items start EMPTY and fill asynchronously, so clamping
+  // early would wrongly reset a restored page (e.g. page 5) to 1 on every
+  // return visit. A legit empty result still has items.length > 0 (only the
+  // *filtered* list is empty), so this guard only skips the pre-hydration state.
   useEffect(() => {
+    if (items.length === 0) return
     if (page > totalPages) setPage(totalPages)
-  }, [totalPages, page])
+  }, [totalPages, page, items.length])
 
   const defaultSort: SortKey = config.defaultSort ?? 'trending'
   const hasFilters =
