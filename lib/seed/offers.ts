@@ -10444,57 +10444,6 @@ export const SEED_OFFERS: Offer[] = [
     ],
   },
   {
-    id: 'o192',
-    slug: 'jumpshot-2026-panafrican',
-    name: 'Jump Shot 2026 – NBPA × UM6P ($160k Equity-Free)',
-    tagline: 'Pan-African impact startups: $160k prizes, 3-month accelerator, UNGA spotlight',
-    description: `Jump Shot by the NBPA Foundation with UM6P is a pan-African challenge for market-ready startups with measurable social/environmental impact: $160,000 equity-free across 6 winners, 3-month virtual accelerator, mentorship, and UNGA 2026 + U.S. exposure for the top winner. 12 eligible countries, live product with traction required. Apply on StartGate.`,
-    url: 'https://dashboard.startgate.ma/challenges/jumpshot-2026',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=nbpa.com&sz=64',
-    category: 'competition',
-    tags: ['impact', 'accelerator', 'pan-african', 'virtual', 'awards'],
-    pricing: 'free',
-    steps: [
-      {
-        title: 'Check fit',
-        description: `Market-ready startup with measurable social or environmental impact in Africa.`,
-        url: 'https://dashboard.startgate.ma/challenges/jumpshot-2026',
-      },
-      {
-        title: 'Join the accelerator',
-        description: `3-month virtual program with mentoring and evaluation.`,
-      },
-      {
-        title: 'Win awards',
-        description: `Final evaluation and awards for top impact ventures.`,
-      },
-    ],
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-    nameAr: 'جمب شوت 2026 – NBPA × UM6P (160 ألف $ بدون أسهم)',
-    taglineAr: 'شركات أفريقية بأثر: جوائز 160 ألف $ وتسريع 3 أشهر وأضواء UNGA',
-    descriptionAr: `تحدي جمب شوت من مؤسسة NBPA مع UM6P للشركات الأفريقية الجاهزة بأثر اجتماعي/بيئي: 160.000$ بدون أسهم لـ 6 فائزين وتسريع افتراضي 3 أشهر وحضور UNGA 2026 للأول. 12 دولة مؤهلة ومنتج حي بجذب مثبت.`,
-    stepsAr: [
-      {
-        title: 'تحقق من الملاءمة',
-        description: 'شركة جاهزة بأثر اجتماعي/بيئي قابل للقياس في أفريقيا.',
-        url: 'https://dashboard.startgate.ma/challenges/jumpshot-2026',
-      },
-      {
-        title: 'انضم للمسرّعة',
-        description: 'برنامج افتراضي 3 أشهر بإرشاد وتقييم.',
-      },
-      {
-        title: 'فُز بالجوائز',
-        description: 'تقييم نهائي وجوائز لأفضل مشاريع الأثر.',
-      },
-    ],
-  },
-  {
     id: 'o194',
     slug: 'tokenrouter-glm-53-free',
     name: 'GLM 5.3 Free on TokenRouter (for AI Agents)',
