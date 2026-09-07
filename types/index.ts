@@ -434,6 +434,6 @@ export const OFFER_CATEGORY_LABELS: Record<OfferCategory, string> = {
   'api-access': 'Free API',
   tool: 'Tool',
   guide: 'Guide',
-  competition: 'Competition',
+  competition: 'For Startups',
   edu: 'EDU',
 }

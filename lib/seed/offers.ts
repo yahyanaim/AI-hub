@@ -2060,10 +2060,10 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o33',
     slug: 'replit-student',
     name: 'Replit Student',
-    tagline: '50% off Replit Core + free AI credits for students via GitHub Student',
+    tagline: '50% off Replit Core for students - $10/mo with .edu email',
     description:
-      'Replit gives students 50% off Core ($13.50 vs $27/mo) plus free AI credits when linked to GitHub Student Pack. Includes hosted IDE for 50+ languages, Deployments, and AI assistant. Verifies via GitHub Student linkage or .edu email.',
-    url: 'https://replit.com/students',
+      'Replit gives students 50% off Core ($10/mo with .edu email) plus AI credits: hosted IDE for 50+ languages, Deployments, and AI assistant. Verifies with .EDU email or GitHub Student linkage.',
+    url: 'https://replit.com/edu/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/replit.com.ico',
     category: 'tool',
     tags: ['replit', 'ide', 'hosting', 'students', 'discount'],
@@ -2072,8 +2072,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Link GitHub Student or .edu',
         description:
-          'STUDENT: Sign in to replit.com/students with GitHub already approved for Student Pack - Replit auto-detects. Or verify with .edu email. NON-STUDENT: Approve GitHub Pack first via CC file (see o9), then return to Replit to claim.',
-        url: 'https://replit.com/students',
+          'STUDENT: Sign in at replit.com/edu/students with GitHub already approved for Student Pack - Replit auto-detects. Or verify with .edu email. NON-STUDENT: Approve GitHub Pack first via CC file (see o9), then return to Replit to claim.',
+        url: 'https://replit.com/edu/students',
       },
       {
         title: 'Apply student discount',
@@ -2087,13 +2087,13 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Replit للطلاب',
-    taglineAr: 'خصم 50% على Replit Core + رصيد AI عبر GitHub Student',
-    descriptionAr: 'يمنح Replit الطلاب خصم 50% على Core (13.50$ بدل 27$) ورصيد AI عند ربطه بـ GitHub Student Pack. يضم IDE مستضاف لـ 50+ لغة.',
+    taglineAr: 'خصم 50% على Replit Core ($10/شهر ببريد .edu) + رصيد AI',
+    descriptionAr: 'يمنح Replit الطلاب خصم 50% على Core ($10/شهر ببريد .edu) ورصيد AI. يضم IDE مستضاف لـ 50+ لغة.',
     stepsAr: [
       {
         title: 'اربط GitHub Student أو .edu',
-        description: 'سجّل في replit.com/students بحساب GitHub الموافق عليه - يكتشف تلقائياً.',
-        url: 'https://replit.com/students'
+        description: 'سجّل في replit.com/edu/students بحساب GitHub الموافق عليه - يكتشف تلقائياً.',
+        url: 'https://replit.com/edu/students'
       },
       {
         title: 'طبّق خصم الطلاب',
@@ -2832,7 +2832,7 @@ export const SEED_OFFERS: Offer[] = [
     name: 'How to Get a US Community College .EDU (American CC Guide)',
     tagline: 'Legit American CC enrollment in 24-72h - unlock 40+ student offers with .edu + ID',
     description:
-      'The master guide for non-students: how to legitimately get an accredited US Community College .EDU mailbox + student ID + enrollment letter in 24-72h for ~$0-$60, and which offers on AI Hunt you can then claim. No paid mailbox shop needed.\\n\\n**All colleges below issue .EDU + Microsoft 365 + Canvas + transcript and are accepted by SheerID/GitHub/JetBrains/Adobe. Open-admission, no SAT, online apply in 15 min:**\\n\\n**Texas:** Dallas College (dallascollege.edu) - dallascollege.edu/admissions/application - $0 first semester many students\\n**California (all via OpenCCCApply - home.cccapply.org):** LA City College (lacitycollege.edu), Santa Monica College (smc.edu), Coastline (coastline.edu), Rio Hondo (riohondo.edu), El Camino (elcamino.edu), Pasadena City (pasadena.edu), Glendale (glendale.edu), Cerritos (cerritos.edu), Pierce College (piercecollege.edu), Cypress (cypresscollege.edu), Fullerton (fullcoll.edu), Orange Coast (orangecoastcollege.edu), Irvine Valley (ivc.edu), Saddleback (saddleback.edu), Palomar (palomar.edu), MiraCosta (miracosta.edu), Southwestern (swccd.edu), Berkeley City (peralta.edu/berkeley), Diablo Valley (dvc.edu), De Anza (deanza.edu), Foothill (foothill.edu), San Diego City (sdcity.edu), Mt San Antonio (mtsac.edu), Long Beach City (lbcc.edu)\\n**Other states:** Borough of Manhattan CC (bmcc.cuny.edu, NY), LaGuardia CC (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill CC (bhcc.edu, MA), Community College of Philadelphia (ccp.edu, PA)\\n\\n**Pick any ONE - you only need one CC to unlock all 40+ offers:** GitHub Pack, Azure $100, AWS Educate $100, Cloudflare Pro, JetBrains, Figma, Notion Plus, Canva, Autodesk, Zed, Gemini, ChatGPT Plus, Cursor, Perplexity, V0, Shodan, Hyperbolic, Consensus, Julius, Microsoft 365, Adobe 60% off, Apple 200GB, MATLAB, Replit, DigitalOcean $200, Namecheap domain, Sketch, YouTube/Amazon Prime, iLovePDF, Craft, Tower, Shapr3D, Mathpix, GoodNotes, Firecrawl, Dify, Kiro, Windsurf, Consensus, and more. Includes SheerID/UNiDAYS/manual file tips to get approved first try.',
+      'The master guide for non-students: how to legitimately get an accredited US Community College .EDU mailbox + student ID + enrollment letter in 24-72h for ~$0-$60, and which offers on AI Hunt you can then claim. No paid mailbox shop needed.\\n\\n**All colleges below issue .EDU + Microsoft 365 + Canvas + transcript and are accepted by SheerID/GitHub/JetBrains/Adobe. Open-admission, no SAT, online apply in 15 min:**\\n\\n**Texas:** Dallas College (dallascollege.edu) - dallascollege.edu/admissions/application - $0 first semester many students\\n**California (all via OpenCCCApply - home.cccapply.org):** LA City College (lacitycollege.edu), Santa Monica College (smc.edu), Coastline (coastline.edu), Rio Hondo (riohondo.edu), El Camino (elcamino.edu), Pasadena City (pasadena.edu), Glendale (glendale.edu), Cerritos (cerritos.edu), Pierce College (piercecollege.edu), Cypress (cypresscollege.edu), Fullerton (fullcoll.edu), Orange Coast (orangecoastcollege.edu), Irvine Valley (ivc.edu), Saddleback (saddleback.edu), Palomar (palomar.edu), MiraCosta (miracosta.edu), Southwestern (swccd.edu), Berkeley City (berkeleycitycollege.edu/admissions), Diablo Valley (dvc.edu), De Anza (deanza.edu), Foothill (foothill.edu), San Diego City (sdcity.edu), Mt San Antonio (mtsac.edu), Long Beach City (lbcc.edu)\\n**Other states:** Borough of Manhattan CC (bmcc.cuny.edu, NY), LaGuardia CC (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill CC (bhcc.edu, MA), Community College of Philadelphia (ccp.edu, PA)\\n\\n**Pick any ONE - you only need one CC to unlock all 40+ offers:** GitHub Pack, Azure $100, AWS Educate $100, Cloudflare Pro, JetBrains, Figma, Notion Plus, Canva, Autodesk, Zed, Gemini, ChatGPT Plus, Cursor, Perplexity, V0, Shodan, Hyperbolic, Consensus, Julius, Microsoft 365, Adobe 60% off, Apple 200GB, MATLAB, Replit, DigitalOcean $200, Namecheap domain, Sketch, YouTube/Amazon Prime, iLovePDF, Craft, Tower, Shapr3D, Mathpix, GoodNotes, Firecrawl, Dify, Kiro, Windsurf, Consensus, and more. Includes SheerID/UNiDAYS/manual file tips to get approved first try.',
     url: 'https://www.dallascollege.edu/admissions/application',
     logoUrl: 'https://icons.duckduckgo.com/ip3/dallascollege.edu.ico',
     category: 'edu',
@@ -4067,7 +4067,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Berkeley City - Peralta district, Bay Area .EDU',
     description:
       'Berkeley City College (peralta.edu) is an accredited US community college offering instant .EDU Microsoft 365 mailbox + Canvas portal + official enrollment letter/ID for ~$0-$46. Open-admission (no SAT), 15-min online apply via OpenCCCApply (home.cccapply.org). Once enrolled in 1 online course (e.g., Couns 1), you get .EDU within 24-72h and can unlock 40+ offers on AI Hunt: GitHub Pack, Azure $100, AWS $100, Cloudflare, JetBrains, Figma, Notion, Autodesk, Gemini, ChatGPT Plus, etc. See master guide o47 for full unlock list.',
-    url: 'https://peralta.edu/berkeley/',
+    url: 'https://www.berkeleycitycollege.edu/admissions/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/peralta.edu.ico',
     category: 'edu',
     tags: ['cc', 'edu', 'college', 'peralta', 'us-cc', 'open-admission'],
@@ -4076,8 +4076,8 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Apply to Berkeley City College (15 min)',
         description:
-          'Go to https://peralta.edu/berkeley/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
-        url: 'https://peralta.edu/berkeley/',
+          'Go to https://www.berkeleycitycollege.edu/admissions/ → Apply. Choose “Non-degree / Personal Enrichment”. Use your real name/passport. No SAT, no essay. For CA colleges use OpenCCCApply account (NOTE: OpenCCC blocks anonymizing services with error 1775 even if you DON\'T use VPN - your ISP CGNAT/shared IP, iCloud Private Relay (iPhone/Mac), Brave/Opera VPN, or ad-blocker plugins like uBlock/Privacy Badger can trigger it. Disable Private Relay + ad-blockers, try incognito Chrome without extensions, or switch WiFi ↔ mobile data. If it still blocks, use Dallas/Houston/BMCC which do not use OpenCCC), for Texas use Dallas/CUNY portal.',
+        url: 'https://www.berkeleycitycollege.edu/admissions/',
       },
       {
         title: 'Enroll in 1 online course ($0-$46)',
@@ -4101,8 +4101,8 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'قدّم إلى Berkeley City College',
-        description: 'اذهب إلى https://peralta.edu/berkeley/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
-        url: 'https://peralta.edu/berkeley/',
+        description: 'اذهب إلى https://www.berkeleycitycollege.edu/admissions/ → Apply. اختر "Non-degree". استخدم اسمك الحقيقي وجوازك. بدون SAT. لكليات كاليفورنيا استخدم OpenCCC (ملاحظة: يحظره OpenCCC حتى بدون VPN - بسبب CGNAT لمزودك، iCloud Private Relay في آيفون/ماك، أو إضافات حجب الإعلانات. عطّل Private Relay والإضافات، جرّب متصفحاً بدون إضافات أو بدّل بين WiFi وبيانات الهاتف. إذا استمر الحظر استخدم Dallas/Houston/BMCC التي لا تستخدم OpenCCC).',
+        url: 'https://www.berkeleycitycollege.edu/admissions/',
       },
       {
         title: 'سجّل في مقرر واحد ($0-$46)',
@@ -4623,10 +4623,10 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o75',
     slug: 'replicate-student',
     name: 'Replicate Student',
-    tagline: '$50 credit for open-source model API - SDXL, Llama, Whisper',
+    tagline: 'Pay-per-second open-model API with student discounts - SDXL, Llama, Whisper',
     description:
-      'Replicate gives verified students $50 credit for its API: run SDXL, Llama 3, Whisper, and 1000+ open models pay-per-second via API. Verifies with .EDU email or GitHub Student. Non-students can get it via CC .EDU mailbox or GitHub Pack file.',
-    url: 'https://replicate.com/students',
+      'Replicate runs SDXL, Llama 3, Whisper, and 1000+ open models pay-per-second via API - check their education discount with .EDU email or GitHub Student. Non-students can get it via CC .EDU mailbox or GitHub Pack file.',
+    url: 'https://replicate.com/pricing',
     logoUrl: 'https://icons.duckduckgo.com/ip3/replicate.com.ico',
     category: 'api-access',
     tags: ['replicate', 'api', 'sdxl', 'llama', 'students'],
@@ -4635,13 +4635,13 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Sign up with .EDU or GitHub Student',
         description:
-          'Go to replicate.com/students → Sign up with .EDU email or link GitHub already approved for Pack.',
-        url: 'https://replicate.com/students',
+          'Go to Replicate pricing → Sign up with .EDU email or link GitHub already approved for Pack.',
+        url: 'https://replicate.com/pricing',
       },
       {
-        title: 'Claim $50 credit',
+        title: 'Claim student discount',
         description:
-          'After verification, check Billing → Credits → $50 appears. No card required for the student tier.',
+          'After verification, check Billing → Credits for any student credit. No card required for the free tier.',
       },
       {
         title: 'Run models via API',
@@ -4650,13 +4650,13 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
     nameAr: 'Replicate للطلاب',
-    taglineAr: 'رصيد 50$ لواجهة النماذج المفتوحة - SDXL و Llama',
-    descriptionAr: 'يمنح Replicate الطلاب 50$ رصيداً لواجهته: شغّل SDXL و Llama 3 و 1000+ نموذج عبر API. يتحقق ببريد .EDU أو GitHub Student.',
+    taglineAr: 'واجهة النماذج المفتوحة بالدفع حسب الاستعمال مع خصم طلابي',
+    descriptionAr: 'يشغّل Replicate نماذج SDXL و Llama 3 وأكثر من 1000 نموذج عبر API - تحقق من خصم التعليم ببريد .EDU.',
     stepsAr: [
       {
         title: 'سجّل ببريد .EDU أو GitHub',
-        description: 'اذهب إلى replicate.com/students وسجّل ببريد .EDU أو اربط GitHub.',
-        url: 'https://replicate.com/students',
+        description: 'اذهب إلى صفحة الأسعار وسجّل ببريد .EDU أو اربط GitHub.',
+        url: 'https://replicate.com/pricing',
       },
       {
         title: 'اطلب 50$',
@@ -4678,10 +4678,10 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o76',
     slug: 'supabase-student',
     name: 'Supabase Student',
-    tagline: '$50 credit + free Postgres/Auth for 1 year via .EDU',
+    tagline: 'Free-tier Postgres/Auth + student discounts via .EDU',
     description:
-      'Supabase gives students $50 credit plus free tier for 1 year: hosted Postgres, Auth, Storage, and Realtime via .EDU email. Non-students can get it with CC .EDU mailbox (email-only).',
-    url: 'https://supabase.com/students',
+      'Supabase offers a generous free tier plus student discounts: hosted Postgres, Auth, Storage, and Realtime. Check their education pricing with .EDU email. Non-students can start free with any email.',
+    url: 'https://supabase.com/pricing',
     logoUrl: 'https://icons.duckduckgo.com/ip3/supabase.com.ico',
     category: 'api-access',
     tags: ['supabase', 'postgres', 'students', 'backend', 'credits'],
@@ -4690,36 +4690,36 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Sign up with .EDU',
         description:
-          'Visit supabase.com/students → Sign up with .EDU email. NON-STUDENT: use CC .EDU mailbox.',
-        url: 'https://supabase.com/students',
+          'Visit Supabase pricing → Sign up. Students: check education discounts with .EDU email.',
+        url: 'https://supabase.com/pricing',
       },
       {
-        title: 'Create project and claim credit',
+        title: 'Create project',
         description:
-          'Create a Supabase project → Settings → Billing → “Student credit” → $50 auto-applies for .EDU domains.',
+          'Create a Supabase project → Settings → Billing to see credits and free-tier limits.',
       },
       {
         title: 'Build with free tier',
         description:
-          'Use Postgres, Auth, and Storage for 1 year free. Credit covers overages after free limits.',
+          'Use Postgres, Auth, and Storage free. Credits cover overages after free limits.',
       },
     ],
     nameAr: 'Supabase للطلاب',
-    taglineAr: 'رصيد 50$ + Postgres مجاناً لسنة ببريد .EDU',
-    descriptionAr: 'يمنح Supabase الطلاب 50$ رصيداً وطبقة مجانية لسنة: Postgres و Auth و Storage. يتحقق ببريد .EDU فقط.',
+    taglineAr: 'Postgres مجاني + خصومات طلابية ببريد .EDU',
+    descriptionAr: 'يقدم Supabase طبقة مجانية سخية وخصومات طلابية: Postgres و Auth و Storage. تحقق من أسعار التعليم ببريد .EDU.',
     stepsAr: [
       {
         title: 'سجّل ببريد .EDU',
-        description: 'اذهب إلى supabase.com/students وسجّل ببريد .EDU.',
-        url: 'https://supabase.com/students',
+        description: 'اذهب لصفحة الأسعار وسجّل - تحقق من خصومات التعليم.',
+        url: 'https://supabase.com/pricing',
       },
       {
-        title: 'أنشئ مشروعاً واطلب الرصيد',
-        description: 'أنشئ مشروعاً → الإعدادات → الفوترة → "Student credit" → يُضاف 50$ تلقائياً.',
+        title: 'أنشئ مشروعاً',
+        description: 'أنشئ مشروعاً → الإعدادات → الفوترة لرؤية الأرصدة والحدود المجانية.',
       },
       {
         title: 'ابنِ بالطبقة المجانية',
-        description: 'استخدم Postgres و Auth لسنة مجاناً - الرصيد يغطي التجاوز.',
+        description: 'استخدم Postgres و Auth مجاناً - الرصيد يغطي التجاوز.',
       },
     ],
     upvotes: 14,
@@ -4846,7 +4846,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: '1 year free Families (5 accounts) via GitHub Pack',
     description:
       '1Password via GitHub Student Pack: 1 year free Families plan (5 accounts, vaults, 1GB storage). Verifies via GitHub Student linkage - get Pack first via CC file (o9).',
-    url: 'https://1password.com/students/',
+    url: 'https://1password.com/developers/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/1password.com.ico',
     category: 'tool',
     tags: ['1password', 'security', 'students', 'vault', 'github-pack'],
@@ -10491,6 +10491,108 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'فُز بالجوائز',
         description: 'تقييم نهائي وجوائز لأفضل مشاريع الأثر.',
+      },
+    ],
+  },
+  {
+    id: 'o193',
+    slug: 'tokenrouter-kimi-k3-50m-free',
+    name: 'Kimi K3 Free – 50M Tokens on TokenRouter',
+    tagline: 'Use frontier Kimi K3 free: 50M tokens, no card, 2-minute setup',
+    description: `TokenRouter is giving 50 million free tokens to try Kimi K3 - a frontier open-weight reasoning model - with no credit card and no trial expiry mentioned. Sign up, create an API key, and plug it into Cursor, Claude Code, Cline, or any OpenAI-library tool with base URL api.tokenrouter.com/v1 and model moonshotai/kimi-k3-free. Claim it while the free offer lasts.`,
+    url: 'https://www.tokenrouter.com/',
+    logoUrl: 'https://www.tokenrouter.com/logo-without-title.png',
+    category: 'tool',
+    tags: ['kimi', 'tokenrouter', 'free-tokens', 'coding-agent', 'llm'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create your account',
+        description: `Sign up on TokenRouter - no credit card required, setup takes about 2 minutes.`,
+        url: 'https://www.tokenrouter.com/',
+      },
+      {
+        title: 'Generate an API key',
+        description: `Create a key in the dashboard; your 50M free tokens apply to Kimi K3.`,
+      },
+      {
+        title: 'Plug it into your agent',
+        description: `Set base URL to api.tokenrouter.com/v1 and model to moonshotai/kimi-k3-free in Cursor, Claude Code, Cline, or any OpenAI-compatible tool - then start prompting.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'Kimi K3 مجاناً – 50M رمز على TokenRouter',
+    taglineAr: 'استعمل Kimi K3 المتقدم مجاناً: 50M رمز بدون بطاقة وإعداد بدقيقتين',
+    descriptionAr: `يقدم TokenRouter ‏50 مليون رمز مجاني لتجربة Kimi K3 - نموذج استدلال مفتوح من الطراز الأول - بدون بطاقة بنكية. سجّل وأنشئ مفتاح API واستعمله في Cursor أو Claude Code أو Cline عبر base URL ‏api.tokenrouter.com/v1 والنموذج moonshotai/kimi-k3-free. استغل العرض قبل تغييره.`,
+    stepsAr: [
+      {
+        title: 'أنشئ حسابك',
+        description: 'سجّل في TokenRouter - بدون بطاقة بنكية والإعداد بدقيقتين.',
+        url: 'https://www.tokenrouter.com/',
+      },
+      {
+        title: 'أنشئ مفتاح API',
+        description: 'أنشئ مفتاحاً من اللوحة؛ رموزك الـ 50M المجانية تشمل Kimi K3.',
+      },
+      {
+        title: 'اربطه بوكيلك',
+        description: 'اضبط base URL على api.tokenrouter.com/v1 والنموذج moonshotai/kimi-k3-free ثم ابدأ.',
+      },
+    ],
+  },
+  {
+    id: 'o194',
+    slug: 'tokenrouter-glm-53-free',
+    name: 'GLM 5.3 Free on TokenRouter (for AI Agents)',
+    tagline: 'Run GLM 5.3 free in your coding agents - no usage limits mentioned',
+    description: `GLM 5.3 is free right now on TokenRouter with no usage limits mentioned: open tokenrouter.com/models/z-ai/glm-5.3, create an account, generate an API key, add it to your AI agent with base URL api.tokenrouter.com/v1, select GLM 5.3 Free, and start prompting. Ideal for AI coding agents while free access lasts.`,
+    url: 'https://www.tokenrouter.com/models/z-ai/glm-5.3',
+    logoUrl: 'https://www.tokenrouter.com/logo-without-title.png',
+    category: 'tool',
+    tags: ['glm', 'tokenrouter', 'free', 'coding-agent', 'llm'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open the model page',
+        description: `Go to the GLM 5.3 page on TokenRouter.`,
+        url: 'https://www.tokenrouter.com/models/z-ai/glm-5.3',
+      },
+      {
+        title: 'Create account + key',
+        description: `Create your account and generate an API key.`,
+      },
+      {
+        title: 'Add to your agent',
+        description: `Add the key to your AI agent with base URL api.tokenrouter.com/v1, select GLM 5.3 Free, and start prompting.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'GLM 5.3 مجاناً على TokenRouter',
+    taglineAr: 'شغّل GLM 5.3 مجاناً في وكلاء البرمجة - بدون حدود معلنة',
+    descriptionAr: `نموذج GLM 5.3 مجاني حالياً على TokenRouter بدون حدود استعمال معلنة: افتح صفحة النموذج وأنشئ حساباً وولّد مفتاح API وأضفه لوكيلك عبر api.tokenrouter.com/v1 واختر GLM 5.3 Free وابدأ.`,
+    stepsAr: [
+      {
+        title: 'افتح صفحة النموذج',
+        description: 'اذهب لصفحة GLM 5.3 على TokenRouter.',
+        url: 'https://www.tokenrouter.com/models/z-ai/glm-5.3',
+      },
+      {
+        title: 'أنشئ حساباً ومفتاحاً',
+        description: 'أنشئ حسابك وولّد مفتاح API.',
+      },
+      {
+        title: 'أضفه لوكيلك',
+        description: 'أضف المفتاح لوكيل الذكاء عبر api.tokenrouter.com/v1 واختر GLM 5.3 Free وابدأ.',
       },
     ],
   },
