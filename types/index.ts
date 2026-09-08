@@ -48,6 +48,7 @@ export type DevToolCategory =
   | 'crash-reporting'
   | 'database'
   | 'debugging'
+  | 'developer-tools'
   | 'dns'
   | 'domain'
   | 'email'
@@ -354,6 +355,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   'crash-reporting': 'Crash Reporting',
   database: 'Database',
   debugging: 'Debugging',
+  'developer-tools': 'Developers Tools',
   dns: 'DNS',
   domain: 'Domain',
   email: 'Email',
