@@ -4,13 +4,15 @@ import { ListingView, type FilterOption } from '@/components/listing/ListingView
 import { OfferCard } from '@/components/cards/OfferCard'
 import { useApp } from '@/lib/store'
 import { OFFER_CATEGORY_LABELS, type Offer } from '@/types'
+import { useRouter } from 'next/navigation'
 
 const categoryOptions: FilterOption[] = Object.entries(OFFER_CATEGORY_LABELS).map(
   ([value, label]) => ({ value, label })
 )
 
-export function OffersView() {
+export function OffersView({ initialCategory }: { initialCategory?: string }) {
   const { offers } = useApp()
+  const router = useRouter()
 
   return (
     <>
@@ -28,6 +30,10 @@ export function OffersView() {
           categoryOptions,
           itemLabel: 'offers',
           defaultSort: 'new',
+          initialCategory,
+          onCategoryChange: (cat) => {
+            router.push(cat === 'all' ? '/offers' : `/offers/${cat}`)
+          },
         }}
         renderCard={(o) => <OfferCard offer={o} />}
         getCategory={(o) => o.category}
