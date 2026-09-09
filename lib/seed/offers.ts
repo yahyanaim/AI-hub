@@ -10439,4 +10439,55 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
   },
+  {
+    id: 'o195',
+    slug: 'tamwilcom-tpe-guarantees',
+    name: 'Tamwilcom TPE Guarantees (Damane Express / Intelak)',
+    tagline: 'State guarantees for very small firms: treasury, creation up to 80%, rural',
+    description: `Tamwilcom backs Moroccan very small enterprises with simple guarantee products: Damane Express (fast treasury/investment guarantee), Damane Intelak (creation support, up to 80% of the loan, no commission), and Damane Intelak Al Moustatmir Al Qarawi (rural productive projects and small farms). Open to Moroccan-law TPEs in all sectors.`,
+    url: 'https://www.tamwilcom.ma/nos-solutions/tres-petites-entreprises',
+    logoUrl: 'https://www.tamwilcom.ma/sites/default/files/sidebar_logo.png',
+    category: 'competition',
+    tags: ['tamwilcom', 'guarantee', 'tpe', 'funding', 'morocco'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Pick your guarantee',
+        description: `Treasury needs: Damane Express. Creating a company: Damane Intelak (up to 80%). Rural project: Intelak Al Qarawi.`,
+        url: 'https://www.tamwilcom.ma/nos-solutions/tres-petites-entreprises',
+      },
+      {
+        title: 'Apply via your bank',
+        description: `Request the Tamwilcom guarantee through your bank when negotiating the loan.`,
+      },
+      {
+        title: 'Get financed',
+        description: `The state guarantee unlocks bank financing for your TPE.`,
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+    nameAr: 'ضمانات تمويلكم للمقاولات الصغيرة جداً',
+    taglineAr: 'ضمانات الدولة للصغار: خزينة وإحداث حتى 80% وقروي',
+    descriptionAr: `تدعم تمويلكم المقاولات المغربية الصغيرة جداً بضمانات بسيطة: ضمان إكسبريس (الخزينة)، ضمان انطلاقة (الإحداث حتى 80% بدون عمولة)، وضمان انطلاقة المستثمر القروي للمشاريع القروية.`,
+    stepsAr: [
+      {
+        title: 'اختر ضمانك',
+        description: 'خزينة: إكسبريس. إحداث: انطلاقة حتى 80%. قروي: انطلاقة القروي.',
+        url: 'https://www.tamwilcom.ma/nos-solutions/tres-petites-entreprises',
+      },
+      {
+        title: 'اطلب عبر بنكك',
+        description: 'اطلب ضمان تمويلكم عبر بنكك عند التفاوض على القرض.',
+      },
+      {
+        title: 'تموّل',
+        description: 'ضمان الدولة يفتح التمويل البنكي لمقاولتك.',
+      },
+    ],
+  },
 ]
