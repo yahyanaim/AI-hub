@@ -71,7 +71,7 @@ export function isCourseraFreeWithRecoded(url: string): boolean {
 export function RecodedBadge({ className }: { className?: string }) {
   return (
     <span
-      className={cn('inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400', className)}
+      className={cn('inline-flex items-center gap-1 rounded-md bg-blue-500/10 px-2 py-0.5 text-[11px] font-medium text-blue-600 dark:text-blue-400', className)}
       title="Free with ReCoded"
     >
       <GraduationCap className="h-3 w-3" />
