@@ -25,7 +25,7 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
       aria-label={`${offer.name} - open details`}
     >
       <Link
-        href={`/offers/${offer.slug}`}
+        href={`/offers/${offer.category}/${offer.slug}`}
         className="absolute inset-0 z-10"
         aria-label={`${offer.name} - open details`}
       >

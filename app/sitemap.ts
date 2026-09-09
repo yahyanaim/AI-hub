@@ -59,7 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const offerPages = SEED_OFFERS.map((offer) => ({
-    url: `${baseUrl}/offers/${offer.slug}`,
+    url: `${baseUrl}/offers/${offer.category}/${offer.slug}`,
     lastModified: new Date(offer.updatedAt),
     changeFrequency: 'weekly' as const,
     priority: 0.7,

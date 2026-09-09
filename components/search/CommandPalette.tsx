@@ -200,7 +200,7 @@ export function CommandPalette() {
           title: o.name,
           subtitle: o.tagline,
           meta: formatNumber(o.upvotes) + ' upvotes',
-          href: `/offers/${o.slug}`,
+          href: `/offers/${o.category}/${o.slug}`,
           item: o,
         }))
 
