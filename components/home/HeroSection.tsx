@@ -107,7 +107,7 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-4 max-w-xl text-base text-muted-foreground"
+          className="mx-auto mt-4 max-w-xl text-center text-base text-muted-foreground"
         >
           A community-driven directory. Browse, upvote, and share what works.
         </motion.p>
