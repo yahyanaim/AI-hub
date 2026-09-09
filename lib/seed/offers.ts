@@ -9069,7 +9069,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Investment credit up to 2M MAD with Tamwilcom guarantee for labelled startups',
     description: `CIH Startup is CIH Bank's offer for labelled startups (StartupMaroc, MassChallenge): investment credit up to 2,000,000 MAD backed by the Tamwilcom guarantee. Built for startups that need bank financing alongside equity - ask your CIH advisor with your label and business plan.`,
     url: 'https://www.cihbank.ma/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=cihbank.ma&sz=64',
+    logoUrl: 'https://www.cihbank.ma/sites/default/files/favicon.ico',
     category: 'competition',
     tags: ['bank', 'credit', 'funding', 'tamwilcom', 'morocco', 'startup'],
     pricing: 'free',
