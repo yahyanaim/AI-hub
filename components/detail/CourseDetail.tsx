@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useApp } from '@/lib/store'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
-import { CategoryBadge, PricingBadge, Tag } from '@/components/ui/Badges'
+import { CategoryBadge, PricingBadge, Tag, RecodedBadge, isCourseraFreeWithRecoded } from '@/components/ui/Badges'
 import { UpvoteButton } from '@/components/interactive/UpvoteButton'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
 import { cn, formatNumber, downloadRoadmapPlan } from '@/lib/utils'
@@ -125,6 +125,7 @@ export function CourseDetailModal() {
               <div className="mb-4 flex flex-wrap items-center gap-1.5">
                 <CategoryBadge kind="course" category={course.category} />
                 <PricingBadge pricing={course.pricing} />
+                {isCourseraFreeWithRecoded(course.url) && <RecodedBadge />}
                 <span className={cn(
                   'inline-flex items-center rounded-md px-2 py-0.5 text-[11px] font-medium',
                   course.difficulty === 'beginner' && 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
@@ -240,6 +241,7 @@ export function CourseDetail({ slug }: { slug: string }) {
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <CategoryBadge kind="course" category={course.category} />
               <PricingBadge pricing={course.pricing} />
+              {isCourseraFreeWithRecoded(course.url) && <RecodedBadge />}
               <span className={cn(
                 'inline-flex items-center rounded-md px-2 py-0.5 text-[11px] font-medium',
                 course.difficulty === 'beginner' && 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',

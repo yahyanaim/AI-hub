@@ -1,3 +1,4 @@
+import { GraduationCap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   PRICING_LABELS,
@@ -57,6 +58,24 @@ export function PricingBadge({
   return (
     <span className={cn('inline-flex items-center rounded-md px-2 py-0.5 text-[11px] font-medium', pricingStyles[pricing], className)}>
       {PRICING_LABELS[pricing]}
+    </span>
+  )
+}
+
+/** True for Coursera-hosted courses, which learners can take free via ReCoded. */
+export function isCourseraFreeWithRecoded(url: string): boolean {
+  return url.includes('coursera.org')
+}
+
+/** Badge shown on Coursera courses: free access via the ReCoded program. */
+export function RecodedBadge({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn('inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400', className)}
+      title="Free with ReCoded"
+    >
+      <GraduationCap className="h-3 w-3" />
+      Free with ReCoded
     </span>
   )
 }

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ExternalLink, Clock, BookOpen, Download, Award } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
-import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
+import { CategoryBadge, PricingBadge, RecodedBadge, isCourseraFreeWithRecoded } from '@/components/ui/Badges'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
 import { useApp } from '@/lib/store'
 import { cn, downloadRoadmapPlan } from '@/lib/utils'
@@ -70,6 +70,7 @@ export function CourseCard({ course, className }: { course: Course; className?: 
       <div className="mb-3 flex flex-wrap items-center gap-1.5">
         <CategoryBadge kind="course" category={course.category} />
         <PricingBadge pricing={course.pricing} />
+        {isCourseraFreeWithRecoded(course.url) && <RecodedBadge />}
         {(course as unknown as { tags?: string[] }).tags?.includes('high-recommended') && (
           <span className="inline-flex items-center gap-1 rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-red-600 ring-1 ring-red-500/20 dark:text-red-400">
             <Award className="h-3 w-3" />
