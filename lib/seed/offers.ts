@@ -5069,7 +5069,7 @@ export const SEED_OFFERS: Offer[] = [
       'RevenueCat global hackathon Aug 1-Sep 30, 2026: ship an iOS/Android/macOS app using RevenueCat SDK for at least one purchase. $740k cash, $1M+ total including sponsor prizes. Grand $100k + NYC Shippies red carpet + Times Square billboard + 9to5Mac press. Category 1sts $20k-$30k. Student-only Next Gen category requires no App Store release. Sponsors: Replit, OneSignal, JetBrains, Stripe, Samsung.',
     url: 'https://revenuecat-shipaton-2026.devpost.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/devpost.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['hackathon', 'revenuecat', 'apps', 'prizes', 'shipaton'],
     pricing: 'free',
     steps: [
@@ -5133,7 +5133,7 @@ export const SEED_OFFERS: Offer[] = [
       'XPRIZE + Google $2M hackathon May 19-Aug 17, 2026: build AI business in 5 categories (Education, Entrepreneurship, Small Business, Financial Access, Professional Services). Grand $500k, 2nd $200k, 3×$100k, 15×$50k runner + 5×$50k category. Judged on business viability, AI-native ops, impact. Must launch real business with real users/revenue in 90 days. Finals Sep 25 LA.',
     url: 'https://www.geminixprize.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/xprize.org.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['xprize', 'gemini', 'hackathon', 'google', '2m'],
     pricing: 'free',
     steps: [
@@ -5188,7 +5188,7 @@ export const SEED_OFFERS: Offer[] = [
       'Stanford TreeHacks Feb 14-15, 2026 - invite-only collegiate, $1,030,875 pool. YC interview, OpenAI lunch + 1yr ChatGPT Pro, Anthropic/Modal credits, Human Capital $50k per member (up to $200k), Cloudflare $250k credits, HeyGen, etc. Invite via application.',
     url: 'https://treehacks-2026.devpost.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/devpost.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['treehacks', 'stanford', 'hackathon', 'collegiate', '1m'],
     pricing: 'free',
     steps: [
@@ -5243,7 +5243,7 @@ export const SEED_OFFERS: Offer[] = [
       'Sui Overflow virtual 2026: build AI agents, DeFi/payments, DeepBook, EVE on Sui. Per track $30k 1st/$15k 2nd/$10k 3rd/$7.5k 4th + specialized $70k/$50k pools. Global online.',
     url: 'https://overflow.sui.io/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/sui.io.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['sui', 'hackathon', 'web3', 'agents', 'defi'],
     pricing: 'free',
     steps: [
@@ -5298,7 +5298,7 @@ export const SEED_OFFERS: Offer[] = [
       'Mistral 2026 worldwide: Global winner $10k + $15k credits + hiring, per location $1.5k/1k/$500 + ElevenLabs $2k/team. Locations worldwide, final in Paris.',
     url: 'https://worldwide-hackathon.mistral.ai/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/mistral.ai.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['mistral', 'hackathon', 'ww', 'credits', 'hiring'],
     pricing: 'free',
     steps: [
@@ -5353,7 +5353,7 @@ export const SEED_OFFERS: Offer[] = [
       'Gloo AI for Good Oct 6-8, 2026 Boulder, Colorado: $200k pool, no coding required, for Faith & Flourishing builders. Start building Sep 8.',
     url: 'https://gloo.com/ai/hackathon',
     logoUrl: 'https://icons.duckduckgo.com/ip3/gloo.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['gloo', 'ai', 'for-good', 'boulder', '200k'],
     pricing: 'free',
     steps: [
@@ -5408,7 +5408,7 @@ export const SEED_OFFERS: Offer[] = [
       'VSLive Microsoft AI Hackathon July 28-29, 2026 at Microsoft HQ Building 98 Redmond: $25k pool ($6k Grand, $2k Team/Solo). Build enterprise AI on Azure OpenAI, Copilot, agents, .NET. Free for VSLive attendees, $50 community in-person only.',
     url: 'https://vslive.com/events/microsofthq-2026/hackathon.aspx',
     logoUrl: 'https://icons.duckduckgo.com/ip3/vslive.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['vslive', 'microsoft', 'azure', 'hackathon', '25k'],
     pricing: 'free',
     steps: [
@@ -5463,7 +5463,7 @@ export const SEED_OFFERS: Offer[] = [
       'DevNetwork API + Cloud + AI Hackathon @ API World 2026: $39.5k pool ($12.5k overall winner). Online Aug 17-Sep 3 + in-person Sep 2-3 Santa Clara Convention Center. 300+ participants, challenges from Perfect Corp, SerpApi, Xano.',
     url: 'https://api-cloud-ai-hackathon-2026.devpost.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/devpost.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['devnetwork', 'api', 'cloud', 'ai', 'api-world'],
     pricing: 'free',
     steps: [
@@ -5518,7 +5518,7 @@ export const SEED_OFFERS: Offer[] = [
       'Y Combinator Fall 2026 batch Oct-Dec SF: $500k standard deal = $125k for 7% + $375k uncapped MFN SAFE (committed day accepted, not batch start). Deadline July 27, 2026 8pm PT, decisions by Aug 28, 10-min Zoom interview, Demo Day fundraising compression. Apply at ycombinator.com/apply. Early Decision for Winter/Spring/Summer 2027.',
     url: 'https://www.ycombinator.com/apply',
     logoUrl: 'https://icons.duckduckgo.com/ip3/ycombinator.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['yc', 'y-combinator', 'accelerator', '500k', '7percent'],
     pricing: 'free',
     steps: [
@@ -5573,7 +5573,7 @@ export const SEED_OFFERS: Offer[] = [
       'Techstars $220k = $20k for 5% CEA + $200k uncapped MFN SAFE (~6% total, adds ~1% at $20M pre). Global vertical programs (London fintech, Boston AI, etc.). No Demo Day lift like YC, but 74% raise within 3 years. Pick for industry/city network you lack.',
     url: 'https://www.techstars.com/accelerators',
     logoUrl: 'https://icons.duckduckgo.com/ip3/techstars.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['techstars', 'accelerator', '220k', '6percent', 'global'],
     pricing: 'free',
     steps: [
@@ -5628,7 +5628,7 @@ export const SEED_OFFERS: Offer[] = [
       'Antler Disrupt 4-week sprint Ho Chi Minh City Mar 30-Apr 20, 2026 (Spring) + other locations: $400k = $250k for 10% + $150k MFN SAFE, $650k perks day 1 ($4M after), no fee. Need working product + early traction. <3% acceptance, IC at Week 4.',
     url: 'https://www.antler.co/academy',
     logoUrl: 'https://icons.duckduckgo.com/ip3/antler.co.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['antler', 'disrupt', '$400k', '10percent', 'sprint'],
     pricing: 'free',
     steps: [
@@ -5683,7 +5683,7 @@ export const SEED_OFFERS: Offer[] = [
       'Antler Residency 6-8 weeks inception: UK London £210k net (£125k 8.5% + £85k note, £40k fee) + up to £330k follow-on, India 3 weeks → ₹4Cr (~$480k) + $1M perks (deadline Feb 19, 2026), Singapore up to $400k ($150k first). Pre-team/pre-product accepted, <1% in UK. 80% raise within 9mo.',
     url: 'https://www.antler.co/residency/uk',
     logoUrl: 'https://icons.duckduckgo.com/ip3/antler.co.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['antler', 'residency', 'uk', 'india', 'inception'],
     pricing: 'free',
     steps: [
@@ -5738,7 +5738,7 @@ export const SEED_OFFERS: Offer[] = [
       '500 Global Flagship SF: $150k for 6% (subject to diligence). 500 Global has 2600+ companies, not fundraising compression like YC but strong network. Apply via 500.co.',
     url: 'https://flagship.aplica.500.co/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/500.co.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['500-global', 'flagship', '150k', '6percent', 'sf'],
     pricing: 'free',
     steps: [
@@ -5793,7 +5793,7 @@ export const SEED_OFFERS: Offer[] = [
       'a16z Speedrun: $500k for 10% (up to $1M total) + $500k follow-on within 18 months if you raise next round. For gaming/AI startups, 12 weeks LA/SF, Demo Day with a16z network.',
     url: 'https://a16z.com/speedrun/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/a16z.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['a16z', 'speedrun', 'gaming', '500k', '10percent'],
     pricing: 'free',
     steps: [
@@ -5848,7 +5848,7 @@ export const SEED_OFFERS: Offer[] = [
       'Techstars Founder Catalyst 10-week pre-accelerator, virtual, part-time: training, mentors, network for pre-funding idea stage (<$400k raised). No equity. Current: Global Fall 2026, Alabama, EIT Urban Mobility. Apply at techstars.com/founder-catalyst.',
     url: 'https://www.techstars.com/founder-catalyst',
     logoUrl: 'https://icons.duckduckgo.com/ip3/techstars.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['techstars', 'catalyst', 'pre-accelerator', 'no-equity', '10-week'],
     pricing: 'free',
     steps: [
@@ -5903,7 +5903,7 @@ export const SEED_OFFERS: Offer[] = [
       'Entrepreneur First London/Paris/Berlin: $150k for 8-10% (8% + optional $125k MFN). Pre-team/pre-idea, co-founder matching is the product, not fundraising. Best for solo technical talent without team. If you already have co-founder + traction, skip EF.',
     url: 'https://www.joinef.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/joinef.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['ef', 'entrepreneur-first', 'co-founder', '150k', '8percent'],
     pricing: 'free',
     steps: [
@@ -5959,7 +5959,7 @@ export const SEED_OFFERS: Offer[] = [
       'SUPERNOVA is the flagship startup competition at GITEX Africa Marrakech (largest Africa tech event, 100+ countries). Moroccan Woliz won 2026 FinTech & Blockchain prize. Past winners raised significant funding and gained international investor attention.',
     url: 'https://gitexafrica.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/gitexafrica.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['gitex', 'supernova', 'morocco', 'competition', 'africa'],
     pricing: 'free',
     steps: [
@@ -6014,7 +6014,7 @@ export const SEED_OFFERS: Offer[] = [
       'Startup World Cup Morocco (Pegasus Tech Ventures + Technopark Casablanca): 131 Moroccan apps → 10 finalists → winner ORA Technologies (fintech) represents Morocco vs 65+ countries in Silicon Valley Grand Finale. 300+ attendees, networking.',
     url: 'https://www.startupworldcup.io/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=startupworldcup.io&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['startup-world-cup', 'morocco', 'pegasus', 'silicon-valley', 'technopark'],
     pricing: 'free',
     steps: [
@@ -6069,7 +6069,7 @@ export const SEED_OFFERS: Offer[] = [
       'NBA Africa + ALX Ventures + ServiceNow + OpenAI + CMU Africa: 700+ apps → 10 finalists → 3-month acceleration. 1st $25k + CMU incubation + $10k OpenAI credits + OpenAI immersion, 5th $2.5k. Reborn (Morocco, SportTech) 1st, Fitclan, Athlon (Egypt) among 2025 winners.',
     url: 'https://www.alxafrica.com/programmes',
     logoUrl: 'https://www.google.com/s2/favicons?domain=alxafrica.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['nba', 'alx', 'accelerator', 'openai', 'cmu', '25k'],
     pricing: 'free',
     steps: [
@@ -6124,7 +6124,7 @@ export const SEED_OFFERS: Offer[] = [
       'Baobab Network Nairobi - Africa leading accelerator: $100k lump sum for 12.5% equity + 12-week remote (2 weeks intensive + 3 months hands-on) + Demo Day. Portfolio: Colis.ma ($50k Morocco logistics 2023), VOVE ID (Morocco regtech 2025), Afrigility, Eazy Chain. No need to leave Africa, US incorporation optional.',
     url: 'https://thebaobabnetwork.com/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=thebaobabnetwork.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['baobab', 'accelerator', '100k', '12.5percent', 'africa'],
     pricing: 'free',
     steps: [
@@ -6179,7 +6179,7 @@ export const SEED_OFFERS: Offer[] = [
       'Morocco Accelerator 3-month (Oct 2026) funded by Ministry Digital Transition, operated by Technopark + Plug and Play (Digital Morocco 2030): equity-free, fee-free mentorship, workshops, office at Technopark, corporate/investor intros, global ecosystem, eligible for Startup Venture Building non-dilutive financing via Tamwilcom. Prev. 80+ founders, 200+ mentorships, $5M+ raised, 19 grad 20M MAD, 2 to Silicon Valley Winter Summit. Moroccan founder/diaspora, traction + revenue, scalable tech. Closes Sep 15, 2026.',
     url: 'https://technopark.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['morocco-accelerator', 'technopark', 'plug-and-play', 'tamwilcom', 'free'],
     pricing: 'free',
     steps: [
@@ -6234,7 +6234,7 @@ export const SEED_OFFERS: Offer[] = [
       'CyberStrike 2026 CTF & Hackathon at GITEX Africa Marrakech (ANCA CERT, DGSSI, Cisco XDR): national/regional African talent, rapid incident response, threat hunting, forensics, XDR. Ryane El Ouarrat 2nd national.',
     url: 'https://www.dgssi.gov.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=gitexafrica.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['cyberstrike', 'ctf', 'gitex', 'anca', 'cisco'],
     pricing: 'free',
     steps: [
@@ -6289,7 +6289,7 @@ export const SEED_OFFERS: Offer[] = [
       'Boost Up Lab Casablanca (Technopark, Ministry Digital Transition - Digital Morocco 2030): 6 months pre-incubation to turn idea into concrete project, business model, solution, with experts/mentors, ending Demo Day. Part of national Boost Up Lab. Deadline Aug 23, 2026 for Casablanca cohort.',
     url: 'https://technopark.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['boost-up', 'pre-incubation', 'technopark', 'demo-day', '6-months'],
     pricing: 'free',
     steps: [
@@ -6344,7 +6344,7 @@ export const SEED_OFFERS: Offer[] = [
       'LaFactory Casablanca by Screendy (OCP Group): 3-month accelerator, equity-free mentoring, coworking, Intelaka fast-track application support. For scalable tech startups.',
     url: 'https://www.lafactory.com/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=lafactory.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['lafactory', 'screendy', 'ocp', 'accelerator', 'intelaka'],
     pricing: 'free',
     steps: [
@@ -6399,7 +6399,7 @@ export const SEED_OFFERS: Offer[] = [
       'ALX Ventures Founder Academy (Casablanca, Accra, Nairobi): 3-month online + hub access for 18-35y, startup foundations, product, pitching, workshops, office hours, ALX Hubs. 1200 learners, 300 grads, 28 incubated to Demo Day grants. Priority Technopark incubation via ALX-Technopark partnership.',
     url: 'https://www.alxafrica.com/programme/founder-academy/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=alxafrica.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['alx', 'founder-academy', '3-month', 'demo-day', 'alx-ventures'],
     pricing: 'free',
     steps: [
@@ -6454,7 +6454,7 @@ export const SEED_OFFERS: Offer[] = [
       'Technopark Maroc (MITC) since 2001 Casa/Rabat/Tanger: subsidized office/coworking for tech/Green/creative, 1800+ startups, 800+ projects, 250+ companies now. AWS/Azure/Google cloud credits, investor/export support, AUSIM Village stand at Assises Tanger Oct 7-9 (2m² + hosting). Apply at technopark.ma.',
     url: 'https://technopark.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['technopark', 'mitc', 'incubator', 'morocco', 'office'],
     pricing: 'free',
     steps: [
@@ -6509,7 +6509,7 @@ export const SEED_OFFERS: Offer[] = [
       'Réseau Entreprendre Maroc pairs you with an experienced volunteer business leader for free, personalized, long-term mentoring to structure and grow your company. Financing comes as an interest-free honor loan (prêt d\'honneur) - 44M+ MAD granted to date. Track record since 2005: 450 entrepreneurs accompanied, 3,000+ jobs created or saved. Open to Moroccan founders at creation or growth stage; apply online via the deposit-a-request form.',
     url: 'https://www.reseau-entreprendre.org/maroc/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=reseau-entreprendre.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['reseau-entreprendre', 'mentoring', 'pret-honneur', 'morocco', 'funding'],
     pricing: 'free',
     steps: [
@@ -6564,7 +6564,7 @@ export const SEED_OFFERS: Offer[] = [
       '212 Founders by CDG Invest - Morocco main VC pre-seed: $50k-$200k for Moroccan seed startups + 18 months incubation, office, mentoring, bridge loan. The reference for Moroccan seed funding.',
     url: 'https://www.cdginvest.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=212founders.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['212-founders', 'cdg-invest', 'pre-seed', 'morocco', 'bf-loan'],
     pricing: 'free',
     steps: [
@@ -6619,7 +6619,7 @@ export const SEED_OFFERS: Offer[] = [
       'UM6P Ventures (UM6P, Ben Guerir): deeptech lab access, prototyping, AgriTech/CleanTech investors, affiliated with Mohammed VI Polytechnic. For lab-heavy startups.',
     url: 'https://www.um6p.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=um6p.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['um6p', 'deeptech', 'lab', 'agritech', 'ben-guerir'],
     pricing: 'free',
     steps: [
@@ -6674,7 +6674,7 @@ export const SEED_OFFERS: Offer[] = [
       'Impact Lab Marrakech: connects social enterprises to impact investors and international development funds. For social/environmental startups.',
     url: 'https://www.impactlab.africa/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=impactlab.africa&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['impact-lab', 'social', 'impact-investors', 'marrakech', 'development-funds'],
     pricing: 'free',
     steps: [
@@ -6729,7 +6729,7 @@ export const SEED_OFFERS: Offer[] = [
       'Government Intelaka (1.2M MAD loan with guarantee via banks) + Forsa (100k MAD grant via forsa.ma) for any Moroccan with an idea. No tech filter, open to all sectors. Apply via bank list (Intelaka) and forsa.ma portal.',
     url: 'https://www.forsa.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=forsa.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['intelaka', 'forsa', 'government', 'morocco', 'grant', 'loan'],
     pricing: 'free',
     steps: [
@@ -6784,7 +6784,7 @@ export const SEED_OFFERS: Offer[] = [
       'Academia Raqmya (الأكاديمية الرقمية) is Morocco\'s national inclusive e-learning platform, built by the Digital Development Agency (ADD) under the Ministry of Digital Transition. 100% free courses in AI, cybersecurity, data, development, digital marketing and administration for the general public, civil servants, and companies (SMEs & startups), with certificates of completion. Available in Arabic and French, with iOS/Android apps.',
     url: 'https://academiaraqmya.gov.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=academiaraqmya.gov.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['academia-raqmya', 'digital-academy', 'morocco', 'free-training', 'add'],
     pricing: 'free',
     steps: [
@@ -6836,7 +6836,7 @@ export const SEED_OFFERS: Offer[] = [
       'Maroc Entrepreneurs is a non-profit network that connects Moroccan entrepreneurs and project holders with mentors, experts, investors, and each other. Members get networking events, pitch practice, experience sharing, and access to a community of founders across Morocco and the diaspora - useful for finding co-founders, first customers, and funding intros.',
     url: 'https://marocentrepreneurs.com/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=marocentrepreneurs.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['maroc-entrepreneurs', 'network', 'founders', 'mentors', 'morocco'],
     pricing: 'free',
     steps: [
@@ -6888,7 +6888,7 @@ export const SEED_OFFERS: Offer[] = [
       'F6S is the platform where founders apply to thousands of startup programs: accelerators, grants, competitions, free credits (AWS, Google, Microsoft…) and investor matching - including many programs open to Moroccan and MENA founders. Create one free founder profile and apply to multiple programs without re-filling your deck each time. Also useful to discover which international programs are currently accepting applications.',
     url: 'https://f6s.com',
     logoUrl: 'https://www.google.com/s2/favicons?domain=f6s.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['f6s', 'grants', 'accelerators', 'credits', 'startups'],
     pricing: 'free',
     steps: [
@@ -6943,7 +6943,7 @@ export const SEED_OFFERS: Offer[] = [
       'TechnoVentures is deployed by Technopark Morocco under its Startup Venture Building offer. The 7-month program targets innovative Moroccan tech startups that already have a POC or MVP and want to accelerate productization, market entry, and scale-up. Founders get structured venture-building support - workshops, mentoring, and access to the Technopark ecosystem - to turn an early prototype into a fundable, growing company.',
     url: 'https://www.start-up.ma/programmes-pour-startups/technoventures/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=technopark.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['technoventures', 'technopark', 'acceleration', 'morocco', 'mvp'],
     pricing: 'free',
     steps: [
@@ -6998,7 +6998,7 @@ export const SEED_OFFERS: Offer[] = [
       'Sport Arena Challenge is a two-day hackathon dedicated to sport-tech, designed to spark innovation and entrepreneurship among young people. Teams move from ideation through hands-on workshops and mentorship to concrete working solutions, pitching at the end of the weekend. Open to students and young professionals interested in the intersection of sports and technology.',
     url: 'https://www.start-up.ma/programmes-pour-startups/sport-arena-challenge/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=sup2i.ac&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['sportech', 'hackathon', 'morocco', 'youth', 'competition'],
     pricing: 'free',
     steps: [
@@ -7053,7 +7053,7 @@ export const SEED_OFFERS: Offer[] = [
       'A bundle of recurring grant programs for women founders you can apply to from Morocco: the Amber Grant (prestigious monthly + annual grant for women-owned businesses), the WomensNet Startup Grant (monthly funding for early-stage women entrepreneurs), Galaxy Grants (fast grants for women & minority founders), the Breakthrough Grant ($5,000 for one ambitious woman entrepreneur), and the IFW Universal Funding application (apply once, get matched with funding, scholarships and mentorship opportunities year-round). Grants are non-dilutive - you keep 100% of your company.',
     url: 'https://www.start-up.ma/programmes-pour-startups/amber-grant-pour-les-femmes/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=ambergrantsforwomen.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['grants', 'women-founders', 'funding', 'non-dilutive', 'startups'],
     pricing: 'free',
     steps: [
@@ -8021,7 +8021,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `A grant aimed at supporting and propelling local businesses led by minority or underrepresented entrepreneurs, providing crucial startup capital to accelerate growth and strengthen community impact.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/the-changing-the-game-grant/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=stanley1913.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["grants", "minority-founders", "funding", "non-dilutive"],
     pricing: 'free',
     steps: [
@@ -8046,7 +8046,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `A community funding initiative awarding a $5,000 grant to one ambitious woman entrepreneur to overcome the capital gap, take her business to the next level, and turn potential into concrete success.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/the-breakthrough-grant-volume-iii/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=heragenda.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["grants", "women-founders", "funding", "non-dilutive"],
     pricing: 'free',
     steps: [
@@ -8071,7 +8071,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `A competition and acceleration program for ambitious entrepreneurs and project holders, designed to launch the future figures of entrepreneurship through mentorship, visibility, and funding opportunities.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/les-nouveaux-boss/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=tv5monde.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["competition", "mentorship", "funding", "africa"],
     pricing: 'free',
     steps: [
@@ -8096,7 +8096,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `RAB'HACKS is an intensive 48-hour hackathon for students and project holders, designed to spark innovation and entrepreneurship through hands-on development of tech solutions addressing major contemporary challenges.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/rabhacks/',
     logoUrl: 'https://www.start-up.ma/wp-content/uploads/2026/06/RABHACKS.png',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["hackathon", "students", "competition", "morocco"],
     pricing: 'free',
     steps: [
@@ -8121,7 +8121,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `The Startup World Cup is a major global competition organized by Pegasus Tech Ventures, connecting innovation ecosystems across 100+ regional conferences and offering finalists unique international visibility and a chance at a $1M investment prize.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/startup-world-cup/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=startupworldcup.io&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["competition", "pitch", "venture-capital", "global"],
     pricing: 'free',
     steps: [
@@ -8146,7 +8146,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `An annual regional competition that rewards, funds, and showcases the best investment projects, startups, and innovative entrepreneurial initiatives driving the economy and job creation in Morocco's Souss-Massa region.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/souss-massa-investment-awards/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=agadirinvest.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["competition", "awards", "morocco", "funding"],
     pricing: 'free',
     steps: [
@@ -8171,7 +8171,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `A national competition and support program that trains and rewards young Moroccan entrepreneurs developing innovative, sustainable solutions to the major challenges of climate change and adaptation.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/climate-and-adaptation-award/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=undp.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["competition", "climate", "sustainability", "morocco"],
     pricing: 'free',
     steps: [
@@ -8196,7 +8196,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `The Science Road 2026 is a streamlined acceleration platform offering two tracks: a Pre-Seed track for solution validation and a Seed track for scaling technology startups and DeepTech projects.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/open-startup-the-science-road-2026/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=open-startup.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["acceleration", "pre-seed", "seed", "deeptech"],
     pricing: 'free',
     steps: [
@@ -8221,7 +8221,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `An intensive training camp designed to support and propel women entrepreneurs in Morocco through hands-on workshops, expert sessions, and targeted mentorship.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/women-in-tech-morocco-entrepreneurship-camp/',
     logoUrl: 'https://www.start-up.ma/wp-content/uploads/2026/06/WIT-h.png',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["bootcamp", "women-founders", "morocco", "mentorship"],
     pricing: 'free',
     steps: [
@@ -8246,7 +8246,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `CAP Innovation is an international support and seed program initiated by the OIF for young francophone entrepreneurs aged 18-34, propelling innovative projects with high social and environmental impact through mentorship and financial grants.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/cap-innovation/',
     logoUrl: 'https://www.francophonie.org/sites/default/files/favicon-64.png',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["incubation", "francophone", "grants", "social-impact"],
     pricing: 'free',
     steps: [
@@ -8271,7 +8271,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `StartUp Maroc 2030 is an excellence incubation program for Tech and Data startups in Morocco, offering intensive support, international connections, and significant non-dilutive funding to bring innovations to market faster.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/startup-maroc-2030/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=startupmaroc.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["incubation", "non-dilutive", "tech", "morocco"],
     pricing: 'free',
     steps: [
@@ -8296,7 +8296,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `The UNICEF Venture Fund invests in startups from developing countries, backing cutting-edge open-source technologies with strong potential for positive impact on children and their communities.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/unicef-venture-fund/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=unicef.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["fund", "open-source", "social-impact", "africa"],
     pricing: 'free',
     steps: [
@@ -8321,7 +8321,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `AU-Startups Dealflow is an ongoing matchmaking platform where high-potential African startups can submit their dossier to be presented to a network of qualified investors (business angels and VC funds) to facilitate fundraising.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/au-startups-dealflow/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=au-startups.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["fundraising", "investors", "africa", "dealflow"],
     pricing: 'free',
     steps: [
@@ -8346,7 +8346,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `A pan-African accelerator designed to support the growth of local high-potential businesses. Initially focused on strengthening health systems, the program has expanded to back innovative solutions for resilient communities.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/the-home-grown-solutions-accelerator/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=nepad.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["accelerator", "healthtech", "africa", "social-impact"],
     pricing: 'free',
     steps: [
@@ -8371,7 +8371,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `The Africa Fundraising Incubator (AFI) is a support and funding program for African NGOs, community organizations, and social enterprises. It combines online training, a fundraising challenge, and an intensive workshop to grow sustainable impact.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/africa-fundraising-incubator-afi/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=newafricafund.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ["ngo", "fundraising", "training", "africa"],
     pricing: 'free',
     steps: [
@@ -8762,7 +8762,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `INNOV IDEA by R&D Maroc (Innov Invest fund) finances Moroccan inventors and startups under 2 years old through ideation, creation, and launch: up to 100,000 DH solo or 200,000 DH for teams. Covers prototyping, technical studies, business plan, training, and IP protection (patents, trademarks). 500+ projects received, dozens already funded and converted into operating startups.`,
     url: 'https://rdmaroc.com/pages/programme-innov-idea',
     logoUrl: 'https://www.google.com/s2/favicons?domain=rdmaroc.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['grants', 'funding', 'non-dilutive', 'morocco', 'prototype', 'startup'],
     pricing: 'free',
     steps: [
@@ -8813,7 +8813,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `1000 Fikra (Afriquia) turns any idea into a business - free, no diploma, no experience, and no capital required. Practical Rebel Business School workshops, step-by-step mentorship across all 12 regions of Morocco, and up to 200,000 DH in financing once your project is validated. Solo or team applications, one condition: have an idea.`,
     url: 'https://www.1000fikra.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=1000fikra.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['entrepreneurship', 'training', 'funding', 'morocco', 'afriquia', 'startup'],
     pricing: 'free',
     steps: [
@@ -8864,7 +8864,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `The Forge (UM6P, Benguerir) is a 9-month residency-first venture program for founders thinking globally from day one. Validation audit, PMF engine, acceleration, then Demo Day: 200+ specialized labs, exposure to 80+ global VCs and angels, embedded experts working as an extension of your team, and capital readiness built in from the start. Applications open for the 2026 cohort via StartGate.`,
     url: 'https://theforge.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=theforge.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['acceleration', 'residency', 'um6p', 'morocco', 'vc', 'startup'],
     pricing: 'free',
     steps: [
@@ -8915,7 +8915,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `FinTech Booster by the Morocco Fintech Center with UM6P StartGate accelerates Moroccan fintech startups with mentoring, workshops, bank and investor connections, and fundraising preparation across 3 tracks: Go-To-Market, Growth, and Scale. Apply for the 2026 edition through the StartGate dashboard.`,
     url: 'https://dashboard.startgate.ma/challenges/fintech-booster-2026',
     logoUrl: '/logos/fintech-booster.png',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['fintech', 'acceleration', 'um6p', 'morocco', 'fundraising'],
     pricing: 'free',
     steps: [
@@ -8966,7 +8966,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Iqlaa by Africalia with Fondation Hiba and the Institut Français (EU co-funded) accelerates Moroccan cultural and creative enterprises: training, coaching, network, 30,000-50,000 MAD grants plus growth support up to 450,000 MAD. For 18-35 founders with ICC companies based in Morocco. Apply via the official form.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/iqlaa-accelerateur-entreprises-culturelles-creatives-maroc/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=africalia.be&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['creative', 'culture', 'acceleration', 'grants', 'morocco', 'youth'],
     pricing: 'free',
     steps: [
@@ -9019,7 +9019,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `ClimateLaunchpad Morocco is the national round of the world's largest cleantech competition: Moroccan climate startups compete locally, winners advance to the Africa final with coaching, visibility, and investor access. Clean energy, circular economy, mobility, food, and adaptation solutions welcome.`,
     url: 'https://climatelaunchpad.org/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=climatelaunchpad.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['cleantech', 'climate', 'competition', 'morocco', 'startup'],
     pricing: 'free',
     steps: [
@@ -9070,7 +9070,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `CIH Startup is CIH Bank's offer for labelled startups (StartupMaroc, MassChallenge): investment credit up to 2,000,000 MAD backed by the Tamwilcom guarantee. Built for startups that need bank financing alongside equity - ask your CIH advisor with your label and business plan.`,
     url: 'https://www.cihbank.ma/',
     logoUrl: 'https://www.cihbank.ma/sites/default/files/favicon.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['bank', 'credit', 'funding', 'tamwilcom', 'morocco', 'startup'],
     pricing: 'free',
     steps: [
@@ -9121,7 +9121,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `MassChallenge Morocco brings the global zero-equity accelerator to Casablanca: a 4-month program with intensive mentoring, corporate connections, and access to a worldwide investor network - without taking any shares in your startup. For high-potential Moroccan tech startups ready to scale.`,
     url: 'https://masschallenge.org/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=masschallenge.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['acceleration', 'global', 'zero-equity', 'morocco', 'investors'],
     pricing: 'free',
     steps: [
@@ -9172,7 +9172,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `GreenUp Morocco by the Ministry of Energy Transition with RES4Africa, Enel Foundation, and UM6P incubates early-stage energy startups: expert workshops, 1-on-1 coaching, coworking and Fablab at the Benguerir campus, investor bootcamps, and a Demo Day. For 18-39 entrepreneurs with a prototype in renewables, storage, e-mobility, circular economy, or clean cooking - startup must target Morocco.`,
     url: 'https://res4africa.org/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=res4africa.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['cleantech', 'energy', 'incubation', 'um6p', 'morocco', 'demo-day'],
     pricing: 'free',
     steps: [
@@ -9223,7 +9223,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `The African Youth Climate Hub by the Mohammed VI Foundation for Environmental Protection incubates youth-led climate solutions across Africa: 6-month journey of ideation, market validation, and investor readiness, hosted with UM6P. 10 projects per cohort from 8+ countries, plus the learning center, network, and dashboard on youthclimatehub.org. 4th edition running with the UN.`,
     url: 'https://youthclimatehub.org/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=youthclimatehub.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['climate', 'youth', 'incubation', 'africa', 'morocco', 'un'],
     pricing: 'free',
     steps: [
@@ -9274,7 +9274,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `1337 is UM6P's tuition-free peer-learning coding school (Benguerir & Khouribga, no teachers, no classes - learn by building). Technical projects born at 1337 get incubation support and a direct path to UM6P Ventures seed funding (500k-5M MAD). Admission through the online test and Piscine bootcamp - no diploma required.`,
     url: 'https://1337.ma/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=um6p.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['coding-school', 'um6p', 'peer-learning', 'incubation', 'morocco'],
     pricing: 'free',
     steps: [
@@ -9325,7 +9325,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Join the world's biggest hackathon from Ben Guerir: NASA Space Apps Challenge 2026 invites students, developers, and makers to solve real-world problems with NASA open data - teamwork, coding, and innovation over one weekend. Deadline September 30, 2026. Found via Civica.`,
     url: 'https://www.civica.ma/opportunities/6a9b730e1f4cbf4c89d50082/thdy-ns-lttbyqt-lfd-bn-jryr-nasa-space-apps-challenge-2026',
     logoUrl: 'https://www.google.com/s2/favicons?domain=nasa.gov&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['hackathon', 'nasa', 'space', 'open-data', 'morocco'],
     pricing: 'free',
     steps: [
@@ -9376,7 +9376,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Virtual hackathon for students to contribute to MOSIP, the globally recognised digital public good for national digital ID systems (adopted in 31 countries). Learn from industry experts, propose solutions, and ship open-source code. Deadline September 13, 2026. Found via Civica.`,
     url: 'https://www.civica.ma/opportunities/6a9872541f4cbf4c89cb19a9/mosip-decode-2026',
     logoUrl: 'https://www.google.com/s2/favicons?domain=mosip.io&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['hackathon', 'open-source', 'digital-id', 'students', 'online'],
     pricing: 'free',
     steps: [
@@ -9427,7 +9427,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `The Arab Youth Center with the UAE Space Agency, National Space Academy, and Space42 opens registration for the Arab Youth Space Hackathon 2026: innovate with space and Earth-observation data. Deadline September 25, 2026, online. Found via Civica.`,
     url: 'https://www.civica.ma/opportunities/6a8f4275f90c58ffb1c7888a/hkthwn-lfd-llshbb-laarby-2026',
     logoUrl: 'https://www.google.com/s2/favicons?domain=arabyouthcenter.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['hackathon', 'space', 'youth', 'arab', 'online'],
     pricing: 'free',
     steps: [
@@ -9478,7 +9478,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `EuroMedAI opens the Responsible AI Cup 2.0 for small companies and startups developing or using AI systems across the Middle East and North Africa. Compete, get evaluated on responsible-AI practices, and gain regional visibility. Deadline September 10, 2026. Found via Civica.`,
     url: 'https://www.civica.ma/opportunities/6a8d7ff6f90c58ffb1c0e8df/aaln-msbq-euromedai-responsible-ai-cup-2.0',
     logoUrl: 'https://www.google.com/s2/favicons?domain=egyptinnovate.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['ai', 'competition', 'sme', 'startup', 'mena'],
     pricing: 'free',
     steps: [
@@ -9529,7 +9529,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Rab'Hacks 2026 supports students, graduates, entrepreneurs, and companies across Africa and Europe with training, coaching, and prototyping for impact projects - ending in a Rabat final with financial prizes. Open call for talents listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/69889ee1731e34082165b6c6/rab-hacks-2026-appel-aux-talents',
     logoUrl: 'https://www.start-up.ma/wp-content/uploads/2026/06/RABHACKS.png',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['hackathon', 'entrepreneurship', 'africa', 'rabat', 'prizes'],
     pricing: 'free',
     steps: [
@@ -9580,7 +9580,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Under the Huawei Morocco × Ministry of Youth agreement: join the Huawei Developer Competition 2025, build with AI, and win $1,000-$5,000 prizes. Every Moroccan participant gets $100-$200 vouchers. Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/68e50a8353ae1796858efbca/huawei-developer-competition-2025',
     logoUrl: 'https://www.google.com/s2/favicons?domain=huawei.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['ai', 'competition', 'huawei', 'morocco', 'prizes', 'students'],
     pricing: 'free',
     steps: [
@@ -9631,7 +9631,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Global online competition for entrepreneurs with an idea, prototype, or running startup. Compete for significant equity-free cash prizes; top-10 finalists get coaching, mentoring, and pitch workshops. Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/68def2bb8f69b693c83beaaf/concours-de-pitch-prime-prime-pitch-competition-ppc-2025',
     logoUrl: 'https://www.google.com/s2/favicons?domain=bmprimecapital.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['pitch', 'competition', 'cash-prizes', 'equity-free', 'online', 'startup'],
     pricing: 'free',
     steps: [
@@ -9682,7 +9682,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Huge African hackathon to build innovative Web3 solutions on the Hedera network: big grants, training, professional certificates, and access to expert networks to boost digital innovation across Africa. Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/68b62ea400a47483e83a8a08/hedera-africa-hackathon-2025-world-s-largest-web3-hackathon',
     logoUrl: 'https://www.google.com/s2/favicons?domain=hedera.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['web3', 'hackathon', 'hedera', 'africa', 'grants'],
     pricing: 'free',
     steps: [
@@ -9733,7 +9733,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `START Hack, Europe's big entrepreneurial hackathon linked to St. Gallen: form teams, join talks and tech/business workshops, and learn entrepreneurship, creative thinking, and tech innovation hands-on. Listed on Civica - check the tour stop for Moroccans.`,
     url: 'https://www.civica.ma/opportunities/68a222b627ac831c57b9a5f0/start-hack-tour-st.-gallen',
     logoUrl: 'https://www.google.com/s2/favicons?domain=startglobal.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['hackathon', 'entrepreneurship', 'europe', 'startup', 'students'],
     pricing: 'free',
     steps: [
@@ -9784,7 +9784,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Arkx Talent Factory's Rabat Open Day for Bac+5 graduates eyeing a Salesforce Developer Consultant career: orientation, bootcamp presentation, and enrollment into the 100% state-funded program (training, mentoring, job insertion). Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/688415d290bebe70fd8b0711/open-day-bootcamp-salesforce-developer-consultant-organise-par-arkx-talent-factory',
     logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['bootcamp', 'salesforce', 'rabat', 'employment', 'funded'],
     pricing: 'free',
     steps: [
@@ -9835,7 +9835,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `ANAPEC with Cisco NetAcad runs a free 2-month summer program training Moroccan students in AI, programming, cybersecurity, and networking - hands-on NetAcad platform practice plus an official Cisco certificate on completion. Online. Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/688363ae90bebe70fd88f6a7/brnmj-netacad-summer-camp-2025-tkwyn-mjny-fy-ldhk-lstnaay-wl-mn-lsybrny',
     logoUrl: 'https://icons.duckduckgo.com/ip3/netacad.com.ico',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['bootcamp', 'ai', 'cybersecurity', 'cisco', 'certificate', 'free'],
     pricing: 'free',
     steps: [
@@ -9886,7 +9886,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `3rd Act by SB3S with Tamwilcom (Innov Invest fund) backs Moroccan pre-acceleration startups under 5 years old: tailored mentoring, practical workshops, expert network, and up to 750,000 MAD in honor loan plus systematic preparation for a first VC round. AgriTech, HealthTech, CleanTech, Industry 4.0 and more.`,
     url: 'https://www.sb3s.com/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=sb3s.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['acceleration', 'tamwilcom', 'honor-loan', 'morocco', 'vc-ready'],
     pricing: 'free',
     steps: [
@@ -9937,7 +9937,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Women in Cleantech Morocco empowers women innovators in Drâa-Tafilalet, Souss-Massa, and Fès-Meknès to turn early climate ideas into impactful cleantech startups: training, mentorship, and climate-ecosystem access via the ClimateLaunchpad application process. Join a community of Moroccan female founders.`,
     url: 'https://climatelaunchpad.org/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=climatelaunchpad.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['cleantech', 'women', 'climate', 'morocco', 'startup'],
     pricing: 'free',
     steps: [
@@ -9988,7 +9988,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `OSTX Morocco by Open Startup with Technopark turns raw ideas into validated startups in 4 weeks: 2-day intensive bootcamp plus 3 weeks of assignments and mentorship, final pitch, and certification. For Moroccan youth 18-35 - students, graduates, employed or not. Hybrid format.`,
     url: 'https://open-startup.org',
     logoUrl: 'https://www.google.com/s2/favicons?domain=open-startup.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['ideation', 'bootcamp', 'technopark', 'youth', 'morocco'],
     pricing: 'free',
     steps: [
@@ -10039,7 +10039,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Hack'Days 2026 by the Euromed Innovation Center (Euro-Mediterranean University of Fes) supports founders and startup teams in Fès-Meknès, Drâa-Tafilalet, and Oriental: selected teams join a bootcamp to prototype, validate, and pitch high-potential tech solutions, with mentoring and post-bootcamp support for emerging startups.`,
     url: 'https://ueuromed.org',
     logoUrl: 'https://www.google.com/s2/favicons?domain=ueuromed.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['hackathon', 'bootcamp', 'fes', 'startup', 'prototype'],
     pricing: 'free',
     steps: [
@@ -10090,7 +10090,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Orange Summer Challenge 2026 pairs startups with young talent to build AI solutions for real Orange business units over 12 weeks (July-September): technical and business mentoring, testing with Orange teams, a path to market, and a possible Orange Fab acceleration afterwards. Run by Orange Digital Center Middle East & Africa.`,
     url: 'https://osc.gos.orange.com/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=orange.com&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['ai', 'orange', 'startup', 'accelerator', '12-weeks'],
     pricing: 'free',
     steps: [
@@ -10141,7 +10141,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `InnovAction 2026 by JCI Tétouan is the northern entrepreneurship competition: young founders and project holders pitch before a jury and the local ecosystem, closing a full program of training and ecosystem events. Visibility, professional network, and investor connections in the Tangier-Tétouan region.`,
     url: 'https://www.civica.ma/opportunities/6a34179263f3ee6bc7578df7/2-edition-de-la-competition-d-entrepreneuriat-innovaction-2026',
     logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['pitch', 'tetouan', 'jci', 'entrepreneurship', 'network'],
     pricing: 'free',
     steps: [
@@ -10192,7 +10192,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `For the 10th anniversary of Casablanca Smart City (under royal patronage): 25 innovative startups win a dedicated booth in the tech village plus maximum visibility at the year's top tech event. Organized by Casablanca Events & Animation with the City of Casablanca, Hack & Pitch, and La Startup Station. Limited seats.`,
     url: 'https://www.civica.ma/opportunities/6a1f38020d4b4b9c7d8b0b7f/nd-llshrkt-lnshy-lmbtkr-dfaa-bmshrwaak-l~-lsdr-fy-hdth-casablanca-smart-city',
     logoUrl: 'https://www.google.com/s2/favicons?domain=civica.ma&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['smart-city', 'casablanca', 'showcase', 'booth', 'startup'],
     pricing: 'free',
     steps: [
@@ -10243,7 +10243,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Technovation Girls Morocco is part of the global Technovation Challenge empowering girls to become tech innovators: teams of girls 12-18 identify a community problem, build a mobile-app solution, and learn entrepreneurship - mentored by industry professionals through app design, business plan, and final pitch. Rabat hybrid format.`,
     url: 'https://www.technovation.org/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=technovation.org&sz=64',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['girls', 'apps', 'entrepreneurship', 'mentorship', 'global'],
     pricing: 'free',
     steps: [
@@ -10294,7 +10294,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `MRTB START is a StartGate incubation program dedicated to retail-tech startups: structured support to build, validate, and scale commerce solutions. Applications open now on the StartGate dashboard - Moroccan and African retail innovators welcome.`,
     url: 'https://dashboard.startgate.ma/challenges/mrtb-start',
     logoUrl: '/logos/mrtb-start.png',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['retail-tech', 'incubation', 'startgate', 'morocco'],
     pricing: 'free',
     steps: [
@@ -10345,7 +10345,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `The Agri-Food Tech Incubator by UM6P and IAV Hassan II backs high-potential innovators in smart agriculture, animal production, biotech, circular economy, and waste valorization: tailored mentorship, technical capacity building, fundraising support, networking, and media visibility under the Generation Green 2020-2030 strategy. 5th cohort open now.`,
     url: 'https://dashboard.startgate.ma/challenges/agri-food-tech-5th-cohort',
     logoUrl: '/logos/agri-food-tech.png',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['agritech', 'incubation', 'um6p', 'generation-green', 'morocco'],
     pricing: 'free',
     steps: [
@@ -10447,7 +10447,7 @@ export const SEED_OFFERS: Offer[] = [
     description: `Tamwilcom backs Moroccan very small enterprises with simple guarantee products: Damane Express (fast treasury/investment guarantee), Damane Intelak (creation support, up to 80% of the loan, no commission), and Damane Intelak Al Moustatmir Al Qarawi (rural productive projects and small farms). Open to Moroccan-law TPEs in all sectors.`,
     url: 'https://www.tamwilcom.ma/nos-solutions/tres-petites-entreprises',
     logoUrl: 'https://www.tamwilcom.ma/sites/default/files/sidebar_logo.png',
-    category: 'competition',
+    category: 'forstartups',
     tags: ['tamwilcom', 'guarantee', 'tpe', 'funding', 'morocco'],
     pricing: 'free',
     steps: [

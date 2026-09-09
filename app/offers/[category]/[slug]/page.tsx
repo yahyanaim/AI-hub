@@ -51,6 +51,11 @@ export default async function OfferDetailPage({
   params: { category: string; slug: string }
 }) {
   const { category, slug } = params
+  // Renamed category: competition → forstartups (keep old links working)
+  if (category === 'competition') {
+    const moved = SEED_OFFERS.find((o) => o.slug === slug)
+    redirect(moved ? `/offers/forstartups/${moved.slug}` : '/offers/forstartups')
+  }
   if (!OFFER_CATEGORY_LABELS[category as keyof typeof OFFER_CATEGORY_LABELS]) {
     notFound()
   }

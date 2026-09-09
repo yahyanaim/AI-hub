@@ -50,6 +50,11 @@ export async function generateMetadata({ params }: { params: { category: string 
 export default function OfferCategoryPage({ params }: { params: { category: string } }) {
   const { category } = params
 
+  // Renamed category: competition → forstartups (keep old links working)
+  if (category === 'competition') {
+    redirect('/offers/forstartups')
+  }
+
   const label = OFFER_CATEGORY_LABELS[category as keyof typeof OFFER_CATEGORY_LABELS]
   if (!label) {
     const legacy = SEED_OFFERS.find((o) => o.slug === category)
