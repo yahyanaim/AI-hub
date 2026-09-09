@@ -70,7 +70,7 @@ export function colorFromString(str: string): string {
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash)
   }
-  return colors[Math.abs(hash) % colors.length]
+  return colors[Math.abs(hash) % colors.length] ?? colors[0]!
 }
 
 // Derive a stable 1-decimal star rating (4.0-5.0) from upvotes/bookmarks

@@ -268,6 +268,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     Set<string>
   > | null>(null)
 
+  // Synchronous mirror of state for submit callbacks: useState updaters run
+  // during render (not synchronously inside setState), so values computed
+  // inside an updater (unique slugs, submitter id) can't be returned. Reading
+  // the ref gives submit functions the latest committed state deterministically.
+  const stateRef = useRef(state)
+  stateRef.current = state
+
   // Hydrate: fresh seed data from code + user deltas from localStorage on mount
   useEffect(() => {
     const load = async () => {
@@ -572,9 +579,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (logoUrl) assertHttpUrl(logoUrl, 'logo URL')
     const slugBase = slugify(input.name) || `tool-${id.slice(0, 6)}`
     const now = new Date().toISOString()
-    const tool: Tool = {
+    // Computed synchronously from the ref mirror (see stateRef): the setState
+    // updater below must stay pure because its return value can't be read back.
+    const prev = stateRef.current
+    const submitter = prev.currentUserId
+      ? prev.users.find((u) => u.id === prev.currentUserId)
+      : undefined
+    const finalTool: Tool = {
       id,
-      slug: slugBase,
+      slug: uniqueSlug(slugBase, new Set(prev.tools.map((t) => t.slug))),
       name: input.name,
       tagline: input.tagline,
       description: input.description,
@@ -585,36 +598,36 @@ export function AppProvider({ children }: { children: ReactNode }) {
       pricing: input.pricing,
       upvotes: 0,
       bookmarks: 0,
-      submittedBy: '',
+      submittedBy: submitter?.id ?? '',
       featured: false,
       createdAt: now,
       updatedAt: now,
     }
-    let result = tool
-    setState((prev) => {
-      const submitter = prev.currentUserId
-        ? prev.users.find((u) => u.id === prev.currentUserId)
-        : undefined
-      const slug = uniqueSlug(slugBase, new Set(prev.tools.map((t) => t.slug)))
-      const finalTool = { ...tool, slug, submittedBy: submitter?.id ?? '' }
-      result = finalTool
-      const users = submitter
-        ? prev.users.map((u) =>
+    setState((p) => ({
+      ...p,
+      tools: [finalTool, ...p.tools],
+      users: submitter
+        ? p.users.map((u) =>
             u.id === submitter.id
               ? { ...u, submittedTools: [...u.submittedTools, finalTool.id] }
               : u
           )
-        : prev.users
-      return { ...prev, tools: [finalTool, ...prev.tools], users }
-    })
-    return result
+        : p.users,
+    }))
+    return finalTool
   }, [])
 
   const submitPrompt = useCallback((input: SubmitPromptInput): Prompt => {
     const id = uuid()
     const slug = slugify(input.title) || `prompt-${id.slice(0, 6)}`
     const now = new Date().toISOString()
-    const prompt: Prompt = {
+    // See submitTool: submitter resolved synchronously so the returned
+    // object matches what's stored.
+    const prev = stateRef.current
+    const submitter = prev.currentUserId
+      ? prev.users.find((u) => u.id === prev.currentUserId)
+      : undefined
+    const final: Prompt = {
       id,
       slug,
       title: input.title,
@@ -625,28 +638,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
       tags: input.tags,
       upvotes: 0,
       copies: 0,
-      submittedBy: '',
+      submittedBy: submitter?.id ?? '',
       featured: false,
       variables: input.variables,
       exampleOutput: input.exampleOutput,
       createdAt: now,
       updatedAt: now,
     }
-    setState((prev) => {
-      const submitter = prev.currentUserId
-        ? prev.users.find((u) => u.id === prev.currentUserId)
-        : undefined
-      const final = { ...prompt, submittedBy: submitter?.id ?? '' }
-      const users = submitter
-        ? prev.users.map((u) =>
+    setState((p) => ({
+      ...p,
+      prompts: [final, ...p.prompts],
+      users: submitter
+        ? p.users.map((u) =>
             u.id === submitter.id
               ? { ...u, submittedPrompts: [...(u.submittedPrompts ?? []), final.id] }
               : u
           )
-        : prev.users
-      return { ...prev, prompts: [final, ...prev.prompts], users }
-    })
-    return prompt
+        : p.users,
+    }))
+    return final
   }, [])
 
   const submitDevTool = useCallback((input: SubmitDevToolInput): DevTool => {
@@ -656,9 +666,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (logoUrl) assertHttpUrl(logoUrl, 'logo URL')
     const slugBase = slugify(input.name) || `devtool-${id.slice(0, 6)}`
     const now = new Date().toISOString()
-    const devTool: DevTool = {
+    // See submitTool: computed synchronously from the ref mirror.
+    const prev = stateRef.current
+    const submitter = prev.currentUserId
+      ? prev.users.find((u) => u.id === prev.currentUserId)
+      : undefined
+    const final: DevTool = {
       id,
-      slug: slugBase,
+      slug: uniqueSlug(slugBase, new Set(prev.devTools.map((d) => d.slug))),
       name: input.name,
       tagline: input.tagline,
       description: input.description,
@@ -669,29 +684,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
       pricing: input.pricing,
       upvotes: 0,
       bookmarks: 0,
-      submittedBy: '',
+      submittedBy: submitter?.id ?? '',
       featured: false,
       createdAt: now,
       updatedAt: now,
     }
-    let result = devTool
-    setState((prev) => {
-      const submitter = prev.currentUserId
-        ? prev.users.find((u) => u.id === prev.currentUserId)
-        : undefined
-      const slug = uniqueSlug(slugBase, new Set(prev.devTools.map((d) => d.slug)))
-      const final = { ...devTool, slug, submittedBy: submitter?.id ?? '' }
-      result = final
-      const users = submitter
-        ? prev.users.map((u) =>
+    setState((p) => ({
+      ...p,
+      devTools: [final, ...p.devTools],
+      users: submitter
+        ? p.users.map((u) =>
             u.id === submitter.id
               ? { ...u, submittedDevTools: [...u.submittedDevTools, final.id] }
               : u
           )
-        : prev.users
-      return { ...prev, devTools: [final, ...prev.devTools], users }
-    })
-    return result
+        : p.users,
+    }))
+    return final
   }, [])
 
   const submitRepo = useCallback((input: SubmitRepoInput): Repo => {
@@ -701,9 +710,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (logoUrl) assertHttpUrl(logoUrl, 'logo URL')
     const slugBase = slugify(input.name) || `repo-${id.slice(0, 6)}`
     const now = new Date().toISOString()
-    const repo: Repo = {
+    // See submitTool: computed synchronously from the ref mirror.
+    const prev = stateRef.current
+    const submitter = prev.currentUserId
+      ? prev.users.find((u) => u.id === prev.currentUserId)
+      : undefined
+    const final: Repo = {
       id,
-      slug: slugBase,
+      slug: uniqueSlug(slugBase, new Set(prev.repos.map((r) => r.slug))),
       name: input.name,
       tagline: input.tagline,
       description: input.description,
@@ -714,29 +728,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
       pricing: input.pricing,
       upvotes: 0,
       bookmarks: 0,
-      submittedBy: '',
+      submittedBy: submitter?.id ?? '',
       featured: false,
       createdAt: now,
       updatedAt: now,
     }
-    let result = repo
-    setState((prev) => {
-      const submitter = prev.currentUserId
-        ? prev.users.find((u) => u.id === prev.currentUserId)
-        : undefined
-      const slug = uniqueSlug(slugBase, new Set(prev.repos.map((r) => r.slug)))
-      const final = { ...repo, slug, submittedBy: submitter?.id ?? '' }
-      result = final
-      const users = submitter
-        ? prev.users.map((u) =>
+    setState((p) => ({
+      ...p,
+      repos: [final, ...p.repos],
+      users: submitter
+        ? p.users.map((u) =>
             u.id === submitter.id
               ? { ...u, submittedRepos: [...u.submittedRepos, final.id] }
               : u
           )
-        : prev.users
-      return { ...prev, repos: [final, ...prev.repos], users }
-    })
-    return result
+        : p.users,
+    }))
+    return final
   }, [])
 
   // ---------------- Delete ----------------

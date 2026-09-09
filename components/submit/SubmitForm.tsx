@@ -109,7 +109,7 @@ export function SubmitForm() {
           return form.url
         }
       })()
-      const pretty = domain.split('.')[0]
+      const pretty = domain.split('.')[0] ?? domain
       set('name', form.name || pretty.charAt(0).toUpperCase() + pretty.slice(1))
       set('logoUrl', `https://www.google.com/s2/favicons?domain=${domain}&sz=128`)
       setFetching(false)
@@ -123,7 +123,7 @@ export function SubmitForm() {
           return form.url
         }
       })()
-      const pretty = domain.split('.')[0]
+      const pretty = domain.split('.')[0] ?? domain
       set('name', form.name || pretty.charAt(0).toUpperCase() + pretty.slice(1))
       set('logoUrl', `https://www.google.com/s2/favicons?domain=${domain}&sz=128`)
       setFetching(false)

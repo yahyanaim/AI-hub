@@ -72,7 +72,7 @@ export function OfferDetail({ slug }: { slug: string }) {
         </div>
 
         <ol className="space-y-4">
-          {(offer.stepsAr && offer.stepsAr.length ? offer.steps.map((_, i) => ({ en: offer.steps[i], ar: offer.stepsAr![i] })) : offer.steps.map(s => ({ en: s, ar: undefined }))).map(({ en, ar }, i) => (
+          {(offer.steps.map((en, i) => ({ en, ar: offer.stepsAr?.[i] }))).map(({ en, ar }, i) => (
             <li
               key={i}
               className="flex gap-4 rounded-lg border border-border bg-muted/50 p-4"
