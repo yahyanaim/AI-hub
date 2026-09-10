@@ -10117,6 +10117,7 @@ export const SEED_OFFERS: Offer[] = [
     bookmarks: 0,
     submittedBy: 'u1',
     featured: true,
+    endsAt: '2026-06-20',
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
     nameAr: 'تحدي أورنج الصيفي 2026 (الذكاء كمسرّع أعمال)',

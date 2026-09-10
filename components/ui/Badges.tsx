@@ -1,4 +1,4 @@
-import { GraduationCap, Timer, CalendarX2 } from 'lucide-react'
+import { GraduationCap, Timer, CalendarX2, Infinity as InfinityIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   PRICING_LABELS,
@@ -101,7 +101,9 @@ export function getOfferUrgency(endsAt: string | undefined, now: number = Date.n
   return null
 }
 
-/** Red "Ended" / amber "Ends in N days" badge for time-sensitive offers. */
+/** Red "Ended" / amber countdown / emerald "Ongoing" badge for offers.
+ *  Dateless (perpetual) offers always show Ongoing, so every offer gets
+ *  exactly one status badge automatically. */
 export function OfferUrgencyBadge({
   endsAt,
   now,
@@ -111,6 +113,17 @@ export function OfferUrgencyBadge({
   now?: number
   className?: string
 }) {
+  if (!endsAt) {
+    return (
+      <span
+        className={cn('inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400', className)}
+        title="This offer is ongoing"
+      >
+        <InfinityIcon className="h-3 w-3" />
+        Ongoing
+      </span>
+    )
+  }
   const urgency = getOfferUrgency(endsAt, now)
   const end = parseOfferEnd(endsAt)
   if (!urgency || end === null) return null
