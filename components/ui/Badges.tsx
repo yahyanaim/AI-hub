@@ -1,4 +1,4 @@
-import { GraduationCap } from 'lucide-react'
+import { GraduationCap, Timer, CalendarX2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   PRICING_LABELS,
@@ -76,6 +76,70 @@ export function RecodedBadge({ className }: { className?: string }) {
     >
       <GraduationCap className="h-3 w-3" />
       Free with ReCoded
+    </span>
+  )
+}
+
+/** Days before the deadline at which an offer counts as ending soon. */
+export const OFFER_ENDING_SOON_DAYS = 7
+
+export type OfferUrgency = 'ended' | 'ending-soon' | null
+
+/** Parse an endsAt value to ms; date-only (YYYY-MM-DD) means end of that day. */
+export function parseOfferEnd(endsAt: string | undefined): number | null {
+  if (!endsAt) return null
+  const end = new Date(/^\d{4}-\d{2}-\d{2}$/.test(endsAt.trim()) ? `${endsAt.trim()}T23:59:59` : endsAt).getTime()
+  return Number.isNaN(end) ? null : end
+}
+
+/** Classify an offer deadline against now (invalid/missing dates → null). */
+export function getOfferUrgency(endsAt: string | undefined, now: number = Date.now()): OfferUrgency {
+  const end = parseOfferEnd(endsAt)
+  if (end === null) return null
+  if (end < now) return 'ended'
+  if (end - now <= OFFER_ENDING_SOON_DAYS * 86400000) return 'ending-soon'
+  return null
+}
+
+/** Red "Ended" / amber "Ends in N days" badge for time-sensitive offers. */
+export function OfferUrgencyBadge({
+  endsAt,
+  now,
+  className,
+}: {
+  endsAt?: string
+  now?: number
+  className?: string
+}) {
+  const urgency = getOfferUrgency(endsAt, now)
+  const end = parseOfferEnd(endsAt)
+  if (!urgency || end === null) return null
+  if (urgency === 'ended') {
+    return (
+      <span
+        className={cn('inline-flex items-center gap-1 rounded-md bg-red-500/10 px-2 py-0.5 text-[11px] font-medium text-red-600 dark:text-red-400', className)}
+        title="This offer has ended"
+      >
+        <CalendarX2 className="h-3 w-3" />
+        Ended
+      </span>
+    )
+  }
+  const current = now ?? Date.now()
+  const atMidnight = (t: number) => {
+    const d = new Date(t)
+    d.setHours(0, 0, 0, 0)
+    return d.getTime()
+  }
+  const calendarDays = Math.round((atMidnight(end) - atMidnight(current)) / 86400000)
+  const label = calendarDays <= 0 ? 'Ends today' : calendarDays === 1 ? 'Ends tomorrow' : `Ends in ${calendarDays} days`
+  return (
+    <span
+      className={cn('inline-flex items-center gap-1 rounded-md bg-amber-500/10 px-2 py-0.5 text-[11px] font-medium text-amber-600 dark:text-amber-400', className)}
+      title={label}
+    >
+      <Timer className="h-3 w-3" />
+      {label}
     </span>
   )
 }

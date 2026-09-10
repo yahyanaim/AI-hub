@@ -5,7 +5,7 @@ import { ExternalLink, ShieldCheck } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
-import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
+import { CategoryBadge, PricingBadge, OfferUrgencyBadge } from '@/components/ui/Badges'
 import { UpvoteButton } from '@/components/interactive/UpvoteButton'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
 import { HoverTranslate } from '@/components/ui/HoverTranslate'
@@ -39,6 +39,7 @@ export function OfferDetail({ slug }: { slug: string }) {
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <CategoryBadge kind="offer" category={offer.category} />
               <PricingBadge pricing={offer.pricing} />
+              <OfferUrgencyBadge endsAt={offer.endsAt} />
               <a
                 href={offer.url}
                 target="_blank"

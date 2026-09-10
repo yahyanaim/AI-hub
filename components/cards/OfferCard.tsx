@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ExternalLink, ListChecks } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
-import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
+import { CategoryBadge, PricingBadge, OfferUrgencyBadge } from '@/components/ui/Badges'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
 import { useApp } from '@/lib/store'
 import { cn } from '@/lib/utils'
@@ -64,6 +64,7 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
       <div className="mb-3 flex flex-wrap items-center gap-1.5">
         <CategoryBadge kind="offer" category={offer.category} />
         <PricingBadge pricing={offer.pricing} />
+        <OfferUrgencyBadge endsAt={offer.endsAt} />
       </div>
 
       <p className="mb-4 line-clamp-2 min-h-[2.5rem] text-sm leading-relaxed text-muted-foreground">

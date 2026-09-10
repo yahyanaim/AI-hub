@@ -267,6 +267,8 @@ export interface Offer {
   featured: boolean
   createdAt: string
   updatedAt: string
+  /** Optional application deadline (ISO). Drives Ended / Ending-soon badges. */
+  endsAt?: string
   // Arabic (Option A - bilingual offers)
   nameAr?: string
   taglineAr?: string
