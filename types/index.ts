@@ -175,7 +175,6 @@ export type CourseCategory =
   | 'cybersecurity'
   | 'math'
   | 'writing'
-  | 'freelancing'
   | 'automation'
   | 'learn-from-repos'
 
@@ -420,7 +419,6 @@ export const COURSE_CATEGORY_LABELS: Record<CourseCategory, string> = {
   cybersecurity: 'Cybersecurity',
   math: 'Math',
   writing: 'Writing & Communication',
-  freelancing: 'Freelancing',
   automation: 'Automation & No-Code',
   'learn-from-repos': 'Learn from Repos',
 }
