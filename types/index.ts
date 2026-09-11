@@ -72,6 +72,7 @@ export type DevToolCategory =
   | 'screenshot'
   | 'search'
   | 'security'
+  | 'seo'
   | 'session-recording'
   | 'source-control'
   | 'starter-pack'
@@ -381,6 +382,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   screenshot: 'Screenshot APIs',
   search: 'Search',
   security: 'Security',
+  seo: 'SEO Tools',
   'session-recording': 'Session Recording',
   'source-control': 'Source Control',
   'starter-pack': 'Starter Packs',
