@@ -124,7 +124,8 @@ export function ReferralDonateModal() {
                 AI Hub Tools is 100% free
               </h2>
               <p className="mt-2 text-center text-base text-muted-foreground">
-                No ads · No accounts · No ad trackers — ever.
+                No ads · We don&apos;t collect personal data — preferences stay in your browser.
+                Donations keep it free and ad-free.
               </p>
 
               <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
