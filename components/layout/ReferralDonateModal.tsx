@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { HeartHandshake, X } from 'lucide-react'
+import { HeartHandshake, X, Share2, Check } from 'lucide-react'
 import {
   REFERRAL_MODAL_SESSION_KEY,
   shouldShowReferralModal,
@@ -16,6 +16,7 @@ const SHOW_DELAY_MS = 600
 export function ReferralDonateModal() {
   const [visible, setVisible] = useState(false)
   const [leaving, setLeaving] = useState(false)
+  const [copied, setCopied] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const pathname = usePathname()
 
@@ -32,6 +33,30 @@ export function ReferralDonateModal() {
       setVisible(false)
       setLeaving(false)
     }, 250)
+  }, [])
+
+  const handleShare = useCallback(async () => {
+    const url = typeof window !== 'undefined' ? window.location.href : ''
+    try {
+      if (typeof navigator !== 'undefined' && navigator.share) {
+        await navigator.share({
+          title: 'AI Hub Tools',
+          text: 'AI Hub Tools - free curated AI tools, courses & offers. No ads, no tracking.',
+          url,
+        })
+        return
+      }
+      throw new Error('share unsupported')
+    } catch (err) {
+      if ((err as DOMException)?.name === 'AbortError') return
+      try {
+        await navigator.clipboard.writeText(url)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 1500)
+      } catch {
+        // clipboard unavailable
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -124,8 +149,7 @@ export function ReferralDonateModal() {
                 AI Hub Tools is 100% free
               </h2>
               <p className="mt-2 text-center text-base text-muted-foreground">
-                No ads · We don&apos;t collect personal data — preferences stay in your browser.
-                Donations keep it free and ad-free.
+                No ads · No tracking · No data collection — ever.
               </p>
 
               <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -134,14 +158,23 @@ export function ReferralDonateModal() {
                   onClick={dismiss}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-7 py-3 text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_24px_var(--accent-glow)] active:scale-[0.98] sm:w-auto"
                 >
-                  <HeartHandshake className="h-4 w-4" />
                   Donate &amp; Support
                 </Link>
                 <button
-                  onClick={dismiss}
+                  onClick={handleShare}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-7 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-auto"
                 >
-                  Maybe later
+                  {copied ? (
+                    <>
+                      <Check className="h-4 w-4 text-green-600" />
+                      Link copied!
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="h-4 w-4" />
+                      Share the platform
+                    </>
+                  )}
                 </button>
               </div>
 
