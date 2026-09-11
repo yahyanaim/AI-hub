@@ -10,7 +10,7 @@ import {
   shouldShowReferralModal,
 } from '@/lib/referral'
 
-const AUTO_DISMISS_MS = 3000
+const AUTO_DISMISS_MS = 5000
 const SHOW_DELAY_MS = 600
 
 export function ReferralDonateModal() {
@@ -120,33 +120,33 @@ export function ReferralDonateModal() {
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange/10">
                 <HeartHandshake className="h-7 w-7 text-brand-orange" />
               </div>
-              <h2 className="font-heading text-xl font-bold text-foreground">
-                Enjoying AI Hunt? 💛
+              <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                AI Hub Tools is 100% free
               </h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                This directory is <strong className="font-semibold text-foreground">free to use</strong> with{' '}
-                <strong className="font-semibold text-foreground">no ads</strong> and{' '}
-                <strong className="font-semibold text-foreground">no accounts</strong>. We run no ad
-                trackers — just anonymous, aggregated visit stats plus preferences saved in your own
-                browser. Donations keep it that way.
+              <p className="mt-2 text-center text-base text-muted-foreground">
+                No ads · No accounts · No ad trackers — ever.
               </p>
 
-              <div className="mt-6 flex flex-col gap-2">
+              <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Link
                   href="/support"
                   onClick={dismiss}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-orange px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-orange-600 active:scale-[0.98]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-7 py-3 text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_24px_var(--accent-glow)] active:scale-[0.98] sm:w-auto"
                 >
                   <HeartHandshake className="h-4 w-4" />
-                  Donate
+                  Donate &amp; Support
                 </Link>
                 <button
                   onClick={dismiss}
-                  className="w-full rounded-lg px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-7 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:w-auto"
                 >
                   Maybe later
                 </button>
               </div>
+
+              <p className="mt-3.5 text-center text-xs text-muted-foreground/80">
+                Even one share makes a difference 🧡
+              </p>
             </div>
           </motion.div>
         </motion.div>
