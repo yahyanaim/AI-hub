@@ -8192,7 +8192,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o146',
     slug: 'open-startup-the-science-road-2026',
-    name: 'Open Startup – The Science Road 2026',
+    name: 'Open Startup, The Science Road 2026',
     tagline: 'Two-track acceleration platform: Pre-Seed validation and Seed scaling',
     description: `The Science Road 2026 is a streamlined acceleration platform offering two tracks: a Pre-Seed track for solution validation and a Seed track for scaling technology startups and DeepTech projects.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/open-startup-the-science-road-2026/',
@@ -8500,9 +8500,9 @@ export const SEED_OFFERS: Offer[] = [
 - **Free Plan (Forever)**: 100-200 daily credits (resets every 24h), 1GB storage, no credit card required
 
 **Plans:**
-- Free: $0 — 100-200 credits/day, 1GB
-- Plus: $24.99/mo ($19.99/mo annual) — 10,000 credits/mo, 50GB, first month free
-- Pro: $249.99/mo ($199.99/mo annual) — 125,000 credits/mo, 1TB`,
+- Free: $0, 100-200 credits/day, 1GB
+- Plus: $24.99/mo ($19.99/mo annual), 10,000 credits/mo, 50GB, first month free
+- Pro: $249.99/mo ($199.99/mo annual), 125,000 credits/mo, 1TB`,
     url: 'https://www.genspark.ai',
     logoUrl: 'https://www.google.com/s2/favicons?domain=genspark.ai&sz=64',
     category: 'tool',
@@ -8545,9 +8545,9 @@ export const SEED_OFFERS: Offer[] = [
 - **الخطة المجانية (للأبد)**: 100-200 رصيد يومياً (تتعاد كل 24 ساعة)، 1 جيجابايت تخزين، لا تحتاج بطاقة ائتمان
 
 **الخطط:**
-- مجاني: $0 — 100-200 رصيد/يوم، 1 جيجابايت
-- Plus: $24.99/شهر ($19.99/شهر سنوي) — 10,000 رصيد/شهر، 50 جيجابايت، الشهر الأول مجاناً
-- Pro: $249.99/شهر ($199.99/شهر سنوي) — 125,000 رصيد/شهر، 1 تيرابايت`,
+- مجاني: $0, 100-200 رصيد/يوم، 1 جيجابايت
+- Plus: $24.99/شهر ($19.99/شهر سنوي), 10,000 رصيد/شهر، 50 جيجابايت، الشهر الأول مجاناً
+- Pro: $249.99/شهر ($199.99/شهر سنوي), 125,000 رصيد/شهر، 1 تيرابايت`,
     stepsAr: [
       {
         title: 'سجّل في Genspark',
@@ -8583,17 +8583,17 @@ export const SEED_OFFERS: Offer[] = [
     pricing: 'free',
     steps: [
       {
-        title: 'Step 1 — Fill Out the Form',
+        title: 'Step 1, Fill Out the Form',
         description: 'Complete the form in the Recode application to apply for the offer.',
         url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
       },
       {
-        title: 'Step 2 — Enroll in the Google Project Management Course',
+        title: 'Step 2, Enroll in the Google Project Management Course',
         description: 'Register for the Google Project Management Professional Certificate on Coursera.',
         url: 'https://www.coursera.org/learn/project-management-foundations',
       },
       {
-        title: 'Step 3 — Claim Your 3-Month Google AI Pro Trial',
+        title: 'Step 3, Claim Your 3-Month Google AI Pro Trial',
         description: 'Go to Module 2 of the course and open the "Redeem Your Google AI Pro Trial" section. Follow the instructions to claim your 3-month Google AI Pro trial.',
         url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
       },
@@ -8609,17 +8609,17 @@ export const SEED_OFFERS: Offer[] = [
     descriptionAr: `خطة 3 أشهر تجمع بين مزايا Gemini Pro ودورة Google لإدارة المشاريع على Coursera.`,
     stepsAr: [
       {
-        title: 'الخطوة 1 — املأ النموذج',
+        title: 'الخطوة 1, املأ النموذج',
         description: 'أكمل النموذج في تطبيق Recode للتقديم على العرض.',
         url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
       },
       {
-        title: 'الخطوة 2 — سجل في دورة إدارة المشاريع من Google',
+        title: 'الخطوة 2, سجل في دورة إدارة المشاريع من Google',
         description: 'سجل في شهادة Google Project Management Professional على Coursera.',
         url: 'https://www.coursera.org/learn/project-management-foundations',
       },
       {
-        title: 'الخطوة 3 — احصل على تجربة Google AI Pro لمدة 3 أشهر',
+        title: 'الخطوة 3, احصل على تجربة Google AI Pro لمدة 3 أشهر',
         description: 'اذهب إلى الوحدة 2 من الدورة وافتح قسم "Redeem Your Google AI Pro Trial" واتبع التعليمات للحصول على تجربة 3 أشهر.',
         url: 'https://www.coursera.org/learn/project-management-foundations/ungradedLti/VyzxA/redeem-your-google-ai-pro-trial',
       },
@@ -8628,7 +8628,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o157',
     slug: 'amd-member-perks',
-    name: 'AMD AI Developer Program — Member Perks',
+    name: 'AMD AI Developer Program, Member Perks',
     tagline: '$100 cloud credits, DeepLearning.AI Pro, GPU sweepstakes & Discord',
     description: `Unlock $100 cloud credits, 1 month DeepLearning.AI Pro, monthly GPU sweepstakes and Discord access as an AMD AI Developer Program member at developer.amd.com/member-perks.`,
 
@@ -8655,7 +8655,7 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'Claim DeepLearning.AI Pro (1 month free)',
-        description: 'In Member Perks, click “Join to get this code” for DeepLearning.AI Pro Membership — 30 days free after enrollment.',
+        description: 'In Member Perks, click “Join to get this code” for DeepLearning.AI Pro Membership, 30 days free after enrollment.',
         url: 'https://developer.amd.com/member-perks/',
       },
     ],
@@ -8665,7 +8665,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'برنامج AMD للمطورين — مزايا الأعضاء',
+    nameAr: 'برنامج AMD للمطورين, مزايا الأعضاء',
     taglineAr: '100$ رصيد سحابي، DeepLearning.AI Pro، سحب شهري على GPU وDiscord',
     descriptionAr: `احصل على 100$ رصيد سحابي، شهر مجاني DeepLearning.AI Pro، سحب GPU شهري وDiscord كعضو في برنامج AMD AI Developer.`,
 
@@ -8962,7 +8962,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o164',
     slug: 'iqlaa-icc-accelerator',
-    name: 'Iqlaa – Cultural & Creative Industries Accelerator',
+    name: 'Iqlaa, Cultural & Creative Industries Accelerator',
     tagline: 'ICC accelerator: training, coaching, 30k-50k MAD grants up to 450k MAD',
     description: `Iqlaa by Africalia with Fondation Hiba and the Institut Français (EU co-funded) accelerates Moroccan cultural and creative enterprises: training, coaching, network, 30,000-50,000 MAD grants plus growth support up to 450,000 MAD. For 18-35 founders with ICC companies based in Morocco. Apply via the official form.`,
     url: 'https://www.start-up.ma/programmes-pour-startups/iqlaa-accelerateur-entreprises-culturelles-creatives-maroc/',
@@ -8992,7 +8992,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'إقلاع – مسرّعة الصناعات الثقافية والإبداعية',
+    nameAr: 'إقلاع, مسرّعة الصناعات الثقافية والإبداعية',
     taglineAr: 'مسرّعة ICC: تكوين ومواكبة ومنح 30-50 ألف درهم حتى 450 ألف',
     descriptionAr: `إقلاع من Africalia مع مؤسسة هبة والمعهد الفرنسي (بتمويل أوروبي) يسرّع المقاولات الثقافية والإبداعية المغربية: تكوين ومواكبة وشبكة ومنح 30-50 ألف درهم مع دعم نمو حتى 450 ألف درهم. للمؤسسين 18-35 بمقاولات ICC بالمغرب.`,
     stepsAr: [
@@ -9219,7 +9219,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o169',
     slug: 'aych-climate-incubation',
-    name: 'African Youth Climate Hub – Incubation (Mohammed VI Foundation)',
+    name: 'African Youth Climate Hub, Incubation (Mohammed VI Foundation)',
     tagline: '6-month incubation for African youth climate solutions - 10 projects per cohort',
     description: `The African Youth Climate Hub by the Mohammed VI Foundation for Environmental Protection incubates youth-led climate solutions across Africa: 6-month journey of ideation, market validation, and investor readiness, hosted with UM6P. 10 projects per cohort from 8+ countries, plus the learning center, network, and dashboard on youthclimatehub.org. 4th edition running with the UN.`,
     url: 'https://youthclimatehub.org/',
@@ -9248,7 +9248,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'القطب الأفريقي لمناخ الشباب – الاحتضان',
+    nameAr: 'القطب الأفريقي لمناخ الشباب, الاحتضان',
     taglineAr: 'احتضان 6 أشهر لحلول المناخ الشبابية - 10 مشاريع للدفعة',
     descriptionAr: `القطب الأفريقي لمناخ الشباب من مؤسسة محمد السادس لحماية البيئة يحتضن حلول المناخ الشبابية عبر أفريقيا: 6 أشهر تأليف وتحقق وجاهزية استثمارية مع UM6P. 10 مشاريع للدفعة من 8+ دول، مع مركز التعلم والشبكة على المنصة.`,
     stepsAr: [
@@ -9321,7 +9321,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o171',
     slug: 'nasa-space-apps-benguerir-2026',
-    name: 'NASA Space Apps Challenge 2026 – Ben Guerir',
+    name: 'NASA Space Apps Challenge 2026, Ben Guerir',
     tagline: 'Global NASA hackathon locally: solve real problems with open NASA data',
     description: `Join the world's biggest hackathon from Ben Guerir: NASA Space Apps Challenge 2026 invites students, developers, and makers to solve real-world problems with NASA open data - teamwork, coding, and innovation over one weekend. Deadline September 30, 2026. Found via Civica.`,
     url: 'https://www.civica.ma/opportunities/6a9b730e1f4cbf4c89d50082/thdy-ns-lttbyqt-lfd-bn-jryr-nasa-space-apps-challenge-2026',
@@ -9351,7 +9351,7 @@ export const SEED_OFFERS: Offer[] = [
     endsAt: '2026-09-30',
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'تحدي ناسا لتطبيقات الفضاء 2026 – بنجرير',
+    nameAr: 'تحدي ناسا لتطبيقات الفضاء 2026, بنجرير',
     taglineAr: 'هاكاثون ناسا العالمي محلياً: حل مشاكل حقيقية ببيانات ناسا المفتوحة',
     descriptionAr: `انضم لأكبر هاكاثون عالمي من بنجرير: تحدي ناسا 2026 للطلبة والمطورين لحل مشاكل واقعية ببيانات ناسا المفتوحة. آخر أجل 30 شتنبر 2026.`,
     stepsAr: [
@@ -9529,7 +9529,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o175',
     slug: 'rabhacks-2026-talents-civica',
-    name: "Rab'Hacks 2026 – Talent Call (Africa & Europe)",
+    name: "Rab'Hacks 2026, Talent Call (Africa & Europe)",
     tagline: 'Innovation & entrepreneurship program: training, coaching, prototyping, Rabat final with cash prizes',
     description: `Rab'Hacks 2026 supports students, graduates, entrepreneurs, and companies across Africa and Europe with training, coaching, and prototyping for impact projects - ending in a Rabat final with financial prizes. Open call for talents listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/69889ee1731e34082165b6c6/rab-hacks-2026-appel-aux-talents',
@@ -9558,7 +9558,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'راب هاكس 2026 – نداء المواهب',
+    nameAr: 'راب هاكس 2026, نداء المواهب',
     taglineAr: 'برنامج ابتكار وريادة: تكوين ومواكبة ونمذجة ونهائي بالرباط بجوائز مالية',
     descriptionAr: `راب هاكس 2026 يواكب الطلبة والخريجين والمقاولين عبر أفريقيا وأوروبا بالتكوين والمواكبة والنمذجة لمشاريع ذات أثر - مع نهائي بالرباط وجوائز مالية.`,
     stepsAr: [
@@ -9580,7 +9580,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o176',
     slug: 'huawei-developer-competition-2025-morocco',
-    name: 'Huawei Developer Competition 2025 (Morocco – $1k-$5k Prizes)',
+    name: 'Huawei Developer Competition 2025 (Morocco, $1k-$5k Prizes)',
     tagline: 'AI competition for Moroccan youth: $1,000-$5,000 prizes + $100-200 vouchers for all',
     description: `Under the Huawei Morocco × Ministry of Youth agreement: join the Huawei Developer Competition 2025, build with AI, and win $1,000-$5,000 prizes. Every Moroccan participant gets $100-$200 vouchers. Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/68e50a8353ae1796858efbca/huawei-developer-competition-2025',
@@ -9682,7 +9682,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o178',
     slug: 'hedera-africa-hackathon-2025',
-    name: 'Hedera Africa Hackathon 2025 (Web3 – Training + Certification)',
+    name: 'Hedera Africa Hackathon 2025 (Web3, Training + Certification)',
     tagline: "Africa's massive Web3 hackathon on Hedera: grants, training, pro certificates",
     description: `Huge African hackathon to build innovative Web3 solutions on the Hedera network: big grants, training, professional certificates, and access to expert networks to boost digital innovation across Africa. Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/68b62ea400a47483e83a8a08/hedera-africa-hackathon-2025-world-s-largest-web3-hackathon',
@@ -9784,7 +9784,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o180',
     slug: 'arkx-salesforce-bootcamp-open-day',
-    name: 'Arkx Open Day – Salesforce Developer Bootcamp (Rabat, State-Funded)',
+    name: 'Arkx Open Day, Salesforce Developer Bootcamp (Rabat, State-Funded)',
     tagline: 'Bac+5 grads: free state-funded Salesforce bootcamp + job insertion in Rabat',
     description: `Arkx Talent Factory's Rabat Open Day for Bac+5 graduates eyeing a Salesforce Developer Consultant career: orientation, bootcamp presentation, and enrollment into the 100% state-funded program (training, mentoring, job insertion). Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/688415d290bebe70fd8b0711/open-day-bootcamp-salesforce-developer-consultant-organise-par-arkx-talent-factory',
@@ -9813,7 +9813,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: false,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'اليوم المفتوح Arkx – بوتكامب Salesforce (الرباط، ممول)',
+    nameAr: 'اليوم المفتوح Arkx, بوتكامب Salesforce (الرباط، ممول)',
     taglineAr: 'خريجو Bac+5: بوتكامب Salesforce ممول من الدولة + إدماج بالرباط',
     descriptionAr: `اليوم المفتوح لـ Arkx بخريجي Bac+5 الراغبين في مهنة Salesforce: توجيه وعرض البوتكامب والتسجيل في البرنامج الممول 100% من الدولة (تكوين ومواكبة وإدماج).`,
     stepsAr: [
@@ -9835,7 +9835,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o181',
     slug: 'netacad-summer-camp-ai-cybersecurity',
-    name: 'NetAcad Summer Camp (ANAPEC × Cisco – Free AI & Cybersecurity)',
+    name: 'NetAcad Summer Camp (ANAPEC × Cisco, Free AI & Cybersecurity)',
     tagline: '2-month free summer program: AI, coding, cybersecurity, networks + Cisco cert',
     description: `ANAPEC with Cisco NetAcad runs a free 2-month summer program training Moroccan students in AI, programming, cybersecurity, and networking - hands-on NetAcad platform practice plus an official Cisco certificate on completion. Online. Listed on Civica.`,
     url: 'https://www.civica.ma/opportunities/688363ae90bebe70fd88f6a7/brnmj-netacad-summer-camp-2025-tkwyn-mjny-fy-ldhk-lstnaay-wl-mn-lsybrny',
@@ -9886,7 +9886,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o182',
     slug: '3rd-act-sb3s-tamwilcom',
-    name: '3rd Act Program – SB3S × Tamwilcom (750k MAD Honor Loan)',
+    name: '3rd Act Program, SB3S × Tamwilcom (750k MAD Honor Loan)',
     tagline: 'Pre-acceleration + up to 750,000 MAD honor loan + VC readiness (Innov Invest)',
     description: `3rd Act by SB3S with Tamwilcom (Innov Invest fund) backs Moroccan pre-acceleration startups under 5 years old: tailored mentoring, practical workshops, expert network, and up to 750,000 MAD in honor loan plus systematic preparation for a first VC round. AgriTech, HealthTech, CleanTech, Industry 4.0 and more.`,
     url: 'https://www.sb3s.com/',
@@ -9915,7 +9915,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'برنامج 3rd Act – SB3S × تمويلكم',
+    nameAr: 'برنامج 3rd Act, SB3S × تمويلكم',
     taglineAr: 'تسريع أولي + حتى 750 ألف درهم قرض شرف + جاهزية VC',
     descriptionAr: `برنامج 3rd Act من SB3S مع تمويلكم (صندوق Innov Invest) للشركات المغربية قبل التسريع تحت 5 سنوات: مواكبة مخصصة وورشات وشبكة خبراء حتى 750.000 درهم قرض شرف وتحضير منهجي لأول جولة تمويل.`,
     stepsAr: [
@@ -9988,7 +9988,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o184',
     slug: 'ostx-morocco-ideation-technopark',
-    name: 'OSTX Morocco – Startup Ideation (Open Startup × Technopark)',
+    name: 'OSTX Morocco, Startup Ideation (Open Startup × Technopark)',
     tagline: '4-week idea-to-startup sprint for 18-35: bootcamp, mentorship, certification',
     description: `OSTX Morocco by Open Startup with Technopark turns raw ideas into validated startups in 4 weeks: 2-day intensive bootcamp plus 3 weeks of assignments and mentorship, final pitch, and certification. For Moroccan youth 18-35 - students, graduates, employed or not. Hybrid format.`,
     url: 'https://open-startup.org',
@@ -10017,7 +10017,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'OSTX المغرب – تأليف الشركات (Open Startup)',
+    nameAr: 'OSTX المغرب, تأليف الشركات (Open Startup)',
     taglineAr: 'سباق 4 أسابيع من الفكرة للشركة لـ 18-35: بوتكامب وشهادة',
     descriptionAr: `برنامج OSTX المغرب من Open Startup مع تكنوبارك يحوّل الأفكار الخام لشركات متحقق منها في 4 أسابيع: بوتكامب مكثف يومين + 3 أسابيع مواكبة وعرض نهائي وشهادة. لشباب 18-35.`,
     stepsAr: [
@@ -10142,7 +10142,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o187',
     slug: 'innovaction-tetouan-2026',
-    name: 'InnovAction Entrepreneuriat 2026 (Tétouan – JCI)',
+    name: 'InnovAction Entrepreneuriat 2026 (Tétouan, JCI)',
     tagline: 'Pitch your project to the northern ecosystem jury: visibility + network',
     description: `InnovAction 2026 by JCI Tétouan is the northern entrepreneurship competition: young founders and project holders pitch before a jury and the local ecosystem, closing a full program of training and ecosystem events. Visibility, professional network, and investor connections in the Tangier-Tétouan region.`,
     url: 'https://www.civica.ma/opportunities/6a34179263f3ee6bc7578df7/2-edition-de-la-competition-d-entrepreneuriat-innovaction-2026',
@@ -10193,7 +10193,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o188',
     slug: 'casablanca-smart-city-startups-10ans',
-    name: 'Casablanca Smart City – Startup Village (10th Anniversary)',
+    name: 'Casablanca Smart City, Startup Village (10th Anniversary)',
     tagline: '25 startups get a booth in the tech village + royal-patronage spotlight',
     description: `For the 10th anniversary of Casablanca Smart City (under royal patronage): 25 innovative startups win a dedicated booth in the tech village plus maximum visibility at the year's top tech event. Organized by Casablanca Events & Animation with the City of Casablanca, Hack & Pitch, and La Startup Station. Limited seats.`,
     url: 'https://www.civica.ma/opportunities/6a1f38020d4b4b9c7d8b0b7f/nd-llshrkt-lnshy-lmbtkr-dfaa-bmshrwaak-l~-lsdr-fy-hdth-casablanca-smart-city',
@@ -10222,7 +10222,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: false,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'الدار البيضاء الذكية – قرية الشركات (10 سنوات)',
+    nameAr: 'الدار البيضاء الذكية, قرية الشركات (10 سنوات)',
     taglineAr: '25 شركة تحصل على جناح في القرية التقنية + أضواء وطنية',
     descriptionAr: `للاحتفال بـ 10 سنوات على الدار البيضاء الذكية (برعاية ملكية): 25 شركة مبتكرة تحصل على جناح خاص في القرية التقنية وظهور أقصى في أبرز حدث تقني. تنظيم Casablanca Events والمدينة وHack & Pitch. مقاعد محدودة.`,
     stepsAr: [
@@ -10346,7 +10346,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o191',
     slug: 'agri-food-tech-5th-cohort',
-    name: 'Agri-Food Tech Incubator – 5th Cohort (UM6P × IAV Hassan II)',
+    name: 'Agri-Food Tech Incubator, 5th Cohort (UM6P × IAV Hassan II)',
     tagline: 'Smart agriculture, biotech, circular economy: mentorship + fundraising + media',
     description: `The Agri-Food Tech Incubator by UM6P and IAV Hassan II backs high-potential innovators in smart agriculture, animal production, biotech, circular economy, and waste valorization: tailored mentorship, technical capacity building, fundraising support, networking, and media visibility under the Generation Green 2020-2030 strategy. 5th cohort open now.`,
     url: 'https://dashboard.startgate.ma/challenges/agri-food-tech-5th-cohort',
@@ -10375,7 +10375,7 @@ export const SEED_OFFERS: Offer[] = [
     featured: true,
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'حاضنة التقنية الفلاحية – الدفعة 5',
+    nameAr: 'حاضنة التقنية الفلاحية, الدفعة 5',
     taglineAr: 'فلاحة ذكية وتكنولوجيا حيوية: إرشاد وتمويل وإبراز',
     descriptionAr: `حاضنة التقنية الفلاحية من UM6P ومعهد الحسن الثاني للزراعة تدعم مبتكري الفلاحة الذكية والإنتاج الحيواني والتكنولوجيا الحيوية والاقتصاد الدائري: إرشاد مخصص ودعم جمع التمويل وتشبيك وإبراز إعلامي ضمن الجيل الأخضر. الدفعة 5 مفتوحة.`,
     stepsAr: [
@@ -10499,7 +10499,7 @@ export const SEED_OFFERS: Offer[] = [
   {
     id: 'o196',
     slug: 'sila-ai-startups-mediterranean',
-    name: 'Sila Call – AI Startups, Southern Mediterranean (€10k-30k Support)',
+    name: 'Sila Call, AI Startups, Southern Mediterranean (€10k-30k Support)',
     tagline: 'France-Mediterranean AI call: 10 startups, tailored scale-up support, deadline Sep 14',
     description: `Sila (France-Mediterranean AI Initiative, funded by France's MEAE via Fonds Équipe France+, run by Expertise France) selects 10 AI startups from Algeria, Egypt, Lebanon, Morocco, and Tunisia: needs assessment, personal scale-up roadmap, and a tailored package worth EUR 10,000-30,000 (MLOps, data, compliance, business development, investment readiness). Health, education, agriculture, climate focus. Apply by September 14, 2026, 12:00 Paris time.`,
     url: 'https://sila-med.com/en/calls/sila-call-for-applications-for-ai-startups-in-the-southern-mediterranean/',
@@ -10529,7 +10529,7 @@ export const SEED_OFFERS: Offer[] = [
     endsAt: '2026-09-14',
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
-    nameAr: 'نداء Sila – شركات الذكاء الناشئة بالمتوسط الجنوبي',
+    nameAr: 'نداء Sila, شركات الذكاء الناشئة بالمتوسط الجنوبي',
     taglineAr: 'نداء فرنسي-متوسطي للذكاء: 10 شركات ودعم مخصص وآخر أجل 14 شتنبر',
     descriptionAr: `نداء Sila (المبادرة الفرنسية-المتوسطية للذكاء، بتمويل فرنسي وتنفيذ Expertise France) ينتقي 10 شركات ذكاء من الجزائر ومصر ولبنان والمغرب وتونس: تقييم احتياجات وخارطة نمو وحزمة مخصصة 10-30 ألف يورو (MLOps وبيانات وامتثال وتطوير أعمال). آخر أجل 14 شتنبر 2026.`,
     stepsAr: [

@@ -21,7 +21,7 @@ export function SupportReminder() {
   const [copied, setCopied] = useState(false)
   const pathname = usePathname()
 
-  // Hidden on /support — that page already carries the full donation section.
+  // Hidden on /support, that page already carries the full donation section.
   if (pathname === '/support') return null
 
   const handleShare = async () => {
@@ -80,7 +80,7 @@ export function SupportReminder() {
           AI Hub Tools is 100% free
         </h3>
         <p className="mt-2 text-center text-base text-muted-foreground">
-          No ads · No tracking · No data collection — ever.
+          No ads · No tracking · No data collection, ever.
         </p>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">

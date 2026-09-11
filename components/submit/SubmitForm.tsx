@@ -655,7 +655,7 @@ export function SubmitForm() {
             <h2 className="font-heading text-lg font-semibold">Review &amp; submit</h2>
             <p className="mt-1 text-sm text-muted-foreground">
               Your submission goes live in this browser immediately. It stays
-              local — other visitors won&apos;t see it.
+              local, other visitors won&apos;t see it.
             </p>
 
             <div className="mt-6 space-y-4">

@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: { category: string 
     }
   }
 
-  // Legacy: old flat /offers/<slug> — redirect handled in component, return fallback metadata here
+  // Legacy: old flat /offers/<slug>, redirect handled in component, return fallback metadata here
   const legacy = SEED_OFFERS.find((o) => o.slug === category)
   if (legacy) {
     return {

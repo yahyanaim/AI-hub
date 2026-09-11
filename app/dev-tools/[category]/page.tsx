@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: { category: string 
     }
   }
 
-  // Legacy: old flat /dev-tools/<slug> or /devtool/<slug> — redirect handled in component, return fallback metadata here
+  // Legacy: old flat /dev-tools/<slug> or /devtool/<slug>, redirect handled in component, return fallback metadata here
   const legacy = SEED_DEV_TOOLS.find((t) => t.slug === category)
   if (legacy) {
     return {

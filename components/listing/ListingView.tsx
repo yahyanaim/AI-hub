@@ -436,7 +436,7 @@ function ListingViewInner<T extends { id: string }>({
 
 /**
  * Suspense boundary lives here (not in each page) because the inner component
- * calls useSearchParams — required for static prerendering in Next 14.
+ * calls useSearchParams, required for static prerendering in Next 14.
  */
 export function ListingView<T extends { id: string }>(props: ListingViewProps<T>) {
   return (

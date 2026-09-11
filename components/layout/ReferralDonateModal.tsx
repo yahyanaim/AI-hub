@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { HeartHandshake, X, Share2, Check } from 'lucide-react'
+import { HeartHandshake, X, Share2, Check, Star, Globe, Sparkles } from 'lucide-react'
 import {
   REFERRAL_MODAL_SESSION_KEY,
   shouldShowReferralModal,
@@ -12,6 +12,14 @@ import {
 
 const AUTO_DISMISS_MS = 5000
 const SHOW_DELAY_MS = 600
+
+const FLOATING_ICONS = [
+  { Icon: HeartHandshake, x: '8%', y: '12%', size: 20, delay: 0, duration: 6, opacity: 0.16 },
+  { Icon: Share2, x: '86%', y: '16%', size: 18, delay: 0.5, duration: 7, opacity: 0.14 },
+  { Icon: Sparkles, x: '14%', y: '78%', size: 16, delay: 0.8, duration: 6.5, opacity: 0.13 },
+  { Icon: Star, x: '88%', y: '72%', size: 15, delay: 0.3, duration: 5.5, opacity: 0.15 },
+  { Icon: Globe, x: '50%', y: '6%', size: 14, delay: 1.0, duration: 7.5, opacity: 0.12 },
+] as const
 
 export function ReferralDonateModal() {
   const [visible, setVisible] = useState(false)
@@ -126,12 +134,34 @@ export function ReferralDonateModal() {
             aria-hidden="true"
           />
           <motion.div
-            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
+            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-brand-orange/60 bg-card bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] shadow-2xl"
             initial={{ opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: leaving ? 0 : 1, y: leaving ? 8 : 0, scale: 1 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.25 }}
           >
+            {/* Floating background icons (mirrors the on-page banner) */}
+            <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
+              {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute text-brand-orange"
+                  style={{ left: x, top: y, opacity }}
+                  animate={{
+                    y: [0, -12, 0, 10, 0],
+                    opacity: [opacity, opacity * 1.6, opacity, opacity * 1.3, opacity],
+                  }}
+                  transition={{
+                    duration,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay,
+                  }}
+                >
+                  <Icon size={size} />
+                </motion.div>
+              ))}
+            </div>
             <button
               onClick={dismiss}
               className="absolute right-3 top-3 z-10 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
@@ -141,7 +171,7 @@ export function ReferralDonateModal() {
               <X className="h-4 w-4" />
             </button>
 
-            <div className="p-8 text-center">
+            <div className="relative p-8 text-center">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange/10">
                 <HeartHandshake className="h-7 w-7 text-brand-orange" />
               </div>
@@ -149,7 +179,7 @@ export function ReferralDonateModal() {
                 AI Hub Tools is 100% free
               </h2>
               <p className="mt-2 text-center text-base text-muted-foreground">
-                No ads · No tracking · No data collection — ever.
+                No ads · No tracking · No data collection, ever.
               </p>
 
               <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
