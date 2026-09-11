@@ -7,6 +7,7 @@ import { SITE_URL } from '@/lib/site'
 import { Navbar } from '@/components/layout/Navbar'
 import { FooterGate } from '@/components/layout/FooterGate'
 import { SupportReminder } from '@/components/layout/SupportReminder'
+import { ReferralDonateModal } from '@/components/layout/ReferralDonateModal'
 import { CommandPalette } from '@/components/search/CommandPalette'
 import { AuthModal } from '@/components/auth/AuthModal'
 import { ToolDetailModal } from '@/components/detail/ToolDetailModal'
@@ -181,6 +182,7 @@ export default function RootLayout({
           </div>
           <CommandPalette />
           <AuthModal />
+          <ReferralDonateModal />
           <ToolDetailModal />
           <RepoDetailModal />
           <CourseDetailModal />
