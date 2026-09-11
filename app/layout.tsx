@@ -32,12 +32,16 @@ export const metadata: Metadata = {
     template: '%s - AI Hunt',
   },
   description:
-    'AI Hunt is a community-driven platform to discover and share the best AI tools, developer tools, open-source GitHub repos, and coding courses. Find top-rated resources for developers, ranked by the community.',
+    'AI Hunt is a community-driven platform to discover and share the best AI tools, n8n automation, developer tools, open-source GitHub repos, and coding courses. Learn AI skills, development, and freelancing with top-rated resources for developers and students in Morocco and worldwide, ranked by the community.',
   keywords: [
     'AI tools', 'AI Hunt', 'developer tools', 'dev tools', 'open source', 'GitHub repos',
     'best AI tools 2026', 'free AI tools', 'AI for developers',
     'LLM tools', 'machine learning tools', 'AI SaaS',
     'code editors', 'AI search', 'coding courses', 'developer platform',
+    'n8n', 'n8n automation', 'n8n Morocco', 'workflow automation', 'AI automation',
+    'AI skills', 'learn AI', 'AI courses Morocco', 'online courses Morocco',
+    'freelancing', 'freelancing skills', 'freelance Morocco', 'development skills',
+    'Moroccan developers', 'Morocco tech', 'تعلم الذكاء الاصطناعي',
   ],
   authors: [{ name: 'Yahia Naim' }],
   creator: 'Yahia Naim',
@@ -58,9 +62,9 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
   openGraph: {
-    title: 'AI Hunt - Discover AI Tools & Developer Resources',
+    title: 'AI Hunt - Discover AI Tools, n8n Automation & Developer Resources',
     description:
-      'Community-driven platform to discover and share AI tools, dev tools, GitHub repos, and coding courses. Trusted by developers worldwide.',
+      'Community-driven platform to discover and share AI tools, n8n workflows, dev tools, GitHub repos, and coding courses. Learn AI, automation, and freelancing skills - trusted by developers in Morocco and worldwide.',
     url: baseUrl,
     siteName: 'AI Hunt',
     type: 'website',
@@ -77,14 +81,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Hunt - Discover AI Tools & Developer Resources',
+    title: 'AI Hunt - AI Tools, n8n Automation & Courses',
     description:
-      'Community-driven platform for AI tools, dev tools, GitHub repos, and coding courses.',
+      'Community-driven platform for AI tools, n8n automation, dev tools, courses, and freelancing skills - Morocco and worldwide.',
     images: ['/og.png'],
     creator: '@yahianaim',
   },
   alternates: {
     canonical: baseUrl,
+  },
+  other: {
+    'geo.region': 'MA',
+    'geo.placename': 'Morocco',
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION ?? '',
@@ -115,7 +123,8 @@ export default function RootLayout({
               '@type': 'WebSite',
               name: 'AI Hunt',
               url: baseUrl,
-              description: 'Community-driven discovery platform for AI tools, developer tools, open-source repos, and coding courses.',
+              description: 'Community-driven discovery platform for AI tools, n8n automation, developer tools, open-source repos, coding courses, and freelancing skills - popular with developers and students in Morocco.',
+              keywords: 'AI tools, n8n, automation, coding courses, freelancing, development, AI skills, Morocco',
               potentialAction: {
                 '@type': 'SearchAction',
                 target: {
@@ -127,7 +136,11 @@ export default function RootLayout({
               inLanguage: ['en', 'fr', 'ar'],
               audience: {
                 '@type': 'Audience',
-                audienceType: ['Developers', 'AI Practitioners', 'Tech Enthusiasts'],
+                audienceType: ['Developers', 'AI Practitioners', 'Tech Enthusiasts', 'Students in Morocco', 'Freelancers'],
+                geographicArea: {
+                  '@type': 'Country',
+                  name: 'Morocco',
+                },
               },
             }),
           }}
