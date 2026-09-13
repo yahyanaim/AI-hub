@@ -15,25 +15,28 @@ export async function generateMetadata({ params }: { params: { category: string;
   const { category, slug } = params
   const course = SEED_COURSES.find((c) => c.slug === slug)
 
-  if (!course) return { title: 'Course Not Found' }
+  if (!course) return { title: 'Course Not Found', robots: { index: false, follow: false } }
 
   if (course.category !== category) {
     redirect(`/courses/${course.category}/${course.slug}`)
   }
 
+  const seoDescription = course.description
+    ? `${course.description.replace(/[#_*`]/g, '').slice(0, 155)}`
+    : course.tagline
   return {
-    title: course.name,
-    description: course.description,
+    title: `${course.name} - ${course.tagline}`,
+    description: seoDescription,
     openGraph: {
-      title: course.name,
-      description: course.description,
+      title: `${course.name} - ${course.tagline}`,
+      description: seoDescription,
       type: 'article',
       images: course.logoUrl ? [{ url: course.logoUrl, alt: course.name }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: course.name,
-      description: course.description,
+      title: `${course.name} - ${course.tagline}`,
+      description: seoDescription,
       images: course.logoUrl ? [course.logoUrl] : undefined,
     },
     alternates: {
@@ -58,7 +61,7 @@ export default async function CourseDetailPage({ params }: { params: { category:
     '@context': 'https://schema.org',
     '@type': 'Course',
     name: course.name,
-    description: course.description,
+    description: course.tagline,
     provider: {
       '@type': 'Organization',
       name: course.name.split(' ').slice(0, 2).join(' '),
@@ -69,13 +72,15 @@ export default async function CourseDetailPage({ params }: { params: { category:
       '@type': 'Offer',
       price: course.pricing === 'free' || course.pricing === 'open-source' ? '0' : undefined,
       priceCurrency: 'USD',
+      url: course.url,
     },
     author: user ? {
       '@type': 'Person',
       name: user.displayName,
     } : undefined,
-    url: course.url,
+    url: `${baseUrl}/courses/${course.category}/${course.slug}`,
     datePublished: course.createdAt,
+    dateModified: course.updatedAt,
   }
 
   return (

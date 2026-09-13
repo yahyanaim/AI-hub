@@ -19,24 +19,27 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { category, slug } = params
   const tool = SEED_DEV_TOOLS.find((t) => t.slug === slug)
-  if (!tool) return { title: 'Dev Tool Not Found' }
+  if (!tool) return { title: 'Dev Tool Not Found', robots: { index: false, follow: false } }
 
   if (tool.category !== category) {
     redirect(`/dev-tools/${tool.category}/${tool.slug}`)
   }
+  const seoDescription = tool.description
+    ? `${tool.description.replace(/[#_*`]/g, '').slice(0, 155)}`
+    : tool.tagline
   return {
-    title: tool.name,
-    description: tool.tagline,
+    title: `${tool.name} - ${tool.tagline}`,
+    description: seoDescription,
     openGraph: {
-      title: tool.name,
-      description: tool.tagline,
+      title: `${tool.name} - ${tool.tagline}`,
+      description: seoDescription,
       type: 'article',
       images: tool.logoUrl ? [{ url: tool.logoUrl, alt: tool.name }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: tool.name,
-      description: tool.tagline,
+      title: `${tool.name} - ${tool.tagline}`,
+      description: seoDescription,
       images: tool.logoUrl ? [tool.logoUrl] : undefined,
     },
     alternates: {
@@ -67,18 +70,22 @@ export default async function DevToolDetailPage({
     name: tool.name,
     description: tool.tagline,
     applicationCategory: 'DeveloperApplication',
+    applicationSubCategory: tool.category,
     operatingSystem: 'Cross-platform',
     offers: {
       '@type': 'Offer',
       price: tool.pricing === 'free' || tool.pricing === 'open-source' ? '0' : undefined,
       priceCurrency: 'USD',
+      url: tool.url,
     },
     author: user ? {
       '@type': 'Person',
       name: user.displayName,
     } : undefined,
-    url: tool.url,
+    url: `${SITE_URL}/dev-tools/${tool.category}/${tool.slug}`,
+    sameAs: tool.url,
     datePublished: tool.createdAt,
+    dateModified: tool.updatedAt,
   }
 
   return (

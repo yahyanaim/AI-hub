@@ -23,20 +23,23 @@ export async function generateMetadata({
   params: { category: string; slug: string }
 }): Promise<Metadata> {
   const offer = await findOffer(params.category, params.slug)
-  if (!offer) return { title: 'Offer Not Found' }
+  if (!offer) return { title: 'Offer Not Found', robots: { index: false, follow: false } }
+  const seoDescription = offer.description
+    ? `${offer.description.replace(/[#_*`]/g, '').slice(0, 155)}`
+    : offer.tagline
   return {
-    title: offer.name,
-    description: offer.tagline,
+    title: `${offer.name} - ${offer.tagline}`,
+    description: seoDescription,
     openGraph: {
-      title: offer.name,
-      description: offer.tagline,
+      title: `${offer.name} - ${offer.tagline}`,
+      description: seoDescription,
       type: 'article',
       images: offer.logoUrl ? [{ url: offer.logoUrl, alt: offer.name }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: offer.name,
-      description: offer.tagline,
+      title: `${offer.name} - ${offer.tagline}`,
+      description: seoDescription,
       images: offer.logoUrl ? [offer.logoUrl] : undefined,
     },
     alternates: {
@@ -70,9 +73,10 @@ export default async function OfferDetailPage({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: offer.name,
-    description: offer.description,
-    url: offer.url,
+    description: offer.tagline,
+    url: `${SITE_URL}/offers/${offer.category}/${offer.slug}`,
     datePublished: offer.createdAt,
+    dateModified: offer.updatedAt,
     provider: {
       '@type': 'Organization',
       name: offer.name,

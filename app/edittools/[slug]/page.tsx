@@ -10,20 +10,23 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const repo = SEED_REPOS.find((r) => r.slug === params.slug)
-  if (!repo) return { title: 'Editing Tool Not Found' }
+  if (!repo) return { title: 'Editing Tool Not Found', robots: { index: false, follow: false } }
+  const seoDescription = repo.description
+    ? `${repo.description.replace(/[#_*`]/g, '').slice(0, 155)}`
+    : repo.tagline
   return {
-    title: repo.name,
-    description: repo.description,
+    title: `${repo.name} - ${repo.tagline}`,
+    description: seoDescription,
     openGraph: {
-      title: repo.name,
-      description: repo.description,
+      title: `${repo.name} - ${repo.tagline}`,
+      description: seoDescription,
       type: 'article',
       images: repo.logoUrl ? [{ url: repo.logoUrl, alt: repo.name }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: repo.name,
-      description: repo.description,
+      title: `${repo.name} - ${repo.tagline}`,
+      description: seoDescription,
       images: repo.logoUrl ? [repo.logoUrl] : undefined,
     },
     alternates: {
@@ -44,16 +47,20 @@ export default async function EditToolDetailPage({
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: repo.name,
-    description: repo.description,
+    description: repo.tagline,
     applicationCategory: 'Multimedia',
+    applicationSubCategory: repo.category,
     operatingSystem: 'Web',
     offers: {
       '@type': 'Offer',
       price: repo.pricing === 'free' || repo.pricing === 'open-source' ? '0' : undefined,
       priceCurrency: 'USD',
+      url: repo.url,
     },
-    url: repo.url,
+    url: `${SITE_URL}/edittools/${repo.slug}`,
+    sameAs: repo.url,
     datePublished: repo.createdAt,
+    dateModified: repo.updatedAt,
   } : null
 
   return (
