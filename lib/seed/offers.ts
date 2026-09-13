@@ -10629,6 +10629,28 @@ export const SEED_OFFERS: Offer[] = [
         description: 'Start coding with the free model - use it before the free access disappears.',
       },
     ],
+    nameAr: 'نماذج Cline المجانية',
+    taglineAr: 'نماذج برمجة مجانية داخل Cline - برمج بدون دفع، لفترة محدودة',
+    descriptionAr: `Cline يتيح لك حالياً استخدام نماذج مجانية للبرمجة بدون دفع. افتح Cline، اختر نموذجاً مجانياً، وابدأ البرمجة - احفظ هذا قبل انتهاء الوصول المجاني.`,
+    stepsAr: [
+      {
+        title: 'اذهب إلى cline.bot',
+        description: 'زر https://cline.bot للحصول على Cline.',
+        url: 'https://cline.bot',
+      },
+      {
+        title: 'افتح Cline',
+        description: 'ثبّت Cline وافتحه في محرر الأكواد.',
+      },
+      {
+        title: 'اختر نموذجاً مجانياً',
+        description: 'من قائمة النماذج، اختر أحد النماذج المجانية حالياً.',
+      },
+      {
+        title: 'ابدأ البرمجة',
+        description: 'ابدأ البرمجة بالنموذج المجاني - استغله قبل انتهاء الوصول المجاني.',
+      },
+    ],
     upvotes: 0,
     bookmarks: 0,
     submittedBy: 'u1',
