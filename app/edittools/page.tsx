@@ -2,9 +2,12 @@ import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
 import Script from 'next/script'
 import { ReposView } from '@/components/listing/ReposView'
+import { SEED_REPOS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = SITE_URL
+
+const topRepos = [...SEED_REPOS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
 
 export const metadata: Metadata = {
   title: 'Open Source GitHub Repos & LLM Tools',
@@ -35,6 +38,16 @@ export default function EditToolsPage() {
           description: 'Community-curated collection of open-source repos for AI and LLM development.',
           url: `${baseUrl}/edittools`,
           about: { '@type': 'Thing', name: 'Open Source Repositories' },
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: topRepos.length,
+            itemListElement: topRepos.map((repo, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: repo.name,
+              url: `${baseUrl}/edittools/${repo.slug}`,
+            })),
+          },
         }),
       }} />
       <ReposView />

@@ -30,6 +30,12 @@ export async function generateMetadata({ params }: { params: { category: string 
         url: `${baseUrl}/offers/${category}`,
         images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Offers' }],
       },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${label} Offers - AI Hunt`,
+        description: `Curated ${label.toLowerCase()} offers and deals.`,
+        images: ['/og.png'],
+      },
       alternates: { canonical: `${baseUrl}/offers/${category}` },
     }
   }
@@ -41,10 +47,11 @@ export async function generateMetadata({ params }: { params: { category: string 
       title: legacy.name,
       description: legacy.tagline,
       alternates: { canonical: `${baseUrl}/offers/${legacy.category}/${legacy.slug}` },
+      robots: { index: false, follow: true },
     }
   }
 
-  return { title: 'Offers Not Found' }
+  return { title: 'Offers Not Found', robots: { index: false, follow: false } }
 }
 
 export default function OfferCategoryPage({ params }: { params: { category: string } }) {

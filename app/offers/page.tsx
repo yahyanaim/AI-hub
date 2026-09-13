@@ -2,9 +2,12 @@ import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
 import Script from 'next/script'
 import { OffersView } from '@/components/listing/OffersView'
+import { SEED_OFFERS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = SITE_URL
+
+const topOffers = [...SEED_OFFERS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
 
 export const metadata: Metadata = {
   title: 'Offers & Deals for Developers',
@@ -35,6 +38,16 @@ export default function OffersPage() {
           description: 'Community-curated offers, free programs, and developer deals with step-by-step guides.',
           url: `${baseUrl}/offers`,
           about: { '@type': 'Thing', name: 'Developer Offers and Deals' },
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: topOffers.length,
+            itemListElement: topOffers.map((offer, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: offer.name,
+              url: `${baseUrl}/offers/${offer.category}/${offer.slug}`,
+            })),
+          },
         }),
       }} />
       <OffersView />

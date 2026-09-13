@@ -2,9 +2,12 @@ import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
 import Script from 'next/script'
 import { DevToolsView } from '@/components/listing/DevToolsView'
+import { SEED_DEV_TOOLS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = SITE_URL
+
+const topDevTools = [...SEED_DEV_TOOLS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
 
 export const metadata: Metadata = {
   title: 'Developer Tools Directory',
@@ -35,6 +38,16 @@ export default function DevToolsPage() {
           description: 'Community-curated collection of essential developer tools.',
           url: `${baseUrl}/dev-tools`,
           about: { '@type': 'Thing', name: 'Developer Tools' },
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: topDevTools.length,
+            itemListElement: topDevTools.map((tool, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: tool.name,
+              url: `${baseUrl}/dev-tools/${tool.category}/${tool.slug}`,
+            })),
+          },
         }),
       }} />
       <DevToolsView />

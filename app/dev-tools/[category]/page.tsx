@@ -27,6 +27,12 @@ export async function generateMetadata({ params }: { params: { category: string 
         url: `${baseUrl}/dev-tools/${category}`,
         images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Dev Tools' }],
       },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${label} Developer Tools - AI Hunt`,
+        description: `Curated ${label.toLowerCase()} developer tools for engineers.`,
+        images: ['/og.png'],
+      },
       alternates: { canonical: `${baseUrl}/dev-tools/${category}` },
     }
   }
@@ -38,10 +44,11 @@ export async function generateMetadata({ params }: { params: { category: string 
       title: legacy.name,
       description: legacy.tagline,
       alternates: { canonical: `${baseUrl}/dev-tools/${legacy.category}/${legacy.slug}` },
+      robots: { index: false, follow: true },
     }
   }
 
-  return { title: 'Dev Tools Not Found' }
+  return { title: 'Dev Tools Not Found', robots: { index: false, follow: false } }
 }
 
 export default function DevToolCategoryPage({ params }: { params: { category: string } }) {

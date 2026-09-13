@@ -27,6 +27,12 @@ export async function generateMetadata({ params }: { params: { category: string 
         url: `${baseUrl}/courses/${category}`,
         images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Courses' }],
       },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${label} Courses - AI Hunt`,
+        description: `Curated ${label.toLowerCase()} courses and roadmaps for developers.`,
+        images: ['/og.png'],
+      },
       alternates: { canonical: `${baseUrl}/courses/${category}` },
     }
   }
@@ -36,7 +42,7 @@ export async function generateMetadata({ params }: { params: { category: string 
     redirect(`/courses/${legacy.category}/${legacy.slug}`)
   }
 
-  return { title: 'Courses Not Found' }
+  return { title: 'Courses Not Found', robots: { index: false, follow: false } }
 }
 
 export default function CourseCategoryPage({ params }: { params: { category: string } }) {

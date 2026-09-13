@@ -3,9 +3,12 @@ import { Suspense } from 'react'
 import { SITE_URL } from '@/lib/site'
 import Script from 'next/script'
 import { ToolsView } from '@/components/listing/ToolsView'
+import { SEED_TOOLS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
 
 const baseUrl = SITE_URL
+
+const topTools = [...SEED_TOOLS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
 
 export const metadata: Metadata = {
   title: 'AI Tools Directory',
@@ -36,6 +39,16 @@ export default function ToolsPage() {
           description: 'Community-curated collection of the best AI tools for developers.',
           url: `${baseUrl}/tools`,
           about: { '@type': 'Thing', name: 'AI Tools' },
+          mainEntity: {
+            '@type': 'ItemList',
+            numberOfItems: topTools.length,
+            itemListElement: topTools.map((tool, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: tool.name,
+              url: `${baseUrl}/tools/${tool.category}/${tool.slug}`,
+            })),
+          },
         }),
       }} />
       <Suspense fallback={<div className="container-page py-16 text-center text-muted-foreground">Loading…</div>}>
