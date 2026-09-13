@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'Submit a Tool or Resource',
   description: 'Submit an AI tool, developer tool, open-source repo, or coding course to the AI Hunt community. New submissions are reviewed before going live.',
   alternates: { canonical: `${baseUrl}/submit` },
+  robots: { index: false, follow: true },
 }
 
 export default function SubmitPage() {

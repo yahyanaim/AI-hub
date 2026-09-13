@@ -21,20 +21,23 @@ export async function generateMetadata({
   params: { category: string; slug: string }
 }): Promise<Metadata> {
   const tool = await findTool(params.category, params.slug)
-  if (!tool) return { title: 'Tool Not Found' }
+  if (!tool) return { title: 'Tool Not Found', robots: { index: false, follow: false } }
+  const seoDescription = tool.description
+    ? `${tool.description.replace(/[#_*`]/g, '').slice(0, 155)}`
+    : tool.tagline
   return {
-    title: tool.name,
-    description: tool.tagline,
+    title: `${tool.name} - ${tool.tagline}`,
+    description: seoDescription,
     openGraph: {
-      title: tool.name,
-      description: tool.tagline,
+      title: `${tool.name} - ${tool.tagline}`,
+      description: seoDescription,
       type: 'article',
       images: tool.logoUrl ? [{ url: tool.logoUrl, alt: tool.name }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: tool.name,
-      description: tool.tagline,
+      title: `${tool.name} - ${tool.tagline}`,
+      description: seoDescription,
       images: tool.logoUrl ? [tool.logoUrl] : undefined,
     },
     alternates: {
@@ -58,7 +61,9 @@ export default async function ToolDetailPage({
         '@type': 'SoftwareApplication',
         name: tool.name,
         description: tool.tagline,
-        applicationCategory: tool.category,
+        applicationCategory: 'DeveloperApplication',
+        applicationSubCategory: tool.category,
+        operatingSystem: 'Web',
         offers: {
           '@type': 'Offer',
           price:
@@ -66,6 +71,7 @@ export default async function ToolDetailPage({
               ? '0'
               : undefined,
           priceCurrency: 'USD',
+          url: tool.url,
         },
         author: user
           ? {
@@ -73,8 +79,10 @@ export default async function ToolDetailPage({
               name: user.displayName,
             }
           : undefined,
-        url: tool.url,
+        url: `${SITE_URL}/tools/${tool.category}/${tool.slug}`,
+        sameAs: tool.url,
         datePublished: tool.createdAt,
+        dateModified: tool.updatedAt,
       }
     : null
 

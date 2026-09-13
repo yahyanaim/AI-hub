@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Search AI Tools & Developer Resources',
   description: 'Search across AI tools, developer tools, open-source GitHub repos, and coding courses. Find the best developer resources on AI Hunt.',
   alternates: { canonical: `${baseUrl}/search` },
+  robots: { index: false, follow: true },
 }
 
 export default function SearchPage() {

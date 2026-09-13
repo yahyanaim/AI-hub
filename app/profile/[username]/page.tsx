@@ -11,7 +11,7 @@ const baseUrl = SITE_URL
 
 export async function generateMetadata({ params }: { params: { username: string } }): Promise<Metadata> {
   const user = SEED_USERS.find((u) => u.username === params.username)
-  if (!user) return { title: 'User Not Found' }
+  if (!user) return { title: 'User Not Found', robots: { index: false, follow: false } }
   return {
     title: user.displayName,
     description: user.bio ?? `Profile of ${user.displayName} on AI Hunt`,
@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: { username: string 
       description: user.bio ?? `Profile of ${user.displayName} on AI Hunt`,
     },
     alternates: { canonical: `${baseUrl}/profile/${user.username}` },
+    robots: { index: false, follow: true },
   }
 }
 

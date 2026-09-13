@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: { params: { category: string 
     title: `${name} Tools & Resources`,
     description: `Browse the best ${cat} AI tools, developer tools, open-source repos, and learning resources. Curated and ranked by the community.`,
     alternates: { canonical: `${baseUrl}/categories/${cat}` },
+    robots: { index: false, follow: true },
   }
 }
 
