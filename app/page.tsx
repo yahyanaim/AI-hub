@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { SITE_URL } from '@/lib/site'
 import { HomeView } from '@/components/home/HomeView'
+import { HOME_FAQS } from '@/components/home/FaqSection'
+import { safeJsonLd } from '@/lib/json-ld'
 
 export const metadata: Metadata = {
   title: 'AI Hunt - AI Tools, n8n Automation, Courses & Freelancing Skills in Morocco',
@@ -16,5 +19,24 @@ export const metadata: Metadata = {
 }
 
 export default function HomePage() {
-  return <HomeView />
+  return (
+    <>
+      <Script
+        id="schema-faq-home"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLd({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: HOME_FAQS.map((faq) => ({
+              '@type': 'Question',
+              name: faq.q,
+              acceptedAnswer: { '@type': 'Answer', text: faq.a },
+            })),
+          }),
+        }}
+      />
+      <HomeView />
+    </>
+  )
 }

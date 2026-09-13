@@ -6,6 +6,7 @@ import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
 import { HeroSection } from './HeroSection'
 import { Sidebar } from './Sidebar'
+import { FaqSection } from './FaqSection'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { motion } from 'framer-motion'
 
@@ -100,6 +101,9 @@ export function HomeView() {
           </div>
         </div>
       </div>
+
+      {/* FAQ — sits above the donate banner rendered in layout */}
+      <FaqSection />
     </div>
   )
 }
