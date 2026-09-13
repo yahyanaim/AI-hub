@@ -10599,4 +10599,41 @@ export const SEED_OFFERS: Offer[] = [
       },
     ],
   },
+  {
+    id: 'o198',
+    slug: 'cline-free-models',
+    name: 'Cline Free Models',
+    tagline: 'FREE coding models inside Cline - code without paying, limited time',
+    description: `Cline currently lets you use free models for coding without paying. Open Cline, select a free model, and start coding - save this before the free access disappears.`,
+    url: 'https://cline.bot',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/cline.bot.ico',
+    category: 'api-access',
+    tags: ['cline', 'free', 'coding', 'ai-agent', 'models', 'api'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Go to cline.bot',
+        description: 'Visit https://cline.bot to get Cline.',
+        url: 'https://cline.bot',
+      },
+      {
+        title: 'Open Cline',
+        description: 'Install and open Cline in your editor.',
+      },
+      {
+        title: 'Select a free model',
+        description: 'In the model picker, choose one of the currently free models.',
+      },
+      {
+        title: 'Start coding',
+        description: 'Start coding with the free model - use it before the free access disappears.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
