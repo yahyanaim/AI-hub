@@ -1,9 +1,9 @@
 'use client'
 
+import { useMemo } from 'react'
 import Link from 'next/link'
 import { useApp } from '@/lib/store'
-import { TOOL_CATEGORY_LABELS, REPO_CATEGORY_LABELS, type Tool } from '@/types'
-import { Badge } from '@/components/ui/badge'
+import { TOOL_CATEGORY_LABELS } from '@/types'
 import {
   Wrench,
   Sparkles,
@@ -15,16 +15,23 @@ import {
 } from 'lucide-react'
 
 export function Sidebar() {
-  const { tools, repos } = useApp()
+  const { tools } = useApp()
 
-  const allCategories = Object.entries(TOOL_CATEGORY_LABELS).map(([key, label]) => ({
-    key,
-    label,
-    type: 'tools' as const,
-    count: tools.filter((t) => t.category === key).length,
-  }))
+  const allCategories = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const t of tools) counts.set(t.category, (counts.get(t.category) ?? 0) + 1)
+    return Object.entries(TOOL_CATEGORY_LABELS).map(([key, label]) => ({
+      key,
+      label,
+      type: 'tools' as const,
+      count: counts.get(key) ?? 0,
+    }))
+  }, [tools])
 
-  const topTools = [...tools].sort((a, b) => b.upvotes - a.upvotes).slice(0, 5)
+  const topTools = useMemo(
+    () => [...tools].sort((a, b) => b.upvotes - a.upvotes).slice(0, 5),
+    [tools]
+  )
 
   return (
     <aside className="space-y-8">

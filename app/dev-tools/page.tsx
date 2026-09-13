@@ -11,7 +11,7 @@ const topDevTools = [...SEED_DEV_TOOLS].sort((a, b) => b.upvotes - a.upvotes).sl
 
 export const metadata: Metadata = {
   title: 'Developer Tools Directory',
-  description: 'Discover essential developer tools - IDEs, code editors, testing frameworks, CI/CD platforms, monitoring solutions, databases, API tools, and more. Curated for software engineers.',
+  description: 'IDEs, CI/CD, testing, monitoring, databases and API tools — community-ranked dev tools for engineers.',
   openGraph: {
     title: 'Developer Tools Directory - AI Hunt',
     description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, databases, and more. Curated for engineers.',

@@ -12,8 +12,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const repo = SEED_REPOS.find((r) => r.slug === params.slug)
   if (!repo) return { title: 'Editing Tool Not Found', robots: { index: false, follow: false } }
   const seoDescription = repo.description
-    ? `${repo.description.replace(/[#_*`]/g, '').slice(0, 155)}`
+    ? `${repo.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
     : repo.tagline
+  const ogImage = `${SITE_URL}/og.png`
   return {
     title: `${repo.name} - ${repo.tagline}`,
     description: seoDescription,
@@ -21,13 +22,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: `${repo.name} - ${repo.tagline}`,
       description: seoDescription,
       type: 'article',
-      images: repo.logoUrl ? [{ url: repo.logoUrl, alt: repo.name }] : undefined,
+      url: `${SITE_URL}/edittools/${repo.slug}`,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${repo.name} - AI Hunt` }],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${repo.name} - ${repo.tagline}`,
       description: seoDescription,
-      images: repo.logoUrl ? [repo.logoUrl] : undefined,
+      images: [ogImage],
     },
     alternates: {
       canonical: `${SITE_URL}/edittools/${repo.slug}`,
@@ -51,12 +53,16 @@ export default async function EditToolDetailPage({
     applicationCategory: 'Multimedia',
     applicationSubCategory: repo.category,
     operatingSystem: 'Web',
-    offers: {
-      '@type': 'Offer',
-      price: repo.pricing === 'free' || repo.pricing === 'open-source' ? '0' : undefined,
-      priceCurrency: 'USD',
-      url: repo.url,
-    },
+    ...(repo.pricing === 'free' || repo.pricing === 'open-source'
+      ? {
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+            url: repo.url,
+          },
+        }
+      : {}),
     url: `${SITE_URL}/edittools/${repo.slug}`,
     sameAs: repo.url,
     datePublished: repo.createdAt,
@@ -71,7 +77,7 @@ export default async function EditToolDetailPage({
           dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       )}
-      <RepoDetail slug={slug} />
+      <RepoDetail slug={slug} initial={repo ?? undefined} />
     </>
   )
 }

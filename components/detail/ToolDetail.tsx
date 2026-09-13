@@ -26,26 +26,30 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { RepoCard } from '@/components/cards/RepoCard'
 import { relativeTime, formatDate, formatNumber } from '@/lib/utils'
 import { use, useState, useEffect } from 'react'
+import type { Tool } from '@/types'
 
 export function ToolDetail({
   slug,
+  initial,
 }: {
   slug: string
+  initial?: Tool
 }) {
   const { tools, repos, getItemBySlug, getUser, currentUser, deleteTool } = useApp()
   const router = useRouter()
   const [notFoundFlag, setNotFoundFlag] = useState(false)
-  const [tool, setTool] = useState(
-    tools.find((t) => t.slug === slug)
-  )
+  // Prefer live store data (votes/bookmarks), fall back to SSR seed snapshot
+  // so crawlers and first paint see content before hydration merges.
+  const live = tools.find((t) => t.slug === slug)
+  const [tool, setTool] = useState(live ?? initial)
 
   useEffect(() => {
-    const found = tools.find((t) => t.slug === slug)
+    const found = tools.find((t) => t.slug === slug) ?? initial
     // Reset on every lookup: hydration merges local submissions after mount,
     // so a slug missing from seed-only state may resolve a render later.
     setNotFoundFlag(!found)
     setTool(found)
-  }, [slug, tools])
+  }, [slug, tools, initial])
 
   if (notFoundFlag && !tool) {
     notFound()

@@ -215,9 +215,9 @@ export function CourseDetailModal() {
   )
 }
 
-export function CourseDetail({ slug }: { slug: string }) {
+export function CourseDetail({ slug, initial }: { slug: string; initial?: Course }) {
   const { courses, getUser } = useApp()
-  const course = courses.find((c) => c.slug === slug)
+  const course = courses.find((c) => c.slug === slug) ?? initial
 
   if (!course) return null
 

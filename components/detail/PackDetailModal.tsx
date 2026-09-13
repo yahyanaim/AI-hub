@@ -298,7 +298,9 @@ export function PackDetailModal({ pack, onClose }: PackDetailModalProps) {
               {PACK_LOGOS[pack.slug] ? (
                 <img
                   src={PACK_LOGOS[pack.slug]}
-                  alt=""
+                  alt={`${pack.name} logo`}
+                  loading="lazy"
+                  decoding="async"
                   className="h-9 w-9 object-contain"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none'
@@ -335,7 +337,9 @@ export function PackDetailModal({ pack, onClose }: PackDetailModalProps) {
                           {logo ? (
                             <img
                               src={logo}
-                              alt=""
+                              alt={`${tool} logo`}
+                              loading="lazy"
+                              decoding="async"
                               className="h-5 w-5 rounded"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).style.display = 'none'

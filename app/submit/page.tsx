@@ -19,7 +19,7 @@ export default function SubmitPage() {
           Contribute
         </div>
         <h1 className="font-heading text-3xl font-bold sm:text-4xl">
-          Share with the community
+          Submit a tool or resource
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Submit a tool, dev tool, or repo. New entries are reviewed before going live.

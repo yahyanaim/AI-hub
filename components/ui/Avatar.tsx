@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { cn, getInitials, colorFromString } from '@/lib/utils'
 
 interface AvatarProps {
@@ -12,7 +13,8 @@ interface AvatarProps {
 export function Avatar({ name, src, size = 32, className }: AvatarProps) {
   const initials = getInitials(name) || '?'
   const bg = colorFromString(name)
-  if (src) {
+  const [failed, setFailed] = useState(false)
+  if (src && !failed) {
     // eslint-disable-next-line @next/next/no-img-element
     return (
       <img
@@ -20,6 +22,10 @@ export function Avatar({ name, src, size = 32, className }: AvatarProps) {
         alt={name}
         width={size}
         height={size}
+        loading="lazy"
+        decoding="async"
+        referrerPolicy="no-referrer"
+        onError={() => setFailed(true)}
         className={cn('rounded-full object-cover', className)}
         style={{ width: size, height: size }}
       />

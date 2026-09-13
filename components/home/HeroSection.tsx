@@ -1,8 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import type { LucideIcon } from 'lucide-react'
-import { ArrowRight, Sparkles, Search, TrendingUp, Brain, Code, Palette, Music, Globe, Zap, Star, Terminal, Cpu, Fingerprint, Rocket, Layers, Lightbulb, Hexagon, CircleDot, Command, Gauge, Blocks, Box, Cog, Database, FileSearch, GitBranch, Monitor, Workflow } from 'lucide-react'
+import { ArrowRight, Sparkles, Search, TrendingUp, Brain, Code, Globe, Zap, Terminal, Rocket, Layers, Database } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
@@ -18,30 +18,13 @@ interface FloatingIcon {
 
 const FLOATING_ICONS: FloatingIcon[] = [
   { Icon: Brain, x: '6%', y: '8%', size: 24, delay: 0, duration: 6, opacity: 0.18 },
-  { Icon: Cpu, x: '22%', y: '85%', size: 18, delay: 0.4, duration: 6.5, opacity: 0.14 },
   { Icon: Code, x: '85%', y: '15%', size: 22, delay: 0.5, duration: 7, opacity: 0.16 },
-  { Icon: Palette, x: '10%', y: '68%', size: 20, delay: 1, duration: 5.5, opacity: 0.13 },
-  { Icon: Music, x: '75%', y: '65%', size: 18, delay: 0.3, duration: 6.5, opacity: 0.15 },
   { Icon: Globe, x: '45%', y: '5%', size: 19, delay: 0.8, duration: 8, opacity: 0.17 },
   { Icon: Zap, x: '90%', y: '45%', size: 16, delay: 1.2, duration: 5, opacity: 0.12 },
-  { Icon: Star, x: '2%', y: '38%', size: 14, delay: 0.6, duration: 7.5, opacity: 0.16 },
   { Icon: Terminal, x: '68%', y: '82%', size: 17, delay: 0.9, duration: 6, opacity: 0.13 },
-  { Icon: Fingerprint, x: '60%', y: '3%', size: 15, delay: 1.1, duration: 7.5, opacity: 0.15 },
   { Icon: Rocket, x: '3%', y: '52%', size: 17, delay: 0.7, duration: 5.5, opacity: 0.18 },
   { Icon: Layers, x: '80%', y: '32%', size: 16, delay: 0.2, duration: 6, opacity: 0.14 },
-  { Icon: Lightbulb, x: '35%', y: '90%', size: 14, delay: 1.3, duration: 7, opacity: 0.12 },
-  { Icon: Hexagon, x: '93%', y: '72%', size: 20, delay: 0.5, duration: 5.5, opacity: 0.16 },
-  { Icon: CircleDot, x: '15%', y: '26%', size: 12, delay: 0.9, duration: 8, opacity: 0.13 },
-  { Icon: Command, x: '52%', y: '78%', size: 16, delay: 0.1, duration: 6.5, opacity: 0.15 },
-  { Icon: Gauge, x: '40%', y: '12%', size: 15, delay: 0.6, duration: 7, opacity: 0.12 },
-  { Icon: Blocks, x: '70%', y: '50%', size: 14, delay: 0.3, duration: 6, opacity: 0.14 },
-  { Icon: Box, x: '30%', y: '75%', size: 13, delay: 1.0, duration: 5.5, opacity: 0.11 },
-  { Icon: Cog, x: '88%', y: '58%', size: 12, delay: 0.8, duration: 7.5, opacity: 0.13 },
   { Icon: Database, x: '50%', y: '95%', size: 14, delay: 0.2, duration: 6.5, opacity: 0.15 },
-  { Icon: FileSearch, x: '12%', y: '50%', size: 11, delay: 1.1, duration: 8, opacity: 0.12 },
-  { Icon: GitBranch, x: '76%', y: '95%', size: 13, delay: 0.5, duration: 5, opacity: 0.14 },
-  { Icon: Monitor, x: '95%', y: '10%', size: 15, delay: 0.7, duration: 6, opacity: 0.11 },
-  { Icon: Workflow, x: '55%', y: '20%', size: 14, delay: 0.9, duration: 7.5, opacity: 0.13 },
 ]
 
 interface HeroSectionProps {
@@ -55,17 +38,18 @@ interface HeroSectionProps {
 
 export function HeroSection({ onSearch, toolCount, promptCount, repoCount, courseCount, offerCount }: HeroSectionProps) {
   const totalCount = toolCount + promptCount + repoCount + courseCount + offerCount
+  const reduceMotion = useReducedMotion()
 
   return (
     <section className="relative overflow-hidden py-16 md:py-24">
       {/* Floating background icons */}
-      <div className="pointer-events-none absolute inset-0 select-none">
+      <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
         {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
           <motion.div
             key={i}
             className="absolute text-brand-orange"
             style={{ left: x, top: y, opacity }}
-            animate={{
+            animate={reduceMotion ? undefined : {
               y: [0, -12, 0, 10, 0],
               opacity: [opacity, opacity * 1.6, opacity, opacity * 1.3, opacity],
             }}

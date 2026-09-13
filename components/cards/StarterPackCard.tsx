@@ -133,7 +133,9 @@ export function StarterPackCard({
           {PACK_LOGOS[devtool.slug] ? (
             <img
               src={PACK_LOGOS[devtool.slug]}
-              alt=""
+              alt={`${devtool.name} logo`}
+              loading="lazy"
+              decoding="async"
               className="h-8 w-8 rounded object-contain"
               onError={(e) => {
                 (e.target as HTMLImageElement).style.display = 'none'
@@ -176,7 +178,9 @@ export function StarterPackCard({
                 {logo ? (
                   <img
                     src={logo}
-                    alt=""
+                    alt={`${tool} logo`}
+                    loading="lazy"
+                    decoding="async"
                     className="h-4 w-4 rounded"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = 'none'

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { DonationGate } from './DonationGate'
 import { useRouter } from 'next/navigation'
 import imageHosts from '@/lib/image-hosts.json'
@@ -51,11 +51,11 @@ export function SubmitForm() {
   const { submitTool, submitDevTool, submitRepo, currentUser, setAuthModalOpen } =
     useApp()
   const [showDonation, setShowDonation] = useState(false)
-  const [pendingSubmit, setPendingSubmit] = useState(false)
   const [logoError, setLogoError] = useState<string | null>(null)
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [step, setStep] = useState<Step>(0)
   const [fetching, setFetching] = useState(false)
+  const fetchRunRef = useRef(0)
   const [tagInput, setTagInput] = useState('')
   const [submitted, setSubmitted] = useState<{
     type: ItemType
@@ -78,6 +78,13 @@ export function SubmitForm() {
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((f) => ({ ...f, [key]: value }))
 
+  const setType = (type: ItemType) => {
+    // Reset category to a valid default for the new type so stale values
+    // (e.g. 'coding' kept when switching Tool -> Repo) can't pass through.
+    const defaults: Record<string, string> = { tool: 'coding', devtool: 'developer-tools', repo: 'other' }
+    setForm((f) => ({ ...f, type, category: defaults[type] ?? 'other' }))
+  }
+
   const canAdvance = (): boolean => {
     if (step === 0) return !!form.type
     if (step === 1) {
@@ -98,34 +105,26 @@ export function SubmitForm() {
 
   // Simulated metadata auto-fetch
   const fetchMetadata = async () => {
-    if (form.type === 'tool' && form.url) {
+    if (fetching) return
+    if ((form.type === 'tool' || form.type === 'devtool') && form.url) {
+      let domain = ''
+      try {
+        domain = new URL(form.url).hostname.replace(/^www\./, '')
+      } catch {
+        setSubmitError('Enter a valid http(s) URL first.')
+        return
+      }
       setFetching(true)
+      const runId = ++fetchRunRef.current
       // Simulate OG fetch with derived values
       await new Promise((r) => setTimeout(r, 900))
-      const domain = (() => {
-        try {
-          return new URL(form.url).hostname.replace('www.', '')
-        } catch {
-          return form.url
-        }
-      })()
+      if (runId !== fetchRunRef.current) return // stale run — another fetch started
       const pretty = domain.split('.')[0] ?? domain
-      set('name', form.name || pretty.charAt(0).toUpperCase() + pretty.slice(1))
-      set('logoUrl', `https://www.google.com/s2/favicons?domain=${domain}&sz=128`)
-      setFetching(false)
-    } else if (form.type === 'devtool' && form.url) {
-      setFetching(true)
-      await new Promise((r) => setTimeout(r, 900))
-      const domain = (() => {
-        try {
-          return new URL(form.url).hostname.replace('www.', '')
-        } catch {
-          return form.url
-        }
-      })()
-      const pretty = domain.split('.')[0] ?? domain
-      set('name', form.name || pretty.charAt(0).toUpperCase() + pretty.slice(1))
-      set('logoUrl', `https://www.google.com/s2/favicons?domain=${domain}&sz=128`)
+      setForm((f) => ({
+        ...f,
+        name: f.name || pretty.charAt(0).toUpperCase() + pretty.slice(1),
+        logoUrl: f.logoUrl || `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
+      }))
       setFetching(false)
     }
   }
@@ -142,22 +141,43 @@ export function SubmitForm() {
       return
     }
     setShowDonation(true)
-    setPendingSubmit(true)
     return
   }
 
   const finishSubmit = () => {
-    // logoUrl must point at an allowlisted image host (see lib/image-hosts.json)
-    let host = ''
-    try {
-      host = new URL(form.logoUrl).hostname
-    } catch {
-      host = ''
+    // Empty logo is allowed — store auto-generates a favicon placeholder.
+    const trimmedLogo = form.logoUrl.trim()
+    if (trimmedLogo) {
+      // logoUrl must point at an allowlisted image host (see lib/image-hosts.json)
+      let host = ''
+      try {
+        host = new URL(trimmedLogo).hostname
+      } catch {
+        host = ''
+      }
+      if (!ALLOWED_IMAGE_HOSTS.includes(host)) {
+        setLogoError(
+          'The logo URL uses an image host we do not allow yet. Leave the URL empty to auto-generate a favicon, or contact us to request the host.'
+        )
+        return
+      }
     }
-    if (!ALLOWED_IMAGE_HOSTS.includes(host)) {
-      setLogoError(
-        'The logo URL uses an image host we do not allow yet. Leave the URL empty to auto-generate a favicon, or contact us to request the host.'
-      )
+    // Validate category against the active type's allowlist (no blind casts).
+    const validCategory =
+      form.type === 'tool'
+        ? (Object.keys(TOOL_CATEGORY_LABELS) as string[]).includes(form.category)
+        : form.type === 'devtool'
+          ? (Object.keys(DEVTOOL_CATEGORY_LABELS) as string[]).includes(form.category)
+          : form.type === 'repo'
+            ? (Object.keys(REPO_CATEGORY_LABELS) as string[]).includes(form.category)
+            : false
+    if (!validCategory) {
+      setSubmitError('Pick a valid category for this type.')
+      return
+    }
+    // Basic length guards before hitting the store (store truncates as well).
+    if (!form.name.trim() || !form.url.trim() || !form.tagline.trim() || !form.description.trim()) {
+      setSubmitError('Fill in name, URL, tagline and description.')
       return
     }
     setLogoError(null)
@@ -170,7 +190,7 @@ export function SubmitForm() {
         tagline: form.tagline,
         description: form.description,
         url: form.url,
-        logoUrl: form.logoUrl,
+        logoUrl: trimmedLogo,
         category: form.category as ToolCategory,
         tags: form.tags,
         pricing: form.pricing,
@@ -182,7 +202,7 @@ export function SubmitForm() {
         tagline: form.tagline,
         description: form.description,
         url: form.url,
-        logoUrl: form.logoUrl,
+        logoUrl: trimmedLogo,
         category: form.category as DevToolCategory,
         tags: form.tags,
         pricing: form.pricing,
@@ -194,7 +214,7 @@ export function SubmitForm() {
         tagline: form.tagline,
         description: form.description,
         url: form.url,
-        logoUrl: form.logoUrl,
+        logoUrl: trimmedLogo,
         category: form.category as EditToolCategory,
         tags: form.tags,
         pricing: form.pricing,
@@ -330,7 +350,7 @@ export function SubmitForm() {
               ).map(({ type, icon: Icon, title, desc }) => (
                 <button
                   key={type}
-                  onClick={() => set('type', type)}
+                  onClick={() => setType(type)}
                   className={cn(
                     'flex flex-col items-start rounded-md border p-4 text-left transition-all',
                     form.type === type

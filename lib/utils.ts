@@ -14,7 +14,9 @@ export function formatNumber(n: number): string {
 export function relativeTime(date: string | Date): string {
   const now = Date.now()
   const then = new Date(date).getTime()
+  if (Number.isNaN(then)) return 'unknown'
   const diff = now - then
+  if (diff < 0) return 'just now'
   const minutes = Math.floor(diff / 60000)
   if (minutes < 1) return 'just now'
   if (minutes < 60) return `${minutes}m ago`
@@ -28,8 +30,10 @@ export function relativeTime(date: string | Date): string {
   return `${years}y ago`
 }
 
-export function formatDate(date: string | Date): string {
-  return new Date(date).toLocaleDateString('en-US', {
+export function formatDate(date: string | Date, locale?: string): string {
+  const d = new Date(date)
+  if (Number.isNaN(d.getTime())) return 'unknown'
+  return d.toLocaleDateString(locale, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -39,13 +43,19 @@ export function formatDate(date: string | Date): string {
 export function slugify(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
+    .normalize('NFKD')
+    .replace(/[^\p{L}\p{N}\s-]/gu, '')
     .replace(/[\s_]+/g, '-')
+    .replace(/-+/g, '-')
     .replace(/^-+|-+$/g, '')
 }
 
 export function uuid(): string {
-  return crypto.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`
+  try {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function')
+      return crypto.randomUUID()
+  } catch {}
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`
 }
 
 export function truncate(str: string, max: number): string {
@@ -97,7 +107,12 @@ export function downloadRoadmapPlan(course: { name: string; slug: string; taglin
 
   const formatLabel = (s: string) => escapeHtml(s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, ' '))
   const esc = escapeHtml
-  const escUrl = (u: string) => esc(u).replace(/^javascript:/i, '')
+  // Rendered as plain text (never as href) — block dangerous protocols defensively.
+  const escUrl = (u: string) => {
+    const t = esc(u.trim())
+    if (/^(javascript|data|vbscript|file|blob):/i.test(t.replace(/[\s\0-\x1F]+/g, ''))) return '#'
+    return t
+  }
 
   el.innerHTML = `
     <div style="border-bottom:2px solid #FF6B00;padding-bottom:20px;margin-bottom:28px">

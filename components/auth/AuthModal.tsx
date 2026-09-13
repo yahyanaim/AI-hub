@@ -1,20 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { X, Github, Mail, Sparkles } from 'lucide-react'
+import { X, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import { useApp } from '@/lib/store'
 
 export function AuthModal() {
   const { authModalOpen, setAuthModalOpen, signIn, resolvePendingAction } = useApp()
   const [username, setUsername] = useState('')
-  const [mode, setMode] = useState<'signin' | 'pending'>('signin')
   const [nameError, setNameError] = useState<string | null>(null)
 
   useEffect(() => {
     if (authModalOpen) {
       setUsername('')
-      setMode('signin')
       setNameError(null)
     }
   }, [authModalOpen])
@@ -34,14 +32,12 @@ export function AuthModal() {
 
   if (!authModalOpen) return null
 
-  const handleSignIn = (provider?: 'github' | 'google' | 'email') => {
-    const name =
-      provider === 'github'
-        ? username || 'dev'
-        : provider === 'google'
-          ? username || 'user'
-          : username
-    if (!name.trim()) return
+  const handleSignIn = () => {
+    const name = username
+    if (!name.trim()) {
+      setNameError('Enter a username first.')
+      return
+    }
     // Mirror store sanitizing so invalid handles show an error instead of
     // silently doing nothing (store ignores handles < 2 chars after cleanup).
     const clean = name.trim().toLowerCase().replace(/[^a-z0-9_]/g, '')
@@ -52,6 +48,7 @@ export function AuthModal() {
     setNameError(null)
     signIn(name.trim())
     setAuthModalOpen(false)
+    // Defer one tick so signIn's setState commits before applying the gate.
     setTimeout(() => resolvePendingAction(), 0)
   }
 
@@ -90,40 +87,32 @@ export function AuthModal() {
           </div>
 
           <div className="space-y-2">
-            <button
-              onClick={() => handleSignIn('github')}
-              className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-muted px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary hover:border-brand-orange/30"
-            >
-              <Github className="h-4 w-4" />
-              Continue with GitHub
-            </button>
-            <button
-              onClick={() => handleSignIn('google')}
-              className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-muted px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary hover:border-brand-orange/30"
-            >
-              <Mail className="h-4 w-4" />
-              Continue with Google
-            </button>
+            <p className="text-xs text-muted-foreground">
+              Demo build — pick a local username below. No real OAuth; your session lives in this browser only.
+            </p>
           </div>
 
           <div className="my-5 flex items-center gap-3">
             <div className="h-px flex-1 bg-border" />
-            <span className="text-xs text-muted-foreground">or pick a username</span>
+            <span className="text-xs text-muted-foreground">pick a username</span>
             <div className="h-px flex-1 bg-border" />
           </div>
 
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              handleSignIn('email')
+              handleSignIn()
             }}
             className="space-y-3"
           >
+            <label htmlFor="auth-username" className="sr-only">Username</label>
             <input
+              id="auth-username"
               value={username}
               onChange={(e) => { setUsername(e.target.value); setNameError(null) }}
               placeholder="your-username"
               maxLength={24}
+              autoComplete="username"
               className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-input"
               autoFocus
             />

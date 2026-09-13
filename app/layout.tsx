@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
-import { Inter } from 'next/font/google'
+import { Inter, Noto_Kufi_Arabic } from 'next/font/google'
 import './globals.css'
 import { AppProvider } from '@/lib/store'
 import { SITE_URL } from '@/lib/site'
@@ -20,6 +20,12 @@ import { safeJsonLd } from '@/lib/json-ld'
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+const arabic = Noto_Kufi_Arabic({
+  subsets: ['arabic'],
+  variable: '--font-arabic',
   display: 'swap',
 })
 
@@ -94,9 +100,9 @@ export const metadata: Metadata = {
     'geo.region': 'MA',
     'geo.placename': 'Morocco',
   },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION ?? '',
-  },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION }
+    : undefined,
   category: 'technology',
 }
 
@@ -112,7 +118,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${arabic.variable}`} suppressHydrationWarning>
       <head>
         <Script
           id="schema-website"
@@ -125,14 +131,6 @@ export default function RootLayout({
               url: baseUrl,
               description: 'Community-driven discovery platform for AI tools, n8n automation, developer tools, open-source repos, coding courses, and freelancing skills - popular with developers and students in Morocco.',
               keywords: 'AI tools, n8n, automation, coding courses, freelancing, development, AI skills, Morocco',
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: {
-                  '@type': 'EntryPoint',
-                  urlTemplate: `${baseUrl}/search?q={search_term_string}`,
-                },
-                'query-input': 'required name=search_term_string',
-              },
               inLanguage: ['en', 'fr', 'ar'],
               audience: {
                 '@type': 'Audience',

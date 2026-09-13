@@ -23,8 +23,9 @@ export async function generateMetadata({
   const tool = await findTool(params.category, params.slug)
   if (!tool) return { title: 'Tool Not Found', robots: { index: false, follow: false } }
   const seoDescription = tool.description
-    ? `${tool.description.replace(/[#_*`]/g, '').slice(0, 155)}`
+    ? `${tool.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
     : tool.tagline
+  const ogImage = `${SITE_URL}/og.png`
   return {
     title: `${tool.name} - ${tool.tagline}`,
     description: seoDescription,
@@ -32,13 +33,14 @@ export async function generateMetadata({
       title: `${tool.name} - ${tool.tagline}`,
       description: seoDescription,
       type: 'article',
-      images: tool.logoUrl ? [{ url: tool.logoUrl, alt: tool.name }] : undefined,
+      url: `${SITE_URL}/tools/${tool.category}/${tool.slug}`,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${tool.name} - AI Hunt` }],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${tool.name} - ${tool.tagline}`,
       description: seoDescription,
-      images: tool.logoUrl ? [tool.logoUrl] : undefined,
+      images: [ogImage],
     },
     alternates: {
       canonical: `${SITE_URL}/tools/${tool.category}/${tool.slug}`,
@@ -64,15 +66,16 @@ export default async function ToolDetailPage({
         applicationCategory: 'DeveloperApplication',
         applicationSubCategory: tool.category,
         operatingSystem: 'Web',
-        offers: {
-          '@type': 'Offer',
-          price:
-            tool.pricing === 'free' || tool.pricing === 'open-source'
-              ? '0'
-              : undefined,
-          priceCurrency: 'USD',
-          url: tool.url,
-        },
+        ...(tool.pricing === 'free' || tool.pricing === 'open-source'
+          ? {
+              offers: {
+                '@type': 'Offer',
+                price: '0',
+                priceCurrency: 'USD',
+                url: tool.url,
+              },
+            }
+          : {}),
         author: user
           ? {
               '@type': 'Person',
@@ -94,7 +97,7 @@ export default async function ToolDetailPage({
           dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       )}
-      <ToolDetail slug={slug} />
+      <ToolDetail slug={slug} initial={tool ?? undefined} />
     </>
   )
 }

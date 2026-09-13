@@ -22,21 +22,22 @@ import { CommentThread } from '@/components/detail/CommentThread'
 import { relativeTime, formatDate, formatNumber } from '@/lib/utils'
 import type { DevTool } from '@/types'
 
-export function DevToolDetail({ slug }: { slug: string }) {
+export function DevToolDetail({ slug, initial }: { slug: string; initial?: DevTool }) {
   const { devTools, getUser, currentUser, deleteDevTool } = useApp()
   const router = useRouter()
   const [notFoundFlag, setNotFoundFlag] = useState(false)
+  const live = devTools.find((d) => d.slug === slug)
   const [devtool, setDevTool] = useState<DevTool | undefined>(
-    devTools.find((d) => d.slug === slug)
+    live ?? initial
   )
 
   useEffect(() => {
-    const found = devTools.find((d) => d.slug === slug)
+    const found = devTools.find((d) => d.slug === slug) ?? initial
     // Reset on every lookup: hydration merges local submissions after mount,
     // so a slug missing from seed-only state may resolve a render later.
     setNotFoundFlag(!found)
     setDevTool(found)
-  }, [slug, devTools])
+  }, [slug, devTools, initial])
 
   if (notFoundFlag && !devtool) {
     notFound()

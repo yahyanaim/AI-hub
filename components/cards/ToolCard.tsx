@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ExternalLink, Flame, Heart, TrendingUp, Trash2 } from 'lucide-react'
+import { ExternalLink, Heart, Trash2 } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
@@ -26,21 +26,22 @@ export function ToolCard({
 
   return (
     <article
-      onClick={() => openDetailModal(tool.id)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          openDetailModal(tool.id)
-        }
-      }}
       className={cn(
-        'group relative flex cursor-pointer flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
+        'group relative flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-within:ring-2 focus-within:ring-brand-orange/40',
         className
       )}
-      aria-label={`${tool.name} - open details`}
     >
+      <Link
+        href={`/tools/${tool.category}/${tool.slug}`}
+        onClick={(e) => {
+          // Allow modifier/middle-click to open the real page; plain click opens the modal.
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return
+          e.preventDefault()
+          openDetailModal(tool.id)
+        }}
+        className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none"
+        aria-label={`${tool.name} - open details`}
+      />
       {/* ===== Header: icon with optional rank badge ===== */}
       <div className="relative mb-3 flex items-start gap-3.5">
         <div className="relative">
@@ -65,13 +66,13 @@ export function ToolCard({
           </div>
         </div>
         {/* Actions, top-right */}
-        <div className="relative z-20 -mr-1 -mt-1 flex items-center gap-0.5" onClick={(e) => e.stopPropagation()}>
+        <div className="relative z-20 -mr-1 -mt-1 flex items-center gap-0.5">
           {currentUser?.id === tool.submittedBy && (
             <button
               onClick={() => {
                 if (window.confirm(`Delete "${tool.name}"?`)) deleteTool(tool.id)
               }}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground opacity-0 transition-all hover:bg-red-500/10 hover:text-red-500 group-hover:opacity-100"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground opacity-0 transition-all hover:bg-red-500/10 hover:text-red-500 group-hover:opacity-100 focus-visible:opacity-100"
               aria-label="Delete tool"
             >
               <Trash2 className="h-3.5 w-3.5" />
@@ -93,23 +94,17 @@ export function ToolCard({
       </div>
 
       {/* ===== Footer: submitter + likes ===== */}
-      <div className="mt-auto flex items-center justify-between border-t border-border/50 pt-3">
+      <div className="relative z-20 mt-auto flex items-center justify-between border-t border-border/50 pt-3">
         <div className="flex items-center gap-2">
           {submitter ? (
             <>
               <Avatar name={submitter.displayName} src={submitter.avatarUrl} size={22} />
-              <span
-                onClick={(e) => e.stopPropagation()}
-                role="button"
+              <Link
+                href={`/profile/${submitter.username}`}
+                className="text-xs text-muted-foreground transition-colors hover:text-foreground"
               >
-                <Link
-                  href={`/profile/${submitter.username}`}
-                  onClick={(e) => e.stopPropagation()}
-                  className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  @{submitter.username}
-                </Link>
-              </span>
+                @{submitter.username}
+              </Link>
             </>
           ) : (
             <span className="text-xs text-muted-foreground">Community</span>

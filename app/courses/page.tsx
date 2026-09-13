@@ -11,7 +11,7 @@ const topCourses = [...SEED_COURSES].sort((a, b) => b.upvotes - a.upvotes).slice
 
 export const metadata: Metadata = {
   title: 'Coding Courses & Learning Paths',
-  description: 'Discover the best free and paid coding courses, learning paths, and roadmaps for web development, AI, data science, and backend engineering. Curated for developers.',
+  description: 'Free and paid coding courses, roadmaps and learning paths for web, AI, data and backend development.',
   openGraph: {
     title: 'Coding Courses & Learning Paths - AI Hunt',
     description: 'Discover the best free and paid coding courses, roadmaps, and learning paths for developers. Curated by the community.',

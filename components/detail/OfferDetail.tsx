@@ -9,10 +9,11 @@ import { CategoryBadge, PricingBadge, OfferUrgencyBadge } from '@/components/ui/
 import { UpvoteButton } from '@/components/interactive/UpvoteButton'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
 import { HoverTranslate } from '@/components/ui/HoverTranslate'
+import type { Offer } from '@/types'
 
-export function OfferDetail({ slug }: { slug: string }) {
+export function OfferDetail({ slug, initial }: { slug: string; initial?: Offer }) {
   const { offers, getUser } = useApp()
-  const offer = offers.find((o) => o.slug === slug)
+  const offer = offers.find((o) => o.slug === slug) ?? initial
 
   if (!offer) return null
 

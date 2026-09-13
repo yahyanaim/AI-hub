@@ -13,17 +13,14 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { category: string; slug: string } }): Promise<Metadata> {
   const { category, slug } = params
-  const course = SEED_COURSES.find((c) => c.slug === slug)
+  const course = SEED_COURSES.find((c) => c.slug === slug && c.category === category)
 
   if (!course) return { title: 'Course Not Found', robots: { index: false, follow: false } }
 
-  if (course.category !== category) {
-    redirect(`/courses/${course.category}/${course.slug}`)
-  }
-
   const seoDescription = course.description
-    ? `${course.description.replace(/[#_*`]/g, '').slice(0, 155)}`
+    ? `${course.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
     : course.tagline
+  const ogImage = `${baseUrl}/og.png`
   return {
     title: `${course.name} - ${course.tagline}`,
     description: seoDescription,
@@ -31,13 +28,14 @@ export async function generateMetadata({ params }: { params: { category: string;
       title: `${course.name} - ${course.tagline}`,
       description: seoDescription,
       type: 'article',
-      images: course.logoUrl ? [{ url: course.logoUrl, alt: course.name }] : undefined,
+      url: `${baseUrl}/courses/${course.category}/${course.slug}`,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${course.name} - AI Hunt` }],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${course.name} - ${course.tagline}`,
       description: seoDescription,
-      images: course.logoUrl ? [course.logoUrl] : undefined,
+      images: [ogImage],
     },
     alternates: {
       canonical: `${baseUrl}/courses/${course.category}/${course.slug}`,
@@ -47,12 +45,15 @@ export async function generateMetadata({ params }: { params: { category: string;
 
 export default async function CourseDetailPage({ params }: { params: { category: string; slug: string } }) {
   const { category, slug } = params
-  const course = SEED_COURSES.find((c) => c.slug === slug)
+  const course = SEED_COURSES.find((c) => c.slug === slug && c.category === category)
 
   if (!course) notFound()
 
-  if (course.category !== category) {
-    redirect(`/courses/${course.category}/${course.slug}`)
+  // If only the category segment is wrong but the slug exists elsewhere,
+  // redirect to the canonical category instead of 404.
+  const canonical = SEED_COURSES.find((c) => c.slug === slug)
+  if (canonical && canonical.category !== category) {
+    redirect(`/courses/${canonical.category}/${canonical.slug}`)
   }
 
   const user = SEED_USERS.find((u) => u.id === course.submittedBy)
@@ -89,7 +90,7 @@ export default async function CourseDetailPage({ params }: { params: { category:
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
-      <CourseDetail slug={slug} />
+      <CourseDetail slug={slug} initial={course} />
     </>
   )
 }

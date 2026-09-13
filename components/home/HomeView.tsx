@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from 'react'
 import { useApp } from '@/lib/store'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
@@ -11,19 +12,22 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { motion } from 'framer-motion'
 
 export function HomeView() {
-  const { tools, devTools, prompts, repos, courses, offers, setPaletteOpen } = useApp()
+  const { tools, devTools, repos, courses, offers, setPaletteOpen } = useApp()
 
-  const todaysTools = [...tools]
-    .sort((a, b) => b.upvotes - a.upvotes)
-    .slice(0, 6)
+  const todaysTools = useMemo(
+    () => [...tools].sort((a, b) => b.upvotes - a.upvotes).slice(0, 6),
+    [tools]
+  )
 
-  const trendingDevTools = [...devTools]
-    .sort((a, b) => b.upvotes - a.upvotes)
-    .slice(0, 4)
+  const trendingDevTools = useMemo(
+    () => [...devTools].sort((a, b) => b.upvotes - a.upvotes).slice(0, 4),
+    [devTools]
+  )
 
-  const trendingRepos = [...repos]
-    .sort((a, b) => b.upvotes - a.upvotes)
-    .slice(0, 4)
+  const trendingRepos = useMemo(
+    () => [...repos].sort((a, b) => b.upvotes - a.upvotes).slice(0, 4),
+    [repos]
+  )
 
   return (
     <div className="container-page py-8 space-y-10">

@@ -8,6 +8,7 @@ const nextConfig = {
       protocol: 'https',
       hostname,
     })),
+    formats: ['image/avif', 'image/webp'],
   },
   async redirects() {
     return [

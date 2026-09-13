@@ -155,10 +155,10 @@ export function RepoDetailModal() {
   )
 }
 
-export function RepoDetail({ slug }: { slug: string }) {
+export function RepoDetail({ slug, initial }: { slug: string; initial?: Repo }) {
   const { repos, getUser, currentUser, deleteRepo } = useApp()
   const router = useRouter()
-  const repo = repos.find((r) => r.slug === slug)
+  const repo = repos.find((r) => r.slug === slug) ?? initial
 
   if (!repo) return null
 

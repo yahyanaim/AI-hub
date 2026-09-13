@@ -71,21 +71,25 @@ const TABS = [
 
 type TabValue = (typeof TABS)[number]['value']
 
+const MAX_RESULTS_PER_SECTION = 24
+
 export function SearchView() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { tools, devTools, courses, repos, offers, hydrated } = useApp()
   const [query, setQuery] = useState(searchParams.get('q') ?? '')
   const [tab, setTab] = useState<TabValue>('all')
+  const [visibleCount, setVisibleCount] = useState(MAX_RESULTS_PER_SECTION)
 
   // Re-sync input when the URL ?q= changes (e.g. new palette search on same page)
   const qParam = searchParams.get('q') ?? ''
   useEffect(() => {
     setQuery(qParam)
+    setVisibleCount(MAX_RESULTS_PER_SECTION)
   }, [qParam])
 
   const q = query.trim().toLowerCase()
-  const queryWords = tokenize(q)
+  const queryWords = useMemo(() => tokenize(q), [q])
 
   const toolResults = useMemo(
     () =>
@@ -166,13 +170,17 @@ export function SearchView() {
 
       <div className="mx-auto mt-8 max-w-xl">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+          <label htmlFor="site-search" className="sr-only">Search tools, courses and repos</label>
           <input
+            id="site-search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => { setQuery(e.target.value); setVisibleCount(MAX_RESULTS_PER_SECTION) }}
             placeholder="Search anything - 'HTML', 'React', 'SEO'…"
             className="input pl-12 py-3 text-base"
             autoFocus
+            autoComplete="off"
+            maxLength={120}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && query.trim()) {
                 router.push(`/search?q=${encodeURIComponent(query.trim())}`)
@@ -191,11 +199,13 @@ export function SearchView() {
         </div>
       </div>
 
-      <div className="mx-auto mt-4 flex max-w-xl items-center justify-center gap-1 rounded-md border border-border bg-card p-0.5">
+      <div className="mx-auto mt-4 flex max-w-xl items-center justify-center gap-1 rounded-md border border-border bg-card p-0.5" role="tablist" aria-label="Search categories">
         {TABS.map(({ value, label }) => (
           <button
             key={value}
-            onClick={() => setTab(value)}
+            role="tab"
+            aria-selected={tab === value}
+            onClick={() => { setTab(value); setVisibleCount(MAX_RESULTS_PER_SECTION) }}
             className={cn(
               'rounded-sm px-3 py-1.5 text-sm font-medium transition-colors',
               tab === value
@@ -240,15 +250,20 @@ export function SearchView() {
             </p>
 
             {(tab === 'all' || tab === 'tool') && toolResults.length > 0 && (
-              <section className="mb-10">
+              <section className="mb-10" aria-live="polite">
                 <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Tools ({toolResults.length})
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {toolResults.map((t) => (
+                  {toolResults.slice(0, visibleCount).map((t) => (
                     <ToolCard key={t.id} tool={t} />
                   ))}
                 </div>
+                {toolResults.length > visibleCount && (
+                  <button onClick={() => setVisibleCount((c) => c + MAX_RESULTS_PER_SECTION)} className="btn-ghost mt-4 w-full py-2 text-sm">
+                    Show more tools ({toolResults.length - visibleCount} remaining)
+                  </button>
+                )}
               </section>
             )}
 
@@ -258,10 +273,15 @@ export function SearchView() {
                   Dev Tools ({devToolResults.length})
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {devToolResults.map((d) => (
+                  {devToolResults.slice(0, visibleCount).map((d) => (
                     <DevToolCard key={d.id} devtool={d} />
                   ))}
                 </div>
+                {devToolResults.length > visibleCount && (
+                  <button onClick={() => setVisibleCount((c) => c + MAX_RESULTS_PER_SECTION)} className="btn-ghost mt-4 w-full py-2 text-sm">
+                    Show more ({devToolResults.length - visibleCount} remaining)
+                  </button>
+                )}
               </section>
             )}
 
@@ -271,10 +291,15 @@ export function SearchView() {
                   Courses ({courseResults.length})
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {courseResults.map((c) => (
+                  {courseResults.slice(0, visibleCount).map((c) => (
                     <CourseCard key={c.id} course={c} />
                   ))}
                 </div>
+                {courseResults.length > visibleCount && (
+                  <button onClick={() => setVisibleCount((c) => c + MAX_RESULTS_PER_SECTION)} className="btn-ghost mt-4 w-full py-2 text-sm">
+                    Show more ({courseResults.length - visibleCount} remaining)
+                  </button>
+                )}
               </section>
             )}
 
@@ -284,10 +309,15 @@ export function SearchView() {
                   Repos ({repoResults.length})
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {repoResults.map((r) => (
+                  {repoResults.slice(0, visibleCount).map((r) => (
                     <RepoCard key={r.id} repo={r} />
                   ))}
                 </div>
+                {repoResults.length > visibleCount && (
+                  <button onClick={() => setVisibleCount((c) => c + MAX_RESULTS_PER_SECTION)} className="btn-ghost mt-4 w-full py-2 text-sm">
+                    Show more ({repoResults.length - visibleCount} remaining)
+                  </button>
+                )}
               </section>
             )}
 
@@ -297,10 +327,15 @@ export function SearchView() {
                   Offers ({offerResults.length})
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {offerResults.map((o) => (
+                  {offerResults.slice(0, visibleCount).map((o) => (
                     <OfferCard key={o.id} offer={o} />
                   ))}
                 </div>
+                {offerResults.length > visibleCount && (
+                  <button onClick={() => setVisibleCount((c) => c + MAX_RESULTS_PER_SECTION)} className="btn-ghost mt-4 w-full py-2 text-sm">
+                    Show more ({offerResults.length - visibleCount} remaining)
+                  </button>
+                )}
               </section>
             )}
           </>

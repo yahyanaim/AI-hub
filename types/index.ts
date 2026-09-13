@@ -142,6 +142,16 @@ export interface Tool {
   relatedRepos?: string[]
 }
 
+export type PromptCategory =
+  | 'coding'
+  | 'writing'
+  | 'marketing'
+  | 'design'
+  | 'data'
+  | 'productivity'
+  | 'education'
+  | 'other'
+
 export interface Prompt {
   id: string
   slug: string
@@ -149,7 +159,7 @@ export interface Prompt {
   description: string
   promptText: string
   model: string[]
-  category: string
+  category: PromptCategory
   tags: string[]
   upvotes: number
   copies: number
@@ -205,6 +215,7 @@ export interface Course {
   bookmarks: number
   submittedBy: string
   featured: boolean
+  featuredDate?: string
   tags?: string[]
   createdAt: string
   updatedAt: string
@@ -297,7 +308,7 @@ export interface User {
   createdAt: string
 }
 
-export type AnyItem = Tool | Repo | DevTool
+export type AnyItem = Tool | DevTool | Prompt | Repo | Course | Offer
 
 export interface Comment {
   id: string

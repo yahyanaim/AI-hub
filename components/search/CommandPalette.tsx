@@ -357,17 +357,19 @@ export function CommandPalette() {
                     : group === 'offer'
                       ? 'Offers'
                       : 'Repos'
+            // Precompute a stable id->index map once per render instead of indexOf per row.
+            const indexById = new Map(results.map((r, i) => [`${r.type}:${r.id}`, i]))
             return (
               <div key={group} className="mb-1">
                 <div className="px-2 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {label}
                 </div>
                 {items.map((r) => {
-                  const flatIndex = results.indexOf(r)
+                  const flatIndex = indexById.get(`${r.type}:${r.id}`) ?? 0
                   const active = flatIndex === activeIndex
                   return (
                     <button
-                      key={r.id}
+                      key={`${r.type}-${r.id}`}
                       id={`palette-option-${flatIndex}`}
                       role="option"
                       aria-selected={active}

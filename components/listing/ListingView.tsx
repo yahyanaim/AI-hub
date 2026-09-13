@@ -3,7 +3,6 @@
 import { useMemo, useState, useEffect, useRef } from 'react'
 import { Suspense } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import { motion } from 'framer-motion'
 import { SearchX, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
 import { CardGrid } from '@/components/cards/CardPrimitives'
 import { Dropdown, ChipFilter, ClearButton } from '@/components/layout/FilterBar'
@@ -35,13 +34,26 @@ interface SavedListingState {
 function loadSavedState(key: string): SavedListingState {
   if (typeof window === 'undefined') return {}
   try {
-    return JSON.parse(sessionStorage.getItem(key) ?? '{}') as SavedListingState
+    const raw = sessionStorage.getItem(key)
+    if (!raw) return {}
+    const parsed: unknown = JSON.parse(raw)
+    if (typeof parsed !== 'object' || parsed === null) return {}
+    const o = parsed as Record<string, unknown>
+    const validSort: SortKey[] = ['trending', 'top', 'new', 'bookmarked']
+    return {
+      sort: validSort.includes(o.sort as SortKey) ? (o.sort as SortKey) : undefined,
+      category: typeof o.category === 'string' ? o.category.slice(0, 60) : undefined,
+      pricing: typeof o.pricing === 'string' ? o.pricing.slice(0, 60) : undefined,
+      language: typeof o.language === 'string' ? o.language.slice(0, 60) : undefined,
+      view: o.view === 'grid' || o.view === 'list' ? o.view : undefined,
+      page: typeof o.page === 'number' && Number.isFinite(o.page) ? Math.min(500, Math.max(1, Math.floor(o.page))) : undefined,
+    }
   } catch {
     return {}
   }
 }
 
-export interface ListingConfig {
+export interface ListingConfig<T = unknown> {
   title: string
   eyebrow: string
   description: string
@@ -51,10 +63,10 @@ export interface ListingConfig {
   extraFilters?: 'pricing' | 'language'
   pricingOptions?: FilterOption[]
   languageOptions?: FilterOption[]
-  customCategoryFilter?: (itemCategory: string, item: any, selectedCategory: string) => boolean
+  customCategoryFilter?: (itemCategory: string, item: T, selectedCategory: string) => boolean
   subcategoryOptions?: FilterOption[]
   subcategoryLabel?: string
-  subcategoryFilter?: (item: any, subcategory: string) => boolean
+  subcategoryFilter?: (item: T, subcategory: string) => boolean
   initialCategory?: string
   /** Default sort for first-time visitors (returning visitors restore their saved sort) */
   defaultSort?: SortKey
@@ -65,7 +77,7 @@ export interface ListingConfig {
 
 interface ListingViewProps<T> {
   items: T[]
-  config: ListingConfig
+  config: ListingConfig<T>
   renderCard: (item: T, view: 'grid' | 'list') => React.ReactNode
   getCategory: (item: T) => string
   getPricing?: (item: T) => string
@@ -104,15 +116,39 @@ function ListingViewInner<T extends { id: string }>({
     config.syncCategoryToUrl && urlCategory && config.categoryOptions.some((o) => o.value === urlCategory)
       ? urlCategory
       : null
+  const urlPage = (() => {
+    const p = Number(searchParams.get('page') ?? '')
+    return Number.isFinite(p) && p >= 1 && p <= 500 ? Math.floor(p) : null
+  })()
+  const urlSort = searchParams.get('sort') as SortKey | null
+  const validUrlSort: SortKey | null =
+    urlSort === 'trending' || urlSort === 'top' || urlSort === 'new' || urlSort === 'bookmarked' ? urlSort : null
 
-  const [sort, setSort] = useState<SortKey>(saved.sort ?? config.defaultSort ?? 'trending')
+  const [sort, setSort] = useState<SortKey>(validUrlSort ?? saved.sort ?? config.defaultSort ?? 'trending')
   const [category, setCategory] = useState(
     config.initialCategory ?? validUrlCategory ?? saved.category ?? 'all'
   )
   const [pricing, setPricing] = useState(saved.pricing ?? 'all')
   const [language, setLanguage] = useState(saved.language ?? 'all')
   const [view, setView] = useState<'grid' | 'list'>(saved.view ?? 'grid')
-  const [page, setPage] = useState(saved.page ?? 1)
+  const [page, setPage] = useState(urlPage ?? saved.page ?? 1)
+
+  const syncListingToUrl = (next: { category?: string; sort?: SortKey; page?: number }) => {
+    const params = new URLSearchParams(searchParams.toString())
+    const cat = next.category ?? category
+    const s = next.sort ?? sort
+    const p = next.page ?? page
+    if (config.syncCategoryToUrl) {
+      if (cat === 'all') params.delete('category')
+      else params.set('category', cat)
+    }
+    if (s === (config.defaultSort ?? 'trending')) params.delete('sort')
+    else params.set('sort', s)
+    if (p <= 1) params.delete('page')
+    else params.set('page', String(p))
+    const qs = params.toString()
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
+  }
 
   // Persist state on every change
   useEffect(() => {
@@ -198,65 +234,79 @@ function ListingViewInner<T extends { id: string }>({
 
   const setCategoryWithUrl = (v: string) => {
     changeFilter(setCategory, v)
-    if (config.syncCategoryToUrl) {
-      const params = new URLSearchParams(searchParams.toString())
-      if (v === 'all') params.delete('category')
-      else params.set('category', v)
-      const qs = params.toString()
-      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
-    }
+    syncListingToUrl({ category: v, page: 1 })
   }
 
+  const setSortWithUrl = (v: SortKey) => {
+    changeFilter(setSort, v)
+    syncListingToUrl({ sort: v, page: 1 })
+  }
+
+  // Store function props in refs so inline closures from callers
+  // (e.g. getCategory={(t) => t.category}) don't defeat the filter memo.
+  const gettersRef = useRef({ getCategory, getPricing, getLanguage, getUpvotes, getBookmarks, getCreatedAt, getTrendingScore, customCategoryFilter: config.customCategoryFilter })
+  gettersRef.current = { getCategory, getPricing, getLanguage, getUpvotes, getBookmarks, getCreatedAt, getTrendingScore, customCategoryFilter: config.customCategoryFilter }
+
   const filtered = useMemo(() => {
+    const g = gettersRef.current
     let arr = [...items]
     if (category !== 'all') {
-      if (config.customCategoryFilter) {
-        arr = arr.filter((i) => config.customCategoryFilter!(getCategory(i), i, category))
+      if (g.customCategoryFilter) {
+        arr = arr.filter((i) => g.customCategoryFilter!(g.getCategory(i), i, category))
       } else {
-        arr = arr.filter((i) => getCategory(i) === category)
+        arr = arr.filter((i) => g.getCategory(i) === category)
       }
     }
-    if (pricing !== 'all' && getPricing) arr = arr.filter((i) => getPricing(i) === pricing)
-    if (language !== 'all' && getLanguage) arr = arr.filter((i) => getLanguage(i) === language)
+    if (pricing !== 'all' && g.getPricing) arr = arr.filter((i) => g.getPricing!(i) === pricing)
+    if (language !== 'all' && g.getLanguage) arr = arr.filter((i) => g.getLanguage!(i) === language)
 
     arr.sort((a, b) => {
       switch (sort) {
         case 'top':
-          return getUpvotes(b) - getUpvotes(a)
+          return g.getUpvotes(b) - g.getUpvotes(a)
         case 'new':
           return (
-            new Date(getCreatedAt(b)).getTime() -
-            new Date(getCreatedAt(a)).getTime()
+            new Date(g.getCreatedAt(b)).getTime() -
+            new Date(g.getCreatedAt(a)).getTime()
           )
         case 'bookmarked':
-          return getBookmarks(b) - getBookmarks(a)
+          return g.getBookmarks(b) - g.getBookmarks(a)
         case 'trending':
         default: {
-          const sa = getTrendingScore?.(a) ?? getUpvotes(a)
-          const sb = getTrendingScore?.(b) ?? getUpvotes(b)
+          const sa = g.getTrendingScore?.(a) ?? g.getUpvotes(a)
+          const sb = g.getTrendingScore?.(b) ?? g.getUpvotes(b)
           return sb - sa
         }
       }
     })
     return arr
-  }, [
-    items,
-    sort,
-    category,
-    pricing,
-    language,
-    getCategory,
-    getPricing,
-    getLanguage,
-    getUpvotes,
-    getBookmarks,
-    getCreatedAt,
-    getTrendingScore,
-    config.customCategoryFilter,
-  ])
+  }, [items, sort, category, pricing, language])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
   const paginated = filtered.slice((page - 1) * pageSize, page * pageSize)
+
+  const setPageAndScroll = (next: number | ((p: number) => number)) => {
+    setPage((prev) => {
+      const resolved = typeof next === 'function' ? (next as (p: number) => number)(prev) : next
+      syncListingToUrl({ page: resolved })
+      return resolved
+    })
+    requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }))
+  }
+
+  const pageHref = (p: number) => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (config.syncCategoryToUrl) {
+      if (category === 'all') params.delete('category')
+      else params.set('category', category)
+    }
+    if (sort === (config.defaultSort ?? 'trending')) params.delete('sort')
+    else params.set('sort', sort)
+    if (p <= 1) params.delete('page')
+    else params.set('page', String(p))
+    const qs = params.toString()
+    return qs ? `${pathname}?${qs}` : pathname
+  }
 
   // Keep restored page valid if the item count shrinks. Must wait until the
   // store has hydrated: items start EMPTY and fill asynchronously, so clamping
@@ -316,7 +366,7 @@ function ListingViewInner<T extends { id: string }>({
             <SlidersHorizontal className="h-3.5 w-3.5" />
             Sort
           </span>
-          <Dropdown label="" value={sort} options={SORT_OPTIONS} onChange={(v) => changeFilter(setSort, v as SortKey)} />
+          <Dropdown label="" value={sort} options={SORT_OPTIONS} onChange={(v) => setSortWithUrl(v as SortKey)} />
           {config.extraFilters?.includes('pricing') && config.pricingOptions && (
             <Dropdown label="Pricing" value={pricing} options={config.pricingOptions} onChange={(v) => changeFilter(setPricing, v)} />
           )}
@@ -364,32 +414,28 @@ function ListingViewInner<T extends { id: string }>({
           ))}
         </CardGrid>
       ) : (
-        <motion.div
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.03 } } }}
-          initial="hidden"
-          animate="show"
-          className="flex flex-col gap-3"
-          role="list"
-        >
+        <div className="flex flex-col gap-3" role="list">
           {paginated.map((item) => (
             <div key={item.id} role="listitem">
               {renderCard(item, 'list')}
             </div>
           ))}
-        </motion.div>
+        </div>
       )}
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="mt-10 flex items-center justify-center gap-2">
-          <button
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-            disabled={page === 1}
-            className="btn-ghost flex items-center gap-1 px-3 py-2 text-sm disabled:opacity-30"
+        <nav aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
+          <a
+            href={pageHref(Math.max(1, page - 1))}
+            onClick={(e) => { e.preventDefault(); setPageAndScroll((p) => Math.max(1, p - 1)) }}
+            aria-disabled={page === 1}
+            aria-label="Previous page"
+            className="btn-ghost flex items-center gap-1 px-3 py-2 text-sm aria-disabled:pointer-events-none aria-disabled:opacity-30"
           >
             <ChevronLeft className="h-4 w-4" />
             Prev
-          </button>          <div className="flex items-center gap-1">
+          </a>          <div className="flex items-center gap-1">
             {(() => {
               const pages: (number | '...')[] = [1]
               if (page > 3) pages.push('...')
@@ -400,13 +446,16 @@ function ListingViewInner<T extends { id: string }>({
               if (totalPages > 1) pages.push(totalPages)
               return pages.map((p, idx) =>
                 p === '...' ? (
-                  <span key={`e-${idx}`} className="flex h-8 w-8 items-center justify-center text-sm text-muted-foreground">
+                  <span key={`e-${idx}`} className="flex h-8 w-8 items-center justify-center text-sm text-muted-foreground" aria-hidden="true">
                     ...
                   </span>
                 ) : (
-                  <button
+                  <a
                     key={p}
-                    onClick={() => setPage(p)}
+                    href={pageHref(p)}
+                    onClick={(e) => { e.preventDefault(); setPageAndScroll(p) }}
+                    aria-label={`Page ${p}`}
+                    aria-current={p === page ? 'page' : undefined}
                     className={cn(
                       'flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium transition-colors',
                       p === page
@@ -415,20 +464,22 @@ function ListingViewInner<T extends { id: string }>({
                     )}
                   >
                     {p}
-                  </button>
+                  </a>
                 )
               )
             })()}
           </div>
-          <button
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-            disabled={page === totalPages}
-            className="btn-ghost flex items-center gap-1 px-3 py-2 text-sm disabled:opacity-30"
+          <a
+            href={pageHref(Math.min(totalPages, page + 1))}
+            onClick={(e) => { e.preventDefault(); setPageAndScroll((p) => Math.min(totalPages, p + 1)) }}
+            aria-disabled={page === totalPages}
+            aria-label="Next page"
+            className="btn-ghost flex items-center gap-1 px-3 py-2 text-sm aria-disabled:pointer-events-none aria-disabled:opacity-30"
           >
             Next
             <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
+          </a>
+        </nav>
       )}
     </div>
   )
@@ -440,7 +491,7 @@ function ListingViewInner<T extends { id: string }>({
  */
 export function ListingView<T extends { id: string }>(props: ListingViewProps<T>) {
   return (
-    <Suspense fallback={<div className="min-h-[60vh]" aria-hidden />}>
+    <Suspense fallback={<div className="min-h-[60vh] animate-pulse rounded-xl border border-border bg-card p-6" role="status" aria-label="Loading results">Loading results…</div>}>
       <ListingViewInner {...props} />
     </Suspense>
   )

@@ -58,7 +58,10 @@ function uniqueSlug(base: string, taken: Set<string>): string {
  * What we persist: ONLY user-specific data. Seed content (tools, courses,
  * offers…) always comes fresh from lib/seed so code updates reach everyone.
  */
+const STORED_DELTA_VERSION = 4
+
 interface StoredDelta {
+  v?: number
   currentUserId: string | null
   users: User[] // includes upvotedItems / bookmarkedItems / karma
   recentSearches: string[]
@@ -69,6 +72,43 @@ interface StoredDelta {
   addedCourses: Course[]
   addedOffers: Offer[]
   addedComments: Comment[] // user comments on any item
+}
+
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return typeof v === 'object' && v !== null
+}
+
+function isValidUser(u: unknown): u is User {
+  if (!isRecord(u)) return false
+  return (
+    typeof u.id === 'string' &&
+    typeof u.username === 'string' &&
+    Array.isArray(u.upvotedItems) &&
+    Array.isArray(u.bookmarkedItems)
+  )
+}
+
+function sanitizeDelta(raw: unknown): StoredDelta | null {
+  if (!isRecord(raw)) return null
+  const pick = <T extends { id: string }>(v: unknown): T[] =>
+    Array.isArray(v) ? (v.filter((x) => isRecord(x) && typeof x.id === 'string') as T[]) : []
+  const users = Array.isArray(raw.users) ? (raw.users.filter(isValidUser) as User[]) : []
+  const recentSearches = Array.isArray(raw.recentSearches)
+    ? (raw.recentSearches.filter((s) => typeof s === 'string') as string[]).slice(0, 20)
+    : []
+  return {
+    v: typeof raw.v === 'number' ? raw.v : undefined,
+    currentUserId: typeof raw.currentUserId === 'string' ? raw.currentUserId : null,
+    users,
+    recentSearches,
+    addedTools: pick<Tool>(raw.addedTools),
+    addedDevTools: pick<DevTool>(raw.addedDevTools),
+    addedPrompts: pick<Prompt>(raw.addedPrompts),
+    addedRepos: pick<Repo>(raw.addedRepos),
+    addedCourses: pick<Course>(raw.addedCourses),
+    addedOffers: pick<Offer>(raw.addedOffers),
+    addedComments: pick<Comment>(raw.addedComments),
+  }
 }
 
 interface PersistedState {
@@ -240,26 +280,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const openDetailModalForCourse = useCallback((id: string) => setDetailModalCourseId(id), [])
   const closeDetailModalForCourse = useCallback(() => setDetailModalCourseId(null), [])
 
-  // Hydrate lang from localStorage + URL ?lang=ar
+  // Hydrate lang from localStorage only (never ?lang= — query variants would
+  // create duplicate indexable URLs; canonical always stays clean).
   useEffect(() => {
     try {
-      const urlLang = new URLSearchParams(window.location.search).get('lang') as OffersLang | null
-      if (urlLang === 'ar' || urlLang === 'en') setOffersLang(urlLang)
-      else {
-        const saved = localStorage.getItem('ai-hunt-offers-lang') as OffersLang | null
-        if (saved === 'ar' || saved === 'en') setOffersLang(saved)
+      const saved = localStorage.getItem('ai-hunt-offers-lang') as OffersLang | null
+      if (saved === 'ar' || saved === 'en') setOffersLang(saved)
+      // Clean up legacy ?lang=ar links: strip without reload, keep canonical.
+      const url = new URL(window.location.href)
+      if (url.searchParams.has('lang')) {
+        url.searchParams.delete('lang')
+        window.history.replaceState({}, '', url.toString())
       }
     } catch {}
   }, [])
   useEffect(() => {
     try { localStorage.setItem('ai-hunt-offers-lang', offersLang); } catch {}
-    // keep URL in sync without reload
-    try {
-      const url = new URL(window.location.href)
-      if (offersLang === 'ar') url.searchParams.set('lang', 'ar')
-      else url.searchParams.delete('lang')
-      window.history.replaceState({}, '', url.toString())
-    } catch {}
   }, [offersLang])
 
   // Seed id registry - lets the saver strip seed items and store only user deltas
@@ -273,7 +309,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // inside an updater (unique slugs, submitter id) can't be returned. Reading
   // the ref gives submit functions the latest committed state deterministically.
   const stateRef = useRef(state)
-  stateRef.current = state
+  useEffect(() => {
+    stateRef.current = state
+  }, [state])
 
   // Hydrate: fresh seed data from code + user deltas from localStorage on mount
   useEffect(() => {
@@ -305,7 +343,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       let delta: StoredDelta | null = null
       if (raw) {
         try {
-          delta = JSON.parse(raw) as StoredDelta
+          delta = sanitizeDelta(JSON.parse(raw))
         } catch {
           delta = null // corrupt state - start clean
         }
@@ -314,7 +352,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       // Seed data always wins; only user-created extras are appended.
       const mergeAdded = <T extends { id: string }>(seedItems: T[], added?: T[]) =>
         added?.length
-          ? [...seedItems, ...added.filter((a) => !seedItems.some((s) => s.id === a.id))]
+          ? [...seedItems, ...added.filter((a) => a && typeof a.id === 'string' && !seedItems.some((s) => s.id === a.id))]
           : seedItems
 
       setState({
@@ -325,7 +363,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         courses: mergeAdded(seedCourses, delta?.addedCourses),
         offers: mergeAdded(seedOffers, delta?.addedOffers),
         users: delta?.users?.length ? delta.users : SEED_USERS,
-        comments: mergeAdded(seedComments, delta?.addedComments),
+        comments: mergeAdded(seedComments, delta?.addedComments).slice(0, MAX_COMMENTS_STORED),
         currentUserId: delta?.currentUserId ?? null,
         recentSearches: delta?.recentSearches ?? [],
       })
@@ -340,7 +378,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const onStorage = (e: StorageEvent) => {
       if (e.key !== STORAGE_KEY || !e.newValue) return
       try {
-        const delta = JSON.parse(e.newValue) as StoredDelta
+        const delta = sanitizeDelta(JSON.parse(e.newValue))
+        if (!delta) return
         setState((prev) => {
           const mergeAdded = <T extends { id: string }>(current: T[], added?: T[]) =>
             added?.length
@@ -377,6 +416,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const ids = seedIdsRef.current
       if (!ids) return
       const delta: StoredDelta = {
+        v: STORED_DELTA_VERSION,
         currentUserId: state.currentUserId,
         users: state.users, // small (~10 entries); carries votes/bookmarks/karma
         recentSearches: state.recentSearches,
@@ -429,12 +469,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return {
           ...prev,
           users: nextUsers,
-          tools: prev.tools.map(bumpUpvotes),
-          devTools: prev.devTools.map(bumpUpvotes),
-          prompts: prev.prompts.map(bumpUpvotes),
-          repos: prev.repos.map(bumpUpvotes),
-          courses: prev.courses.map(bumpUpvotes),
-          offers: prev.offers.map(bumpUpvotes),
+          tools: itemType === 'tool' ? prev.tools.map(bumpUpvotes) : prev.tools,
+          devTools: itemType === 'devtool' ? prev.devTools.map(bumpUpvotes) : prev.devTools,
+          prompts: itemType === 'prompt' ? prev.prompts.map(bumpUpvotes) : prev.prompts,
+          repos: itemType === 'repo' ? prev.repos.map(bumpUpvotes) : prev.repos,
+          courses: itemType === 'course' ? prev.courses.map(bumpUpvotes) : prev.courses,
+          offers: itemType === 'offer' ? prev.offers.map(bumpUpvotes) : prev.offers,
         }
       })
     },
@@ -466,11 +506,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return {
           ...prev,
           users: nextUsers,
-          tools: prev.tools.map(bumpBookmarks),
-          devTools: prev.devTools.map(bumpBookmarks),
-          repos: prev.repos.map(bumpBookmarks),
-          courses: prev.courses.map(bumpBookmarks),
-          offers: prev.offers.map(bumpBookmarks),
+          tools: itemType === 'tool' ? prev.tools.map(bumpBookmarks) : prev.tools,
+          devTools: itemType === 'devtool' ? prev.devTools.map(bumpBookmarks) : prev.devTools,
+          repos: itemType === 'repo' ? prev.repos.map(bumpBookmarks) : prev.repos,
+          courses: itemType === 'course' ? prev.courses.map(bumpBookmarks) : prev.courses,
+          offers: itemType === 'offer' ? prev.offers.map(bumpBookmarks) : prev.offers,
         }
       })
     },
@@ -516,10 +556,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     (itemId: string) =>
       state.comments
         .filter((c) => c.itemId === itemId)
-        .sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        ),
+        .sort((a, b) => {
+          const ta = new Date(a.createdAt).getTime()
+          const tb = new Date(b.createdAt).getTime()
+          if (Number.isNaN(ta) && Number.isNaN(tb)) return 0
+          if (Number.isNaN(ta)) return 1
+          if (Number.isNaN(tb)) return -1
+          return tb - ta
+        }),
     [state.comments]
   )
 
@@ -588,13 +632,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const finalTool: Tool = {
       id,
       slug: uniqueSlug(slugBase, new Set(prev.tools.map((t) => t.slug))),
-      name: input.name,
-      tagline: input.tagline,
-      description: input.description,
+      name: input.name.trim().slice(0, 80),
+      tagline: input.tagline.trim().slice(0, 140),
+      description: input.description.trim().slice(0, 5000),
       url,
       logoUrl: logoUrl || '/placeholder-logo.svg',
       category: input.category,
-      tags: input.tags,
+      tags: input.tags.map((t) => t.trim().slice(0, 30)).filter(Boolean).slice(0, 12),
       pricing: input.pricing,
       upvotes: 0,
       bookmarks: 0,
@@ -619,7 +663,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const submitPrompt = useCallback((input: SubmitPromptInput): Prompt => {
     const id = uuid()
-    const slug = slugify(input.title) || `prompt-${id.slice(0, 6)}`
+    const slugBase = slugify(input.title) || `prompt-${id.slice(0, 6)}`
     const now = new Date().toISOString()
     // See submitTool: submitter resolved synchronously so the returned
     // object matches what's stored.
@@ -629,19 +673,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
       : undefined
     const final: Prompt = {
       id,
-      slug,
-      title: input.title,
-      description: input.description,
-      promptText: input.promptText,
-      model: input.model,
+      slug: uniqueSlug(slugBase, new Set(prev.prompts.map((p) => p.slug))),
+      title: input.title.trim().slice(0, 120),
+      description: input.description.trim().slice(0, 2000),
+      promptText: input.promptText.trim().slice(0, 8000),
+      model: input.model.map((m) => m.trim()).filter(Boolean).slice(0, 8),
       category: input.category,
-      tags: input.tags,
+      tags: input.tags.map((t) => t.trim().slice(0, 30)).filter(Boolean).slice(0, 12),
       upvotes: 0,
       copies: 0,
       submittedBy: submitter?.id ?? '',
       featured: false,
-      variables: input.variables,
-      exampleOutput: input.exampleOutput,
+      variables: input.variables?.slice(0, 20),
+      exampleOutput: input.exampleOutput?.slice(0, 4000),
       createdAt: now,
       updatedAt: now,
     }
@@ -674,13 +718,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const final: DevTool = {
       id,
       slug: uniqueSlug(slugBase, new Set(prev.devTools.map((d) => d.slug))),
-      name: input.name,
-      tagline: input.tagline,
-      description: input.description,
+      name: input.name.trim().slice(0, 80),
+      tagline: input.tagline.trim().slice(0, 140),
+      description: input.description.trim().slice(0, 5000),
       url,
       logoUrl: logoUrl || '/placeholder-logo.svg',
       category: input.category,
-      tags: input.tags,
+      tags: input.tags.map((t) => t.trim().slice(0, 30)).filter(Boolean).slice(0, 12),
       pricing: input.pricing,
       upvotes: 0,
       bookmarks: 0,
@@ -718,13 +762,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const final: Repo = {
       id,
       slug: uniqueSlug(slugBase, new Set(prev.repos.map((r) => r.slug))),
-      name: input.name,
-      tagline: input.tagline,
-      description: input.description,
+      name: input.name.trim().slice(0, 80),
+      tagline: input.tagline.trim().slice(0, 140),
+      description: input.description.trim().slice(0, 5000),
       url,
       logoUrl,
       category: input.category,
-      tags: input.tags,
+      tags: input.tags.map((t) => t.trim().slice(0, 30)).filter(Boolean).slice(0, 12),
       pricing: input.pricing,
       upvotes: 0,
       bookmarks: 0,
@@ -844,17 +888,54 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // ---------------- Pending action (auth gate) ----------------
   const resolvePendingAction = useCallback(() => {
-    if (!pendingAction || !state.currentUserId) {
+    setState((prev) => {
+      if (!pendingAction || !prev.currentUserId) return prev
+      return prev // actual mutation happens in the effect below with fresh state
+    })
+    if (!pendingAction) {
       setPendingAction(null)
       return
     }
-    if (pendingAction.type === 'upvote') {
-      toggleUpvote(pendingAction.itemType, pendingAction.itemId)
-    } else if (pendingAction.type === 'bookmark') {
-      toggleBookmark(pendingAction.itemType, pendingAction.itemId)
-    }
+    // Use functional updates so we don't depend on stale `state.currentUserId`.
+    // The auth modal calls signIn() then this; signIn commits first via its own
+    // setState, and React flushes both before this timeout runs.
+    setState((prev) => {
+      if (!prev.currentUserId) return prev
+      const user = prev.users.find((u) => u.id === prev.currentUserId)
+      if (!user) return prev
+      const { type, itemType, itemId } = pendingAction
+      if (type !== 'upvote' && type !== 'bookmark') return prev
+      const list = type === 'upvote' ? user.upvotedItems : user.bookmarkedItems
+      const already = list.includes(itemId)
+      const nextUsers = prev.users.map((u) =>
+        u.id === user.id
+          ? type === 'upvote'
+            ? { ...u, upvotedItems: already ? u.upvotedItems.filter((id) => id !== itemId) : [...u.upvotedItems, itemId] }
+            : { ...u, bookmarkedItems: already ? u.bookmarkedItems.filter((id) => id !== itemId) : [...u.bookmarkedItems, itemId] }
+          : u
+      )
+      const d = already ? -1 : 1
+      const bump = <T extends { id: string; upvotes: number; bookmarks?: number }>(item: T): T =>
+        item.id !== itemId
+          ? item
+          : type === 'upvote'
+            ? { ...item, upvotes: item.upvotes + d }
+            : { ...item, bookmarks: Math.max(0, (item.bookmarks ?? 0) + d) }
+      const byType = <T extends { id: string; upvotes: number; bookmarks?: number }>(arr: T[], want: ItemType): T[] =>
+        pendingAction.itemType === want ? (arr.map(bump) as T[]) : arr
+      return {
+        ...prev,
+        users: nextUsers,
+        tools: byType(prev.tools, 'tool'),
+        devTools: byType(prev.devTools, 'devtool'),
+        prompts: type === 'upvote' && itemType === 'prompt' ? prev.prompts.map(bump) as typeof prev.prompts : prev.prompts,
+        repos: byType(prev.repos, 'repo'),
+        courses: byType(prev.courses, 'course'),
+        offers: byType(prev.offers, 'offer'),
+      }
+    })
     setPendingAction(null)
-  }, [pendingAction, state.currentUserId, toggleUpvote, toggleBookmark])
+  }, [pendingAction])
 
   // Memoized so provider-local UI state (modals, palette, lang…) doesn't
   // re-render every consumer of useApp(); data consumers still update on
