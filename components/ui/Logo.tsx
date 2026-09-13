@@ -44,7 +44,7 @@ export function Logo({ src, name, size = 48, className }: LogoProps) {
         loading="lazy"
         decoding="async"
         referrerPolicy="no-referrer"
-        className="h-full w-full object-cover"
+        className="h-full w-full bg-white object-contain p-1.5"
         onError={() => setFailed(true)}
       />
     </div>
