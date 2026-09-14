@@ -2,8 +2,10 @@ import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
-const DEFAULT_MODEL = 'moonshotai/kimi-k3'
-const FALLBACK_MODELS = ['meta/llama-3.1-70b-instruct', 'nvidia/llama-3.1-nemotron-70b-instruct', 'meta/llama-3.1-405b-instruct']
+// Verified working on this account (Feb 2026 probe: fast 2-3s for trivial prompt).
+// kimi-k3 works but needs 25-35s+ per request — keep it as last-resort fallback only.
+const DEFAULT_MODEL = 'deepseek-ai/deepseek-v4-flash-0731'
+const FALLBACK_MODELS = ['openai/gpt-oss-20b', 'z-ai/glm-5.3-flash', 'moonshotai/kimi-k3']
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
@@ -229,8 +231,6 @@ export async function POST(request: Request) {
         max_tokens: 4096,
         temperature: 1,
         stream: true,
-        // kimi-k3 supports reasoning_effort; harmless for other models (ignored)
-        reasoning_effort: 'max',
         seed: 0,
       }
       const controller = new AbortController()
@@ -272,31 +272,32 @@ export async function POST(request: Request) {
         }
         const body = await res.text()
         console.error('[chat] upstream error', m, res.status, body)
-        // Retry on model-not-found with fallback; fail fast on auth/rate-limit
-        if ((res.status === 404 || res.status === 400 || res.status === 422) && m !== modelsToTry[modelsToTry.length - 1]) {
-          upstreamBody = body
-          continue
+        const isLast = m === modelsToTry[modelsToTry.length - 1]
+        // Auth failures won't fix themselves on retry — fail fast.
+        // Everything else (dead model, gone/EOL, rate-limit, overload) → try next model.
+        if ((res.status === 401 || res.status === 403) || isLast) {
+          let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
+          if (res.status === 401 || res.status === 403) {
+            clientError = `AI auth failed (upstream ${res.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
+          } else if (res.status === 410) {
+            clientError = `Model "${m}" is retired (upstream 410 Gone).`
+          } else if (res.status === 404 || res.status === 400 || res.status === 422) {
+            const hint = body.slice(0, 200).replace(/\s+/g, ' ')
+            clientError = `Model "${m}" rejected (upstream ${res.status}). ${hint}`
+          } else if (res.status === 429) {
+            clientError = `AI rate limited/quota exhausted (upstream 429). Try in 60s or check build.nvidia.com credits.`
+          } else if (res.status >= 500) {
+            clientError = `AI upstream overloaded (upstream ${res.status}). Retry in a few seconds.`
+          } else {
+            clientError = `AI service error (upstream ${res.status}). Please retry shortly.`
+          }
+          return NextResponse.json(
+            { error: clientError, upstreamStatus: res.status },
+            { status: 502 }
+          )
         }
-        // Non-retryable or last fallback failed
-        let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
-        if (res.status === 401 || res.status === 403) {
-          clientError = `AI auth failed (upstream ${res.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
-        } else if (res.status === 410) {
-          clientError = `NVIDIA Public API Endpoints not enabled for this account (410 Gone). Your key is valid but the org lacks permission — request enablement at forums.developer.nvidia.com or set DAHL_API_KEY/OPENAI_API_KEY as fallback. See build.nvidia.com.`
-        } else if (res.status === 404 || res.status === 400 || res.status === 422) {
-          const hint = body.slice(0, 200).replace(/\s+/g, ' ')
-          clientError = `Model "${m}" rejected (upstream ${res.status}). ${hint}`
-        } else if (res.status === 429) {
-          clientError = `AI rate limited/quota exhausted (upstream 429). Try in 60s or check build.nvidia.com credits.`
-        } else if (res.status >= 500) {
-          clientError = `AI upstream overloaded (upstream ${res.status}). Retry in a few seconds.`
-        } else {
-          clientError = `AI service error (upstream ${res.status}). Please retry shortly.`
-        }
-        return NextResponse.json(
-          { error: clientError, upstreamStatus: res.status },
-          { status: 502 }
-        )
+        upstreamBody = body
+        continue
       } catch (e: unknown) {
         // fetch timeout/network — retry next model if available, else 502
         if (m !== modelsToTry[modelsToTry.length - 1]) continue
