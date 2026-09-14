@@ -4,6 +4,7 @@ import { ListingView, type FilterOption } from '@/components/listing/ListingView
 import { OfferCard } from '@/components/cards/OfferCard'
 import { useApp } from '@/lib/store'
 import { OFFER_CATEGORY_LABELS, type Offer } from '@/types'
+import { GUIDES_ENABLED, isPaidGuide } from '@/lib/guides'
 import { useRouter } from 'next/navigation'
 
 const categoryOptions: FilterOption[] = Object.entries(OFFER_CATEGORY_LABELS).map(
@@ -13,6 +14,7 @@ const categoryOptions: FilterOption[] = Object.entries(OFFER_CATEGORY_LABELS).ma
 export function OffersView({ initialCategory }: { initialCategory?: string }) {
   const { offers } = useApp()
   const router = useRouter()
+  const visibleOffers = GUIDES_ENABLED ? offers : offers.filter((o) => !isPaidGuide(o))
 
   return (
     <>
@@ -20,7 +22,7 @@ export function OffersView({ initialCategory }: { initialCategory?: string }) {
         مرّر فوق أي نص للترجمة للعربية · Hover any text to see Arabic · انقر على الجوال للتبديل
       </div>
       <ListingView<Offer>
-        items={offers}
+        items={visibleOffers}
         config={{
           title: 'Offers & Deals',
           eyebrow: 'Offers',

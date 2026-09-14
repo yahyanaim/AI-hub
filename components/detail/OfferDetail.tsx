@@ -10,12 +10,15 @@ import { UpvoteButton } from '@/components/interactive/UpvoteButton'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
 import { HoverTranslate } from '@/components/ui/HoverTranslate'
 import type { Offer } from '@/types'
+import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
 
 export function OfferDetail({ slug, initial }: { slug: string; initial?: Offer }) {
   const { offers, getUser } = useApp()
   const offer = offers.find((o) => o.slug === slug) ?? initial
 
   if (!offer) return null
+  // Guides disabled: hide paid guides even on their legacy /offers URL.
+  if (isPaidGuide(offer) && !GUIDES_ENABLED) return null
 
   const submitter = getUser(offer.submittedBy)
   const hasAr = !!(offer.nameAr && offer.descriptionAr)

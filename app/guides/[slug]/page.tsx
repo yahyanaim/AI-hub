@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SEED_OFFERS } from '@/lib/seed'
-import { isPaidGuide, GUIDE_PRICE_LABEL } from '@/lib/guides'
+import { isPaidGuide, GUIDE_PRICE_LABEL, GUIDES_ENABLED } from '@/lib/guides'
 import { GuideLanding } from '@/components/guides/GuideLanding'
 import { safeJsonLd } from '@/lib/json-ld'
 import { SITE_URL } from '@/lib/site'
 
 export function generateStaticParams() {
+  if (!GUIDES_ENABLED) return []
   return SEED_OFFERS.filter(isPaidGuide).map((g) => ({ slug: g.slug }))
 }
 
@@ -46,6 +47,7 @@ export async function generateMetadata({
 }
 
 export default function GuideDetailPage({ params }: { params: { slug: string } }) {
+  if (!GUIDES_ENABLED) notFound()
   const guide = findGuide(params.slug)
   if (!guide) notFound()
 

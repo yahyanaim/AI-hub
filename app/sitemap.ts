@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/site'
 import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } from '@/lib/seed'
-import { isPaidGuide } from '@/lib/guides'
+import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
 import { DEVTOOL_CATEGORY_LABELS, OFFER_CATEGORY_LABELS, TOOL_CATEGORY_LABELS, COURSE_CATEGORY_LABELS } from '@/types'
 
 // Fixed build-time date so sitemap output is deterministic across requests.
@@ -81,23 +81,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  const offerPages = SEED_OFFERS.map((offer) => ({
+  const offerPages = SEED_OFFERS.filter((o) => GUIDES_ENABLED || !isPaidGuide(o)).map((offer) => ({
     url: `${baseUrl}/offers/${offer.category}/${offer.slug}`,
     lastModified: safeDate(offer.updatedAt),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }))
 
-  const paidGuides = SEED_OFFERS.filter(isPaidGuide)
-  const guidePages = [
-    { url: `${baseUrl}/guides`, lastModified: BUILD_DATE, changeFrequency: 'weekly' as const, priority: 0.8 },
-    ...paidGuides.map((g) => ({
-      url: `${baseUrl}/guides/${g.slug}`,
-      lastModified: safeDate(g.updatedAt),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    })),
-  ]
+  const paidGuides = GUIDES_ENABLED ? SEED_OFFERS.filter(isPaidGuide) : []
+  const guidePages = GUIDES_ENABLED
+    ? [
+        { url: `${baseUrl}/guides`, lastModified: BUILD_DATE, changeFrequency: 'weekly' as const, priority: 0.8 },
+        ...paidGuides.map((g) => ({
+          url: `${baseUrl}/guides/${g.slug}`,
+          lastModified: safeDate(g.updatedAt),
+          changeFrequency: 'weekly' as const,
+          priority: 0.8,
+        })),
+      ]
+    : []
 
   // NOTE: prompts intentionally omitted — no /prompts route exists yet.
   // Re-add when the route ships to avoid sitemap 404s.

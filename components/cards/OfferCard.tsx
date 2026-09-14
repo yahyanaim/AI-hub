@@ -10,14 +10,18 @@ import { useApp } from '@/lib/store'
 import { cn } from '@/lib/utils'
 import { HoverTranslate } from '@/components/ui/HoverTranslate'
 import type { Offer } from '@/types'
-import { isPaidGuide, formatRating, GUIDE_PRICE_LABEL } from '@/lib/guides'
+import { isPaidGuide, formatRating, GUIDE_PRICE_LABEL, GUIDES_ENABLED } from '@/lib/guides'
 
 export function OfferCard({ offer, className, lang }: { offer: Offer; className?: string; lang?: 'en' | 'ar' }) {
   const { getUser } = useApp()
   const submitter = getUser(offer.submittedBy)
   const hasAr = !!(offer.nameAr && offer.taglineAr)
   const paid = isPaidGuide(offer)
-  const detailHref = paid ? `/guides/${offer.slug}` : `/offers/${offer.category}/${offer.slug}`
+  if (paid && !GUIDES_ENABLED) return null
+  const detailHref =
+    paid && GUIDES_ENABLED
+      ? `/guides/${offer.slug}`
+      : `/offers/${offer.category}/${offer.slug}`
   const rating = formatRating(offer)
 
   return (

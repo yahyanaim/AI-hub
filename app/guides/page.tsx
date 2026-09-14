@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import Script from 'next/script'
 import { SITE_URL } from '@/lib/site'
 import { SEED_OFFERS } from '@/lib/seed'
-import { isPaidGuide } from '@/lib/guides'
+import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
 import { safeJsonLd } from '@/lib/json-ld'
 import { GuidesView } from '@/components/guides/GuidesView'
 
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
 }
 
 export default function GuidesPage() {
+  if (!GUIDES_ENABLED) notFound()
   return (
     <>
       <Script

@@ -9,6 +9,10 @@ import type { Offer } from '@/types'
 // TODO: replace with your real numbers.
 export const WHATSAPP_NUMBER = '212600000000' // digits only, country code + number
 export const PAYMENT_RIB = 'RIB 000-000-00000000000000 (Banque — Your Name)'
+
+// Feature flag — guides are hidden until you finish working on them.
+// Set to true to re-enable: cards, /guides routes, and sitemap entries.
+export const GUIDES_ENABLED = false
 export const GUIDE_PRICE_LABEL = (o: Offer) =>
   o.price ? `${o.price} ${o.currency ?? 'MAD'}` : ''
 
