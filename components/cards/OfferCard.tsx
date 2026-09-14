@@ -10,11 +10,15 @@ import { useApp } from '@/lib/store'
 import { cn } from '@/lib/utils'
 import { HoverTranslate } from '@/components/ui/HoverTranslate'
 import type { Offer } from '@/types'
+import { isPaidGuide, formatRating, GUIDE_PRICE_LABEL } from '@/lib/guides'
 
 export function OfferCard({ offer, className, lang }: { offer: Offer; className?: string; lang?: 'en' | 'ar' }) {
   const { getUser } = useApp()
   const submitter = getUser(offer.submittedBy)
   const hasAr = !!(offer.nameAr && offer.taglineAr)
+  const paid = isPaidGuide(offer)
+  const detailHref = paid ? `/guides/${offer.slug}` : `/offers/${offer.category}/${offer.slug}`
+  const rating = formatRating(offer)
 
   return (
     <article
@@ -25,7 +29,7 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
       aria-label={`${offer.name} - open details`}
     >
       <Link
-        href={`/offers/${offer.category}/${offer.slug}`}
+        href={detailHref}
         className="absolute inset-0 z-10"
         aria-label={`${offer.name} - open details`}
       >
@@ -47,8 +51,15 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
             <span className="flex items-center gap-1">
               <ListChecks className="h-3.5 w-3.5" />
               {offer.steps.length} steps
+              {offer.pages ? ` · ${offer.pages} pages` : ''}
               {hasAr && <span className="text-[10px] opacity-60">· مرّر للترجمة</span>}
             </span>
+            {paid && (
+              <span className="rounded bg-green-600/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-green-700 dark:text-green-400">
+                Guide • {GUIDE_PRICE_LABEL(offer)}
+              </span>
+            )}
+            {rating && <span className="font-medium text-amber-600">{rating}</span>}
             {offer.featured && (
               <span className={cn(
                 'rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider',
@@ -87,16 +98,23 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
           )}
         </div>
         <div className="flex items-center gap-3">
-          <a
-            href={offer.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="inline-flex cursor-pointer items-center gap-1 rounded-lg bg-brand-orange/10 px-2.5 py-1.5 text-xs font-semibold text-brand-orange transition-colors hover:bg-brand-orange/20"
-          >
-            Visit
-            <ExternalLink className="h-3 w-3" />
-          </a>
+          {paid ? (
+            <span className="inline-flex cursor-pointer items-center gap-1 rounded-lg bg-green-600/10 px-2.5 py-1.5 text-xs font-semibold text-green-700 dark:text-green-400">
+              Get PDF
+              <ExternalLink className="h-3 w-3" />
+            </span>
+          ) : (
+            <a
+              href={offer.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex cursor-pointer items-center gap-1 rounded-lg bg-brand-orange/10 px-2.5 py-1.5 text-xs font-semibold text-brand-orange transition-colors hover:bg-brand-orange/20"
+            >
+              Visit
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
           <div className="relative z-20">
             <BookmarkButton itemType="offer" itemId={offer.id} />
           </div>

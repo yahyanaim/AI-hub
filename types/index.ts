@@ -282,6 +282,20 @@ export interface Offer {
   updatedAt: string
   /** Optional application deadline (ISO). Drives Ended / Ending-soon badges. */
   endsAt?: string
+  // --- Paid guide (MVP: direct virement + WhatsApp delivery) ---
+  /** Fixed price, e.g. 99. Undefined = free offer. */
+  price?: number
+  /** ISO currency, e.g. 'MAD'. Defaults to MAD for guides. */
+  currency?: string
+  /** Number of PDF pages shown on card/landing. */
+  pages?: number
+  /** Difficulty/level shown on card/landing. */
+  level?: 'beginner' | 'intermediate' | 'advanced'
+  /** Average rating 0-5 shown as stars. */
+  rating?: number
+  reviewsCount?: number
+  /** Money-back / trust line, e.g. '7-day guarantee'. */
+  guarantee?: string
   // Arabic (Option A - bilingual offers)
   nameAr?: string
   taglineAr?: string

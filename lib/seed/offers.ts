@@ -10678,4 +10678,74 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  // --- MVP paid guide: direct virement + WhatsApp delivery ---
+  {
+    id: 'g1',
+    slug: 'edu-proof-master-guide-pro',
+    name: 'EDU Proof Master Guide PRO',
+    tagline: 'Get verified student offers step-by-step — full PDF playbook',
+    description:
+      'The complete PRO playbook: which US community college to pick, exact application clicks, how to get your .EDU mailbox + student ID + enrollment letter in 24-72h, and the order to claim 40+ offers (GitHub Pack, Azure $100, AWS $100, JetBrains, Figma). Includes templates, troubleshooting, and renewal checklist. Pay by virement, send the receipt on WhatsApp, receive the PDF on WhatsApp.',
+    url: '/guides/edu-proof-master-guide-pro',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/education.github.com.ico',
+    category: 'guide',
+    tags: ['guide', 'edu', 'student-pack', 'pdf', 'pro'],
+    pricing: 'paid',
+    price: 99,
+    currency: 'MAD',
+    pages: 42,
+    level: 'beginner',
+    rating: 4.9,
+    reviewsCount: 12,
+    guarantee: '7-day refund if the guide does not help you',
+    steps: [
+      {
+        title: 'Pay by virement (99 MAD)',
+        description:
+          'Send 99 MAD to the RIB shown on the guide page. Keep the receipt / screenshot — you will need it in step 2.',
+      },
+      {
+        title: 'Send “Hi, I paid” + receipt on WhatsApp',
+        description:
+          'Tap the WhatsApp button on the guide page and send your payment receipt. We confirm within a few hours.',
+      },
+      {
+        title: 'Receive the PDF on WhatsApp',
+        description:
+          'We send you the full 42-page PDF directly on WhatsApp + free updates for 30 days.',
+      },
+      {
+        title: 'FREE glimpse — what is an .EDU proof?',
+        description:
+          'Student offers verify you 3 ways: school email (.EDU), student ID, enrollment letter. This free chapter explains which proof each platform (GitHub, Azure, AWS, SheerID) accepts. The full college list + click-paths are in the paid PDF.',
+      },
+    ],
+    nameAr: 'دليل إثبات الطالب PRO',
+    taglineAr: 'احصل على عروض الطلاب خطوة بخطوة — دليل PDF كامل',
+    descriptionAr: 'الدليل الكامل: أي كلية تختار، النقرات الدقيقة، كيف تحصل على بريد .EDU + بطاقة الطالب + خطاب التسجيل خلال 24-72 ساعة، وترتيب المطالبة بأكثر من 40 عرضاً. ادفع بالتحويل، أرسل الوصل على واتساب، واستلم PDF على واتساب.',
+    stepsAr: [
+      {
+        title: 'ادفع بالتحويل (99 درهم)',
+        description: 'أرسل 99 درهم إلى RIB الموجود في صفحة الدليل. احتفظ بالوصل.',
+      },
+      {
+        title: 'أرسل "سلام، خلّصت" + الوصل على واتساب',
+        description: 'اضغط زر واتساب وأرسل صورة الوصل. نؤكد لك خلال ساعات.',
+      },
+      {
+        title: 'استلم PDF على واتساب',
+        description: 'نرسل لك PDF الكامل (42 صفحة) على واتساب + تحديثات مجانية 30 يوماً.',
+      },
+      {
+        title: 'نظرة مجانية — ما هو إثبات الطالب؟',
+        description: 'المنصات تتحقق بثلاث طرق: بريد .EDU، بطاقة الطالب، خطاب التسجيل. هذا الفصل المجاني يشرح ماذا يقبل كل موقع. لائحة الكليات الكاملة في PDF المدفوع.',
+      },
+    ],
+    upvotes: 5,
+    bookmarks: 8,
+    submittedBy: 'u6',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
