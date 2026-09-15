@@ -9,8 +9,8 @@ interface MarqueeTool {
   logoUrl: string
 }
 
-// 20 popular AI tools - logo strip under the hero (Jobzyn-style infinite marquee)
-const MARQUEE_TOOLS: MarqueeTool[] = [
+// Row 1 - first 10 AI tools
+const ROW_ONE: MarqueeTool[] = [
   { slug: 'chatgpt', name: 'ChatGPT', category: 'other', logoUrl: 'https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128' },
   { slug: 'claude', name: 'Claude', category: 'other', logoUrl: 'https://www.google.com/s2/favicons?domain=claude.ai&sz=128' },
   { slug: 'gemini', name: 'Gemini', category: 'research', logoUrl: 'https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128' },
@@ -21,6 +21,10 @@ const MARQUEE_TOOLS: MarqueeTool[] = [
   { slug: 'hugging-face', name: 'Hugging Face', category: 'data', logoUrl: 'https://www.google.com/s2/favicons?domain=huggingface.co&sz=128' },
   { slug: 'runway', name: 'Runway', category: 'video', logoUrl: 'https://www.google.com/s2/favicons?domain=runwayml.com&sz=128' },
   { slug: 'elevenlabs', name: 'ElevenLabs', category: 'audio', logoUrl: 'https://www.google.com/s2/favicons?domain=elevenlabs.io&sz=128' },
+]
+
+// Row 2 - next 10 AI tools (scrolls opposite direction)
+const ROW_TWO: MarqueeTool[] = [
   { slug: 'suno', name: 'Suno', category: 'audio', logoUrl: 'https://www.google.com/s2/favicons?domain=suno.com&sz=128' },
   { slug: 'notion-ai', name: 'Notion AI', category: 'productivity', logoUrl: 'https://www.google.com/s2/favicons?domain=notion.so&sz=128' },
   { slug: 'gamma', name: 'Gamma', category: 'productivity', logoUrl: 'https://www.google.com/s2/favicons?domain=gamma.app&sz=128' },
@@ -33,9 +37,42 @@ const MARQUEE_TOOLS: MarqueeTool[] = [
   { slug: 'grammarly', name: 'Grammarly', category: 'writing', logoUrl: 'https://www.google.com/s2/favicons?domain=grammarly.com&sz=128' },
 ]
 
-export function ToolsMarquee() {
-  const loop = [...MARQUEE_TOOLS, ...MARQUEE_TOOLS]
+function MarqueeRow({ tools, reverse = false }: { tools: MarqueeTool[]; reverse?: boolean }) {
+  const loop = [...tools, ...tools]
 
+  return (
+    <div className="group relative overflow-hidden" role="region" aria-roledescription="carousel">
+      <div className="overflow-hidden">
+        <div
+          className={`mt-4 flex w-max motion-reduce:animate-none ${
+            reverse ? 'animate-marquee-reverse' : 'animate-marquee'
+          } group-hover:[animation-play-state:paused]`}
+        >
+          {loop.map((tool, i) => (
+            <div key={`${tool.slug}-${i}`} role="group" aria-roledescription="slide" className="min-w-0 shrink-0 grow-0 basis-auto pl-16">
+              <Link
+                href={`/tools/${tool.category}/${tool.slug}`}
+                aria-hidden={i >= tools.length}
+                tabIndex={i >= tools.length ? -1 : undefined}
+                title={tool.name}
+                className="block"
+              >
+                <img
+                  src={tool.logoUrl}
+                  alt={tool.name}
+                  loading="lazy"
+                  className="h-16 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100"
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function ToolsMarquee() {
   return (
     <section aria-label="Popular AI tools" className="relative mt-8 md:mt-12">
       <div className="mb-6 mt-16 flex items-center justify-center gap-4">
@@ -49,28 +86,8 @@ export function ToolsMarquee() {
         <div className="h-px max-w-[80px] flex-1 bg-gradient-to-l from-transparent to-foreground/10" />
       </div>
       <div className="mx-auto max-w-5xl [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="group relative overflow-hidden" role="region" aria-roledescription="carousel">
-          <div className="mt-4 flex w-max animate-marquee [animation-duration:55s] group-hover:[animation-play-state:paused] motion-reduce:animate-none">
-            {loop.map((tool, i) => (
-              <div key={`${tool.slug}-${i}`} role="group" aria-roledescription="slide" className="min-w-0 shrink-0 grow-0 basis-auto pl-16">
-                <Link
-                  href={`/tools/${tool.category}/${tool.slug}`}
-                  aria-hidden={i >= MARQUEE_TOOLS.length}
-                  tabIndex={i >= MARQUEE_TOOLS.length ? -1 : undefined}
-                  title={tool.name}
-                  className="block"
-                >
-                  <img
-                    src={tool.logoUrl}
-                    alt={tool.name}
-                    loading="lazy"
-                    className="h-16 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100"
-                  />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
+        <MarqueeRow tools={ROW_ONE} />
+        <MarqueeRow tools={ROW_TWO} reverse />
       </div>
     </section>
   )
