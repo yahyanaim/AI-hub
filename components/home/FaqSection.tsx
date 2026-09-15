@@ -1,8 +1,9 @@
 import { CalendarClock, UserRound } from 'lucide-react'
 
-// TODO: replace with your Calendly booking link + your photo (public/your-photo.jpg)
-const CALENDLY_URL = '#'
-const FOUNDER_PHOTO_URL: string | null = null
+// Founder booking: photo + Calendly link
+const CALENDLY_URL = 'https://calendly.com/yahyanaim2001/30min'
+const FOUNDER_PHOTO_URL: string | null =
+  'https://avatars.githubusercontent.com/u/57252787?v=4'
 
 export const HOME_FAQS = [
   {
@@ -63,10 +64,10 @@ export function FaqSection() {
               </span>
             )}
             <h3 className="mt-4 text-xl font-bold text-foreground">
-              Book a 15 min call
+              Book a 30 min call
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              If you have any questions, just book a 15-minute call with us
+              If you have any questions, just book a 30-minute call with us
               before subscribing.
             </p>
             <a
