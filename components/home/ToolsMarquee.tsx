@@ -11,26 +11,26 @@ interface MarqueeTool {
 
 // 20 popular AI tools - logo strip under the hero (Jobzyn-style infinite marquee)
 const MARQUEE_TOOLS: MarqueeTool[] = [
-  { slug: 'chatgpt', name: 'ChatGPT', category: 'other', logoUrl: 'https://icons.duckduckgo.com/ip3/chatgpt.com.ico' },
-  { slug: 'claude', name: 'Claude', category: 'other', logoUrl: 'https://icons.duckduckgo.com/ip3/claude.ai.ico' },
-  { slug: 'gemini', name: 'Gemini', category: 'research', logoUrl: 'https://icons.duckduckgo.com/ip3/gemini.google.com.ico' },
-  { slug: 'cursor', name: 'Cursor', category: 'coding', logoUrl: 'https://www.cursor.com/favicon.ico' },
-  { slug: 'perplexity', name: 'Perplexity', category: 'research', logoUrl: 'https://icons.duckduckgo.com/ip3/perplexity.ai.ico' },
-  { slug: 'midjourney', name: 'Midjourney', category: 'image', logoUrl: 'https://icons.duckduckgo.com/ip3/midjourney.com.ico' },
-  { slug: 'github-copilot', name: 'GitHub Copilot', category: 'coding', logoUrl: 'https://icons.duckduckgo.com/ip3/github.com.ico' },
-  { slug: 'hugging-face', name: 'Hugging Face', category: 'data', logoUrl: 'https://icons.duckduckgo.com/ip3/huggingface.co.ico' },
-  { slug: 'runway', name: 'Runway', category: 'video', logoUrl: 'https://icons.duckduckgo.com/ip3/runwayml.com.ico' },
-  { slug: 'elevenlabs', name: 'ElevenLabs', category: 'audio', logoUrl: 'https://icons.duckduckgo.com/ip3/elevenlabs.io.ico' },
-  { slug: 'suno', name: 'Suno', category: 'audio', logoUrl: 'https://icons.duckduckgo.com/ip3/suno.com.ico' },
-  { slug: 'notion-ai', name: 'Notion AI', category: 'productivity', logoUrl: 'https://icons.duckduckgo.com/ip3/notion.so.ico' },
-  { slug: 'gamma', name: 'Gamma', category: 'productivity', logoUrl: 'https://icons.duckduckgo.com/ip3/gamma.app.ico' },
-  { slug: 'synthesia', name: 'Synthesia', category: 'video', logoUrl: 'https://icons.duckduckgo.com/ip3/synthesia.io.ico' },
-  { slug: 'leonardo-ai', name: 'Leonardo.ai', category: 'image', logoUrl: 'https://icons.duckduckgo.com/ip3/leonardo.ai.ico' },
-  { slug: 'jasper', name: 'Jasper', category: 'marketing', logoUrl: 'https://icons.duckduckgo.com/ip3/jasper.ai.ico' },
-  { slug: 'copy-ai', name: 'Copy.ai', category: 'marketing', logoUrl: 'https://icons.duckduckgo.com/ip3/copy.ai.ico' },
-  { slug: 'descript', name: 'Descript', category: 'video', logoUrl: 'https://icons.duckduckgo.com/ip3/descript.com.ico' },
-  { slug: 'otter-ai', name: 'Otter.ai', category: 'productivity', logoUrl: 'https://icons.duckduckgo.com/ip3/otter.ai.ico' },
-  { slug: 'grammarly', name: 'Grammarly', category: 'writing', logoUrl: 'https://icons.duckduckgo.com/ip3/grammarly.com.ico' },
+  { slug: 'chatgpt', name: 'ChatGPT', category: 'other', logoUrl: 'https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128' },
+  { slug: 'claude', name: 'Claude', category: 'other', logoUrl: 'https://www.google.com/s2/favicons?domain=claude.ai&sz=128' },
+  { slug: 'gemini', name: 'Gemini', category: 'research', logoUrl: 'https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128' },
+  { slug: 'cursor', name: 'Cursor', category: 'coding', logoUrl: 'https://www.google.com/s2/favicons?domain=cursor.com&sz=128' },
+  { slug: 'perplexity', name: 'Perplexity', category: 'research', logoUrl: 'https://www.google.com/s2/favicons?domain=perplexity.ai&sz=128' },
+  { slug: 'midjourney', name: 'Midjourney', category: 'image', logoUrl: 'https://www.google.com/s2/favicons?domain=midjourney.com&sz=128' },
+  { slug: 'github-copilot', name: 'GitHub Copilot', category: 'coding', logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=128' },
+  { slug: 'hugging-face', name: 'Hugging Face', category: 'data', logoUrl: 'https://www.google.com/s2/favicons?domain=huggingface.co&sz=128' },
+  { slug: 'runway', name: 'Runway', category: 'video', logoUrl: 'https://www.google.com/s2/favicons?domain=runwayml.com&sz=128' },
+  { slug: 'elevenlabs', name: 'ElevenLabs', category: 'audio', logoUrl: 'https://www.google.com/s2/favicons?domain=elevenlabs.io&sz=128' },
+  { slug: 'suno', name: 'Suno', category: 'audio', logoUrl: 'https://www.google.com/s2/favicons?domain=suno.com&sz=128' },
+  { slug: 'notion-ai', name: 'Notion AI', category: 'productivity', logoUrl: 'https://www.google.com/s2/favicons?domain=notion.so&sz=128' },
+  { slug: 'gamma', name: 'Gamma', category: 'productivity', logoUrl: 'https://www.google.com/s2/favicons?domain=gamma.app&sz=128' },
+  { slug: 'synthesia', name: 'Synthesia', category: 'video', logoUrl: 'https://www.google.com/s2/favicons?domain=synthesia.io&sz=128' },
+  { slug: 'leonardo-ai', name: 'Leonardo.ai', category: 'image', logoUrl: 'https://www.google.com/s2/favicons?domain=leonardo.ai&sz=128' },
+  { slug: 'jasper', name: 'Jasper', category: 'marketing', logoUrl: 'https://www.google.com/s2/favicons?domain=jasper.ai&sz=128' },
+  { slug: 'copy-ai', name: 'Copy.ai', category: 'marketing', logoUrl: 'https://www.google.com/s2/favicons?domain=copy.ai&sz=128' },
+  { slug: 'descript', name: 'Descript', category: 'video', logoUrl: 'https://www.google.com/s2/favicons?domain=descript.com&sz=128' },
+  { slug: 'otter-ai', name: 'Otter.ai', category: 'productivity', logoUrl: 'https://www.google.com/s2/favicons?domain=otter.ai&sz=128' },
+  { slug: 'grammarly', name: 'Grammarly', category: 'writing', logoUrl: 'https://www.google.com/s2/favicons?domain=grammarly.com&sz=128' },
 ]
 
 export function ToolsMarquee() {
@@ -38,10 +38,10 @@ export function ToolsMarquee() {
 
   return (
     <section aria-label="Popular AI tools" className="relative mt-8 md:mt-12">
-      <div className="mb-6 flex items-center justify-center gap-4">
+      <div className="mb-6 mt-16 flex items-center justify-center gap-4">
         <div className="h-px max-w-[80px] flex-1 bg-gradient-to-r from-transparent to-foreground/10" />
         <p
-          className="text-center font-sans font-medium text-muted-foreground"
+          className="text-center font-geist font-medium text-muted-foreground"
           style={{ fontSize: '11px', letterSpacing: '0.03em', lineHeight: 1.4 }}
         >
           Loved by builders using the best AI tools

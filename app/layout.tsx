@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import { Inter, Noto_Kufi_Arabic } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import { AppProvider } from '@/lib/store'
 import { SITE_URL } from '@/lib/site'
@@ -28,6 +29,8 @@ const arabic = Noto_Kufi_Arabic({
   variable: '--font-arabic',
   display: 'swap',
 })
+
+const geist = GeistSans
 
 const baseUrl = SITE_URL
 
@@ -121,7 +124,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${arabic.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${arabic.variable} ${geist.variable}`} suppressHydrationWarning>
       <head>
         <Script
           id="schema-website"

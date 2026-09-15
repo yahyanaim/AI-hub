@@ -17,6 +17,7 @@
     "clsx": "2.1.1",
     "cmdk": "^1.1.1",
     "framer-motion": "11.3.19",
+    "geist": "^1.7.2",
     "highlight.js": "11.10.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
