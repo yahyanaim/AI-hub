@@ -72,7 +72,7 @@ export function FaqSection() {
             </p>
             <a
               href={CALENDLY_URL}
-              target={CALENDLY_URL === '#' ? undefined : '_blank'}
+              target="_blank"
               rel="noreferrer"
               className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-orange to-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-[0.98]"
             >
