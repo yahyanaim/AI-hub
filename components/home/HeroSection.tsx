@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { ArrowRight, Sparkles, Search, TrendingUp, Brain, Code, Globe, Zap, Terminal, Rocket, Layers, Database } from 'lucide-react'
 import Link from 'next/link'
@@ -39,6 +40,39 @@ interface HeroSectionProps {
 export function HeroSection({ onSearch, toolCount, promptCount, repoCount, courseCount, offerCount }: HeroSectionProps) {
   const totalCount = toolCount + promptCount + repoCount + courseCount + offerCount
   const reduceMotion = useReducedMotion()
+
+  // Typewriter for the headline keyword
+  const PHRASES = ['AI tools', 'dev tools', 'courses']
+  const phraseAt = (i: number) => PHRASES[i % PHRASES.length] ?? 'AI tools'
+  const [phraseIdx, setPhraseIdx] = useState(0)
+  const [charCount, setCharCount] = useState(phraseAt(0).length)
+  const [deleting, setDeleting] = useState(true)
+
+  useEffect(() => {
+    if (reduceMotion) {
+      setCharCount(phraseAt(0).length)
+      return
+    }
+    const current = phraseAt(phraseIdx)
+    let delay = deleting ? 35 : 75
+    if (!deleting && charCount === current.length) delay = 1600
+    else if (deleting && charCount === 0) delay = 350
+    const t = setTimeout(() => {
+      if (!deleting && charCount === current.length) {
+        setDeleting(true)
+      } else if (deleting && charCount === 0) {
+        setDeleting(false)
+        setPhraseIdx((i) => (i + 1) % PHRASES.length)
+      } else {
+        setCharCount((c) => c + (deleting ? -1 : 1))
+      }
+    }, delay)
+    return () => clearTimeout(t)
+  }, [charCount, deleting, phraseIdx, reduceMotion])
+
+  const typed = reduceMotion
+    ? phraseAt(0)
+    : phraseAt(phraseIdx).slice(0, charCount)
 
   return (
     <section className="relative overflow-hidden py-16 md:py-24">
@@ -82,9 +116,9 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
         <h1 className="font-heading text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
           Discover the best{' '}
           <span className="bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
-            AI tools
+            {typed}
           </span>
-          , dev tools &amp; courses
+          <span aria-hidden="true" className="ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.12em] animate-pulse rounded-full bg-brand-orange" />
         </h1>
 
         <motion.p
