@@ -55,14 +55,20 @@ function MarqueeRow({ tools, reverse = false }: { tools: MarqueeTool[]; reverse?
                 aria-hidden={i >= tools.length}
                 tabIndex={i >= tools.length ? -1 : undefined}
                 title={tool.name}
-                className="block"
+                className="flex shrink-0 items-center gap-3 opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
               >
                 <img
                   src={tool.logoUrl}
-                  alt={tool.name}
+                  alt=""
                   loading="lazy"
-                  className="h-16 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100"
+                  className="h-9 w-9 object-contain"
                 />
+                <span
+                  className="whitespace-nowrap font-geist font-medium text-black/55"
+                  style={{ fontSize: '19px', letterSpacing: '-0.01em' }}
+                >
+                  {tool.name}
+                </span>
               </Link>
             </div>
           ))}
