@@ -254,6 +254,7 @@ export type OfferCategory =
   | 'guide'
   | 'forstartups'
   | 'startup-discounts'
+  | 'ai-perks'
   | 'edu'
 
 export interface OfferStep {
@@ -468,5 +469,6 @@ export const OFFER_CATEGORY_LABELS: Record<OfferCategory, string> = {
   guide: 'Guide',
   forstartups: 'For Startups',
   'startup-discounts': 'Startups Perks',
+  'ai-perks': 'AI Perks',
   edu: 'EDU',
 }
