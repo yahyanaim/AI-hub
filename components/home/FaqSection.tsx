@@ -39,6 +39,7 @@ export const HOME_FAQS = [
 export function FaqSection() {
   return (
     <section aria-label="Frequently asked questions" className="mt-4">
+      <div className="rounded-3xl bg-[#F4F4F6] p-6 sm:p-10 dark:bg-muted/20">
       <div className="grid gap-8 lg:grid-cols-5">
         {/* Left: heading + book-a-call card */}
         <div className="lg:col-span-2">
@@ -46,11 +47,11 @@ export function FaqSection() {
             <span className="inline-block size-1.5 rounded-full bg-brand-orange" />
             FAQs
           </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
             Frequently Asked Questions
           </h2>
 
-          <div className="mt-6 rounded-2xl border border-[#FDE4E1] bg-[#FFFBFA] p-6 dark:border-border dark:bg-card">
+          <div className="mt-6 rounded-2xl border border-black/5 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
             {FOUNDER_PHOTO_URL ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -88,12 +89,12 @@ export function FaqSection() {
             <details
               key={faq.q}
               open={i === 0}
-              className="group rounded-2xl border border-[#FDE4E1] bg-[#FFFBFA] px-5 py-4 transition-colors dark:border-border dark:bg-card"
+              className="group rounded-2xl border border-transparent bg-[#FBEDEC] px-5 py-4 transition-colors open:border-[#F5D9D4] open:bg-white open:shadow-sm dark:border-border dark:bg-card"
             >
-              <summary className="cursor-pointer list-none text-sm font-semibold text-foreground marker:hidden [&::-webkit-details-marker]:hidden">
+              <summary className="cursor-pointer list-none text-[15px] font-semibold text-foreground marker:hidden [&::-webkit-details-marker]:hidden">
                 <span className="flex items-center justify-between gap-4">
                   {faq.q}
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full text-lg font-normal text-muted-foreground transition-transform group-open:rotate-45">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-black/5 bg-white text-base font-normal text-muted-foreground shadow-sm transition-transform group-open:rotate-45 dark:border-border dark:bg-background">
                     +
                   </span>
                 </span>
@@ -104,6 +105,7 @@ export function FaqSection() {
             </details>
           ))}
         </div>
+      </div>
       </div>
     </section>
   )
