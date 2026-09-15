@@ -37,29 +37,39 @@ export function ToolsMarquee() {
   const loop = [...MARQUEE_TOOLS, ...MARQUEE_TOOLS]
 
   return (
-    <section aria-label="Popular AI tools" className="relative -mt-4 pb-2 md:-mt-8">
-      <p className="mb-5 text-center font-heading text-base text-foreground">
-        Loved by builders using the best AI tools
-      </p>
-      <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="flex w-max animate-marquee items-center gap-16 pr-16 group-hover:[animation-play-state:paused] motion-reduce:animate-none">
-          {loop.map((tool, i) => (
-            <Link
-              key={`${tool.slug}-${i}`}
-              href={`/tools/${tool.category}/${tool.slug}`}
-              aria-hidden={i >= MARQUEE_TOOLS.length}
-              tabIndex={i >= MARQUEE_TOOLS.length ? -1 : undefined}
-              title={tool.name}
-              className="flex shrink-0 items-center opacity-70 transition-opacity hover:opacity-100"
-            >
-              <img
-                src={tool.logoUrl}
-                alt={tool.name}
-                loading="lazy"
-                className="h-11 w-11 rounded-xl object-contain"
-              />
-            </Link>
-          ))}
+    <section aria-label="Popular AI tools" className="relative mt-8 md:mt-12">
+      <div className="mb-6 flex items-center justify-center gap-4">
+        <div className="h-px max-w-[80px] flex-1 bg-gradient-to-r from-transparent to-foreground/10" />
+        <p
+          className="text-center font-sans font-medium text-muted-foreground"
+          style={{ fontSize: '11px', letterSpacing: '0.03em', lineHeight: 1.4 }}
+        >
+          Loved by builders using the best AI tools
+        </p>
+        <div className="h-px max-w-[80px] flex-1 bg-gradient-to-l from-transparent to-foreground/10" />
+      </div>
+      <div className="mx-auto max-w-5xl [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div className="group relative overflow-hidden" role="region" aria-roledescription="carousel">
+          <div className="mt-4 flex w-max animate-marquee [animation-duration:55s] group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+            {loop.map((tool, i) => (
+              <div key={`${tool.slug}-${i}`} role="group" aria-roledescription="slide" className="min-w-0 shrink-0 grow-0 basis-auto pl-16">
+                <Link
+                  href={`/tools/${tool.category}/${tool.slug}`}
+                  aria-hidden={i >= MARQUEE_TOOLS.length}
+                  tabIndex={i >= MARQUEE_TOOLS.length ? -1 : undefined}
+                  title={tool.name}
+                  className="block"
+                >
+                  <img
+                    src={tool.logoUrl}
+                    alt={tool.name}
+                    loading="lazy"
+                    className="h-16 w-auto object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100"
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
