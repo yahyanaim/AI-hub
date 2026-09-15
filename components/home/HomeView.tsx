@@ -83,11 +83,11 @@ export function HomeView() {
             </div>
           </section>
 
-          {/* Popular Repos */}
+          {/* Trending Editing Tools */}
           <section>
             <SectionHeading
-              eyebrow="Repositories"
-              title="Star-worthy repos"
+              eyebrow="Editing Tools"
+              title="Trending Editing tools"
               href="/edittools"
             />
             <div className="grid gap-5 sm:grid-cols-2">
