@@ -44,8 +44,8 @@ export function Navbar() {
             className="group inline-flex items-center gap-2.5 text-base font-semibold tracking-tight text-foreground"
             aria-label="AI Hunt home"
           >
-            <span className="flex size-8 items-center justify-center overflow-hidden bg-transparent transition-transform group-hover:scale-105">
-              <Image src="/logo.png" alt="AI Hunt" width={32} height={32} className="h-full w-full object-contain" />
+            <span className="flex size-10 items-center justify-center overflow-hidden bg-transparent transition-transform group-hover:scale-105">
+              <Image src="/logo.png" alt="AI Hunt" width={40} height={40} className="h-full w-full object-contain" />
             </span>
           </Link>
 
