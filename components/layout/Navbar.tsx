@@ -47,9 +47,6 @@ export function Navbar() {
             <span className="flex size-8 items-center justify-center overflow-hidden bg-transparent transition-transform group-hover:scale-105">
               <Image src="/logo.png" alt="AI Hunt" width={32} height={32} className="h-full w-full object-contain" />
             </span>
-            <span className="text-base font-semibold tracking-tight">
-              AI Hunt
-            </span>
           </Link>
 
           {/* Desktop nav */}
