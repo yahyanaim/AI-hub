@@ -38,7 +38,7 @@ export function ToolsMarquee() {
 
   return (
     <section aria-label="Popular AI tools" className="relative -mt-4 pb-2 md:-mt-8">
-      <p className="mb-5 text-center text-xs font-medium uppercase tracking-widest text-muted-foreground">
+      <p className="mb-5 text-center font-heading text-base font-semibold text-foreground">
         Loved by builders using the best AI tools
       </p>
       <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
