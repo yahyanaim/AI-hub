@@ -1,4 +1,8 @@
-import { SectionHeading } from '@/components/ui/SectionHeading'
+import { CalendarClock, UserRound } from 'lucide-react'
+
+// TODO: replace with your Calendly booking link + your photo (public/your-photo.jpg)
+const CALENDLY_URL = '#'
+const FOUNDER_PHOTO_URL: string | null = null
 
 export const HOME_FAQS = [
   {
@@ -34,30 +38,71 @@ export const HOME_FAQS = [
 export function FaqSection() {
   return (
     <section aria-label="Frequently asked questions" className="mt-4">
-      <SectionHeading
-        eyebrow="FAQ"
-        title="Frequently asked questions"
-        description="Quick answers about AI Hunt, rankings, submissions, and support."
-      />
-      <div className="grid gap-3">
-        {HOME_FAQS.map((faq) => (
-          <details
-            key={faq.q}
-            className="group rounded-xl border border-border bg-card px-5 py-4 transition-colors hover:border-accent/40"
-          >
-            <summary className="cursor-pointer list-none text-sm font-semibold text-foreground marker:hidden [&::-webkit-details-marker]:hidden">
-              <span className="flex items-center justify-between gap-4">
-                {faq.q}
-                <span className="shrink-0 text-lg font-normal text-muted-foreground transition-transform group-open:rotate-45">
-                  +
-                </span>
+      <div className="grid gap-8 lg:grid-cols-5">
+        {/* Left: heading + book-a-call card */}
+        <div className="lg:col-span-2">
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            <span className="inline-block size-1.5 rounded-full bg-brand-orange" />
+            FAQs
+          </p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="mt-6 rounded-2xl border border-[#FDE4E1] bg-[#FFFBFA] p-6 dark:border-border dark:bg-card">
+            {FOUNDER_PHOTO_URL ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={FOUNDER_PHOTO_URL}
+                alt="Founder"
+                className="size-14 rounded-full object-cover"
+              />
+            ) : (
+              <span className="flex size-14 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
+                <UserRound className="size-7" />
               </span>
-            </summary>
+            )}
+            <h3 className="mt-4 text-xl font-bold text-foreground">
+              Book a 15 min call
+            </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {faq.a}
+              If you have any questions, just book a 15-minute call with us
+              before subscribing.
             </p>
-          </details>
-        ))}
+            <a
+              href={CALENDLY_URL}
+              target={CALENDLY_URL === '#' ? undefined : '_blank'}
+              rel="noreferrer"
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-orange to-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-[0.98]"
+            >
+              <CalendarClock className="size-4" />
+              Book a Free Call
+            </a>
+          </div>
+        </div>
+
+        {/* Right: accordion */}
+        <div className="grid content-start gap-3 lg:col-span-3">
+          {HOME_FAQS.map((faq, i) => (
+            <details
+              key={faq.q}
+              open={i === 0}
+              className="group rounded-2xl border border-[#FDE4E1] bg-[#FFFBFA] px-5 py-4 transition-colors dark:border-border dark:bg-card"
+            >
+              <summary className="cursor-pointer list-none text-sm font-semibold text-foreground marker:hidden [&::-webkit-details-marker]:hidden">
+                <span className="flex items-center justify-between gap-4">
+                  {faq.q}
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full text-lg font-normal text-muted-foreground transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </span>
+              </summary>
+              <p className="mt-2 pr-10 text-sm leading-relaxed text-muted-foreground">
+                {faq.a}
+              </p>
+            </details>
+          ))}
+        </div>
       </div>
     </section>
   )
