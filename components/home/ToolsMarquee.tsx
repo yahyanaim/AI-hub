@@ -42,24 +42,22 @@ export function ToolsMarquee() {
         Loved by builders using the best AI tools
       </p>
       <div className="group relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="flex w-max animate-marquee items-center gap-10 pr-10 group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+        <div className="flex w-max animate-marquee items-center gap-16 pr-16 group-hover:[animation-play-state:paused] motion-reduce:animate-none">
           {loop.map((tool, i) => (
             <Link
               key={`${tool.slug}-${i}`}
               href={`/tools/${tool.category}/${tool.slug}`}
               aria-hidden={i >= MARQUEE_TOOLS.length}
               tabIndex={i >= MARQUEE_TOOLS.length ? -1 : undefined}
-              className="flex shrink-0 items-center gap-2.5 opacity-60 transition-opacity hover:opacity-100"
+              title={tool.name}
+              className="flex shrink-0 items-center opacity-70 transition-opacity hover:opacity-100"
             >
               <img
                 src={tool.logoUrl}
-                alt=""
+                alt={tool.name}
                 loading="lazy"
-                className="h-7 w-7 rounded-md object-contain"
+                className="h-11 w-11 rounded-xl object-contain"
               />
-              <span className="whitespace-nowrap text-sm font-semibold text-foreground">
-                {tool.name}
-              </span>
             </Link>
           ))}
         </div>
