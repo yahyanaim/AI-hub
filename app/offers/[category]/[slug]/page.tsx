@@ -4,7 +4,7 @@ import { SEED_OFFERS } from '@/lib/seed'
 import { OFFER_CATEGORY_LABELS } from '@/types'
 import { OfferDetail } from '@/components/detail/OfferDetail'
 import { safeJsonLd } from '@/lib/json-ld'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
   return SEED_OFFERS.map((offer) => ({
@@ -27,7 +27,7 @@ export async function generateMetadata({
   const seoDescription = offer.description
     ? `${offer.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
     : offer.tagline
-  const ogImage = `${SITE_URL}/og.png`
+  const ogImage = resolveOgImage(offer.logoUrl)
   return {
     title: `${offer.name} - ${offer.tagline}`,
     description: seoDescription,
@@ -36,13 +36,13 @@ export async function generateMetadata({
       description: seoDescription,
       type: 'article',
       url: `${SITE_URL}/offers/${offer.category}/${offer.slug}`,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: `${offer.name} - AI Hunt` }],
+      images: [{ url: ogImage.src, alt: `${offer.name} - AI Hunt` }],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: ogImage.isLogo ? 'summary' : 'summary_large_image',
       title: `${offer.name} - ${offer.tagline}`,
       description: seoDescription,
-      images: [ogImage],
+      images: [ogImage.src],
     },
     alternates: {
       canonical: `${SITE_URL}/offers/${offer.category}/${offer.slug}`,
@@ -76,7 +76,7 @@ export default async function OfferDetailPage({
     '@type': 'Article',
     headline: offer.name,
     description: offer.tagline,
-    image: `${SITE_URL}/og.png`,
+    image: resolveOgImage(offer.logoUrl).src,
     author: { '@type': 'Organization', name: 'AI Hunt' },
     url: `${SITE_URL}/offers/${offer.category}/${offer.slug}`,
     datePublished: offer.createdAt,

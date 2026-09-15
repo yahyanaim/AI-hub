@@ -4,7 +4,7 @@ import { SEED_OFFERS } from '@/lib/seed'
 import { isPaidGuide, GUIDE_PRICE_LABEL, GUIDES_ENABLED } from '@/lib/guides'
 import { GuideLanding } from '@/components/guides/GuideLanding'
 import { safeJsonLd } from '@/lib/json-ld'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export function generateStaticParams() {
   if (!GUIDES_ENABLED) return []
@@ -26,6 +26,7 @@ export async function generateMetadata({
   const price = GUIDE_PRICE_LABEL(guide)
   const title = `${guide.name} — ${price} | AI Hunt Guide`
   const description = `${guide.tagline} Pay by virement, send receipt on WhatsApp, get the ${guide.pages ?? ''} PDF.`.slice(0, 155)
+  const ogImage = resolveOgImage(guide.logoUrl)
   return {
     title,
     description,
@@ -34,13 +35,13 @@ export async function generateMetadata({
       description,
       type: 'article',
       url: `${SITE_URL}/guides/${guide.slug}`,
-      images: [{ url: `${SITE_URL}/og.png`, width: 1200, height: 630, alt: guide.name }],
+      images: [{ url: ogImage.src, alt: guide.name }],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: ogImage.isLogo ? 'summary' : 'summary_large_image',
       title,
       description,
-      images: [`${SITE_URL}/og.png`],
+      images: [ogImage.src],
     },
     alternates: { canonical: `${SITE_URL}/guides/${guide.slug}` },
   }
@@ -57,7 +58,7 @@ export default function GuideDetailPage({ params }: { params: { slug: string } }
     '@type': 'Product',
     name: guide.name,
     description: guide.tagline,
-    image: `${SITE_URL}/og.png`,
+    image: resolveOgImage(guide.logoUrl).src,
     url: `${SITE_URL}/guides/${guide.slug}`,
     offers: {
       '@type': 'Offer',

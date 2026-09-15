@@ -13,3 +13,15 @@ function resolveSiteUrl(): string {
   return 'https://aihubtools.vercel.app'
 }
 export const SITE_URL = resolveSiteUrl()
+
+// Resolve an item logo to an absolute og:image URL for link previews.
+// Absolute URLs pass through, site-relative paths get the site origin,
+// empty/missing logos fall back to the generic site banner.
+export function resolveOgImage(logoUrl?: string): { src: string; isLogo: boolean } {
+  const raw = logoUrl?.trim()
+  if (raw) {
+    if (/^https?:\/\//i.test(raw)) return { src: raw, isLogo: true }
+    if (raw.startsWith('/')) return { src: `${SITE_URL}${raw}`, isLogo: true }
+  }
+  return { src: `${SITE_URL}/og.png`, isLogo: false }
+}

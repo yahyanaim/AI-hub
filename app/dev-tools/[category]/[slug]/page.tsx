@@ -3,7 +3,7 @@ import { redirect, notFound } from 'next/navigation'
 import { SEED_DEV_TOOLS, SEED_USERS } from '@/lib/seed'
 import { DevToolDetail } from '@/components/detail/DevToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
   return SEED_DEV_TOOLS.map((tool) => ({
@@ -27,7 +27,7 @@ export async function generateMetadata({
   const seoDescription = tool.description
     ? `${tool.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
     : tool.tagline
-  const ogImage = `${SITE_URL}/og.png`
+  const ogImage = resolveOgImage(tool.logoUrl)
   return {
     title: `${tool.name} - ${tool.tagline}`,
     description: seoDescription,
@@ -36,13 +36,13 @@ export async function generateMetadata({
       description: seoDescription,
       type: 'article',
       url: `${SITE_URL}/dev-tools/${tool.category}/${tool.slug}`,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: `${tool.name} - AI Hunt` }],
+      images: [{ url: ogImage.src, alt: `${tool.name} - AI Hunt` }],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: ogImage.isLogo ? 'summary' : 'summary_large_image',
       title: `${tool.name} - ${tool.tagline}`,
       description: seoDescription,
-      images: [ogImage],
+      images: [ogImage.src],
     },
     alternates: {
       canonical: `${SITE_URL}/dev-tools/${tool.category}/${tool.slug}`,

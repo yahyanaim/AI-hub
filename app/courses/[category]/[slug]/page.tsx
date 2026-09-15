@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, resolveOgImage } from '@/lib/site'
 import { redirect, notFound } from 'next/navigation'
 import { SEED_COURSES, SEED_USERS } from '@/lib/seed'
 import { CourseDetail } from '@/components/detail/CourseDetail'
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { category: string;
   const seoDescription = course.description
     ? `${course.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
     : course.tagline
-  const ogImage = `${baseUrl}/og.png`
+  const ogImage = resolveOgImage(course.logoUrl)
   return {
     title: `${course.name} - ${course.tagline}`,
     description: seoDescription,
@@ -29,13 +29,13 @@ export async function generateMetadata({ params }: { params: { category: string;
       description: seoDescription,
       type: 'article',
       url: `${baseUrl}/courses/${course.category}/${course.slug}`,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: `${course.name} - AI Hunt` }],
+      images: [{ url: ogImage.src, alt: `${course.name} - AI Hunt` }],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: ogImage.isLogo ? 'summary' : 'summary_large_image',
       title: `${course.name} - ${course.tagline}`,
       description: seoDescription,
-      images: [ogImage],
+      images: [ogImage.src],
     },
     alternates: {
       canonical: `${baseUrl}/courses/${course.category}/${course.slug}`,
