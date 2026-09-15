@@ -16,6 +16,7 @@ export function CoursesView({ initialCategory }: { initialCategory?: string }) {
 
   return (
     <>
+      <div className="container-page pt-6 md:pt-8">
       <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200">
         <strong>Free access & certification:</strong> To get free access and earn a Coursera certificate, fill out{' '}
         <a
@@ -27,6 +28,7 @@ export function CoursesView({ initialCategory }: { initialCategory?: string }) {
           this form
         </a>
         .
+      </div>
       </div>
       <ListingView<Course>
       items={courses}

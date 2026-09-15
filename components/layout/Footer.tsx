@@ -1,6 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Twitter, Heart } from 'lucide-react'
+import { Github, Heart } from 'lucide-react'
+
+function XLogo({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
 
 export function Footer() {
   return (
@@ -58,22 +66,22 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/yahyanaim"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground"
-              aria-label="GitHub"
+              className="text-foreground transition-colors hover:text-brand-orange"
+              aria-label="GitHub - yahyanaim"
             >
               <Github className="h-5 w-5" />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://x.com/yahianaim"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground"
-              aria-label="Twitter"
+              className="text-foreground transition-colors hover:text-brand-orange"
+              aria-label="X - yahianaim"
             >
-              <Twitter className="h-5 w-5" />
+              <XLogo className="h-5 w-5" />
             </a>
             <span className="flex items-center gap-1 text-xs text-muted-foreground">
               Made with <Heart className="h-3 w-3 fill-red-500 text-red-500" /> by Yahia Naim

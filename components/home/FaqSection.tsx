@@ -57,11 +57,11 @@ export function FaqSection() {
               <img
                 src={FOUNDER_PHOTO_URL}
                 alt="Founder"
-                className="size-14 rounded-full object-cover"
+                className="size-20 rounded-full object-cover"
               />
             ) : (
-              <span className="flex size-14 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
-                <UserRound className="size-7" />
+              <span className="flex size-20 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
+                <UserRound className="size-9" />
               </span>
             )}
             <h3 className="mt-4 text-xl font-bold text-foreground">

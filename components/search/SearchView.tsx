@@ -177,7 +177,7 @@ export function SearchView() {
             value={query}
             onChange={(e) => { setQuery(e.target.value); setVisibleCount(MAX_RESULTS_PER_SECTION) }}
             placeholder="Search anything - 'HTML', 'React', 'SEO'…"
-            className="input pl-12 py-3 text-base"
+            className="w-full rounded-xl border border-input bg-card py-3 pl-12 pr-10 text-base font-normal text-foreground shadow-sm outline-none transition-colors placeholder:font-normal placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50"
             autoFocus
             autoComplete="off"
             maxLength={120}
