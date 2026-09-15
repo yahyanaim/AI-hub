@@ -47,7 +47,7 @@ export function FaqSection() {
             <span className="inline-block size-1.5 rounded-full bg-brand-orange" />
             FAQs
           </p>
-          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Frequently Asked Questions
           </h2>
 
@@ -57,11 +57,11 @@ export function FaqSection() {
               <img
                 src={FOUNDER_PHOTO_URL}
                 alt="Founder"
-                className="size-20 rounded-full object-cover"
+                className="size-24 rounded-full object-cover"
               />
             ) : (
-              <span className="flex size-20 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
-                <UserRound className="size-9" />
+              <span className="flex size-24 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
+                <UserRound className="size-10" />
               </span>
             )}
             <h3 className="mt-4 text-xl font-bold text-foreground">
