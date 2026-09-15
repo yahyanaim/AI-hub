@@ -30,7 +30,7 @@ export function HomeView() {
   )
 
   return (
-    <div className="container-page py-8 space-y-10">
+    <div className="container-page space-y-10 pb-8 pt-10 md:pt-14">
       {/* Hero Section */}
       <HeroSection
         onSearch={() => setPaletteOpen(true)}
