@@ -55,17 +55,17 @@ function MarqueeRow({ tools, reverse = false }: { tools: MarqueeTool[]; reverse?
                 aria-hidden={i >= tools.length}
                 tabIndex={i >= tools.length ? -1 : undefined}
                 title={tool.name}
-                className="flex shrink-0 items-center gap-3 opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                className="flex shrink-0 items-center gap-2.5 opacity-90 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
               >
                 <img
                   src={tool.logoUrl}
                   alt=""
                   loading="lazy"
-                  className="h-9 w-9 object-contain"
+                  className="h-8 w-8 object-contain"
                 />
                 <span
-                  className="whitespace-nowrap font-geist font-medium text-black/55"
-                  style={{ fontSize: '19px', letterSpacing: '-0.01em' }}
+                  className="whitespace-nowrap font-sans font-medium text-black/55"
+                  style={{ fontSize: '17px', letterSpacing: '-0.01em' }}
                 >
                   {tool.name}
                 </span>
@@ -83,10 +83,7 @@ export function ToolsMarquee() {
     <section aria-label="Popular AI tools" className="relative mt-8 md:mt-12">
       <div className="mb-6 mt-16 flex items-center justify-center gap-4">
         <div className="h-px max-w-[80px] flex-1 bg-gradient-to-r from-transparent to-foreground/10" />
-        <p
-          className="text-center font-geist font-medium text-muted-foreground"
-          style={{ fontSize: '11px', letterSpacing: '0.03em', lineHeight: 1.4 }}
-        >
+        <p className="text-center font-sans text-sm font-medium text-muted-foreground">
           Loved by builders using the best AI tools
         </p>
         <div className="h-px max-w-[80px] flex-1 bg-gradient-to-l from-transparent to-foreground/10" />
