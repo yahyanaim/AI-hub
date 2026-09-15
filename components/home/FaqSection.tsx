@@ -40,9 +40,9 @@ export function FaqSection() {
   return (
     <section aria-label="Frequently asked questions" className="mt-4">
       <div className="rounded-3xl bg-[#F4F4F6] p-6 sm:p-10 dark:bg-muted/20">
-      <div className="grid gap-8 lg:grid-cols-5">
+      <div className="grid items-stretch gap-8 lg:grid-cols-5">
         {/* Left: heading + book-a-call card */}
-        <div className="lg:col-span-2">
+        <div className="flex flex-col lg:col-span-2">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             <span className="inline-block size-1.5 rounded-full bg-brand-orange" />
             FAQs
@@ -51,7 +51,7 @@ export function FaqSection() {
             Frequently Asked Questions
           </h2>
 
-          <div className="mt-6 rounded-2xl border border-black/5 bg-white p-6 shadow-sm dark:border-border dark:bg-card">
+          <div className="mt-6 flex flex-1 flex-col items-center rounded-2xl border border-black/5 bg-white p-6 text-center shadow-sm dark:border-border dark:bg-card">
             {FOUNDER_PHOTO_URL ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -75,7 +75,7 @@ export function FaqSection() {
               href={CALENDLY_URL}
               target="_blank"
               rel="noreferrer"
-              className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-orange to-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-[0.98]"
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-orange-600 hover:shadow-lg active:scale-[0.98]"
             >
               <CalendarClock className="size-4" />
               Book a Free Call
