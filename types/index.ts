@@ -90,7 +90,11 @@ export type EditToolCategory =
   | 'photo'
   | 'converter'
   | 'design'
+  | 'diagram'
+  | 'cad'
+  | 'color'
   | 'video'
+  | 'animation'
   | 'audio'
   | '3d'
   | 'capture'
@@ -432,7 +436,11 @@ export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
   photo: 'Photo & RAW',
   converter: 'Converter',
   design: 'Design',
+  diagram: 'Diagrams',
+  cad: 'CAD & Engineering',
+  color: 'Color Tools',
   video: 'Video',
+  animation: 'Animation',
   audio: 'Audio & Music',
   '3d': '3D & Animation',
   capture: 'Record & Stream',
