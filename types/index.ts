@@ -87,9 +87,13 @@ export type DevToolCategory =
 export type EditToolCategory =
   | 'pdf'
   | 'image-editing'
+  | 'photo'
   | 'converter'
   | 'design'
   | 'video'
+  | 'audio'
+  | '3d'
+  | 'capture'
   | 'text'
   | 'file'
   | 'other'
@@ -425,9 +429,13 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
 export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
   pdf: 'PDF',
   'image-editing': 'Image',
+  photo: 'Photo & RAW',
   converter: 'Converter',
   design: 'Design',
   video: 'Video',
+  audio: 'Audio & Music',
+  '3d': '3D & Animation',
+  capture: 'Record & Stream',
   text: 'Text',
   file: 'File',
   other: 'Other',
