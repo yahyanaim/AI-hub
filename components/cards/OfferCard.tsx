@@ -68,7 +68,9 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
               <span className={cn(
                 'rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider',
                 'bg-brand-orange/10 text-brand-orange'
-              )}>
+              )}
+                title="Featured: hand-picked by the AI Hunt team as a top offer"
+              >
                 Featured
               </span>
             )}

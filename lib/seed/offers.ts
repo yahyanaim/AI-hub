@@ -17510,8 +17510,8 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://opencode.ai/',
       },
       {
-        title: 'Get a Zen API key',
-        description: 'Sign in at opencode.ai/auth, add billing details, and copy your API key. Union Alpha itself costs $0; auto-reload can be disabled in billing settings.',
+        title: 'Get a Zen API key — no credit card needed',
+        description: 'Sign in at opencode.ai/auth and copy your API key. No credit card required: Union Alpha is 100% free during the 7-day window.',
         url: 'https://opencode.ai/auth',
       },
       {
@@ -17537,8 +17537,8 @@ export const SEED_OFFERS: Offer[] = [
         url: 'https://opencode.ai/',
       },
       {
-        title: 'احصل على مفتاح Zen',
-        description: 'سجّل في opencode.ai/auth وأضف بيانات الدفع وانسخ المفتاح. النموذج نفسه مجاني ويمكن تعطيل إعادة الشحن التلقائي.',
+        title: 'احصل على مفتاح Zen — بدون بطاقة بنكية',
+        description: 'سجّل في opencode.ai/auth وانسخ المفتاح. لا حاجة لبطاقة بنكية: Union Alpha مجاني 100% خلال الأيام السبعة.',
         url: 'https://opencode.ai/auth',
       },
       {
