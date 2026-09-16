@@ -10911,7 +10911,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'OVHcloud Startup Program gives €10k-100k in free public cloud credits plus technical consultations, visibility, and mentoring (2900+ startups helped since 2015). START level for pre-seed/seed, SCALE for Series A. Global/Europe. Source: startup-perks.com/perks/ovhcloud-startup/.',
     url: 'https://us.ovhcloud.com/startup-program/',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=ovhcloud.com&sz=64',
+    logoUrl: '/logos/ovhcloud.svg',
     category: 'startup-discounts',
     tags: ['free', 'credits', '100k', 'cloud', 'europe', 'startup-perks'],
     pricing: 'free',
@@ -15802,7 +15802,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'IBM Cloud startup offerings can include credits for enterprise-grade cloud infrastructure and AI services. Pre-seed to Series B, global. Source: startup-perks.com/perks/ibm-cloud-startup/.',
     url: 'https://www.ibm.com/cloud/startups',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=ibm.com&sz=64',
+    logoUrl: '/logos/ibm.svg',
     category: 'startup-discounts',
     tags: ['free', 'credits', 'cloud', 'ai', 'startup-perks'],
     pricing: 'free',
