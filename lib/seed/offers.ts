@@ -17490,4 +17490,75 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o328',
+    slug: 'opencode-union-alpha',
+    name: 'OpenCode + Union Alpha',
+    tagline: 'Union Alpha free for 7 days on OpenCode (Sep 16-23)',
+    description:
+      'Union Alpha Free is a stealth coding model on OpenCode Zen — free for 7 days starting Sep 16, 2026 (until Sep 23) with zero-retention privacy. Connect Zen once, pick opencode/union-alpha from /models, and code with it in the terminal, IDE, or web.',
+    url: 'https://opencode.ai/docs/zen/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/opencode.ai.ico',
+    category: 'ai-perks',
+    tags: ['free', 'ai-model', 'coding', 'opencode', 'stealth'],
+    pricing: 'free',
+    endsAt: '2026-09-23',
+    steps: [
+      {
+        title: 'Install OpenCode',
+        description: 'Install with npm i -g opencode-ai (or brew / the curl script), then verify with opencode --version.',
+        url: 'https://opencode.ai/',
+      },
+      {
+        title: 'Get a Zen API key',
+        description: 'Sign in at opencode.ai/auth, add billing details, and copy your API key. Union Alpha itself costs $0; auto-reload can be disabled in billing settings.',
+        url: 'https://opencode.ai/auth',
+      },
+      {
+        title: 'Connect Zen in OpenCode',
+        description: 'Open the TUI, run /connect, select OpenCode Zen, and paste your API key (stored in auth.json).',
+      },
+      {
+        title: 'Select Union Alpha Free',
+        description: 'Run /models and pick Union Alpha Free (id opencode/union-alpha) as your coding model.',
+      },
+      {
+        title: 'Test it before Sep 23',
+        description: 'Send a test prompt, confirm $0 cost in Zen billing, and optionally set monthly limits. Free window ends Sep 23, 2026; provider follows zero-retention (no training on your data).',
+      },
+    ],
+    nameAr: 'OpenCode + Union Alpha',
+    taglineAr: 'Union Alpha مجاني لـ 7 أيام على OpenCode (16-23 سبتمبر)',
+    descriptionAr: 'Union Alpha Free نموذج برمجة خفي على OpenCode Zen — مجاني لـ 7 أيام ابتداءً من 16 سبتمبر 2026 (حتى 23 سبتمبر) مع سياسة عدم الاحتفاظ بالبيانات. اربط Zen مرة واحدة واختر opencode/union-alpha من /models وبرمج به.',
+    stepsAr: [
+      {
+        title: 'ثبّت OpenCode',
+        description: 'ثبّت عبر npm i -g opencode-ai (أو brew / سكربت curl) ثم تحقق بـ opencode --version.',
+        url: 'https://opencode.ai/',
+      },
+      {
+        title: 'احصل على مفتاح Zen',
+        description: 'سجّل في opencode.ai/auth وأضف بيانات الدفع وانسخ المفتاح. النموذج نفسه مجاني ويمكن تعطيل إعادة الشحن التلقائي.',
+        url: 'https://opencode.ai/auth',
+      },
+      {
+        title: 'اربط Zen في OpenCode',
+        description: 'افتح الواجهة ونفّذ /connect واختر OpenCode Zen والصق المفتاح (يُحفظ في auth.json).',
+      },
+      {
+        title: 'اختر Union Alpha Free',
+        description: 'نفّذ /models واختر Union Alpha Free (opencode/union-alpha) كنموذج البرمجة.',
+      },
+      {
+        title: 'جرّبه قبل 23 سبتمبر',
+        description: 'أرسل أمراً تجريبياً وتأكد من التكلفة 0$ في الفوترة واضبط حداً شهرياً اختيارياً. تنتهي المجانية في 23 سبتمبر 2026 ولا تُستخدم بياناتك للتدريب.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]

@@ -1,4 +1,4 @@
-import { GraduationCap, Timer, CalendarX2, Infinity as InfinityIcon } from 'lucide-react'
+import { GraduationCap, Timer, CalendarX2, Flame, Infinity as InfinityIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   PRICING_LABELS,
@@ -153,6 +153,24 @@ export function OfferUrgencyBadge({
     >
       <Timer className="h-3 w-3" />
       {label}
+    </span>
+  )
+}
+
+/** An offer is HOT when it's featured and ending within the urgency window. */
+export function isHotOffer(offer: { featured?: boolean; endsAt?: string }, now: number = Date.now()): boolean {
+  return !!offer.featured && getOfferUrgency(offer.endsAt, now) === 'ending-soon'
+}
+
+/** Fiery HOT badge for featured time-limited offers. */
+export function HotBadge({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn('inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-red-500/20 to-orange-500/20 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-red-600 dark:text-red-400', className)}
+      title="Hot offer - ending soon"
+    >
+      <Flame className="h-3 w-3" />
+      Hot
     </span>
   )
 }

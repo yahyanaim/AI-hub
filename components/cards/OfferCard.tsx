@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ExternalLink, ListChecks } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
-import { CategoryBadge, PricingBadge, OfferUrgencyBadge } from '@/components/ui/Badges'
+import { CategoryBadge, PricingBadge, OfferUrgencyBadge, HotBadge, isHotOffer } from '@/components/ui/Badges'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
 import { useApp } from '@/lib/store'
 import { cn } from '@/lib/utils'
@@ -72,6 +72,7 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
                 Featured
               </span>
             )}
+            {isHotOffer(offer) && <HotBadge />}
           </div>
         </div>
       </div>
