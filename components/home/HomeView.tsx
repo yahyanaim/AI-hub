@@ -6,7 +6,6 @@ import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
 import { HeroSection } from './HeroSection'
-import { ToolsMarquee } from './ToolsMarquee'
 import { Sidebar } from './Sidebar'
 import { FaqSection } from './FaqSection'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -41,9 +40,6 @@ export function HomeView() {
         courseCount={courses.length}
         offerCount={offers.length}
       />
-
-      {/* Popular tools marquee */}
-      <ToolsMarquee />
 
       {/* Main content with sidebar */}
       <div className="flex flex-col gap-8 lg:flex-row">
