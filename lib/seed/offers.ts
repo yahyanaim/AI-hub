@@ -470,7 +470,7 @@ export const SEED_OFFERS: Offer[] = [
       'Google’s official 2026 student offer - live since Aug 19, 2026 and redeemable until Dec 31, 2026. In the US you get 12 months of Google AI Pro free (normally $19.99/mo): 4× higher usage limits in Gemini, 5 TB of Google Drive/Photos/Gmail storage, Gemini Spark agentic platform, Gemini Omni, Gemini in Gmail/Docs/Sheets, Google Health Premium, plus the new Student Hub (study notebooks with custom learning plans, interactive visualizations, personalized quizzes & performance tracker), unlimited uploads and Gemini Live. Outside the US (160+ countries including Morocco, MENA, EU, Asia) you get 12 months of Google AI Plus free: 2× higher Gemini limits, 400 GB storage, Gemini Omni, and the same Student Hub with unlimited notebooks/visualizations. Must be 18+, verified each year via SheerID with your college .edu or student ID, and requires a payment method - auto-renews at standard price unless you cancel. Offer Terms at one.google.com/offer/studentoffer8.',
     url: 'https://gemini.google/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/gemini.google.com.ico',
-    category: 'learning',
+    category: 'student-perks',
     tags: ['gemini', 'google', 'students', 'free', 'ai-pro', 'ai-plus', 'student-hub'],
     pricing: 'free',
     steps: [
@@ -624,7 +624,7 @@ export const SEED_OFFERS: Offer[] = [
       'The benchmark student pack - verified students get free access to 20+ premium dev tools: GitHub Copilot Pro (free while student), GitHub Codespaces, Namecheap 1-year domain + SSL, DigitalOcean $200 credit, JetBrains (via pack), Stripe fee waiver, 1Password, and more. Renewable while enrolled. GitHub verifies via school email, student ID, or enrollment letter. Non-students can get it by legitimately enrolling in any accredited college/community college (US CC ~$40 gets a real .edu + ID in 2-3 days) - no paid .edu shop needed.',
     url: 'https://education.github.com/pack',
     logoUrl: 'https://icons.duckduckgo.com/ip3/education.github.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['github', 'copilot', 'student-pack', 'verified', 'cloud', 'domain'],
     pricing: 'free',
     steps: [
@@ -701,7 +701,7 @@ export const SEED_OFFERS: Offer[] = [
       'Azure for Students gives verified students $100 credit for 12 months, no credit card required at signup. Includes 25+ always-free services (App Service, Functions, Cosmos DB, VMs). Renewal requires re-verification. Students verify with school email via Microsoft. Non-students can qualify by enrolling in a CC/open university to get a .edu + enrollment proof, then use the same portal - Azure accepts both email and manual academic verification via SheerID/UNiDAYS.',
     url: 'https://azure.microsoft.com/free/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/azure.microsoft.com.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['azure', 'microsoft', 'cloud', 'students', 'free-credit'],
     pricing: 'free',
     steps: [
@@ -774,7 +774,7 @@ export const SEED_OFFERS: Offer[] = [
       'AWS Educate is Amazon’s student cloud program: $75-$100 credits (refreshed annually), access to 20+ Career Pathways, hands-on labs, and 50% off AWS Certified Cloud Practitioner. Verifies via school .edu or enrollment doc. Non-students can qualify by taking a cheap accredited course to get a student email/ID, then apply - AWS Educate accepts transcript + ID, not just .edu.',
     url: 'https://aws.amazon.com/education/awseducate/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/aws.amazon.com.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['aws', 'cloud', 'students', 'credits', 'certification'],
     pricing: 'free',
     steps: [
@@ -847,7 +847,7 @@ export const SEED_OFFERS: Offer[] = [
       'Cloudflare gives verified students a free year of Pro plan perks: unlimited Workers requests, R2 storage, Pages builds, Stream, and Zero Trust seat. Verifies via UNiDAYS or student email. Non-students can get it by enrolling in a community college to get a UNiDAYS-eligible .edu, then verify via UNiDAYS with enrollment proof.',
     url: 'https://www.cloudflare.com/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/cloudflare.com.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['cloudflare', 'cdn', 'workers', 'students', 'hosting'],
     pricing: 'free',
     steps: [
@@ -920,7 +920,7 @@ export const SEED_OFFERS: Offer[] = [
       'Shodan grants a free ongoing membership upgrade to students/researchers who register with a .edu/.ac address: unlimited search results, API credits, and history. Manual upgrade via support email. Works with any academic email from edumailshop/normal college. Non-students can obtain it by creating a US CC .edu mailbox.',
     url: 'https://help.shodan.io/the-basics/academic-upgrade',
     logoUrl: 'https://www.google.com/s2/favicons?domain=shodan.io&sz=64',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['shodan', 'security', 'iot', 'academic', 'osint'],
     pricing: 'free',
     steps: [
@@ -975,7 +975,7 @@ export const SEED_OFFERS: Offer[] = [
       'Hyperbolic offers $15 in inference credits and discounted GPU rentals for students who verify with .edu. Gives OpenAI-compatible API access to DeepSeek-R1, Qwen, Llama. Low barrier: any .edu works via email verification.',
     url: 'https://app.hyperbolic.ai/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/hyperbolic.ai.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['hyperbolic', 'api', 'gpu', 'deepseek', 'inference'],
     pricing: 'freemium',
     steps: [
@@ -1030,7 +1030,7 @@ export const SEED_OFFERS: Offer[] = [
       'OpenAI offers ChatGPT Plus free for students via SheerID/UNiDAYS in supported countries (US, UK, CA etc.). Includes GPT-4o, higher message limits, file uploads, and Code Interpreter. Outside eligible countries, use a US CC enrollment to get US SheerID verification. Regularly extended, redeem before expiry shown on page.',
     url: 'https://chatgpt.com/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/chatgpt.com.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['openai', 'chatgpt', 'students', 'plus', 'gpt-4'],
     pricing: 'free',
     steps: [
@@ -1094,7 +1094,7 @@ export const SEED_OFFERS: Offer[] = [
       'Cursor gives students 1 year of Pro free: unlimited completions, agent mode, codebase-aware chat, and Max models. Verifies via SheerID with .edu or file. Non-students can qualify with a CC .edu + enrollment proof - Cursor’s SheerID accepts file upload, no .edu email strictly required.',
     url: 'https://cursor.com/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/cursor.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['cursor', 'ide', 'ai-editor', 'students', 'autocompletion'],
     pricing: 'free',
     steps: [
@@ -1158,7 +1158,7 @@ export const SEED_OFFERS: Offer[] = [
       'Perplexity gives verified students 1 year of Pro free (normally $20/mo): 300+ Pro searches/day, file upload, image generation, and API. Verifies via SheerID/ .edu. Non-students can get it with a CC .edu + SheerID file upload - widely approved.',
     url: 'https://www.perplexity.ai/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/perplexity.ai.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['perplexity', 'search', 'pro', 'students', 'research'],
     pricing: 'free',
     steps: [
@@ -1213,7 +1213,7 @@ export const SEED_OFFERS: Offer[] = [
       'Vercel gives students free V0 credits: generate production-ready React + Tailwind + shadcn components from text or image, iterate with chat, export code. Verifies with .edu or GitHub Student. Non-students can use GitHub Student Pack approval (file) to claim without .edu.',
     url: 'https://v0.app/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/v0.app.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['v0', 'vercel', 'react', 'ui-gen', 'students'],
     pricing: 'free',
     steps: [
@@ -1268,7 +1268,7 @@ export const SEED_OFFERS: Offer[] = [
       'Kiro.dev (agentic IDE) offers free Pro access for students: agent coding, codebase chat, and Claude/GPT routing. Requires school email + file proof for some schools. Accepts US CC enrollments - ideal for non-students using file verification path.',
     url: 'https://kiro.dev/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/kiro.dev.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['kiro', 'ide', 'agent', 'students', 'coding'],
     pricing: 'free',
     steps: [
@@ -1323,7 +1323,7 @@ export const SEED_OFFERS: Offer[] = [
       'Dify gives verified students 1 year of Professional free: build and deploy LLM apps/agents with datasets, tools, and hosting. Verifies with .edu email. Non-students can get it with any CC .edu mailbox (email-only verification).',
     url: 'https://dify.ai/',
     logoUrl: 'https://www.google.com/s2/favicons?domain=dify.ai&sz=64',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['dify', 'llm', 'agent', 'students', 'no-code'],
     pricing: 'free',
     steps: [
@@ -1378,7 +1378,7 @@ export const SEED_OFFERS: Offer[] = [
       'Firecrawl (YC-backed scraping API) gives students free credits: turn any URL into clean markdown/JSON for RAG. Perfect for agent builders. Verifies with .edu email.',
     url: 'https://www.firecrawl.dev/student-program',
     logoUrl: 'https://icons.duckduckgo.com/ip3/firecrawl.dev.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['firecrawl', 'scraping', 'api', 'rag', 'students'],
     pricing: 'free',
     steps: [
@@ -1433,7 +1433,7 @@ export const SEED_OFFERS: Offer[] = [
       'Windsurf by Codeium gives students free Pro: Cascade agent, autocomplete, and codebase understanding. Verify with .edu or GitHub Student. Non-students can use GitHub Pack approval to claim.',
     url: 'https://windsurf.com/editor',
     logoUrl: 'https://icons.duckduckgo.com/ip3/windsurf.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['windsurf', 'codeium', 'editor', 'students', 'agent'],
     pricing: 'free',
     steps: [
@@ -1488,7 +1488,7 @@ export const SEED_OFFERS: Offer[] = [
       'JetBrains gives students free access to all 15+ IDEs (IntelliJ IDEA Ultimate, PyCharm Pro, WebStorm, Rider, GoLand, etc.) for 1 year, renewable. Verifies via .edu or file (ID + enrollment). Non-students can qualify with CC enrollment - JetBrains accepts enrollment letter + ID without strict .edu domain check.',
     url: 'https://www.jetbrains.com/shop/eform/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/jetbrains.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['jetbrains', 'ide', 'intellij', 'pycharm', 'students'],
     pricing: 'free',
     steps: [
@@ -1552,7 +1552,7 @@ export const SEED_OFFERS: Offer[] = [
       'Figma Education gives verified students free Organization plan: Figma Design, FigJam, Dev Mode, and team libraries. Verifies via school email or manual doc. Non-students can qualify with CC enrollment + file proof - Figma manually reviews ID + schedule.',
     url: 'https://www.figma.com/education/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/figma.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['figma', 'design', 'ui-ux', 'students', 'figjam'],
     pricing: 'free',
     steps: [
@@ -1616,7 +1616,7 @@ export const SEED_OFFERS: Offer[] = [
       'Notion gives students free Plus plan: unlimited blocks/file uploads, 100GB+ history, and free Notion AI (normally $8/mo). Verifies via .edu email instantly. Non-students can get it with any .edu mailbox (email-only). Team members with .edu also get free Plus when added to your workspace.',
     url: 'https://www.notion.com/product/notion-for-education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/notion.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['notion', 'productivity', 'education', 'ai', 'workspace'],
     pricing: 'free',
     steps: [
@@ -1671,7 +1671,7 @@ export const SEED_OFFERS: Offer[] = [
       'Canva gives verified students free Pro: 140M+ templates, Magic Write/Resize, 1TB storage, and team Brand Kit. Verifies via Canva Education portal with school name + ID. Non-students can qualify with CC ID + enrollment screenshot - manual review approves most.',
     url: 'https://www.canva.com/education/students/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/canva.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['canva', 'design', 'templates', 'students', 'ai'],
     pricing: 'free',
     steps: [
@@ -1726,7 +1726,7 @@ export const SEED_OFFERS: Offer[] = [
       'Autodesk gives students free 1-year license to 20+ products: AutoCAD, Maya, 3ds Max, Revit, Inventor, Fusion 360. Verifies via SheerID with .edu or file. Non-students can enroll in CC drafting/design course to get enrollment proof - SheerID accepts file upload, not only email.',
     url: 'https://www.autodesk.com/education/edu-software/overview',
     logoUrl: 'https://icons.duckduckgo.com/ip3/autodesk.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['autodesk', 'autocad', 'maya', 'revit', 'students', 'cad'],
     pricing: 'free',
     steps: [
@@ -1790,7 +1790,7 @@ export const SEED_OFFERS: Offer[] = [
       'Zed gives verified students 1 year of Pro free: AI edit/chat, multiplayer collab, and premium themes. Verifies via .edu or GitHub Student. Non-students can use GitHub Pack approval (file) to claim without .edu.',
     url: 'https://zed.dev/education',
     logoUrl: 'https://www.google.com/s2/favicons?domain=zed.dev&sz=64',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['zed', 'editor', 'rust', 'students', 'collaboration'],
     pricing: 'free',
     steps: [
@@ -1845,7 +1845,7 @@ export const SEED_OFFERS: Offer[] = [
       'Microsoft 365 Education A1 is free for verified students: Word, Excel, PowerPoint, OneNote on web + desktop, 100GB OneDrive (legacy 1TB on older tenants), Teams, and 50GB Exchange mail. Verifies via school .edu/Microsoft 365 Education domain. Non-students can enroll in a CC that issues Microsoft 365 Education accounts (most US CCs auto-provision) → get the school M365 login and claim.',
     url: 'https://www.microsoft.com/education/products/office',
     logoUrl: 'https://icons.duckduckgo.com/ip3/microsoft.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['microsoft', 'office365', 'onedrive', 'students', 'teams'],
     pricing: 'free',
     steps: [
@@ -1900,7 +1900,7 @@ export const SEED_OFFERS: Offer[] = [
       'Adobe Creative Cloud Pro for Students/Teachers: ~60% off (~$19.99/mo vs $59.99). Includes Photoshop, Illustrator, Premiere Pro, After Effects, XD, 100GB cloud. Verifies via SheerID/UNiDAYS with .edu or file. Non-students can qualify with CC enrollment + ID/transcript - SheerID accepts file proof and approves most accredited CCs.',
     url: 'https://www.adobe.com/creativecloud/buy/students.html',
     logoUrl: 'https://www.google.com/s2/favicons?domain=adobe.com&sz=64',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['adobe', 'creative-cloud', 'photoshop', 'students', 'discount'],
     pricing: 'paid',
     steps: [
@@ -1955,7 +1955,7 @@ export const SEED_OFFERS: Offer[] = [
       'Apple offers 200GB iCloud free (permanent while enrolled) for students/teacherswhose school uses Apple School Manager. The school admin assigns the Managed Apple ID → 200GB quota appears in Settings. For personal Apple IDs, students can claim Apple Music Student ($5.99) + iCloud+ features. Non-students can ask their CC IT desk to issue a Managed Apple ID after enrollment - many CCs support ASM.',
     url: 'https://www.apple.com/education/k12/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/apple.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['apple', 'icloud', 'storage', 'education', 'school-manager'],
     pricing: 'free',
     steps: [
@@ -2010,7 +2010,7 @@ export const SEED_OFFERS: Offer[] = [
       'MathWorks MATLAB Student Suite: MATLAB, Simulink, and 10 toolboxes for $49 (or free if your campus has a Campus-Wide License - check with .edu). Includes online MATLAB, 1TB Drive. Verifies via .edu email or campus SSO. Non-students can get it via CC Math course - MathWorks accepts any accredited .edu, and many CCs have campus license covering you free.',
     url: 'https://www.mathworks.com/products/matlab/student.html',
     logoUrl: 'https://icons.duckduckgo.com/ip3/mathworks.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['matlab', 'simulink', 'mathworks', 'students', 'engineering'],
     pricing: 'paid',
     steps: [
@@ -2065,7 +2065,7 @@ export const SEED_OFFERS: Offer[] = [
       'Replit gives students 50% off Core ($10/mo with .edu email) plus AI credits: hosted IDE for 50+ languages, Deployments, and AI assistant. Verifies with .EDU email or GitHub Student linkage.',
     url: 'https://replit.com/edu/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/replit.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['replit', 'ide', 'hosting', 'students', 'discount'],
     pricing: 'paid',
     steps: [
@@ -2120,7 +2120,7 @@ export const SEED_OFFERS: Offer[] = [
       'DigitalOcean via GitHub Student Pack: $200 credit for 12 months to run droplets, managed DBs, Spaces object storage, and App Platform. Verifies via GitHub Student linkage - no separate .edu check. Non-students qualify by first getting GitHub Pack via CC file (o9).',
     url: 'https://www.digitalocean.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/digitalocean.com.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['digitalocean', 'hosting', 'cloud', 'droplet', 'students'],
     pricing: 'free',
     steps: [
@@ -2175,7 +2175,7 @@ export const SEED_OFFERS: Offer[] = [
       'Namecheap via GitHub Student Pack: free .me domain for 1 year, free PositiveSSL, and free hosting trial. Verifies via GitHub Student linkage. Also standalone .edu discount at nc.me/edu. Non-students get it via CC → GitHub Pack file path.',
     url: 'https://www.namecheap.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/namecheap.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['namecheap', 'domain', 'ssl', 'hosting', 'students'],
     pricing: 'free',
     steps: [
@@ -2230,7 +2230,7 @@ export const SEED_OFFERS: Offer[] = [
       'Sketch gives verified students free Education license: macOS app + web workspace, team libraries, and prototype sharing. Verifies via school email or file. Non-students can get it with CC enrollment + ID upload - manual review approves most accredited schools.',
     url: 'https://www.sketch.com/education/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/sketch.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['sketch', 'design', 'ui', 'mac', 'students'],
     pricing: 'free',
     steps: [
@@ -2285,7 +2285,7 @@ export const SEED_OFFERS: Offer[] = [
       'YouTube Premium Student: first month free, then ~50% off (~$7.99 vs $13.99). Includes ad-free YouTube + YouTube Music, background play, offline downloads, and picture-in-picture. Verifies via SheerID with .edu or file. Non-students can qualify with CC enrollment + ID - SheerID accepts enrollment letter + student ID for most US CCs.',
     url: 'https://www.youtube.com/premium/student',
     logoUrl: 'https://icons.duckduckgo.com/ip3/youtube.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['youtube', 'premium', 'students', 'music', 'discount'],
     pricing: 'paid',
     steps: [
@@ -2340,7 +2340,7 @@ export const SEED_OFFERS: Offer[] = [
       'Amazon Prime Student: 6 months free (no charge), then 50% off ($7.49/mo vs $14.99). Includes free delivery, Prime Video, Prime Reading, and exclusive deals. Verifies via .edu email or SheerID file. Non-students can enroll in a CC to get .edu + enrollment proof - Amazon accepts upload of enrollment letter + ID via SheerID.',
     url: 'https://www.amazon.com/joinstudent',
     logoUrl: 'https://icons.duckduckgo.com/ip3/amazon.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['amazon', 'prime', 'students', 'free-trial', 'shipping'],
     pricing: 'paid',
     steps: [
@@ -2395,7 +2395,7 @@ export const SEED_OFFERS: Offer[] = [
       'Consensus gives students 1 year of Pro free (normally $12/mo): AI synthesis over 200M research papers, study snapshots, and citation search. Verifies with .edu email instantly. Non-students can get it with any CC .edu mailbox - email-only verification.',
     url: 'https://consensus.app/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/consensus.app.ico',
-    category: 'learning',
+    category: 'student-perks',
     tags: ['consensus', 'research', 'papers', 'students', 'ai-search'],
     pricing: 'free',
     steps: [
@@ -2450,7 +2450,7 @@ export const SEED_OFFERS: Offer[] = [
       'Julius AI gives verified students free Pro: chat with CSVs/Excel/Sheets, auto-charts, and data cleaning. Verifies with .edu email. Non-students can get it with CC .edu mailbox (email-only).',
     url: 'https://julius.ai/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/julius.ai.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['julius', 'data', 'analysis', 'students', 'charts'],
     pricing: 'free',
     steps: [
@@ -2505,7 +2505,7 @@ export const SEED_OFFERS: Offer[] = [
       'GoodNotes gives verified students 1 year of Pro free: unlimited notebooks, AI handwriting search, and iCloud sync. Verifies via UNiDAYS with .edu or file. Non-students can qualify with CC enrollment + UNiDAYS file upload - most CCs are listed.',
     url: 'https://www.goodnotes.com/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/goodnotes.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['goodnotes', 'notes', 'ipad', 'students', 'handwriting'],
     pricing: 'free',
     steps: [
@@ -2560,7 +2560,7 @@ export const SEED_OFFERS: Offer[] = [
       'Mathpix Snip gives students 500+ OCR conversions/month free (normally 100). Snap handwritten or PDF math → LaTeX, Word, and search. Verifies with .edu email. Non-students can get it with CC .edu mailbox - email-only.',
     url: 'https://mathpix.com/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/mathpix.com.ico',
-    category: 'learning',
+    category: 'student-perks',
     tags: ['mathpix', 'ocr', 'latex', 'students', 'math'],
     pricing: 'free',
     steps: [
@@ -2615,7 +2615,7 @@ export const SEED_OFFERS: Offer[] = [
       'Shapr3D gives students 1 year of Pro free: full CAD modeling on iPad/Mac/Win. Verifies via school email or file (ID + enrollment). Non-students can qualify with CC enrollment + ID upload - manual review approves most accredited CCs.',
     url: 'https://www.shapr3d.com/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/shapr3d.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['shapr3d', 'cad', '3d', 'students', 'ipad'],
     pricing: 'free',
     steps: [
@@ -2670,7 +2670,7 @@ export const SEED_OFFERS: Offer[] = [
       'Tower gives students free license for 1 year: powerful Git GUI for Mac/Win with drag-and-drop, merge, and PR flows. Verifies via school email or file. Non-students can get it with CC ID + enrollment - manual approval.',
     url: 'https://www.git-tower.com/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/git-tower.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['tower', 'git', 'client', 'students', 'mac'],
     pricing: 'free',
     steps: [
@@ -2725,7 +2725,7 @@ export const SEED_OFFERS: Offer[] = [
       'Craft gives verified students free Pro: docs, calendar, AI writing, and team workspace. Verifies via school email or file. Non-students can qualify with CC enrollment + file proof - Craft manually reviews.',
     url: 'https://www.craft.do/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/craft.do.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['craft', 'notes', 'docs', 'students', 'ai'],
     pricing: 'free',
     steps: [
@@ -2780,7 +2780,7 @@ export const SEED_OFFERS: Offer[] = [
       'iLovePDF gives verified students Premium free for 1 year: edit, merge, split, compress, OCR, and sign PDFs with high limits. Verifies via school email or file upload. Non-students can qualify with CC ID + enrollment - manual review approves most.',
     url: 'https://www.ilovepdf.com/education',
     logoUrl: 'https://icons.duckduckgo.com/ip3/ilovepdf.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['ilovepdf', 'pdf', 'students', 'ocr', 'premium'],
     pricing: 'free',
     steps: [
@@ -4518,7 +4518,7 @@ export const SEED_OFFERS: Offer[] = [
       'Hugging Face gives verified students free Pro (normally $9/mo): unlimited private models/datasets, Inference Endpoints, and $100 credits for Serverless Inference API. Verifies via .edu email. Non-students can get it with any CC .EDU mailbox (email-only).',
     url: 'https://huggingface.co/join',
     logoUrl: 'https://icons.duckduckgo.com/ip3/huggingface.co.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['huggingface', 'students', 'inference', 'models', 'api'],
     pricing: 'free',
     steps: [
@@ -4573,7 +4573,7 @@ export const SEED_OFFERS: Offer[] = [
       'OpenRouter gives students $25 credit plus permanent free tier for 200+ LLMs (GPT-4o, Claude 3.5, Gemini, Llama) via OpenAI-compatible API. Verifies via .EDU email. Non-students can get it with CC .EDU mailbox (email-only).',
     url: 'https://openrouter.ai/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/openrouter.ai.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['openrouter', 'api', 'llm', 'students', 'credits'],
     pricing: 'free',
     steps: [
@@ -4628,7 +4628,7 @@ export const SEED_OFFERS: Offer[] = [
       'Replicate runs SDXL, Llama 3, Whisper, and 1000+ open models pay-per-second via API - check their education discount with .EDU email or GitHub Student. Non-students can get it via CC .EDU mailbox or GitHub Pack file.',
     url: 'https://replicate.com/pricing',
     logoUrl: 'https://icons.duckduckgo.com/ip3/replicate.com.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['replicate', 'api', 'sdxl', 'llama', 'students'],
     pricing: 'free',
     steps: [
@@ -4683,7 +4683,7 @@ export const SEED_OFFERS: Offer[] = [
       'Supabase offers a generous free tier plus student discounts: hosted Postgres, Auth, Storage, and Realtime. Check their education pricing with .EDU email. Non-students can start free with any email.',
     url: 'https://supabase.com/pricing',
     logoUrl: 'https://icons.duckduckgo.com/ip3/supabase.com.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['supabase', 'postgres', 'students', 'backend', 'credits'],
     pricing: 'free',
     steps: [
@@ -4738,7 +4738,7 @@ export const SEED_OFFERS: Offer[] = [
       'MongoDB Atlas via GitHub Student Pack: $50 credit for Atlas + free 512MB shared cluster forever. Verifies via GitHub Student linkage - get Pack first via CC file (o9), then claim.',
     url: 'https://www.mongodb.com/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/mongodb.com.ico',
-    category: 'api-access',
+    category: 'student-perks',
     tags: ['mongodb', 'atlas', 'students', 'database', 'credits'],
     pricing: 'free',
     steps: [
@@ -4793,7 +4793,7 @@ export const SEED_OFFERS: Offer[] = [
       'Vercel gives students Pro-like features and $100 credit via GitHub Student Pack or .EDU: hobby deployments with higher limits, analytics, and team seats. Verifies via GitHub Pack linkage or .EDU email.',
     url: 'https://vercel.com/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/vercel.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['vercel', 'hosting', 'students', 'nextjs', 'credits'],
     pricing: 'free',
     steps: [
@@ -4848,7 +4848,7 @@ export const SEED_OFFERS: Offer[] = [
       '1Password via GitHub Student Pack: 1 year free Families plan (5 accounts, vaults, 1GB storage). Verifies via GitHub Student linkage - get Pack first via CC file (o9).',
     url: 'https://1password.com/developers/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/1password.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['1password', 'security', 'students', 'vault', 'github-pack'],
     pricing: 'free',
     steps: [
@@ -4903,7 +4903,7 @@ export const SEED_OFFERS: Offer[] = [
       'Miro gives verified students free Education plan: 100+ boards, Miro AI, and team workspaces. Verifies via school email or file (ID + enrollment). Non-students can qualify with CC enrollment + file proof.',
     url: 'https://miro.com/education/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/miro.com.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['miro', 'whiteboard', 'students', 'collaboration', 'ai'],
     pricing: 'free',
     steps: [
@@ -4958,7 +4958,7 @@ export const SEED_OFFERS: Offer[] = [
       'Linear gives verified students free Standard for 1 year: unlimited issues, cycles, and integrations. Verifies via .EDU email. Non-students can get it with CC .EDU mailbox (email-only).',
     url: 'https://linear.app/students',
     logoUrl: 'https://icons.duckduckgo.com/ip3/linear.app.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['linear', 'project-management', 'students', 'tracking', 'team'],
     pricing: 'free',
     steps: [
@@ -5013,7 +5013,7 @@ export const SEED_OFFERS: Offer[] = [
       'Warp is an AI-powered terminal free to start: AI command search, themes, and team sharing with a free plan for everyone including students. Download, sign up, and build - no student verification needed.',
     url: 'https://www.warp.dev',
     logoUrl: 'https://icons.duckduckgo.com/ip3/warp.dev.ico',
-    category: 'tool',
+    category: 'student-perks',
     tags: ['warp', 'terminal', 'students', 'ai', 'productivity'],
     pricing: 'free',
     steps: [
