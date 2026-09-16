@@ -21,8 +21,18 @@ export async function generateMetadata({
   const tool = SEED_DEV_TOOLS.find((t) => t.slug === slug)
   if (!tool) return { title: 'Dev Tool Not Found', robots: { index: false, follow: false } }
 
+  // Never redirect() inside generateMetadata — it throws during metadata
+  // generation. The page component handles the canonical redirect; here we
+  // point crawlers at the canonical URL and keep it out of the index to
+  // avoid duplicate content under the wrong category.
   if (tool.category !== category) {
-    redirect(`/dev-tools/${tool.category}/${tool.slug}`)
+    const canonical = `${SITE_URL}/dev-tools/${tool.category}/${tool.slug}`
+    return {
+      title: `${tool.name} - ${tool.tagline}`,
+      robots: { index: false, follow: true },
+      alternates: { canonical },
+      openGraph: { url: canonical },
+    }
   }
   const seoDescription = tool.description
     ? `${tool.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`

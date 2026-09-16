@@ -39,7 +39,15 @@ export async function generateMetadata({ params }: { params: { category: string 
 
   const legacy = SEED_COURSES.find((c) => c.slug === category)
   if (legacy) {
-    redirect(`/courses/${legacy.category}/${legacy.slug}`)
+    // Never redirect() inside generateMetadata. Point crawlers at the
+    // canonical detail URL instead; the page component performs the redirect.
+    const canonical = `${baseUrl}/courses/${legacy.category}/${legacy.slug}`
+    return {
+      title: `${legacy.name} - ${legacy.tagline}`,
+      robots: { index: false, follow: true },
+      alternates: { canonical },
+      openGraph: { url: canonical },
+    }
   }
 
   return { title: 'Courses Not Found', robots: { index: false, follow: false } }

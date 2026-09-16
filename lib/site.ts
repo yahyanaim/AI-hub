@@ -1,5 +1,9 @@
 // Canonical site URL for metadata/JSON-LD/sitemap.
 // Override per environment with NEXT_PUBLIC_SITE_URL (e.g. preview deploys).
+// Falls back to the placeholder domain below — set the env var in production
+// or every canonical / OG / sitemap URL will point at the wrong host.
+const FALLBACK_SITE_URL = 'https://aihubtools.vercel.app'
+
 function resolveSiteUrl(): string {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '').trim()
   if (raw) {
@@ -10,7 +14,13 @@ function resolveSiteUrl(): string {
       // fall through to default
     }
   }
-  return 'https://aihubtools.vercel.app'
+  if (typeof process !== 'undefined' && process.env.NODE_ENV === 'production' && !raw) {
+    console.warn(
+      '[site] NEXT_PUBLIC_SITE_URL is not set — falling back to ' +
+        `${FALLBACK_SITE_URL}. Set it to your production domain to fix canonicals/OG/sitemap.`
+    )
+  }
+  return FALLBACK_SITE_URL
 }
 export const SITE_URL = resolveSiteUrl()
 

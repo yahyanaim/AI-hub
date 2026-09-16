@@ -67,11 +67,13 @@ export default function GuideDetailPage({ params }: { params: { slug: string } }
       availability: 'https://schema.org/InStock',
     },
     aggregateRating:
-      typeof guide.rating === 'number'
+      typeof guide.rating === 'number' &&
+      typeof guide.reviewsCount === 'number' &&
+      guide.reviewsCount > 0
         ? {
             '@type': 'AggregateRating',
             ratingValue: guide.rating,
-            reviewCount: guide.reviewsCount ?? 1,
+            reviewCount: guide.reviewsCount,
           }
         : undefined,
   }

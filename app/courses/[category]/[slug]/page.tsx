@@ -58,6 +58,18 @@ export default async function CourseDetailPage({ params }: { params: { category:
 
   const user = SEED_USERS.find((u) => u.id === course.submittedBy)
 
+  // Provider must be a real organization, not words sliced from the course
+  // title. Derive it from the course URL host (e.g. udemy.com -> Udemy).
+  let providerName = 'AI Hunt'
+  try {
+    const host = new URL(course.url).hostname.replace(/^www\./, '')
+    if (host) providerName = host
+  } catch {
+    // keep fallback
+  }
+
+  const isFree = course.pricing === 'free' || course.pricing === 'open-source'
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Course',
@@ -65,16 +77,23 @@ export default async function CourseDetailPage({ params }: { params: { category:
     description: course.tagline,
     provider: {
       '@type': 'Organization',
-      name: course.name.split(' ').slice(0, 2).join(' '),
+      name: providerName,
     },
     educationalCredentialAwarded: course.difficulty === 'beginner' ? 'Beginner' : course.difficulty === 'intermediate' ? 'Intermediate' : 'Advanced',
     timeRequired: course.duration,
-    offers: {
-      '@type': 'Offer',
-      price: course.pricing === 'free' || course.pricing === 'open-source' ? '0' : undefined,
-      priceCurrency: 'USD',
-      url: course.url,
-    },
+    // Only emit offers when the price is known: free courses get price 0,
+    // paid courses with unknown price omit offers entirely (price: undefined
+    // + priceCurrency fails rich-result validation).
+    ...(isFree
+      ? {
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+            url: course.url,
+          },
+        }
+      : {}),
     author: user ? {
       '@type': 'Person',
       name: user.displayName,

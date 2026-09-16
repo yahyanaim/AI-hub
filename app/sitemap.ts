@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/site'
 import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } from '@/lib/seed'
 import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
-import { DEVTOOL_CATEGORY_LABELS, OFFER_CATEGORY_LABELS, TOOL_CATEGORY_LABELS, COURSE_CATEGORY_LABELS } from '@/types'
+import { DEVTOOL_CATEGORY_LABELS, OFFER_CATEGORY_LABELS, COURSE_CATEGORY_LABELS } from '@/types'
 
 // Fixed build-time date so sitemap output is deterministic across requests.
 const BUILD_DATE = new Date('2026-01-01T00:00:00.000Z')
@@ -32,12 +32,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  const toolCategoryPages = Object.keys(TOOL_CATEGORY_LABELS).map((category) => ({
-    url: `${baseUrl}/tools/${category}`,
-    lastModified: BUILD_DATE,
-    changeFrequency: 'weekly' as const,
-    priority: 0.6,
-  }))
+  // NOTE: /tools/[category] is a legacy-redirect route (see app/tools/[category]/page.tsx)
+  // that 301s to /tools or /tools/<category>/<slug>. Do NOT list category URLs
+  // here to avoid sitemap soft-404s. Re-add only when a real listing exists.
 
   const devToolPages = SEED_DEV_TOOLS.map((tool) => ({
     url: `${baseUrl}/dev-tools/${tool.category}/${tool.slug}`,
@@ -104,5 +101,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // NOTE: prompts intentionally omitted — no /prompts route exists yet.
   // Re-add when the route ships to avoid sitemap 404s.
 
-  return [...staticPages, ...toolPages, ...toolCategoryPages, ...devToolPages, ...devToolCategoryPages, ...repoPages, ...coursePages, ...courseCategoryPages, ...offerCategoryPages, ...offerPages, ...guidePages]
+  return [...staticPages, ...toolPages, ...devToolPages, ...devToolCategoryPages, ...repoPages, ...coursePages, ...courseCategoryPages, ...offerCategoryPages, ...offerPages, ...guidePages]
 }
