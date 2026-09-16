@@ -23532,31 +23532,4 @@ export const SEED_TOOLS: Tool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
-  {
-    id: 't1672',
-    slug: 'opencode-union-alpha',
-    name: 'OpenCode + Union Alpha',
-    tagline: 'Union Alpha free for 7 days inside OpenCode',
-    description: `**Union Alpha Free** is a stealth coding model on **OpenCode Zen** - **free for 7 days starting Sep 16, 2026 (until Sep 23)** with zero-retention privacy.
-
-Use it as your agent model in the terminal, IDE, or web:
-
-- **Install OpenCode** and connect your Zen API key via \`/connect\`
-- **Pick Union Alpha Free** (\`opencode/union-alpha\`) from \`/models\`
-- **Code with tools** - file edits, shell, search, and LSP all work through the agent loop
-
-Full step-by-step setup lives in our Offers entry. Free until Sep 23, 2026; your data is never used for training.`,
-    url: 'https://opencode.ai/docs/zen/',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/opencode.ai.ico',
-    category: 'coding',
-    tags: ['ai-model', 'coding-agent', 'opencode', 'free', 'stealth'],
-    pricing: 'free',
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-    screenshots: [],
-  },
 ]

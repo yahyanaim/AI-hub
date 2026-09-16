@@ -100,6 +100,7 @@ export type EditToolCategory =
   | 'capture'
   | 'text'
   | 'file'
+  | 'storage'
   | 'other'
 
 export type Pricing = 'free' | 'freemium' | 'paid' | 'open-source'
@@ -446,6 +447,7 @@ export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
   capture: 'Record & Stream',
   text: 'Text',
   file: 'File',
+  storage: 'Storage',
   other: 'Other',
 }
 

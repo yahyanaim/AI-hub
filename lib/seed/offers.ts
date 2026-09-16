@@ -17499,7 +17499,7 @@ export const SEED_OFFERS: Offer[] = [
       'Union Alpha Free is a stealth coding model on OpenCode Zen — free for 7 days starting Sep 16, 2026 (until Sep 23) with zero-retention privacy. Connect Zen once, pick opencode/union-alpha from /models, and code with it in the terminal, IDE, or web.',
     url: 'https://opencode.ai/docs/zen/',
     logoUrl: 'https://icons.duckduckgo.com/ip3/opencode.ai.ico',
-    category: 'ai-perks',
+    category: 'tool',
     tags: ['free', 'ai-model', 'coding', 'opencode', 'stealth'],
     pricing: 'free',
     endsAt: '2026-09-23',
