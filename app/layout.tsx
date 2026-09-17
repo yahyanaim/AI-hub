@@ -7,6 +7,7 @@ import { AppProvider } from '@/lib/store'
 import { SITE_URL } from '@/lib/site'
 import { Navbar } from '@/components/layout/Navbar'
 import { FooterGate } from '@/components/layout/FooterGate'
+import { PartnersMarquee } from '@/components/layout/PartnersMarquee'
 import { SupportReminder } from '@/components/layout/SupportReminder'
 import { ReferralDonateModal } from '@/components/layout/ReferralDonateModal'
 import { CommandPalette } from '@/components/search/CommandPalette'
@@ -194,6 +195,9 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <div className="container-page">
               <SupportReminder />
+            </div>
+            <div className="container-page">
+              <PartnersMarquee />
             </div>
             <FooterGate />
           </div>
