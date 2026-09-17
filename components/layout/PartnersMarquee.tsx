@@ -68,7 +68,7 @@ function PerkRow({ items }: { items: typeof PERK_ROW }) {
                 href={item.href}
                 aria-hidden={i >= items.length}
                 tabIndex={i >= items.length ? -1 : undefined}
-                className="flex h-full items-start gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="flex h-full items-start gap-4 p-2 transition duration-300 hover:-translate-y-0.5"
               >
                 <Logo src={item.logoUrl} name={item.name} size={56} />
                 <span className="min-w-0">
