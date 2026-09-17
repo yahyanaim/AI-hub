@@ -96,7 +96,6 @@ function PostCard({ post, hidden }: { post: WallPost; hidden?: boolean }) {
 }
 
 export function Testimonials() {
-  const loop = [...POSTS, ...POSTS]
   return (
     <section aria-label="Wall of Love" className="relative mt-12">
       <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
@@ -105,16 +104,10 @@ export function Testimonials() {
       <p className="mt-2 text-center text-sm text-muted-foreground">
         What the community says about their experience on AI Hunt
       </p>
-      <div className="group relative mt-8 overflow-hidden" role="region" aria-roledescription="carousel">
-        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-          <div className="flex w-max animate-marquee motion-reduce:animate-none group-hover:[animation-play-state:paused]">
-            {loop.map((post, i) => (
-              <div key={`${post.name}-${i}`} role="group" aria-roledescription="slide" className="w-[340px] shrink-0 grow-0 px-3 md:w-[440px]">
-                <PostCard post={post} hidden={i >= POSTS.length} />
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="mx-auto mt-8 grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {POSTS.map((post) => (
+          <PostCard key={post.name} post={post} />
+        ))}
       </div>
     </section>
   )
