@@ -13,10 +13,9 @@ function XLogo({ className }: { className?: string }) {
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-foreground">
-      <span className="mr-2 inline-block h-3 w-1 rounded-full bg-brand-orange align-baseline" />
+    <div className="mb-4 text-sm font-bold text-foreground">
       {children}
-    </h4>
+    </div>
   )
 }
 
@@ -39,22 +38,19 @@ export function Footer() {
     <footer className="relative z-10 mt-12 border-t border-border bg-card/50">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-orange/60 to-transparent" />
       <div className="container-page py-12">
-        <div className="mb-10 flex flex-col items-start justify-between gap-5 border-b border-border/70 pb-8 lg:flex-row lg:items-center">
-          <div>
-            <h3 className="font-heading text-lg font-bold text-foreground">Get the best new tools first</h3>
-            <p className="mt-1 text-sm text-muted-foreground">One short email when something worth knowing drops. No spam.</p>
-          </div>
-          <NewsletterForm />
-        </div>
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          <div className="col-span-2 md:col-span-1">
+        <div className="grid grid-cols-2 gap-8 lg:grid-cols-12">
+          <div className="col-span-2 lg:col-span-4">
             <div className="flex items-center gap-2">
               <span className="flex h-16 w-16 items-center justify-center overflow-hidden bg-transparent">
                 <Image src="/logo.png" alt="AI Hunt" width={60} height={60} className="h-full w-full object-contain" />
               </span>
+              <span className="font-heading text-xl font-bold text-foreground">AI Hunt</span>
             </div>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Discover AI tools, dev tools, courses and many resources for developers to level up your skills.
+            </p>
+            <p className="mt-3 max-w-xs text-xs leading-relaxed text-muted-foreground/80">
+              A demonstration build. Data is stored locally in your browser.
             </p>
             <div className="mt-5 flex items-center gap-2.5">
               <SocialLink href="https://github.com/yahyanaim" label="GitHub - yahyanaim">
@@ -72,7 +68,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="lg:col-span-2">
             <FooterHeading>Discover</FooterHeading>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/tools" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Tools</Link></li>
@@ -83,7 +79,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="lg:col-span-2">
             <FooterHeading>Community</FooterHeading>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/submit" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Submit</Link></li>
@@ -91,10 +87,12 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <FooterHeading>About</FooterHeading>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              A demonstration build. Data is stored locally in your browser.
+          <div className="col-span-2 lg:col-span-4">
+            <FooterHeading>Stay in the loop</FooterHeading>
+            <p className="mb-4 text-sm text-muted-foreground">Get the best new tools first. One short email, no spam.</p>
+            <NewsletterForm />
+            <p className="mt-3 text-xs text-muted-foreground/70">
+              By subscribing, you agree to receive our newsletter.
             </p>
           </div>
         </div>
