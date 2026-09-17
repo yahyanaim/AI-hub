@@ -46,9 +46,9 @@ function initials(name: string) {
 
 function PostCard({ t, hidden }: { t: Testimonial; hidden?: boolean }) {
   return (
-    <article
+      <article
       aria-hidden={hidden}
-      className="flex h-full flex-col rounded-xl border border-border bg-card p-5 shadow-sm"
+      className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-xl"
     >
       <div className="flex items-center gap-3">
         <span
@@ -82,14 +82,11 @@ export function Testimonials() {
       <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
         Trusted by founders across the ecosystem
       </h2>
-      <p className="mt-2 text-center text-sm text-muted-foreground">
-        What the community says about AI Hunt
-      </p>
       <div className="group relative mt-8 overflow-hidden" role="region" aria-roledescription="carousel">
-        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
           <div className="flex w-max animate-marquee motion-reduce:animate-none group-hover:[animation-play-state:paused]">
             {loop.map((t, i) => (
-              <div key={`${t.name}-${i}`} role="group" aria-roledescription="slide" className="w-80 shrink-0 grow-0 px-3 md:w-[420px]">
+              <div key={`${t.name}-${i}`} role="group" aria-roledescription="slide" className="w-[320px] shrink-0 grow-0 px-3 md:w-[480px]">
                 <PostCard t={t} hidden={i >= TESTIMONIALS.length} />
               </div>
             ))}
