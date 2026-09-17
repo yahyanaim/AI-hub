@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation'
 import { PartnersMarquee } from '@/components/layout/PartnersMarquee'
-import { Testimonials } from '@/components/layout/Testimonials'
 
 export function MarqueeGate() {
   const pathname = usePathname()
@@ -10,7 +9,6 @@ export function MarqueeGate() {
   return (
     <div className="container-page">
       <PartnersMarquee />
-      <Testimonials />
     </div>
   )
 }
