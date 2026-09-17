@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Heart } from 'lucide-react'
+import { Github, Heart, Instagram, Facebook } from 'lucide-react'
 
 function XLogo({ className }: { className?: string }) {
   return (
@@ -81,6 +81,24 @@ export function Footer() {
               aria-label="X - yahianaim"
             >
               <XLogo className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.instagram.com/yahia_naiiiim/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground transition-colors hover:text-brand-orange"
+              aria-label="Instagram - yahia_naiiiim"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.facebook.com/yaaahya.naim/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground transition-colors hover:text-brand-orange"
+              aria-label="Facebook - yaaahya.naim"
+            >
+              <Facebook className="h-5 w-5" />
             </a>
             <span className="flex items-center gap-1 text-xs text-muted-foreground">
               Made with <Heart className="h-3 w-3 fill-red-500 text-red-500" /> by Yahia Naim
