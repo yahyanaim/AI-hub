@@ -86,7 +86,7 @@ export function Footer() {
               href="https://www.instagram.com/yahia_naiiiim/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground transition-colors hover:text-brand-orange"
+              className="text-pink-600 transition-colors hover:text-pink-500 dark:text-pink-500 dark:hover:text-pink-400"
               aria-label="Instagram - yahia_naiiiim"
             >
               <Instagram className="h-5 w-5" />
@@ -95,7 +95,7 @@ export function Footer() {
               href="https://www.facebook.com/yaaahya.naim/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground transition-colors hover:text-brand-orange"
+              className="text-[#1877F2] transition-colors hover:text-[#166fe5]"
               aria-label="Facebook - yaaahya.naim"
             >
               <Facebook className="h-5 w-5" />
