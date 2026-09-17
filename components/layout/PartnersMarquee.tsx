@@ -86,14 +86,14 @@ function PerkRow({ items }: { items: typeof PERK_ROW }) {
 
 export function PartnersMarquee() {
   return (
-    <section aria-label="Trusted across the AI ecosystem" className="relative mt-8 md:mt-12">
+    <section aria-label="Trusted across the AI ecosystem" className="relative mt-6 md:mt-8">
       <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
         Trusted across the AI ecosystem
       </h2>
       <p className="mt-2 text-center text-sm text-muted-foreground">
         Top-rated tools and perks, ranked by the community
       </p>
-      <div className="mx-auto mt-8 max-w-6xl space-y-6 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+      <div className="mx-auto mt-6 max-w-6xl space-y-6 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <LogoRow items={LOGO_ROW} />
         <PerkRow items={PERK_ROW} />
       </div>
