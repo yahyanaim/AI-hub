@@ -12,7 +12,7 @@ function XLogo({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="relative z-10 mt-24 border-t border-border bg-card/50">
+    <footer className="relative z-10 mt-12 border-t border-border bg-card/50">
       <div className="container-page py-12">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
