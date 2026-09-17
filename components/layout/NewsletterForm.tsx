@@ -5,7 +5,7 @@ import { Send, Check, AlertCircle, Loader2 } from 'lucide-react'
 
 type Status = 'idle' | 'loading' | 'done' | 'error'
 
-export function NewsletterForm() {
+export function NewsletterForm({ dark = false }: { dark?: boolean }) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [message, setMessage] = useState('')
@@ -47,7 +47,11 @@ export function NewsletterForm() {
           placeholder="you@example.com"
           disabled={status === 'loading' || status === 'done'}
           aria-label="Email address"
-          className="h-10 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-brand-orange/60 focus:outline-none focus:ring-2 focus:ring-brand-orange/20 disabled:opacity-60"
+          className={
+            dark
+              ? 'h-10 w-full rounded-xl border border-white/15 bg-white/10 px-4 text-sm text-white placeholder:text-white/40 focus:border-brand-orange/70 focus:outline-none focus:ring-2 focus:ring-brand-orange/30 disabled:opacity-60'
+              : 'h-10 w-full rounded-xl border border-border bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-brand-orange/60 focus:outline-none focus:ring-2 focus:ring-brand-orange/20 disabled:opacity-60'
+          }
         />
         <button
           type="submit"

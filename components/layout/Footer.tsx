@@ -13,7 +13,7 @@ function XLogo({ className }: { className?: string }) {
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mb-4 text-sm font-bold text-foreground">
+    <div className="mb-4 text-sm font-bold text-white">
       {children}
     </div>
   )
@@ -35,8 +35,8 @@ function SocialLink({ href, label, chipClass, children }: { href: string; label:
 
 export function Footer() {
   return (
-    <footer className="relative z-10 mt-12 border-t border-border bg-muted/40">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-orange/60 to-transparent" />
+    <footer className="relative z-10 mt-12 bg-brand-navy text-slate-300">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-orange/70 to-transparent" />
       <div className="container-page py-12">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-12">
           <div className="col-span-2 lg:col-span-4">
@@ -45,11 +45,8 @@ export function Footer() {
                 <Image src="/logo.png" alt="AI Hunt" width={60} height={60} className="h-full w-full object-contain" />
               </span>
             </div>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-400">
               Discover AI tools, dev tools, courses and many resources for developers to level up your skills.
-            </p>
-            <p className="mt-3 max-w-xs text-xs leading-relaxed text-muted-foreground/80">
-              A demonstration build. Data is stored locally in your browser.
             </p>
             <div className="mt-5 flex items-center gap-2.5">
               <SocialLink href="https://github.com/yahyanaim" label="GitHub - yahyanaim" chipClass="bg-[#24292f]">
@@ -70,37 +67,37 @@ export function Footer() {
           <div className="lg:col-span-2">
             <FooterHeading>Discover</FooterHeading>
             <ul className="space-y-2.5 text-sm">
-              <li><Link href="/tools" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Tools</Link></li>
-              <li><Link href="/dev-tools" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Dev Tools</Link></li>
-              <li><Link href="/edittools" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Editing Tools</Link></li>
-              <li><Link href="/courses" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Courses</Link></li>
-              <li><Link href="/offers" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Offers</Link></li>
+              <li><Link href="/tools" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Tools</Link></li>
+              <li><Link href="/dev-tools" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Dev Tools</Link></li>
+              <li><Link href="/edittools" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Editing Tools</Link></li>
+              <li><Link href="/courses" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Courses</Link></li>
+              <li><Link href="/offers" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Offers</Link></li>
             </ul>
           </div>
 
           <div className="lg:col-span-2">
             <FooterHeading>Community</FooterHeading>
             <ul className="space-y-2.5 text-sm">
-              <li><Link href="/submit" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Submit</Link></li>
-              <li><Link href="/support" className="text-muted-foreground transition-all hover:pl-1 hover:text-brand-orange">Support</Link></li>
+              <li><Link href="/submit" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Submit</Link></li>
+              <li><Link href="/support" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Support</Link></li>
             </ul>
           </div>
 
           <div className="col-span-2 lg:col-span-4">
             <FooterHeading>Stay in the loop</FooterHeading>
-            <p className="mb-4 text-sm text-muted-foreground">Get the best new tools first. One short email, no spam.</p>
-            <NewsletterForm />
-            <p className="mt-3 text-xs text-muted-foreground/70">
+            <p className="mb-4 text-sm text-slate-400">Get the best new tools first. One short email, no spam.</p>
+            <NewsletterForm dark />
+            <p className="mt-3 text-xs text-slate-500">
               By subscribing, you agree to receive our newsletter.
             </p>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border/70 pt-6 sm:flex-row">
-          <p className="text-xs text-muted-foreground">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
+          <p className="text-xs text-slate-500">
             &copy; {new Date().getFullYear()} AI Hunt. Built for the AI community.
           </p>
-          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-xs text-slate-500">
             Made with <Heart className="h-3 w-3 fill-red-500 text-red-500" /> by Yahia Naim
           </span>
         </div>
