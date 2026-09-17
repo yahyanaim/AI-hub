@@ -82,6 +82,28 @@ function StoryPhone({ post }: { post: WallPost }) {
   )
 }
 
+function FeedPanel({ post }: { post: WallPost }) {
+  return (
+    <div className="mx-auto flex w-full flex-col overflow-clip rounded-xl border border-gray-200 bg-[#efeae2]">
+      <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3">
+        <div className="flex cursor-pointer items-center gap-3">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-navy font-heading text-sm font-bold text-white">
+            {initials(post.name)}
+          </span>
+          <div className="flex flex-col text-left">
+            <span className="text-sm font-semibold leading-tight text-gray-900">{post.name}</span>
+            <span className="text-xs text-gray-500">{post.role}</span>
+          </div>
+        </div>
+        <span aria-hidden="true" className="text-lg font-bold leading-none text-gray-400">···</span>
+      </div>
+      <div className="p-4">
+        <PostCard post={post} />
+      </div>
+    </div>
+  )
+}
+
 function PostCard({ post }: { post: WallPost }) {
   return (
     <article className="mx-auto h-full w-full max-w-lg rounded-lg border border-gray-200 bg-white p-4 pb-1 shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
@@ -147,7 +169,7 @@ export function Testimonials() {
         {POSTS.map((post) => (
           <div key={post.name} className="flex flex-col gap-5">
             <StoryPhone post={post} />
-            <PostCard post={post} />
+            <FeedPanel post={post} />
           </div>
         ))}
       </div>
