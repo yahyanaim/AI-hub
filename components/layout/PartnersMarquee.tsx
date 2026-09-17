@@ -86,7 +86,7 @@ function PerkRow({ items }: { items: typeof PERK_ROW }) {
 
 export function PartnersMarquee() {
   return (
-    <section aria-label="Trusted across the AI ecosystem" className="relative mt-10 md:mt-12">
+    <section aria-label="Trusted across the AI ecosystem" className="relative mt-12">
       <h2 className="text-center font-heading text-2xl font-bold text-foreground md:text-3xl">
         Trusted across the AI ecosystem
       </h2>
