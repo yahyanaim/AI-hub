@@ -19,14 +19,14 @@ function FooterHeading({ children }: { children: React.ReactNode }) {
   )
 }
 
-function SocialLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+function SocialLink({ href, label, chipClass, children }: { href: string; label: string; chipClass: string; children: React.ReactNode }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-muted/60 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-orange/40 hover:shadow-md"
+      className={`flex h-9 w-9 items-center justify-center rounded-full text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:brightness-110 ${chipClass}`}
     >
       {children}
     </a>
@@ -35,7 +35,7 @@ function SocialLink({ href, label, children }: { href: string; label: string; ch
 
 export function Footer() {
   return (
-    <footer className="relative z-10 mt-12 border-t border-border bg-card/50">
+    <footer className="relative z-10 mt-12 border-t border-border bg-muted/40">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-orange/60 to-transparent" />
       <div className="container-page py-12">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-12">
@@ -44,7 +44,6 @@ export function Footer() {
               <span className="flex h-16 w-16 items-center justify-center overflow-hidden bg-transparent">
                 <Image src="/logo.png" alt="AI Hunt" width={60} height={60} className="h-full w-full object-contain" />
               </span>
-              <span className="font-heading text-xl font-bold text-foreground">AI Hunt</span>
             </div>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Discover AI tools, dev tools, courses and many resources for developers to level up your skills.
@@ -53,17 +52,17 @@ export function Footer() {
               A demonstration build. Data is stored locally in your browser.
             </p>
             <div className="mt-5 flex items-center gap-2.5">
-              <SocialLink href="https://github.com/yahyanaim" label="GitHub - yahyanaim">
-                <Github className="h-4 w-4 text-foreground" />
+              <SocialLink href="https://github.com/yahyanaim" label="GitHub - yahyanaim" chipClass="bg-[#24292f]">
+                <Github className="h-4 w-4" />
               </SocialLink>
-              <SocialLink href="https://x.com/yahianaim" label="X - yahianaim">
-                <XLogo className="h-4 w-4 text-foreground" />
+              <SocialLink href="https://x.com/yahianaim" label="X - yahianaim" chipClass="bg-black dark:bg-white dark:text-black">
+                <XLogo className="h-4 w-4" />
               </SocialLink>
-              <SocialLink href="https://www.instagram.com/yahia_naiiiim/" label="Instagram - yahia_naiiiim">
-                <Instagram className="h-4 w-4 text-pink-600 dark:text-pink-500" />
+              <SocialLink href="https://www.instagram.com/yahia_naiiiim/" label="Instagram - yahia_naiiiim" chipClass="bg-gradient-to-tr from-[#FEDA75] via-[#D62976] to-[#962FBF]">
+                <Instagram className="h-4 w-4" />
               </SocialLink>
-              <SocialLink href="https://www.facebook.com/yaaahya.naim/" label="Facebook - yaaahya.naim">
-                <Facebook className="h-4 w-4 text-[#1877F2]" />
+              <SocialLink href="https://www.facebook.com/yaaahya.naim/" label="Facebook - yaaahya.naim" chipClass="bg-[#1877F2]">
+                <Facebook className="h-4 w-4" />
               </SocialLink>
             </div>
           </div>
