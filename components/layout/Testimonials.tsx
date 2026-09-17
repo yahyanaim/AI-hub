@@ -1,4 +1,4 @@
-import { ThumbsUp, MessageCircle, Repeat2, Send } from 'lucide-react'
+import { ThumbsUp, MessageCircle, Repeat2, Send, Quote } from 'lucide-react'
 
 interface WallPost {
   quote: string
@@ -54,6 +54,32 @@ function initials(name: string) {
     .slice(0, 2)
     .map((w) => w[0]?.toUpperCase() ?? '')
     .join('')
+}
+
+function StoryPhone({ post }: { post: WallPost }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="relative mx-auto aspect-[9/14] w-full max-w-[240px] overflow-hidden rounded-[3rem] border-[8px] border-zinc-800 bg-black shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
+    >
+      <div className="absolute left-1/2 top-3 z-10 h-[24px] w-[90px] -translate-x-1/2 rounded-full bg-black" />
+      <div className="flex h-full w-full flex-col justify-between bg-gradient-to-b from-brand-navy via-[#1a2b4a] to-brand-orange/80 p-5 pt-12 text-white">
+        <Quote className="h-7 w-7 text-white/40" />
+        <p className="text-[15px] font-semibold leading-snug tracking-tight">
+          &ldquo;{post.quote}&rdquo;
+        </p>
+        <div className="flex items-center gap-2.5">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 font-heading text-sm font-bold backdrop-blur-sm">
+            {initials(post.name)}
+          </span>
+          <div>
+            <div className="text-sm font-bold leading-tight">{post.name}</div>
+            <div className="text-xs text-white/70">{post.role}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function PostCard({ post }: { post: WallPost }) {
@@ -117,9 +143,12 @@ export function Testimonials() {
       >
         What the community says about their experience on AI Hunt
       </p>
-      <div className="grid grid-cols-1 gap-5 text-left sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 text-left sm:grid-cols-2 lg:grid-cols-3">
         {POSTS.map((post) => (
-          <PostCard key={post.name} post={post} />
+          <div key={post.name} className="flex flex-col gap-5">
+            <StoryPhone post={post} />
+            <PostCard post={post} />
+          </div>
         ))}
       </div>
     </section>
