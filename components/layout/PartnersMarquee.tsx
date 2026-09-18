@@ -30,7 +30,7 @@ function LogoRow({ items, reverse = false }: { items: MarqueeItem[]; reverse?: b
                 aria-hidden={i >= items.length}
                 tabIndex={i >= items.length ? -1 : undefined}
                 title={item.name}
-                className="flex shrink-0 items-center gap-3 opacity-90 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                className="flex shrink-0 items-center gap-3 opacity-70 grayscale drop-shadow-xl transition duration-300 hover:opacity-100 hover:grayscale-0"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- tiny remote favicons in a decorative marquee */}
                 <img src={item.logoUrl} alt="" loading="lazy" className="h-14 w-14 shrink-0 object-contain" />
