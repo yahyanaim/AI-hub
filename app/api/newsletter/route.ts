@@ -46,6 +46,13 @@ export async function POST(req: Request) {
     if (res.status === 400 && data?.code === 'email_already_exists') {
       return NextResponse.json({ message: "You're already subscribed. Welcome back!" })
     }
+    // Forward Buttondown's own message when safe (e.g. invalid domain,
+    // disposable address, subscriber limit) so users know what to fix.
+    if (data?.detail && data.detail.length < 200) {
+      console.warn('[newsletter] buttondown rejected signup:', data.code, data.detail)
+      return NextResponse.json({ message: data.detail }, { status: 502 })
+    }
+    console.warn('[newsletter] buttondown signup failed:', res.status)
     return NextResponse.json(
       { message: 'Subscription failed. Please try again.' },
       { status: 502 }
