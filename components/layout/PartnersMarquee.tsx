@@ -30,7 +30,7 @@ function LogoRow({ items, reverse = false }: { items: MarqueeItem[]; reverse?: b
                 aria-hidden={i >= items.length}
                 tabIndex={i >= items.length ? -1 : undefined}
                 title={item.name}
-                className="flex shrink-0 items-center gap-2 opacity-50 grayscale drop-shadow-xl transition duration-300 hover:opacity-100 hover:grayscale-0"
+                className="flex shrink-0 items-center gap-2 opacity-90 grayscale-0 drop-shadow-xl transition duration-300 hover:opacity-100"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- tiny remote favicons in a decorative marquee */}
                 <img src={item.logoUrl} alt="" loading="lazy" className="h-8 w-8 shrink-0 object-contain" />
@@ -47,7 +47,7 @@ function LogoRow({ items, reverse = false }: { items: MarqueeItem[]; reverse?: b
 export function PartnersMarquee() {
   return (
     <section aria-label="Top tools and perks" className="relative mt-12 py-10">
-      <div className="mx-auto max-w-6xl space-y-8 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+      <div className="mx-auto max-w-6xl space-y-4 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <LogoRow items={ROW_ONE} />
         <LogoRow items={ROW_TWO} reverse />
       </div>
