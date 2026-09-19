@@ -71,9 +71,6 @@ export function FaqSection() {
               If you have any questions, just book a 30-minute call with us
               before subscribing.
             </p>
-            <p className="mt-2 text-xs font-medium text-foreground">
-              The call is <span className="text-brand-orange font-semibold">paid</span> — you&apos;ll pay for the consultant time.
-            </p>
             <a
               href={CALENDLY_URL}
               target="_blank"
@@ -83,12 +80,10 @@ export function FaqSection() {
               <CalendarClock className="size-4" />
               Book a Call
             </a>
-            <p className="mt-3 flex items-start gap-1.5 text-left text-xs leading-relaxed text-muted-foreground">
-              <span>
-                After you book, we&apos;ll contact you to arrange the payment.
-                Once you pay, send us the payment proof (a screenshot of your
-                transaction receipt) on WhatsApp to continue the process.
-              </span>
+            <p className="mt-3 text-xs leading-relaxed text-brand-orange text-justify">
+              After you book, we&apos;ll contact you to arrange the payment.
+              Once you pay, send us the payment proof (a screenshot of your
+              transaction receipt) on WhatsApp to continue the process.
             </p>
           </div>
         </div>
