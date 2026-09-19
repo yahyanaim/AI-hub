@@ -80,7 +80,7 @@ export function FaqSection() {
               <CalendarClock className="size-4" />
               Book a Call
             </a>
-            <p className="mt-3 text-xs leading-relaxed text-brand-orange text-justify">
+            <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground text-justify">
               After you book, we&apos;ll contact you to arrange the payment.
               Once you pay, send us the payment proof (a screenshot of your
               transaction receipt) on WhatsApp to continue the process.
