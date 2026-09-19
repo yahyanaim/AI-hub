@@ -1,11 +1,7 @@
-import { CalendarClock, MessageCircle, UserRound } from 'lucide-react'
-import { WHATSAPP_NUMBER } from '@/lib/guides'
+import { CalendarClock, UserRound } from 'lucide-react'
 
 // Founder booking: photo + Calendly link
 const CALENDLY_URL = 'https://calendly.com/yahyanaim2001/30min'
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  'Hi, I booked a 30 min call. Here is my payment proof (screenshot):'
-)}`
 const FOUNDER_PHOTO_URL: string | null =
   'https://avatars.githubusercontent.com/u/57252787?v=4'
 
@@ -88,20 +84,10 @@ export function FaqSection() {
               Book a Call
             </a>
             <p className="mt-3 flex items-start gap-1.5 text-left text-xs leading-relaxed text-muted-foreground">
-              <MessageCircle className="mt-0.5 size-3.5 shrink-0 text-green-600" />
               <span>
                 After you book, we&apos;ll contact you to arrange the payment.
                 Once you pay, send us the payment proof (a screenshot of your
-                transaction receipt) on{' '}
-                <a
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-semibold text-green-600 underline underline-offset-2 hover:text-green-700"
-                >
-                  WhatsApp
-                </a>{' '}
-                to continue the process.
+                transaction receipt) on WhatsApp to continue the process.
               </span>
             </p>
           </div>
