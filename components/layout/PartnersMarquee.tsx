@@ -47,7 +47,7 @@ function LogoRow({ items, reverse = false }: { items: MarqueeItem[]; reverse?: b
 export function PartnersMarquee() {
   return (
     <section aria-label="Top tools and perks" className="relative mt-12 py-10">
-      <div className="mx-auto max-w-6xl space-y-8 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+      <div className="mx-auto max-w-6xl space-y-14 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <LogoRow items={ROW_ONE} />
         <LogoRow items={ROW_TWO} reverse />
       </div>
