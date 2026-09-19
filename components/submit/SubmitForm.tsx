@@ -276,9 +276,9 @@ export function SubmitForm() {
       )}
     <div className="mx-auto max-w-2xl">
       {/* Stepper */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex items-center">
         {STEPS.map((label, i) => (
-          <div key={label} className="flex flex-1 items-center">
+          <div key={label} className="flex flex-1 items-center last:flex-none">
             <div className="flex flex-col items-center">
               <div
                 className={cn(
