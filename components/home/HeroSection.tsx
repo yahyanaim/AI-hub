@@ -113,7 +113,7 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
           {totalCount}+ curated entries
         </div>
 
-        <h1 className="font-heading text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
+        <h1 className="whitespace-nowrap font-heading text-[min(9vw,3.75rem)] font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
           Discover the best{' '}
           <span className="bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
             {typed}
