@@ -15,6 +15,7 @@ import {
 import { cn } from '@/lib/utils'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
+import { ThemeToggle } from '@/components/layout/ThemeToggle'
 
 const NAV_LINKS = [
   { href: '/tools', label: 'Tools' },
@@ -76,6 +77,7 @@ export function Navbar() {
 
         {/* Right side: actions */}
         <div className="ml-auto flex items-center gap-2">
+          <ThemeToggle />
 
           {/* Submit button */}
           <Link href="/submit" className="hidden h-9 items-center rounded-xl border border-border bg-background px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted sm:inline-flex">
