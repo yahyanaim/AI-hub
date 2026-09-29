@@ -38,9 +38,9 @@ export const HOME_FAQS = [
 
 export function FaqSection() {
   return (
-    <section aria-label="Frequently asked questions" className="mt-12 py-8">
-      <div className="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-10 dark:bg-card">
-      <div className="grid items-stretch gap-10 lg:grid-cols-5">
+    <section aria-label="Frequently asked questions" className="mt-12 py-10">
+      <div className="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-12 dark:bg-card">
+      <div className="grid items-stretch gap-12 lg:grid-cols-5">
         {/* Left: heading + book-a-call card */}
         <div className="flex flex-col lg:col-span-2">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
@@ -89,12 +89,12 @@ export function FaqSection() {
         </div>
 
         {/* Right: accordion */}
-        <div className="grid content-start gap-4 lg:col-span-3">
+        <div className="grid content-start gap-5 lg:col-span-3">
           {HOME_FAQS.map((faq, i) => (
             <details
               key={faq.q}
               open={i === 0}
-              className="group rounded-2xl border border-brand-orange/20 bg-white px-6 py-5 transition-all open:border-brand-orange/40 open:shadow-md dark:border-border dark:bg-card"
+              className="group rounded-2xl border border-brand-orange/20 bg-white px-7 py-6 shadow-[0_2px_12px_-2px_rgba(255,107,0,0.12)] transition-all hover:shadow-[0_8px_30px_-6px_rgba(255,107,0,0.25)] open:border-brand-orange/40 open:shadow-[0_12px_40px_-8px_rgba(255,107,0,0.35)] dark:border-border dark:bg-card dark:shadow-none"
             >
               <summary className="cursor-pointer list-none text-[15px] font-semibold text-foreground marker:hidden [&::-webkit-details-marker]:hidden">
                 <span className="flex items-center justify-between gap-4">

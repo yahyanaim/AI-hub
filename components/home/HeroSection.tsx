@@ -117,13 +117,13 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
           {/* Static keyword-rich H1 for Google + screen readers. The animated
               word is decorative only (aria-hidden) so crawlers always see the
               full phrase even with JS disabled. */}
-          <span className="sr-only">Discover the best AI tools, dev tools and courses — AI Hunt Morocco</span>
+          <span className="sr-only">Discover the best AI tools, dev tools and courses by AI Hunt Morocco</span>
           <span aria-hidden="true">
-            Discover the best{' '}
-            <span className="bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
+            Discover the best
+            <span className="block bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
               {typed}
+              <span className="ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.12em] animate-pulse rounded-full bg-brand-orange" />
             </span>
-            <span className="ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.12em] animate-pulse rounded-full bg-brand-orange" />
           </span>
         </h1>
 
@@ -134,7 +134,7 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
           className="mx-auto mt-4 max-w-xl text-center text-base text-muted-foreground"
         >
           Community-driven directory to discover AI tools, n8n automation, dev tools,
-          coding courses and freelancing skills — free resources for developers and students in Morocco and worldwide.
+          coding courses and freelancing skills. Free resources for developers and students in Morocco and worldwide.
         </motion.p>
 
         <div className="mx-auto mt-8 max-w-md">

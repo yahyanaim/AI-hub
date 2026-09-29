@@ -88,7 +88,7 @@ export function AuthModal() {
 
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground">
-              Demo build — pick a local username below. No real OAuth; your session lives in this browser only.
+              Demo build: pick a local username below. No real OAuth; your session lives in this browser only.
             </p>
           </div>
 

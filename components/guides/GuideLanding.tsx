@@ -76,15 +76,15 @@ export function GuideLanding({ offer }: { offer: Offer }) {
               className="mt-5 inline-flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-green-700"
             >
               <MessageCircle className="h-4 w-4" />
-              Order on WhatsApp — {price}
+              Order on WhatsApp: {price}
             </a>
           </div>
         </div>
       </div>
 
-      {/* How to get it — 3 steps */}
+      {/* How to get it in 3 steps */}
       <div className="mt-8 rounded-xl border border-border bg-card p-6 md:p-8">
-        <h2 className="font-heading text-xl font-bold">How to get the PDF — 3 steps</h2>
+        <h2 className="font-heading text-xl font-bold">How to get the PDF in 3 steps</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Virement direct. No account, no checkout page.
         </p>
@@ -108,11 +108,11 @@ export function GuideLanding({ offer }: { offer: Offer }) {
 
         <div className="mt-4 rounded-lg border border-dashed border-border bg-muted/50 p-4">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            1 — Pay to this RIB
+            1. Pay to this RIB
           </p>
           <p className="mt-1 font-mono text-sm font-bold text-foreground">{PAYMENT_RIB}</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Amount: <strong className="text-foreground">{price}</strong> — keep the receipt screenshot.
+            Amount: <strong className="text-foreground">{price}</strong>. Keep the receipt screenshot.
           </p>
         </div>
 
@@ -123,19 +123,19 @@ export function GuideLanding({ offer }: { offer: Offer }) {
           className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-green-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-green-700"
         >
           <MessageCircle className="h-4 w-4" />
-          2 — Send “Hi, I paid” + receipt on WhatsApp
+          2. Send “Hi, I paid” + receipt on WhatsApp
         </a>
         <p className="mt-2 text-center text-xs text-muted-foreground">
-          3 — We reply and send you the full PDF on WhatsApp + 30 days of free updates.
+          3. We reply and send you the full PDF on WhatsApp + 30 days of free updates.
         </p>
       </div>
 
-      {/* Free glimpse — indexable */}
+      {/* Free glimpse, indexable */}
       {glimpseSteps.length > 0 && (
         <div className="mt-8 rounded-xl border border-border bg-card p-6 md:p-8">
           <div className="mb-2 flex items-center gap-2">
             <BadgeCheck className="h-5 w-5 text-brand-orange" />
-            <h2 className="font-heading text-xl font-bold">Free glimpse — 1 chapter</h2>
+            <h2 className="font-heading text-xl font-bold">Free glimpse: 1 chapter</h2>
           </div>
           {glimpseSteps.map((step, i) => (
             <div key={i} className="mt-3 rounded-lg border border-border bg-muted/50 p-4">
@@ -161,7 +161,7 @@ export function GuideLanding({ offer }: { offer: Offer }) {
       <div className="mt-8 overflow-hidden rounded-xl border border-border bg-card p-6 md:p-8">
         <div className="flex items-center gap-2">
           <Lock className="h-5 w-5 text-muted-foreground" />
-          <h2 className="font-heading text-xl font-bold">Full {offer.pages ?? ''} pages — locked</h2>
+          <h2 className="font-heading text-xl font-bold">Full {offer.pages ?? ''} pages locked</h2>
         </div>
         <div className="relative mt-4">
           <div className="space-y-2 blur-[3px]" aria-hidden="true">
@@ -178,7 +178,7 @@ export function GuideLanding({ offer }: { offer: Offer }) {
               className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-green-700"
             >
               <MessageCircle className="h-4 w-4" />
-              Unlock on WhatsApp — {price}
+              Unlock on WhatsApp: {price}
             </a>
           </div>
         </div>
@@ -197,7 +197,7 @@ export function GuideLanding({ offer }: { offer: Offer }) {
           className="flex items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-3 text-sm font-bold text-white"
         >
           <MessageCircle className="h-4 w-4" />
-          Get the PDF — {price}
+          Get the PDF: {price}
         </a>
       </div>
     </div>
