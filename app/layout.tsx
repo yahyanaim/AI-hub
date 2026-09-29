@@ -16,7 +16,7 @@ import { ToolDetailModal } from '@/components/detail/ToolDetailModal'
 import { RepoDetailModal } from '@/components/detail/RepoDetail'
 import { CourseDetailModal } from '@/components/detail/CourseDetail'
 import { Analytics } from '@vercel/analytics/react'
-import { ChatBot } from '@/components/chat/ChatBot'
+import dynamic from 'next/dynamic'
 import { safeJsonLd } from '@/lib/json-ld'
 
 const inter = Inter({
@@ -34,6 +34,13 @@ const arabic = Noto_Kufi_Arabic({
 const geist = GeistSans
 
 const baseUrl = SITE_URL
+
+// Lazy-load the chatbot so it never blocks LCP on landing pages.
+// It renders only after hydration on the client.
+const ChatBot = dynamic(() => import('@/components/chat/ChatBot').then((m) => m.ChatBot), {
+  ssr: false,
+  loading: () => null,
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -82,10 +89,9 @@ export const metadata: Metadata = {
     siteName: 'AI Hunt',
     type: 'website',
     locale: 'en_US',
-    alternateLocale: ['fr_FR', 'ar_SA'],
     images: [
       {
-        url: '/og.png',
+        url: `${baseUrl}/og.png`,
         width: 1200,
         height: 630,
         alt: 'AI Hunt - Discover AI Tools & Developer Resources',
@@ -97,7 +103,7 @@ export const metadata: Metadata = {
     title: 'AI Hunt - AI Tools, n8n Automation & Courses',
     description:
       'Community-driven platform for AI tools, n8n automation, dev tools, courses, and freelancing skills - Morocco and worldwide.',
-    images: ['/og.png'],
+    images: [`${baseUrl}/og.png`],
     creator: '@yahianaim',
   },
   alternates: {
@@ -144,6 +150,14 @@ export default function RootLayout({
               description: 'Community-driven discovery platform for AI tools, n8n automation, developer tools, open-source repos, coding courses, and freelancing skills - popular with developers and students in Morocco.',
               keywords: 'AI tools, n8n, automation, coding courses, freelancing, development, AI skills, Morocco',
               inLanguage: ['en', 'fr', 'ar'],
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: {
+                  '@type': 'EntryPoint',
+                  urlTemplate: `${baseUrl}/search?q={search_term_string}`,
+                },
+                'query-input': 'required name=search_term_string',
+              },
               audience: {
                 '@type': 'Audience',
                 audienceType: ['Developers', 'AI Practitioners', 'Tech Enthusiasts', 'Students in Morocco', 'Freelancers'],

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: 'Paid Guides - AI Hunt',
     description: 'Premium PDF playbooks with WhatsApp delivery.',
     url: `${baseUrl}/guides`,
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Guides' }],
+    images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Guides' }],
   },
   alternates: { canonical: `${baseUrl}/guides` },
 }

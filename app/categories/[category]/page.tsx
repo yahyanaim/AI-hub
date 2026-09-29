@@ -39,10 +39,13 @@ const baseUrl = SITE_URL
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
   const cat = params.category
   const name = cat.charAt(0).toUpperCase() + cat.slice(1)
+  const target = CATEGORY_TO_TYPE[cat] ?? '/tools'
   return {
     title: `${name} Tools & Resources`,
     description: `Browse the best ${cat} AI tools, developer tools, open-source repos, and learning resources. Curated and ranked by the community.`,
-    alternates: { canonical: `${baseUrl}/categories/${cat}` },
+    // Redirect route: never index, canonical points at the redirect target
+    // so Google consolidates signals instead of flagging a soft-404.
+    alternates: { canonical: `${baseUrl}${target}?category=${cat}` },
     robots: { index: false, follow: true },
   }
 }

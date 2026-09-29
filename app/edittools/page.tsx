@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     title: 'Open Source Repos & LLM Tools - AI Hunt',
     description: 'Discover top open-source GitHub repos for AI, LLMs, RAG, agent frameworks, vector databases, and ML tools.',
     url: `${baseUrl}/edittools`,
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Open Source Repos' }],
+    images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Open Source Repos' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Open Source Repos & LLM Tools - AI Hunt',
     description: 'Discover top open-source GitHub repos for AI, LLMs, RAG, and ML tools.',
-    images: ['/og.png'],
+    images: [`${baseUrl}/og.png`],
   },
   alternates: { canonical: `${baseUrl}/edittools` },
 }

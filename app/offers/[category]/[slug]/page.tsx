@@ -4,6 +4,7 @@ import { SEED_OFFERS } from '@/lib/seed'
 import { OFFER_CATEGORY_LABELS } from '@/types'
 import { OfferDetail } from '@/components/detail/OfferDetail'
 import { safeJsonLd } from '@/lib/json-ld'
+import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
@@ -24,24 +25,23 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const offer = await findOffer(params.category, params.slug)
   if (!offer) return { title: 'Offer Not Found', robots: { index: false, follow: false } }
-  const seoDescription = offer.description
-    ? `${offer.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
-    : offer.tagline
+  const title = seoTitle(offer.name, offer.tagline)
+  const seoDescriptionText = seoDescription(offer.description, offer.tagline)
   const ogImage = resolveOgImage(offer.logoUrl)
   return {
-    title: `${offer.name} - ${offer.tagline}`,
-    description: seoDescription,
+    title,
+    description: seoDescriptionText,
     openGraph: {
-      title: `${offer.name} - ${offer.tagline}`,
-      description: seoDescription,
+      title,
+      description: seoDescriptionText,
       type: 'article',
       url: `${SITE_URL}/offers/${offer.category}/${offer.slug}`,
       images: [{ url: ogImage.src, alt: `${offer.name} - AI Hunt` }],
     },
     twitter: {
       card: ogImage.isLogo ? 'summary' : 'summary_large_image',
-      title: `${offer.name} - ${offer.tagline}`,
-      description: seoDescription,
+      title,
+      description: seoDescriptionText,
       images: [ogImage.src],
     },
     alternates: {
@@ -92,6 +92,18 @@ export default async function OfferDetailPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLd(
+            breadcrumbJsonLd(SITE_URL, [
+              { name: 'Home', path: '/' },
+              { name: 'Offers', path: '/offers' },
+              { name: offer.name, path: `/offers/${offer.category}/${offer.slug}` },
+            ])
+          ),
+        }}
       />
       <OfferDetail slug={slug} initial={offer} />
     </>

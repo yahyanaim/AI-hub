@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { SEED_REPOS } from '@/lib/seed'
 import { RepoDetail } from '@/components/detail/RepoDetail'
 import { safeJsonLd } from '@/lib/json-ld'
+import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
@@ -11,24 +12,23 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const repo = SEED_REPOS.find((r) => r.slug === params.slug)
   if (!repo) return { title: 'Editing Tool Not Found', robots: { index: false, follow: false } }
-  const seoDescription = repo.description
-    ? `${repo.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
-    : repo.tagline
+  const title = seoTitle(repo.name, repo.tagline)
+  const seoDescriptionText = seoDescription(repo.description, repo.tagline)
   const ogImage = resolveOgImage(repo.logoUrl)
   return {
-    title: `${repo.name} - ${repo.tagline}`,
-    description: seoDescription,
+    title,
+    description: seoDescriptionText,
     openGraph: {
-      title: `${repo.name} - ${repo.tagline}`,
-      description: seoDescription,
+      title,
+      description: seoDescriptionText,
       type: 'article',
       url: `${SITE_URL}/edittools/${repo.slug}`,
       images: [{ url: ogImage.src, alt: `${repo.name} - AI Hunt` }],
     },
     twitter: {
       card: ogImage.isLogo ? 'summary' : 'summary_large_image',
-      title: `${repo.name} - ${repo.tagline}`,
-      description: seoDescription,
+      title,
+      description: seoDescriptionText,
       images: [ogImage.src],
     },
     alternates: {
@@ -75,6 +75,20 @@ export default async function EditToolDetailPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+        />
+      )}
+      {repo && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: safeJsonLd(
+              breadcrumbJsonLd(SITE_URL, [
+                { name: 'Home', path: '/' },
+                { name: 'Open Source Repos', path: '/edittools' },
+                { name: repo.name, path: `/edittools/${repo.slug}` },
+              ])
+            ),
+          }}
         />
       )}
       <RepoDetail slug={slug} initial={repo ?? undefined} />

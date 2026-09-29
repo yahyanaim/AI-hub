@@ -4,8 +4,9 @@ import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } fro
 import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
 import { DEVTOOL_CATEGORY_LABELS, OFFER_CATEGORY_LABELS, COURSE_CATEGORY_LABELS } from '@/types'
 
-// Fixed build-time date so sitemap output is deterministic across requests.
-const BUILD_DATE = new Date('2026-01-01T00:00:00.000Z')
+// Build-time date: fresh per build so Google sees updated lastModified.
+// Falls back to a fixed date only if build time is unavailable.
+const BUILD_DATE = new Date()
 
 function safeDate(value: string | undefined): Date {
   const d = value ? new Date(value) : BUILD_DATE

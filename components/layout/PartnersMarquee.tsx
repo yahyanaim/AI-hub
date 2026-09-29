@@ -33,7 +33,7 @@ function LogoRow({ items, reverse = false }: { items: MarqueeItem[]; reverse?: b
                 className="flex shrink-0 items-center gap-2 opacity-90 grayscale-0 drop-shadow-xl transition duration-300 hover:opacity-100"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- tiny remote favicons in a decorative marquee */}
-                <img src={item.logoUrl} alt="" loading="lazy" className="h-8 w-8 shrink-0 object-contain" />
+                <img src={item.logoUrl} alt={`${item.name} logo`} loading="lazy" className="h-8 w-8 shrink-0 object-contain" />
                 <span className="whitespace-nowrap text-sm font-semibold text-foreground">{item.name}</span>
               </Link>
             </div>

@@ -4,6 +4,7 @@ import { redirect, notFound } from 'next/navigation'
 import { SEED_COURSES, SEED_USERS } from '@/lib/seed'
 import { CourseDetail } from '@/components/detail/CourseDetail'
 import { safeJsonLd } from '@/lib/json-ld'
+import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
@@ -17,24 +18,23 @@ export async function generateMetadata({ params }: { params: { category: string;
 
   if (!course) return { title: 'Course Not Found', robots: { index: false, follow: false } }
 
-  const seoDescription = course.description
-    ? `${course.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
-    : course.tagline
+  const seoDescriptionText = seoDescription(course.description, course.tagline)
+  const title = seoTitle(course.name, course.tagline)
   const ogImage = resolveOgImage(course.logoUrl)
   return {
-    title: `${course.name} - ${course.tagline}`,
-    description: seoDescription,
+    title,
+    description: seoDescriptionText,
     openGraph: {
-      title: `${course.name} - ${course.tagline}`,
-      description: seoDescription,
+      title,
+      description: seoDescriptionText,
       type: 'article',
       url: `${baseUrl}/courses/${course.category}/${course.slug}`,
       images: [{ url: ogImage.src, alt: `${course.name} - AI Hunt` }],
     },
     twitter: {
       card: ogImage.isLogo ? 'summary' : 'summary_large_image',
-      title: `${course.name} - ${course.tagline}`,
-      description: seoDescription,
+      title,
+      description: seoDescriptionText,
       images: [ogImage.src],
     },
     alternates: {
@@ -108,6 +108,18 @@ export default async function CourseDetailPage({ params }: { params: { category:
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: safeJsonLd(
+            breadcrumbJsonLd(baseUrl, [
+              { name: 'Home', path: '/' },
+              { name: 'Courses', path: '/courses' },
+              { name: course.name, path: `/courses/${course.category}/${course.slug}` },
+            ])
+          ),
+        }}
       />
       <CourseDetail slug={slug} initial={course} />
     </>

@@ -113,12 +113,18 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
           {totalCount}+ curated entries
         </div>
 
-        <h1 className="whitespace-nowrap font-heading text-[min(9vw,3.75rem)] font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
-          Discover the best{' '}
-          <span className="bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
-            {typed}
+        <h1 className="font-heading text-[min(9vw,3.75rem)] font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
+          {/* Static keyword-rich H1 for Google + screen readers. The animated
+              word is decorative only (aria-hidden) so crawlers always see the
+              full phrase even with JS disabled. */}
+          <span className="sr-only">Discover the best AI tools, dev tools and courses — AI Hunt Morocco</span>
+          <span aria-hidden="true">
+            Discover the best{' '}
+            <span className="bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
+              {typed}
+            </span>
+            <span className="ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.12em] animate-pulse rounded-full bg-brand-orange" />
           </span>
-          <span aria-hidden="true" className="ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.12em] animate-pulse rounded-full bg-brand-orange" />
         </h1>
 
         <motion.p
@@ -127,7 +133,8 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
           transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto mt-4 max-w-xl text-center text-base text-muted-foreground"
         >
-          A community-driven directory. Browse, upvote, and share what works.
+          Community-driven directory to discover AI tools, n8n automation, dev tools,
+          coding courses and freelancing skills — free resources for developers and students in Morocco and worldwide.
         </motion.p>
 
         <div className="mx-auto mt-8 max-w-md">

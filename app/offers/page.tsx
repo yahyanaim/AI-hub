@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     title: 'Offers & Deals for Developers - AI Hunt',
     description: 'Curated offers and free programs with step-by-step how-to-get-it guides.',
     url: `${baseUrl}/offers`,
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Offers' }],
+    images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Offers' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Offers & Deals for Developers - AI Hunt',
     description: 'Curated offers and free programs with step-by-step guides.',
-    images: ['/og.png'],
+    images: [`${baseUrl}/og.png`],
   },
   alternates: { canonical: `${baseUrl}/offers` },
 }

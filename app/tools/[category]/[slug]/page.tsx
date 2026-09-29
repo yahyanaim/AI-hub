@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { SEED_TOOLS, SEED_USERS } from '@/lib/seed'
 import { ToolDetail } from '@/components/detail/ToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'
+import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
@@ -22,24 +23,23 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const tool = await findTool(params.category, params.slug)
   if (!tool) return { title: 'Tool Not Found', robots: { index: false, follow: false } }
-  const seoDescription = tool.description
-    ? `${tool.description.replace(/[#_*`]/g, '').split(/\s+/).slice(0, 30).join(' ').slice(0, 155)}`
-    : tool.tagline
+  const title = seoTitle(tool.name, tool.tagline)
+  const seoDescriptionText = seoDescription(tool.description, tool.tagline)
   const ogImage = resolveOgImage(tool.logoUrl)
   return {
-    title: `${tool.name} - ${tool.tagline}`,
-    description: seoDescription,
+    title,
+    description: seoDescriptionText,
     openGraph: {
-      title: `${tool.name} - ${tool.tagline}`,
-      description: seoDescription,
+      title,
+      description: seoDescriptionText,
       type: 'article',
       url: `${SITE_URL}/tools/${tool.category}/${tool.slug}`,
       images: [{ url: ogImage.src, alt: `${tool.name} - AI Hunt` }],
     },
     twitter: {
       card: ogImage.isLogo ? 'summary' : 'summary_large_image',
-      title: `${tool.name} - ${tool.tagline}`,
-      description: seoDescription,
+      title,
+      description: seoDescriptionText,
       images: [ogImage.src],
     },
     alternates: {
@@ -95,6 +95,20 @@ export default async function ToolDetailPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+        />
+      )}
+      {tool && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: safeJsonLd(
+              breadcrumbJsonLd(SITE_URL, [
+                { name: 'Home', path: '/' },
+                { name: 'AI Tools', path: '/tools' },
+                { name: tool.name, path: `/tools/${tool.category}/${tool.slug}` },
+              ])
+            ),
+          }}
         />
       )}
       <ToolDetail slug={slug} initial={tool ?? undefined} />

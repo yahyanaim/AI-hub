@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     title: 'Developer Tools Directory - AI Hunt',
     description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, databases, and more. Curated for engineers.',
     url: `${baseUrl}/dev-tools`,
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Dev Tools' }],
+    images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Dev Tools' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Developer Tools Directory - AI Hunt',
     description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, and more.',
-    images: ['/og.png'],
+    images: [`${baseUrl}/og.png`],
   },
   alternates: { canonical: `${baseUrl}/dev-tools` },
 }

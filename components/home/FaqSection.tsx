@@ -38,9 +38,9 @@ export const HOME_FAQS = [
 
 export function FaqSection() {
   return (
-    <section aria-label="Frequently asked questions" className="mt-4">
-      <div className="rounded-3xl bg-[#F4F4F6] p-6 sm:p-10 dark:bg-muted/20">
-      <div className="grid items-stretch gap-8 lg:grid-cols-5">
+    <section aria-label="Frequently asked questions" className="mt-12 py-8">
+      <div className="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-10 dark:bg-card">
+      <div className="grid items-stretch gap-10 lg:grid-cols-5">
         {/* Left: heading + book-a-call card */}
         <div className="flex flex-col lg:col-span-2">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
@@ -51,7 +51,7 @@ export function FaqSection() {
             Frequently Asked Questions
           </h2>
 
-          <div className="mt-6 flex flex-1 flex-col items-center rounded-2xl border border-black/5 bg-white p-6 text-center shadow-sm dark:border-border dark:bg-card">
+          <div className="mt-8 flex flex-1 flex-col items-center rounded-2xl border border-brand-orange/20 bg-white p-8 text-center shadow-sm dark:border-border dark:bg-card">
             {FOUNDER_PHOTO_URL ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -89,22 +89,22 @@ export function FaqSection() {
         </div>
 
         {/* Right: accordion */}
-        <div className="grid content-start gap-3 lg:col-span-3">
+        <div className="grid content-start gap-4 lg:col-span-3">
           {HOME_FAQS.map((faq, i) => (
             <details
               key={faq.q}
               open={i === 0}
-              className="group rounded-2xl border border-transparent bg-[#FBEDEC] px-5 py-4 transition-colors open:border-[#F5D9D4] open:bg-white open:shadow-sm dark:border-border dark:bg-card"
+              className="group rounded-2xl border border-brand-orange/20 bg-white px-6 py-5 transition-all open:border-brand-orange/40 open:shadow-md dark:border-border dark:bg-card"
             >
               <summary className="cursor-pointer list-none text-[15px] font-semibold text-foreground marker:hidden [&::-webkit-details-marker]:hidden">
                 <span className="flex items-center justify-between gap-4">
                   {faq.q}
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-black/5 bg-white text-base font-normal text-muted-foreground shadow-sm transition-transform group-open:rotate-45 dark:border-border dark:bg-background">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-brand-orange/30 bg-white text-base font-normal text-brand-orange shadow-sm transition-transform group-open:rotate-45 dark:border-border dark:bg-background dark:text-muted-foreground">
                     +
                   </span>
                 </span>
               </summary>
-              <p className="mt-2 pr-10 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-3 pr-10 text-sm leading-relaxed text-muted-foreground">
                 {faq.a}
               </p>
             </details>
