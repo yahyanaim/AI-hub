@@ -7,7 +7,6 @@ import { AppProvider } from '@/lib/store'
 import { SITE_URL } from '@/lib/site'
 import { Navbar } from '@/components/layout/Navbar'
 import { FooterGate } from '@/components/layout/FooterGate'
-import { MarqueeGate } from '@/components/layout/MarqueeGate'
 import { SupportReminder } from '@/components/layout/SupportReminder'
 import { ReferralDonateModal } from '@/components/layout/ReferralDonateModal'
 import { CommandPalette } from '@/components/search/CommandPalette'
@@ -200,7 +199,6 @@ export default function RootLayout({
             <div className="container-page">
               <SupportReminder />
             </div>
-            <MarqueeGate />
             <FooterGate />
           </div>
           <CommandPalette />

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { SITE_URL } from '@/lib/site'
 import { HomeView } from '@/components/home/HomeView'
+import { PartnersMarquee } from '@/components/layout/PartnersMarquee'
 import { HOME_FAQS } from '@/components/home/FaqSection'
 import { safeJsonLd } from '@/lib/json-ld'
 
@@ -37,6 +38,13 @@ export default function HomePage() {
         }}
       />
       <HomeView />
+      {/* Server-rendered: keeps the 20 crawlable directory links in the home
+          HTML with zero client JS. Previously this lived behind MarqueeGate in
+          the root layout, which dragged the whole seed catalogue into the
+          global client bundle (audit §6.1). */}
+      <div className="container-page">
+        <PartnersMarquee />
+      </div>
     </>
   )
 }

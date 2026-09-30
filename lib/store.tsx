@@ -10,6 +10,7 @@ import {
   useCallback,
   type ReactNode,
 } from 'react'
+import { usePathname } from 'next/navigation'
 import type {
   Tool,
   DevTool,
@@ -250,6 +251,56 @@ const EMPTY_OFFERS: Offer[] = []
 const EMPTY_PROMPTS: Prompt[] = []
 const EMPTY_COMMENTS: Comment[] = []
 
+// ---------------- Seed slices (perf: audit §6.1) ----------------
+// The catalogue is ~2.8 MB of source. A single `import('@/lib/seed')` bundles
+// it into one ~2.3 MB client chunk downloaded by every visitor — including a
+// tool detail page that needs one record. Instead each section file is
+// imported separately so webpack emits one chunk per slice, and only the
+// slices for the current route load immediately; the rest stream in on idle.
+// Listing/detail pages already render from server-provided
+// `initialItems`/`initial`, so a not-yet-loaded slice only means "no live
+// vote deltas yet" — never empty content.
+type SliceKey =
+  | 'tools'
+  | 'devTools'
+  | 'prompts'
+  | 'repos'
+  | 'courses'
+  | 'offers'
+  | 'comments'
+
+const SLICE_LOADERS: Record<SliceKey, () => Promise<{ id: string }[]>> = {
+  tools: () => import('@/lib/seed/tools').then((m) => m.SEED_TOOLS),
+  devTools: () => import('@/lib/seed/dev-tools').then((m) => m.SEED_DEV_TOOLS),
+  prompts: () => import('@/lib/seed/prompts').then((m) => m.SEED_PROMPTS),
+  repos: () => import('@/lib/seed/repos').then((m) => m.SEED_REPOS),
+  courses: () => import('@/lib/seed/courses').then((m) => m.SEED_COURSES),
+  offers: () => import('@/lib/seed/offers').then((m) => m.SEED_OFFERS),
+  comments: () => import('@/lib/seed/comments').then((m) => m.SEED_COMMENTS),
+}
+
+const ALL_SLICES = Object.keys(SLICE_LOADERS) as SliceKey[]
+
+/** Slices needed for first interaction on a route; the rest are idle-loaded. */
+function prioritySlicesFor(pathname: string | null): SliceKey[] {
+  const tiny: SliceKey[] = ['prompts', 'comments'] // ~8 KB combined, always worth it
+  if (!pathname) return ALL_SLICES
+  if (pathname.startsWith('/tools')) return ['tools', ...tiny]
+  if (pathname.startsWith('/dev-tools')) return ['devTools', ...tiny]
+  if (pathname.startsWith('/edittools')) return ['repos', ...tiny]
+  if (pathname.startsWith('/courses')) return ['courses', ...tiny]
+  if (pathname.startsWith('/offers') || pathname.startsWith('/guides')) return ['offers', ...tiny]
+  // Home, search, submit, profile, command palette: need the full catalogue.
+  return ALL_SLICES
+}
+
+/** Seed data always wins; only user-created extras (by id) are appended. */
+function mergeSeedAdded<T extends { id: string }>(seedItems: T[], added?: T[]): T[] {
+  return added?.length
+    ? [...seedItems, ...added.filter((a) => a && typeof a.id === 'string' && !seedItems.some((s) => s.id === a.id))]
+    : seedItems
+}
+
 function freshSeed(): PersistedState {
   return {
     tools: EMPTY_TOOLS,
@@ -298,11 +349,29 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try { localStorage.setItem('ai-hunt-offers-lang', offersLang); } catch {}
   }, [offersLang])
 
-  // Seed id registry - lets the saver strip seed items and store only user deltas
-  const seedIdsRef = useRef<Record<
+  // Seed id registry - lets the saver strip seed items and store only user deltas.
+  // Initialized with empty sets so slices can register incrementally as they load.
+  type SeedIdRegistry = Record<
     'tools' | 'devTools' | 'prompts' | 'repos' | 'courses' | 'offers' | 'comments',
     Set<string>
-  > | null>(null)
+  >
+  const seedIdsRef = useRef<SeedIdRegistry>({
+    tools: new Set(),
+    devTools: new Set(),
+    prompts: new Set(),
+    repos: new Set(),
+    courses: new Set(),
+    offers: new Set(),
+    comments: new Set(),
+  })
+  // Slices already merged into state / currently downloading. Both the mount
+  // load and the route-change load fire on first render, so without this guard
+  // the priority slices would download twice.
+  const loadedSlicesRef = useRef<Set<SliceKey>>(new Set())
+  const inflightSlicesRef = useRef<Set<SliceKey>>(new Set())
+  // LocalStorage delta, read once on mount and reused for every slice merge.
+  const deltaRef = useRef<StoredDelta | null>(null)
+  const restoredUsersRef = useRef(false)
 
   // Synchronous mirror of state for submit callbacks: useState updaters run
   // during render (not synchronously inside setState), so values computed
@@ -313,33 +382,70 @@ export function AppProvider({ children }: { children: ReactNode }) {
     stateRef.current = state
   }, [state])
 
-  // Hydrate: fresh seed data from code + user deltas from localStorage on mount
+  // Hydrate: fresh seed slices from code + user deltas from localStorage on mount
+  const pathname = usePathname()
+
+  // Download + merge one set of seed slices. Safe to call repeatedly and from
+  // multiple effects: already-loaded and in-flight slices are skipped.
+  const loadSliceSet = useCallback(async (want: Set<SliceKey>) => {
+    const missing = [...want].filter(
+      (k) => !loadedSlicesRef.current.has(k) && !inflightSlicesRef.current.has(k)
+    )
+    if (missing.length === 0) return
+    missing.forEach((k) => inflightSlicesRef.current.add(k))
+    try {
+      const pairs = await Promise.all(
+        missing.map(async (k) => ({ key: k, items: await SLICE_LOADERS[k]() }))
+      )
+      const delta = deltaRef.current
+      const addedBySlice: Record<SliceKey, { id: string }[] | undefined> = {
+        tools: delta?.addedTools,
+        devTools: delta?.addedDevTools,
+        prompts: delta?.addedPrompts,
+        repos: delta?.addedRepos,
+        courses: delta?.addedCourses,
+        offers: delta?.addedOffers,
+        comments: delta?.addedComments,
+      }
+      const ids = seedIdsRef.current
+      for (const { key, items } of pairs) {
+        loadedSlicesRef.current.add(key)
+        ids[key] = new Set(items.map((i) => i.id))
+      }
+      const restoreUsers = !restoredUsersRef.current && delta !== null
+      if (restoreUsers) restoredUsersRef.current = true
+      setState((prev) => {
+        const next = { ...prev }
+        for (const { key, items } of pairs) {
+          next[key] = mergeSeedAdded(items, addedBySlice[key] as never[]) as never
+        }
+        // Keep the comments cap from the old full-load path: one browser tab
+        // can't grow the stored list past localStorage quota.
+        next.comments = next.comments.slice(0, MAX_COMMENTS_STORED)
+        if (restoreUsers && delta) {
+          next.users = delta.users?.length ? delta.users : next.users
+          next.currentUserId = delta.currentUserId ?? next.currentUserId
+          next.recentSearches = delta.recentSearches ?? next.recentSearches
+        }
+        return next
+      })
+    } finally {
+      missing.forEach((k) => inflightSlicesRef.current.delete(k))
+    }
+  }, [])
+
+  // Mount: user deltas from localStorage + the current route's seed slices.
+  // Route slices load immediately; everything else follows on idle so a tool
+  // detail page fetches ~0.8 MB instead of ~2.3 MB before becoming
+  // interactive. `hydrated` still means "full library ready" (search and the
+  // command palette depend on it), so it flips only after the idle step.
   useEffect(() => {
+    let cancelled = false
     const load = async () => {
       let raw: string | null = null
       try {
         raw = localStorage.getItem(STORAGE_KEY)
       } catch {}
-      // Dynamically import large seed data (keeps client bundles small)
-      const seedMod = await import('@/lib/seed')
-      const seedTools = seedMod.SEED_TOOLS as Tool[]
-      const seedDevTools = seedMod.SEED_DEV_TOOLS as DevTool[]
-      const seedRepos = seedMod.SEED_REPOS as Repo[]
-      const seedCourses = seedMod.SEED_COURSES as Course[]
-      const seedOffers = seedMod.SEED_OFFERS as Offer[]
-      const seedPrompts = seedMod.SEED_PROMPTS as Prompt[]
-      const seedComments = seedMod.SEED_COMMENTS as Comment[]
-
-      seedIdsRef.current = {
-        tools: new Set(seedTools.map((t) => t.id)),
-        devTools: new Set(seedDevTools.map((d) => d.id)),
-        prompts: new Set(seedPrompts.map((p) => p.id)),
-        repos: new Set(seedRepos.map((r) => r.id)),
-        courses: new Set(seedCourses.map((c) => c.id)),
-        offers: new Set(seedOffers.map((o) => o.id)),
-        comments: new Set(seedComments.map((c) => c.id)),
-      }
-
       let delta: StoredDelta | null = null
       if (raw) {
         try {
@@ -348,29 +454,45 @@ export function AppProvider({ children }: { children: ReactNode }) {
           delta = null // corrupt state - start clean
         }
       }
-
-      // Seed data always wins; only user-created extras are appended.
-      const mergeAdded = <T extends { id: string }>(seedItems: T[], added?: T[]) =>
-        added?.length
-          ? [...seedItems, ...added.filter((a) => a && typeof a.id === 'string' && !seedItems.some((s) => s.id === a.id))]
-          : seedItems
-
-      setState({
-        tools: mergeAdded(seedTools, delta?.addedTools),
-        devTools: mergeAdded(seedDevTools, delta?.addedDevTools),
-        prompts: mergeAdded(seedPrompts, delta?.addedPrompts),
-        repos: mergeAdded(seedRepos, delta?.addedRepos),
-        courses: mergeAdded(seedCourses, delta?.addedCourses),
-        offers: mergeAdded(seedOffers, delta?.addedOffers),
-        users: delta?.users?.length ? delta.users : SEED_USERS,
-        comments: mergeAdded(seedComments, delta?.addedComments).slice(0, MAX_COMMENTS_STORED),
-        currentUserId: delta?.currentUserId ?? null,
-        recentSearches: delta?.recentSearches ?? [],
+      if (cancelled) return
+      deltaRef.current = delta
+      await loadSliceSet(new Set(prioritySlicesFor(pathname)))
+      if (cancelled) return
+      const scheduleIdle = (cb: () => void) => {
+        try {
+          const w = window as Window & {
+            requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number
+          }
+          if (typeof w.requestIdleCallback === 'function') {
+            w.requestIdleCallback(cb, { timeout: 2500 })
+            return
+          }
+        } catch {}
+        setTimeout(cb, 800)
+      }
+      scheduleIdle(() => {
+        if (cancelled) return
+        void loadSliceSet(new Set(ALL_SLICES)).then(() => {
+          if (!cancelled) setHydrated(true)
+        })
       })
-      setHydrated(true)
     }
     load()
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Client-side navigation between sections: fetch slices the new route needs
+  // (deduped against the mount load by loadedSlicesRef/inflightSlicesRef).
+  // Views render server-provided initialItems meanwhile, so there is no flash.
+  useEffect(() => {
+    const want = new Set(prioritySlicesFor(pathname))
+    if ([...want].some((k) => !loadedSlicesRef.current.has(k))) {
+      void loadSliceSet(want)
+    }
+  }, [pathname, loadSliceSet])
 
   // Cross-tab sync: when another tab writes deltas, merge them in.
   useEffect(() => {
