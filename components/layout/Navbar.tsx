@@ -11,6 +11,7 @@ import {
   LogOut,
   Sparkles,
   Coffee,
+  Search,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useApp } from '@/lib/store'
@@ -28,8 +29,10 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const pathname = usePathname()
-  const { currentUser, setAuthModalOpen, signOut } = useApp()
+  const { currentUser, setAuthModalOpen, signOut, setPaletteOpen } = useApp()
   const [mobileOpen, setMobileOpen] = useState(false)
+  // Global search lives on every page except /support.
+  const showSearch = pathname !== '/support'
 
   useEffect(() => {
     setMobileOpen(false)
@@ -78,6 +81,21 @@ export function Navbar() {
         {/* Right side: actions */}
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
+
+          {/* Global search (opens the command palette) */}
+          {showSearch && (
+            <button
+              onClick={() => setPaletteOpen(true)}
+              className="hidden h-9 items-center gap-2 rounded-xl border border-border bg-muted/50 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:inline-flex"
+              aria-label="Search tools, courses and more"
+            >
+              <Search className="h-4 w-4" />
+              <span className="hidden lg:inline">Search…</span>
+              <kbd className="hidden rounded-md border border-border bg-background px-1.5 py-0.5 font-sans text-[11px] xl:inline-block">
+                ⌘K
+              </kbd>
+            </button>
+          )}
 
           {/* Submit button */}
           <Link href="/submit" className="hidden h-9 items-center rounded-xl border border-border bg-background px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted sm:inline-flex">
@@ -134,6 +152,17 @@ export function Navbar() {
       {mobileOpen && (
         <div id="mobile-nav" className="mx-auto mt-2 w-full max-w-7xl rounded-2xl border border-border bg-background/90 p-2 shadow-lg backdrop-blur-xl md:hidden">
           <nav className="flex flex-col gap-1">
+            {showSearch && (
+              <button
+                onClick={() => {
+                  setMobileOpen(false)
+                  setPaletteOpen(true)
+                }}
+                className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+              >
+                <Search className="h-4 w-4" /> Search
+              </button>
+            )}
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

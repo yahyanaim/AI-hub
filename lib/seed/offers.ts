@@ -17629,11 +17629,11 @@ export const SEED_OFFERS: Offer[] = [
     name: 'Roots Pitch Wall Agadir',
     tagline: 'Moroccan youth 18-35: 3 minutes to pitch your idea in Agadir - apply by Oct 1, 2026',
     description:
-      'Roots Pitch Wall in Agadir gives Moroccan youth (18-35) the chance to pitch their ideas on stage: 3 minutes to present your vision, share it with experts and peers, and connect. Ideas and projects at any stage. Apply by 1 October 2026. Backed by the European Union in Morocco and Impact Europe. What would you build to change your life or your city?',
-    url: 'https://startupgarage.ma/',
-    logoUrl: '/placeholder-logo.svg',
+      'Roots Pitch Wall in Agadir: Moroccan youth (18-35) get 3 minutes on stage to pitch an idea or project at any stage, share their vision, and connect with experts and peers. Apply by 1 October 2026 and let your idea take root. An initiative for Moroccan youth backed by the European Union in Morocco and Impact Europe. What would you build to change your life or your city?',
+    url: 'https://www.eumedbridge.eu/',
+    logoUrl: 'https://www.eumedbridge.eu/wp-content/uploads/2021/12/Logo.png',
     category: 'fellowship',
-    tags: ['morocco', 'agadir', 'youth', 'pitch', 'competition', 'roots-pitch-wall'],
+    tags: ['morocco', 'agadir', 'youth', 'pitch', 'competition', 'eu-medbridge', 'roots-pitch-wall'],
     pricing: 'free',
     endsAt: '2026-10-01',
     steps: [
@@ -17647,8 +17647,8 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'Apply before 1 October 2026',
-        description: 'Submit your application through the official Google Form (shared via the organizers) before the deadline.',
-        url: 'https://startupgarage.ma/',
+        description: 'Submit your application through the official application form shared by the organizers before the deadline. Follow EU MedBridge channels for the form link.',
+        url: 'https://www.eumedbridge.eu/',
       },
       {
         title: 'Pitch in Agadir and connect',
@@ -17669,8 +17669,8 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'قدّم قبل 1 أكتوبر 2026',
-        description: 'أرسل طلبك عبر نموذج Google الرسمي (يُنشر عبر المنظمين) قبل الموعد النهائي.',
-        url: 'https://startupgarage.ma/',
+        description: 'أرسل طلبك عبر نموذج الترشيح الرسمي الذي ينشره المنظمون قبل الموعد النهائي. تابع قنوات EU MedBridge لرابط النموذج.',
+        url: 'https://www.eumedbridge.eu/',
       },
       {
         title: 'اعرض في أكادير وتواصل',
