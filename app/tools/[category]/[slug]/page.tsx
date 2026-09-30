@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { SEED_TOOLS, SEED_USERS } from '@/lib/seed'
 import { ToolDetail } from '@/components/detail/ToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'
-import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
+import { seoTitle, seoDescriptionWithName, breadcrumbJsonLd } from '@/lib/seo'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
@@ -24,7 +24,7 @@ export async function generateMetadata({
   const tool = await findTool(params.category, params.slug)
   if (!tool) return { title: 'Tool Not Found', robots: { index: false, follow: false } }
   const title = seoTitle(tool.name, tool.tagline)
-  const seoDescriptionText = seoDescription(tool.description, tool.tagline)
+  const seoDescriptionText = seoDescriptionWithName(tool.name, tool.description, tool.tagline)
   const ogImage = resolveOgImage(tool.logoUrl)
   return {
     title,

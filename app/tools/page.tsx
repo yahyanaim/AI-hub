@@ -5,10 +5,16 @@ import Script from 'next/script'
 import { ToolsView } from '@/components/listing/ToolsView'
 import { SEED_TOOLS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
+import { toolsFirstPage } from '@/lib/listing-static'
+import { breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
 const topTools = [...SEED_TOOLS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
+
+// Prerendered first page: this is what non-JS crawlers (GPTBot, ClaudeBot,
+// PerplexityBot, CCBot) and the Suspense fallback render. See lib/listing-static.ts.
+const firstPage = toolsFirstPage()
 
 export const metadata: Metadata = {
   title: 'AI Tools Directory',
@@ -51,8 +57,18 @@ export default function ToolsPage() {
           },
         }),
       }} />
-      <Suspense fallback={<div className="container-page py-16 text-center text-muted-foreground">Loading…</div>}>
-        <ToolsView />
+      {/* 2-level breadcrumb — replaces the incorrect site-wide one that used to
+          live in app/layout.tsx (see SEO_GEO_AUDIT.md §6.2). */}
+      <Script id="schema-breadcrumb-tools" type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: safeJsonLd(
+          breadcrumbJsonLd(baseUrl, [
+            { name: 'Home', path: '/' },
+            { name: 'AI Tools', path: '/tools' },
+          ])
+        ),
+      }} />
+      <Suspense fallback={null}>
+        <ToolsView initialItems={firstPage} />
       </Suspense>
     </>
   )

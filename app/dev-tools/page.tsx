@@ -4,10 +4,15 @@ import Script from 'next/script'
 import { DevToolsView } from '@/components/listing/DevToolsView'
 import { SEED_DEV_TOOLS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
+import { devToolsFirstPage } from '@/lib/listing-static'
+import { breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
 const topDevTools = [...SEED_DEV_TOOLS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
+
+// Prerendered first page for non-JS crawlers — see lib/listing-static.ts.
+const firstPage = devToolsFirstPage()
 
 export const metadata: Metadata = {
   title: 'Developer Tools Directory',
@@ -50,7 +55,16 @@ export default function DevToolsPage() {
           },
         }),
       }} />
-      <DevToolsView />
+      <Script id="schema-breadcrumb-dev-tools" type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: safeJsonLd(
+          breadcrumbJsonLd(baseUrl, [
+            { name: 'Home', path: '/' },
+            { name: 'Dev Tools', path: '/dev-tools' },
+          ])
+        ),
+      }} />
+      <DevToolsView initialItems={firstPage} />
     </>
   )
 }
+

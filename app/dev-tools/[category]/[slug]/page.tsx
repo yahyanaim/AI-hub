@@ -3,7 +3,7 @@ import { redirect, notFound } from 'next/navigation'
 import { SEED_DEV_TOOLS, SEED_USERS } from '@/lib/seed'
 import { DevToolDetail } from '@/components/detail/DevToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'
-import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
+import { seoTitle, seoDescriptionWithName, breadcrumbJsonLd } from '@/lib/seo'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
@@ -35,7 +35,7 @@ export async function generateMetadata({
       openGraph: { url: canonical },
     }
   }
-  const seoDescriptionText = seoDescription(tool.description, tool.tagline)
+  const seoDescriptionText = seoDescriptionWithName(tool.name, tool.description, tool.tagline)
   const title = seoTitle(tool.name, tool.tagline)
   const ogImage = resolveOgImage(tool.logoUrl)
   return {

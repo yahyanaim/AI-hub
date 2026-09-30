@@ -6,6 +6,8 @@ import { SEED_COURSES } from '@/lib/seed'
 import { COURSE_CATEGORY_LABELS } from '@/types'
 import { CoursesView } from '@/components/listing/CoursesView'
 import { safeJsonLd } from '@/lib/json-ld'
+import { coursesFirstPage } from '@/lib/listing-static'
+import { breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
@@ -74,7 +76,16 @@ export default function CourseCategoryPage({ params }: { params: { category: str
           url: `${baseUrl}/courses/${category}`,
         }),
       }} />
-      <CoursesView initialCategory={category} />
+      <Script id={`schema-breadcrumb-courses-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: safeJsonLd(
+          breadcrumbJsonLd(baseUrl, [
+            { name: 'Home', path: '/' },
+            { name: 'Courses', path: '/courses' },
+            { name: `${label} Courses`, path: `/courses/${category}` },
+          ])
+        ),
+      }} />
+      <CoursesView initialCategory={category} initialItems={coursesFirstPage(category)} />
     </>
   )
 }

@@ -4,10 +4,15 @@ import Script from 'next/script'
 import { OffersView } from '@/components/listing/OffersView'
 import { SEED_OFFERS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
+import { offersFirstPage } from '@/lib/listing-static'
+import { breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
 const topOffers = [...SEED_OFFERS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
+
+// Prerendered first page for non-JS crawlers — see lib/listing-static.ts.
+const firstPage = offersFirstPage()
 
 export const metadata: Metadata = {
   title: 'Offers & Deals for Developers',
@@ -50,7 +55,15 @@ export default function OffersPage() {
           },
         }),
       }} />
-      <OffersView />
+      <Script id="schema-breadcrumb-offers" type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: safeJsonLd(
+          breadcrumbJsonLd(baseUrl, [
+            { name: 'Home', path: '/' },
+            { name: 'Offers', path: '/offers' },
+          ])
+        ),
+      }} />
+      <OffersView initialItems={firstPage} />
     </>
   )
 }

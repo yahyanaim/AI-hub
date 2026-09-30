@@ -4,10 +4,15 @@ import Script from 'next/script'
 import { ReposView } from '@/components/listing/ReposView'
 import { SEED_REPOS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
+import { reposFirstPage } from '@/lib/listing-static'
+import { breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
 const topRepos = [...SEED_REPOS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
+
+// Prerendered first page for non-JS crawlers — see lib/listing-static.ts.
+const firstPage = reposFirstPage()
 
 export const metadata: Metadata = {
   title: 'Open Source GitHub Repos & LLM Tools',
@@ -50,7 +55,16 @@ export default function EditToolsPage() {
           },
         }),
       }} />
-      <ReposView />
+      <Script id="schema-breadcrumb-edittools" type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: safeJsonLd(
+          breadcrumbJsonLd(baseUrl, [
+            { name: 'Home', path: '/' },
+            { name: 'Open Source Repos', path: '/edittools' },
+          ])
+        ),
+      }} />
+      <ReposView initialItems={firstPage} />
     </>
   )
 }
+

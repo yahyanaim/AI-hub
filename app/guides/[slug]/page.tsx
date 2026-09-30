@@ -23,6 +23,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const guide = findGuide(params.slug)
   if (!guide) return { title: 'Guide Not Found', robots: { index: false, follow: false } }
+  // Guides are not launched yet (GUIDES_ENABLED = false): keep the route out of
+  // the index until it ships.
+  if (!GUIDES_ENABLED) return { title: 'Guide Not Found', robots: { index: false, follow: false } }
   const price = GUIDE_PRICE_LABEL(guide)
   const title = `${guide.name} — ${price} | AI Hunt Guide`
   const description = `${guide.tagline} Pay by virement, send receipt on WhatsApp, get the ${guide.pages ?? ''} PDF.`.slice(0, 155)

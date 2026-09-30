@@ -148,7 +148,6 @@ export default function RootLayout({
               name: 'AI Hunt',
               url: baseUrl,
               description: 'Community-driven discovery platform for AI tools, n8n automation, developer tools, open-source repos, coding courses, and freelancing skills - popular with developers and students in Morocco.',
-              keywords: 'AI tools, n8n, automation, coding courses, freelancing, development, AI skills, Morocco',
               inLanguage: ['en', 'fr', 'ar'],
               potentialAction: {
                 '@type': 'SearchAction',
@@ -189,23 +188,9 @@ export default function RootLayout({
             }),
           }}
         />
-        <Script
-          id="schema-breadcrumb"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: safeJsonLd({
-              '@context': 'https://schema.org',
-              '@type': 'BreadcrumbList',
-              name: 'AI Hunt Breadcrumb',
-              itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
-                { '@type': 'ListItem', position: 2, name: 'AI Tools', item: `${baseUrl}/tools` },
-                { '@type': 'ListItem', position: 3, name: 'Dev Tools', item: `${baseUrl}/dev-tools` },
-                { '@type': 'ListItem', position: 4, name: 'Courses', item: `${baseUrl}/courses` },
-              ],
-            }),
-          }}
-        />
+        {/* BreadcrumbList used to be declared here globally; it is wrong on
+            non-listing pages, so per-section trails now live in the hub and
+            detail page components instead. See lib/seo.ts breadcrumbJsonLd. */}
       </head>
       <body>
         <AppProvider>

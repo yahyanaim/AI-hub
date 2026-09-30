@@ -6,14 +6,18 @@ import { SEED_OFFERS } from '@/lib/seed'
 import { OFFER_CATEGORY_LABELS } from '@/types'
 import { OffersView } from '@/components/listing/OffersView'
 import { safeJsonLd } from '@/lib/json-ld'
+import { offersFirstPage } from '@/lib/listing-static'
+import { breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
 export function generateStaticParams() {
-  return [
-    ...Object.keys(OFFER_CATEGORY_LABELS).map((category) => ({ category })),
-    ...SEED_OFFERS.map((offer) => ({ category: offer.slug })),
-  ]
+  // Only real category listing pages are prerendered.
+  // Legacy flat /offers/<slug> URLs are NOT prerendered here on purpose:
+  // prerendering a redirect() produces an HTTP 200 + meta-refresh page, not a
+  // genuine redirect. middleware.ts returns real 308s for those instead, and
+  // the page component's redirect() below covers any runtime misses.
+  return Object.keys(OFFER_CATEGORY_LABELS).map((category) => ({ category }))
 }
 
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
@@ -80,7 +84,16 @@ export default function OfferCategoryPage({ params }: { params: { category: stri
           url: `${baseUrl}/offers/${category}`,
         }),
       }} />
-      <OffersView initialCategory={category} />
+      <Script id={`schema-breadcrumb-offers-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: safeJsonLd(
+          breadcrumbJsonLd(baseUrl, [
+            { name: 'Home', path: '/' },
+            { name: 'Offers', path: '/offers' },
+            { name: `${label} Offers`, path: `/offers/${category}` },
+          ])
+        ),
+      }} />
+      <OffersView initialCategory={category} initialItems={offersFirstPage(category)} />
     </>
   )
 }

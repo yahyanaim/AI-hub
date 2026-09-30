@@ -1,6 +1,5 @@
 'use client'
-
-import { ListingView, type FilterOption } from '@/components/listing/ListingView'
+import { ListingView, ListingCrawlLinks, type FilterOption } from '@/components/listing/ListingView'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { useApp } from '@/lib/store'
 import { useRouter } from 'next/navigation'
@@ -9,18 +8,25 @@ import {
   PRICING_LABELS,
   type DevTool,
 } from '@/types'
-
+import { devToolTrendingScore } from '@/lib/listing-order'
 const categoryOptions: FilterOption[] = Object.entries(DEVTOOL_CATEGORY_LABELS).map(
   ([value, label]) => ({ value, label })
 )
 const pricingOptions: FilterOption[] = Object.entries(PRICING_LABELS).map(
   ([value, label]) => ({ value, label })
 )
-
-export function DevToolsView({ initialCategory }: { initialCategory?: string }) {
+export function DevToolsView({
+  initialCategory,
+  initialItems = [],
+}: {
+  initialCategory?: string
+  initialItems?: DevTool[]
+}) {
   const { devTools } = useApp()
   const router = useRouter()
-
+  // Server-prerendered first page so the Suspense fallback is not empty
+  // (see lib/listing-order.ts).
+  const items = devTools.length ? devTools : initialItems
   return (
     <div className="container-page py-8">
       {/* Header */}
@@ -38,35 +44,39 @@ export function DevToolsView({ initialCategory }: { initialCategory?: string }) 
           </p>
         </div>
       </div>
-
       {/* All dev tools (including starter packs as a regular category) */}
-      <ListingView<DevTool>
-        key={initialCategory ?? 'all'}
-        items={devTools}
-        config={{
-          title: '',
-          eyebrow: '',
-          description: '',
-          categoryLabel: 'Category',
-          categoryOptions,
-          itemLabel: 'dev-tools',
-          extraFilters: 'pricing',
-          pricingOptions,
-          initialCategory,
-          onCategoryChange: (cat) => {
-            router.push(cat === 'all' ? '/dev-tools' : `/dev-tools/${cat}`)
-          },
-        }}
-        renderCard={(devtool) => <DevToolCard devtool={devtool} />}
-        getCategory={(t) => t.category}
-        getPricing={(t) => t.pricing}
-        getUpvotes={(t) => t.upvotes}
-        getBookmarks={(t) => t.bookmarks}
-        getCreatedAt={(t) => t.createdAt}
-        getTrendingScore={(t) =>
-          t.upvotes + Math.round(t.bookmarks * 0.8) + (t.featured ? 80 : 0)
-        }
-      />
+        {/* Server-rendered crawl links: cards open modals on plain click, so
+            this invisible nav is what ships real item URLs to non-JS crawlers. */}
+        <ListingCrawlLinks
+          items={items}
+          label="Dev tools quick links"
+          getHref={(t) => `/dev-tools/${t.category}/${t.slug}`}
+        />
+    <ListingView<DevTool>
+      key={initialCategory ?? 'all'}
+      items={items}
+      config={{
+      title: '',
+      eyebrow: '',
+      description: '',
+      categoryLabel: 'Category',
+      categoryOptions,
+      itemLabel: 'dev-tools',
+      extraFilters: 'pricing',
+      pricingOptions,
+      initialCategory,
+      onCategoryChange: (cat) => {
+      router.push(cat === 'all' ? '/dev-tools' : `/dev-tools/${cat}`)
+      },
+      }}
+      renderCard={(devtool) => <DevToolCard devtool={devtool} />}
+      getCategory={(t) => t.category}
+      getPricing={(t) => t.pricing}
+      getUpvotes={(t) => t.upvotes}
+      getBookmarks={(t) => t.bookmarks}
+      getCreatedAt={(t) => t.createdAt}
+      getTrendingScore={devToolTrendingScore}
+    />
     </div>
   )
 }

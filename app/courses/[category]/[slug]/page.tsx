@@ -4,7 +4,7 @@ import { redirect, notFound } from 'next/navigation'
 import { SEED_COURSES, SEED_USERS } from '@/lib/seed'
 import { CourseDetail } from '@/components/detail/CourseDetail'
 import { safeJsonLd } from '@/lib/json-ld'
-import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
+import { seoTitle, seoDescriptionWithName, breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: { category: string;
 
   if (!course) return { title: 'Course Not Found', robots: { index: false, follow: false } }
 
-  const seoDescriptionText = seoDescription(course.description, course.tagline)
+  const seoDescriptionText = seoDescriptionWithName(course.name, course.description, course.tagline)
   const title = seoTitle(course.name, course.tagline)
   const ogImage = resolveOgImage(course.logoUrl)
   return {

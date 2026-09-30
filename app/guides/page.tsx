@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: 'Paid Guides — Premium PDF Playbooks',
   description:
     'Premium PDF guides. Pay by virement, send “Hi, I paid” + receipt on WhatsApp, receive the PDF on WhatsApp.',
+  // Guides are not launched yet (GUIDES_ENABLED = false): keep the route out of
+  // the index until it ships. Flip back to index:true when guides go live.
+  robots: GUIDES_ENABLED ? { index: true, follow: true } : { index: false, follow: false },
   openGraph: {
     title: 'Paid Guides - AI Hunt',
     description: 'Premium PDF playbooks with WhatsApp delivery.',

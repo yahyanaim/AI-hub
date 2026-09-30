@@ -4,7 +4,7 @@ import { SEED_OFFERS } from '@/lib/seed'
 import { OFFER_CATEGORY_LABELS } from '@/types'
 import { OfferDetail } from '@/components/detail/OfferDetail'
 import { safeJsonLd } from '@/lib/json-ld'
-import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
+import { seoTitle, seoDescriptionWithName, breadcrumbJsonLd } from '@/lib/seo'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
@@ -26,7 +26,7 @@ export async function generateMetadata({
   const offer = await findOffer(params.category, params.slug)
   if (!offer) return { title: 'Offer Not Found', robots: { index: false, follow: false } }
   const title = seoTitle(offer.name, offer.tagline)
-  const seoDescriptionText = seoDescription(offer.description, offer.tagline)
+  const seoDescriptionText = seoDescriptionWithName(offer.name, offer.description, offer.tagline)
   const ogImage = resolveOgImage(offer.logoUrl)
   return {
     title,

@@ -343,21 +343,7 @@ function ListingViewInner<T extends { id: string }>({
 
   return (
     <div className={config.title ? 'container-page py-8' : ''}>
-      {config.title && (
-        <div className="mb-8">
-          <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-accent">
-            {config.eyebrow}
-          </div>
-          <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            {config.title}
-          </h1>
-          <div className="mt-3 w-full rounded-xl border border-brand-orange/50 bg-card px-4 py-3 transition-all duration-200 hover:border-accent hover:shadow-[0_0_24px_var(--accent-glow)]">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {config.description}
-            </p>
-          </div>
-        </div>
-      )}
+      <ListingHeader config={config as ListingConfig<never>} />
 
       {/* Filters */}
       <div className="mb-6 space-y-3 border-b border-border pb-4">
@@ -486,13 +472,116 @@ function ListingViewInner<T extends { id: string }>({
 }
 
 /**
+ * Shared header block (eyebrow + <h1> + description card).
+ * Extracted so the static fallback and the interactive view render byte-identical
+ * markup — the <h1> must exist in the prerendered HTML.
+ */
+function ListingHeader({ config }: { config: ListingConfig<never> }) {
+  if (!config.title) return null
+  return (
+    <div className="mb-8">
+      <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-accent">
+        {config.eyebrow}
+      </div>
+      <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        {config.title}
+      </h1>
+      <div className="mt-3 w-full rounded-xl border border-brand-orange/50 bg-card px-4 py-3 transition-all duration-200 hover:border-accent hover:shadow-[0_0_24px_var(--accent-glow)]">
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          {config.description}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Hook-free mirror of the default listing view.
+ *
+ * This is the <Suspense> fallback, so it is what gets written into the static
+ * HTML for every hub page. ListingViewInner calls useSearchParams(), which opts
+ * the whole boundary out of prerendering — without a content-rich fallback,
+ * crawlers that do not execute JavaScript (GPTBot, ClaudeBot, PerplexityBot,
+ * CCBot, OAI-SearchBot) receive a bare "Loading results…" skeleton with no
+ * <h1> and no links.
+ *
+ * `items` is the first page supplied by the server page (see lib/listing-order.ts),
+ * so the prerendered cards match what hydrates over them.
+ */
+function ListingStatic<T extends { id: string }>({
+  items,
+  config,
+  renderCard,
+  pageSize = PAGE_SIZE,
+}: ListingViewProps<T>) {
+  const initial = items.slice(0, pageSize)
+
+  return (
+    <div className={config.title ? 'container-page py-8' : ''}>
+      <ListingHeader config={config as ListingConfig<never>} />
+      {initial.length > 0 && (
+        <>
+          <div className="mb-4 text-sm text-muted-foreground">
+            <span className="font-semibold text-foreground">{items.length}</span>{' '}
+            {config.itemLabel ?? 'tools'}
+          </div>
+          <CardGrid>
+            {initial.map((item) => (
+              <div key={item.id} role="listitem">
+                {renderCard(item, 'grid')}
+              </div>
+            ))}
+          </CardGrid>
+        </>
+      )}
+    </div>
+  )
+}
+
+/**
+ * SEO crawl links: hub listings render their cards through client modals, so
+ * the only real <a href> in a listing is a profile credit. This invisible nav
+ * gives crawlers (GPTBot, ClaudeBot, PerplexityBot — no JS) the direct item
+ * URLs. `sr-only` keeps it out of the visual design; crawlers still read it.
+ */
+export function ListingCrawlLinks<T extends { id: string }>({
+  items,
+  getHref,
+  label,
+}: {
+  items: T[]
+  getHref: (item: T) => string
+  label: string
+}) {
+  if (!items.length) return null
+  return (
+    <nav aria-label={label} className="sr-only">
+      <ul>
+        {items.map((item) => {
+          const href = getHref(item)
+          return (
+            <li key={item.id}>
+              <a href={href}>{href}</a>
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+}
+
+/**
  * Suspense boundary lives here (not in each page) because the inner component
  * calls useSearchParams, required for static prerendering in Next 14.
+ *
+ * The fallback is deliberately the content-rich ListingStatic rather than a
+ * spinner: it is the only markup a non-JS crawler will ever see.
  */
 export function ListingView<T extends { id: string }>(props: ListingViewProps<T>) {
   return (
-    <Suspense fallback={<div className="min-h-[60vh] animate-pulse rounded-xl border border-border bg-card p-6" role="status" aria-label="Loading results">Loading results…</div>}>
+    <Suspense fallback={<ListingStatic {...props} />}>
       <ListingViewInner {...props} />
     </Suspense>
   )
 }
+

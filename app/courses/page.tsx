@@ -4,10 +4,15 @@ import Script from 'next/script'
 import { CoursesView } from '@/components/listing/CoursesView'
 import { SEED_COURSES } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
+import { coursesFirstPage } from '@/lib/listing-static'
+import { breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
 const topCourses = [...SEED_COURSES].sort((a, b) => b.upvotes - a.upvotes).slice(0, 10)
+
+// Prerendered first page for non-JS crawlers — see lib/listing-static.ts.
+const firstPage = coursesFirstPage()
 
 export const metadata: Metadata = {
   title: 'Coding Courses & Learning Paths',
@@ -50,7 +55,15 @@ export default function CoursesPage() {
           },
         }),
       }} />
-      <CoursesView />
+      <Script id="schema-breadcrumb-courses" type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: safeJsonLd(
+          breadcrumbJsonLd(baseUrl, [
+            { name: 'Home', path: '/' },
+            { name: 'Courses', path: '/courses' },
+          ])
+        ),
+      }} />
+      <CoursesView initialItems={firstPage} />
     </>
   )
 }

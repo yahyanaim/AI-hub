@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
-import { SITE_URL } from '@/lib/site'
 import { redirect } from 'next/navigation'
+
+// Redirect-only route: middleware.ts serves a real 308 for /categories/<cat>,
+// so this page is only a runtime fallback.
+// NOTE: keep `generateMetadata` minimal — this route ships no indexable content.
+export const dynamic = 'force-dynamic'
 
 const CATEGORY_TO_TYPE: Record<string, string> = {
   coding: '/tools',
@@ -34,19 +38,12 @@ const CATEGORY_TO_TYPE: Record<string, string> = {
   rag: '/edittools',
 }
 
-const baseUrl = SITE_URL
-
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
   const cat = params.category
   const name = cat.charAt(0).toUpperCase() + cat.slice(1)
-  const target = CATEGORY_TO_TYPE[cat] ?? '/tools'
   return {
     title: `${name} Tools & Resources`,
-    description: `Browse the best ${cat} AI tools, developer tools, open-source repos, and learning resources. Curated and ranked by the community.`,
-    // Redirect route: never index, canonical points at the redirect target
-    // so Google consolidates signals instead of flagging a soft-404.
-    alternates: { canonical: `${baseUrl}${target}?category=${cat}` },
-    robots: { index: false, follow: true },
+    robots: { index: false, follow: false },
   }
 }
 

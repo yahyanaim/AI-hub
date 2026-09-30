@@ -6,6 +6,8 @@ import { SEED_DEV_TOOLS } from '@/lib/seed'
 import { DEVTOOL_CATEGORY_LABELS } from '@/types'
 import { DevToolsView } from '@/components/listing/DevToolsView'
 import { safeJsonLd } from '@/lib/json-ld'
+import { devToolsFirstPage } from '@/lib/listing-static'
+import { breadcrumbJsonLd } from '@/lib/seo'
 
 const baseUrl = SITE_URL
 
@@ -72,7 +74,16 @@ export default function DevToolCategoryPage({ params }: { params: { category: st
           url: `${baseUrl}/dev-tools/${category}`,
         }),
       }} />
-      <DevToolsView initialCategory={category} />
+      <Script id={`schema-breadcrumb-devtools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: safeJsonLd(
+          breadcrumbJsonLd(baseUrl, [
+            { name: 'Home', path: '/' },
+            { name: 'Dev Tools', path: '/dev-tools' },
+            { name: `${label} Developer Tools`, path: `/dev-tools/${category}` },
+          ])
+        ),
+      }} />
+      <DevToolsView initialCategory={category} initialItems={devToolsFirstPage(category)} />
     </>
   )
 }

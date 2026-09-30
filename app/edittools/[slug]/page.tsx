@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { SEED_REPOS } from '@/lib/seed'
 import { RepoDetail } from '@/components/detail/RepoDetail'
 import { safeJsonLd } from '@/lib/json-ld'
-import { seoTitle, seoDescription, breadcrumbJsonLd } from '@/lib/seo'
+import { seoTitle, seoDescriptionWithName, breadcrumbJsonLd } from '@/lib/seo'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const repo = SEED_REPOS.find((r) => r.slug === params.slug)
   if (!repo) return { title: 'Editing Tool Not Found', robots: { index: false, follow: false } }
   const title = seoTitle(repo.name, repo.tagline)
-  const seoDescriptionText = seoDescription(repo.description, repo.tagline)
+  const seoDescriptionText = seoDescriptionWithName(repo.name, repo.description, repo.tagline)
   const ogImage = resolveOgImage(repo.logoUrl)
   return {
     title,

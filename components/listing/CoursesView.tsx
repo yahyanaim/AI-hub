@@ -1,19 +1,25 @@
 'use client'
-
-import { ListingView, type FilterOption } from '@/components/listing/ListingView'
+import { ListingView, ListingCrawlLinks, type FilterOption } from '@/components/listing/ListingView'
 import { CourseCard } from '@/components/cards/CourseCard'
 import { useApp } from '@/lib/store'
 import { COURSE_CATEGORY_LABELS, type Course } from '@/types'
+import { courseTrendingScore } from '@/lib/listing-order'
 import { useRouter } from 'next/navigation'
-
 const categoryOptions: FilterOption[] = Object.entries(COURSE_CATEGORY_LABELS).map(
   ([value, label]) => ({ value, label })
 )
-
-export function CoursesView({ initialCategory }: { initialCategory?: string }) {
+export function CoursesView({
+  initialCategory,
+  initialItems = [],
+}: {
+  initialCategory?: string
+  initialItems?: Course[]
+}) {
   const { courses } = useApp()
   const router = useRouter()
-
+  // `initialItems` comes from the server page so the Suspense fallback ships real
+  // cards + links instead of an empty skeleton (see lib/listing-order.ts).
+  const items = courses.length ? courses : initialItems
   return (
     <>
       <div className="container-page pt-6 md:pt-8">
@@ -30,34 +36,41 @@ export function CoursesView({ initialCategory }: { initialCategory?: string }) {
         .
       </div>
       </div>
-      <ListingView<Course>
-      items={courses}
+        {/* Server-rendered crawl links: cards open modals on plain click, so
+            this invisible nav is what ships real item URLs to non-JS crawlers. */}
+        <ListingCrawlLinks
+          items={items}
+          label="Courses quick links"
+          getHref={(c) => `/courses/${c.category}/${c.slug}`}
+        />
+    <ListingView<Course>
+      items={items}
       config={{
-        title: 'Learning Courses',
-        eyebrow: 'Learn',
-        description:
-          'Structured roadmaps and learning paths for software developers. From full-stack to AI engineering.',
-        categoryLabel: 'Category',
-        categoryOptions,
-        itemLabel: 'courses',
-        initialCategory,
-        defaultSort: 'new',
-        onCategoryChange: (cat) => {
-          router.push(cat === 'all' ? '/courses' : `/courses/${cat}`)
-        },
-        customCategoryFilter: (itemCategory, item, selectedCategory) => {
-          if (selectedCategory === 'high-recommended') {
-            return Boolean((item as Course).tags?.includes('high-recommended'))
-          }
-          return itemCategory === selectedCategory
-        },
+      title: 'Learning Courses',
+      eyebrow: 'Learn',
+      description:
+      'Structured roadmaps and learning paths for software developers. From full-stack to AI engineering.',
+      categoryLabel: 'Category',
+      categoryOptions,
+      itemLabel: 'courses',
+      initialCategory,
+      defaultSort: 'new',
+      onCategoryChange: (cat) => {
+      router.push(cat === 'all' ? '/courses' : `/courses/${cat}`)
+      },
+      customCategoryFilter: (itemCategory, item, selectedCategory) => {
+      if (selectedCategory === 'high-recommended') {
+      return Boolean((item as Course).tags?.includes('high-recommended'))
+      }
+      return itemCategory === selectedCategory
+      },
       }}
       renderCard={(c) => <CourseCard course={c} />}
       getCategory={(c) => c.category}
       getUpvotes={(c) => c.upvotes}
       getBookmarks={(c) => c.bookmarks}
       getCreatedAt={(c) => c.createdAt}
-      getTrendingScore={(c) => c.upvotes + (c.featured ? 100 : 0)}
+      getTrendingScore={courseTrendingScore}
     />
     </>
   )
