@@ -17561,4 +17561,127 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o329',
+    slug: 'startup-garage-morocco',
+    name: 'Startup Garage Morocco',
+    tagline: 'Moroccan startup hub - programs and support for founders',
+    description:
+      'Startup Garage Morocco (startupgarage.ma) supports Moroccan founders with startup programs, resources, and community. If you are building a startup in Morocco, explore their programs and apply to get mentorship, visibility, and connections to the local ecosystem.',
+    url: 'https://startupgarage.ma/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/startupgarage.ma.ico',
+    category: 'forstartups',
+    tags: ['morocco', 'startups', 'incubator', 'founders', 'mentorship'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open Startup Garage Morocco',
+        description: 'Visit startupgarage.ma and browse the programs and opportunities for founders.',
+        url: 'https://startupgarage.ma/',
+      },
+      {
+        title: 'Pick the program that fits your stage',
+        description: 'Check eligibility and format for each program - idea stage, early startup, or growing team.',
+      },
+      {
+        title: 'Prepare your pitch',
+        description: 'Write a short pitch: problem, solution, market, and what support you need.',
+      },
+      {
+        title: 'Apply and follow up',
+        description: 'Submit your application on the site and follow their channels for cohort announcements.',
+      },
+    ],
+    nameAr: 'Startup Garage المغرب',
+    taglineAr: 'مركز مغربي للشركات الناشئة - برامج ودعم للمؤسسين',
+    descriptionAr: 'Startup Garage Morocco يدعم المؤسسين المغاربة ببرامج وموارد ومجتمع للشركات الناشئة. إذا كنت تبني مشروعاً في المغرب، استكشف برامجهم وقدّم للحصول على التوجيه والظهور والتواصل مع المنظومة المحلية.',
+    stepsAr: [
+      {
+        title: 'افتح موقع Startup Garage Morocco',
+        description: 'زر startupgarage.ma وتصفح البرامج والفرص المتاحة للمؤسسين.',
+        url: 'https://startupgarage.ma/',
+      },
+      {
+        title: 'اختر البرنامج المناسب لمرحلتك',
+        description: 'تحقق من الشروط والصيغة لكل برنامج - مرحلة الفكرة أو البداية أو النمو.',
+      },
+      {
+        title: 'جهّز عرضك',
+        description: 'اكتب عرضاً مختصراً: المشكلة والحل والسوق والدعم الذي تحتاجه.',
+      },
+      {
+        title: 'قدّم وتابع',
+        description: 'أرسل طلبك عبر الموقع وتابع قنواتهم لإعلانات الدفعات الجديدة.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+
+  {
+    id: 'o330',
+    slug: 'roots-pitch-wall-agadir',
+    name: 'Roots Pitch Wall Agadir',
+    tagline: 'Moroccan youth 18-35: 3 minutes to pitch your idea in Agadir - apply by Oct 1, 2026',
+    description:
+      'Roots Pitch Wall in Agadir gives Moroccan youth (18-35) the chance to pitch their ideas on stage: 3 minutes to present your vision, share it with experts and peers, and connect. Ideas and projects at any stage. Apply by 1 October 2026. Backed by the European Union in Morocco and Impact Europe. What would you build to change your life or your city?',
+    url: 'https://startupgarage.ma/',
+    logoUrl: '/placeholder-logo.svg',
+    category: 'fellowship',
+    tags: ['morocco', 'agadir', 'youth', 'pitch', 'competition', 'roots-pitch-wall'],
+    pricing: 'free',
+    endsAt: '2026-10-01',
+    steps: [
+      {
+        title: 'Check you are eligible',
+        description: 'You must be 18-35 years old with an idea or project at any stage - no prior pitching experience needed.',
+      },
+      {
+        title: 'Prepare a 3-minute pitch',
+        description: 'Answer one question: what would you build to change your life or your city? Keep it to 3 minutes: problem, idea, and next step.',
+      },
+      {
+        title: 'Apply before 1 October 2026',
+        description: 'Submit your application through the official Google Form (shared via the organizers) before the deadline.',
+        url: 'https://startupgarage.ma/',
+      },
+      {
+        title: 'Pitch in Agadir and connect',
+        description: 'Selected youth pitch on the Roots Pitch Wall in Agadir, share their vision, and connect with experts and peers.',
+      },
+    ],
+    nameAr: 'جدارية جذور التغيير أكادير',
+    taglineAr: 'شباب مغاربة 18-35: 3 دقائق لعرض فكرتكم في أكادير - آخر أجل 1 أكتوبر 2026',
+    descriptionAr: 'جدارية جذور التغيير (Roots Pitch Wall) في أكادير تمنح الشباب المغربي (18-35 سنة) فرصة عرض أفكارهم على المسرح: 3 دقائق لتقديم رؤيتكم ومشاركتها مع الخبراء والأقران والتواصل معهم. الأفكار والمشاريع في أي مرحلة. آخر أجل للتقديم 1 أكتوبر 2026. بدعم من الاتحاد الأوروبي في المغرب وImpact Europe.',
+    stepsAr: [
+      {
+        title: 'تحقق من الأهلية',
+        description: 'يجب أن تكون بين 18 و35 سنة مع فكرة أو مشروع في أي مرحلة - لا حاجة لتجربة سابقة في العروض.',
+      },
+      {
+        title: 'جهّز عرضاً من 3 دقائق',
+        description: 'أجب عن سؤال واحد: ماذا ستبني لتغيّر حياتك أو مدينتك؟ 3 دقائق: المشكلة والفكرة والخطوة التالية.',
+      },
+      {
+        title: 'قدّم قبل 1 أكتوبر 2026',
+        description: 'أرسل طلبك عبر نموذج Google الرسمي (يُنشر عبر المنظمين) قبل الموعد النهائي.',
+        url: 'https://startupgarage.ma/',
+      },
+      {
+        title: 'اعرض في أكادير وتواصل',
+        description: 'الشباب المختارون يعرضون على جدارية Roots في أكادير ويتواصلون مع الخبراء والأقران.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
