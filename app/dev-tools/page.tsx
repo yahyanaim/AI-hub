@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     title: 'Developer Tools Directory - AI Hunt',
     description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, databases, and more. Curated for engineers.',
     url: `${baseUrl}/dev-tools`,
+    siteName: 'AI Hunt',
+    type: 'website',
+    locale: 'en_US',
     images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Dev Tools' }],
   },
   twitter: {

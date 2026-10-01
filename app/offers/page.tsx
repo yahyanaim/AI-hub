@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     title: 'Offers & Deals for Developers - AI Hunt',
     description: 'Curated offers and free programs with step-by-step how-to-get-it guides.',
     url: `${baseUrl}/offers`,
+    siteName: 'AI Hunt',
+    type: 'website',
+    locale: 'en_US',
     images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Offers' }],
   },
   twitter: {

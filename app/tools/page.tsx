@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     title: 'AI Tools Directory - AI Hunt',
     description: 'Browse and discover the best AI tools ranked by the community. Find tools for coding, writing, design, productivity, and more.',
     url: `${baseUrl}/tools`,
+    siteName: 'AI Hunt',
+    type: 'website',
+    locale: 'en_US',
     images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Tools' }],
   },
   twitter: {

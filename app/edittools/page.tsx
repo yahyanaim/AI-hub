@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     title: 'Open Source Repos & LLM Tools - AI Hunt',
     description: 'Discover top open-source GitHub repos for AI, LLMs, RAG, agent frameworks, vector databases, and ML tools.',
     url: `${baseUrl}/edittools`,
+    siteName: 'AI Hunt',
+    type: 'website',
+    locale: 'en_US',
     images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Open Source Repos' }],
   },
   twitter: {

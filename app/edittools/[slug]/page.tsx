@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title,
       description: seoDescriptionText,
       type: 'article',
+      siteName: 'AI Hunt',
       url: `${SITE_URL}/edittools/${repo.slug}`,
       images: [{ url: ogImage.src, alt: `${repo.name} - AI Hunt` }],
     },

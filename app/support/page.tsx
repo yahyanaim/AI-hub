@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     title: 'Support AI Hunt - Buy me a coffee',
     description: 'Support AI Hunt via PayPal or direct bank transfer (CIH).',
     url: `${baseUrl}/support`,
+    siteName: 'AI Hunt',
+    type: 'website',
+    locale: 'en_US',
     images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'Support AI Hunt' }],
   },
   twitter: {

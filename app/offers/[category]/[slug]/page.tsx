@@ -35,6 +35,7 @@ export async function generateMetadata({
       title,
       description: seoDescriptionText,
       type: 'article',
+      siteName: 'AI Hunt',
       url: `${SITE_URL}/offers/${offer.category}/${offer.slug}`,
       images: [{ url: ogImage.src, alt: `${offer.name} - AI Hunt` }],
     },

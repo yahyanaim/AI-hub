@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: { params: { category: string;
       title,
       description: seoDescriptionText,
       type: 'article',
+      siteName: 'AI Hunt',
       url: `${baseUrl}/courses/${course.category}/${course.slug}`,
       images: [{ url: ogImage.src, alt: `${course.name} - AI Hunt` }],
     },

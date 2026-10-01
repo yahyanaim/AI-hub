@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     title: 'Coding Courses & Learning Paths - AI Hunt',
     description: 'Discover the best free and paid coding courses, roadmaps, and learning paths for developers. Curated by the community.',
     url: `${baseUrl}/courses`,
+    siteName: 'AI Hunt',
+    type: 'website',
+    locale: 'en_US',
     images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Courses' }],
   },
   twitter: {

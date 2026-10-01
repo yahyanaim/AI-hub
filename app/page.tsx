@@ -15,6 +15,17 @@ export const metadata: Metadata = {
     description:
       'Discover AI tools, master n8n automation, take coding courses, and build freelancing skills. Free resources for Morocco.',
     url: SITE_URL,
+    siteName: 'AI Hunt',
+    type: 'website',
+    locale: 'en_US',
+    images: [
+      {
+        url: `${SITE_URL}/og.png`,
+        width: 1200,
+        height: 630,
+        alt: 'AI Hunt - Discover AI Tools & Developer Resources',
+      },
+    ],
   },
   alternates: { canonical: SITE_URL },
 }

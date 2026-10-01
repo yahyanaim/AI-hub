@@ -40,6 +40,7 @@ export async function generateMetadata({
       title,
       description,
       type: 'article',
+      siteName: 'AI Hunt',
       url: `${SITE_URL}/guides/${guide.slug}`,
       images: [{ url: ogImage.src, alt: guide.name }],
     },
