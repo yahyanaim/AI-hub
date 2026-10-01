@@ -2,7 +2,7 @@
 // Override per environment with NEXT_PUBLIC_SITE_URL (e.g. preview deploys).
 // Falls back to the placeholder domain below — set the env var in production
 // or every canonical / OG / sitemap URL will point at the wrong host.
-const FALLBACK_SITE_URL = 'https://aihubtools.vercel.app'
+const FALLBACK_SITE_URL = 'https://aihubtools.ma'
 
 function resolveSiteUrl(): string {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '').trim()
