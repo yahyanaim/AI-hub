@@ -17630,7 +17630,7 @@ export const SEED_OFFERS: Offer[] = [
     tagline: 'Moroccan youth 18-35: 3 minutes to pitch your idea in Agadir - apply by Oct 1, 2026',
     description:
       'Roots Pitch Wall in Agadir: Moroccan youth (18-35) get 3 minutes on stage to pitch an idea or project at any stage, share their vision, and connect with experts and peers. Apply by 1 October 2026 and let your idea take root. An initiative for Moroccan youth backed by the European Union in Morocco and Impact Europe. What would you build to change your life or your city?',
-    url: 'https://www.eumedbridge.eu/',
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSe7MQe1qZaRK3EzycPJpAJ7D-hQ47wetUAPS_W5p0yThHQWWg/viewform',
     logoUrl: 'https://www.eumedbridge.eu/wp-content/uploads/2021/12/Logo.png',
     category: 'fellowship',
     tags: ['morocco', 'agadir', 'youth', 'pitch', 'competition', 'eu-medbridge', 'roots-pitch-wall'],
@@ -17647,8 +17647,8 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'Apply before 1 October 2026',
-        description: 'Submit your application through the official application form shared by the organizers before the deadline. Follow EU MedBridge channels for the form link.',
-        url: 'https://www.eumedbridge.eu/',
+        description: 'Submit your application through the official Google Form before the deadline.',
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLSe7MQe1qZaRK3EzycPJpAJ7D-hQ47wetUAPS_W5p0yThHQWWg/viewform',
       },
       {
         title: 'Pitch in Agadir and connect',
@@ -17669,8 +17669,8 @@ export const SEED_OFFERS: Offer[] = [
       },
       {
         title: 'قدّم قبل 1 أكتوبر 2026',
-        description: 'أرسل طلبك عبر نموذج الترشيح الرسمي الذي ينشره المنظمون قبل الموعد النهائي. تابع قنوات EU MedBridge لرابط النموذج.',
-        url: 'https://www.eumedbridge.eu/',
+        description: 'أرسل طلبك عبر نموذج Google الرسمي قبل الموعد النهائي.',
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLSe7MQe1qZaRK3EzycPJpAJ7D-hQ47wetUAPS_W5p0yThHQWWg/viewform',
       },
       {
         title: 'اعرض في أكادير وتواصل',
