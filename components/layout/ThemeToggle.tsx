@@ -17,9 +17,7 @@ function getStoredTheme(): Theme | null {
 }
 
 function getPreferredTheme(): Theme {
-  if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
-    return 'dark'
-  }
+  // Light is the default: only an explicit stored 'dark' choice enables dark.
   return 'light'
 }
 
