@@ -10,6 +10,11 @@ import { GuidesView } from '@/components/guides/GuidesView'
 const baseUrl = SITE_URL
 const guides = SEED_OFFERS.filter(isPaidGuide)
 
+// Force request-time rendering while guides are disabled so notFound() below
+// returns a real HTTP 404 (not a statically prerendered 200 soft-404).
+// Remove when GUIDES_ENABLED flips true and the page has real content.
+export const dynamic = GUIDES_ENABLED ? 'auto' : 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Paid Guides — Premium PDF Playbooks',
   description:

@@ -20,6 +20,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import legacy from '@/lib/legacy-redirects.json'
+import { GUIDES_ENABLED } from '@/lib/guides'
 
 const MAPS: Record<string, Record<string, string>> = {
   tools: legacy.tools,
@@ -30,6 +31,13 @@ const MAPS: Record<string, Record<string, string>> = {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+
+  // Disabled /guides section: real 404 at the routing layer. (Calling
+  // notFound() inside the statically-prerenderable guides pages produced an
+  // HTTP 200 soft-404 instead.) Remove when GUIDES_ENABLED flips true.
+  if (!GUIDES_ENABLED && (pathname === '/guides' || pathname.startsWith('/guides/'))) {
+    return new NextResponse('Not Found', { status: 404 })
+  }
 
   // Legacy /categories/<cat> → section listing.
   const catMatch = /^\/categories\/([^/]+)\/?$/.exec(pathname)
@@ -67,5 +75,7 @@ export const config = {
     '/offers/:path*',
     '/categories',
     '/categories/:path*',
+    '/guides',
+    '/guides/:path*',
   ],
 }

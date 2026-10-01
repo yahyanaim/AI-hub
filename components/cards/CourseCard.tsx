@@ -95,13 +95,14 @@ export function CourseCard({ course, className }: { course: Course; className?: 
           )}
         </div>
         <div className="flex items-center gap-3">
-          <a
+          <button
+            type="button"
             onClick={(e) => { e.stopPropagation(); downloadRoadmapPlan(course) }}
             className="inline-flex cursor-pointer items-center gap-1 rounded-lg bg-brand-orange/10 px-2.5 py-1.5 text-xs font-semibold text-brand-orange transition-colors hover:bg-brand-orange/20"
           >
             Download Plan
             <Download className="h-3 w-3" />
-          </a>
+          </button>
           <div className="relative z-20">
             <BookmarkButton itemType="course" itemId={course.id} />
           </div>

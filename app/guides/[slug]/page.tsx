@@ -6,6 +6,9 @@ import { GuideLanding } from '@/components/guides/GuideLanding'
 import { safeJsonLd } from '@/lib/json-ld'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
+// Same as app/guides/page.tsx: real 404s while guides are disabled.
+export const dynamic = GUIDES_ENABLED ? 'auto' : 'force-dynamic'
+
 export function generateStaticParams() {
   if (!GUIDES_ENABLED) return []
   return SEED_OFFERS.filter(isPaidGuide).map((g) => ({ slug: g.slug }))
