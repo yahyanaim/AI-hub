@@ -79,6 +79,7 @@ export function Footer() {
             <FooterHeading>Community</FooterHeading>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/submit" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Submit</Link></li>
+              <li><Link href="/about" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">About</Link></li>
               <li><Link href="/support" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Support</Link></li>
             </ul>
           </div>

@@ -2597,7 +2597,9 @@
   "i10x-ai-research": "ai-perks",
   "makeforms-startup-forms": "ai-perks",
   "hookradar-ad-intelligence": "ai-perks",
-  "opencode-union-alpha": "tool"
+  "opencode-union-alpha": "tool",
+  "startup-garage-morocco": "forstartups",
+  "roots-pitch-wall-agadir": "fellowship"
  },
  "categories": {
   "coding": "/tools",
@@ -2629,5 +2631,33 @@
   "ui-frameworks": "/edittools",
   "infrastructure": "/edittools",
   "rag": "/edittools"
- }
+ },
+ "eduColleges": [
+  "dallas-college-edu",
+  "lacc-edu",
+  "smc-edu",
+  "coastline-edu",
+  "rio-hondo-edu",
+  "el-camino-edu",
+  "pasadena-city-edu",
+  "glendale-cc-edu",
+  "cerritos-edu",
+  "pierce-college-edu",
+  "cypress-edu",
+  "fullerton-edu",
+  "orange-coast-edu",
+  "ivc-edu",
+  "saddleback-edu",
+  "palomar-edu",
+  "miracosta-edu",
+  "southwestern-edu",
+  "berkeley-city-edu",
+  "dvc-edu",
+  "de-anza-edu",
+  "foothill-edu",
+  "sdcity-edu",
+  "bmcc-edu",
+  "hcc-edu"
+ ],
+ "eduMaster": "how-to-get-us-community-college-edu"
 }

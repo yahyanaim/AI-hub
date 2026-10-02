@@ -31,3 +31,14 @@ export function formatRating(offer: Offer): string | null {
   const count = offer.reviewsCount ? ` (${offer.reviewsCount})` : ''
   return `★ ${offer.rating.toFixed(1)}${count}`
 }
+
+// --- EDU consolidation (audit §6.8) ---
+// 25 thin per-college template pages + 1 comprehensive master guide. The
+// college pages 308 into the master guide (see middleware.ts) and are
+// excluded from the sitemap / llms-full.txt so Google indexes one strong
+// page instead of 26 near-duplicates.
+export const EDU_MASTER_SLUG = 'how-to-get-us-community-college-edu'
+
+export function isEduCollegePage(o: { category: string; slug: string }): boolean {
+  return o.category === 'edu' && o.slug !== EDU_MASTER_SLUG
+}

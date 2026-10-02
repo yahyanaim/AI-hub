@@ -60,7 +60,17 @@ const categories = {
   infrastructure: '/edittools', rag: '/edittools',
 }
 
-const out = { tools, devtools, courses, offers, categories }
+// Thin per-college EDU template pages consolidated into the master guide
+// (audit §6.8). Master slug must match EDU_MASTER_SLUG in lib/guides.ts.
+const EDU_MASTER_SLUG = 'how-to-get-us-community-college-edu'
+const eduColleges = []
+for (const e of parsed.get('offers') ?? []) {
+  if (e.slug && e.slug !== EDU_MASTER_SLUG && e.text.includes("category: 'edu'")) {
+    eduColleges.push(e.slug)
+  }
+}
+
+const out = { tools, devtools, courses, offers, categories, eduColleges, eduMaster: EDU_MASTER_SLUG }
 const dest = new URL('../lib/legacy-redirects.json', import.meta.url)
 writeFileSync(dest, JSON.stringify(out, null, 1) + '\n')
 

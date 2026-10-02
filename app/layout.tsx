@@ -183,6 +183,7 @@ export default function RootLayout({
               },
               sameAs: [
                 'https://github.com/yahyanaim/AI-hub',
+                'https://x.com/yahianaim',
               ],
             }),
           }}

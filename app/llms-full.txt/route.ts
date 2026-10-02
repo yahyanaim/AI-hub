@@ -1,6 +1,6 @@
 import { SITE_URL } from '@/lib/site'
 import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } from '@/lib/seed'
-import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
+import { isPaidGuide, isEduCollegePage, GUIDES_ENABLED } from '@/lib/guides'
 
 export const dynamic = 'force-static'
 
@@ -34,7 +34,8 @@ export async function GET() {
     lines.push(`${one(c.name, `${base}/courses/${c.category}/${c.slug}`, c.tagline)} — ${c.category}`)
   }
   lines.push('', '## Offers & deals', '')
-  const offers = GUIDES_ENABLED ? SEED_OFFERS : SEED_OFFERS.filter((o) => !isPaidGuide(o))
+  const offers = (GUIDES_ENABLED ? SEED_OFFERS : SEED_OFFERS.filter((o) => !isPaidGuide(o)))
+    .filter((o) => !isEduCollegePage(o))
   for (const o of [...offers].sort((a, b) => b.upvotes - a.upvotes)) {
     lines.push(`${one(o.name, `${base}/offers/${o.category}/${o.slug}`, o.tagline)} — ${o.category}`)
   }

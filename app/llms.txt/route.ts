@@ -38,6 +38,7 @@ export async function GET() {
     `- Coding courses: ${base}/courses`,
     `- Offers & deals: ${base}/offers`,
     ...(GUIDES_ENABLED ? [`- Paid guides: ${base}/guides`] : []),
+    `- About (who runs it, ranking methodology): ${base}/about`,
     `- Sitemap: ${base}/sitemap.xml`,
     '',
     '## Top AI tools',

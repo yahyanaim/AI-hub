@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/site'
 import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } from '@/lib/seed'
-import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
+import { isPaidGuide, isEduCollegePage, GUIDES_ENABLED } from '@/lib/guides'
 import { DEVTOOL_CATEGORY_LABELS, OFFER_CATEGORY_LABELS, COURSE_CATEGORY_LABELS } from '@/types'
 
 /**
@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/courses`, lastModified: coursesMod, changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/offers`, lastModified: offersMod, changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/support`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: `${baseUrl}/about`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
   ]
 
   const byDevToolCategory = new Map<string, Date>()
@@ -123,12 +124,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  const offerPages = visibleOffers.map((offer) => ({
-    url: `${baseUrl}/offers/${offer.category}/${offer.slug}`,
-    lastModified: safeDate(offer.updatedAt),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }))
+  // Thin EDU college templates 308 into the master guide (audit §6.8), so
+  // only the master guide is indexed — not 26 near-duplicates.
+  const offerPages = visibleOffers
+    .filter((offer) => !isEduCollegePage(offer))
+    .map((offer) => ({
+      url: `${baseUrl}/offers/${offer.category}/${offer.slug}`,
+      lastModified: safeDate(offer.updatedAt),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }))
 
   const paidGuides = GUIDES_ENABLED ? SEED_OFFERS.filter(isPaidGuide) : []
   const guidePages = GUIDES_ENABLED

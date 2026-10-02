@@ -12,6 +12,8 @@
 //   /courses/<slug>        → /courses/<category>/<slug>
 //   /offers/<slug>         → /offers/<category>/<slug>
 //   /categories/<category> → section listing (mirrors the old mapping)
+//   /offers/edu/<college>    → the EDU master guide (thin-template
+//                              consolidation, audit §6.8)
 //
 // The slug maps are generated at build time by scripts/gen-legacy-redirects.mjs
 // so the middleware stays a fast, dependency-free lookup.
@@ -46,6 +48,18 @@ export function middleware(request: NextRequest) {
     const target = (legacy.categories as Record<string, string>)[decodeURIComponent(raw)]
     if (target) return NextResponse.redirect(new URL(target, request.url), 308)
     return NextResponse.redirect(new URL('/tools', request.url), 308)
+  }
+
+  // Thin EDU college templates → the comprehensive master guide (audit §6.8).
+  // The master guide itself passes through untouched.
+  const eduMatch = /^\/offers\/edu\/([^/]+)\/?$/.exec(pathname)
+  if (eduMatch) {
+    const slug = decodeURIComponent(eduMatch[1] ?? '')
+    const colleges = legacy.eduColleges as string[]
+    if (slug !== legacy.eduMaster && colleges.includes(slug)) {
+      return NextResponse.redirect(new URL(`/offers/edu/${legacy.eduMaster}`, request.url), 308)
+    }
+    return NextResponse.next()
   }
 
   // Legacy one-segment slugs: exactly /<section>/<slug> (two segments).
