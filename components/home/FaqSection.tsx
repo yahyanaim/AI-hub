@@ -90,10 +90,9 @@ export function FaqSection() {
 
         {/* Right: accordion */}
         <div className="grid content-start gap-5 lg:col-span-3">
-          {HOME_FAQS.map((faq, i) => (
+          {HOME_FAQS.map((faq) => (
             <details
               key={faq.q}
-              open={i === 0}
               className="group rounded-2xl border border-brand-orange/20 bg-white px-7 py-6 shadow-[0_1px_6px_-1px_rgba(255,107,0,0.06)] transition-all hover:shadow-[0_4px_16px_-4px_rgba(255,107,0,0.12)] open:border-brand-orange/40 open:shadow-[0_6px_20px_-6px_rgba(255,107,0,0.16)] dark:border-border dark:bg-card dark:shadow-none"
             >
               <summary className="cursor-pointer list-none text-[15px] font-semibold text-foreground marker:hidden [&::-webkit-details-marker]:hidden">
