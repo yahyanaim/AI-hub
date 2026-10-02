@@ -99,10 +99,10 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
         ))}
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+      {/* Plain div (not motion): this block holds the LCP-critical H1 +
+          subtitle and must paint immediately from SSR HTML instead of
+          starting at opacity: 0 and waiting for hydration + animation. */}
+      <div
         className="mx-auto max-w-3xl text-center"
       >
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-1.5 text-xs text-muted-foreground">
@@ -127,15 +127,14 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
           </span>
         </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        {/* Plain p (not motion.p): the LCP subtitle must be visible on first
+            paint — no initial opacity: 0, no transition delay. */}
+        <p
           className="mx-auto mt-4 max-w-xl text-center text-base text-muted-foreground"
         >
           Community-driven directory to discover AI tools, n8n automation, dev tools,
           coding courses and freelancing skills. Free resources for developers and students in Morocco and worldwide.
-        </motion.p>
+        </p>
 
         <div className="mx-auto mt-8 max-w-md">
           <button
@@ -168,7 +167,7 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
             </Button>
           </Link>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }
