@@ -39,7 +39,6 @@ export function RepoCard({
         'group relative flex cursor-pointer flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
         className
       )}
-      aria-label={`${repo.name} - open details`}
     >
       <div className="relative mb-3 flex items-start gap-3.5">
         <div className="relative">
@@ -99,7 +98,7 @@ export function RepoCard({
                 <Link
                   href={`/profile/${submitter.username}`}
                   onClick={(e) => e.stopPropagation()}
-                  className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  className="inline-flex min-h-[24px] items-center text-xs text-muted-foreground transition-colors hover:text-foreground"
                 >
                   @{submitter.username}
                 </Link>

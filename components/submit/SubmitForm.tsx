@@ -286,7 +286,7 @@ export function SubmitForm() {
                   i < step
                     ? 'border-accent bg-accent text-white'
                     : i === step
-                      ? 'border-accent text-accent shadow-[0_0_16px_var(--accent-glow)]'
+                      ? 'border-accent text-orange-700 dark:text-accent shadow-[0_0_16px_var(--accent-glow)]'
                       : 'border-border text-muted-foreground'
                 )}
               >
@@ -361,7 +361,7 @@ export function SubmitForm() {
                   <Icon
                     className={cn(
                       'mb-3 h-6 w-6',
-                      form.type === type ? 'text-accent' : 'text-muted-foreground'
+                      form.type === type ? 'text-orange-700 dark:text-accent' : 'text-muted-foreground'
                     )}
                   />
                   <span className="font-heading text-sm font-semibold">{title}</span>

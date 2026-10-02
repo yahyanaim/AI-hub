@@ -87,7 +87,6 @@ export function Navbar() {
             <button
               onClick={() => setPaletteOpen(true)}
               className="hidden h-9 items-center gap-2 rounded-xl border border-border bg-muted/50 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:inline-flex"
-              aria-label="Search tools, courses and more"
             >
               <Search className="h-4 w-4" />
               <span className="hidden lg:inline">Search…</span>

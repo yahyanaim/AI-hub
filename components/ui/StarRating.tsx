@@ -15,7 +15,7 @@ export function StarRating({
   const full = Math.floor(value)
   const hasHalf = value - full >= 0.5
   return (
-    <span className={cn('inline-flex items-center gap-0.5', className)} aria-label={`${value} out of 5`}>
+    <span role="img" className={cn('inline-flex items-center gap-0.5', className)} aria-label={`${value} out of 5`}>
       {Array.from({ length: 5 }).map((_, i) => {
         const isFull = i < full
         const isHalf = i === full && hasHalf

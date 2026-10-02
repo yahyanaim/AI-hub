@@ -28,7 +28,7 @@ export function SectionHeading({
     >
       <div>
         {eyebrow && (
-          <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-accent">
+          <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-orange-700 dark:text-accent">
             {eyebrow}
           </div>
         )}

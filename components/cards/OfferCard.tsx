@@ -30,7 +30,6 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
         'group relative flex cursor-pointer flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
         className
       )}
-      aria-label={`${offer.name} - open details`}
     >
       <Link
         href={detailHref}
@@ -96,7 +95,7 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
               <Avatar name={submitter.displayName} src={submitter.avatarUrl} size={22} />
               <Link
                 href={`/profile/${submitter.username}`}
-                className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex min-h-[24px] items-center text-xs text-muted-foreground transition-colors hover:text-foreground"
                 onClick={(e) => e.stopPropagation()}
               >
                 @{submitter.username}

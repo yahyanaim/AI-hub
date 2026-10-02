@@ -35,7 +35,7 @@ export function CategoryBadge({
             ? OFFER_CATEGORY_LABELS[category as OfferCategory]
             : REPO_CATEGORY_LABELS[category as EditToolCategory]
   return (
-    <span className={cn('inline-flex items-center gap-1 rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-medium text-brand-orange', className)}>
+    <span className={cn('inline-flex items-center gap-1 rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-medium text-orange-700 dark:text-brand-orange', className)}>
       {label}
     </span>
   )

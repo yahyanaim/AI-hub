@@ -101,7 +101,7 @@ export function ToolCard({
               <Avatar name={submitter.displayName} src={submitter.avatarUrl} size={22} />
               <Link
                 href={`/profile/${submitter.username}`}
-                className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex min-h-[24px] items-center text-xs text-muted-foreground transition-colors hover:text-foreground"
               >
                 @{submitter.username}
               </Link>
