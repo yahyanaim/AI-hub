@@ -5,6 +5,7 @@ import { OFFER_CATEGORY_LABELS } from '@/types'
 import { OfferDetail } from '@/components/detail/OfferDetail'
 import { safeJsonLd } from '@/lib/json-ld'
 import { seoTitle, seoDescriptionWithName, breadcrumbJsonLd } from '@/lib/seo'
+import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
 import { SITE_URL, resolveOgImage } from '@/lib/site'
 
 export async function generateStaticParams() {
@@ -28,9 +29,15 @@ export async function generateMetadata({
   const title = seoTitle(offer.name, offer.tagline)
   const seoDescriptionText = seoDescriptionWithName(offer.name, offer.description, offer.tagline)
   const ogImage = resolveOgImage(offer.logoUrl)
+  // Paid guides are not launched yet: keep their detail pages out of the
+  // index until GUIDES_ENABLED flips true (auto-reverts on launch).
+  const robots = isPaidGuide(offer) && !GUIDES_ENABLED
+    ? { index: false, follow: false }
+    : undefined
   return {
     title,
     description: seoDescriptionText,
+    robots,
     openGraph: {
       title,
       description: seoDescriptionText,

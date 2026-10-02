@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { SITE_URL } from '@/lib/site'
+import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } from '@/lib/seed'
 import { HomeView } from '@/components/home/HomeView'
 import { PartnersMarquee } from '@/components/layout/PartnersMarquee'
 import { HOME_FAQS } from '@/components/home/FaqSection'
@@ -31,6 +32,19 @@ export const metadata: Metadata = {
 }
 
 export default function HomePage() {
+  // Server-rendered first paint for crawlers: top-ranked items + full counts.
+  // Sorts mirror HomeView exactly so hydration never reshuffles the grid.
+  const byUpvotes = (a: { upvotes: number }, b: { upvotes: number }) => b.upvotes - a.upvotes
+  const initialTools = [...SEED_TOOLS].sort(byUpvotes).slice(0, 12)
+  const initialDevTools = [...SEED_DEV_TOOLS].sort(byUpvotes).slice(0, 8)
+  const initialRepos = [...SEED_REPOS].sort(byUpvotes).slice(0, 8)
+  const initialCounts = {
+    tools: SEED_TOOLS.length,
+    devTools: SEED_DEV_TOOLS.length,
+    repos: SEED_REPOS.length,
+    courses: SEED_COURSES.length,
+    offers: SEED_OFFERS.length,
+  }
   return (
     <>
       <Script
@@ -48,7 +62,12 @@ export default function HomePage() {
           }),
         }}
       />
-      <HomeView />
+      <HomeView
+        initialTools={initialTools}
+        initialDevTools={initialDevTools}
+        initialRepos={initialRepos}
+        initialCounts={initialCounts}
+      />
       {/* Server-rendered: keeps the 20 crawlable directory links in the home
           HTML with zero client JS. Previously this lived behind MarqueeGate in
           the root layout, which dragged the whole seed catalogue into the

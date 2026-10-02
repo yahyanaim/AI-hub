@@ -32,13 +32,13 @@ export async function generateMetadata({ params }: { params: { category: string 
         title: `${label} Offers - AI Hunt`,
         description: `Curated ${label.toLowerCase()} offers and deals.`,
         url: `${baseUrl}/offers/${category}`,
-        images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Offers' }],
+        images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Offers' }],
       },
       twitter: {
         card: 'summary_large_image',
         title: `${label} Offers - AI Hunt`,
         description: `Curated ${label.toLowerCase()} offers and deals.`,
-        images: ['/og.png'],
+        images: [`${baseUrl}/og.png`],
       },
       alternates: { canonical: `${baseUrl}/offers/${category}` },
     }

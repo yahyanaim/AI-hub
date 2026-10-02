@@ -27,13 +27,13 @@ export async function generateMetadata({ params }: { params: { category: string 
         title: `${label} Courses - AI Hunt`,
         description: `Curated ${label.toLowerCase()} courses and roadmaps for developers.`,
         url: `${baseUrl}/courses/${category}`,
-        images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Courses' }],
+        images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Courses' }],
       },
       twitter: {
         card: 'summary_large_image',
         title: `${label} Courses - AI Hunt`,
         description: `Curated ${label.toLowerCase()} courses and roadmaps for developers.`,
-        images: ['/og.png'],
+        images: [`${baseUrl}/og.png`],
       },
       alternates: { canonical: `${baseUrl}/courses/${category}` },
     }

@@ -63,13 +63,60 @@ export function middleware(request: NextRequest) {
   }
 
   // Legacy one-segment slugs: exactly /<section>/<slug> (two segments).
+  // Exception: /tools/<category> are real hub pages (audit §8) and pass
+  // through. The only slug/category collision is 'seo' (a tool slug AND a
+  // category): the hub wins; that tool stays reachable at its canonical URL.
+  //
+  // NOTE on statuses: page-level redirect()/notFound() calls on routes that
+  // export generateStaticParams are served as HTTP 200 (meta-refresh / baked
+  // not-found UI), even for on-demand params. So the middleware below is the
+  // status-code authority for catalogue URLs: real 308s for legacy/renamed
+  // links, real 404s for unknown slugs (audit §14). Page components keep
+  // their fallbacks for safety.
   const m = /^\/(tools|dev-tools|courses|offers)\/([^/]+)\/?$/.exec(pathname)
-  if (!m) return NextResponse.next()
-  const section = m[1] as 'tools' | 'dev-tools' | 'courses' | 'offers'
-  const slug = decodeURIComponent(m[2] ?? '')
-  const category = MAPS[section]?.[slug]
-  if (!category) return NextResponse.next()
-  return NextResponse.redirect(new URL(`/${section}/${category}/${slug}`, request.url), 308)
+  if (m) {
+    const section = m[1] as string
+    const slug = decodeURIComponent(m[2] ?? '')
+    if (section === 'tools') {
+      if (legacy.toolCategories.includes(slug)) return NextResponse.next()
+      const category = (legacy.tools as Record<string, string>)[slug]
+      if (category) return NextResponse.redirect(new URL(`/tools/${category}/${slug}`, request.url), 308)
+      return NextResponse.redirect(new URL('/tools', request.url), 308)
+    }
+    const cats =
+      section === 'dev-tools' ? legacy.devCategories
+      : section === 'courses' ? legacy.courseCategories
+      : legacy.offerCategories
+    if (cats.includes(slug)) return NextResponse.next()
+    const category = MAPS[section]?.[slug]
+    if (category) return NextResponse.redirect(new URL(`/${section}/${category}/${slug}`, request.url), 308)
+    return new NextResponse('Not Found', { status: 404 })
+  }
+
+  // Detail pages: /<section>/<category>/<slug>. Unknown slugs are 404s;
+  // right-slug-wrong-category links 308 to the canonical URL.
+  const d = /^\/(tools|dev-tools|courses|offers)\/([^/]+)\/([^/]+)\/?$/.exec(pathname)
+  if (d) {
+    const section = d[1] as string
+    const category = decodeURIComponent(d[2] ?? '')
+    const slug = decodeURIComponent(d[3] ?? '')
+    const canonical = MAPS[section]?.[slug]
+    if (!canonical) return new NextResponse('Not Found', { status: 404 })
+    if (canonical !== category) {
+      return NextResponse.redirect(new URL(`/${section}/${canonical}/${slug}`, request.url), 308)
+    }
+    return NextResponse.next()
+  }
+
+  // edittools has no category routes: known repo → page, else 404.
+  const e = /^\/edittools\/([^/]+)\/?$/.exec(pathname)
+  if (e) {
+    const slug = decodeURIComponent(e[1] ?? '')
+    if ((legacy.repos as Record<string, string>)[slug]) return NextResponse.next()
+    return new NextResponse('Not Found', { status: 404 })
+  }
+
+  return NextResponse.next()
 }
 
 export const config = {
@@ -87,6 +134,8 @@ export const config = {
     '/courses/:path*',
     '/offers',
     '/offers/:path*',
+    '/edittools',
+    '/edittools/:path*',
     '/categories',
     '/categories/:path*',
     '/guides',

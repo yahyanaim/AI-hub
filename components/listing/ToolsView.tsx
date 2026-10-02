@@ -2,6 +2,7 @@
 import { ListingView, ListingCrawlLinks, type FilterOption } from '@/components/listing/ListingView'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { useApp } from '@/lib/store'
+import { useRouter } from 'next/navigation'
 import { TOOL_CATEGORY_LABELS, PRICING_LABELS, type Tool } from '@/types'
 import { toolTrendingScore } from '@/lib/listing-order'
 const categoryOptions: FilterOption[] = Object.entries(TOOL_CATEGORY_LABELS).map(
@@ -15,8 +16,15 @@ const pricingOptions: FilterOption[] = Object.entries(PRICING_LABELS).map(
  * starts empty on the server, so without it the Suspense fallback would ship a
  * heading with no cards and no links.
  */
-export function ToolsView({ initialItems = [] }: { initialItems?: Tool[] }) {
+export function ToolsView({
+  initialItems = [],
+  initialCategory,
+}: {
+  initialItems?: Tool[]
+  initialCategory?: string
+}) {
   const { tools } = useApp()
+  const router = useRouter()
   const items = tools.length ? tools : initialItems
   return (
     <>
@@ -36,7 +44,14 @@ export function ToolsView({ initialItems = [] }: { initialItems?: Tool[] }) {
       'Browse the best AI products across categories - from code editors to image generators. Upvote your favorites.',
       categoryLabel: 'Category',
       categoryOptions,
-      syncCategoryToUrl: true,
+      syncCategoryToUrl: !initialCategory,
+      ...(initialCategory
+        ? {
+            initialCategory,
+            onCategoryChange: (cat: string) =>
+              router.push(cat === 'all' ? '/tools' : `/tools/${cat}`),
+          }
+        : {}),
       extraFilters: 'pricing',
       pricingOptions,
       }}

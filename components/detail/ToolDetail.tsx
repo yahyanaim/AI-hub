@@ -24,6 +24,7 @@ import { CommentThread } from '@/components/detail/CommentThread'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
 import { RepoCard } from '@/components/cards/RepoCard'
+import { ToolCard } from '@/components/cards/ToolCard'
 import { relativeTime, formatDate, formatNumber } from '@/lib/utils'
 import { use, useState, useEffect } from 'react'
 import type { Tool } from '@/types'
@@ -31,9 +32,11 @@ import type { Tool } from '@/types'
 export function ToolDetail({
   slug,
   initial,
+  relatedTools = [],
 }: {
   slug: string
   initial?: Tool
+  relatedTools?: Tool[]
 }) {
   const { tools, repos, getItemBySlug, getUser, currentUser, deleteTool } = useApp()
   const router = useRouter()
@@ -219,6 +222,19 @@ export function ToolDetail({
               </h3>
               <div className="space-y-3">
                 {relatedRepos.map((r) => r && <RepoCard key={r.id} repo={r} />)}
+              </div>
+            </div>
+          )}
+
+          {relatedTools.length > 0 && (
+            <div>
+              <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Related tools
+              </h3>
+              <div className="space-y-3">
+                {relatedTools.map((t) => (
+                  <ToolCard key={t.id} tool={t} />
+                ))}
               </div>
             </div>
           )}

@@ -46,6 +46,28 @@ for u in /tools/chatgpt /categories/coding; do
   else echo "FAIL  $u returned $code (want 308)"; fail=1; fi
 done
 
+# Category hubs are real pages (audit §8).
+for u in /tools/coding /tools/seo; do
+  code=$(curl -s -o /dev/null -w '%{http_code}' -A "$UA" "$BASE$u")
+  body=$(curl -s -A "$UA" "$BASE$u")
+  if [ "$code" = "200" ] && grep -q '<h1' <<<"$body"; then echo "ok    $u hub is 200 with H1"
+  else echo "FAIL  $u returned $code without H1"; fail=1; fi
+done
+
+# Unknown catalogue URLs must be real 404s, not 200 soft-404s (audit §14).
+# (/tools/<unknown> is the exception: it 308s to the hub, matching the
+# historical redirect('/tools') fallback.)
+for u in /dev-tools/nope /courses/nope /offers/nope/nope2 /edittools/nope /tools/coding/no-such-tool; do
+  code=$(curl -s -o /dev/null -w '%{http_code}' -A "$UA" "$BASE$u")
+  if [ "$code" = "404" ]; then echo "ok    $u is a 404"
+  else echo "FAIL  $u returned $code (want 404)"; fail=1; fi
+done
+
+# Unknown legacy-style URL under /tools falls back to the hub with a 308.
+code=$(curl -s -o /dev/null -w '%{http_code}' -A "$UA" "$BASE/tools/no-such-tool")
+if [ "$code" = "308" ]; then echo "ok    /tools/no-such-tool is a 308 to /tools"
+else echo "FAIL  /tools/no-such-tool returned $code (want 308)"; fail=1; fi
+
 # /guides 404s while disabled (its body may still say "Page not found").
 code=$(curl -s -o /dev/null -w '%{http_code}' -A "$UA" "$BASE/guides")
 if [ "$code" = "404" ]; then echo "ok    /guides is a 404 while GUIDES_ENABLED=false"

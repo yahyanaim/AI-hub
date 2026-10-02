@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import { useApp } from '@/lib/store'
+import type { Tool, DevTool, Repo } from '@/types'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
@@ -11,22 +12,48 @@ import { FaqSection } from './FaqSection'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { motion } from 'framer-motion'
 
-export function HomeView() {
+interface HomeCounts {
+  tools: number
+  devTools: number
+  repos: number
+  courses: number
+  offers: number
+}
+
+/**
+ * Server-prerendered first paint: app/page.tsx passes the top-ranked items so
+ * crawlers (and first paint) see real cards without JavaScript. Once the
+ * client store hydrates, live data takes over — same sort, so no reshuffle.
+ */
+export function HomeView({
+  initialTools = [],
+  initialDevTools = [],
+  initialRepos = [],
+  initialCounts = { tools: 0, devTools: 0, repos: 0, courses: 0, offers: 0 },
+}: {
+  initialTools?: Tool[]
+  initialDevTools?: DevTool[]
+  initialRepos?: Repo[]
+  initialCounts?: HomeCounts
+}) {
   const { tools, devTools, repos, courses, offers, setPaletteOpen } = useApp()
+  const t = tools.length ? tools : initialTools
+  const d = devTools.length ? devTools : initialDevTools
+  const r = repos.length ? repos : initialRepos
 
   const todaysTools = useMemo(
-    () => [...tools].sort((a, b) => b.upvotes - a.upvotes).slice(0, 6),
-    [tools]
+    () => [...t].sort((a, b) => b.upvotes - a.upvotes).slice(0, 6),
+    [t]
   )
 
   const trendingDevTools = useMemo(
-    () => [...devTools].sort((a, b) => b.upvotes - a.upvotes).slice(0, 4),
-    [devTools]
+    () => [...d].sort((a, b) => b.upvotes - a.upvotes).slice(0, 4),
+    [d]
   )
 
   const trendingRepos = useMemo(
-    () => [...repos].sort((a, b) => b.upvotes - a.upvotes).slice(0, 4),
-    [repos]
+    () => [...r].sort((a, b) => b.upvotes - a.upvotes).slice(0, 4),
+    [r]
   )
 
   return (
@@ -34,11 +61,11 @@ export function HomeView() {
       {/* Hero Section */}
       <HeroSection
         onSearch={() => setPaletteOpen(true)}
-        toolCount={tools.length}
-        promptCount={devTools.length}
-        repoCount={repos.length}
-        courseCount={courses.length}
-        offerCount={offers.length}
+        toolCount={tools.length ? tools.length : initialCounts.tools}
+        promptCount={devTools.length ? devTools.length : initialCounts.devTools}
+        repoCount={repos.length ? repos.length : initialCounts.repos}
+        courseCount={courses.length ? courses.length : initialCounts.courses}
+        offerCount={offers.length ? offers.length : initialCounts.offers}
       />
 
       {/* Main content with sidebar */}

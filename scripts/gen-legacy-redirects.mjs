@@ -71,6 +71,35 @@ for (const e of parsed.get('offers') ?? []) {
 }
 
 const out = { tools, devtools, courses, offers, categories, eduColleges, eduMaster: EDU_MASTER_SLUG }
+
+// Valid /tools/<category> hub slugs (real landing pages, audit §8). The
+// middleware lets these through to the category page instead of treating
+// them as legacy tool slugs.
+const toolCategories = [...new Set(
+  (parsed.get('tools') ?? []).map((e) => categoryOf(e.text)).filter(Boolean)
+)]
+out.toolCategories = toolCategories.sort()
+
+// Valid category sets for the catalogue sections, used by middleware.ts to
+// tell genuine hubs apart from unknown URLs (real 404s, audit §14).
+// 'high-recommended' is a tag-based pseudo-category with a real route but no
+// seed items, so it is added explicitly.
+const uniqCats = (ns, extra = []) => [...new Set([
+  ...(parsed.get(ns) ?? []).map((e) => categoryOf(e.text)).filter(Boolean),
+  ...extra,
+])].sort()
+out.devCategories = uniqCats('devtools')
+out.courseCategories = uniqCats('courses', ['high-recommended'])
+out.offerCategories = uniqCats('offers')
+
+// Repo slug → category map (edittools has no category routes; unknown slugs
+// are real 404s).
+const repos = {}
+for (const e of parsed.get('repos') ?? []) {
+  const c = categoryOf(e.text)
+  if (e.slug && c) repos[e.slug] = c
+}
+out.repos = repos
 const dest = new URL('../lib/legacy-redirects.json', import.meta.url)
 writeFileSync(dest, JSON.stringify(out, null, 1) + '\n')
 

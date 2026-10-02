@@ -30,9 +30,10 @@ import type { Tool, DevTool, Repo, Course, Offer } from '@/types'
 
 const take = <T,>(arr: T[]) => arr.slice(0, LISTING_STATIC_COUNT)
 
-/** `/tools` — default sort: trending. */
-export function toolsFirstPage(): Tool[] {
-  return take([...SEED_TOOLS].sort((a, b) => toolTrendingScore(b) - toolTrendingScore(a)))
+/** `/tools` and `/tools/<category>` — default sort: trending. */
+export function toolsFirstPage(category?: string): Tool[] {
+  const pool = category ? SEED_TOOLS.filter((t) => t.category === category) : SEED_TOOLS
+  return take([...pool].sort((a, b) => toolTrendingScore(b) - toolTrendingScore(a)))
 }
 
 /** `/dev-tools` and `/dev-tools/<category>` — default sort: trending. */

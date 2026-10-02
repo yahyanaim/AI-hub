@@ -27,13 +27,13 @@ export async function generateMetadata({ params }: { params: { category: string 
         title: `${label} Developer Tools - AI Hunt`,
         description: `Curated ${label.toLowerCase()} developer tools for engineers.`,
         url: `${baseUrl}/dev-tools/${category}`,
-        images: [{ url: '/og.png', width: 1200, height: 630, alt: 'AI Hunt Dev Tools' }],
+        images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Dev Tools' }],
       },
       twitter: {
         card: 'summary_large_image',
         title: `${label} Developer Tools - AI Hunt`,
         description: `Curated ${label.toLowerCase()} developer tools for engineers.`,
-        images: ['/og.png'],
+        images: [`${baseUrl}/og.png`],
       },
       alternates: { canonical: `${baseUrl}/dev-tools/${category}` },
     }

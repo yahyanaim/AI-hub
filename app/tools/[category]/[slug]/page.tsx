@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { SEED_TOOLS, SEED_USERS } from '@/lib/seed'
 import { ToolDetail } from '@/components/detail/ToolDetail'
 import { safeJsonLd } from '@/lib/json-ld'
@@ -56,7 +57,17 @@ export default async function ToolDetailPage({
 }) {
   const { category, slug } = params
   const tool = await findTool(category, slug)
+  // Unknown slugs 404 at the middleware layer; this is the fallback.
+  if (!tool) notFound()
   const user = tool ? SEED_USERS.find((u) => u.id === tool.submittedBy) : null
+  // Same-category neighbours for the Related tools block: real internal links
+  // computed on the server so crawlers follow them without JavaScript.
+  const relatedTools = tool
+    ? [...SEED_TOOLS]
+        .filter((t) => t.category === tool.category && t.slug !== tool.slug)
+        .sort((a, b) => b.upvotes - a.upvotes)
+        .slice(0, 4)
+    : []
 
   const jsonLd = tool
     ? {
@@ -112,7 +123,7 @@ export default async function ToolDetailPage({
           }}
         />
       )}
-      <ToolDetail slug={slug} initial={tool ?? undefined} />
+      <ToolDetail slug={slug} initial={tool ?? undefined} relatedTools={relatedTools} />
     </>
   )
 }
