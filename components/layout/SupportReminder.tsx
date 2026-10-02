@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { motion } from 'framer-motion'
 import { Share2, Check, Brain, Code, Rocket, Zap, Sparkles, Terminal, Globe, Star } from 'lucide-react'
 
 const FLOATING_ICONS = [
@@ -52,26 +51,22 @@ export function SupportReminder() {
 
   return (
     <div className="relative mt-8 overflow-hidden rounded-xl border border-brand-orange/60 bg-card bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center transition-all duration-200 hover:border-accent hover:shadow-[0_0_24px_var(--accent-glow)]">
-      {/* Floating icons */}
+      {/* Floating icons: pure CSS float loop (compositor-only), no JS rAF loop. */}
       <div className="pointer-events-none absolute inset-0 select-none">
         {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
-          <motion.div
+          <div
             key={i}
-            className="absolute text-brand-orange"
-            style={{ left: x, top: y, opacity }}
-            animate={{
-              y: [0, -12, 0, 10, 0],
-              opacity: [opacity, opacity * 1.6, opacity, opacity * 1.3, opacity],
-            }}
-            transition={{
-              duration,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay,
+            className="absolute animate-float-soft text-brand-orange motion-reduce:animate-none"
+            style={{
+              left: x,
+              top: y,
+              opacity,
+              animationDuration: `${duration}s`,
+              animationDelay: `${delay}s`,
             }}
           >
             <Icon size={size} />
-          </motion.div>
+          </div>
         ))}
       </div>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { useReducedMotion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { ArrowRight, Sparkles, Search, TrendingUp, Brain, Code, Globe, Zap, Terminal, Rocket, Layers, Database } from 'lucide-react'
@@ -76,26 +76,24 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
 
   return (
     <section className="relative overflow-hidden py-16 md:py-24">
-      {/* Floating background icons */}
+      {/* Floating background icons: pure CSS float loop (compositor-only),
+          no JS rAF loop. Opacity stays at its base value; bob via transform.
+          Honors reduced-motion via Tailwind's motion-reduce variant. */}
       <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
         {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
-          <motion.div
+          <div
             key={i}
-            className="absolute text-brand-orange"
-            style={{ left: x, top: y, opacity }}
-            animate={reduceMotion ? undefined : {
-              y: [0, -12, 0, 10, 0],
-              opacity: [opacity, opacity * 1.6, opacity, opacity * 1.3, opacity],
-            }}
-            transition={{
-              duration,
-              delay,
-              repeat: Infinity,
-              ease: 'easeInOut',
+            className="absolute animate-float-soft text-brand-orange motion-reduce:animate-none"
+            style={{
+              left: x,
+              top: y,
+              opacity,
+              animationDuration: `${duration}s`,
+              animationDelay: `${delay}s`,
             }}
           >
             <Icon size={size} />
-          </motion.div>
+          </div>
         ))}
       </div>
 

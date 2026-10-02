@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -22,10 +21,12 @@ export function cardVariants() {
   }
 }
 
-// A single card wrapping content in a link with hover glow
+// A single card wrapping content in a link with hover glow.
+// Entrance uses the CSS `animate-slide-up` keyframes (same look as the old
+// framer-motion variant) so grids paint without JS-driven animation.
 export function CardLink({ href, children, className }: CardLinkProps) {
   return (
-    <motion.div variants={cardVariants()}>
+    <div className="animate-slide-up" style={{ animationFillMode: 'both' }}>
       <Link
         href={href}
         className={cn(
@@ -35,7 +36,7 @@ export function CardLink({ href, children, className }: CardLinkProps) {
       >
         {children}
       </Link>
-    </motion.div>
+    </div>
   )
 }
 
@@ -47,10 +48,7 @@ export function CardGrid({
   className?: string
 }) {
   return (
-    <motion.div
-      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04 } } }}
-      initial="hidden"
-      animate="show"
+    <div
       className={cn(
         'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3',
         className
@@ -58,6 +56,6 @@ export function CardGrid({
       role="list"
     >
       {children}
-    </motion.div>
+    </div>
   )
 }

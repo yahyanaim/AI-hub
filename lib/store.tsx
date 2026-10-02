@@ -291,6 +291,11 @@ function prioritySlicesFor(pathname: string | null): SliceKey[] {
   if (pathname.startsWith('/courses')) return ['courses', ...tiny]
   if (pathname.startsWith('/offers') || pathname.startsWith('/guides')) return ['offers', ...tiny]
   // Home, search, submit, profile, command palette: need the full catalogue.
+  // Exception: the homepage itself only renders tools/dev-tools/repos (counts
+  // arrive via server props), so courses/offers stream in on idle instead of
+  // competing with first paint. The palette/search show their loading state
+  // until the idle step completes.
+  if (pathname === '/') return ['tools', 'devTools', 'repos', ...tiny]
   return ALL_SLICES
 }
 

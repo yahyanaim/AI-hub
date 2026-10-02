@@ -10,7 +10,6 @@ import { HeroSection } from './HeroSection'
 import { Sidebar } from './Sidebar'
 import { FaqSection } from './FaqSection'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { motion } from 'framer-motion'
 
 interface HomeCounts {
   tools: number
@@ -79,21 +78,20 @@ export function HomeView({
               title="Today's top tools"
               href="/tools"
             />
-            <motion.div
-              initial="hidden"
-              animate="show"
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }}
-              className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
-            >
+            {/* CSS entrance (not framer-motion): identical fade-up look with
+                per-card stagger, but zero JS — runs from first paint and
+                never blocks hydration. */}
+            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {todaysTools.map((tool, i) => (
-                <motion.div
+                <div
                   key={tool.id}
-                  variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+                  className="animate-slide-up"
+                  style={{ animationDelay: `${i * 0.05}s`, animationFillMode: 'both' }}
                 >
                   <ToolCard tool={tool} rank={i + 1} />
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </section>
 
           {/* Trending Dev Tools */}
