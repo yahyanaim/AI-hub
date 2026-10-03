@@ -23541,7 +23541,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'Prompt generator for AI image tools like Midjourney, DALL-E and Gemini image creator. Produces tailored writing prompts, explores literary techniques, and jump-starts creativity when you stare at an empty prompt box.',
     url: 'https://midjourneypromptsgenerator.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/midjourneypromptsgenerator.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=midjourneypromptsgenerator.com&sz=128',
     category: 'writing',
     tags: ['prompts', 'midjourney', 'image-generation', 'free'],
     pricing: 'free',
@@ -23561,7 +23561,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'Free learning platform for AI fundamentals: develop skills through structured lessons and create projects that showcase your AI knowledge to employers.',
     url: 'https://aicurious.co',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/aicurious.co.ico',
+    logoUrl: '/placeholder-logo.svg',
     category: 'education',
     tags: ['learning', 'ai-basics', 'free', 'courses'],
     pricing: 'free',
@@ -23661,7 +23661,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'Free AI image generator: describe what you need and get downloadable visuals in seconds. Handy for thumbnails, posts, and mockups.',
     url: 'https://imagifyai.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/imagifyai.com.ico',
+    logoUrl: '/placeholder-logo.svg',
     category: 'image',
     tags: ['image-generation', 'free', 'thumbnails'],
     pricing: 'free',
@@ -23701,7 +23701,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'Freemium plagiarism detection: deep-search technology checks your text against billions of sources. Popular with students, teachers, and content writers.',
     url: 'https://www.quetext.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/quetext.com.ico',
+    logoUrl: 'https://www.quetext.com/assets/img/logos/favicon.png',
     category: 'writing',
     tags: ['plagiarism', 'writing', 'education', 'checker'],
     pricing: 'freemium',
@@ -23821,7 +23821,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'Freemium AI chat app: ask everyday questions, draft content, and get quick answers in a clean chat interface across web and mobile.',
     url: 'https://usechat.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/usechat.com.ico',
+    logoUrl: 'https://usechat.com/favicon.ico',
     category: 'productivity',
     tags: ['chatbot', 'assistant', 'q&a', 'mobile'],
     pricing: 'freemium',
@@ -23881,7 +23881,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'Freemium YouTube toolkit: keyword research, tag suggestions, rank tracking, and bulk-processing tools to grow your channel faster.',
     url: 'https://www.tubebuddy.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/tubebuddy.com.ico',
+    logoUrl: 'https://www.tubebuddy.com/wp-content/themes/luis/assets/images/favicon.svg',
     category: 'marketing',
     tags: ['youtube', 'seo', 'growth', 'creators'],
     pricing: 'freemium',

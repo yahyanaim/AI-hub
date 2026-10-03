@@ -14849,7 +14849,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Free open-source optical character recognition library: convert scans and photos into searchable, editable text with support for 80+ languages. Install via pip and run locally.',
     url: 'https://jaided.ai',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/jaided.ai.ico',
+    logoUrl: 'https://jaided.ai/static/img/favicon.svg',
     category: 'library',
     tags: ['ocr', 'open-source', 'python', 'text-extraction'],
     pricing: 'open-source',
@@ -14869,7 +14869,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Free open-source design system from GitHub: elegant components, utilities, and guidelines to build consistent, professional web interfaces faster.',
     url: 'https://primer.style',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/primer.style.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=primer.style&sz=128',
     category: 'framework',
     tags: ['css', 'design-system', 'open-source', 'github'],
     pricing: 'open-source',
@@ -14889,7 +14889,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Enterprise web-data platform: point-and-click extraction turns pages into tables and lists, with scheduling, APIs, and data enrichment for accurate, fresh datasets.',
     url: 'https://www.import.io',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/import.io.ico',
+    logoUrl: 'https://www.import.io/assets/favicon.svg',
     category: 'low-code',
     tags: ['scraping', 'data-extraction', 'no-code', 'api'],
     pricing: 'paid',
@@ -14989,7 +14989,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Free and open-source developer platform: MarsX combines reusable micro-apps and AI assistance so teams ship full-stack software with less boilerplate.',
     url: 'https://marsx.dev',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/marsx.dev.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=marsx.dev&sz=128',
     category: 'developer-tools',
     tags: ['open-source', 'fullstack', 'micro-apps', 'free'],
     pricing: 'open-source',
@@ -15009,7 +15009,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Freemium text-to-SQL generator ($7/mo): describe what you need plus your schema, get optimized queries to run, and save favorites for reuse.',
     url: 'https://txt2sql.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/txt2sql.com.ico',
+    logoUrl: '/placeholder-logo.svg',
     category: 'database',
     tags: ['sql', 'database', 'queries', 'freemium'],
     pricing: 'freemium',
@@ -15149,7 +15149,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Freemium mentorship marketplace: book 1:1 sessions with vetted developers for debugging help, code reviews, and career guidance across every stack.',
     url: 'https://www.codementor.io',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/codementor.io.ico',
+    logoUrl: 'https://assets.codementor.io/icons/favicon.ico',
     category: 'other',
     tags: ['mentorship', 'debugging', 'freelance', 'career'],
     pricing: 'freemium',
@@ -15209,7 +15209,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Freemium WordPress builder: design landing pages, coming-soon screens, and full themes visually with conversion-focused blocks and templates.',
     url: 'https://www.seedprod.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/seedprod.com.ico',
+    logoUrl: 'https://www.seedprod.com/wp-content/uploads/2020/10/cropped-Favicon-192x192.png',
     category: 'cms',
     tags: ['wordpress', 'landing-pages', 'builder', 'themes'],
     pricing: 'freemium',
@@ -15229,7 +15229,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Freemium SEO suite: KWFinder keyword research, SERPChecker, SERPWatcher rank tracking, LinkMiner backlinks, and SiteProfiler overviews in one simple package.',
     url: 'https://mangools.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/mangools.com.ico',
+    logoUrl: 'https://mangools.com/apple-touch-icon.png',
     category: 'seo',
     tags: ['seo', 'keywords', 'rank-tracking', 'backlinks'],
     pricing: 'freemium',
