@@ -26,20 +26,25 @@ export function DevToolCard({
 
   return (
     <article
-      onClick={() => openDetailModal(devtool.id)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          openDetailModal(devtool.id)
-        }
-      }}
       className={cn(
-        'group relative flex cursor-pointer flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
+        'group relative flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
         className
       )}
     >
+      {/* Primary destination as a real link (crawlable href in SSR HTML).
+          Plain click opens the detail modal; modifier/middle-click follows
+          the link to the detail page. Interactive zones below sit above it
+          (z-20) so bookmark/delete/profile controls keep working. */}
+      <Link
+        href={`/dev-tools/${devtool.category}/${devtool.slug}`}
+        onClick={(e) => {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return
+          e.preventDefault()
+          openDetailModal(devtool.id)
+        }}
+        className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none"
+        aria-label={`${devtool.name} - open details`}
+      />
       {/* ===== Header: icon with optional rank badge ===== */}
       <div className="relative mb-3 flex items-start gap-3.5">
         <div className="relative">
@@ -92,15 +97,12 @@ export function DevToolCard({
       </div>
 
       {/* ===== Footer: submitter + likes ===== */}
-      <div className="mt-auto flex items-center justify-between border-t border-border/50 pt-3">
+      <div className="relative z-20 mt-auto flex items-center justify-between border-t border-border/50 pt-3">
         <div className="flex items-center gap-2">
           {submitter ? (
             <>
               <Avatar name={submitter.displayName} src={submitter.avatarUrl} size={22} />
-              <span
-                onClick={(e) => e.stopPropagation()}
-                role="button"
-              >
+              <span onClick={(e) => e.stopPropagation()}>
                 <Link
                   href={`/profile/${submitter.username}`}
                   onClick={(e) => e.stopPropagation()}

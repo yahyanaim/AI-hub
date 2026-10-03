@@ -16,20 +16,25 @@ export function CourseCard({ course, className }: { course: Course; className?: 
 
   return (
     <article
-      onClick={() => openDetailModalForCourse(course.id)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          openDetailModalForCourse(course.id)
-        }
-      }}
       className={cn(
-        'group relative flex cursor-pointer flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
+        'group relative flex flex-col rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand-orange/30 hover:shadow-xl hover:shadow-brand-orange/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange/40',
         className
       )}
     >
+      {/* Primary destination as a real link (crawlable href in SSR HTML).
+          Plain click opens the detail modal; modifier/middle-click follows
+          the link to the detail page. Interactive zones below sit above it
+          (z-20) so profile/download/bookmark controls keep working. */}
+      <Link
+        href={`/courses/${course.category}/${course.slug}`}
+        onClick={(e) => {
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return
+          e.preventDefault()
+          openDetailModalForCourse(course.id)
+        }}
+        className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none"
+        aria-label={`${course.name} - open details`}
+      />
       <div className="relative mb-3 flex items-start gap-3.5">
         <Logo src={course.logoUrl} name={course.name} size={56} />
         <div className="min-w-0 flex-1">
@@ -78,7 +83,7 @@ export function CourseCard({ course, className }: { course: Course; className?: 
         )}
       </div>
 
-      <div className="mt-auto flex items-center justify-between border-t border-border/50 pt-3">
+      <div className="relative z-20 mt-auto flex items-center justify-between border-t border-border/50 pt-3">
         <div className="flex items-center gap-2">
           {submitter && (
             <>
