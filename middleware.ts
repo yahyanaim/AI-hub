@@ -31,7 +31,36 @@ const MAPS: Record<string, Record<string, string>> = {
   offers: legacy.offers,
 }
 
+// Canonical-host enforcement: the legacy Vercel domain serves the full site
+// with HTTP 200 instead of redirecting, splitting indexation signals across
+// two origins. Exact-host match only — localhost (hostname 'localhost',
+// never includes the port) and preview '*.vercel.app' deployments pass
+// through untouched.
+const LEGACY_HOST = 'aihubtools.vercel.app'
+const CANONICAL_HOST = 'www.aihubtools.ma'
+
+/**
+ * Real request host. `request.nextUrl.hostname` reflects the server's local
+ * bind address under `next start` (and can't be trusted behind proxies in
+ * general), so derive it from headers: `x-forwarded-host` set by Vercel's
+ * edge, falling back to `Host`. Port stripped, lowercased.
+ */
+function requestHostname(request: NextRequest): string {
+  const raw =
+    request.headers.get('x-forwarded-host') ?? request.headers.get('host') ?? ''
+  return raw.split(',')[0]?.trim().split(':')[0]?.toLowerCase() ?? ''
+}
+
 export function middleware(request: NextRequest) {
+  // Safest earliest point: before any route-specific logic. Pathname and
+  // search params are preserved by cloning the URL and swapping host only.
+  if (requestHostname(request) === LEGACY_HOST) {
+    const url = request.nextUrl.clone()
+    url.protocol = 'https:'
+    url.host = CANONICAL_HOST
+    return NextResponse.redirect(url, 308)
+  }
+
   const { pathname } = request.nextUrl
 
   // Disabled /guides section: real 404 at the routing layer. (Calling
@@ -120,25 +149,9 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Run on probable one-segment legacy paths. Matchers must cover the
-  // two-segment shapes too (e.g. '/tools/:slug*'), because a matcher like
-  // '/tools/:slug' also matches plain '/tools' itself. The middleware body
-  // double-checks the exact shape before redirecting, so /tools etc. pass
-  // through untouched.
-  matcher: [
-    '/tools',
-    '/tools/:path*',
-    '/dev-tools',
-    '/dev-tools/:path*',
-    '/courses',
-    '/courses/:path*',
-    '/offers',
-    '/offers/:path*',
-    '/edittools',
-    '/edittools/:path*',
-    '/categories',
-    '/categories/:path*',
-    '/guides',
-    '/guides/:path*',
-  ],
+  // The canonical-host check above must see EVERY path (/, /search?q=…,
+  // deep links, API routes), so the matcher is intentionally broad. Static
+  // assets and _next internals are unaffected: the middleware body only
+  // inspects the URL and calls NextResponse.next() for them.
+  matcher: ['/', '/:path*'],
 }
