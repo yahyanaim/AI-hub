@@ -15,11 +15,11 @@ const topOffers = [...SEED_OFFERS].sort((a, b) => b.upvotes - a.upvotes).slice(0
 const firstPage = offersFirstPage()
 
 export const metadata: Metadata = {
-  title: 'Offers & Deals for Developers',
-  description: 'Free fellowships, programs and dev resources with step-by-step guides to claim them quickly.',
+  title: 'Tech Opportunities & Deals for Developers',
+  description: 'Fellowships, programs, student perks and developer deals with step-by-step claim guides. Curated tech opportunities, including programs for Morocco.',
   openGraph: {
-    title: 'Offers & Deals for Developers - AI Hunt',
-    description: 'Curated offers and free programs with step-by-step how-to-get-it guides.',
+    title: 'Tech Opportunities & Deals - AI Hunt',
+    description: 'Curated fellowships, programs and developer deals with step-by-step how-to-claim guides.',
     url: `${baseUrl}/offers`,
     siteName: 'AI Hunt',
     type: 'website',

@@ -25,18 +25,19 @@ export async function generateMetadata({ params }: { params: { category: string 
 
   const label = OFFER_CATEGORY_LABELS[category as keyof typeof OFFER_CATEGORY_LABELS]
   if (label) {
+    const count = SEED_OFFERS.filter((o) => o.category === category).length
     return {
-      title: `${label} Offers & Deals`,
-      description: `Explore the best curated ${label.toLowerCase()} offers, programs, and deals.`,
+      title: `${label} Opportunities & Deals`,
+      description: `Claim ${count} curated ${label.toLowerCase()} opportunities and deals, each with a step-by-step guide.`,
       openGraph: {
-        title: `${label} Offers - AI Hunt`,
+        title: `${label} Opportunities - AI Hunt`,
         description: `Curated ${label.toLowerCase()} offers and deals.`,
         url: `${baseUrl}/offers/${category}`,
         images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Offers' }],
       },
       twitter: {
         card: 'summary_large_image',
-        title: `${label} Offers - AI Hunt`,
+        title: `${label} Opportunities - AI Hunt`,
         description: `Curated ${label.toLowerCase()} offers and deals.`,
         images: [`${baseUrl}/og.png`],
       },
@@ -73,13 +74,15 @@ export default function OfferCategoryPage({ params }: { params: { category: stri
     notFound()
   }
 
+  const count = SEED_OFFERS.filter((o) => o.category === category).length
+
   return (
     <>
       <Script id={`schema-collection-offers-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: `${label} Offers`,
+          name: `${label} Opportunities`,
           description: `Community-curated collection of the best ${label.toLowerCase()} offers and deals.`,
           url: `${baseUrl}/offers/${category}`,
         }),
@@ -89,11 +92,19 @@ export default function OfferCategoryPage({ params }: { params: { category: stri
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },
             { name: 'Offers', path: '/offers' },
-            { name: `${label} Offers`, path: `/offers/${category}` },
+            { name: `${label} Opportunities`, path: `/offers/${category}` },
           ])
         ),
       }} />
-      <OffersView initialCategory={category} initialItems={offersFirstPage(category)} />
+      <OffersView
+        initialCategory={category}
+        initialItems={offersFirstPage(category)}
+        heading={{
+          title: `${label} Opportunities`,
+          eyebrow: label,
+          description: `${count} curated ${label.toLowerCase()} opportunities and deals, each with a step-by-step guide to claim it.`,
+        }}
+      />
     </>
   )
 }

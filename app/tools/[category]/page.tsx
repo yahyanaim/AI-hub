@@ -24,8 +24,9 @@ export async function generateMetadata({ params }: { params: { category: string 
 
   const label = TOOL_CATEGORY_LABELS[category as keyof typeof TOOL_CATEGORY_LABELS]
   if (label) {
+    const count = SEED_TOOLS.filter((t) => t.category === category).length
     const title = `${label} AI Tools`
-    const description = `Discover the best ${label.toLowerCase()} AI tools, ranked by the community. Compare features, pricing, and top-rated alternatives.`
+    const description = `Discover ${count} ${label.toLowerCase()} AI tools, ranked by the community. Compare features and pricing, and find top-rated alternatives.`
     return {
       title,
       description,
@@ -74,6 +75,8 @@ export default function ToolCategoryPage({ params }: { params: { category: strin
     redirect('/tools')
   }
 
+  const count = SEED_TOOLS.filter((t) => t.category === category).length
+
   return (
     <>
       <Script id={`schema-collection-tools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
@@ -94,7 +97,15 @@ export default function ToolCategoryPage({ params }: { params: { category: strin
           ])
         ),
       }} />
-      <ToolsView initialCategory={category} initialItems={toolsFirstPage(category)} />
+      <ToolsView
+        initialCategory={category}
+        initialItems={toolsFirstPage(category)}
+        heading={{
+          title: `${label} AI Tools`,
+          eyebrow: label,
+          description: `Browse ${count} community-ranked ${label.toLowerCase()} AI tools. Compare features and pricing, and discover top-rated alternatives.`,
+        }}
+      />
     </>
   )
 }

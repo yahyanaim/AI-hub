@@ -15,11 +15,11 @@ const topDevTools = [...SEED_DEV_TOOLS].sort((a, b) => b.upvotes - a.upvotes).sl
 const firstPage = devToolsFirstPage()
 
 export const metadata: Metadata = {
-  title: 'Developer Tools Directory',
-  description: 'IDEs, CI/CD, testing, monitoring, databases and API tools — community-ranked dev tools for engineers.',
+  title: 'Developer Tools Directory - Best Dev Tools for Engineers',
+  description: 'IDEs, CI/CD, testing, monitoring, databases and API tools — community-ranked developer tools for engineers, including AI coding assistants. Popular with developers in Morocco and worldwide.',
   openGraph: {
     title: 'Developer Tools Directory - AI Hunt',
-    description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, databases, and more. Curated for engineers.',
+    description: 'Discover essential developer tools: IDEs, CI/CD, testing, monitoring, databases, APIs and AI coding assistants. Curated for engineers.',
     url: `${baseUrl}/dev-tools`,
     siteName: 'AI Hunt',
     type: 'website',

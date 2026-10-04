@@ -8,13 +8,13 @@ import { HOME_FAQS } from '@/components/home/FaqSection'
 import { safeJsonLd } from '@/lib/json-ld'
 
 export const metadata: Metadata = {
-  title: 'AI Hunt - AI Tools, n8n Automation, Courses & Freelancing Skills in Morocco',
+  title: 'AI Hunt - Discover the Best AI Tools in Morocco',
   description:
-    'Morocco-first directory to learn AI, n8n automation, development, and freelancing: discover AI tools, follow coding courses, and build job-ready skills. Free community-curated resources for Moroccan developers and students.',
+    'AI Hunt (AI Hub Tools) is a Morocco-first directory to discover AI tools, dev tools, coding courses and developer offers. Free, community-ranked resources for developers and students.',
   openGraph: {
-    title: 'AI Hunt - Learn AI, Automation & Freelancing in Morocco',
+    title: 'AI Hunt - Discover the Best AI Tools in Morocco',
     description:
-      'Discover AI tools, master n8n automation, take coding courses, and build freelancing skills. Free resources for Morocco.',
+      'Morocco-first directory of AI tools, dev tools, coding courses and developer offers. Free, ranked by the community.',
     url: SITE_URL,
     siteName: 'AI Hunt',
     type: 'website',

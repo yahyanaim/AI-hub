@@ -53,6 +53,13 @@ function loadSavedState(key: string): SavedListingState {
   }
 }
 
+/** Optional per-page H1/eyebrow/intro override (e.g. category hubs). */
+export interface ListingHeading {
+  title: string
+  eyebrow: string
+  description: string
+}
+
 export interface ListingConfig<T = unknown> {
   title: string
   eyebrow: string

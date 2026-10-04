@@ -1,5 +1,5 @@
 'use client'
-import { ListingView, ListingCrawlLinks, type FilterOption } from '@/components/listing/ListingView'
+import { ListingView, ListingCrawlLinks, type FilterOption, type ListingHeading } from '@/components/listing/ListingView'
 import { CourseCard } from '@/components/cards/CourseCard'
 import { useApp } from '@/lib/store'
 import { COURSE_CATEGORY_LABELS, type Course } from '@/types'
@@ -11,9 +11,11 @@ const categoryOptions: FilterOption[] = Object.entries(COURSE_CATEGORY_LABELS).m
 export function CoursesView({
   initialCategory,
   initialItems = [],
+  heading,
 }: {
   initialCategory?: string
   initialItems?: Course[]
+  heading?: ListingHeading
 }) {
   const { courses } = useApp()
   const router = useRouter()
@@ -46,10 +48,11 @@ export function CoursesView({
     <ListingView<Course>
       items={items}
       config={{
-      title: 'Learning Courses',
-      eyebrow: 'Learn',
+      title: heading?.title ?? 'Learning Courses',
+      eyebrow: heading?.eyebrow ?? 'Learn',
       description:
-      'Structured roadmaps and learning paths for software developers. From full-stack to AI engineering.',
+        heading?.description ??
+        'Structured roadmaps and learning paths for software developers. From full-stack to AI engineering.',
       categoryLabel: 'Category',
       categoryOptions,
       itemLabel: 'courses',

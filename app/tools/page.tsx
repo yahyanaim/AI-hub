@@ -17,11 +17,11 @@ const topTools = [...SEED_TOOLS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 
 const firstPage = toolsFirstPage()
 
 export const metadata: Metadata = {
-  title: 'AI Tools Directory',
-  description: 'Browse the best AI tools for coding, writing, image generation, video, productivity, research, marketing, and more. Community-ranked and reviewed.',
+  title: 'AI Tools Directory - Browse & Discover the Best AI Tools',
+  description: 'Browse and discover AI tools by category: coding, writing, image, video, audio, productivity and more. Free and community-ranked, with new tools from Morocco and worldwide.',
   openGraph: {
     title: 'AI Tools Directory - AI Hunt',
-    description: 'Browse and discover the best AI tools ranked by the community. Find tools for coding, writing, design, productivity, and more.',
+    description: 'Browse and discover the best AI tools by category, ranked by the community. Free tools for coding, writing, design, productivity, and more.',
     url: `${baseUrl}/tools`,
     siteName: 'AI Hunt',
     type: 'website',
@@ -45,7 +45,7 @@ export default function ToolsPage() {
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: 'AI Tools Directory',
-          description: 'Community-curated collection of the best AI tools for developers.',
+          description: 'Community-curated directory to browse and discover AI tools by category.',
           url: `${baseUrl}/tools`,
           about: { '@type': 'Thing', name: 'AI Tools' },
           mainEntity: {

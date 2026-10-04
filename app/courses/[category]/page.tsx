@@ -20,9 +20,12 @@ export async function generateMetadata({ params }: { params: { category: string 
 
   const label = COURSE_CATEGORY_LABELS[category as keyof typeof COURSE_CATEGORY_LABELS]
   if (label) {
+    const count = SEED_COURSES.filter((c) =>
+      category === 'high-recommended' ? c.tags?.includes('high-recommended') : c.category === category
+    ).length
     return {
-      title: `${label} Courses`,
-      description: `Explore the best curated ${label.toLowerCase()} courses, learning paths, and roadmaps for developers.`,
+      title: `${label} Courses - Learn ${label}`,
+      description: `Follow ${count} curated ${label.toLowerCase()} courses and learning paths, from beginner fundamentals to advanced practice.`,
       openGraph: {
         title: `${label} Courses - AI Hunt`,
         description: `Curated ${label.toLowerCase()} courses and roadmaps for developers.`,
@@ -65,6 +68,10 @@ export default function CourseCategoryPage({ params }: { params: { category: str
     notFound()
   }
 
+  const count = SEED_COURSES.filter((c) =>
+    category === 'high-recommended' ? c.tags?.includes('high-recommended') : c.category === category
+  ).length
+
   return (
     <>
       <Script id={`schema-collection-courses-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
@@ -85,7 +92,15 @@ export default function CourseCategoryPage({ params }: { params: { category: str
           ])
         ),
       }} />
-      <CoursesView initialCategory={category} initialItems={coursesFirstPage(category)} />
+      <CoursesView
+        initialCategory={category}
+        initialItems={coursesFirstPage(category)}
+        heading={{
+          title: `${label} Courses`,
+          eyebrow: label,
+          description: `Follow ${count} curated ${label.toLowerCase()} courses and learning paths, from beginner fundamentals to advanced practice.`,
+        }}
+      />
     </>
   )
 }

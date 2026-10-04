@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: { category: string 
   if (label) {
     return {
       title: `${label} Developer Tools`,
-      description: `Explore the best curated ${label.toLowerCase()} developer tools for software engineers.`,
+      description: `Compare ${SEED_DEV_TOOLS.filter((t) => t.category === category).length} curated ${label.toLowerCase()} developer tools for software engineers. Community-ranked with free and paid options.`,
       openGraph: {
         title: `${label} Developer Tools - AI Hunt`,
         description: `Curated ${label.toLowerCase()} developer tools for engineers.`,

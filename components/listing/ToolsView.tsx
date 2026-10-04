@@ -1,5 +1,5 @@
 'use client'
-import { ListingView, ListingCrawlLinks, type FilterOption } from '@/components/listing/ListingView'
+import { ListingView, ListingCrawlLinks, type FilterOption, type ListingHeading } from '@/components/listing/ListingView'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { useApp } from '@/lib/store'
 import { useRouter } from 'next/navigation'
@@ -19,9 +19,11 @@ const pricingOptions: FilterOption[] = Object.entries(PRICING_LABELS).map(
 export function ToolsView({
   initialItems = [],
   initialCategory,
+  heading,
 }: {
   initialItems?: Tool[]
   initialCategory?: string
+  heading?: ListingHeading
 }) {
   const { tools } = useApp()
   const router = useRouter()
@@ -38,10 +40,11 @@ export function ToolsView({
     <ListingView
       items={items}
       config={{
-      title: 'AI Tools',
-      eyebrow: 'Discover',
+      title: heading?.title ?? 'AI Tools',
+      eyebrow: heading?.eyebrow ?? 'Discover',
       description:
-      'Browse the best AI products across categories - from code editors to image generators. Upvote your favorites.',
+        heading?.description ??
+        'Browse and discover AI tools by category — from coding assistants to image generators. Free and community-ranked.',
       categoryLabel: 'Category',
       categoryOptions,
       syncCategoryToUrl: !initialCategory,

@@ -1,5 +1,5 @@
 'use client'
-import { ListingView, ListingCrawlLinks, type FilterOption } from '@/components/listing/ListingView'
+import { ListingView, ListingCrawlLinks, type FilterOption, type ListingHeading } from '@/components/listing/ListingView'
 import { OfferCard } from '@/components/cards/OfferCard'
 import { useApp } from '@/lib/store'
 import { OFFER_CATEGORY_LABELS, type Offer } from '@/types'
@@ -12,9 +12,11 @@ const categoryOptions: FilterOption[] = Object.entries(OFFER_CATEGORY_LABELS).ma
 export function OffersView({
   initialCategory,
   initialItems = [],
+  heading,
 }: {
   initialCategory?: string
   initialItems?: Offer[]
+  heading?: ListingHeading
 }) {
   const { offers } = useApp()
   const router = useRouter()
@@ -37,10 +39,11 @@ export function OffersView({
     <ListingView<Offer>
       items={visibleOffers}
       config={{
-      title: 'Offers & Deals',
-      eyebrow: 'Offers',
+      title: heading?.title ?? 'Offers & Deals',
+      eyebrow: heading?.eyebrow ?? 'Offers',
       description:
-      'Free programs, developer tools, and API access worth claiming. Each offer includes a step-by-step guide - student vs non-student paths + how to get EDU proof. Hover any title or description to auto-translate to Arabic.',
+        heading?.description ??
+        'Free programs, developer tools, and API access worth claiming. Each offer includes a step-by-step guide - student vs non-student paths + how to get EDU proof. Hover any title or description to auto-translate to Arabic.',
       categoryLabel: 'Category',
       categoryOptions,
       itemLabel: 'offers',
