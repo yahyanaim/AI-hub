@@ -1285,7 +1285,11 @@
   "resumonk": "productivity",
   "grantable": "writing",
   "palette-fm": "image",
-  "sobrief": "productivity"
+  "sobrief": "productivity",
+  "coursebox": "education",
+  "eklipse": "video",
+  "learnsmarter": "education",
+  "quizalize": "education"
  },
  "devtools": {
   "vs-code": "ide",
@@ -3240,6 +3244,17 @@
   "vmake": "video",
   "bigmp4": "video",
   "creative-fabrica-png-svg": "converter",
-  "sigmaos": "websites"
+  "sigmaos": "websites",
+  "tuxguitar": "audio",
+  "qprompt": "video",
+  "gradia": "image-editing",
+  "fontmatrix": "design",
+  "scantailor-advanced": "converter",
+  "giada-loop-machine": "audio",
+  "bespokesynth": "audio",
+  "bforartists": "3d",
+  "hitpaw": "video",
+  "cutout-pro": "image-editing",
+  "passport-photo-online": "photo"
  }
 }
