@@ -154,6 +154,10 @@ p {
   .card-hover {
     @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg;
   }
+
+  .input {
+    @apply w-full rounded-xl border border-input bg-card px-4 py-2.5 text-sm text-foreground shadow-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-brand-orange/60 focus:ring-2 focus:ring-brand-orange/25 disabled:opacity-60;
+  }
 }
 
 /* Reduced motion */

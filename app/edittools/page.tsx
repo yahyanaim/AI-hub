@@ -15,21 +15,21 @@ const topRepos = [...SEED_REPOS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 
 const firstPage = reposFirstPage()
 
 export const metadata: Metadata = {
-  title: 'Open Source GitHub Repos & LLM Tools',
-  description: 'Explore top open-source GitHub repositories for AI, LLMs, fine-tuning, RAG, agent frameworks, vector databases, and machine learning. Community-voted and curated.',
+  title: 'Editing Tools - Free PDF, Image, Video & Audio Editors',
+  description: 'Free online editing tools: PDF editors, image and photo editors, video and audio editors, converters and design tools. Community-ranked and reviewed.',
   openGraph: {
-    title: 'Open Source Repos & LLM Tools - AI Hunt',
-    description: 'Discover top open-source GitHub repos for AI, LLMs, RAG, agent frameworks, vector databases, and ML tools.',
+    title: 'Editing Tools - AI Hunt',
+    description: 'Discover free PDF editors, image tools, video and audio editors, converters and design tools, ranked by the community.',
     url: `${baseUrl}/edittools`,
     siteName: 'AI Hunt',
     type: 'website',
     locale: 'en_US',
-    images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Open Source Repos' }],
+    images: [{ url: `${baseUrl}/og.png`, width: 1200, height: 630, alt: 'AI Hunt Editing Tools' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Open Source Repos & LLM Tools - AI Hunt',
-    description: 'Discover top open-source GitHub repos for AI, LLMs, RAG, and ML tools.',
+    title: 'Editing Tools - AI Hunt',
+    description: 'Free PDF, image, video and audio editors, ranked by the community.',
     images: [`${baseUrl}/og.png`],
   },
   alternates: { canonical: `${baseUrl}/edittools` },
@@ -42,10 +42,10 @@ export default function EditToolsPage() {
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: 'Open Source GitHub Repos & LLM Tools',
-          description: 'Community-curated collection of open-source repos for AI and LLM development.',
+          name: 'Editing Tools',
+          description: 'Community-curated collection of free online editing tools: PDF, image, video and audio.',
           url: `${baseUrl}/edittools`,
-          about: { '@type': 'Thing', name: 'Open Source Repositories' },
+          about: { '@type': 'Thing', name: 'Editing Tools' },
           mainEntity: {
             '@type': 'ItemList',
             numberOfItems: topRepos.length,
@@ -62,7 +62,7 @@ export default function EditToolsPage() {
         __html: safeJsonLd(
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },
-            { name: 'Open Source Repos', path: '/edittools' },
+            { name: 'Editing Tools', path: '/edittools' },
           ])
         ),
       }} />

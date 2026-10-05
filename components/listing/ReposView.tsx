@@ -17,16 +17,16 @@ export function ReposView({ initialItems = [] }: { initialItems?: Repo[] }) {
           this invisible nav is what ships real item URLs to non-JS crawlers. */}
       <ListingCrawlLinks
         items={items}
-        label="Open-source repo quick links"
+          label="Editing tools quick links"
         getHref={(r) => `/edittools/${r.slug}`}
       />
     <ListingView<Repo>
       items={items}
       config={{
-      title: 'Open Source GitHub Repos & LLM Tools',
-      eyebrow: 'Discover',
+      title: 'Editing Tools',
+      eyebrow: 'Edit',
       description:
-      'Explore top open-source GitHub repositories for AI, LLMs, RAG, agent frameworks, vector databases and machine learning. Community-voted and curated.',
+      'Free online PDF editors, image and photo tools, video and audio editors, converters and design tools. Community-voted and curated.',
       categoryLabel: 'Category',
       categoryOptions,
       itemLabel: 'repos',

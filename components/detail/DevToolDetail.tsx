@@ -75,7 +75,7 @@ export function DevToolDetail({ slug, initial }: { slug: string; initial?: DevTo
                 {devtool.name}
               </h1>
               {devtool.featured && (
-                <span className="badge border-accent/30 bg-accent/10 text-accent">
+                <span className="inline-flex items-center gap-1 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-md">
                   <Sparkles className="h-3 w-3" />
                   Featured
                 </span>
