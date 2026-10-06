@@ -21,12 +21,19 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: `${SITE_URL}/og.png`,
+        url: `${SITE_URL}/og-hero.png`,
         width: 1200,
         height: 630,
-        alt: 'AI Hunt - Discover AI Tools & Developer Resources',
+        alt: 'AI Hunt homepage - discover AI tools, courses and developer resources',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI Hunt - Discover the Best AI Tools in Morocco',
+    description:
+      'Morocco-first directory of AI tools, dev tools, coding courses and developer offers. Free, ranked by the community.',
+    images: [`${SITE_URL}/og-hero.png`],
   },
   alternates: { canonical: SITE_URL },
 }
