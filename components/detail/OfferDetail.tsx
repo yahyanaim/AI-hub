@@ -68,21 +68,21 @@ export function OfferDetail({ slug, initial }: { slug: string; initial?: Offer }
       </div>
 
       {/* How to get it */}
-      <div className="mt-8 rounded-xl border border-border bg-card p-6 md:p-8">
-        <div className="mb-6 flex items-center gap-2">
+      <div className="mt-6 rounded-xl border border-border bg-card p-5 md:p-6">
+        <div className="mb-4 flex items-center gap-2">
           <ShieldCheck className="h-5 w-5 text-brand-orange" />
           <h2 className="font-heading text-xl font-bold">
             How to get it <span className="text-xs font-normal text-muted-foreground">· مرّر للترجمة</span>
           </h2>
         </div>
 
-        <ol className="space-y-4">
+        <ol className="space-y-3">
           {(offer.steps.map((en, i) => ({ en, ar: offer.stepsAr?.[i] }))).map(({ en, ar }, i) => (
             <li
               key={i}
-              className="flex gap-4 rounded-lg border border-border bg-muted/50 p-4"
+              className="flex gap-3 rounded-lg border border-border bg-muted/50 p-3"
             >
-              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-orange/10 text-sm font-bold text-brand-orange">
+              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-orange/10 text-xs font-bold text-brand-orange">
                 {i + 1}
               </span>
               <div className="min-w-0">

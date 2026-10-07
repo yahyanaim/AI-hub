@@ -32,8 +32,9 @@ export function HoverTranslate({
       </span>
       <span
         dir={dirOnHover ? 'rtl' : undefined}
+        lang="ar"
         className={cn(
-          'pointer-events-none absolute inset-0 block opacity-0 transition-opacity duration-200',
+          'pointer-events-none absolute inset-0 block text-right leading-relaxed opacity-0 transition-opacity duration-200',
           showAr ? 'opacity-100' : 'group-hover/hover:opacity-100'
         )}
       >
@@ -67,8 +68,9 @@ export function HoverTranslateBlock({
       <p className={cn('transition-opacity duration-200', tapped ? 'opacity-0' : 'group-hover/hover:opacity-0')}>{en}</p>
       <p
         dir="rtl"
+        lang="ar"
         className={cn(
-          'pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200',
+          'pointer-events-none absolute inset-0 text-right leading-relaxed opacity-0 transition-opacity duration-200',
           tapped ? 'opacity-100' : 'group-hover/hover:opacity-100'
         )}
       >
