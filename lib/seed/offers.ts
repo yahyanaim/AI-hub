@@ -2842,33 +2842,33 @@ export const SEED_OFFERS: Offer[] = [
       {
         title: 'Pick an open-admission CC (no SAT needed) - full list below',
         description:
-          'Choose ONE accredited CC from this list - all issue .EDU + Canvas + transcript and are accepted by SheerID/GitHub: Texas: Dallas College (dallascollege.edu/admissions/application) | California OpenCCC (home.cccapply.org): LA City College, Santa Monica College, Coastline, Rio Hondo, El Camino, Pasadena City, Glendale, Cerritos, Pierce, Cypress, Fullerton, Orange Coast, Irvine Valley, Saddleback, Palomar, MiraCosta, Southwestern, Berkeley City, Diablo Valley, De Anza, Foothill, San Diego City, Mt SAC, Long Beach City | Other states: BMCC (bmcc.cuny.edu, NY), LaGuardia (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill (bhcc.edu, MA), CCP (ccp.edu, PA). All open-admission, no SAT, 15-min online apply. Google any college name + “apply” for its direct link, or use the Dallas College link below (works for internationals).',
+          'Pick ONE college from this list. All give .EDU mail + Canvas + transcript, accepted by SheerID and GitHub. Texas: LA City College, Santa Monica College, Coastline, Rio Hondo, El Camino, Pasadena City, Glendale, Cerritos, Pierce, Cypress, Fullerton, Orange Coast, Irvine Valley, Saddleback, Palomar, MiraCosta, Southwestern, Berkeley City, Diablo Valley, De Anza, Foothill, San Diego City, Mt SAC, Long Beach City | Other states: BMCC (bmcc.cuny.edu, NY), LaGuardia (laguardia.edu, NY), Houston CC (hccs.edu, TX), Bunker Hill (bhcc.edu, MA), CCP (ccp.edu, PA). No SAT, 15-minute online apply. Google any name + “apply” for its link, or use Dallas College below (works worldwide).',
         url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
         title: 'Apply as non-degree / dual-enrollment student (15 min) - IMPORTANT: disable VPN for OpenCCC',
         description:
-          'On the CC site click Apply → OpenCCC (California) or the Dallas College app. Select “Non-degree / Personal Enrichment”, use your real name + passport (no essay). ⚠️ OpenCCCApply BLOCKS VPN/proxy/Tor — with one active you get “proxy connection detected”, error 1775. Turn off VPN, Tor, iCloud Private Relay (Settings → iCloud → Private Relay OFF), anonymizing extensions and ad-blockers; use your normal connection or mobile data, ideally incognito Chrome with no extensions. Moroccan ISPs (Maroc Telecom/Orange/Inwi) sometimes use a transparent proxy that triggers this with no VPN on your side. If you must keep a VPN, apply to Dallas College, Houston CC, or BMCC instead — they skip OpenCCC and work with VPN.',
+          'On the college site click Apply, then OpenCCC (California) or the Dallas College app. Choose “Non-degree”, use your real name + passport. No essay. ⚠️ OpenCCC blocks VPNs — you will get error 1775 “proxy connection detected”. Turn off VPN, Tor, iCloud Private Relay, and ad-blockers. Use normal WiFi or mobile data. Note: Moroccan internet providers sometimes trigger this block even without VPN. If you need a VPN, use Dallas College, Houston CC, or BMCC instead — they work fine with VPN.',
       },
       {
         title: 'Enroll in 1 cheap online course ($0-$60)',
         description:
-          'After admission (often same day), log into the Canvas/myCollege portal and enroll in one 1-credit online class (e.g. Couns 1, CS 101). Often free for first-time students, otherwise ~$46 total in CA. You do NOT need to finish it — enrollment alone generates proof.',
+          'After admission (often the same day), log into Canvas and join one cheap online class. Often free, otherwise about $46. You do NOT need to finish it — joining is enough for proof.',
       },
       {
         title: 'Collect your 3 proofs in 24-72h',
         description:
-          'Within 1-3 days you get: (1) @student.cc.edu Microsoft 365 mailbox (myCollege → Email), (2) downloadable student ID PDF, (3) enrollment letter / class-schedule PDF with name, school, term and date. Save all as color PDFs — SheerID/GitHub require a date within 30 days.',
+          'In 1-3 days you get 3 proofs: (1) student email, (2) student ID, (3) enrollment letter with your name and date. Save them as color PDFs. SheerID needs a date within 30 days.',
       },
       {
         title: 'Use the 3 proofs to unlock offers - which ones?',
         description:
-          'One enrollment claims them all on AI Hunt. EMAIL-ONLY (just the .EDU mailbox): Notion, Hyperbolic, Dify, Firecrawl, Consensus, Julius, Mathpix, Shodan. SHEERID FILE (upload ID + enrollment letter): GitHub Pack, JetBrains, Autodesk, Adobe, Cursor, ChatGPT Plus, Perplexity, Gemini, YouTube/Amazon Prime. UNiDAYS (verify with file): Cloudflare, GoodNotes. GitHub Pack then unlocks DigitalOcean $200, a Namecheap domain and Replit 50% automatically; Microsoft 365 comes with the .EDU itself. Stay enrolled until every verification passes, then you may drop the class (watch the refund deadline so proofs stay fresh).',
+          'One enrollment unlocks everything here. With EMAIL only: Notion, Hyperbolic, Dify, Firecrawl, Consensus, Julius, Mathpix, Shodan. With ID + letter upload (SheerID): GitHub Pack, JetBrains, Autodesk, Adobe, Cursor, ChatGPT Plus, Perplexity, Gemini, YouTube, Amazon Prime. With UNiDAYS: Cloudflare, GoodNotes. GitHub Pack also gives DigitalOcean $200, a Namecheap domain and Replit 50%. Stay enrolled until all checks pass.',
       },
       {
         title: 'Renew yearly & stay compliant',
         description:
-          'Offers last 12 months. Before expiry, re-enroll in one 1-credit course for a freshly dated letter and re-verify via SheerID/UNiDAYS; log into the .EDU mailbox monthly to keep it active. This is legitimate enrollment — never buy a resold .EDU mailbox, it can be revoked and violates ToS. Your real transcript is the safest proof.',
+          'Offers last 12 months. Before expiry, join one more class for a fresh letter and verify again. Open the .EDU mailbox monthly to keep it. Real enrollment only — never buy a mailbox, it gets revoked.',
       },
     ],
     nameAr: 'كيف تحصل على بريد .EDU من كلية مجتمع أمريكية (دليل CC)',
@@ -2877,28 +2877,28 @@ export const SEED_OFFERS: Offer[] = [
     stepsAr: [
       {
         title: 'اختر كلية مفتوحة القبول (بدون SAT) - القائمة الكاملة',
-        description: 'اختر كلية واحدة من هذه القائمة — جميعها تمنح بريد .EDU ومقبولة لدى جهات التحقق: Dallas College، LA City College، Santa Monica، Coastline، Rio Hondo، El Camino، Pasadena City، Glendale، Cerritos، Pierce، Cypress، Fullerton، Orange Coast، Irvine Valley، Saddleback، Palomar، MiraCosta، Southwestern، Berkeley City، Diablo Valley، De Anza، Foothill، San Diego City، Mt SAC، Long Beach City (كاليفورنيا عبر home.cccapply.org) + BMCC و LaGuardia بنيويورك و Houston CC و Bunker Hill و CCP. القبول مفتوح في جميعها دون SAT، والتسجيل عبر الإنترنت يستغرق 15 دقيقة.',
+        description: 'اختر كلية واحدة فقط من القائمة. كلها تعطيك بريد .EDU ومقبولة: Dallas College، LA City College، Santa Monica، Coastline، Rio Hondo، El Camino، Pasadena City، Glendale، Cerritos، Pierce، Cypress، Fullerton، Orange Coast، Irvine Valley، Saddleback، Palomar، MiraCosta، Southwestern، Berkeley City، Diablo Valley، De Anza، Foothill، San Diego City، Mt SAC، Long Beach City (كاليفورنيا عبر home.cccapply.org) + BMCC و LaGuardia بنيويورك و Houston CC و Bunker Hill و CCP. لا تحتاج SAT. التسجيل عبر الإنترنت يأخذ 15 دقيقة فقط.',
         url: 'https://www.dallascollege.edu/admissions/application',
       },
       {
         title: 'قدّم كطالب غير متفرغ (15 دقيقة) - مهم: عطّل VPN لـ OpenCCC',
-        description: 'في موقع الكلية اضغط Apply ثم OpenCCC (كاليفورنيا) أو تطبيق Dallas College، واختر “Non-degree”. استخدم اسمك الحقيقي وجواز سفرك، ولا حاجة لأي مقال. ⚠️ موقع OpenCCC يحظر الـVPN والبروكسي وTor — مع تفعيل أي منها ستظهر رسالة “proxy connection detected” بالخطأ 1775. عطّل الـVPN وTor وiCloud Private Relay (الإعدادات ← iCloud ← إيقاف) وإضافات إخفاء الهوية وحاجبات الإعلانات، واستخدم اتصالك العادي أو بيانات الهاتف، ويفضل نافذة تصفح خاص بمتصفح Chrome دون إضافات. انتبه: شركات الإنترنت في المغرب (اتصالات المغرب/أورنج/إنوي) تستخدم أحياناً بروكسي شفافاً قد يسبب الحظر حتى دون VPN من جهتك. إذا كان لا بد من الـVPN، قدّم إلى Dallas College أو Houston CC أو BMCC فهي لا تستخدم OpenCCC وتعمل مع الـVPN.',
+        description: 'في موقع الكلية اضغط Apply ثم OpenCCC أو تطبيق Dallas College، واختر “Non-degree”. استخدم اسمك الحقيقي وجوازك. لا حاجة لمقال. ⚠️ موقع OpenCCC يمنع الـVPN — ستظهر رسالة خطأ 1775. أطفئ الـVPN وiCloud Private Relay وحاجبات الإعلانات. استخدم WiFi عادياً أو بيانات الهاتف. ملاحظة: شركات الإنترنت في المغرب قد تسبب نفس المشكلة حتى بدون VPN. إذا كنت تحتاج VPN، قدّم إلى Dallas College أو Houston CC أو BMCC فهي تقبله.',
       },
       {
         title: 'سجّل في مقرر واحد رخيص ($0-$60)',
-        description: 'بعد القبول (غالباً في اليوم نفسه)، ادخل إلى بوابة Canvas وسجّل في مقرر واحد عبر الإنترنت (مثل Couns 1 أو CS 101). كثير من الكليات مجانية للمستجدين، وإلا فالتكلفة نحو 46$ للمقرر في كاليفورنيا. لست مطالباً بإتمام المقرر — التسجيل وحده يولّد الإثبات.',
+        description: 'بعد القبول (غالباً في نفس اليوم)، ادخل Canvas وسجّل في مقرر واحد رخيص. غالباً مجاني، وإلا نحو 46$. لا يجب أن تكمل المقرر — التسجيل وحده كافٍ.',
       },
       {
         title: 'اجمع إثباتاتك الثلاثة خلال 24-72 ساعة',
-        description: 'ستحصل خلال 1-3 أيام على: (1) بريد @student.cc.edu عبر Microsoft 365 (من البوابة ← البريد)، (2) بطاقة طالب بصيغة PDF، (3) خطاب تسجيل أو جدول دراسي PDF باسمك والكلية والتاريخ. احفظها ملونة — يشترط SheerID وGitHub تاريخاً خلال 30 يوماً.',
+        description: 'خلال 1-3 أيام ستحصل على 3 إثباتات: (1) بريد الطالب، (2) بطاقة طالب PDF، (3) خطاب تسجيل باسمك وتاريخه. احفظها ملونة. يجب أن يكون التاريخ خلال 30 يوماً.',
       },
       {
         title: 'استخدمها لفتح العروض - ما الذي يفتح؟',
-        description: 'تسجيل واحد يفتح كل شيء في AI Hunt. بالبريد فقط: Notion وHyperbolic وDify وFirecrawl وConsensus وJulius وMathpix وShodan. بملف SheerID (البطاقة + خطاب التسجيل): GitHub Pack وJetBrains وAutodesk وAdobe وCursor وChatGPT Plus وPerplexity وGemini وYouTube وAmazon Prime. عبر UNiDAYS: Cloudflare وGoodNotes. ثم يفتح GitHub Pack تلقائياً DigitalOcean بقيمة 200$ ونطاق Namecheap وخصم Replit بـ50%.',
+        description: 'تسجيل واحد يفتح كل شيء هنا. بالبريد فقط: Notion وHyperbolic وDify وFirecrawl وConsensus وJulius وMathpix وShodan. برفع البطاقة والخطاب (SheerID): GitHub Pack وJetBrains وAutodesk وAdobe وCursor وChatGPT Plus وPerplexity وGemini وYouTube وAmazon Prime. عبر UNiDAYS: Cloudflare وGoodNotes. ويعطيك GitHub Pack أيضاً DigitalOcean 200$ ونطاق Namecheap وخصم Replit.',
       },
       {
         title: 'جدّد سنوياً والتزم',
-        description: 'مدة العروض 12 شهراً. قبل انتهائها سجّل في مقرر جديد للحصول على خطاب بتاريخ حديث وأعد التحقق عبر SheerID وUNiDAYS، وسجّل الدخول إلى بريد .EDU شهرياً لإبقائه نشطاً. هذا تسجيل شرعي — لا تشترِ بريداً مُعاد بيعه فقد يُسحب وينتهك الشروط.',
+        description: 'العروض صالحة 12 شهراً. قبل انتهائها سجّل في مقرر جديد بخطاب جديد وتحقق مرة أخرى. افتح بريد .EDU كل شهر ليبقى يعمل. هذا تسجيل حقيقي — لا تشترِ بريداً جاهزاً فقد يتوقف.',
       },
     ],
     upvotes: 58,
