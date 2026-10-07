@@ -2628,7 +2628,8 @@
   "hookradar-ad-intelligence": "ai-perks",
   "opencode-union-alpha": "tool",
   "startup-garage-morocco": "forstartups",
-  "roots-pitch-wall-agadir": "fellowship"
+  "roots-pitch-wall-agadir": "fellowship",
+  "claude-for-startups": "ai-perks"
  },
  "categories": {
   "coding": "/tools",

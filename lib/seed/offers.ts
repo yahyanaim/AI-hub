@@ -17684,4 +17684,89 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o331',
+    slug: 'claude-for-startups',
+    name: 'Claude for Startups',
+    tagline: '1 free year of Claude Team + $1,000 API credits + up to $45k partner perks',
+    description:
+      'Anthropic program for startups: 1 free year of Claude Team (up to 5 seats, new Team customers), $1,000 in Claude API credits, up to $45,000 in partner tool perks via the Claude Startup Stack, higher API rate limits, biweekly Applied AI office hours, and access to Founder House events, hackathons, and meetups. Open to bootstrapped, pre-seed, and funded startups — no VC backing required.',
+    url: 'https://claude.com/fr/programs/startups',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/claude.ai.ico',
+    category: 'ai-perks',
+    tags: ['anthropic', 'claude', 'startups', 'api-credits', 'founders'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Check eligibility (2 minutes)',
+        description:
+          'Your startup must be founded within the last 5 years or funded in the last 2. Bootstrapped, pre-seed, and VC-backed startups all qualify — no VC funding required. You need a Claude Console account, a work email matching your website domain, and a short description of what you are building. Review decisions take minutes for most, or 2-3 business days with manual review.',
+        url: 'https://claude.com/fr/programs/startups',
+      },
+      {
+        title: 'Apply through Claude Console',
+        description:
+          'Log into Claude Console and fill in the application form. VC-backed founders in the partner network can unlock up to $100,000 extra API credits through their VC.',
+        url: 'https://claude.com/fr/programs/startups',
+      },
+      {
+        title: 'Activate 1 free year of Claude Team',
+        description:
+          'Once approved, open the Claude Startups page in Console and activate the offer: 1 year free for up to 5 Premium seats (new Team customers only). Teams already on a paid plan are not eligible for this part.',
+      },
+      {
+        title: 'Claim your $1,000 API credits',
+        description:
+          'Claim the credits on the Claude Startups page in Console. Credits expire 6 months after grant, work only on the proprietary Claude API via Console (not AWS Bedrock or Google Vertex), and come with automatically higher API rate limits.',
+      },
+      {
+        title: 'Activate up to $45k in partner perks',
+        description:
+          'Browse the Claude Startup Stack in Console (Augment, ClickHouse, ElevenLabs, Emergent, Firecrawl, Gamma, Granola, Hex and more) and redeem each offer with its code. Perks are provided by independent third parties, not Anthropic.',
+      },
+      {
+        title: 'Join office hours and events',
+        description:
+          'Book 45-minute Applied AI office hours (every two weeks, signup link arrives by email) and join Founder House gatherings, hackathons, and community meetups.',
+      },
+    ],
+    nameAr: 'Claude للشركات الناشئة',
+    taglineAr: 'سنة مجانية من Claude Team + 1000$ أرصدة API + حتى 45 ألف$ مزايا شركاء',
+    descriptionAr: 'برنامج Anthropic للشركات الناشئة: سنة مجانية من Claude Team (حتى 5 مقاعد للعملاء الجدد)، و1000$ أرصدة Claude API، وحتى 45 ألف$ مزايا أدوات الشركاء عبر Claude Startup Stack، وحدود استخدام أعلى، وجلسات استشارية مع فريق Applied AI، وفعاليات Founder House وهاكاثونات. مفتوح للشركات ذاتية التمويل وما قبل التأسيس والممولة — لا يشترط تمويل استثماري.',
+    stepsAr: [
+      {
+        title: 'تحقق من الأهلية (دقيقتان)',
+        description: 'يجب أن تكون شركتك مؤسسة خلال آخر 5 سنوات أو ممولة خلال آخر سنتين. الشركات ذاتية التمويل وما قبل التأسيس والممولة كلها مؤهلة ولا يشترط تمويل استثماري. تحتاج حساب Claude Console وبريد عمل يطابق نطاق موقعك ووصفاً مختصراً لما تبنيه. معظم الطلبات تُراجع خلال دقائق، والمراجعة اليدوية تأخذ 2-3 أيام عمل.',
+        url: 'https://claude.com/fr/programs/startups',
+      },
+      {
+        title: 'قدّم عبر Claude Console',
+        description: 'سجّل الدخول إلى Claude Console واملأ نموذج التقديم. المؤسسون المدعومون من شركات استثمارية في شبكة الشركاء يمكنهم الحصول على حتى 100 ألف$ أرصدة إضافية عبر شركتهم.',
+        url: 'https://claude.com/fr/programs/startups',
+      },
+      {
+        title: 'فعّل سنة Claude Team المجانية',
+        description: 'بعد القبول، افتح صفحة Claude Startups في Console وفعّل العرض: سنة مجانية حتى 5 مقاعد مميزة (للعملاء الجدد على Team فقط). الخطط المدفوعة الحالية غير مشمولة.',
+      },
+      {
+        title: 'اطلب أرصدة API بقيمة 1000$',
+        description: 'اطلب الأرصدة من صفحة Claude Startups. تنتهي بعد 6 أشهر من المنح وتعمل فقط على Claude API عبر Console (ليست AWS Bedrock أو Google Vertex)، وتأتي مع حدود استخدام أعلى تلقائياً.',
+      },
+      {
+        title: 'فعّل مزايا الشركاء حتى 45 ألف$',
+        description: 'تصفح Claude Startup Stack في Console (Augment وClickHouse وElevenLabs وFirecrawl وGamma وغيرها) وفعّل كل عرض برمزه. المزايا من شركات مستقلة وليست من Anthropic.',
+      },
+      {
+        title: 'انضم للجلسات والفعاليات',
+        description: 'احجز جلسات Applied AI الاستشارية (45 دقيقة كل أسبوعين، رابط التسجيل يصلك بالبريد) وانضم لفعاليات Founder House والهاكاثونات واللقاءات.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
