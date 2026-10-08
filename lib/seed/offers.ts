@@ -17769,4 +17769,73 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o332',
+    slug: 'unitpost-for-startups',
+    name: 'Unitpost for Startups',
+    tagline: '50k-250k emails/month free for 6-12 months, no credit card',
+    description:
+      'Unitpost startup program: 50,000 to 250,000 emails per month free for 6 or 12 months on Starter or Growth plans, with no credit card required. Works with Claude, Cursor and more via MCP or API.',
+    url: 'https://unitpost.com/startups',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/unitpost.com.ico',
+    category: 'startup-discounts',
+    tags: ['startups', 'email', 'mcp', 'api', 'claude', 'cursor'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open the startup program page',
+        description: 'Visit unitpost.com/startups and review the Starter and Growth plan tiers.',
+        url: 'https://unitpost.com/startups',
+      },
+      {
+        title: 'Apply with your startup details',
+        description: 'Submit your startup name, website, and contact email. No credit card required at any step.',
+      },
+      {
+        title: 'Pick Starter or Growth',
+        description: 'Choose the tier matching your volume: up to 50k emails/month on Starter, up to 250k on Growth, free for 6 or 12 months.',
+      },
+      {
+        title: 'Connect via MCP or API',
+        description: 'Plug Unitpost into Claude, Cursor, or your own stack via MCP or the REST API using the provided key.',
+      },
+      {
+        title: 'Send your first campaign',
+        description: 'Verify your domain, import contacts, and launch. Track opens and replies from the dashboard.',
+      },
+    ],
+    nameAr: 'Unitpost للشركات الناشئة',
+    taglineAr: '50-250 ألف بريد شهرياً مجاناً لـ6-12 أشهر، دون بطاقة بنكية',
+    descriptionAr: 'برنامج Unitpost للشركات الناشئة: من 50 ألف إلى 250 ألف بريد شهرياً مجاناً لمدة 6 أو 12 شهراً على باقتي Starter وGrowth، دون بطاقة بنكية. يعمل مع Claude وCursor وغيرهما عبر MCP أو API.',
+    stepsAr: [
+      {
+        title: 'افتح صفحة البرنامج',
+        description: 'زر unitpost.com/startups وراجع باقتي Starter وGrowth.',
+        url: 'https://unitpost.com/startups',
+      },
+      {
+        title: 'قدّم ببيانات شركتك',
+        description: 'أرسل اسم شركتك وموقعها وبريدك. لا حاجة لبطاقة بنكية في أي خطوة.',
+      },
+      {
+        title: 'اختر Starter أو Growth',
+        description: 'اختر الباقة المناسبة لحجمك: حتى 50 ألف بريد شهرياً أو حتى 250 ألفاً، مجاناً لـ6 أو 12 شهراً.',
+      },
+      {
+        title: 'اربط عبر MCP أو API',
+        description: 'اربط Unitpost مع Claude أو Cursor أو نظامك عبر MCP أو REST API بالمفتاح المقدم.',
+      },
+      {
+        title: 'أرسل أول حملة',
+        description: 'تحقق من نطاقك واستورد جهات الاتصال وأطلق. تابع الفتح والردود من اللوحة.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]

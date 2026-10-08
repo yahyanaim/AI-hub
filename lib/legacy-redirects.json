@@ -2629,7 +2629,8 @@
   "opencode-union-alpha": "tool",
   "startup-garage-morocco": "forstartups",
   "roots-pitch-wall-agadir": "fellowship",
-  "claude-for-startups": "ai-perks"
+  "claude-for-startups": "ai-perks",
+  "unitpost-for-startups": "startup-discounts"
  },
  "categories": {
   "coding": "/tools",
