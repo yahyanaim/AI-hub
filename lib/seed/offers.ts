@@ -17778,7 +17778,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'Unitpost startup program: 50,000 to 250,000 emails per month free for 6 or 12 months on Starter or Growth plans, with no credit card required. Works with Claude, Cursor and more via MCP or API.',
     url: 'https://unitpost.com/startups',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/unitpost.com.ico',
+    logoUrl: 'https://www.unitpost.com/icon.png?2b6b195739abf5f4',
     category: 'startup-discounts',
     tags: ['startups', 'email', 'mcp', 'api', 'claude', 'cursor'],
     pricing: 'free',
