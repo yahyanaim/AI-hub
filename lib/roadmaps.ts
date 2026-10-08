@@ -198,16 +198,17 @@ export const ROADMAP_TRACKS: RoadmapTrack[] = [
   },
 ]
 
-/** Mermaid flowchart for a track, styled in brand orange. */
+/** Mermaid flowchart for a track, styled like roadmap.sh: dark canvas with
+ *  yellow topic nodes and dark text. Vertical flow like the reference. */
 export function roadmapMermaid(track: RoadmapTrack): string {
-  const lines = ['flowchart LR']
+  const lines = ['flowchart TD']
   track.nodes.forEach((n, i) => {
     const id = `n${i}`
     lines.push(`    ${id}["${n.label}"]`)
-    lines.push(`    class ${id} step`)
+    lines.push(`    class ${id} topic`)
     if (i > 0) lines.push(`    n${i - 1} --> ${id}`)
   })
-  lines.push('    classDef step fill:#FFF3E8,stroke:#FF6B00,stroke-width:2px,color:#1F2937,rx:12,py:8;')
-  lines.push('    linkStyle default stroke:#FF6B00,stroke-width:2px;')
+  lines.push('    classDef topic fill:#FFD43B,stroke:#0F172A,stroke-width:2px,color:#111827,rx:10,py:10;')
+  lines.push('    linkStyle default stroke:#94A3B8,stroke-width:2px;')
   return lines.join('\n')
 }
