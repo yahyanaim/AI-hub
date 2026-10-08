@@ -36,7 +36,6 @@ export async function GET() {
     `- Dev Tools directory: ${base}/dev-tools`,
     `- Open-source repos & LLM tools: ${base}/edittools`,
     `- Coding courses: ${base}/courses`,
-    `- CS roadmaps with course links: ${base}/roadmaps`,
     `- Offers & deals: ${base}/offers`,
     ...(GUIDES_ENABLED ? [`- Paid guides: ${base}/guides`] : []),
     `- About (who runs it, ranking methodology): ${base}/about`,

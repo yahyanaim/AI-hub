@@ -71,7 +71,6 @@ export function Footer() {
               <li><Link href="/dev-tools" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Dev Tools</Link></li>
               <li><Link href="/edittools" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Editing Tools</Link></li>
               <li><Link href="/courses" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Courses</Link></li>
-              <li><Link href="/roadmaps" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Roadmaps</Link></li>
               <li><Link href="/offers" className="text-slate-400 transition-all hover:pl-1 hover:text-brand-orange">Offers</Link></li>
             </ul>
           </div>
