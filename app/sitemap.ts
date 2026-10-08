@@ -49,7 +49,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/offers`, lastModified: offersMod, changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/support`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.5 },
     { url: `${baseUrl}/about`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
-    { url: `${baseUrl}/booking`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
   ]
 
   const byDevToolCategory = new Map<string, Date>()

@@ -31,6 +31,8 @@ const nextConfig = {
     return [
       { source: '/devtool', destination: '/dev-tools', permanent: true },
       { source: '/devtool/:path*', destination: '/dev-tools/:path*', permanent: true },
+      // Shareable shortcut: /booking jumps to the booking card on the homepage.
+      { source: '/booking', destination: '/#booking', permanent: true },
       // NOTE: legacy one-segment redirects (/tools/<slug> → /tools/<category>/<slug>,
       // /categories/<cat>, etc.) are intentionally NOT declared here.
       // next.config redirects cannot do dynamic slug→category lookups; they are

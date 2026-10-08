@@ -51,7 +51,7 @@ export function FaqSection() {
             Frequently Asked Questions
           </h2>
 
-          <div className="mt-6 flex flex-col items-center rounded-2xl border border-brand-orange/20 bg-white p-6 text-center shadow-sm dark:border-border dark:bg-card">
+          <div id="booking" className="mt-6 flex flex-col items-center rounded-2xl border border-brand-orange/20 bg-white p-6 text-center shadow-sm dark:border-border dark:bg-card">
             {FOUNDER_PHOTO_URL ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
