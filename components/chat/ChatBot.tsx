@@ -51,6 +51,25 @@ export function ChatBot() {
     }
   }
 
+  // External entry point: pages like /roadmaps dispatch
+  // `new CustomEvent('ai-hunt:ask', { detail: { question } })`. The question
+  // is prefilled and the normal open flow (including the donation gate)
+  // runs unchanged.
+  useEffect(() => {
+    const onAsk = (e: Event) => {
+      const q = (e as CustomEvent<{ question?: string }>).detail?.question?.trim()
+      if (!q) return
+      setInput(q)
+      if (!hasDonated) {
+        setShowDonationGate(true)
+      } else {
+        setOpen(true)
+      }
+    }
+    window.addEventListener('ai-hunt:ask', onAsk)
+    return () => window.removeEventListener('ai-hunt:ask', onAsk)
+  }, [hasDonated])
+
   const onDonationDismiss = () => {
     setShowDonationGate(false)
     setOpen(true)
