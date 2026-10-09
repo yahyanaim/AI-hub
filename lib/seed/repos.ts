@@ -7897,4 +7897,24 @@ export const SEED_REPOS: Repo[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'r501',
+    slug: 'artcraft',
+    name: 'ArtCraft',
+    tagline: 'Free open-source AI tools for artists, no subscription',
+    description:
+      'Open-source creative suite for artists: controllable AI image and video generation, background removal, 3D compositing, and character posing. Free to download on macOS, Windows, and web.',
+    url: 'https://getartcraft.com',
+    logoUrl: 'https://getartcraft.com/artcraft-icon.svg',
+    category: 'image-editing',
+    tags: ['open-source', 'ai-art', 'image-generation', 'video', 'free'],
+    pricing: 'free',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
