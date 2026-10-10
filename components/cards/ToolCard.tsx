@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ExternalLink, Heart, Trash2 } from 'lucide-react'
+import { ExternalLink, Heart, Trash2, BadgeCheck } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
@@ -15,10 +15,12 @@ export function ToolCard({
   tool,
   className,
   rank,
+  verifiedBadge,
 }: {
   tool: Tool
   className?: string
   rank?: number
+  verifiedBadge?: boolean
 }) {
   const { getUser, currentUser, deleteTool, openDetailModal } = useApp()
   const submitter = getUser(tool.submittedBy)
@@ -46,6 +48,15 @@ export function ToolCard({
       <div className="relative mb-3 flex items-start gap-3.5">
         <div className="relative">
           <Logo src={tool.logoUrl} name={tool.name} size={56} />
+          {verifiedBadge && (
+            <span
+              className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-orange text-white ring-2 ring-card"
+              title="Verified listing"
+              aria-label={`${tool.name} is a verified listing`}
+            >
+              <BadgeCheck className="h-3.5 w-3.5" />
+            </span>
+          )}
           {rank && (
             <span className="absolute -left-1.5 -top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-brand-orange to-orange-400 text-[11px] font-bold text-white shadow-md ring-2 ring-background">
               {rank}

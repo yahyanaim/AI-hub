@@ -184,7 +184,7 @@ export function GoalFinder() {
               <ul className="mt-4 grid gap-5 sm:grid-cols-2">
                 {matches.map(({ tool }) => (
                   <li key={tool.id}>
-                    <ToolCard tool={tool} />
+                    <ToolCard tool={tool} verifiedBadge />
                   </li>
                 ))}
               </ul>
