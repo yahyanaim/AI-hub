@@ -48,17 +48,17 @@ export function GoalFinder() {
           Tools can sound alike. Start with your goal, check which published
           listing details matched, and decide what fits.
         </p>
-        <ol className="mt-6 divide-y divide-border rounded-2xl border border-border bg-card">
-          {STEPS.map((s) => (
-            <li key={s.n} className="flex gap-4 p-5">
-              <span className="font-heading text-sm font-bold text-brand-orange">{s.n}</span>
-              <div>
-                <p className="font-heading text-base font-bold">{s.title}</p>
-                <p className="mt-0.5 text-sm text-muted-foreground">{s.text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+      <ol className="mt-6 grid gap-5 sm:grid-cols-3">
+        {STEPS.map((s) => (
+          <li key={s.n} className="flex gap-3">
+            <span className="font-heading text-sm font-bold text-brand-orange">{s.n}</span>
+            <div>
+              <p className="font-heading text-base font-bold">{s.title}</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">{s.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
       </section>
 
       {/* Form */}
@@ -112,7 +112,7 @@ export function GoalFinder() {
                 setGoal(s)
                 setDone(false)
               }}
-              className="rounded-full border-2 border-brand-orange bg-muted/50 px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-brand-orange/10"
+              className="rounded-full border-2 border-brand-orange bg-white px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-brand-orange/10 dark:bg-card"
             >
               {s}
             </button>
