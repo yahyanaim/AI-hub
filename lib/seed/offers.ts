@@ -17838,4 +17838,78 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o333',
+    slug: 'cloudflare-startups-10k-credits',
+    name: 'Cloudflare Startups $10K Credits',
+    tagline: 'Claim $10,000 in Cloudflare credits for $0, no VC needed',
+    description:
+      'Cloudflare gives startups up to $10,000 in credits for 1 year with no VC backing required: apply with a domain email, describe what the company actually builds, and add a card for overages. Tier 3 (bootstrapped or under $1M raised) needs no partner. Credits expire after 12 months with no extensions — one shot per company.',
+    url: 'https://cloudflare.com/startups/',
+    logoUrl: 'https://www.cloudflare.com/favicon.ico',
+    category: 'startup-discounts',
+    tags: ['cloudflare', 'startups', 'credits', 'cloud', 'free'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Get a domain and domain email first',
+        description:
+          'You need two things before applying: a domain (~$10) and an email on that domain. Free Gmail addresses get filtered — use the domain mailbox guide if you do not have one yet.',
+      },
+      {
+        title: 'Make sure the site is live',
+        description:
+          'Reviewers open your website to verify what the company actually builds. Ship something useful and publicly reachable before applying — apply is not approval.',
+      },
+      {
+        title: 'Apply at cloudflare.com/startups',
+        description:
+          'Apply with the domain email (not Gmail) and describe what the company builds. Do not apply as an agency, consultancy, blog, or reseller — those get filtered.',
+        url: 'https://cloudflare.com/startups/',
+      },
+      {
+        title: 'Add a card to the Cloudflare account',
+        description:
+          'Overages bill to the card; credits do not. Pick Tier 3 — the one with no VC requirement ($10,000 for bootstrapped or under $1M raised).',
+      },
+      {
+        title: 'Know the tiers and the clock',
+        description:
+          '$10K if bootstrapped or under $1M raised (no partner needed). $100K only if under $5M and funded by a Cloudflare partner VC/accelerator. $350K only if $5M+ via the same partner list. Credits expire after 12 months or at zero — no extensions, one shot per company. Review takes up to 48 hours; no mail after a week, email startups@cloudflare.com.',
+      },
+    ],
+    nameAr: 'كلاودفلير للشركات الناشئة: 10 آلاف دولار',
+    taglineAr: 'احصل على 10 آلاف دولار أرصدة كلاودفلير مجاناً دون تمويل',
+    descriptionAr: 'تمنح كلاودفلير الشركات الناشئة حتى 10 آلاف دولار أرصدة لمدة سنة دون اشتراط تمويل: قدّم ببريد النطاق وصف ما تبنيه الشركة فعلياً وأضف بطاقة للتجاوزات. المستوى الثالث (ذاتية التمويل أو أقل من مليون دولار) لا يحتاج شريكاً. تنتهي الأرصدة بعد 12 شهراً دون تمديد — فرصة واحدة لكل شركة.',
+    stepsAr: [
+      {
+        title: 'جهّز النطاق والبريد أولاً',
+        description: 'تحتاج أمرين قبل التقديم: نطاق (~10$) وبريد عليه. عناوين Gmail المجانية تُرفض — اتبع دليل بريد النطاق إذا لم يكن لديك واحد.',
+      },
+      {
+        title: 'تأكد أن الموقع يعمل',
+        description: 'يفتح المراجعون موقعك للتحقق مما تبنيه الشركة فعلياً. أطلق شيئاً مفيداً ومتاحاً للجميع قبل التقديم — التقديم ليس قبولاً.',
+      },
+      {
+        title: 'قدّم عبر cloudflare.com/startups',
+        description: 'قدّم ببريد النطاق (ليس Gmail) وصف ما تبنيه الشركة. لا تقدّم كوكالة أو استشارة أو مدونة أو موزع — تُرفض هذه الطلبات.',
+        url: 'https://cloudflare.com/startups/',
+      },
+      {
+        title: 'أضف بطاقة لحساب كلاودفلير',
+        description: 'التجاوزات تُحسب على البطاقة، أما الأرصدة فلا. اختر المستوى الثالث — بلا شرط تمويل (10 آلاف دولار للتمويل الذاتي أو أقل من مليون).',
+      },
+      {
+        title: 'اعرف المستويات والمهلة',
+        description: '10 آلاف إذا كنت ذاتي التمويل أو أقل من مليون (بلا شريك). 100 ألف فقط إذا أقل من 5 ملايين بتمويل من شريك كلاودفلير. 350 ألفاً فقط إذا 5 ملايين فأكثر عبر نفس القائمة. تنتهي الأرصدة بعد 12 شهراً أو عند نفادها — بلا تمديد وفرصة واحدة لكل شركة. المراجعة حتى 48 ساعة؛ وإن لم تصلك رسالة بعد أسبوع راسل startups@cloudflare.com.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
