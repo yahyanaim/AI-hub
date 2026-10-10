@@ -1,10 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import { BadgeCheck } from 'lucide-react'
 import { matchToolsByGoal } from '@/lib/goal-finder'
-import { Logo } from '@/components/ui/Logo'
+import { ToolCard } from '@/components/cards/ToolCard'
 
 const STEPS = [
   { n: '01', title: 'Start with the outcome', text: 'Describe the work in your own words.' },
@@ -114,7 +112,7 @@ export function GoalFinder() {
                 setGoal(s)
                 setDone(false)
               }}
-              className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-brand-orange/40 hover:text-foreground"
+              className="rounded-full border-2 border-brand-orange bg-muted/50 px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-brand-orange/10"
             >
               {s}
             </button>
@@ -184,46 +182,10 @@ export function GoalFinder() {
             </p>
           ) : (
             <>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {matches.map(({ tool, matched }) => (
-                  <li
-                    key={tool.id}
-                    className="rounded-lg border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-brand-orange/40 hover:shadow-md focus-within:border-brand-orange"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <span className="relative shrink-0">
-                        <Logo src={tool.logoUrl} name={tool.name} size={38} />
-                        <span
-                          className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-orange text-white ring-2 ring-card"
-                          title="Verified listing"
-                          aria-label={`${tool.name} is a verified listing`}
-                        >
-                          <BadgeCheck className="h-3.5 w-3.5" />
-                        </span>
-                      </span>
-                      <div className="min-w-0">
-                        <p className="truncate text-[9px] uppercase tracking-wider text-muted-foreground">
-                          {tool.category.replace(/-/g, ' ')}
-                        </p>
-                        <h3 className="truncate font-heading text-base font-semibold tracking-tight">
-                          <Link
-                            href={`/tools/${tool.category}/${tool.slug}`}
-                            className="transition-colors hover:text-brand-orange focus-visible:outline-none"
-                          >
-                            {tool.name}
-                          </Link>
-                        </h3>
-                      </div>
-                    </div>
-                    <p className="mt-3 line-clamp-2 min-h-[2.6em] text-[11px] leading-relaxed text-muted-foreground">
-                      {tool.tagline}
-                    </p>
-                    <p className="mt-2 border-t border-border pt-2 text-[9px] text-muted-foreground">
-                      <strong className="mr-1 font-semibold">Pricing</strong>
-                      {tool.pricing}
-                      <strong className="ml-3 mr-1 font-semibold">Matched</strong>
-                      {matched.join(', ')}
-                    </p>
+              <ul className="mt-4 grid gap-5 sm:grid-cols-2">
+                {matches.map(({ tool }) => (
+                  <li key={tool.id}>
+                    <ToolCard tool={tool} />
                   </li>
                 ))}
               </ul>
