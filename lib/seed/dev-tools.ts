@@ -15225,4 +15225,24 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'd1005',
+    slug: 'warmbly',
+    name: 'Warmbly',
+    tagline: 'Open-source cold email and warmup platform',
+    description:
+      'Open-source outreach suite: warm up sender reputation, run sequences with follow-ups and A/B tests, unify all replies in one inbox, and push interested leads to your CRM via API and webhooks. Free self-hosted, paid cloud.',
+    url: 'https://warmbly.com',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/warmbly.com.ico',
+    category: 'email',
+    tags: ['cold-email', 'warmup', 'deliverability', 'open-source', 'crm'],
+    pricing: 'freemium',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]

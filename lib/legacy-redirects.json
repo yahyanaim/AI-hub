@@ -2109,7 +2109,8 @@
   "seedprod": "cms",
   "mangools": "seo",
   "twinword": "api",
-  "brandbird": "screenshot"
+  "brandbird": "screenshot",
+  "warmbly": "email"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",
