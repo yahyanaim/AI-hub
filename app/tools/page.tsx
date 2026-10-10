@@ -17,11 +17,11 @@ const topTools = [...SEED_TOOLS].sort((a, b) => b.upvotes - a.upvotes).slice(0, 
 const firstPage = toolsFirstPage()
 
 export const metadata: Metadata = {
-  title: 'AI Tools Directory - Browse & Discover the Best AI Tools',
-  description: 'Browse and discover AI tools by category: coding, writing, image, video, audio, productivity and more. Free and community-ranked, with new tools from Morocco and worldwide.',
+  title: 'Best AI Tools - Free Directory to Browse & Discover',
+  description: 'Discover the best AI tools in one free directory. Browse by category: coding, writing, image, video, audio and productivity. Community-ranked with new tools added regularly.',
   openGraph: {
-    title: 'AI Tools Directory - AI Hunt',
-    description: 'Browse and discover the best AI tools by category, ranked by the community. Free tools for coding, writing, design, productivity, and more.',
+    title: 'Best AI Tools Directory',
+    description: 'Discover the best free AI tools by category: coding, writing, design, video, productivity and more. Ranked by the community.',
     url: `${baseUrl}/tools`,
     siteName: 'AI Hunt',
     type: 'website',
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Tools Directory - AI Hunt',
-    description: 'Browse and discover the best AI tools ranked by the community.',
+    title: 'Best AI Tools Directory - AI Hunt',
+    description: 'Discover the best free AI tools, ranked by the community.',
     images: [`${baseUrl}/og.png`],
   },
   alternates: { canonical: `${baseUrl}/tools` },

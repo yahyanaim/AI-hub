@@ -40,11 +40,11 @@ export function ToolsView({
     <ListingView
       items={items}
       config={{
-      title: heading?.title ?? 'AI Tools',
+      title: heading?.title ?? 'Best AI Tools',
       eyebrow: heading?.eyebrow ?? 'Discover',
       description:
         heading?.description ??
-        'Browse and discover AI tools by category — from coding assistants to image generators. Free and community-ranked.',
+        'Discover the best AI tools by category — from coding assistants to image generators. Free and community-ranked.',
       categoryLabel: 'Category',
       categoryOptions,
       syncCategoryToUrl: !initialCategory,
