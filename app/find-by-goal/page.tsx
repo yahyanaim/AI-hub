@@ -51,14 +51,16 @@ export default function FindByGoalPage() {
         }}
       />
       <div className="container-page py-8">
-        <div className="mx-auto mb-8 max-w-2xl text-center">
-          <div className="mb-1 text-xs font-semibold uppercase tracking-widest text-accent">
+        <div className="mb-8">
+          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-orange">
+            <span className="inline-block h-px w-5 bg-brand-orange" />
             The goal-first finder
           </div>
-          <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Find the best AI tool for what you&apos;re trying to accomplish
+          <h1 className="mt-3 max-w-3xl font-heading font-semibold leading-[1.05] tracking-tight text-foreground text-[clamp(38px,5vw,58px)]">
+            Find the best AI tool for{' '}
+            <em className="not-italic text-brand-orange">what you&apos;re trying to accomplish.</em>
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             Start with the outcome. Explore real directory listings, see why
             they matched, compare available details, and find a path that fits.
           </p>

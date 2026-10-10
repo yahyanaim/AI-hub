@@ -2,26 +2,22 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Sparkles, ArrowRight, BadgeCheck } from 'lucide-react'
 import { matchToolsByGoal } from '@/lib/goal-finder'
 import { Logo } from '@/components/ui/Logo'
 
 const STEPS = [
-  {
-    n: '01',
-    title: 'Start with the outcome',
-    text: 'Describe the work in your own words.',
-  },
-  {
-    n: '02',
-    title: 'Review what matched',
-    text: 'See the relevant listing details.',
-  },
-  {
-    n: '03',
-    title: 'Explore the tradeoffs',
-    text: 'Compare available facts, then inspect details.',
-  },
+  { n: '01', title: 'Start with the outcome', text: 'Describe the work in your own words.' },
+  { n: '02', title: 'Review what matched', text: 'See the relevant listing details.' },
+  { n: '03', title: 'Explore the tradeoffs', text: 'Compare available facts, then inspect details.' },
+]
+
+const SUGGESTIONS = [
+  'Turn YouTube videos into short clips',
+  'Write cold emails that convert',
+  'Build a landing page fast',
+  'Transcribe my meetings with notes',
+  'Remove backgrounds from photos',
+  'Create a logo for my startup',
 ]
 
 export function GoalFinder() {
@@ -30,141 +26,201 @@ export function GoalFinder() {
   const [done, setDone] = useState(false)
   const matches = done ? matchToolsByGoal(goal, freeOnly) : []
 
-  const askAi = () => {
-    const q = goal.trim()
-    if (!q) return
-    window.dispatchEvent(
-      new CustomEvent('ai-hunt:ask', {
-        detail: { question: `Help me find an AI tool for this goal: ${q}` },
-      })
-    )
+  const submit = () => {
+    if (!goal.trim()) return
+    setDone(true)
+    setTimeout(() => {
+      document.getElementById('finder-results')?.scrollIntoView({ behavior: 'smooth' })
+    }, 50)
   }
 
   return (
-    <div className="mx-auto max-w-2xl">
-      {/* Signal statement */}
-      <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground">
-        Less scrolling. More signal.
-      </p>
-      <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-        Because a tool list isn&apos;t the same as an answer. Tools can sound
-        alike — start with your goal, check which published listing details
-        matched, and decide what fits.
-      </p>
-
-      {/* Numbered steps */}
-      <ol className="mt-8 space-y-5">
-        {STEPS.map((s) => (
-          <li key={s.n} className="flex gap-4">
-            <span className="font-heading text-sm font-bold text-brand-orange">
-              {s.n}
-            </span>
-            <div>
-              <h2 className="font-heading text-base font-bold">{s.title}</h2>
-              <p className="mt-0.5 text-sm text-muted-foreground">{s.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-
-      {/* Goal form */}
-      <div className="mt-10">
-        <p className="font-heading text-sm font-bold uppercase tracking-widest text-brand-orange">
-          01 Describe your goal
-        </p>
-        <h2 className="mt-2 font-heading text-xl font-bold">
-          What are you hoping to get done?
+    <div>
+      {/* Story */}
+      <section aria-label="How it works">
+        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-orange">
+          <span className="inline-block h-px w-5 bg-brand-orange" />
+          Less scrolling. More signal.
+        </div>
+        <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight sm:text-3xl">
+          Because a tool list isn&apos;t the same as an answer.
         </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          A task, workflow, or outcome is a good place to start. 500 character
-          limit. Matches come from published listing information — this finder
-          does not generate or verify product claims.
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          Tools can sound alike. Start with your goal, check which published
+          listing details matched, and decide what fits.
         </p>
-        <label htmlFor="goal-input" className="sr-only">
-          Describe what you want to accomplish
+        <div className="mt-6 grid gap-5 sm:grid-cols-3">
+          {STEPS.map((s) => (
+            <div key={s.n} className="flex gap-3">
+              <span className="font-heading text-sm font-bold text-brand-orange">{s.n}</span>
+              <div>
+                <p className="font-heading text-base font-bold">{s.title}</p>
+                <p className="mt-0.5 text-sm text-muted-foreground">{s.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Form */}
+      <form
+        className="mt-8 rounded-[13px] border border-border bg-card p-5 shadow-[0_14px_32px_rgb(0_0_0/8%)] sm:px-8"
+        onSubmit={(e) => {
+          e.preventDefault()
+          submit()
+        }}
+      >
+        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-brand-orange">
+          <span>01</span> Describe your goal
+        </div>
+        <label
+          htmlFor="goal-input"
+          className="mt-2 block font-heading text-[22px] font-semibold tracking-tight"
+        >
+          What are you hoping to get done?
         </label>
-        <textarea
-          id="goal-input"
-          value={goal}
-          onChange={(e) => setGoal(e.target.value.slice(0, 500))}
-          rows={4}
-          className="input mt-4 resize-y"
-        />
-        <label className="mt-3 inline-flex cursor-pointer items-center gap-2 text-sm text-muted-foreground">
+        <p className="mt-1 text-xs text-muted-foreground">
+          A task, workflow, or outcome is a good place to start.
+        </p>
+        <div className="relative mt-3">
+          <textarea
+            id="goal-input"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value.slice(0, 500))}
+            placeholder="For example, organize customer feedback and find recurring themes"
+            rows={3}
+            minLength={2}
+            required
+            aria-describedby="goal-help"
+            className="input min-h-[92px] pb-8"
+          />
+          <span className="pointer-events-none absolute bottom-2 right-3 text-[10px] text-muted-foreground">
+            500 character limit
+          </span>
+        </div>
+        <p id="goal-help" className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
+          Matches come from published listing information. This finder does not
+          generate or verify product claims.
+        </p>
+
+        {/* Suggestion chips */}
+        <div className="mt-3 flex flex-wrap gap-2" aria-label="Suggested goals">
+          {SUGGESTIONS.map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => {
+                setGoal(s)
+                setDone(false)
+              }}
+              className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-brand-orange/40 hover:text-foreground"
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+
+        <label className="mt-4 inline-flex cursor-pointer items-start gap-2.5 text-xs text-foreground">
           <input
             type="checkbox"
             checked={freeOnly}
             onChange={(e) => setFreeOnly(e.target.checked)}
-            className="h-4 w-4 accent-[#FF6B00]"
+            className="peer sr-only"
           />
-          Show only tools with a free plan
-        </label>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          Your goal is used only to search directory listings. Prefer the AI?
-          Send it to the chatbot instead — same matching, conversational help.
-        </p>
-        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-center">
-          <button
-            type="button"
-            onClick={() => setDone(true)}
-            disabled={!goal.trim()}
-            className="btn-primary px-8"
+          <span
+            aria-hidden="true"
+            className="mt-0.5 grid h-[18px] w-[18px] shrink-0 place-items-center rounded border border-input bg-card transition-colors peer-checked:border-brand-orange peer-checked:bg-brand-orange peer-focus-visible:outline-2 peer-focus-visible:outline-brand-orange [&>svg]:hidden peer-checked:[&>svg]:block"
           >
+            <svg viewBox="0 0 10 10" className="h-2.5 w-2.5 fill-none stroke-white stroke-2">
+              <path d="M1.5 5.5l2.5 2.5 4.5-6" />
+            </svg>
+          </span>
+          <span>
+            Show only tools with a free plan
+            <small className="mt-0.5 block text-[10px] leading-relaxed text-muted-foreground">
+              Free-plan evidence is reviewed separately from whether the tool
+              itself is verified.
+            </small>
+          </span>
+        </label>
+
+        <div className="mt-3 flex flex-col gap-3 border-t border-border pt-4 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-md text-[10px] leading-relaxed text-muted-foreground">
+            Your goal is used only to search directory listings. Nothing is
+            saved or sent anywhere.
+          </p>
+          <button type="submit" className="btn-primary shrink-0">
             Find my options
-            <ArrowRight className="h-4 w-4" />
-          </button>
-          <button type="button" onClick={askAi} className="btn-secondary">
-            <Sparkles className="h-4 w-4" />
-            Ask AI instead
+            <span aria-hidden="true">→</span>
           </button>
         </div>
-      </div>
+      </form>
 
       {/* Results */}
       {done && (
-        <div className="mt-10">
-          <h2 className="text-center font-heading text-lg font-bold">
-            {matches.length ? `${matches.length} matches` : 'No matches yet'}
-          </h2>
+        <div id="finder-results" className="mt-5 scroll-mt-24 rounded-[13px] border border-border bg-card p-5 shadow-[0_14px_32px_rgb(0_0_0/8%)] sm:px-7">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="font-heading text-2xl font-semibold tracking-tight">
+                {matches.length ? `${matches.length} matches` : 'No matches yet'}
+              </h2>
+              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+                Goal: <strong className="font-medium text-foreground">{goal.trim().slice(0, 140)}</strong>
+              </p>
+            </div>
+            <span className="shrink-0 rounded-full border border-border px-2.5 py-1 text-[10px] text-muted-foreground">
+              {matches.length} found
+            </span>
+          </div>
+          <p className="mt-3 rounded-md border border-brand-orange/20 bg-brand-orange/[0.04] p-2.5 text-[10px] leading-relaxed text-muted-foreground">
+            Method: keyword overlap against published names, tags, categories
+            and descriptions. No generated claims.
+          </p>
           {matches.length === 0 ? (
-            <p className="mt-2 text-center text-sm text-muted-foreground">
+            <p className="mt-3 text-sm text-muted-foreground">
               Nothing in the catalogue matches those words yet. Try broader
-              terms — or ask the AI for guidance.
+              terms or one of the suggestions above.
             </p>
           ) : (
-            <ul className="mt-4 space-y-4">
-              {matches.map(({ tool, matched }) => (
-                <li
-                  key={tool.id}
-                  className="rounded-2xl border border-border bg-card p-5 shadow-sm"
-                >
-                  <div className="flex items-center gap-3">
-                    <Logo src={tool.logoUrl} name={tool.name} size={44} />
-                    <div className="min-w-0">
-                      <h3 className="truncate font-heading text-base font-bold">
-                        {tool.name}
-                      </h3>
-                      <p className="truncate text-xs text-muted-foreground">
-                        {tool.tagline}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="mt-2 flex items-start gap-1.5 text-xs text-muted-foreground">
-                    <BadgeCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-orange" />
-                    <span>
-                      Matched on: {matched.join(', ')} · {tool.pricing}
-                    </span>
-                  </p>
-                  <Link
-                    href={`/tools/${tool.category}/${tool.slug}`}
-                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-orange hover:underline"
+            <>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {matches.map(({ tool, matched }) => (
+                  <li
+                    key={tool.id}
+                    className="rounded-lg border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-brand-orange/40 hover:shadow-md focus-within:border-brand-orange"
                   >
-                    View details
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                    <div className="flex items-center gap-2.5">
+                      <Logo src={tool.logoUrl} name={tool.name} size={38} />
+                      <div className="min-w-0">
+                        <p className="truncate text-[9px] uppercase tracking-wider text-muted-foreground">
+                          {tool.category.replace(/-/g, ' ')}
+                        </p>
+                        <h3 className="truncate font-heading text-base font-semibold tracking-tight">
+                          <Link
+                            href={`/tools/${tool.category}/${tool.slug}`}
+                            className="transition-colors hover:text-brand-orange focus-visible:outline-none"
+                          >
+                            {tool.name}
+                          </Link>
+                        </h3>
+                      </div>
+                    </div>
+                    <p className="mt-3 line-clamp-2 min-h-[2.6em] text-[11px] leading-relaxed text-muted-foreground">
+                      {tool.tagline}
+                    </p>
+                    <p className="mt-2 border-t border-border pt-2 text-[9px] text-muted-foreground">
+                      <strong className="mr-1 font-semibold">Pricing</strong>
+                      {tool.pricing}
+                      <strong className="ml-3 mr-1 font-semibold">Matched</strong>
+                      {matched.join(', ')}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-[10px] text-muted-foreground">
+                Showing top {matches.length} of catalogue matches.
+              </p>
+            </>
           )}
         </div>
       )}

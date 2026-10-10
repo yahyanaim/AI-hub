@@ -24,6 +24,7 @@ const NAV_LINKS = [
   { href: '/edittools', label: 'Editing Tools' },
   { href: '/courses', label: 'Courses' },
   { href: '/offers', label: 'Offers' },
+  { href: '/find-by-goal', label: 'Find by Goal' },
   { href: '/support', label: 'Support' },
 ]
 
@@ -54,7 +55,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <nav aria-label="Primary" className="ml-4 hidden items-center gap-1 md:flex">
+          <nav aria-label="Primary" className="ml-4 hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => {
               const active =
                 pathname === link.href ||
@@ -137,7 +138,7 @@ export function Navbar() {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileOpen((o) => !o)}
-            className="inline-flex size-9 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted md:hidden"
+            className="inline-flex size-9 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted lg:hidden"
             aria-label="Menu"
             aria-controls="mobile-nav"
             aria-expanded={mobileOpen}
@@ -149,7 +150,7 @@ export function Navbar() {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div id="mobile-nav" className="mx-auto mt-2 w-full max-w-7xl rounded-2xl border border-border bg-background/90 p-2 shadow-lg backdrop-blur-xl md:hidden">
+        <div id="mobile-nav" className="mx-auto mt-2 w-full max-w-7xl rounded-2xl border border-border bg-background/90 p-2 shadow-lg backdrop-blur-xl lg:hidden">
           <nav className="flex flex-col gap-1">
             {showSearch && (
               <button
