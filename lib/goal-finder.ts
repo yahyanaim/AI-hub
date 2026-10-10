@@ -45,7 +45,7 @@ const SYNONYMS: Record<string, string[]> = {
   translate: ['translate', 'translation', 'translator', 'dubbing', 'dub'],
   chat: ['chat', 'chatbot', 'assistant', 'conversation'],
   search: ['search', 'find', 'finder', 'lookup', 'discover'],
-  build: ['build', 'builder', 'create', 'creator', 'generate', 'generator', 'maker'],
+  build: ['build', 'builder', 'create', 'creator', 'generate', 'generator'],
   test: ['test', 'testing', 'tests', 'qa'],
 }
 
@@ -79,10 +79,12 @@ function expand(term: string): string[] {
   return [...out]
 }
 
-/** Edit distance ≤ 1 (insert/delete/substitute), cheap for short tokens. */
+/** Edit distance ≤ 1 (insert/delete/substitute), cheap for short tokens.
+ *  Both sides must be ≥ 5 chars: short words collide too easily
+ *  ('trip' vs 'strip' once produced a travel app for "background removal"). */
 function fuzzy(hay: string, needle: string): boolean {
   if (hay.includes(needle)) return true
-  if (needle.length < 5 || hay.length < 4) return false
+  if (needle.length < 5 || hay.length < 5) return false
   if (Math.abs(hay.length - needle.length) > 1) return false
   let i = 0
   let j = 0
@@ -120,18 +122,37 @@ function fieldIncludes(fieldTokens: string[], variants: string[]): boolean {
 export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): GoalMatch[] {
   const rawTerms = tokens(goal).slice(0, 20)
   if (!rawTerms.length) return []
-  const pool = freeOnly
+  const pool = (freeOnly
     ? SEED_TOOLS.filter((t) => t.pricing === 'free' || t.pricing === 'open-source')
     : SEED_TOOLS
+  ).filter((t) => !t.name.toLowerCase().endsWith(' skill'))
   // Multi-word phrases from the raw goal (e.g. "landing page").
   const lowered = goal.toLowerCase()
   const phrases = ['landing page', 'text to speech', 'speech to text', 'background remover', 'remove background']
     .filter((p) => lowered.includes(p))
 
+  // IDF weights: terms appearing in hundreds of records (remove, free,
+  // video) contribute little; distinctive terms (backgrounds, transcribe)
+  // dominate. Computed over the pool so the free filter re-weights fairly.
+  const docOf = (tool: Tool) =>
+    new Set(
+      tokens(
+        `${tool.name} ${tool.tags.join(' ').replace(/-/g, ' ')} ${tool.category} ${tool.tagline} ${tool.description}`
+      ).map((t) => t.stem)
+    )
+  const docs = pool.map(docOf)
+  const idf = (variants: string[]) => {
+    let best = 0
+    for (const v of variants) {
+      const df = docs.filter((d) => [...d].some((f) => fuzzy(f, v))).length || 1
+      best = Math.max(best, Math.log(pool.length / df))
+    }
+    return best
+  }
+
   const scored: GoalMatch[] = []
   for (const tool of pool) {
     const name = tool.name.toLowerCase()
-    const nameTokens = tokens(tool.name).map((t) => t.stem)
     const tagTokens = tool.tags.flatMap((t) => tokens(t.replace(/-/g, ' ')).map((x) => x.stem))
     const catTokens = tokens(tool.category.replace(/-/g, ' ')).map((t) => t.stem)
     const bodyTokens = tokens(`${tool.tagline} ${tool.description}`).map((t) => t.stem)
@@ -143,10 +164,12 @@ export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): Goa
     }
     for (const { raw, stem: term } of rawTerms) {
       const variants = expand(term)
-      if (fieldIncludes(nameTokens, variants)) hit(raw, 5)
-      else if (fieldIncludes(tagTokens, variants)) hit(raw, 3)
-      else if (fieldIncludes(catTokens, variants)) hit(raw, 2)
-      else if (fieldIncludes(bodyTokens, variants)) hit(raw, 1)
+      const boost = 1 + idf(variants)
+      // Names match exactly (brand precision — no fuzzy, no synonyms).
+      if (variants.some((v) => name.includes(v))) hit(raw, 5 * boost)
+      else if (fieldIncludes(tagTokens, variants)) hit(raw, 3 * boost)
+      else if (fieldIncludes(catTokens, variants)) hit(raw, 2 * boost)
+      else if (fieldIncludes(bodyTokens, variants)) hit(raw, 1 * boost)
     }
     for (const p of phrases) {
       const blob = `${tool.name} ${tool.tagline} ${tool.description}`.toLowerCase()
@@ -159,8 +182,11 @@ export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): Goa
   }
   // Best match per normalized name: the catalogue contains a few duplicate
   // records for the same product — never show the same tool twice.
+  // Minimum score 2 filters single body-word coincidences (one stray word
+  // in a long description outranking genuinely relevant tools).
   const best = new Map<string, GoalMatch>()
   for (const m of scored) {
+    if (m.score < 2) continue
     const key = m.tool.name.toLowerCase().replace(/[^a-z0-9]/g, '')
     const prev = best.get(key)
     if (!prev || m.score > prev.score) best.set(key, m)
