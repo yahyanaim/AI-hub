@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { BadgeCheck } from 'lucide-react'
 import { matchToolsByGoal } from '@/lib/goal-finder'
 import { Logo } from '@/components/ui/Logo'
 
@@ -49,17 +50,17 @@ export function GoalFinder() {
           Tools can sound alike. Start with your goal, check which published
           listing details matched, and decide what fits.
         </p>
-        <div className="mt-6 grid gap-5 sm:grid-cols-3">
+        <ol className="mt-6 divide-y divide-border rounded-2xl border border-border bg-card">
           {STEPS.map((s) => (
-            <div key={s.n} className="flex gap-3">
+            <li key={s.n} className="flex gap-4 p-5">
               <span className="font-heading text-sm font-bold text-brand-orange">{s.n}</span>
               <div>
                 <p className="font-heading text-base font-bold">{s.title}</p>
                 <p className="mt-0.5 text-sm text-muted-foreground">{s.text}</p>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
       {/* Form */}
@@ -190,7 +191,16 @@ export function GoalFinder() {
                     className="rounded-lg border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-brand-orange/40 hover:shadow-md focus-within:border-brand-orange"
                   >
                     <div className="flex items-center gap-2.5">
-                      <Logo src={tool.logoUrl} name={tool.name} size={38} />
+                      <span className="relative shrink-0">
+                        <Logo src={tool.logoUrl} name={tool.name} size={38} />
+                        <span
+                          className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-orange text-white ring-2 ring-card"
+                          title="Verified listing"
+                          aria-label={`${tool.name} is a verified listing`}
+                        >
+                          <BadgeCheck className="h-3.5 w-3.5" />
+                        </span>
+                      </span>
                       <div className="min-w-0">
                         <p className="truncate text-[9px] uppercase tracking-wider text-muted-foreground">
                           {tool.category.replace(/-/g, ' ')}
