@@ -48,9 +48,9 @@ export function GoalFinder() {
           Tools can sound alike. Start with your goal, check which published
           listing details matched, and decide what fits.
         </p>
-      <ol className="mt-6 grid gap-5 sm:grid-cols-3">
+      <ol className="mt-6 grid gap-5 sm:grid-cols-3 sm:divide-x sm:divide-border">
         {STEPS.map((s) => (
-          <li key={s.n} className="flex gap-3">
+          <li key={s.n} className="flex gap-3 sm:pl-6 sm:first:pl-0">
             <span className="font-heading text-sm font-bold text-brand-orange">{s.n}</span>
             <div>
               <p className="font-heading text-base font-bold">{s.title}</p>
@@ -150,7 +150,6 @@ export function GoalFinder() {
           </p>
           <button type="submit" className="btn-primary shrink-0">
             Find my options
-            <span aria-hidden="true">→</span>
           </button>
         </div>
       </form>

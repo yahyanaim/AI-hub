@@ -50,7 +50,7 @@ export default function FindByGoalPage() {
           }),
         }}
       />
-      <div className="container-page py-8">
+      <div className="container-page pb-8 pt-12 md:pt-14">
         <div className="mb-8">
           <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-accent">
             The goal-first finder
@@ -58,10 +58,12 @@ export default function FindByGoalPage() {
           <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Find the best AI tool for what you&apos;re trying to accomplish
           </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Start with the outcome. Explore real directory listings, see why
-            they matched, compare available details, and find a path that fits.
-          </p>
+          <div className="mt-3 w-full rounded-xl border border-brand-orange/50 bg-card px-4 py-3 transition-all duration-200 hover:border-accent hover:shadow-[0_0_24px_var(--accent-glow)]">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Start with the outcome. Explore real directory listings, see why
+              they matched, compare available details, and find a path that fits.
+            </p>
+          </div>
         </div>
         <GoalFinder />
       </div>
