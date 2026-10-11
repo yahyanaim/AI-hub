@@ -225,6 +225,7 @@ export function GoalFinder() {
                 Showing top {matches.length} of catalogue matches.
               </p>
             </>
+          )}
           </>
           )}
         </div>
