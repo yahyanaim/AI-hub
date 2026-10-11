@@ -1272,7 +1272,35 @@
   "coursebox": "education",
   "eklipse": "video",
   "learnsmarter": "education",
-  "quizalize": "education"
+  "quizalize": "education",
+  "newsletter-pilot": "email",
+  "ai-portrait-gen": "image",
+  "blogtweet": "marketing",
+  "bookhero-ai": "education",
+  "decision-mentor": "productivity",
+  "definite-app": "data",
+  "dreampress-ai": "writing",
+  "fineshare-voicetrans": "audio",
+  "free-content-ideas": "marketing",
+  "text-to-speech-online": "audio",
+  "hyperseo": "marketing",
+  "insighto-ai": "productivity",
+  "localbot-ai": "productivity",
+  "logolivery-ai": "image",
+  "magic-tales": "education",
+  "marketalerts": "finance",
+  "monetizebot-ai": "marketing",
+  "notes-ai-app": "productivity",
+  "pitchbob": "marketing",
+  "pixalto-app": "image",
+  "plantphoto-ai": "image",
+  "plus-ai-decks": "productivity",
+  "sketch-logo-ai": "image",
+  "tubeonai": "productivity",
+  "txt-muse": "writing",
+  "webagent-ai": "productivity",
+  "youtube-summary-extension": "productivity",
+  "zoom-ai-companion": "productivity"
  },
  "devtools": {
   "vs-code": "ide",
@@ -2109,7 +2137,19 @@
   "mangools": "seo",
   "twinword": "api",
   "brandbird": "screenshot",
-  "warmbly": "email"
+  "warmbly": "email",
+  "alcohol-label-api": "api",
+  "maintain-ai": "other",
+  "android-studio": "ide",
+  "db-browser-sqlite": "database",
+  "air-sqlite-manager": "database",
+  "freelens": "containers",
+  "podman-desktop": "containers",
+  "kreya": "api",
+  "gitbutler": "source-control",
+  "gitfiend": "source-control",
+  "arduino-ide": "ide",
+  "shuttle-dev": "hosting"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",
@@ -3236,6 +3276,9 @@
   "hitpaw": "video",
   "cutout-pro": "image-editing",
   "passport-photo-online": "photo",
-  "artcraft": "image-editing"
+  "artcraft": "image-editing",
+  "blipcut-video-translator": "video",
+  "animaker-subtitles": "video",
+  "exposure-x6": "photo"
  }
 }
