@@ -5301,6 +5301,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['mistral', 'hackathon', 'ww', 'credits', 'hiring'],
     pricing: 'free',
+    endsAt: '2026-03-11',
     steps: [
       {
         title: 'Pick a location and register',
@@ -5411,6 +5412,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['vslive', 'microsoft', 'azure', 'hackathon', '25k'],
     pricing: 'free',
+    endsAt: '2026-07-29',
     steps: [
       {
         title: 'Register for VSLive Microsoft HQ',
@@ -5466,6 +5468,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['devnetwork', 'api', 'cloud', 'ai', 'api-world'],
     pricing: 'free',
+    endsAt: '2026-09-03',
     steps: [
       {
         title: 'Join on Devpost',
@@ -5962,6 +5965,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['gitex', 'supernova', 'morocco', 'competition', 'africa'],
     pricing: 'free',
+    endsAt: '2026-04-09',
     steps: [
       {
         title: 'Apply on GITEX Africa',
@@ -7002,6 +7006,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['sportech', 'hackathon', 'morocco', 'youth', 'competition'],
     pricing: 'free',
+    endsAt: '2026-06-20',
     steps: [
       {
         title: 'Register your team',
@@ -9023,6 +9028,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['cleantech', 'climate', 'competition', 'morocco', 'startup'],
     pricing: 'free',
+    endsAt: '2026-08-14',
     steps: [
       {
         title: 'Enter the national round',
@@ -9588,6 +9594,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['ai', 'competition', 'huawei', 'morocco', 'prizes', 'students'],
     pricing: 'free',
+    endsAt: '2025-12-18',
     steps: [
       {
         title: 'Register as a Moroccan youth',
@@ -9639,6 +9646,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['pitch', 'competition', 'cash-prizes', 'equity-free', 'online', 'startup'],
     pricing: 'free',
+    endsAt: '2025-12-31',
     steps: [
       {
         title: 'Enter online',
@@ -9690,6 +9698,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['web3', 'hackathon', 'hedera', 'africa', 'grants'],
     pricing: 'free',
+    endsAt: '2026-04-29',
     steps: [
       {
         title: 'Register your team',
@@ -9741,6 +9750,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['hackathon', 'entrepreneurship', 'europe', 'startup', 'students'],
     pricing: 'free',
+    endsAt: '2026-03-20',
     steps: [
       {
         title: 'Pick your tour stop',
@@ -10252,6 +10262,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['girls', 'apps', 'entrepreneurship', 'mentorship', 'global'],
     pricing: 'free',
+    endsAt: '2026-04-20',
     steps: [
       {
         title: 'Form a girls team',
@@ -10354,6 +10365,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['agritech', 'incubation', 'um6p', 'generation-green', 'morocco'],
     pricing: 'free',
+    endsAt: '2026-09-13',
     steps: [
       {
         title: 'Check fit',
@@ -10559,6 +10571,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['hackathon', 'agents', 'openai', 'global', 'build-day'],
     pricing: 'free',
+    endsAt: '2026-09-12',
     steps: [
       {
         title: 'Apply to your city',
