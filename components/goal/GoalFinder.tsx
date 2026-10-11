@@ -41,10 +41,10 @@ export function GoalFinder() {
     timer.current = setTimeout(() => {
       setMatches(matchToolsByGoal(q, free))
       setSearching(false)
-      setTimeout(() => {
-        document.getElementById('finder-results')?.scrollIntoView({ behavior: 'smooth' })
-      }, 50)
     }, 650)
+    setTimeout(() => {
+      document.getElementById('finder-results')?.scrollIntoView({ behavior: 'smooth' })
+    }, 50)
   }
 
   return (

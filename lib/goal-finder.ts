@@ -115,6 +115,72 @@ export interface GoalMatch {
   matched: string[]
 }
 
+interface IndexEntry {
+  tool: Tool
+  name: string
+  tagTokens: string[]
+  catTokens: string[]
+  bodyTokens: string[]
+  doc: Set<string>
+}
+
+function stemTokens(text: string): string[] {
+  return tokens(text.replace(/-/g, ' ')).map((t) => t.stem)
+}
+
+// Built once per pool and reused across queries (module lifetime).
+const indexCache = new Map<string, IndexEntry[]>()
+
+function getIndex(freeOnly: boolean): IndexEntry[] {
+  const key = freeOnly ? 'free' : 'all'
+  const hit = indexCache.get(key)
+  if (hit) return hit
+  const pool = (
+    freeOnly
+      ? SEED_TOOLS.filter((t) => t.pricing === 'free' || t.pricing === 'open-source')
+      : SEED_TOOLS
+  ).filter((t) => !t.name.toLowerCase().endsWith(' skill'))
+  const entries = pool.map((tool) => {
+    const tagTokens = tool.tags.flatMap((t) => stemTokens(t))
+    const catTokens = stemTokens(tool.category)
+    const bodyTokens = stemTokens(`${tool.tagline} ${tool.description}`)
+    return {
+      tool,
+      name: tool.name.toLowerCase(),
+      tagTokens,
+      catTokens,
+      bodyTokens,
+      doc: new Set([
+        ...stemTokens(tool.name),
+        ...tagTokens,
+        ...catTokens,
+        ...bodyTokens,
+      ]),
+    }
+  })
+  indexCache.set(key, entries)
+  return entries
+}
+
+// IDF cache persists across queries: term rarity never changes at runtime.
+const idfCache = new Map<string, number>()
+
+function idf(variants: string[], docs: Set<string>[], poolSize: number): number {
+  let best = 0
+  for (const v of variants) {
+    // Keyed by pool size: the same term is rarer in the smaller free pool.
+    const key = `${poolSize}:${v}`
+    let cached = idfCache.get(key)
+    if (cached === undefined) {
+      const df = docs.filter((d) => [...d].some((f) => fuzzy(f, v))).length || 1
+      cached = Math.log(poolSize / df)
+      idfCache.set(key, cached)
+    }
+    if (cached > best) best = cached
+  }
+  return best
+}
+
 function fieldIncludes(fieldTokens: string[], variants: string[]): boolean {
   return variants.some((v) => fieldTokens.some((f) => fuzzy(f, v)))
 }
@@ -122,55 +188,33 @@ function fieldIncludes(fieldTokens: string[], variants: string[]): boolean {
 export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): GoalMatch[] {
   const rawTerms = tokens(goal).slice(0, 20)
   if (!rawTerms.length) return []
-  const pool = (freeOnly
-    ? SEED_TOOLS.filter((t) => t.pricing === 'free' || t.pricing === 'open-source')
-    : SEED_TOOLS
-  ).filter((t) => !t.name.toLowerCase().endsWith(' skill'))
+  const entries = getIndex(freeOnly)
   // Multi-word phrases from the raw goal (e.g. "landing page").
   const lowered = goal.toLowerCase()
   const phrases = ['landing page', 'text to speech', 'speech to text', 'background remover', 'remove background']
     .filter((p) => lowered.includes(p))
 
-  // IDF weights: terms appearing in hundreds of records (remove, free,
-  // video) contribute little; distinctive terms (backgrounds, transcribe)
-  // dominate. Computed over the pool so the free filter re-weights fairly.
-  const docOf = (tool: Tool) =>
-    new Set(
-      tokens(
-        `${tool.name} ${tool.tags.join(' ').replace(/-/g, ' ')} ${tool.category} ${tool.tagline} ${tool.description}`
-      ).map((t) => t.stem)
-    )
-  const docs = pool.map(docOf)
-  const idf = (variants: string[]) => {
-    let best = 0
-    for (const v of variants) {
-      const df = docs.filter((d) => [...d].some((f) => fuzzy(f, v))).length || 1
-      best = Math.max(best, Math.log(pool.length / df))
-    }
-    return best
-  }
+  // Term boosts computed ONCE per query (not per tool): rarity is a
+  // property of the pool, and recomputing it per record froze the UI.
+  const boosts = rawTerms.map(({ stem: term }) => 1 + idf(expand(term), entries.map((e) => e.doc), entries.length))
 
   const scored: GoalMatch[] = []
-  for (const tool of pool) {
-    const name = tool.name.toLowerCase()
-    const tagTokens = tool.tags.flatMap((t) => tokens(t.replace(/-/g, ' ')).map((x) => x.stem))
-    const catTokens = tokens(tool.category.replace(/-/g, ' ')).map((t) => t.stem)
-    const bodyTokens = tokens(`${tool.tagline} ${tool.description}`).map((t) => t.stem)
+  for (const { tool, name, tagTokens, catTokens, bodyTokens } of entries) {
     let score = 0
     const matched: string[] = []
     const hit = (label: string, w: number) => {
       score += w
       if (!matched.includes(label)) matched.push(label)
     }
-    for (const { raw, stem: term } of rawTerms) {
+    rawTerms.forEach(({ raw, stem: term }, ti) => {
       const variants = expand(term)
-      const boost = 1 + idf(variants)
+      const boost = boosts[ti]!
       // Names match exactly (brand precision — no fuzzy, no synonyms).
       if (variants.some((v) => name.includes(v))) hit(raw, 5 * boost)
       else if (fieldIncludes(tagTokens, variants)) hit(raw, 3 * boost)
       else if (fieldIncludes(catTokens, variants)) hit(raw, 2 * boost)
       else if (fieldIncludes(bodyTokens, variants)) hit(raw, 1 * boost)
-    }
+    })
     for (const p of phrases) {
       const blob = `${tool.name} ${tool.tagline} ${tool.description}`.toLowerCase()
       if (blob.includes(p)) {
