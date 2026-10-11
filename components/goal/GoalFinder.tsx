@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { matchToolsByGoal } from '@/lib/goal-finder'
+import { useRef, useState } from 'react'
+import { Loader2 } from 'lucide-react'
+import { matchToolsByGoal, type GoalMatch } from '@/lib/goal-finder'
 import { ToolCard } from '@/components/cards/ToolCard'
 
 const STEPS = [
@@ -23,14 +24,27 @@ export function GoalFinder() {
   const [goal, setGoal] = useState('')
   const [freeOnly, setFreeOnly] = useState(false)
   const [done, setDone] = useState(false)
-  const matches = done ? matchToolsByGoal(goal, freeOnly) : []
+  const [searching, setSearching] = useState(false)
+  const [matches, setMatches] = useState<GoalMatch[]>([])
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const submit = () => {
-    if (!goal.trim()) return
+    if (!goal.trim() || searching) return
+    const q = goal.trim()
+    const free = freeOnly
     setDone(true)
-    setTimeout(() => {
-      document.getElementById('finder-results')?.scrollIntoView({ behavior: 'smooth' })
-    }, 50)
+    setSearching(true)
+    setMatches([])
+    if (timer.current) clearTimeout(timer.current)
+    // Let the loader paint first; matching itself is instant. The pause
+    // also reads as "searching the catalogue" rather than a flash.
+    timer.current = setTimeout(() => {
+      setMatches(matchToolsByGoal(q, free))
+      setSearching(false)
+      setTimeout(() => {
+        document.getElementById('finder-results')?.scrollIntoView({ behavior: 'smooth' })
+      }, 50)
+    }, 650)
   }
 
   return (
@@ -157,6 +171,25 @@ export function GoalFinder() {
       {/* Results */}
       {done && (
         <div id="finder-results" className="mt-5 scroll-mt-24 rounded-[13px] border border-border bg-card p-5 shadow-[0_14px_32px_rgb(0_0_0/8%)] sm:px-7">
+          {searching ? (
+            <div role="status" aria-label="Searching tools">
+              <div className="flex items-center justify-center gap-2 py-2">
+                <Loader2 className="h-5 w-5 animate-spin text-brand-orange" />
+                <p className="font-heading text-lg font-semibold">
+                  Searching the catalogue…
+                </p>
+              </div>
+              <ul className="mt-4 grid gap-5 sm:grid-cols-2" aria-hidden="true">
+                {[0, 1, 2, 3].map((i) => (
+                  <li
+                    key={i}
+                    className="h-48 animate-pulse rounded-2xl border border-border bg-muted/50"
+                  />
+                ))}
+              </ul>
+            </div>
+          ) : (
+          <>
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="font-heading text-2xl font-semibold tracking-tight">
