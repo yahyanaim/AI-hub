@@ -4,8 +4,9 @@ import { SEED_COURSES } from '@/lib/seed'
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 // Verified working on this account (Feb 2026 probe: fast 2-3s for trivial prompt).
 // kimi-k3 works but needs 25-35s+ per request — keep it as last-resort fallback only.
-const DEFAULT_MODEL = 'deepseek-ai/deepseek-v4-flash-0731'
-const FALLBACK_MODELS = ['openai/gpt-oss-20b', 'z-ai/glm-5.3-flash', 'moonshotai/kimi-k3']
+// deepseek-v4-flash returns 410 Gone (retired) — gpt-oss-20b verified live.
+const DEFAULT_MODEL = 'openai/gpt-oss-20b'
+const FALLBACK_MODELS = ['z-ai/glm-5.3-flash']
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {

@@ -1,9 +1,16 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Sparkles } from 'lucide-react'
 import { matchToolsByGoal, type GoalMatch } from '@/lib/goal-finder'
 import { ToolCard } from '@/components/cards/ToolCard'
+import type { Tool } from '@/types'
+
+interface ShownMatch {
+  tool: Tool
+  note: string
+  ai: boolean
+}
 
 const STEPS = [
   { n: '01', title: 'Start with the outcome', text: 'Describe the work in your own words.' },
@@ -25,7 +32,8 @@ export function GoalFinder() {
   const [freeOnly, setFreeOnly] = useState(false)
   const [done, setDone] = useState(false)
   const [searching, setSearching] = useState(false)
-  const [matches, setMatches] = useState<GoalMatch[]>([])
+  const [matches, setMatches] = useState<ShownMatch[]>([])
+  const [aiUsed, setAiUsed] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const submit = () => {
@@ -35,12 +43,55 @@ export function GoalFinder() {
     setDone(true)
     setSearching(true)
     setMatches([])
+    setAiUsed(false)
     if (timer.current) clearTimeout(timer.current)
-    // Let the loader paint first; matching itself is instant. The pause
-    // also reads as "searching the catalogue" rather than a flash.
-    timer.current = setTimeout(() => {
-      setMatches(matchToolsByGoal(q, free))
+    // AI re-rank first (understands phrasing), local keyword matching as
+    // the instant fallback. The loader paints before either runs.
+    const run = async () => {
+      try {
+        const controller = new AbortController()
+        const timeout = setTimeout(() => controller.abort(), 30000)
+        try {
+          const res = await fetch('/api/goal-match', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ goal: q, freeOnly: free }),
+            signal: controller.signal,
+          })
+          if (res.ok) {
+            const data = await res.json()
+            if (Array.isArray(data.matches) && data.matches.length) {
+              setMatches(
+                data.matches.map((m: { tool: Tool; reason: string }) => ({
+                  tool: m.tool,
+                  note: m.reason,
+                  ai: true,
+                }))
+              )
+              setAiUsed(true)
+              setSearching(false)
+              return
+            }
+          }
+        } finally {
+          clearTimeout(timeout)
+        }
+      } catch {
+        // fall through to local matching
+      }
+      const local: GoalMatch[] = matchToolsByGoal(q, free)
+      setMatches(
+        local.map((m) => ({
+          tool: m.tool,
+          note: `Matched on: ${m.matched.join(', ')}`,
+          ai: false,
+        }))
+      )
+      setAiUsed(false)
       setSearching(false)
+    }
+    timer.current = setTimeout(() => {
+      void run()
     }, 650)
     setTimeout(() => {
       document.getElementById('finder-results')?.scrollIntoView({ behavior: 'smooth' })
@@ -204,8 +255,20 @@ export function GoalFinder() {
             </span>
           </div>
           <p className="mt-3 rounded-md border border-brand-orange/20 bg-brand-orange/[0.04] p-2.5 text-[10px] leading-relaxed text-muted-foreground">
-            Method: keyword overlap against published names, tags, categories
-            and descriptions. No generated claims.
+            {aiUsed ? (
+              <>
+                <span className="inline-flex items-center gap-1 font-semibold text-brand-orange">
+                  <Sparkles className="h-3 w-3" /> AI-ranked
+                </span>{' '}
+                from real catalogue entries — every pick links to a published
+                detail page. No generated claims.
+              </>
+            ) : (
+              <>
+                Method: keyword overlap against published names, tags,
+                categories and descriptions. No generated claims.
+              </>
+            )}
           </p>
           {matches.length === 0 ? (
             <p className="mt-3 text-sm text-muted-foreground">
@@ -215,9 +278,12 @@ export function GoalFinder() {
           ) : (
             <>
               <ul className="mt-4 grid gap-5 sm:grid-cols-2">
-                {matches.map(({ tool }) => (
+                {matches.map(({ tool, note }) => (
                   <li key={tool.id}>
                     <ToolCard tool={tool} verifiedBadge />
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                      {note}
+                    </p>
                   </li>
                 ))}
               </ul>
