@@ -17912,4 +17912,78 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o334',
+    slug: 'oracle-cloud-free-vps',
+    name: 'Oracle Cloud Free VPS',
+    tagline: 'Free 2 OCPU + 12GB VPS forever, no domain needed',
+    description:
+      'Oracle Cloud Always Free: a 2 OCPU + 12GB ARM virtual machine free forever, plus 2 micro VMs, 200GB block storage, and 10TB monthly outbound traffic. Gmail works fine — they want a real card and accurate identity details, no domain needed. Also includes $300 credits for 30 days in select countries.',
+    url: 'https://signup.cloud.oracle.com',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/cloud.oracle.com.ico',
+    category: 'tool',
+    tags: ['vps', 'cloud', 'free-tier', 'hosting', 'oracle'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up with real details',
+        description:
+          'Go to signup.cloud.oracle.com and register with your real name, address, phone, and email. Gmail is fine — accuracy matters, not the provider.',
+        url: 'https://signup.cloud.oracle.com',
+      },
+      {
+        title: 'Verify with SMS and a real card',
+        description:
+          'Complete SMS verification and add a real credit or debit card — prepaid and virtual cards are rejected. No domain or business needed, just an identity check.',
+      },
+      {
+        title: 'Pick the home region carefully',
+        description:
+          'Choose your home region during signup — it can never be changed later. If a popular region shows out of capacity, retry later or pick a quieter one.',
+      },
+      {
+        title: 'Launch the Always Free VM',
+        description:
+          'Create the free shape: 2 OCPU + 12GB RAM ARM instance, plus 2 AMD micro VMs (1GB each), 200GB block storage, and 10TB monthly outbound traffic.',
+      },
+      {
+        title: 'Keep it active and clean',
+        description:
+          'Free forever as long as the account stays active — idle instances can be reclaimed, so keep light usage. Never create multiple free accounts and never leave the VM checking anything abusive. Claim the $300 30-day credits too where available.',
+      },
+    ],
+    nameAr: 'سيرفر Oracle السحابي المجاني',
+    taglineAr: 'سيرفر مجاني بمعالجين و12GB رام للأبد، دون نطاق',
+    descriptionAr: 'Oracle Cloud المجاني دائماً: سيرفر افتراضي بمعالجين و12GB رام مجاناً للأبد، مع سيرفرين صغيرين و200GB تخزين و10TB نقل شهرياً. يقبل Gmail — يريدون بطاقة حقيقية وبيانات دقيقة فقط، دون نطاق. ويشمل أيضاً 300$ أرصدة لـ30 يوماً في دول محددة.',
+    stepsAr: [
+      {
+        title: 'سجّل ببيانات حقيقية',
+        description: 'اذهب إلى signup.cloud.oracle.com وسجل باسمك وعنوانك وهاتفك وبريدك الحقيقي. Gmail مقبول — المهم دقة البيانات لا مزود البريد.',
+        url: 'https://signup.cloud.oracle.com',
+      },
+      {
+        title: 'تحقق بالرسائل والبطاقة',
+        description: 'أكمل التحقق برسالة نصية وأضف بطاقة ائتمان أو خصم حقيقية — البطاقات مسبقة الدفع والافتراضية مرفوضة. لا حاجة لنطاق، فقط إثبات هوية.',
+      },
+      {
+        title: 'اختر المنطقة بحذر',
+        description: 'اختر منطقتك الأساسية أثناء التسجيل — لا يمكن تغييرها لاحقاً. إذا ظهرت رسالة امتلاء السعة في منطقة مشهورة، أعد المحاولة لاحقاً أو اختر منطقة أهدأ.',
+      },
+      {
+        title: 'أطلق السيرفر المجاني',
+        description: 'أنشئ النسخة المجانية: معالجان و12GB رام، مع سيرفرين صغيرين و200GB تخزين و10TB نقل شهري.',
+      },
+      {
+        title: 'حافظ على نشاطه ونظافته',
+        description: 'مجاني للأبد ما دام الحساب نشطاً — السيرفرات الخاملة قد تُستعاد فحافظ على استخدام خفيف. لا تنشئ حسابات مجانية متعددة ولا تترك السيرفر يقوم بأي نشاط مخالف. واطلب أيضاً أرصدة 300$ لـ30 يوماً حيث تتوفر.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]

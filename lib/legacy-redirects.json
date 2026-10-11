@@ -2671,7 +2671,8 @@
   "roots-pitch-wall-agadir": "fellowship",
   "claude-for-startups": "ai-perks",
   "unitpost-for-startups": "startup-discounts",
-  "cloudflare-startups-10k-credits": "startup-discounts"
+  "cloudflare-startups-10k-credits": "startup-discounts",
+  "oracle-cloud-free-vps": "tool"
  },
  "categories": {
   "coding": "/tools",

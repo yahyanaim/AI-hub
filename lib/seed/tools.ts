@@ -23868,7 +23868,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'Free AI story generator: turn ideas into complete short stories with characters, plot twists, and endings in seconds.',
     url: 'https://www.dreampress.ai',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/dreampress.ai.ico',
+    logoUrl: 'https://a854f716b37d256a41f8642118b9f76c.cdn.bubble.io/cdn-cgi/image/w=128,h=,f=auto,dpr=1,fit=contain/f1706961384131x339754606670191100/favicon-new.png',
     category: 'writing',
     tags: ['stories', 'fiction', 'free', 'creative-writing'],
     pricing: 'free',
@@ -24048,7 +24048,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'MarketAlerts delivers proprietary datasets, market indicators, KOL networks, and fintech marketing and development services to power data-driven growth.',
     url: 'https://www.marketalerts.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/marketalerts.com.ico',
+    logoUrl: '/placeholder-logo.svg',
     category: 'finance',
     tags: ['data', 'indicators', 'fintech', 'marketing'],
     pricing: 'freemium',
@@ -24228,7 +24228,7 @@ export const SEED_TOOLS: Tool[] = [
     description:
       'Txt Muse is a writing companion to brainstorm ideas, write drafts, and perfect copy with powerful AI tools.',
     url: 'https://www.txtmuse.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/txtmuse.com.ico',
+    logoUrl: 'https://txtmuse.com/favicon.svg',
     category: 'writing',
     tags: ['writing', 'brainstorm', 'drafts', 'copy'],
     pricing: 'freemium',

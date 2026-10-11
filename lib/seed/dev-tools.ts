@@ -15274,7 +15274,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Maintain-AI uses AI to deliver automated road condition assessments, so road authorities can act on consistent, objective data. Good roads should cost less.',
     url: 'https://www.maintain-ai.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/maintain-ai.com.ico',
+    logoUrl: 'https://maintain-ai.com/favicon-32.png',
     category: 'other',
     tags: ['infrastructure', 'roads', 'computer-vision', 'government'],
     pricing: 'paid',
