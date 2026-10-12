@@ -23683,26 +23683,6 @@ export const SEED_TOOLS: Tool[] = [
   },
 
   {
-    id: 't1715',
-    slug: 'learnsmarter',
-    name: 'LearnSmarter',
-    tagline: 'Study assistant that turns notes into recall practice',
-    description:
-      'Freemium study companion: upload notes and textbooks, get flashcards, quizzes, and spaced-repetition plans tuned to your exams.',
-    url: 'https://learnsmarter.ai',
-    logoUrl: '/placeholder-logo.svg',
-    category: 'education',
-    tags: ['study', 'flashcards', 'exams', 'students'],
-    pricing: 'freemium',
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
-
-  {
     id: 't1716',
     slug: 'quizalize',
     name: 'Quizalize',
