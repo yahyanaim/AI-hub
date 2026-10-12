@@ -17999,4 +17999,143 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o335',
+    slug: 'qwen-38-flash-free-qoder',
+    name: 'Qwen 3.8 Flash Free on Qoder',
+    tagline: '1M context multimodal model free, actually calls tools',
+    description:
+      'Qwen 3.8 Flash is free on Qoder right now: 1M context, multimodal, and it actually calls tools — pointed at Qoder as an external subagent with better than expected results. Zero balance and zero credit still goes through. Free for individual users on Qoder International (not teams or enterprise). Started Sept 18 and extended past Sept 30; free tiers rarely stick around.',
+    url: 'https://qoder.com',
+    logoUrl: 'https://qoder.com/favIcon.svg',
+    category: 'ai-perks',
+    tags: ['qwen', 'qoder', 'free-model', 'agents', 'multimodal'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Sign up on Qoder (under 1 min)',
+        description:
+          'Go to qoder.com and create a free individual account. No card, no plan needed.',
+        url: 'https://qoder.com',
+      },
+      {
+        title: 'Select Qwen 3.8 Flash as your model',
+        description:
+          'In the model picker, choose Qwen 3.8 Flash with 1M context and multimodal support.',
+      },
+      {
+        title: 'Start delegating',
+        description:
+          'Point it at Qoder as an external subagent or use it directly — it calls tools reliably. The 100 credits/day check-in covers other models and is untouched by this.',
+      },
+      {
+        title: 'Know the limits',
+        description:
+          'Free for individual users on Qoder International only, not teams or enterprise. CN and global endpoints both work. Started Sept 18, extended past Sept 30 with no announced end date — grab it while it lasts.',
+      },
+    ],
+    nameAr: 'Qwen 3.8 Flash مجاناً على Qoder',
+    taglineAr: 'نموذج بسياق مليون ومتعدد الوسائط مجاناً ويستدعي الأدوات فعلاً',
+    descriptionAr: 'نموذج Qwen 3.8 Flash مجاني حالياً على Qoder: سياق مليون ومتعدد الوسائط ويستدعي الأدوات فعلياً — بتوجيهه كوكيل خارجي كانت النتائج أفضل من المتوقع. يعمل برصيد صفر ودون بطاقة. مجاني للمستخدمين الأفراد على Qoder International (ليس للفرق). بدأ 18 سبتمبر ومُدد بعد 30 سبتمبر دون موعد انتهاء معلن.',
+    stepsAr: [
+      {
+        title: 'سجل في Qoder (أقل من دقيقة)',
+        description: 'اذهب إلى qoder.com وأنشئ حساباً فردياً مجانياً. لا بطاقة ولا خطة.',
+        url: 'https://qoder.com',
+      },
+      {
+        title: 'اختر Qwen 3.8 Flash كنموذج',
+        description: 'من منتقي النماذج اختر Qwen 3.8 Flash بسياق المليون ودعم الوسائط.',
+      },
+      {
+        title: 'ابدأ التفويض',
+        description: 'وجّهه كوكيل خارجي أو استخدمه مباشرة — يستدعي الأدوات بموثوقية. رصيد الـ100 نقطة اليومي للنماذج الأخرى لا يتأثر.',
+      },
+      {
+        title: 'اعرف الحدود',
+        description: 'مجاني للأفراد على Qoder International فقط وليس للفرق. نقطتا CN والعالمية تعملان. بدأ 18 سبتمبر ومُدد بعد 30 سبتمبر دون نهاية معلنة — استغله ما دام متاحاً.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+
+  {
+    id: 'o336',
+    slug: 'openwa-whatsapp-api',
+    name: 'OpenWA - Free Open-Source WhatsApp API',
+    tagline: 'Self-hosted WhatsApp REST API, MIT licensed',
+    description:
+      'OpenWA turns WhatsApp into a self-hosted REST API: 100% free and open source (MIT). Send and receive text, images, videos, audio, and documents; multi-session multi-account support; built-in React dashboard; webhooks; n8n integration; MCP support for Claude and AI agents; SQLite/PostgreSQL, Redis, S3; Docker-ready for your own VPS.',
+    url: 'https://github.com/rmyndharis/OpenWA',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/github.com.ico',
+    category: 'api-access',
+    tags: ['whatsapp', 'api', 'open-source', 'self-hosted', 'n8n', 'mcp'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Clone the repository',
+        description:
+          'Run git clone https://github.com/rmyndharis/OpenWA.git and enter the folder.',
+        url: 'https://github.com/rmyndharis/OpenWA',
+      },
+      {
+        title: 'Start with Docker',
+        description:
+          'Run docker compose and open the dashboard (default port 2785 in the guide). No monthly subscription, no vendor lock-in, no paid gateway.',
+      },
+      {
+        title: 'Create a session and scan the QR',
+        description:
+          'Retrieve the generated API key, create a session, and scan the QR code with WhatsApp to link the account. Multi-session supports several accounts.',
+      },
+      {
+        title: 'Start building automations',
+        description:
+          'Connect it to n8n, your backend, or an AI agent via MCP and automate messaging workflows with webhooks and real-time events.',
+      },
+      {
+        title: 'Respect the ban risk',
+        description:
+          'OpenWA uses unofficial WhatsApp clients (Baileys, whatsapp-web.js), NOT the official Cloud API. There is real risk of restrictions or bans: use a dedicated test number, avoid bulk unsolicited messaging. Self-hosting is free but your VPS still costs money.',
+      },
+    ],
+    nameAr: 'OpenWA - واجهة واتساب مجانية مفتوحة المصدر',
+    taglineAr: 'حوّل واتساب إلى API تستضيفه بنفسك، برخصة MIT',
+    descriptionAr: 'يحوّل OpenWA واتساب إلى REST API تستضيفه بنفسك: مجاني 100% ومفتوح المصدر (MIT). أرسل واستقبل النصوص والصور والفيديو والصوت والمستندات؛ دعم متعدد الحسابات؛ لوحة React؛ Webhooks؛ تكامل n8n؛ دعم MCP لكلود ووكلاء الذكاء الاصطناعي؛ SQLite/PostgreSQL وRedis وS3؛ جاهز لـDocker على سيرفرك.',
+    stepsAr: [
+      {
+        title: 'انسخ المستودع',
+        description: 'نفّذ git clone للرابط وادخل المجلد.',
+        url: 'https://github.com/rmyndharis/OpenWA',
+      },
+      {
+        title: 'ابدأ بـDocker',
+        description: 'شغّل docker compose وافتح اللوحة. لا اشتراك شهري ولا ارتباط بمزود ولا بوابة مدفوعة.',
+      },
+      {
+        title: 'أنشئ جلسة وامسح الرمز',
+        description: 'احصل على مفتاح API المولّد وأنشئ جلسة وامسح رمز QR بواتساب لربط الحساب. يدعم عدة حسابات.',
+      },
+      {
+        title: 'ابدأ البناء والأتمتة',
+        description: 'اربطه مع n8n أو نظامك أو وكيل ذكاء اصطناعي عبر MCP وأتمت سير المراسلة بالأحداث الفورية.',
+      },
+      {
+        title: 'انتبه لخطر الحظر',
+        description: 'يستخدم عملاء واتساب غير رسميين وليس Cloud API الرسمية. خطر حقيقي بالتقييد أو الحظر: استخدم رقم تجربة مخصصاً وتجنب الرسائل الجماعية. الاستضافة مجانية لكن سيرفرك قد يكلف.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
