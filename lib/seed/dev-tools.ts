@@ -15485,4 +15485,24 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'd1035',
+    slug: 'pagespeed-insights',
+    name: 'PageSpeed Insights',
+    tagline: "Google's free Core Web Vitals and performance analyzer",
+    description:
+      'Free Google tool to test any page: Core Web Vitals, performance, accessibility, best practices, and SEO scores with lab data plus real-user CrUX field data and fix recommendations.',
+    url: 'https://pagespeed.web.dev/',
+    logoUrl: 'https://www.gstatic.com/pagespeed/insights/ui/logo/favicon_48.png',
+    category: 'seo',
+    tags: ['performance', 'core-web-vitals', 'seo', 'google', 'free'],
+    pricing: 'free',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
