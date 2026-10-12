@@ -257,6 +257,12 @@ function ListingViewInner<T extends { id: string }>({
   const filtered = useMemo(() => {
     const g = gettersRef.current
     let arr = [...items]
+    // Position in the unfiltered catalogue: the seed files are append-only,
+    // so a higher index means a later addition. Used as the 'new' tiebreak.
+    const position = new Map<T, number>()
+    items.forEach((item, i) => {
+      if (!position.has(item)) position.set(item, i)
+    })
     if (category !== 'all') {
       if (g.customCategoryFilter) {
         arr = arr.filter((i) => g.customCategoryFilter!(g.getCategory(i), i, category))
@@ -271,11 +277,18 @@ function ListingViewInner<T extends { id: string }>({
       switch (sort) {
         case 'top':
           return g.getUpvotes(b) - g.getUpvotes(a)
-        case 'new':
-          return (
-            new Date(g.getCreatedAt(b)).getTime() -
-            new Date(g.getCreatedAt(a)).getTime()
-          )
+        case 'new': {
+          const ta = new Date(g.getCreatedAt(a)).getTime()
+          const tb = new Date(g.getCreatedAt(b)).getTime()
+          if (Number.isNaN(ta)) return 1
+          if (Number.isNaN(tb)) return -1
+          if (tb !== ta) return tb - ta
+          // Same timestamp (420+ seed tools share daysAgo(0)): the catalogue
+          // is append-only, so the later array position is the newer addition.
+          // Without this, newly added tools stable-sort behind every older
+          // same-day tool and land on the last page.
+          return (position.get(b) ?? 0) - (position.get(a) ?? 0)
+        }
         case 'bookmarked':
           return g.getBookmarks(b) - g.getBookmarks(a)
         case 'trending':
