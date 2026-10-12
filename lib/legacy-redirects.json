@@ -1298,7 +1298,14 @@
   "txt-muse": "writing",
   "webagent-ai": "productivity",
   "youtube-summary-extension": "productivity",
-  "zoom-ai-companion": "productivity"
+  "zoom-ai-companion": "productivity",
+  "alpaca-ollama-client": "other",
+  "planify-todo": "productivity",
+  "sticky-notes-app": "productivity",
+  "ultimate-media-downloader": "video",
+  "4ktube-downloader": "video",
+  "ytdownloader": "video",
+  "stremio": "video"
  },
  "devtools": {
   "vs-code": "ide",
@@ -2147,7 +2154,24 @@
   "gitbutler": "source-control",
   "gitfiend": "source-control",
   "arduino-ide": "ide",
-  "shuttle-dev": "hosting"
+  "shuttle-dev": "hosting",
+  "bitwarden": "security",
+  "keepassxc": "security",
+  "proton-pass": "security",
+  "localsend": "other",
+  "peazip": "other",
+  "bottles": "other",
+  "flatseal": "other",
+  "pika-backup": "storage",
+  "deja-dup-backups": "storage",
+  "authenticator-2fa": "security",
+  "notepad-next": "other",
+  "gear-lever": "other",
+  "protontricks": "other",
+  "distroshelf": "containers",
+  "deskflow": "remote-desktop",
+  "solaar-device-manager": "other",
+  "impression-usb-writer": "other"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",
