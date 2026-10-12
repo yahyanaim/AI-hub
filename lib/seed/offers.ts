@@ -18073,7 +18073,7 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'OpenWA turns WhatsApp into a self-hosted REST API: 100% free and open source (MIT). Send and receive text, images, videos, audio, and documents; multi-session multi-account support; built-in React dashboard; webhooks; n8n integration; MCP support for Claude and AI agents; SQLite/PostgreSQL, Redis, S3; Docker-ready for your own VPS.',
     url: 'https://github.com/rmyndharis/OpenWA',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/github.com.ico',
+    logoUrl: 'https://static.facebook.com/images/whatsapp/www/favicon.png',
     category: 'api-access',
     tags: ['whatsapp', 'api', 'open-source', 'self-hosted', 'n8n', 'mcp'],
     pricing: 'free',
