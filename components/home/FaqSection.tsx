@@ -91,7 +91,7 @@ export function FaqSection() {
             </p>
           </div>
 
-          <div className="mt-4 flex flex-col items-center rounded-2xl border border-border bg-card p-6 text-center shadow-sm dark:bg-card">
+          <div className="flex flex-1 flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center shadow-sm dark:bg-card">
             <span className="flex size-12 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
               <Mail className="size-6" />
             </span>
@@ -109,9 +109,6 @@ export function FaqSection() {
               <Mail className="size-4" />
               Email Me
             </a>
-            <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-              {CONSULT_EMAIL}
-            </p>
           </div>
         </div>
 
