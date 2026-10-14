@@ -91,17 +91,10 @@ export function FaqSection() {
             </p>
           </div>
 
-          <div className="flex flex-1 flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center shadow-sm dark:bg-card">
-            <span className="flex size-12 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
-              <Mail className="size-6" />
-            </span>
-            <h3 className="mt-4 text-xl font-bold text-foreground">
+          <div className="mt-6 flex flex-1 flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center shadow-sm dark:bg-card">
+            <h3 className="text-xl font-bold text-foreground">
               Need a consultation?
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              If you want a consultation about AI, Business, or orientation,
-              contact me directly by email.
-            </p>
             <a
               href={CONSULT_MAILTO}
               className="mt-5 flex w-full items-center justify-center gap-2 rounded-full border border-brand-orange/40 bg-white px-5 py-2.5 text-sm font-semibold text-brand-orange shadow-sm transition-all hover:bg-brand-orange hover:text-white hover:shadow-md active:scale-[0.98] dark:bg-card"
