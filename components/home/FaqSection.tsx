@@ -1,7 +1,11 @@
-import { CalendarClock, UserRound } from 'lucide-react'
+import { CalendarClock, Mail, UserRound } from 'lucide-react'
 
 // Founder booking: photo + Calendly link
 const CALENDLY_URL = 'https://calendly.com/yahyanaim2001/30min'
+// Direct email consultation: opens the mail app with a pre-written subject
+const CONSULT_EMAIL = 'yahyanaim2001@gmail.com'
+const CONSULT_SUBJECT = 'Consultation request: AI / Business / Orientation'
+const CONSULT_MAILTO = `mailto:${CONSULT_EMAIL}?subject=${encodeURIComponent(CONSULT_SUBJECT)}&body=${encodeURIComponent('Hi Yahia,\n\nI would like a consultation about:\n\n')}`
 const FOUNDER_PHOTO_URL: string | null =
   'https://avatars.githubusercontent.com/u/57252787?v=4'
 
@@ -84,6 +88,29 @@ export function FaqSection() {
               After you book, we&apos;ll contact you to arrange the payment.
               Once you pay, send us the payment proof (a screenshot of your
               transaction receipt) on WhatsApp to continue the process.
+            </p>
+          </div>
+
+          <div className="mt-4 flex flex-col items-center rounded-2xl border border-border bg-card p-6 text-center shadow-sm dark:bg-card">
+            <span className="flex size-12 items-center justify-center rounded-full bg-brand-orange/10 text-brand-orange">
+              <Mail className="size-6" />
+            </span>
+            <h3 className="mt-4 text-xl font-bold text-foreground">
+              Need a consultation?
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              If you want a consultation about AI, Business, or orientation,
+              contact me directly by email.
+            </p>
+            <a
+              href={CONSULT_MAILTO}
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-full border border-brand-orange/40 bg-white px-5 py-2.5 text-sm font-semibold text-brand-orange shadow-sm transition-all hover:bg-brand-orange hover:text-white hover:shadow-md active:scale-[0.98] dark:bg-card"
+            >
+              <Mail className="size-4" />
+              Email Me
+            </a>
+            <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
+              {CONSULT_EMAIL}
             </p>
           </div>
         </div>
