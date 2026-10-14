@@ -28,7 +28,6 @@ export type ToolCategory =
   | 'for-creators'
   | 'no-code-platforms'
   | 'extension'
-  | 'programmer-websites'
   | 'other'
 
 export type DevToolCategory =
@@ -83,6 +82,7 @@ export type DevToolCategory =
   | 'testing'
   | 'translation'
   | 'extension'
+  | 'programmer-websites'
   | 'repo'
   | 'websites'
 
@@ -377,7 +377,6 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
   'for-creators': 'For Creators',
   'no-code-platforms': 'No Code Platforms',
   extension: 'Extensions',
-  'programmer-websites': 'Programmer Websites',
   other: 'Other',
 }
 
@@ -433,6 +432,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   testing: 'Testing',
   translation: 'Translation',
   extension: 'Extensions',
+  'programmer-websites': 'Programmer Websites',
   repo: 'Repos',
   websites: 'Websites',
 }
