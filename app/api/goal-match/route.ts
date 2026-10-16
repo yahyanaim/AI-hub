@@ -148,6 +148,7 @@ export async function POST(req: Request) {
       return {
         kind: m.kind,
         item: m.item,
+        pct: m.pct,
         reason:
           typeof p.reason === 'string' && p.reason.trim()
             ? p.reason.trim().slice(0, 160)

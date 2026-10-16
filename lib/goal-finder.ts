@@ -115,6 +115,8 @@ export interface GoalMatch {
   kind: GoalItemKind
   item: Tool | DevTool | Repo
   score: number
+  /** 0-100: share of the best achievable score for this query. */
+  pct: number
   matched: string[]
 }
 
@@ -212,6 +214,12 @@ export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): Goa
   const boosts = rawTerms.map(({ stem: term }) => 1 + idf(expand(term), entries.map((e) => e.doc), entries.length))
 
   const scored: GoalMatch[] = []
+  // Best achievable score for this query: every term hitting a name (5x)
+  // plus every phrase bonus. Percentages are relative to this ceiling.
+  const maxPossible =
+    rawTerms.reduce((sum, _, ti) => sum + 5 * boosts[ti]!, 0) + 4 * phrases.length
+  const toPct = (score: number) =>
+    maxPossible > 0 ? Math.min(100, Math.round((score / maxPossible) * 100)) : 0
   for (const { kind, item, name, tagTokens, catTokens, bodyTokens } of entries) {
     let score = 0
     const matched: string[] = []
@@ -235,7 +243,7 @@ export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): Goa
         matched.push(p)
       }
     }
-    if (score > 0) scored.push({ kind, item, score, matched: matched.slice(0, 4) })
+    if (score > 0) scored.push({ kind, item, score, pct: toPct(score), matched: matched.slice(0, 4) })
   }
   // Best match per normalized name: the catalogue contains a few duplicate
   // records for the same product — never show the same tool twice.

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { Loader2, Sparkles } from 'lucide-react'
+import { ArrowDown, ArrowUp, Loader2, Sparkles } from 'lucide-react'
 import { matchToolsByGoal, type GoalItemKind, type GoalMatch } from '@/lib/goal-finder'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
@@ -12,6 +12,7 @@ interface ShownMatch {
   kind: GoalItemKind
   item: Tool | DevTool | Repo
   note: string
+  pct: number
   ai: boolean
 }
 
@@ -67,10 +68,11 @@ export function GoalFinder() {
             const data = await res.json()
             if (Array.isArray(data.matches) && data.matches.length) {
               setMatches(
-                data.matches.map((m: { kind: GoalItemKind; item: Tool | DevTool | Repo; reason: string }) => ({
+                data.matches.map((m: { kind: GoalItemKind; item: Tool | DevTool | Repo; pct: number; reason: string }) => ({
                   kind: m.kind,
                   item: m.item,
                   note: m.reason,
+                  pct: typeof m.pct === 'number' ? m.pct : 0,
                   ai: true,
                 }))
               )
@@ -91,6 +93,7 @@ export function GoalFinder() {
           kind: m.kind,
           item: m.item,
           note: `Matched on: ${m.matched.join(', ')}`,
+          pct: m.pct,
           ai: false,
         }))
       )
@@ -285,7 +288,7 @@ export function GoalFinder() {
           ) : (
             <>
               <ul className="mt-4 grid gap-5 sm:grid-cols-2">
-                {matches.map(({ kind, item, note }) => (
+                {matches.map(({ kind, item, note, pct }) => (
                   <li key={`${kind}-${item.id}`}>
                     {kind === 'tool' ? (
                       <ToolCard tool={item as Tool} verifiedBadge />
@@ -294,8 +297,23 @@ export function GoalFinder() {
                     ) : (
                       <RepoCard repo={item as Repo} />
                     )}
-                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-                      {note}
+                    <p className="mt-1.5 flex items-center gap-1.5 text-xs leading-relaxed text-muted-foreground">
+                      <span
+                        className={`inline-flex shrink-0 items-center gap-0.5 rounded-full px-2 py-0.5 text-[11px] font-bold ${
+                          pct >= 20
+                            ? 'bg-green-500/10 text-green-600 dark:text-green-400'
+                            : 'bg-red-500/10 text-red-500 dark:text-red-400'
+                        }`}
+                        title={`${pct}% match`}
+                      >
+                        {pct}%
+                        {pct >= 20 ? (
+                          <ArrowUp className="h-3 w-3" />
+                        ) : (
+                          <ArrowDown className="h-3 w-3" />
+                        )}
+                      </span>
+                      <span>{note}</span>
                     </p>
                   </li>
                 ))}
