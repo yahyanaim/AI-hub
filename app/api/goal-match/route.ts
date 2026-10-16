@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { SEED_TOOLS } from '@/lib/seed'
-import { matchToolsByGoal } from '@/lib/goal-finder'
+import { matchToolsByGoal, type GoalItemKind } from '@/lib/goal-finder'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 const API_KEY = process.env.NVIDIA_API_KEY ?? ''
@@ -22,8 +21,8 @@ function rateLimited(ip: string): boolean {
   return arr.length > 12
 }
 
-function candidateLine(t: (typeof SEED_TOOLS)[number]): string {
-  return `- ${t.id} | ${t.name} | ${t.category} | ${t.pricing} | tags: ${t.tags.join(', ')} | ${t.tagline}`
+function candidateLine(kind: GoalItemKind, t: { id: string; name: string; category: string; pricing: string; tags: string[]; tagline: string }): string {
+  return `- [${kind}] ${t.id} | ${t.name} | ${t.category} | ${t.pricing} | tags: ${t.tags.join(', ')} | ${t.tagline}`
 }
 
 export async function POST(req: Request) {
@@ -55,10 +54,10 @@ export async function POST(req: Request) {
   // Local prefilter: same honest keyword scoring, wide net.
   const local = matchToolsByGoal(goal, freeOnly, CANDIDATE_COUNT)
   if (!local.length) return NextResponse.json({ matches: [] })
-  const byId = new Map(local.map((m) => [m.tool.id, m.tool]))
-  const catalog = local.map((m) => candidateLine(m.tool)).join('\n')
+  const byId = new Map(local.map((m) => [m.item.id, m]))
+  const catalog = local.map((m) => candidateLine(m.kind, m.item)).join('\n')
 
-  const system = `You rank AI tools for a user's goal. You MUST pick only from the catalogue below, using each tool's real id. Never invent tools, features, or prices. Rank the ${PICK_COUNT} best fits and reply with STRICT JSON only — an array like [{"id": "...", "reason": "short reason grounded in the listed facts"}]. No markdown fences, no other text.`
+  const system = `You rank catalogue listings (AI tools, dev tools, editing tools) for a user's goal. You MUST pick only from the catalogue below, using each listing's real id. Never invent tools, features, or prices. Rank the ${PICK_COUNT} best fits and reply with STRICT JSON only — an array like [{"id": "...", "reason": "short reason grounded in the listed facts"}]. No markdown fences, no other text.`
   const user = `Goal: "${goal}"${freeOnly ? ' (free plan required — all candidates already satisfy this)' : ''}\n\nCatalogue:\n${catalog}`
 
   const models = [DEFAULT_MODEL, ...FALLBACK_MODELS]
@@ -144,14 +143,18 @@ export async function POST(req: Request) {
   const matches = picks
     .filter((p) => p && typeof p.id === 'string' && byId.has(p.id))
     .slice(0, PICK_COUNT)
-    .map((p) => ({
-      tool: byId.get(p.id!)!,
-      reason:
-        typeof p.reason === 'string' && p.reason.trim()
-          ? p.reason.trim().slice(0, 160)
-          : 'Matched by the AI re-rank.',
-      ai: true as const,
-    }))
+    .map((p) => {
+      const m = byId.get(p.id!)!
+      return {
+        kind: m.kind,
+        item: m.item,
+        reason:
+          typeof p.reason === 'string' && p.reason.trim()
+            ? p.reason.trim().slice(0, 160)
+            : 'Matched by the AI re-rank.',
+        ai: true as const,
+      }
+    })
 
   return NextResponse.json({ matches })
 }

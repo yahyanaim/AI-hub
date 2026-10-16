@@ -12,8 +12,8 @@
 // - typo tolerance (edit distance ≤ 1 for terms ≥ 5 chars)
 // ============================================================
 
-import { SEED_TOOLS } from '@/lib/seed'
-import type { Tool } from '@/types'
+import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS } from '@/lib/seed'
+import type { Tool, DevTool, Repo } from '@/types'
 
 const STOP = new Set([
   'the', 'and', 'for', 'with', 'that', 'this', 'from', 'have', 'has',
@@ -109,14 +109,18 @@ function fuzzy(hay: string, needle: string): boolean {
   return edits + (hay.length - i + (needle.length - j)) <= 1
 }
 
+export type GoalItemKind = 'tool' | 'devtool' | 'repo'
+
 export interface GoalMatch {
-  tool: Tool
+  kind: GoalItemKind
+  item: Tool | DevTool | Repo
   score: number
   matched: string[]
 }
 
 interface IndexEntry {
-  tool: Tool
+  kind: GoalItemKind
+  item: Tool | DevTool | Repo
   name: string
   tagTokens: string[]
   catTokens: string[]
@@ -137,21 +141,30 @@ function getIndex(freeOnly: boolean): IndexEntry[] {
   if (hit) return hit
   const pool = (
     freeOnly
-      ? SEED_TOOLS.filter((t) => t.pricing === 'free' || t.pricing === 'open-source')
-      : SEED_TOOLS
-  ).filter((t) => !t.name.toLowerCase().endsWith(' skill'))
-  const entries = pool.map((tool) => {
-    const tagTokens = tool.tags.flatMap((t) => stemTokens(t))
-    const catTokens = stemTokens(tool.category)
-    const bodyTokens = stemTokens(`${tool.tagline} ${tool.description}`)
+      ? [
+          ...SEED_TOOLS.filter((t) => t.pricing === 'free' || t.pricing === 'open-source').map((item) => ({ kind: 'tool' as const, item })),
+          ...SEED_DEV_TOOLS.filter((t) => t.pricing === 'free' || t.pricing === 'open-source').map((item) => ({ kind: 'devtool' as const, item })),
+          ...SEED_REPOS.filter((t) => t.pricing === 'free' || t.pricing === 'open-source').map((item) => ({ kind: 'repo' as const, item })),
+        ]
+      : [
+          ...SEED_TOOLS.map((item) => ({ kind: 'tool' as const, item })),
+          ...SEED_DEV_TOOLS.map((item) => ({ kind: 'devtool' as const, item })),
+          ...SEED_REPOS.map((item) => ({ kind: 'repo' as const, item })),
+        ]
+  ).filter(({ item }) => !item.name.toLowerCase().endsWith(' skill'))
+  const entries = pool.map(({ kind, item }) => {
+    const tagTokens = item.tags.flatMap((t) => stemTokens(t))
+    const catTokens = stemTokens(item.category)
+    const bodyTokens = stemTokens(`${item.tagline} ${item.description}`)
     return {
-      tool,
-      name: tool.name.toLowerCase(),
+      kind,
+      item,
+      name: item.name.toLowerCase(),
       tagTokens,
       catTokens,
       bodyTokens,
       doc: new Set([
-        ...stemTokens(tool.name),
+        ...stemTokens(item.name),
         ...tagTokens,
         ...catTokens,
         ...bodyTokens,
@@ -199,7 +212,7 @@ export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): Goa
   const boosts = rawTerms.map(({ stem: term }) => 1 + idf(expand(term), entries.map((e) => e.doc), entries.length))
 
   const scored: GoalMatch[] = []
-  for (const { tool, name, tagTokens, catTokens, bodyTokens } of entries) {
+  for (const { kind, item, name, tagTokens, catTokens, bodyTokens } of entries) {
     let score = 0
     const matched: string[] = []
     const hit = (label: string, w: number) => {
@@ -216,13 +229,13 @@ export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): Goa
       else if (fieldIncludes(bodyTokens, variants)) hit(raw, 1 * boost)
     })
     for (const p of phrases) {
-      const blob = `${tool.name} ${tool.tagline} ${tool.description}`.toLowerCase()
+      const blob = `${item.name} ${item.tagline} ${item.description}`.toLowerCase()
       if (blob.includes(p)) {
         score += 4
         matched.push(p)
       }
     }
-    if (score > 0) scored.push({ tool, score, matched: matched.slice(0, 4) })
+    if (score > 0) scored.push({ kind, item, score, matched: matched.slice(0, 4) })
   }
   // Best match per normalized name: the catalogue contains a few duplicate
   // records for the same product — never show the same tool twice.
@@ -231,11 +244,11 @@ export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): Goa
   const best = new Map<string, GoalMatch>()
   for (const m of scored) {
     if (m.score < 2) continue
-    const key = m.tool.name.toLowerCase().replace(/[^a-z0-9]/g, '')
+    const key = m.item.name.toLowerCase().replace(/[^a-z0-9]/g, '')
     const prev = best.get(key)
     if (!prev || m.score > prev.score) best.set(key, m)
   }
   return [...best.values()]
-    .sort((a, b) => b.score - a.score || b.tool.upvotes - a.tool.upvotes)
+    .sort((a, b) => b.score - a.score || b.item.upvotes - a.item.upvotes)
     .slice(0, limit)
 }

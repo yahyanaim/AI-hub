@@ -2,12 +2,15 @@
 
 import { useRef, useState } from 'react'
 import { Loader2, Sparkles } from 'lucide-react'
-import { matchToolsByGoal, type GoalMatch } from '@/lib/goal-finder'
+import { matchToolsByGoal, type GoalItemKind, type GoalMatch } from '@/lib/goal-finder'
 import { ToolCard } from '@/components/cards/ToolCard'
-import type { Tool } from '@/types'
+import { DevToolCard } from '@/components/cards/DevToolCard'
+import { RepoCard } from '@/components/cards/RepoCard'
+import type { Tool, DevTool, Repo } from '@/types'
 
 interface ShownMatch {
-  tool: Tool
+  kind: GoalItemKind
+  item: Tool | DevTool | Repo
   note: string
   ai: boolean
 }
@@ -25,6 +28,8 @@ const SUGGESTIONS = [
   'Transcribe my meetings with notes',
   'Remove backgrounds from photos',
   'Create a logo for my startup',
+  'Download a folder from a GitHub repo',
+  'Stay current with developer news',
 ]
 
 export function GoalFinder() {
@@ -62,8 +67,9 @@ export function GoalFinder() {
             const data = await res.json()
             if (Array.isArray(data.matches) && data.matches.length) {
               setMatches(
-                data.matches.map((m: { tool: Tool; reason: string }) => ({
-                  tool: m.tool,
+                data.matches.map((m: { kind: GoalItemKind; item: Tool | DevTool | Repo; reason: string }) => ({
+                  kind: m.kind,
+                  item: m.item,
                   note: m.reason,
                   ai: true,
                 }))
@@ -82,7 +88,8 @@ export function GoalFinder() {
       const local: GoalMatch[] = matchToolsByGoal(q, free)
       setMatches(
         local.map((m) => ({
-          tool: m.tool,
+          kind: m.kind,
+          item: m.item,
           note: `Matched on: ${m.matched.join(', ')}`,
           ai: false,
         }))
@@ -278,9 +285,15 @@ export function GoalFinder() {
           ) : (
             <>
               <ul className="mt-4 grid gap-5 sm:grid-cols-2">
-                {matches.map(({ tool, note }) => (
-                  <li key={tool.id}>
-                    <ToolCard tool={tool} verifiedBadge />
+                {matches.map(({ kind, item, note }) => (
+                  <li key={`${kind}-${item.id}`}>
+                    {kind === 'tool' ? (
+                      <ToolCard tool={item as Tool} verifiedBadge />
+                    ) : kind === 'devtool' ? (
+                      <DevToolCard devtool={item as DevTool} />
+                    ) : (
+                      <RepoCard repo={item as Repo} />
+                    )}
                     <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
                       {note}
                     </p>
