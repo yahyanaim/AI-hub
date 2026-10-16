@@ -18175,6 +18175,33 @@ export const SEED_OFFERS: Offer[] = [
         description: 'Ask it to explore the repository, fix bugs, refactor components, or implement features — it calls tools and edits code on its own.',
       },
     ],
+    nameAr: 'OpenCode + DeepSeek V4.1 Flash',
+    taglineAr: 'DeepSeek V4.1 Flash بسياق مليون رمز داخل OpenCode Zen',
+    descriptionAr: 'DeepSeek V4.1 Flash متوفر الآن على OpenCode Zen: نموذج برمجة بسياق مليون رمز، متعدد الوسائط (نص + صور) مع استدعاء أدوات وكيلية لاستكشاف المستودعات وإصلاح الأخطاء وإعادة الهيكلة وتحليل المشاريع. بنية MoE بـ 552B مع تفعيل 8B-16B فقط تجعل الاستدلال سريعاً وأسعار الـ API منخفضة خارج الذروة. يعمل داخل وكيل OpenCode مفتوح المصدر في الطرفية وسطح المكتب وبيئة التطوير.',
+    stepsAr: [
+      {
+        title: 'ثبّت OpenCode',
+        description: 'ثبّت وكيل البرمجة مفتوح المصدر عبر npm install -g opencode-ai (أو من opencode.ai) ثم تأكد أنه يعمل على جهازك.',
+        url: 'https://opencode.ai/',
+      },
+      {
+        title: 'أطلق OpenCode',
+        description: 'افتح الطرفية في مجلد مشروعك ونفّذ: opencode — يبدأ الوكيل في مستودعك ويكون جاهزاً للعمل.',
+      },
+      {
+        title: 'اربط مزوّد Zen',
+        description: 'اكتب /connect واختر OpenCode Zen وسجّل الدخول لربط حسابك. تُحفظ بيانات الاعتماد محلياً.',
+        url: 'https://opencode.ai/auth',
+      },
+      {
+        title: 'اختر DeepSeek V4.1 Flash',
+        description: 'نفّذ /models وابحث عن deepseek-v4.1-flash واختره كنموذج البرمجة النشط.',
+      },
+      {
+        title: 'ابدأ التفويض',
+        description: 'اطلب منه استكشاف المستودع أو إصلاح الأخطاء أو إعادة هيكلة المكونات أو تنفيذ المزايا — يستدعي الأدوات ويعدّل الشيفرة بنفسه.',
+      },
+    ],
     upvotes: 0,
     bookmarks: 0,
     submittedBy: 'u1',
