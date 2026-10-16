@@ -18138,4 +18138,48 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'o337',
+    slug: 'opencode-deepseek-v41-flash',
+    name: 'OpenCode + DeepSeek V4.1 Flash',
+    tagline: 'DeepSeek V4.1 Flash with 1M context inside OpenCode Zen',
+    description:
+      'DeepSeek V4.1 Flash is now available on OpenCode Zen: a 1M-context, multimodal (text + images) coding model with agentic tool-calling for exploring repos, fixing bugs, refactoring, and project analysis. Its 552B MoE design activates only 8B-16B parameters, keeping inference fast and off-peak API pricing low. Runs inside the open-source OpenCode agent in the terminal, desktop, and IDE.',
+    url: 'https://opencode.ai',
+    logoUrl: 'https://opencode.ai/favicon.ico',
+    category: 'tool',
+    tags: ['opencode', 'deepseek', 'deepseek-v4.1-flash', 'coding-agent', 'free', 'cli', 'terminal', 'agentic'],
+    pricing: 'freemium',
+    steps: [
+      {
+        title: 'Install OpenCode',
+        description: 'Install the open-source coding agent with npm install -g opencode-ai (or from opencode.ai), then verify it runs on your machine.',
+        url: 'https://opencode.ai/',
+      },
+      {
+        title: 'Launch OpenCode',
+        description: 'Open a terminal in your project folder and run: opencode — the agent starts in your repository and is ready to work.',
+      },
+      {
+        title: 'Connect the Zen provider',
+        description: 'Type /connect, select OpenCode Zen, and sign in to link your account. The credential is stored locally.',
+        url: 'https://opencode.ai/auth',
+      },
+      {
+        title: 'Select DeepSeek V4.1 Flash',
+        description: 'Run /models, search for deepseek-v4.1-flash, and select it as your active coding model.',
+      },
+      {
+        title: 'Start delegating',
+        description: 'Ask it to explore the repository, fix bugs, refactor components, or implement features — it calls tools and edits code on its own.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
