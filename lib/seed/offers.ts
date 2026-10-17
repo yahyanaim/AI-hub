@@ -18216,4 +18216,39 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o338',
+    slug: 'gemini-4-argon-ai-studio',
+    name: 'Gemini 4 Argon in AI Studio Build',
+    tagline: 'Attention Google AI Pro subscribers: you can now build with Gemini 4 Argon in AI Studio Build / Playground 🛠️',
+    description:
+      'Attention Google AI Pro subscribers: you can now build with Gemini 4 Argon in AI Studio Build / Playground 🛠️. Get started here: ai.studio/build. Sign in with the Google account on your Google AI Pro plan, open the Build / Playground workspace, and select Gemini 4 Argon as the model to start building.',
+    url: 'https://ai.studio/build',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=aistudio.google.com&sz=64',
+    category: 'tool',
+    tags: ['gemini', 'google-ai-pro', 'ai-studio', 'playground', 'build'],
+    pricing: 'freemium',
+    steps: [
+      {
+        title: 'Open the AI Studio Build workspace',
+        description: 'Get started here: ai.studio/build. The link opens Google AI Studio; sign in if prompted.',
+        url: 'https://ai.studio/build',
+      },
+      {
+        title: 'Sign in with your Google AI Pro account',
+        description: 'Use the Google account that carries your Google AI Pro subscription so the paid-tier models are available.',
+        url: 'https://ai.studio/build',
+      },
+      {
+        title: 'Select Gemini 4 Argon in Build / Playground 🛠️',
+        description: 'In the Build / Playground workspace, pick Gemini 4 Argon as the model and start building.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]

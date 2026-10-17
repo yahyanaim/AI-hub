@@ -2738,7 +2738,8 @@
   "oracle-cloud-free-vps": "tool",
   "qwen-38-flash-free-qoder": "ai-perks",
   "openwa-whatsapp-api": "api-access",
-  "opencode-deepseek-v41-flash": "tool"
+  "opencode-deepseek-v41-flash": "tool",
+  "gemini-4-argon-ai-studio": "tool"
  },
  "categories": {
   "coding": "/tools",
