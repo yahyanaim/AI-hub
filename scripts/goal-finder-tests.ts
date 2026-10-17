@@ -197,7 +197,14 @@ const CLIP_QUERY = 'Turn YouTube videos into short clips'
     AI_FAILURE_PRESENTATION.presentsLocalResults === false && AI_FAILURE_PRESENTATION.retry === true && AI_FAILURE_PRESENTATION.state === 'unavailable', AI_FAILURE_PRESENTATION)
   const gfSrc = readFileSync(new URL('../components/goal/GoalFinder.tsx', import.meta.url), 'utf8')
   check('fallback contract: GoalFinder never reaches a keyword fallback and shows the retry button',
-    !gfSrc.includes('evaluateGoalFallback') && gfSrc.includes('Retry AI matching') && /\(aiFailed\) && \(/.test(gfSrc), true)
+    !gfSrc.includes('evaluateGoalFallback') && gfSrc.includes('Retry AI matching') && /\(aiFailed \|\| abstained\) && \(/.test(gfSrc), true)
+
+  check('states: the three empty states are separate and never collapse into "No matches yet"',
+    gfSrc.includes("'No catalogue candidates found'") &&
+    gfSrc.includes("'AI could not confirm a suitable match'") &&
+    gfSrc.includes("'AI temporarily unavailable'") && !gfSrc.includes("'No matches yet'"), true)
+  check('states: abstention renders its own retry affordance without auto-refill',
+    gfSrc.includes('setAbstained(data.matches.length === 0)') && gfSrc.includes('(aiFailed || abstained) && ('), true)
 
   // A) The cross-domain listing remains a RETRIEVAL candidate only.
   const fxPhotoVideo = fixtureTool('fx-photovideo', 'Backgroundinator', 'free', 'image-editing',
@@ -298,9 +305,11 @@ const CLIP_QUERY = 'Turn YouTube videos into short clips'
 // ------------------------------------------------------------
 {
   const freeOnly = matchToolsByGoal('remove background from photos', true, 10)
-  check('retrieval: freeOnly accepts only free/open-source pool',
-    freeOnly.every((m) => m.item.pricing === 'free' || m.item.pricing === 'open-source'),
+  check('retrieval: freeOnly pool keeps free/open-source/freemium, drops paid',
+    freeOnly.every((m) => m.item.pricing !== 'paid'),
     freeOnly.map((m) => `${m.item.name}:${m.item.pricing}`))
+  check('retrieval: freeOnly pool retains freemium candidates (AI verifies the free tier)',
+    freeOnly.some((m) => m.item.pricing === 'freemium'), freeOnly.map((m) => m.item.pricing))
   const all = matchToolsByGoal('remove background from photos', false, 10)
   check('retrieval: freeOnly=false can include paid tools', all.length > 0, all.length)
 }
@@ -473,12 +482,16 @@ async function roundtripChecks(): Promise<void> {
 // ------------------------------------------------------------
 {
   check('prompt: source-material rule installed (naming a source ≠ URL import)',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('identifies the source material. It does not automatically require direct YouTube URL import'), true)
+    GOAL_MATCH_SYSTEM_PROMPT.includes('identifies the source material, not a demand for direct URL import'), true)
   check('prompt: URL-import evidence required only on explicit request',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('Require direct URL-import evidence only when the user explicitly requests URL import'), true)
-  check('prompt: download/upload workflow allowed with explicit limitation, never invented',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('a documented download-then-upload or file-based workflow qualifies') &&
+    GOAL_MATCH_SYSTEM_PROMPT.includes('Unless the user explicitly requests URL import') &&
+    GOAL_MATCH_SYSTEM_PROMPT.includes('direct URL-handling evidence stays mandatory'), true)
+  check('prompt: source-task conversion qualifies without documented import; arrival stays unverified',
+    GOAL_MATCH_SYSTEM_PROMPT.includes('listing whose supplied evidence explicitly supports converting long videos into short clips qualifies') &&
+    GOAL_MATCH_SYSTEM_PROMPT.includes('otherwise it is unverified') &&
     GOAL_MATCH_SYSTEM_PROMPT.includes('Never invent direct import support'), true)
+  check('prompt: download/upload workflow allowed with explicit limitation, never invented',
+    GOAL_MATCH_SYSTEM_PROMPT.includes('a documented download-then-upload or file-based workflow also qualifies'), true)
 }
 
 // ------------------------------------------------------------
@@ -490,6 +503,8 @@ async function roundtripChecks(): Promise<void> {
     GOAL_MATCH_SYSTEM_PROMPT.includes("say it is unverified"), true)
   check('evidence: free-trial vs free-plan rule installed',
     GOAL_MATCH_SYSTEM_PROMPT.includes('A free trial is not a free plan'), true)
+  check('evidence: reasons must mark undocumented arrival steps unverified',
+    GOAL_MATCH_SYSTEM_PROMPT.includes('YouTube import unverified'), true)
   check('evidence: contradiction rule installed',
     GOAL_MATCH_SYSTEM_PROMPT.includes('the evidence is contradictory'), true)
 }
@@ -538,8 +553,10 @@ async function routeChecks(): Promise<void> {
     const data1 = await res1.json()
     check('route: valid model output → 200 with matches', res1.status === 200 && data1.matches.length === 1, { res1: res1.status, data1 })
     check('route: request body uses configured model', fetchCalls[0]?.body?.model === 'openai/gpt-oss-20b', fetchCalls[0]?.body?.model)
+    check('route: openai/gpt-oss-20b gets explicit medium reasoning_effort (evidence-tuned)',
+      fetchCalls[0]?.body?.reasoning_effort === 'medium', fetchCalls[0]?.body?.reasoning_effort)
     check('route: system prompt installed (runtime relevance evaluator)', String(fetchCalls[0]?.body?.messages?.[0]?.content ?? '').includes('strict catalogue relevance evaluator'), true)
-    check('route: freeOnly=true forwarded into user payload', String(fetchCalls[0]?.body?.messages?.[1]?.content ?? '').includes('free plan required'), String(fetchCalls[0]?.body?.messages?.[1]?.content ?? '').slice(0, 120))
+    check('route: freeOnly=true forwarded into user payload', String(fetchCalls[0]?.body?.messages?.[1]?.content ?? '').includes('filters to free-plan candidates'), String(fetchCalls[0]?.body?.messages?.[1]?.content ?? '').slice(0, 160))
 
     // b) AI abstention [] stays empty — no local keyword refill
     globalThis.fetch = (async () => jsonResponse('[]')) as unknown as typeof fetch
@@ -571,6 +588,31 @@ async function routeChecks(): Promise<void> {
       typeof userB3 === 'string' && userB3.includes('internet'),
       String(userB3).slice(0, 200))
 
+    // b4) regression: exact failed query must keep task-supporting
+    // evidence in the payload (sentence-preserving, not a mid-sentence
+    // 150-char cut) — Opus Clip's qualifying sentence must survive whole.
+    fetchCalls = []
+    await post({ goal: 'turn youtube videos into short clips', freeOnly: false })
+    const catalogB4 = fetchCalls.at(-1)?.body?.messages?.[1]?.content ?? ''
+    check('regression: exact query keeps Opus Clip evidence untruncated in the payload',
+      catalogB4.includes('repurpose long videos into viral short clips. Detects highlights') &&
+      catalogB4.includes('[tool] t225'),
+      String(catalogB4).slice(0, 120))
+    check('regression: exact query ranks Opus/Klap/SendShort among candidates',
+      ['Opus Clip', 'Klap', 'SendShort'].filter((n) => catalogB4.includes(`| ${n} |`)).length === 3,
+      ['Opus Clip', 'Klap', 'SendShort'].filter((n) => catalogB4.includes(`| ${n} |`)))
+    check('payload: bounded — no candidate description exceeds the cap',
+      [...catalogB4.matchAll(/\| \[[^\]]+\] [^|]+ \| [^|]+ \| [^|]+ \| [^|]+ \| tags: [^|]+ \| [^|]+ \| ([^\n]+)$/gm)]
+        .every((m) => m[1].length <= 260 + 3), null) // +3 for ellipsis-less joins
+    check('regression: prompt resolves YouTube source-material ambiguity',
+      GOAL_MATCH_SYSTEM_PROMPT.includes('converting long videos into short clips with YouTube as the material') &&
+      GOAL_MATCH_SYSTEM_PROMPT.includes('YouTube import unverified'), true)
+    check('regression: explicit URL-import requests still require direct URL evidence',
+      GOAL_MATCH_SYSTEM_PROMPT.includes('direct URL-handling evidence stays mandatory'), true)
+    check('regression: freemium is not auto-excluded and trials never establish a free plan',
+      GOAL_MATCH_SYSTEM_PROMPT.includes("A 'freemium' pricing label claims a free tier") &&
+      GOAL_MATCH_SYSTEM_PROMPT.includes('A free trial is not a free plan'), true)
+
     // c) invalid output → technical error, not abstention
     globalThis.fetch = (async () => jsonResponse('no json here')) as unknown as typeof fetch
     const res3 = await post({ goal: CLIP_QUERY, freeOnly: false })
@@ -595,7 +637,11 @@ async function routeChecks(): Promise<void> {
     await res5.json()
     const catalog5 = fetchCalls.at(-1)?.body?.messages?.[1]?.content ?? ''
     const pricings = [...catalog5.matchAll(/\| (freemium|paid|free|open-source) \|/g)].map((m) => m[1])
-    check('route: freeOnly catalogue limited to free/open-source', pricings.length > 0 && pricings.every((p) => p === 'free' || p === 'open-source'), pricings)
+    check('route: freeOnly catalogue keeps free/open-source + freemium, drops paid',
+      pricings.length > 0 && !pricings.includes('paid') && pricings.some((p) => p === 'free' || p === 'open-source'), [...new Set(pricings)])
+    check('route: freeOnly note ties freemium candidates to free-tier evidence, never trials',
+      catalog5.includes('freemium candidate qualifies ONLY if its listing documents the requested feature on the free tier') &&
+      catalog5.includes('a free trial never counts'), true)
 
     // f) retrieval-empty distinct state
     const res6 = await post({ goal: 'zzz qqq www x yy', freeOnly: false })

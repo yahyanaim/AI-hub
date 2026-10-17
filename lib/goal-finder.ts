@@ -366,7 +366,12 @@ function buildIndex(pool: GoalPoolItem[]): IndexEntry[] {
 }
 
 function isFree(item: { pricing: string }): boolean {
-  return item.pricing === 'free' || item.pricing === 'open-source'
+  // A 'freemium' listing claims an ongoing free tier, so it stays a
+  // free-plan candidate — the wiring does NOT decide whether the free
+  // tier actually covers the requested feature: the AI evaluator must
+  // verify that from supplied listing evidence (see lib/goal-prompt.ts).
+  // 'paid' and advertised free trials are not free-plan candidates.
+  return item.pricing === 'free' || item.pricing === 'open-source' || item.pricing === 'freemium'
 }
 
 function getIndex(freeOnly: boolean): IndexEntry[] {

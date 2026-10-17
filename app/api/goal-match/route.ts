@@ -8,7 +8,14 @@ import type { Tool, DevTool, Repo } from '@/types'
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 const API_KEY = process.env.NVIDIA_API_KEY ?? ''
 const DEFAULT_MODEL = 'openai/gpt-oss-20b'
-const FALLBACK_MODELS = ['z-ai/glm-5.3-flash']
+// Measured (Oct 2026, production payload for the reported false-empty
+// query): glm-5.3-flash never delivered inside ANY budget (45s, 60s,
+// 90s; >60s even with thinking-disabled request variants), while the
+// primary resolves at 15-55s. A sibling that only ever hits the attempt
+// deadline actively wastes the user's wait on abstentions and partial
+// failures (park/until-deadline semantics), so the fan-out stays single
+// — replace only with a model measured FASTER on the actual payload.
+const FALLBACK_MODELS: string[] = []
 
 // Candidates are prefiltered and RANKED locally so the prompt stays small
 // and the model can only pick from REAL catalogue entries (IDs validated
@@ -34,8 +41,22 @@ function logGoalMatch(event: string, meta: Record<string, unknown>) {
   console.error(`[goal-match] ${event} ${JSON.stringify(meta)}`)
 }
 
+// Candidate descriptions are cut on a SENTENCE boundary, never
+// mid-sentence: the sentence boundary is usually where task-supporting
+// evidence lives (e.g. "repurpose long videos into viral short clips."),
+// and a blind 150-char cut can hide exactly that. Bounded at MAX_DESC;
+// live payload stays ≈2.3k prompt tokens.
+const MAX_DESC = 260
+function truncateDescription(desc: string): string {
+  const flat = desc.replace(/\s+/g, ' ').trim()
+  if (flat.length <= MAX_DESC) return flat
+  const head = flat.slice(0, MAX_DESC)
+  const cut = Math.max(head.lastIndexOf('. '), head.lastIndexOf('! '), head.lastIndexOf('? '))
+  return cut > 0 ? head.slice(0, cut + 1) : head
+}
+
 function candidateLine(kind: GoalItemKind, t: { id: string; name: string; category: string; pricing: string; tags: string[]; tagline: string; description: string }): string {
-  const desc = t.description.replace(/\s+/g, ' ').slice(0, 150)
+  const desc = truncateDescription(t.description)
   return `- [${kind}] ${t.id} | ${t.name} | ${t.category} | ${t.pricing} | tags: ${t.tags.join(', ')} | ${t.tagline} | ${desc}`
 }
 
@@ -89,7 +110,10 @@ export async function POST(req: Request) {
   const constraintLines = constraintParts.length
     ? `\nMandatory constraints (do NOT relax them): ${constraintParts.join('; ')}\n`
     : '\n'
-  const user = `Goal: "${goal}"${freeOnly ? ' (free plan required — all candidates already satisfy this filter)' : ''}${constraintLines}\n\nCatalogue:\n${catalog}`
+  const freeNote = freeOnly
+    ? ' (the user filters to free-plan candidates. Structured pricing already excludes paid listings; a freemium candidate qualifies ONLY if its listing documents the requested feature on the free tier — a free trial never counts)'
+    : ''
+  const user = `Goal: "${goal}"${freeNote}${constraintLines}\n\nCatalogue:\n${catalog}`
 
   // ---- Provider fan-out: bounded budget, safe logs ---------------------
   // All providers run in parallel with independent per-attempt budgets
@@ -143,6 +167,15 @@ export async function POST(req: Request) {
           // answer inside the attempt budget instead of truncating it.
           max_tokens: 3000,
           temperature: 0.2,
+          // Evidence (latency probe on the production payload):
+          // gpt-oss-20b with default reasoning burns 1.4-3k thinking
+          // tokens (25-52s, sometimes truncating with no answer);
+          // with explicit reasoning_effort='medium' it emits a valid
+          // answer at ~25s (and 'low' under-thinks and abstains).
+          // glm-5.3-flash ignores this knob and runs >60s on this
+          // payload — it only ever contributes on cheap queries and is
+          // otherwise cancelled at the attempt deadline.
+          ...(model.startsWith('openai/') ? { reasoning_effort: 'medium' } : {}),
           stream: false,
         }),
         signal: linkedSignal,

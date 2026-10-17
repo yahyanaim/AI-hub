@@ -270,9 +270,11 @@ export function GoalFinder() {
               <h2 className="font-heading text-2xl font-semibold tracking-tight">
                 {matches.length
                   ? `${matches.length} matches`
-                  : aiFailed
-                    ? 'AI matching temporarily unavailable'
-                    : 'No matches yet'}
+                  : retrievalEmpty
+                    ? 'No catalogue candidates found'
+                    : aiFailed
+                      ? 'AI temporarily unavailable'
+                      : 'AI could not confirm a suitable match'}
               </h2>
               <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
                 Goal: <strong className="font-medium text-foreground">{goal.trim().slice(0, 140)}</strong>
@@ -295,8 +297,8 @@ export function GoalFinder() {
               ) : (
                 <>
                   The AI checked the catalogue and found no sufficiently
-                  supported match for this goal. Try broader terms or one of
-                  the suggestions above.
+                  supported match for this goal. This is not a
+                  &ldquo;no product exists anywhere&rdquo; answer — please retry.
                 </>
               )
             ) : aiFailed ? (
@@ -327,10 +329,10 @@ export function GoalFinder() {
                   : retrievalEmpty
                     ? 'Nothing in the catalogue is close to those words yet. Try broader terms or one of the suggestions above.'
                     : abstained
-                      ? 'No sufficiently supported match was found in the supplied candidates. This does not prove that no suitable product exists elsewhere.'
+                      ? 'No listing in the evaluated candidates is sufficiently supported for this goal yet. This does not prove that no suitable product exists elsewhere — please retry.'
                       : 'Nothing in the catalogue matches those words yet. Try broader terms or one of the suggestions above.'}
               </p>
-              {(aiFailed) && (
+              {(aiFailed || abstained) && (
                 <button
                   type="button"
                   onClick={submit}
