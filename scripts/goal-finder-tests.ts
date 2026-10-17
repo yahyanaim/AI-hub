@@ -520,17 +520,21 @@ void fxLocalOnly
 async function routeChecks(): Promise<void> {
   const realFetch = globalThis.fetch
   let fetchCalls: { url: string; body: any }[] = []
-  function jsonResponse(content: string): Response {
+  function jsonResponse(content: string, init?: { status?: number }): Response {
     return {
-      ok: true,
-      status: 200,
+      ok: (init?.status ?? 200) < 400,
+      status: init?.status ?? 200,
       json: async () => ({ choices: [{ message: { content }, finish_reason: 'stop' }] }),
     } as unknown as Response
   }
+  let postSeq = 0
   async function post(body: unknown): Promise<Response> {
+    // Each test call is an independent client — rotate the test IP so the
+    // route's 12/min per-IP rate limit never fails a suite that grows.
+    postSeq += 1
     const req = new Request('http://localhost/api/goal-match', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-forwarded-for': '203.0.113.77' },
+      headers: { 'Content-Type': 'application/json', 'x-forwarded-for': `203.0.113.${(postSeq % 250) + 1}` },
       body: JSON.stringify(body),
     })
     const { POST } = await import('../app/api/goal-match/route')
@@ -612,6 +616,21 @@ async function routeChecks(): Promise<void> {
     check('regression: freemium is not auto-excluded and trials never establish a free plan',
       GOAL_MATCH_SYSTEM_PROMPT.includes("A 'freemium' pricing label claims a free tier") &&
       GOAL_MATCH_SYSTEM_PROMPT.includes('A free trial is not a free plan'), true)
+    check('regression: eligibility criterion 2 defers input compatibility to the source-material rule',
+      GOAL_MATCH_SYSTEM_PROMPT.includes('matching the named source to a generalized documented input class') &&
+      GOAL_MATCH_SYSTEM_PROMPT.includes('direct platform import is not required unless the user explicitly requests it'),
+      true)
+    check('regression: no bare "Compatible input and output." criterion left to contradict SOURCE MATERIAL VS IMPORT',
+      !GOAL_MATCH_SYSTEM_PROMPT.includes('\n2. Compatible input and output.\n'), true)
+    const gfSource = readFileSync(new URL('../components/goal/GoalFinder.tsx', import.meta.url), 'utf8')
+    check('regression: UI lifecycle — stale runs guarded by a monotonic run id',
+      gfSource.includes('const runId = useRef(0)') && gfSource.includes('runId.current !== currentRun'), true)
+    check('regression: UI lifecycle — a newer submit aborts the in-flight fetch',
+      gfSource.includes('fetchRef.current?.abort()'), true)
+    check('regression: UI lifecycle — Retry resends the captured query, not live textarea text',
+      gfSource.includes('submit(searchedGoal)') && !gfSource.includes('onClick={submit}'), true)
+    check('regression: UI lifecycle — results header renders the searched goal, not live input',
+      gfSource.includes('{searchedGoal.slice(0, 140)}') && !gfSource.includes('{goal.trim().slice(0, 140)}'), true)
 
     // b5) abstention retry: one independent second judgment, inside the
     // total budget — a second valid [] STILL abstains (never forced).
@@ -642,6 +661,58 @@ async function routeChecks(): Promise<void> {
     check('route: abstention + validated second draw = 200 matches',
       resB6.status === 200 && dataB6.abstained === false && dataB6.matches.length >= 1 && fetchCalls.length === 2,
       { fetches: fetchCalls.length, resB6: resB6.status, dataB6 })
+
+    // b7) request diagnostics: attempt config + requestId correlation
+    const pb7 = fetchCalls[0]?.body ?? {}
+    check('route: model request uses measured output budget (max_tokens 4000, not 3000)',
+      pb7.max_tokens === 4000 && pb7.temperature === 0.2,
+      { max_tokens: pb7.max_tokens, temperature: pb7.temperature })
+    check('route: openai-* draws pin reasoning_effort = medium (not low/high/default)',
+      pb7.reasoning_effort === 'medium', pb7.reasoning_effort)
+    check('route: responses carry meta.requestId for log correlation',
+      typeof dataB5?.meta?.requestId === 'string' && dataB5.meta.requestId.length > 0 &&
+      typeof dataB6?.meta?.requestId === 'string' && dataB6.meta.requestId.length > 0,
+      { b5: dataB5?.meta?.requestId, b6: dataB6?.meta?.requestId })
+
+    // b8) retry trail distinguishes completed double-abstention from an
+    // incomplete second attempt (truncation/failure) — truncated output
+    // is never reported as an honest abstention.
+    fetchCalls = []
+    let flipB8 = 0
+    globalThis.fetch = (async (_url: string | URL, init?: RequestInit) => {
+      fetchCalls.push({ url: String(_url), body: JSON.parse(String(init?.body)) })
+      flipB8 += 1
+      return jsonResponse(flipB8 === 1 ? '[]' : 'no json here')
+    }) as unknown as typeof fetch
+    const resB8 = await post({ goal: CLIP_QUERY, freeOnly: false })
+    const dataB8 = await resB8.json()
+    check('route: invalid second draw keeps abstention with retryTrail=invalid',
+      resB8.status === 200 && dataB8.abstained === true && dataB8.meta?.retryTrail === 'invalid', { dataB8 })
+    fetchCalls = []
+    let flipB9 = 0
+    globalThis.fetch = (async (_url: string | URL, init?: RequestInit) => {
+      fetchCalls.push({ url: String(_url), body: JSON.parse(String(init?.body)) })
+      flipB9 += 1
+      // first draw: valid []; second draw: provider rejects the request
+      return flipB9 === 1 ? jsonResponse('[]') : jsonResponse('[]', { status: 500 })
+    }) as unknown as typeof fetch
+    const resB9 = await post({ goal: CLIP_QUERY, freeOnly: false })
+    const dataB9 = await resB9.json()
+    check('route: failed second draw keeps abstention with retryTrail=incomplete',
+      resB9.status === 200 && dataB9.abstained === true && dataB9.meta?.retryTrail === 'incomplete', { dataB9 })
+    check('route: successful retry responses carry no retryTrail marker',
+      dataB6?.meta?.retryTrail === undefined && (dataB5?.matches?.length ?? 0) === 0,
+      { b5Trail: dataB5?.meta?.retryTrail, b6Trail: dataB6?.meta?.retryTrail })
+
+    // b10) truncated (cut mid-JSON) model output is invalid — never
+    // parsed as a partial abstention or partially matched silently.
+    fetchCalls = []
+    globalThis.fetch = (async () =>
+      jsonResponse('[{"id":"opus-clip","reason":"cuts long')) as unknown as typeof fetch
+    const resB10 = await post({ goal: CLIP_QUERY, freeOnly: false })
+    const dataB10 = await resB10.json()
+    check('route: truncated model output = 502 technical failure (never silent partials)',
+      resB10.status === 502 && dataB10.fallback === true, { resB10: resB10.status, dataB10 })
 
     // c) invalid output → technical error, not abstention
     globalThis.fetch = (async () => jsonResponse('no json here')) as unknown as typeof fetch

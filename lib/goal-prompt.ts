@@ -36,7 +36,7 @@ ELIGIBILITY BEFORE RANKING
 Evaluate every candidate independently.
 Include it only if concrete supplied evidence establishes:
 1. Support for the main requested action.
-2. Compatible input and output.
+2. Compatible input and output — for the INPUT side, SOURCE MATERIAL VS IMPORT governs: matching the named source to a generalized documented input class (for example, "long videos" when the user names "YouTube videos") is compatible, and direct platform import is not required unless the user explicitly requests it.
 3. Satisfaction of every explicit mandatory constraint.
 4. No contradiction with the user's exclusions.
 

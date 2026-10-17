@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { createHash, randomBytes } from 'node:crypto'
 import { matchToolsByGoal, analyzeGoal, type GoalItemKind } from '@/lib/goal-finder'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
 import { runProviderRoundtrip, type ProviderResult } from '@/lib/goal-provider-roundtrip'
@@ -36,11 +37,28 @@ function rateLimited(ip: string): boolean {
   return arr.length > 12
 }
 
-// Safe operational logging: metadata only — never the raw user query,
-// never the API key. Enough to diagnose provider failures.
-function logGoalMatch(event: string, meta: Record<string, unknown>) {
-  console.error(`[goal-match] ${event} ${JSON.stringify(meta)}`)
+// Safe operational diagnostics: metadata only — never the raw user query,
+// never the API key, never raw prompt text. Every event carries:
+// - rnd: per-request id so server logs correlate with the requestId the
+//   client received in the response `meta`
+// - build: commit under which this code is running — first thing to check
+//   when the user reports behavior that contradicts (e.g. "retry layer
+//   missing" on the deployed host)
+// - prompt: 8-hex PROMPT_VERSION — catches "prompt not updated on host"
+const PROMPT_VERSION = createHash('sha256').update(GOAL_MATCH_SYSTEM_PROMPT).digest('hex').slice(0, 8)
+const logGoalMatch = (requestId: string, event: string, meta: Record<string, unknown> = {}) => {
+  const common = {
+    rnd: requestId,
+    build: process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.COMMIT_SHA ?? process.env.NEXT_PUBLIC_COMMIT_SHA ?? 'dev',
+    prompt: PROMPT_VERSION,
+  }
+  console.error(`[goal-match] ${event} ${JSON.stringify({ ...common, ...meta })}`)
 }
+
+// A fresh logger per request, so every event carries the same rnd/build
+// id without threading the ids through every call site.
+const loggerFor = (requestId: string) => (event: string, meta: Record<string, unknown> = {}) =>
+  logGoalMatch(requestId, event, meta)
 
 // Candidate descriptions are cut on a SENTENCE boundary, never
 // mid-sentence: the sentence boundary is usually where task-supporting
@@ -90,12 +108,21 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Describe your goal first.' }, { status: 400 })
   }
 
+  // ---- Per-request diagnostics ------------------------------------------
+  // rnd: stable id across all log lines of this request AND echoed in the
+  // response `meta` so a client-visible failure can be correlated with the
+  // server-side evidence (attempt numbers, statuses, finish reasons).
+  const requestId = randomBytes(4).toString('hex')
+  // Local shadow of the module-level factory keeps every existing call
+  // site source-compatible while gaining rnd/build/prompt context.
+  const logGoalMatch = loggerFor(requestId)
+
   // ---- State 1: candidate retrieval found nothing -----------------------
   const retrievalMs0 = Date.now()
   const local = matchToolsByGoal(goal, freeOnly, CANDIDATE_COUNT)
   const retrievalMs = Date.now() - retrievalMs0
   if (!local.length) {
-    return NextResponse.json({ matches: [], noCandidates: true, abstained: false })
+    return NextResponse.json({ matches: [], noCandidates: true, abstained: false, meta: { requestId } })
   }
   const byId = new Map(local.map((m) => [m.item.id, m]))
   const catalog = local.map((m) => candidateLine(m.kind, m.item)).join('\n')
@@ -127,6 +154,9 @@ export async function POST(req: Request) {
   const validIdSet = new Set(byId.keys())
   logGoalMatch('request-built', {
     candidates: local.length,
+    // Candidate set is safe to log (internal catalogue ids, not the user
+    // query) — it pins down which ranked evidence the model judged.
+    candidateIds: local.map((m) => m.item.id).slice(0, 30),
     retrievalMs,
     systemChars: GOAL_MATCH_SYSTEM_PROMPT.length,
     userChars: user.length,
@@ -137,11 +167,22 @@ export async function POST(req: Request) {
   // read. Cancellation is a cost measure only; tokens the provider
   // already processed may still be billed.
   const controllers = new Map<string, AbortController>()
+  let attemptSeq = 0
   const send = async (model: string, attemptMs: number = PROVIDER_ATTEMPT_MS): Promise<ProviderResult> => {
     if (req.signal.aborted) {
       return { ok: false, model, errName: 'ClientDisconnected' }
     }
+    const attempt = ++attemptSeq
     const attemptStart = Date.now()
+    logGoalMatch('provider-request', {
+      attempt,
+      model,
+      attemptMs,
+      // Reasoning/output config is part of the evidence for the
+      // truncation/timeout failure classes (finish_reason=length).
+      maxTokens: 4000,
+      ...(model.startsWith('openai/') ? { reasoningEffort: 'medium' } : {}),
+    })
     const controller = new AbortController()
     controllers.set(model, controller)
     const timer = setTimeout(() => controller.abort(), attemptMs)
@@ -163,10 +204,15 @@ export async function POST(req: Request) {
             { role: 'user', content: user },
           ],
           // Headroom for reasoning-style models: live runs showed the
-          // reasoning tokens consuming the full output budget with the
-          // answer never emitted (finish_reason=length). 3000 keeps the
-          // answer inside the attempt budget instead of truncating it.
-          max_tokens: 3000,
+          // reasoning tokens consuming the output budget with the answer
+          // never emitted (finish_reason=length). 4000 keeps the answer
+          // inside the attempt budget: MEASURED completion consumption on
+          // the production payload is 1232-2527 tokens for valid answers,
+          // while truncating draws hit the previous 3000 cap with the
+          // JSON cut mid-array (finish=length, contentChars 905 on one
+          // draw) — an output-budget problem, not an attempt-time problem,
+          // so the cap rises instead of the timeout.
+          max_tokens: 4000,
           temperature: 0.2,
           // Evidence (latency probe on the production payload):
           // gpt-oss-20b with default reasoning burns 1.4-3k thinking
@@ -182,7 +228,7 @@ export async function POST(req: Request) {
         signal: linkedSignal,
       })
       if (!res.ok) {
-        logGoalMatch('provider-http-error', { model, status: res.status, attemptMs: Date.now() - attemptStart })
+        logGoalMatch('provider-http-error', { attempt, model, status: res.status, attemptMs: Date.now() - attemptStart })
         return { ok: false, model, httpStatus: res.status }
       }
       const data = (await res.json()) as {
@@ -201,6 +247,7 @@ export async function POST(req: Request) {
         totalTokens: data?.usage?.total_tokens,
       }
       logGoalMatch('provider-response', {
+        attempt,
         model,
         status: res.status,
         attemptMs: Date.now() - attemptStart,
@@ -211,6 +258,7 @@ export async function POST(req: Request) {
       return text.trim() ? { ok: true, model, text, finishReason } : { ok: false, model }
     } catch (err) {
       logGoalMatch('provider-fetch-error', {
+        attempt,
         model,
         attemptMs: Date.now() - attemptStart,
         errName: err instanceof Error ? err.name : 'unknown',
@@ -286,23 +334,39 @@ export async function POST(req: Request) {
       const attemptMs = Math.min(PROVIDER_ATTEMPT_MS, remaining - 1)
       logGoalMatch('abstention-retry-start', { elapsedMs: elapsed, attemptMs })
       const second = await send(DEFAULT_MODEL, attemptMs)
+      // Explicit retry-trail marker in the response contract, so "two
+      // completed abstentions" (retry: 'abstained' | 'invalid' | none) is
+      // distinguishable from "one abstention followed by an incomplete
+      // attempt" (retry: 'incomplete') and from a success (no marker at
+      // all). The UI keeps its single abstention state; the distinction
+      // lives in the API + logs for honest diagnosis.
+      let retryTrail: string | undefined
       if (second.ok && second.text) {
         const outcome = parseModelOutput(second.text, validIdSet)
         if (outcome.kind === 'ok') {
           const matches = buildMatches(outcome.picks)
           logGoalMatch('goal-match-after-retry', { elapsedMs: Date.now() - started, picked: matches.length, dropped: outcome.dropped })
-          return NextResponse.json({ matches, abstained: false })
+          return NextResponse.json({ matches, abstained: false, meta: { requestId } })
         }
         // Valid [] again → abstention stands (with or without explicit
         // deadline); invalid output does NOT override a valid verdict.
+        retryTrail = outcome.kind === 'abstain' ? 'abstained' : 'invalid'
         logGoalMatch('abstention-retry-kept', { outcome: outcome.kind, elapsedMs: Date.now() - started })
       } else {
-        logGoalMatch('abstention-retry-failed', { httpStatus: second.httpStatus, errName: second.errName })
+        // Truncated output with non-empty content is an INCOMPLETE
+        // attempt, not an honest second abstention — it stays visible in
+        // the trail as 'incomplete'.
+        retryTrail = 'incomplete'
+        logGoalMatch('abstention-retry-failed', {
+          httpStatus: second.httpStatus,
+          errName: second.errName,
+        })
       }
+      return NextResponse.json({ matches: [], abstained: true, meta: { requestId, retryTrail } })
     } else {
       logGoalMatch('abstention-retry-skipped', { elapsedMs: elapsed })
     }
-    return NextResponse.json({ matches: [], abstained: true })
+    return NextResponse.json({ matches: [], abstained: true, meta: { requestId } })
   }
 
   // ---- State 3: AI returned validated non-empty matches ----------------
@@ -314,13 +378,13 @@ export async function POST(req: Request) {
       picked: matches.length,
       droppedByContract: result.dropped,
     })
-    return NextResponse.json({ matches, abstained: false })
+    return NextResponse.json({ matches, abstained: false, meta: { requestId } })
   }
 
   // ---- States 4/5: technical failure vs deadline expiry ----------------
   logGoalMatch('goal-failure', { elapsedMs: Date.now() - started, cause: result.cause, deadlineExpired: result.deadlineExpired })
   return NextResponse.json(
-    { error: 'AI matching unavailable right now.', fallback: true, deadlineExpired: result.cause === 'deadline' },
+    { error: 'AI matching unavailable right now.', fallback: true, deadlineExpired: result.cause === 'deadline', meta: { requestId } },
     { status: 502 }
   )
 }

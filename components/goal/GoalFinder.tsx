@@ -46,10 +46,32 @@ export function GoalFinder() {
   const [retrievalEmpty, setRetrievalEmpty] = useState(false)
   const [aiFailed, setAiFailed] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Monotonic run id: only the newest run may write result state, so a
+  // cancelled in-flight response can never overwrite a newer search.
+  const runId = useRef(0)
+  // The query/filter values captured AT SUBMIT TIME. The results header
+  // renders these (never the live input), so editing the textarea while
+  // a search is in flight — or after it finishes — cannot relabel the
+  // results as a different search, and Retry re-sends the same captured
+  // search instead of whatever the textarea happens to contain now.
+  const [searchedGoal, setSearchedGoal] = useState('')
+  const [searchedFreeOnly, setSearchedFreeOnly] = useState(false)
+  // Abort handle for an in-flight fetch: a newer submit cancels it so a
+  // late response can never arrive after (and a disconnected user does
+  // not keep the provider burning budget).
+  const fetchRef = useRef<AbortController | null>(null)
 
-  const submit = () => {
-    if (!goal.trim() || searching) return
-    const q = goal.trim()
+  const submit = (nextGoal?: string) => {
+    // Manual Retry passes the CAPTURED goal; normal submits use the
+    // textarea's live value. Empty text (input unresolved) aborts.
+    if (searching) return
+    const q = (nextGoal ?? goal).trim()
+    if (!q) return
+    const freeFilter = freeOnly
+    runId.current += 1
+    const currentRun = runId.current
+    setSearchedGoal(q)
+    setSearchedFreeOnly(freeFilter)
     setDone(true)
     setSearching(true)
     setMatches([])
@@ -58,54 +80,64 @@ export function GoalFinder() {
     setRetrievalEmpty(false)
     setAiFailed(false)
     if (timer.current) clearTimeout(timer.current)
+    // Cancel any in-flight fetch from an older run BEFORE starting the
+    // new one — its response (if it ever arrives) is stale by definition
+    // and guarded below even if the abort is too late.
+    fetchRef.current?.abort()
     // AI evaluation first (understands phrasing, honours constraints and
     // the structured freeOnly filter). On technical failure we show a
     // temporary-unavailability message with a visible retry — keyword
     // coverage is NEVER substituted for verified support, and an AI
     // abstention (empty list) is shown as-is, never refilled.
     const run = async () => {
+      const controller = new AbortController()
+      fetchRef.current = controller
+      // Must stay above the server's full provider-chain budget so the
+      // backend can still make its fallback-provider attempt.
+      const timeout = setTimeout(() => controller.abort(), CLIENT_TIMEOUT_MS)
+      const stale = () => runId.current !== currentRun
       try {
-        const controller = new AbortController()
-        // Must stay above the server's full provider-chain budget so the
-        // backend can still make its fallback-provider attempt.
-        const timeout = setTimeout(() => controller.abort(), CLIENT_TIMEOUT_MS)
-        try {
-          const res = await fetch('/api/goal-match', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ goal: q, freeOnly }),
-            signal: controller.signal,
-          })
-          if (res.ok) {
-            const data = await res.json()
-            // Candidate retrieval found nothing — distinct from both AI
-            // abstention and technical failure.
-            if (data.noCandidates) {
-              setRetrievalEmpty(true)
-              setSearching(false)
-              return
-            }
-            if (Array.isArray(data.matches)) {
-              setMatches(
-                data.matches.map((m: { kind: GoalItemKind; item: Tool | DevTool | Repo; pct: number; reason: string }) => ({
-                  kind: m.kind,
-                  item: m.item,
-                  note: m.reason,
-                  pct: typeof m.pct === 'number' ? m.pct : 0,
-                  ai: true,
-                }))
-              )
-              setAiUsed(true)
-              setAbstained(data.matches.length === 0)
-              setSearching(false)
-              return
-            }
+        const res = await fetch('/api/goal-match', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ goal: q, freeOnly: freeFilter }),
+          signal: controller.signal,
+        })
+        if (stale()) return
+        if (res.ok) {
+          const data = await res.json()
+          if (stale()) return
+          // Candidate retrieval found nothing — distinct from both AI
+          // abstention and technical failure.
+          if (data.noCandidates) {
+            setRetrievalEmpty(true)
+            setSearching(false)
+            return
           }
-        } finally {
-          clearTimeout(timeout)
+          if (Array.isArray(data.matches)) {
+            setMatches(
+              data.matches.map((m: { kind: GoalItemKind; item: Tool | DevTool | Repo; pct: number; reason: string }) => ({
+                kind: m.kind,
+                item: m.item,
+                note: m.reason,
+                pct: typeof m.pct === 'number' ? m.pct : 0,
+                ai: true,
+              }))
+            )
+            setAiUsed(true)
+            setAbstained(data.matches.length === 0)
+            setSearching(false)
+            return
+          }
         }
       } catch {
-        // network error / client timeout — technical AI failure
+        // network error / client timeout / superseded by a newer search
+        // (the abort above) — stale runs must not stamp their failure
+        // onto the newer search's state.
+        if (stale()) return
+      } finally {
+        clearTimeout(timeout)
+        if (fetchRef.current === controller) fetchRef.current = null
       }
       // Any non-validated outcome → temporary unavailability with retry.
       // No local keyword results, ever: a valid AI [] above returned
@@ -115,6 +147,9 @@ export function GoalFinder() {
       setSearching(false)
     }
     timer.current = setTimeout(() => {
+      // A newer submit may have superseded this run within the debounce
+      // window; never start the stale fetch.
+      if (runId.current !== currentRun) return
       void run()
     }, 650)
     setTimeout(() => {
@@ -277,7 +312,7 @@ export function GoalFinder() {
                       : 'AI could not confirm a suitable match'}
               </h2>
               <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
-                Goal: <strong className="font-medium text-foreground">{goal.trim().slice(0, 140)}</strong>
+                Goal: <strong className="font-medium text-foreground">{searchedGoal.slice(0, 140)}</strong>
               </p>
             </div>
             <span className="shrink-0 rounded-full border border-border px-2.5 py-1 text-[10px] text-muted-foreground">
@@ -335,7 +370,10 @@ export function GoalFinder() {
               {(aiFailed || abstained) && (
                 <button
                   type="button"
-                  onClick={submit}
+                  // Retry re-sends the CAPTURED query + filter — not the
+                  // textarea's current text (which may have drifted and
+                  // would relabel the results as a different search).
+                  onClick={() => submit(searchedGoal)}
                   className="mt-3 rounded-full border-2 border-brand-orange bg-white px-4 py-1.5 text-xs font-semibold text-foreground transition-colors hover:bg-brand-orange/10 dark:bg-card"
                 >
                   Retry AI matching
