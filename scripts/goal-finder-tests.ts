@@ -8,20 +8,17 @@
 // ============================================================
 
 import type { Tool } from '@/types'
-import {
-  analyzeGoal,
-  matchToolsByGoalInPool,
-  evaluateGoalFallbackInPool,
-  matchToolsByGoal,
-  type GoalPoolItem,
-} from '@/lib/goal-finder'
+import * as goalFinder from '@/lib/goal-finder'
+const { analyzeGoal, matchToolsByGoalInPool, matchToolsByGoal } = goalFinder
+type GoalPoolItem = goalFinder.GoalPoolItem
 import {
   parseModelOutput,
   type ParsedOutput,
 } from '@/lib/goal-output'
 import { runProviderRoundtrip, type ProviderResult } from '@/lib/goal-provider-roundtrip'
-import { shouldRefillLocally } from '@/lib/goal-fallback-policy'
+import { AI_FAILURE_PRESENTATION } from '@/lib/goal-fallback-policy'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
+import { readFileSync } from 'node:fs'
 import {
   CLIENT_TIMEOUT_MS,
   SERVER_TOTAL_MS,
@@ -172,39 +169,60 @@ const CLIP_QUERY = 'Turn YouTube videos into short clips'
 // ------------------------------------------------------------
 // 1. Confirmed failure: brand-name fragments ≠ capability
 // ------------------------------------------------------------
-{
-  const fallback = evaluateGoalFallbackInPool(basePool, CLIP_QUERY)
-  const ids = fallback.map((m) => m.item.id)
-  check('fallback: Clipdrop/Paperclip not presented as clip-tool matches', !ids.includes('fx-clipdrop') && !ids.includes('fx-paperclip'), ids)
+{ // eslint-disable-line no-block
   const retrieval = matchToolsByGoalInPool(basePool, CLIP_QUERY)
   const retrievalHasBrandFragmentOnly = retrieval.some(
     (m) => (m.item.id === 'fx-clipdrop' || m.item.id === 'fx-paperclip') &&
       m.matched.every((label) => ['clip', 'clips'].includes(label.toLowerCase())),
   )
   check('retrieval: brand-fragment match did not fire for Clipdrop/Paperclip', !retrievalHasBrandFragmentOnly, retrieval.map((m) => `${m.item.id}:${m.matched}`))
+  check('retrieval: output of matchToolsByGoal* is always candidates (typed GoalMatch), never labels itself a confirmed match', retrieval.every((m) => typeof m.pct === 'number'), true)
 }
 
 // ------------------------------------------------------------
-// 2. Explicitly supporting clipper stays eligible
+// 1b. The keyword-coverage fallback is REMOVED from the AI-failure path
 // ------------------------------------------------------------
+// Red reproductions (before removal) of the three reported failures:
+// A) "remove backgrounds from videos" matched a photo background remover
+//    ("Remove backgrounds from photos. Generate videos from text.").
+// B) "free video editor" matched a paid listing ("Free trial … Paid
+//    subscription required after trial.", pricing: paid).
+// C) a listing that claimed offline support AND stated the opposite was
+//    accepted as-is ("Edit your videos offline. Online mode is not
+//    supported.").
 {
-  const fallback = evaluateGoalFallbackInPool(basePool, CLIP_QUERY)
-  check('fallback: explicit YouTube clipper stays eligible', fallback.some((m) => m.item.id === 'fx-clipper'), fallback.map((m) => m.item.id))
-}
+  check('fallback contract: the keyword-coverage evaluator no longer exists',
+    !('evaluateGoalFallback' in goalFinder) && !('evaluateGoalFallbackInPool' in goalFinder), Object.keys(goalFinder).filter((k) => /fallback|conservative/i.test(k)))
+  check('fallback contract: technical failure presents NO local results, retry always visible',
+    AI_FAILURE_PRESENTATION.presentsLocalResults === false && AI_FAILURE_PRESENTATION.retry === true && AI_FAILURE_PRESENTATION.state === 'unavailable', AI_FAILURE_PRESENTATION)
+  const gfSrc = readFileSync(new URL('../components/goal/GoalFinder.tsx', import.meta.url), 'utf8')
+  check('fallback contract: GoalFinder never reaches a keyword fallback and shows the retry button',
+    !gfSrc.includes('evaluateGoalFallback') && gfSrc.includes('Retry AI matching') && /\(aiFailed\) && \(/.test(gfSrc), true)
 
-// ------------------------------------------------------------
-// 3. Generic video editor is insufficient
-// ------------------------------------------------------------
-{
-  const genericOnly = [fxClipdrop, fxPaperclip, fxGenericEditor]
-  const fallback = evaluateGoalFallbackInPool(genericOnly, CLIP_QUERY)
-  check('fallback: generic video editor insufficient for shorts workflow', fallback.length === 0, fallback.map((m) => m.item.id))
+  // A) The cross-domain listing remains a RETRIEVAL candidate only.
+  const fxPhotoVideo = fixtureTool('fx-photovideo', 'Backgroundinator', 'free', 'image-editing',
+    'Remove backgrounds', 'Remove backgrounds from photos. Generate videos from text.', ['background', 'photos'])
+  const candidateA = matchToolsByGoalInPool([fxPhotoVideo], 'remove backgrounds from videos')
+  check('regression A: cross-domain listing stays a candidate, never a presented match',
+    candidateA.length >= 1 && !('evaluateGoalFallback' in goalFinder), candidateA.map((m) => m.item.name))
 
-  // Workflow honesty: no-YouTube-import tool still eligible if it supports
-  // the clipping workflow, but direct YouTube URL claims are NOT invented.
-  const noYouTube = [fxOfflineClipper]
-  const fb2 = evaluateGoalFallbackInPool(noYouTube, 'Turn downloaded YouTube videos into short clips')
-  check('fallback: downloaded-video clipping workflow eligible without URL import', fb2.some((m) => m.item.id === 'fx-offline-clipper'), fb2.map((m) => m.item.id))
+  // B) The free-plan wording in the QUERY is a captured constraint for the
+  // AI evaluator; the UI freeOnly filter uses the structured pricing field.
+  check('regression B: "free video editor" query records the free-plan constraint',
+    analyzeGoal('free video editor').askingFree === true, analyzeGoal('free video editor'))
+  check('regression B: FR/AR free wording records the constraint too',
+    analyzeGoal('éditeur vidéo gratuit').askingFree === true &&
+    analyzeGoal('محرر فيديو مجاني').askingFree === true, true)
+  check('regression B: paid-with-free-trial listing still retrievable — pricing is judged by the AI, not hidden',
+    matchToolsByGoalInPool([fixtureTool('fx-trial', 'VideoBrush', 'paid', 'video',
+      'Video editing for teams', 'Free trial for our video editor. Paid subscription required after trial.', ['video', 'editor'])],
+      'free video editor').length >= 1, true)
+
+  // C) Contradictory listings cannot be verified lexically; with the
+  // keyword fallback gone there is no mechanism to present them, and the
+  // AI evaluator carries an explicit contradiction rule.
+  check('regression C: no keyword mechanism remains to present a contradictory listing',
+    !('evaluateGoalFallback' in goalFinder), true)
 }
 
 // ------------------------------------------------------------
@@ -223,13 +241,15 @@ const CLIP_QUERY = 'Turn YouTube videos into short clips'
 {
   const a = analyzeGoal('turn my videos into short clips')
   check('concepts: videos/clips collapse into one video concept', a.concepts.filter((c) => c.id === 'video').length === 1, a.concepts.map((c) => c.id))
-  // edit+object requirement: one concept (object synonyms) is not two.
+  // Action+object: retrieval is a candidate net — concept MERGING is what
+  // keeps synonyms from counting as independent task requirements, and the
+  // AI evaluator (not keyword coverage) decides support.
   const onlyObject = [fixtureTool('fx-obj', 'Fred', 'free', 'video', 'Makes clips from your videos', 'Create short clips: splits your videos automatically.', ['clips'])]
-  const fbEditObject = evaluateGoalFallbackInPool(onlyObject, 'edit videos with AI')
-  check('fallback: object synonyms alone do not satisfy action+object', fbEditObject.length === 0, fbEditObject.map((m) => m.item.id))
-  const withAction = [fixtureTool('fx-act', 'FredEdit', 'free', 'video', 'AI video editor', 'A full editor for your videos with editing, trim and cut tools.', ['editing', 'video'])]
-  const fbEditObject2 = evaluateGoalFallbackInPool(withAction, 'edit videos with AI')
-  check('fallback: real editor covering action stays eligible', fbEditObject2.length > 0, fbEditObject2.map((m) => m.item.id))
+  const gotObjectOnly = matchToolsByGoalInPool(onlyObject, 'edit videos with AI')
+  check('synonyms: object synonyms stay ONE concept in analysis (not an edit-object pairing)',
+    analyzeGoal('edit videos with AI').concepts.filter((c) => c.id === 'video').length === 1, analyzeGoal('edit videos with AI').concepts.map((c) => c.id))
+  check('synonyms: such a listing is only candidate material, never presented without AI',
+    !('evaluateGoalFallback' in goalFinder) && (gotObjectOnly.length === 0 || gotObjectOnly.every((m) => typeof m.pct === 'number')), gotObjectOnly.map((m) => m.item.id))
 }
 
 // ------------------------------------------------------------
@@ -248,21 +268,29 @@ const CLIP_QUERY = 'Turn YouTube videos into short clips'
   const d = analyzeGoal('مجاني بدون انترنت')
   check('constraints: Arabic "بدون انترنت" (without internet) preserved',
     d.constraints.includes('انترنت'), d)
-  // Conservative fallback declines unverifiable constraints
-  const fb = evaluateGoalFallbackInPool([fxLocalOnly], 'edit videos without internet')
-  check('fallback: does not silently verify "without internet"', fb.length === 0, fb.map((m) => m.item.id))
+  // Contradictions in the QUERY wording render as explicit constraints
+  // for the AI evaluator (deterministic capture; support judgment stays
+  // with the model + strict output validator).
+  const e = analyzeGoal('edit videos offline. Offline mode is not supported.')
+  check('constraints: "not supported" wording captured as constraint, not claim evidence',
+    e.constraints.includes('supported'), e.constraints)
+  // A negated constraint term is never positive search evidence.
+  check('constraints: negated terms are excluded from positive retrieval concepts',
+    matchToolsByGoalInPool([fxLocalOnly], 'edit videos without internet').every(
+      (m) => !m.matched.some((lbl) => /internet/i.test(lbl))), true)
 }
 
 // ------------------------------------------------------------
 // 7. Missing mandatory evidence causes exclusion
 // ------------------------------------------------------------
 {
-  // Translation/transcription distinction: transcribe tool must not match translate+dub query coverage locally
-  const fbTrans = evaluateGoalFallbackInPool(
-    [fixtureTool('fx-transcr', 'MeetNotes', 'free', 'productivity', 'Transcribe meetings', 'Real-time meeting transcription with speaker notes.', ['transcription'])],
-    'transcribe my meetings with notes',
-  )
-  check('fallback: direct transcription listing eligible', fbTrans.length === 1, fbTrans.map((m) => m.item.id))
+  // Transcribe ≠ translate: the glossary/synonym engine keeps translate
+  // and transcribe distinct concepts (deterministic capture; the AI
+  // evaluator makes the support call).
+  const a = analyzeGoal('transcribe my meetings with notes')
+  const b = analyzeGoal('translate my meetings with notes')
+  check('evidence: transcribe/translate are distinct concepts, synonyms never merge them',
+    JSON.stringify(a.concepts.map((c) => c.id).sort()) !== JSON.stringify(b.concepts.map((c) => c.id).sort()), { a: a.concepts.map((c) => c.id), b: b.concepts.map((c) => c.id) })
 }
 
 // ------------------------------------------------------------
@@ -435,10 +463,9 @@ async function roundtripChecks(): Promise<void> {
 // 13. Local refill policy (independent, pure)
 // ------------------------------------------------------------
 {
-  check('policy: 5xx allows local conservative refill', shouldRefillLocally(502) && shouldRefillLocally(500), true)
-  check('policy: aborted/no-response (0) allows local refill', shouldRefillLocally(0), true)
-  check('policy: 4xx never refilled', !shouldRefillLocally(400) && !shouldRefillLocally(429), true)
-  check('policy: success never refilled (abstention returns before this path)', !shouldRefillLocally(200), true)
+  check('policy: any HTTP failure → unavailable state with visible retry, no local results',
+    AI_FAILURE_PRESENTATION.state === 'unavailable' && AI_FAILURE_PRESENTATION.retry === true &&
+    AI_FAILURE_PRESENTATION.presentsLocalResults === false, AI_FAILURE_PRESENTATION)
 }
 
 // ------------------------------------------------------------
@@ -458,22 +485,17 @@ async function roundtripChecks(): Promise<void> {
 // 15. Conservative fallback evidence purity (catalogue facts only)
 // ------------------------------------------------------------
 {
-  const fluffy: GoalPoolItem = fixtureTool(
-    'fx-fluffy',
-    'ClipCraft Cloud',
-    'freemium',
-    'video-editor',
-    'Unleash creativity and engage your audience effortlessly!',
-    // Marketing copy with no catalogue facts about clipping workflows
-    'A delightful experience for modern storytellers and ambitious teams. Loved by thousands.',
-    ['creative', 'easy', 'popular'],
-  )
-  const pool = [fxClipper, fluffy]
-  const rich = evaluateGoalFallbackInPool(pool, CLIP_QUERY)
-  const anyFluffy = rich.some((m) => m.item.name === 'ClipCraft Cloud')
-  check('fallback: marketing-only listing excluded (evidence must be catalogue facts)', !anyFluffy, rich.map((m) => m.item.name))
-  check('fallback: listing with concrete clipping facts stays eligible', rich.some((m) => m.item.name === 'ShortsForge'), rich.map((m) => m.item.name))
+  check('evidence: unsupported-steps rule installed (no invented uploads/imports/downloads)',
+    GOAL_MATCH_SYSTEM_PROMPT.includes("Do not state that a candidate accepts uploads, requires downloads, or imports URLs unless the listing itself says so") &&
+    GOAL_MATCH_SYSTEM_PROMPT.includes("say it is unverified"), true)
+  check('evidence: free-trial vs free-plan rule installed',
+    GOAL_MATCH_SYSTEM_PROMPT.includes('A free trial is not a free plan'), true)
+  check('evidence: contradiction rule installed',
+    GOAL_MATCH_SYSTEM_PROMPT.includes('the evidence is contradictory'), true)
 }
+void fxGenericEditor
+void fxOfflineClipper
+void fxLocalOnly
 
 // ------------------------------------------------------------
 // 12. Live API-route plumbing (mocked provider only)
@@ -524,6 +546,30 @@ async function routeChecks(): Promise<void> {
     const res2 = await post({ goal: CLIP_QUERY, freeOnly: true })
     const data2 = await res2.json()
     check('route: valid [] = abstained, matches empty', res2.status === 200 && data2.abstained === true && data2.matches.length === 0, { res2: res2.status, data2 })
+    check('route: abstention body carries no local-fallback flag (never refillable)',
+      res2.status === 200 && !('fallback' in data2) && !('error' in data2), data2)
+
+    // b2) explicit "free" wording in the query becomes an evaluator
+    // constraint (recording mock — must push into fetchCalls, not a
+    // bare canned-response mock).
+    fetchCalls = []
+    globalThis.fetch = (async (_url: string | URL, init?: RequestInit) => {
+      fetchCalls.push({ url: String(_url), body: JSON.parse(String(init?.body)) })
+      return jsonResponse('[]')
+    }) as unknown as typeof fetch
+    await post({ goal: 'free video editor', freeOnly: false })
+    const userB2 = fetchCalls.at(-1)?.body?.messages?.[1]?.content
+    check('route: query-level "free" is enforced as a mandatory constraint in the payload',
+      typeof userB2 === 'string' && userB2.includes('free plan required') && userB2.includes('free video editor'),
+      String(userB2).slice(0, 200))
+
+    // b3) negated constraint captured from the query survives transit
+    fetchCalls = []
+    await post({ goal: 'edit videos without internet', freeOnly: false })
+    const userB3 = fetchCalls.at(-1)?.body?.messages?.[1]?.content
+    check('route: "without internet" constraint survives into the evaluator payload',
+      typeof userB3 === 'string' && userB3.includes('internet'),
+      String(userB3).slice(0, 200))
 
     // c) invalid output → technical error, not abstention
     globalThis.fetch = (async () => jsonResponse('no json here')) as unknown as typeof fetch
@@ -540,7 +586,11 @@ async function routeChecks(): Promise<void> {
     check('route: AI failure = 502 fallback (no keyword drain)', res4.status === 502 && data4.fallback === true, { res4: res4.status, data4 })
 
     // e) freeOnly=true limits candidates to free/open-source pricing
-    globalThis.fetch = (async () => jsonResponse('[]')) as unknown as typeof fetch
+    fetchCalls = []
+    globalThis.fetch = (async (_url: string | URL, init?: RequestInit) => {
+      fetchCalls.push({ url: String(_url), body: JSON.parse(String(init?.body)) })
+      return jsonResponse('[]')
+    }) as unknown as typeof fetch
     const res5 = await post({ goal: 'remove background from photos', freeOnly: true })
     await res5.json()
     const catalog5 = fetchCalls.at(-1)?.body?.messages?.[1]?.content ?? ''

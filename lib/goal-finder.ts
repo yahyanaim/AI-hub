@@ -5,13 +5,17 @@
 //
 // Two clearly separated paths:
 // - matchToolsByGoal: keyword RETRIEVAL. A wide net that produces
-//   candidates; it never establishes task suitability on its own.
-// - evaluateGoalFallback: CONSERVATIVE evaluation used only when the AI
-//   ranker is technically unavailable. It qualifies a candidate as a
-//   goal match only when the listing text covers EVERY query concept
-//   (action + object + …), with at least two concepts supported by the
-//   listing body itself. Anything else returns no matches — the UI then
-//   shows a temporary-unavailable message instead of fake matches.
+//   candidates for the AI evaluator; it never establishes task
+//   suitability on its own and its output is never presented to the
+//   user as confirmed matches.
+// - When the AI evaluator is technically unavailable or fails, the UI
+//   shows a temporary-unavailable message with a retry action. There is
+//   deliberately NO keyword-based fallback match list: lexical coverage
+//   is not verified task support (live failures: "remove backgrounds
+//   from videos" matched a photo background remover; "free video
+//   editor" matched a paid tool with a free trial; a listing that
+//   contradicted itself was accepted). Only model output that passes
+//   the strict catalogue-evidence validator reaches the user.
 //
 // Matching quality notes:
 // - Unicode-aware tokenization + light stemming (editing/edit, photos/photo)
@@ -231,6 +235,11 @@ export interface GoalAnalysis {
   phrases: string[]
   /** Display labels of negated mandatory constraints ("without internet"). */
   constraints: string[]
+  /** True when the query wording itself demands a free plan ("free",
+   *  "gratuit", "مجانا"). Enforced by the AI evaluator together with the
+   *  UI freeOnly pricing filter — never inferred from a listing's word
+   *  "free", which may be a free trial or an unrelated free tier. */
+  askingFree: boolean
 }
 
 export function analyzeGoal(goal: string): GoalAnalysis {
@@ -257,7 +266,8 @@ export function analyzeGoal(goal: string): GoalAnalysis {
     }
   }
   for (const c of concepts) if (c.negated) constraints.push(c.label)
-  return { concepts, phrases, constraints }
+  const askingFree = concepts.some((c) => c.id === 'free' && !c.negated)
+  return { concepts, phrases, constraints, askingFree }
 }
 
 /** Edit distance ≤ 1 (insert/delete/substitute), cheap for short tokens.
@@ -544,62 +554,13 @@ export function matchToolsByGoalInPool(pool: GoalPoolItem[], goal: string, limit
 }
 
 // ============================================================
-// CONSERVATIVE FALLBACK EVALUATION — AI unavailable only
+// NO KEYWORD FALLBACK MATCHES
 // ============================================================
-
-function collectConservative(
-  entries: IndexEntry[],
-  analysis: GoalAnalysis,
-  limit: number,
-): GoalMatch[] {
-  // Explicit negated mandatory constraints ("without internet", "not
-  // paid", "no installation") cannot be verified with a keyword gate.
-  // Showing matches while ignoring them would silently relax the user's
-  // requirements, so the fallback declines instead.
-  if (analysis.constraints.length) return []
-
-  const concepts = analysis.concepts.filter((c) => !c.negated)
-  if (!concepts.length) return []
-  const { scored } = scoreIndex(entries, analysis)
-
-  // Every distinct query concept must be covered by listing evidence —
-  // two matching keywords do not establish an end-to-end workflow, so
-  // ANY missing concept makes the candidate ineligible here.
-  const needCoverage = concepts.length
-  const needBody = Math.min(2, concepts.length)
-  const best = new Map<string, ScoredMatch>()
-  for (const m of scored) {
-    if (m.score < 2) continue
-    const covered = new Set([...m.strong, ...m.bodyConcepts])
-    if (covered.size < needCoverage) continue
-    if (m.bodyConcepts.length < needBody) continue
-    const key = m.item.name.toLowerCase().replace(/[^a-z0-9]/g, '')
-    const prev = best.get(key)
-    if (!prev || m.score > prev.score) best.set(key, m)
-  }
-  return [...best.values()]
-    .sort((a, b) => b.score - a.score || b.item.upvotes - a.item.upvotes)
-    .slice(0, limit)
-}
-
-/** Strict local evaluation for when the AI ranker cannot be used.
- *
- *  A candidate MAY be shown as a goal match only when the listing's own
- *  text establishes support for every distinct query concept, with at
- *  least two concepts evidenced directly in the tagline/description body
- *  (not merely in a name fragment or a broad category). If the local
- *  check cannot establish task suitability — including any explicit
- *  negated constraint, which cannot be verified without AI — the caller
- *  must show a temporary-unavailability message instead.
- *
- *  This is still a deterministic keyword gate: it is deliberately much
- *  stricter than retrieval, and results surfaced through it are labeled
- *  "not AI-verified" in the UI. */
-export function evaluateGoalFallback(goal: string, freeOnly = false, limit = 4): GoalMatch[] {
-  return collectConservative(getIndex(freeOnly), analyzeGoal(goal), limit)
-}
-
-/** Conservative evaluation over a controlled pool (regression tests). */
-export function evaluateGoalFallbackInPool(pool: GoalPoolItem[], goal: string, limit = 4): GoalMatch[] {
-  return collectConservative(buildIndex(pool), analyzeGoal(goal), limit)
-}
+// When the AI evaluator is unavailable, the finder presents NO local
+// candidate list. Lexical coverage cannot verify task support: it once
+// (before removal) accepted "remove backgrounds from videos" because a
+// photo background remover's description mentioned videos, accepted a
+// paid tool's free trial for a "free video editor" query, and accepted
+// a listing that stated the opposite of its claim. Structured pricing
+// data and the strict model-output validator are the only evidence
+// sources that reach the user.

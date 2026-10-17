@@ -1,6 +1,11 @@
 // Latency probe: exact goal-match provider payload, generous 90s budget,
 // measures real provider latency for the slow case. Safe metadata only.
+// OPT-IN like the live check: GOAL_LIVE_CHECK=1 (spends provider credits).
 async function probeMain() {
+  if (process.env.GOAL_LIVE_CHECK !== '1') {
+    console.log('skipped: latency probe is opt-in (GOAL_LIVE_CHECK=1)')
+    return
+  }
   const fs = await import('node:fs')
   for (const line of fs.readFileSync('.env.local', 'utf8').split('\n')) {
     const m = line.match(/^([A-Z0-9_]+)=(.*)$/)

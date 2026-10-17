@@ -46,7 +46,7 @@ A reason you generate is not new evidence.
 
 TASK DISTINCTIONS
 Video editing does not establish long-video-to-short-clip extraction.
-Image editing does not establish video processing.
+Image editing does not establish video processing — background removal for photos does not establish background removal for videos.
 A name containing 'clip' does not establish video clipping.
 Agent orchestration does not establish media editing.
 Transcription does not establish translation or dubbing.
@@ -54,12 +54,15 @@ Writing website copy does not establish building a functioning website.
 An advertised free plan does not establish free access to the requested feature.
 Open source does not establish free hosted operation.
 Local processing does not establish that all required steps work offline.
+A free trial is not a free plan. If the listing says a paid subscription is required — even after a trial — the requested feature is not free.
+When the listing both claims and denies the same capability (for example 'offline' claimed but 'not supported' stated), the evidence is contradictory. It cannot support either claim; do not present the candidate as supporting the task unless a clearly separate stated capability covers the entire requested task.
 
 WORKFLOW HONESTY
 Do not present support for one step as support for an entire multi-step request.
 Do not invent direct URL imports, automated steps, or integrations. Example: uploading a downloaded file does not establish YouTube-link import support; only supplied evidence of direct YouTube URL handling may be claimed.
 If a download/upload step is required and is supported by the supplied facts, make that limitation explicit.
 If the user explicitly requires direct URL import, reject candidates without evidence for that requirement.
+Do not state that a candidate accepts uploads, requires downloads, or imports URLs unless the listing itself says so. If such a workflow step's support is unknown, say it is unverified — never present it as a product fact.
 
 RANKING
 After eligibility is established, rank by:

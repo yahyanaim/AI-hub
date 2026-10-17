@@ -2,13 +2,8 @@
 
 import { useRef, useState } from 'react'
 import { ArrowDown, ArrowUp, Loader2, Sparkles } from 'lucide-react'
-import {
-  evaluateGoalFallback,
-  type GoalItemKind,
-  type GoalMatch,
-} from '@/lib/goal-finder'
+import type { GoalItemKind } from '@/lib/goal-finder'
 import { CLIENT_TIMEOUT_MS } from '@/lib/goal-timeouts'
-import { shouldRefillLocally } from '@/lib/goal-fallback-policy'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
@@ -50,13 +45,11 @@ export function GoalFinder() {
   // Distinct result states — never collapsed into one another.
   const [retrievalEmpty, setRetrievalEmpty] = useState(false)
   const [aiFailed, setAiFailed] = useState(false)
-  const [fallbackUsed, setFallbackUsed] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const submit = () => {
     if (!goal.trim() || searching) return
     const q = goal.trim()
-    const free = freeOnly
     setDone(true)
     setSearching(true)
     setMatches([])
@@ -64,17 +57,13 @@ export function GoalFinder() {
     setAbstained(false)
     setRetrievalEmpty(false)
     setAiFailed(false)
-    setFallbackUsed(false)
     if (timer.current) clearTimeout(timer.current)
-    // AI re-rank first (understands phrasing), then a STRICT local
-    // evaluation as the last resort. Normal keyword retrieval is NOT the
-    // fallback: an AI abstention (empty list) is shown as-is, never
-    // refilled, and a technical failure (5xx / aborted request — decided
-    // by shouldRefillLocally) only qualifies candidates whose listing
-    // text covers the full task — otherwise we surface a clear
-    // temporary-unavailability message with retry.
+    // AI evaluation first (understands phrasing, honours constraints and
+    // the structured freeOnly filter). On technical failure we show a
+    // temporary-unavailability message with a visible retry — keyword
+    // coverage is NEVER substituted for verified support, and an AI
+    // abstention (empty list) is shown as-is, never refilled.
     const run = async () => {
-      let httpStatus = 0
       try {
         const controller = new AbortController()
         // Must stay above the server's full provider-chain budget so the
@@ -87,11 +76,10 @@ export function GoalFinder() {
             body: JSON.stringify({ goal: q, freeOnly }),
             signal: controller.signal,
           })
-          httpStatus = res.status
           if (res.ok) {
             const data = await res.json()
             // Candidate retrieval found nothing — distinct from both AI
-            // abstention and no-keyword-matches.
+            // abstention and technical failure.
             if (data.noCandidates) {
               setRetrievalEmpty(true)
               setSearching(false)
@@ -117,35 +105,13 @@ export function GoalFinder() {
           clearTimeout(timeout)
         }
       } catch {
-        // network error / client timeout — treat as technical AI failure
+        // network error / client timeout — technical AI failure
       }
-      // 5xx and aborted requests are technical AI failures → the
-      // conservative local evaluation may run. 4xx is a request error —
-      // never refilled with keyword results. A successful AI response
-      // (including an abstention) returned above and can never reach
-      // this refill path.
-      if (!shouldRefillLocally(httpStatus)) {
-        setAiFailed(true)
-        setSearching(false)
-        return
-      }
-      const local: GoalMatch[] = evaluateGoalFallback(q, free)
-      if (local.length) {
-        setMatches(
-          local.map((m) => ({
-            kind: m.kind,
-            item: m.item,
-            // Conservative gate: only listings whose own text covered every
-            // part of the goal reached this point.
-            note: `Keyword evidence: ${m.matched.join(', ')} (not AI-verified)`,
-            pct: m.pct,
-            ai: false,
-          }))
-        )
-        setFallbackUsed(true)
-      } else {
-        setAiFailed(true)
-      }
+      // Any non-validated outcome → temporary unavailability with retry.
+      // No local keyword results, ever: a valid AI [] above returned
+      // before this line and stays empty; keyword coverage is not
+      // verified task support (see lib/goal-fallback-policy.ts).
+      setAiFailed(true)
       setSearching(false)
     }
     timer.current = setTimeout(() => {
@@ -335,17 +301,10 @@ export function GoalFinder() {
               )
             ) : aiFailed ? (
               <>
-                AI matching is temporarily unavailable, and the strict keyword
-                check could not confirm any catalogue entry supports this full
-                task. This is not a &ldquo;no matches anywhere&rdquo; answer —
-                please retry in a moment.
-              </>
-            ) : fallbackUsed ? (
-              <>
-                AI matching is temporarily unavailable. Shown below are only
-                listings whose published text covers every part of your goal —
-                a strict keyword check, <strong className="font-medium text-foreground">not AI-verified</strong>.
-                No generated claims. Retry to get the AI evaluation.
+                AI matching is temporarily unavailable, so nothing could be
+                evaluated or presented for this goal. This is not a
+                &ldquo;no matches anywhere&rdquo; answer — please retry in a
+                moment.
               </>
             ) : retrievalEmpty ? (
               <>
@@ -371,7 +330,7 @@ export function GoalFinder() {
                       ? 'No sufficiently supported match was found in the supplied candidates. This does not prove that no suitable product exists elsewhere.'
                       : 'Nothing in the catalogue matches those words yet. Try broader terms or one of the suggestions above.'}
               </p>
-              {(aiFailed || fallbackUsed) && (
+              {(aiFailed) && (
                 <button
                   type="button"
                   onClick={submit}

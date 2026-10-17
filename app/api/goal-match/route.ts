@@ -69,7 +69,9 @@ export async function POST(req: Request) {
   }
 
   // ---- State 1: candidate retrieval found nothing -----------------------
+  const retrievalMs0 = Date.now()
   const local = matchToolsByGoal(goal, freeOnly, CANDIDATE_COUNT)
+  const retrievalMs = Date.now() - retrievalMs0
   if (!local.length) {
     return NextResponse.json({ matches: [], noCandidates: true, abstained: false })
   }
@@ -77,10 +79,15 @@ export async function POST(req: Request) {
   const catalog = local.map((m) => candidateLine(m.kind, m.item)).join('\n')
 
   // Preserve negation/constraints explicitly for the evaluator, so none of
-  // them gets treated as noise downstream.
+  // them gets treated as noise downstream. The query word "free" is a
+  // plan constraint the evaluator must honor (a free trial, a free tier
+  // for an unrelated feature, or open-source licensing do not satisfy
+  // it); the UI freeOnly filter applies the structured pricing field.
   const analysis = analyzeGoal(goal)
-  const constraintLines = analysis.constraints.length
-    ? `\nMandatory constraints (do NOT relax them): ${analysis.constraints.join('; ')}\n`
+  const constraintParts = [...analysis.constraints]
+  if (analysis.askingFree) constraintParts.push('free plan required')
+  const constraintLines = constraintParts.length
+    ? `\nMandatory constraints (do NOT relax them): ${constraintParts.join('; ')}\n`
     : '\n'
   const user = `Goal: "${goal}"${freeOnly ? ' (free plan required — all candidates already satisfy this filter)' : ''}${constraintLines}\n\nCatalogue:\n${catalog}`
 
@@ -95,16 +102,28 @@ export async function POST(req: Request) {
   const validIdSet = new Set(byId.keys())
   logGoalMatch('request-built', {
     candidates: local.length,
+    retrievalMs,
     systemChars: GOAL_MATCH_SYSTEM_PROMPT.length,
     userChars: user.length,
   })
 
+  // Client disconnects cancel the provider fan-out where the runtime
+  // supports signal linking — no point paying for a request nobody will
+  // read. Cancellation is a cost measure only; tokens the provider
+  // already processed may still be billed.
   const controllers = new Map<string, AbortController>()
   const send = async (model: string): Promise<ProviderResult> => {
+    if (req.signal.aborted) {
+      return { ok: false, model, errName: 'ClientDisconnected' }
+    }
     const attemptStart = Date.now()
     const controller = new AbortController()
     controllers.set(model, controller)
     const timer = setTimeout(() => controller.abort(), PROVIDER_ATTEMPT_MS)
+    const linkedSignal =
+      typeof AbortSignal.any === 'function'
+        ? AbortSignal.any([controller.signal, req.signal])
+        : controller.signal
     try {
       const res = await fetch(API_URL, {
         method: 'POST',
@@ -126,7 +145,7 @@ export async function POST(req: Request) {
           temperature: 0.2,
           stream: false,
         }),
-        signal: controller.signal,
+        signal: linkedSignal,
       })
       if (!res.ok) {
         logGoalMatch('provider-http-error', { model, status: res.status, attemptMs: Date.now() - attemptStart })
@@ -164,6 +183,9 @@ export async function POST(req: Request) {
       })
       return { ok: false, model, errName: err instanceof Error ? err.name : 'unknown' }
     } finally {
+      // Timer cleared so a settled attempt can never be aborted late;
+      // late responses after the fan-out resolves are ignored by the
+      // roundtrip helper's finished-guard.
       clearTimeout(timer)
       controllers.delete(model)
     }
@@ -177,6 +199,7 @@ export async function POST(req: Request) {
       }
     }
   }
+  req.signal.addEventListener('abort', cancelInFlight, { once: true })
 
   const result = await runProviderRoundtrip({
     models: [DEFAULT_MODEL, ...FALLBACK_MODELS],

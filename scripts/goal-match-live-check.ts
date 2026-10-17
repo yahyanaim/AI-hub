@@ -1,10 +1,16 @@
 // One-shot LIVE provider check for the goal-match route.
 // Runs the real route handler with the real NVIDIA_API_KEY from .env.local
 // and the real catalogue. Prints safe metadata + the parsed outcome only.
+// It costs provider credits and depends on provider latency, so it is
+// OPT-IN: set GOAL_LIVE_CHECK=1 explicitly (never part of required CI).
 //
-// Run: npx tsx scripts/goal-match-live-check.ts
+// Run: GOAL_LIVE_CHECK=1 npx tsx scripts/goal-match-live-check.ts
 
 async function liveCheckMain() {
+  if (process.env.GOAL_LIVE_CHECK !== '1') {
+    console.log('skipped: live provider check is opt-in (GOAL_LIVE_CHECK=1)')
+    return
+  }
   const rows: string[] = []
   for (const line of (await import('node:fs')).readFileSync('.env.local', 'utf8').split('\n')) {
     const m = line.match(/^([A-Z0-9_]+)=(.*)$/)
