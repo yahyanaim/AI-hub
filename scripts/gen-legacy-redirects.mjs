@@ -100,6 +100,15 @@ for (const e of parsed.get('repos') ?? []) {
   if (e.slug && c) repos[e.slug] = c
 }
 out.repos = repos
+// Browser extensions re-moved from /dev-tools to the Editing Tools
+// catalog: the old /dev-tools/... URLs must 308 to their new
+// /edittools/<slug> home. Detected as repo entries carrying the
+// 'extension' category (the extensions catalog lives on /edittools).
+const movedEdittools = []
+for (const e of parsed.get('repos') ?? []) {
+  if (e.slug && e.text.includes("category: 'extension'")) movedEdittools.push(e.slug)
+}
+out.movedEdittools = movedEdittools.sort()
 const dest = new URL('../lib/legacy-redirects.json', import.meta.url)
 writeFileSync(dest, JSON.stringify(out, null, 1) + '\n')
 

@@ -81,7 +81,7 @@ export type DevToolCategory =
   | 'templates'
   | 'testing'
   | 'translation'
-  | 'extension'
+  | 'dev-extension'
   | 'programmer-websites'
   | 'repo'
   | 'websites'
@@ -104,6 +104,7 @@ export type EditToolCategory =
   | 'file'
   | 'storage'
   | 'websites'
+  | 'extension'
   | 'other'
 
 export type Pricing = 'free' | 'freemium' | 'paid' | 'open-source'
@@ -431,7 +432,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   templates: 'Templates',
   testing: 'Testing',
   translation: 'Translation',
-  extension: 'Extensions',
+  'dev-extension': 'Dev Extensions',
   'programmer-websites': 'Programmer Websites',
   repo: 'Repos',
   websites: 'Websites',
@@ -455,6 +456,7 @@ export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
   file: 'File',
   storage: 'Storage',
   websites: 'Websites',
+  extension: 'Extensions',
   other: 'Other',
 }
 
