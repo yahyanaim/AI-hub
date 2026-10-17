@@ -18244,6 +18244,26 @@ export const SEED_OFFERS: Offer[] = [
         description: 'In the Build / Playground workspace, pick Gemini 4 Argon as the model and start building.',
       },
     ],
+    nameAr: 'Gemini 4 Argon في AI Studio Build',
+    taglineAr: 'تنبيه لمشتركي Google AI Pro: يمكنكم الآن إنشاء المشاريع باستخدام Gemini 4 Argon في AI Studio Build / Playground 🛠️',
+    descriptionAr:
+      'تنبيه لمشتركي Google AI Pro: يمكنكم الآن إنشاء المشاريع باستخدام Gemini 4 Argon في AI Studio Build / Playground 🛠️. ابدأوا من ai.studio/build. سجّلوا الدخول بحساب Google المرتبط باشتراك Google AI Pro، وافتحوا مساحة Build / Playground، ثم اختاروا نموذج Gemini 4 Argon لبدء إنشاء مشاريعكم.',
+    stepsAr: [
+      {
+        title: 'افتح مساحة AI Studio Build',
+        description: 'ابدأ من ai.studio/build. يفتح الرابط Google AI Studio؛ سجّل الدخول إذا طُلب منك ذلك.',
+        url: 'https://ai.studio/build',
+      },
+      {
+        title: 'سجّل الدخول بحساب Google AI Pro',
+        description: 'استخدم حساب Google المرتبط باشتراكك في Google AI Pro حتى تتاح لك نماذج الباقة المدفوعة.',
+        url: 'https://ai.studio/build',
+      },
+      {
+        title: 'اختر Gemini 4 Argon في Build / Playground 🛠️',
+        description: 'داخل مساحة Build / Playground، اختر Gemini 4 Argon كنموذج وابدأ إنشاء مشروعك.',
+      },
+    ],
     upvotes: 0,
     bookmarks: 0,
     submittedBy: 'u1',
