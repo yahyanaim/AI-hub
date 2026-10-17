@@ -100,15 +100,16 @@ for (const e of parsed.get('repos') ?? []) {
   if (e.slug && c) repos[e.slug] = c
 }
 out.repos = repos
-// Browser extensions re-moved from /dev-tools to the Editing Tools
-// catalog: the old /dev-tools/... URLs must 308 to their new
-// /edittools/<slug> home. Detected as repo entries carrying the
-// 'extension' category (the extensions catalog lives on /edittools).
-const movedEdittools = []
-for (const e of parsed.get('repos') ?? []) {
-  if (e.slug && e.text.includes("category: 'extension'")) movedEdittools.push(e.slug)
+// Browser-extensions catalog is canonicalized under /tools/extension.
+// Slugs are collected from tools entries carrying category 'extension' —
+// the items previously moved twice (from /dev-tools → /edittools → OK).
+// Any legacy URL on dev-tools or edittools targeting one 308s to
+// /tools/extension/<slug>.
+const extensionTools = []
+for (const e of parsed.get('tools') ?? []) {
+  if (e.slug && e.text.includes("category: 'extension'")) extensionTools.push(e.slug)
 }
-out.movedEdittools = movedEdittools.sort()
+out.extensionTools = extensionTools.sort()
 const dest = new URL('../lib/legacy-redirects.json', import.meta.url)
 writeFileSync(dest, JSON.stringify(out, null, 1) + '\n')
 

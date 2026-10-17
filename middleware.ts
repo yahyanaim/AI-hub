@@ -112,14 +112,14 @@ export function middleware(request: NextRequest) {
       if (category) return NextResponse.redirect(new URL(`/tools/${category}/${slug}`, request.url), 308)
       return NextResponse.redirect(new URL('/tools', request.url), 308)
     }
-    // The old Extensions hub URL now lives on the Editing Tools catalog.
+    // The old Extensions hub URL now lives in the AI tools catalog.
     if (section === 'dev-tools' && slug === 'extension') {
-      return NextResponse.redirect(new URL('/edittools', request.url), 308)
+      return NextResponse.redirect(new URL('/tools/extension', request.url), 308)
     }
-    // Browser extensions moved to the Editing Tools catalog keep their
-    // old dev-tools URLs alive as 308s to the new canonical home.
-    if (section === 'dev-tools' && (legacy.movedEdittools as string[]).includes(slug)) {
-      return NextResponse.redirect(new URL(`/edittools/${slug}`, request.url), 308)
+    // Browser extensions canonicalize under /tools/extension — old
+    // dev-tools URLs 308 there.
+    if (section === 'dev-tools' && (legacy.extensionTools as string[]).includes(slug)) {
+      return NextResponse.redirect(new URL(`/tools/extension/${slug}`, request.url), 308)
     }
     const cats =
       section === 'dev-tools' ? legacy.devCategories
@@ -138,9 +138,9 @@ export function middleware(request: NextRequest) {
     const section = d[1] as string
     const category = decodeURIComponent(d[2] ?? '')
     const slug = decodeURIComponent(d[3] ?? '')
-    // Old /dev-tools/extension/<slug> links for re-moved items → edittools.
-    if (section === 'dev-tools' && category === 'extension' && (legacy.movedEdittools as string[]).includes(slug)) {
-      return NextResponse.redirect(new URL(`/edittools/${slug}`, request.url), 308)
+    // Old /dev-tools/extension/<slug> links for moved items → tools.
+    if (section === 'dev-tools' && category === 'extension' && (legacy.extensionTools as string[]).includes(slug)) {
+      return NextResponse.redirect(new URL(`/tools/extension/${slug}`, request.url), 308)
     }
     const canonical = MAPS[section]?.[slug]
     if (!canonical) return new NextResponse('Not Found', { status: 404 })
@@ -154,6 +154,11 @@ export function middleware(request: NextRequest) {
   const e = /^\/edittools\/([^/]+)\/?$/.exec(pathname)
   if (e) {
     const slug = decodeURIComponent(e[1] ?? '')
+    // Extensions that migrated from editing tools to the AI tools
+    // catalog keep working as 308s to their canonical home.
+    if ((legacy.extensionTools as string[]).includes(slug)) {
+      return NextResponse.redirect(new URL(`/tools/extension/${slug}`, request.url), 308)
+    }
     if ((legacy.repos as Record<string, string>)[slug]) return NextResponse.next()
     return new NextResponse('Not Found', { status: 404 })
   }

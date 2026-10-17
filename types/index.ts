@@ -105,7 +105,6 @@ export type EditToolCategory =
   | 'file'
   | 'storage'
   | 'websites'
-  | 'extension'
   | 'other'
 
 export type Pricing = 'free' | 'freemium' | 'paid' | 'open-source'
@@ -458,7 +457,6 @@ export const REPO_CATEGORY_LABELS: Record<EditToolCategory, string> = {
   file: 'File',
   storage: 'Storage',
   websites: 'Websites',
-  extension: 'Extensions',
   other: 'Other',
 }
 

@@ -15615,7 +15615,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'GitZip lets you download a single file or subfolder from a GitHub repo as a ZIP without cloning everything — handy when you only need part of a codebase for review.',
     url: 'https://gitzip.org/',
-    logoUrl: 'https://gitzip.org/favicon.ico',
+    logoUrl: 'https://gitzip.org/assets/images/favicon-96x96.png',
     category: 'dev-extension',
     tags: ['github', 'download', 'zip', 'chrome'],
     pricing: 'free',
@@ -15675,7 +15675,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'JSON Viewer formats raw JSON responses into readable collapsible trees, a huge time-saver when you work with APIs and debug payloads all day.',
     url: 'https://jsonview.com/',
-    logoUrl: 'https://jsonview.com/favicon.ico',
+    logoUrl: 'https://benhollis.net/images/jsonview-175da902.png',
     category: 'dev-extension',
     tags: ['json', 'api', 'debugging', 'chrome'],
     pricing: 'open-source',
@@ -15775,7 +15775,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'WhatFont reveals the typeface behind any text on a page — hover, click, and get the font family, size, and weight without digging through devtools.',
     url: 'https://getwhatfont.com/',
-    logoUrl: 'https://getwhatfont.com/favicon.ico',
+    logoUrl: 'https://getwhatfont.com/assets/logo-Cc39fMdR.svg',
     category: 'dev-extension',
     tags: ['fonts', 'typography', 'design', 'chrome'],
     pricing: 'free',
