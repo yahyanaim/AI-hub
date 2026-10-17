@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { matchToolsByGoal, analyzeGoal, type GoalItemKind } from '@/lib/goal-finder'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
 import { runProviderRoundtrip, type ProviderResult } from '@/lib/goal-provider-roundtrip'
+import { parseModelOutput } from '@/lib/goal-output'
 import { PROVIDER_ATTEMPT_MS, SERVER_TOTAL_MS } from '@/lib/goal-timeouts'
 import type { Tool, DevTool, Repo } from '@/types'
 
@@ -136,14 +137,14 @@ export async function POST(req: Request) {
   // read. Cancellation is a cost measure only; tokens the provider
   // already processed may still be billed.
   const controllers = new Map<string, AbortController>()
-  const send = async (model: string): Promise<ProviderResult> => {
+  const send = async (model: string, attemptMs: number = PROVIDER_ATTEMPT_MS): Promise<ProviderResult> => {
     if (req.signal.aborted) {
       return { ok: false, model, errName: 'ClientDisconnected' }
     }
     const attemptStart = Date.now()
     const controller = new AbortController()
     controllers.set(model, controller)
-    const timer = setTimeout(() => controller.abort(), PROVIDER_ATTEMPT_MS)
+    const timer = setTimeout(() => controller.abort(), attemptMs)
     const linkedSignal =
       typeof AbortSignal.any === 'function'
         ? AbortSignal.any([controller.signal, req.signal])
@@ -243,18 +244,13 @@ export async function POST(req: Request) {
     onEvent: logGoalMatch,
   })
 
-  // ---- State 2: AI abstention (valid empty array) ----------------------
-  if (result.kind === 'abstain') {
-    logGoalMatch('goal-abstained', { elapsedMs: Date.now() - started, deadlineExpired: result.deadlineExpired, abstentions: result.abstentions })
-    return NextResponse.json({ matches: [], abstained: true })
-  }
-
-  // ---- State 3: AI returned validated non-empty matches ----------------
-  if (result.kind === 'ok') {
+  // Validated picks → response objects (shared by the fan-out winner and
+  // the abstention-retry second draw below).
+  const buildMatches = (picks: { id: string; reason: string }[]) => {
     const matches: { kind: GoalItemKind; item: Tool | DevTool | Repo; pct: number; reason: string; ai: true }[] = []
     const seenIds = new Set<string>()
     const seenNames = new Set<string>()
-    for (const pick of result.picks) {
+    for (const pick of picks) {
       if (matches.length >= 6) break
       if (seenIds.has(pick.id)) continue
       seenIds.add(pick.id)
@@ -270,6 +266,48 @@ export async function POST(req: Request) {
         ai: true as const,
       })
     }
+    return matches
+  }
+
+  // ---- State 2: AI abstention (valid empty array) ----------------------
+  if (result.kind === 'abstain') {
+    const elapsed = Date.now() - started
+    logGoalMatch('goal-abstained', { elapsedMs: elapsed, deadlineExpired: result.deadlineExpired, abstentions: result.abstentions })
+    // One INDEPENDENT second judgment when a repeat abstention would be
+    // immediately shown: measured first-try abstentions resolve fast
+    // (28-42s draws), and a fresh generation breaks the abstention often
+    // enough to justify the wait — the honest "AI could not confirm" +
+    // UI Retry then covers the residual two-abstain case. Never forced:
+    // a second valid [] abstains too; the first valid judgment stands
+    // unless the second draw contradicts it with validated picks.
+    const RETRY_MIN_ROOM_MS = 35_000
+    const remaining = SERVER_TOTAL_MS - elapsed
+    if (!result.deadlineExpired && remaining >= RETRY_MIN_ROOM_MS) {
+      const attemptMs = Math.min(PROVIDER_ATTEMPT_MS, remaining - 1)
+      logGoalMatch('abstention-retry-start', { elapsedMs: elapsed, attemptMs })
+      const second = await send(DEFAULT_MODEL, attemptMs)
+      if (second.ok && second.text) {
+        const outcome = parseModelOutput(second.text, validIdSet)
+        if (outcome.kind === 'ok') {
+          const matches = buildMatches(outcome.picks)
+          logGoalMatch('goal-match-after-retry', { elapsedMs: Date.now() - started, picked: matches.length, dropped: outcome.dropped })
+          return NextResponse.json({ matches, abstained: false })
+        }
+        // Valid [] again → abstention stands (with or without explicit
+        // deadline); invalid output does NOT override a valid verdict.
+        logGoalMatch('abstention-retry-kept', { outcome: outcome.kind, elapsedMs: Date.now() - started })
+      } else {
+        logGoalMatch('abstention-retry-failed', { httpStatus: second.httpStatus, errName: second.errName })
+      }
+    } else {
+      logGoalMatch('abstention-retry-skipped', { elapsedMs: elapsed })
+    }
+    return NextResponse.json({ matches: [], abstained: true })
+  }
+
+  // ---- State 3: AI returned validated non-empty matches ----------------
+  if (result.kind === 'ok') {
+    const matches = buildMatches(result.picks)
     logGoalMatch('goal-match-done', {
       elapsedMs: Date.now() - started,
       candidates: local.length,

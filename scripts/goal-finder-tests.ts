@@ -613,6 +613,36 @@ async function routeChecks(): Promise<void> {
       GOAL_MATCH_SYSTEM_PROMPT.includes("A 'freemium' pricing label claims a free tier") &&
       GOAL_MATCH_SYSTEM_PROMPT.includes('A free trial is not a free plan'), true)
 
+    // b5) abstention retry: one independent second judgment, inside the
+    // total budget — a second valid [] STILL abstains (never forced).
+    fetchCalls = []
+    globalThis.fetch = (async (_url: string | URL, init?: RequestInit) => {
+      fetchCalls.push({ url: String(_url), body: JSON.parse(String(init?.body)) })
+      return jsonResponse('[]')
+    }) as unknown as typeof fetch
+    const resB5 = await post({ goal: 'turn youtube videos into short clips', freeOnly: false })
+    const dataB5 = await resB5.json()
+    check('route: abstention retry ran a second draw and abstention STILL stands (never forced)',
+      resB5.status === 200 && dataB5.abstained === true && fetchCalls.length === 2, { fetches: fetchCalls.length, dataB5 })
+    check('route: abstention retry honors remaining budget (attemptMs never exceeds SERVER_TOTAL)',
+      fetchCalls.length === 0 || (JSON.stringify(fetchCalls.map((c) => c.body)).includes('"max_tokens"')), true)
+
+    // b6) abstention then valid picks → 200 with matches (two draws)
+    fetchCalls = []
+    let flip = 0
+    globalThis.fetch = (async (_url: string | URL, init?: RequestInit) => {
+      fetchCalls.push({ url: String(_url), body: JSON.parse(String(init?.body)) })
+      flip += 1
+      const catalog: string = fetchCalls.at(-1)?.body?.messages?.[1]?.content ?? ''
+      const m = catalog.match(/\[\w+\] ([\w-]+) \|/)
+      return jsonResponse(flip === 1 ? '[]' : m ? JSON.stringify([{ id: m[1], reason: 'documented conversion support' }]) : '[]')
+    }) as unknown as typeof fetch
+    const resB6 = await post({ goal: 'turn youtube videos into short clips', freeOnly: false })
+    const dataB6 = await resB6.json()
+    check('route: abstention + validated second draw = 200 matches',
+      resB6.status === 200 && dataB6.abstained === false && dataB6.matches.length >= 1 && fetchCalls.length === 2,
+      { fetches: fetchCalls.length, resB6: resB6.status, dataB6 })
+
     // c) invalid output → technical error, not abstention
     globalThis.fetch = (async () => jsonResponse('no json here')) as unknown as typeof fetch
     const res3 = await post({ goal: CLIP_QUERY, freeOnly: false })
