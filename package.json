@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test:goal": "tsx scripts/goal-finder-tests.ts",
     "seed:check": "node scripts/validate-seed.mjs"
   },
   "dependencies": {

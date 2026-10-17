@@ -2,7 +2,13 @@
 
 import { useRef, useState } from 'react'
 import { ArrowDown, ArrowUp, Loader2, Sparkles } from 'lucide-react'
-import { matchToolsByGoal, type GoalItemKind, type GoalMatch } from '@/lib/goal-finder'
+import {
+  evaluateGoalFallback,
+  type GoalItemKind,
+  type GoalMatch,
+} from '@/lib/goal-finder'
+import { CLIENT_TIMEOUT_MS } from '@/lib/goal-timeouts'
+import { shouldRefillLocally } from '@/lib/goal-fallback-policy'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
@@ -41,6 +47,10 @@ export function GoalFinder() {
   const [matches, setMatches] = useState<ShownMatch[]>([])
   const [aiUsed, setAiUsed] = useState(false)
   const [abstained, setAbstained] = useState(false)
+  // Distinct result states — never collapsed into one another.
+  const [retrievalEmpty, setRetrievalEmpty] = useState(false)
+  const [aiFailed, setAiFailed] = useState(false)
+  const [fallbackUsed, setFallbackUsed] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const submit = () => {
@@ -52,23 +62,41 @@ export function GoalFinder() {
     setMatches([])
     setAiUsed(false)
     setAbstained(false)
+    setRetrievalEmpty(false)
+    setAiFailed(false)
+    setFallbackUsed(false)
     if (timer.current) clearTimeout(timer.current)
-    // AI re-rank first (understands phrasing), local keyword matching as
-    // the instant fallback. The fallback runs ONLY on technical failure —
-    // an AI abstention (empty list) is shown as-is, never refilled.
+    // AI re-rank first (understands phrasing), then a STRICT local
+    // evaluation as the last resort. Normal keyword retrieval is NOT the
+    // fallback: an AI abstention (empty list) is shown as-is, never
+    // refilled, and a technical failure (5xx / aborted request — decided
+    // by shouldRefillLocally) only qualifies candidates whose listing
+    // text covers the full task — otherwise we surface a clear
+    // temporary-unavailability message with retry.
     const run = async () => {
+      let httpStatus = 0
       try {
         const controller = new AbortController()
-        const timeout = setTimeout(() => controller.abort(), 30000)
+        // Must stay above the server's full provider-chain budget so the
+        // backend can still make its fallback-provider attempt.
+        const timeout = setTimeout(() => controller.abort(), CLIENT_TIMEOUT_MS)
         try {
           const res = await fetch('/api/goal-match', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ goal: q, free: freeOnly }),
+            body: JSON.stringify({ goal: q, freeOnly }),
             signal: controller.signal,
           })
+          httpStatus = res.status
           if (res.ok) {
             const data = await res.json()
+            // Candidate retrieval found nothing — distinct from both AI
+            // abstention and no-keyword-matches.
+            if (data.noCandidates) {
+              setRetrievalEmpty(true)
+              setSearching(false)
+              return
+            }
             if (Array.isArray(data.matches)) {
               setMatches(
                 data.matches.map((m: { kind: GoalItemKind; item: Tool | DevTool | Repo; pct: number; reason: string }) => ({
@@ -89,19 +117,35 @@ export function GoalFinder() {
           clearTimeout(timeout)
         }
       } catch {
-        // fall through to local matching (technical failure only)
+        // network error / client timeout — treat as technical AI failure
       }
-      const local: GoalMatch[] = matchToolsByGoal(q, free)
-      setMatches(
-        local.map((m) => ({
-          kind: m.kind,
-          item: m.item,
-          note: `Matched on: ${m.matched.join(', ')}`,
-          pct: m.pct,
-          ai: false,
-        }))
-      )
-      setAiUsed(false)
+      // 5xx and aborted requests are technical AI failures → the
+      // conservative local evaluation may run. 4xx is a request error —
+      // never refilled with keyword results. A successful AI response
+      // (including an abstention) returned above and can never reach
+      // this refill path.
+      if (!shouldRefillLocally(httpStatus)) {
+        setAiFailed(true)
+        setSearching(false)
+        return
+      }
+      const local: GoalMatch[] = evaluateGoalFallback(q, free)
+      if (local.length) {
+        setMatches(
+          local.map((m) => ({
+            kind: m.kind,
+            item: m.item,
+            // Conservative gate: only listings whose own text covered every
+            // part of the goal reached this point.
+            note: `Keyword evidence: ${m.matched.join(', ')} (not AI-verified)`,
+            pct: m.pct,
+            ai: false,
+          }))
+        )
+        setFallbackUsed(true)
+      } else {
+        setAiFailed(true)
+      }
       setSearching(false)
     }
     timer.current = setTimeout(() => {
@@ -258,7 +302,11 @@ export function GoalFinder() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="font-heading text-2xl font-semibold tracking-tight">
-                {matches.length ? `${matches.length} matches` : 'No matches yet'}
+                {matches.length
+                  ? `${matches.length} matches`
+                  : aiFailed
+                    ? 'AI matching temporarily unavailable'
+                    : 'No matches yet'}
               </h2>
               <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
                 Goal: <strong className="font-medium text-foreground">{goal.trim().slice(0, 140)}</strong>
@@ -285,6 +333,26 @@ export function GoalFinder() {
                   the suggestions above.
                 </>
               )
+            ) : aiFailed ? (
+              <>
+                AI matching is temporarily unavailable, and the strict keyword
+                check could not confirm any catalogue entry supports this full
+                task. This is not a &ldquo;no matches anywhere&rdquo; answer —
+                please retry in a moment.
+              </>
+            ) : fallbackUsed ? (
+              <>
+                AI matching is temporarily unavailable. Shown below are only
+                listings whose published text covers every part of your goal —
+                a strict keyword check, <strong className="font-medium text-foreground">not AI-verified</strong>.
+                No generated claims. Retry to get the AI evaluation.
+              </>
+            ) : retrievalEmpty ? (
+              <>
+                Method: keyword retrieval against published names, tags,
+                categories and descriptions found no candidates for these
+                words. No generated claims.
+              </>
             ) : (
               <>
                 Method: keyword overlap against published names, tags,
@@ -293,11 +361,26 @@ export function GoalFinder() {
             )}
           </p>
           {matches.length === 0 ? (
-            <p className="mt-3 text-sm text-muted-foreground">
-              {abstained
-                ? 'No sufficiently supported match was found in the supplied candidates. This does not prove that no suitable product exists elsewhere.'
-                : 'Nothing in the catalogue matches those words yet. Try broader terms or one of the suggestions above.'}
-            </p>
+            <div className="mt-3">
+              <p className="text-sm text-muted-foreground">
+                {aiFailed
+                  ? 'We could not verify any catalogue listing against your full goal right now. This is a temporary service issue, not proof that no tool exists.'
+                  : retrievalEmpty
+                    ? 'Nothing in the catalogue is close to those words yet. Try broader terms or one of the suggestions above.'
+                    : abstained
+                      ? 'No sufficiently supported match was found in the supplied candidates. This does not prove that no suitable product exists elsewhere.'
+                      : 'Nothing in the catalogue matches those words yet. Try broader terms or one of the suggestions above.'}
+              </p>
+              {(aiFailed || fallbackUsed) && (
+                <button
+                  type="button"
+                  onClick={submit}
+                  className="mt-3 rounded-full border-2 border-brand-orange bg-white px-4 py-1.5 text-xs font-semibold text-foreground transition-colors hover:bg-brand-orange/10 dark:bg-card"
+                >
+                  Retry AI matching
+                </button>
+              )}
+            </div>
           ) : (
             <>
               <ul className="mt-4 grid gap-5 sm:grid-cols-2">
