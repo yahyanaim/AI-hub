@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server'
 import { createHash, randomBytes } from 'node:crypto'
 import { matchToolsByGoal, analyzeGoal, type GoalItemKind } from '@/lib/goal-finder'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
-import { runProviderRoundtrip, type ProviderResult } from '@/lib/goal-provider-roundtrip'
-import { parseModelOutput } from '@/lib/goal-output'
+import { runProviderRoundtrip, parseProviderOutput, type ProviderResult } from '@/lib/goal-provider-roundtrip'
 import { PROVIDER_ATTEMPT_MS, SERVER_TOTAL_MS } from '@/lib/goal-timeouts'
 import type { Tool, DevTool, Repo } from '@/types'
 
@@ -81,14 +80,21 @@ function candidateLine(kind: GoalItemKind, t: { id: string; name: string; catego
 
 
 export async function POST(req: Request) {
+  const requestId = randomBytes(4).toString('hex')
+  const meta = {
+    requestId,
+    build: process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.COMMIT_SHA ?? process.env.NEXT_PUBLIC_COMMIT_SHA ?? 'dev',
+    prompt: PROMPT_VERSION,
+  }
+
   if (!API_KEY) {
-    return NextResponse.json({ error: 'AI matching is not configured.', fallback: true }, { status: 503 })
+    return NextResponse.json({ error: 'AI matching is not configured.', fallback: true, meta }, { status: 503 })
   }
   const ip =
     req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
   if (rateLimited(ip)) {
     return NextResponse.json(
-      { error: 'Too many searches — please wait a minute.', fallback: true },
+      { error: 'Too many searches — please wait a minute.', fallback: true, meta },
       { status: 429 }
     )
   }
@@ -102,17 +108,16 @@ export async function POST(req: Request) {
     // filter is never silently lost in transit.
     freeOnly = body.freeOnly === true || body.free === true
   } catch {
-    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 })
+    return NextResponse.json({ error: 'Invalid request.', meta }, { status: 400 })
   }
   if (goal.length < 2) {
-    return NextResponse.json({ error: 'Describe your goal first.' }, { status: 400 })
+    return NextResponse.json({ error: 'Describe your goal first.', meta }, { status: 400 })
   }
 
   // ---- Per-request diagnostics ------------------------------------------
   // rnd: stable id across all log lines of this request AND echoed in the
   // response `meta` so a client-visible failure can be correlated with the
   // server-side evidence (attempt numbers, statuses, finish reasons).
-  const requestId = randomBytes(4).toString('hex')
   // Local shadow of the module-level factory keeps every existing call
   // site source-compatible while gaining rnd/build/prompt context.
   const logGoalMatch = loggerFor(requestId)
@@ -122,18 +127,21 @@ export async function POST(req: Request) {
   const local = matchToolsByGoal(goal, freeOnly, CANDIDATE_COUNT)
   const retrievalMs = Date.now() - retrievalMs0
   if (!local.length) {
-    return NextResponse.json({ matches: [], noCandidates: true, abstained: false, meta: { requestId } })
+    return NextResponse.json({ matches: [], noCandidates: true, abstained: false, meta })
   }
   const byId = new Map(local.map((m) => [m.item.id, m]))
   const catalog = local.map((m) => candidateLine(m.kind, m.item)).join('\n')
 
-  // Preserve negation/constraints explicitly for the evaluator, so none of
+  // Keep the complete goal as the source of truth for negation. Do not
+  // promote lossy token labels (e.g. 'internet' from 'without internet')
+  // into contradictory positive requirements. The prompt reads the goal.
+  // Preserve the explicit free-plan flag so none of
   // them gets treated as noise downstream. The query word "free" is a
   // plan constraint the evaluator must honor (a free trial, a free tier
   // for an unrelated feature, or open-source licensing do not satisfy
   // it); the UI freeOnly filter applies the structured pricing field.
   const analysis = analyzeGoal(goal)
-  const constraintParts = [...analysis.constraints]
+  const constraintParts: string[] = []
   if (analysis.askingFree) constraintParts.push('free plan required')
   const constraintLines = constraintParts.length
     ? `\nMandatory constraints (do NOT relax them): ${constraintParts.join('; ')}\n`
@@ -342,15 +350,17 @@ export async function POST(req: Request) {
       // lives in the API + logs for honest diagnosis.
       let retryTrail: string | undefined
       if (second.ok && second.text) {
-        const outcome = parseModelOutput(second.text, validIdSet)
+        const outcome = parseProviderOutput(second, validIdSet)
         if (outcome.kind === 'ok') {
           const matches = buildMatches(outcome.picks)
           logGoalMatch('goal-match-after-retry', { elapsedMs: Date.now() - started, picked: matches.length, dropped: outcome.dropped })
-          return NextResponse.json({ matches, abstained: false, meta: { requestId } })
+          return NextResponse.json({ matches, abstained: false, meta })
         }
         // Valid [] again → abstention stands (with or without explicit
         // deadline); invalid output does NOT override a valid verdict.
-        retryTrail = outcome.kind === 'abstain' ? 'abstained' : 'invalid'
+        retryTrail = second.finishReason && second.finishReason !== 'stop'
+          ? 'incomplete'
+          : outcome.kind === 'abstain' ? 'abstained' : 'invalid'
         logGoalMatch('abstention-retry-kept', { outcome: outcome.kind, elapsedMs: Date.now() - started })
       } else {
         // Truncated output with non-empty content is an INCOMPLETE
@@ -362,11 +372,11 @@ export async function POST(req: Request) {
           errName: second.errName,
         })
       }
-      return NextResponse.json({ matches: [], abstained: true, meta: { requestId, retryTrail } })
+      return NextResponse.json({ matches: [], abstained: true, meta: { ...meta, retryTrail } })
     } else {
       logGoalMatch('abstention-retry-skipped', { elapsedMs: elapsed })
     }
-    return NextResponse.json({ matches: [], abstained: true, meta: { requestId } })
+    return NextResponse.json({ matches: [], abstained: true, meta })
   }
 
   // ---- State 3: AI returned validated non-empty matches ----------------
@@ -378,13 +388,13 @@ export async function POST(req: Request) {
       picked: matches.length,
       droppedByContract: result.dropped,
     })
-    return NextResponse.json({ matches, abstained: false, meta: { requestId } })
+    return NextResponse.json({ matches, abstained: false, meta })
   }
 
   // ---- States 4/5: technical failure vs deadline expiry ----------------
   logGoalMatch('goal-failure', { elapsedMs: Date.now() - started, cause: result.cause, deadlineExpired: result.deadlineExpired })
   return NextResponse.json(
-    { error: 'AI matching unavailable right now.', fallback: true, deadlineExpired: result.cause === 'deadline', meta: { requestId } },
+    { error: 'AI matching unavailable right now.', fallback: true, deadlineExpired: result.cause === 'deadline', meta },
     { status: 502 }
   )
 }

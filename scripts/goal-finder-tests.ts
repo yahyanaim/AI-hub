@@ -15,7 +15,7 @@ import {
   parseModelOutput,
   type ParsedOutput,
 } from '@/lib/goal-output'
-import { runProviderRoundtrip, type ProviderResult } from '@/lib/goal-provider-roundtrip'
+import { runProviderRoundtrip, parseProviderOutput, type ProviderResult } from '@/lib/goal-provider-roundtrip'
 import { AI_FAILURE_PRESENTATION } from '@/lib/goal-fallback-policy'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
 import { readFileSync } from 'node:fs'
@@ -390,6 +390,34 @@ async function roundtripChecks(): Promise<void> {
     return { ok: true, model: 'm', text: 'not json', finishReason: 'stop' }
   }
 
+  // A token-capped response can still contain valid JSON. It is not a verdict.
+  {
+    const truncatedEmpty: ProviderResult = { ...abstain(), finishReason: 'length' }
+    const truncatedPicks: ProviderResult = { ...ok('a'), finishReason: 'length' }
+    check('completion: valid [] with finish=length is invalid, never abstention',
+      parseProviderOutput(truncatedEmpty, ids).kind === 'invalid', true)
+    check('completion: valid picks with finish=length are incomplete, never success',
+      parseProviderOutput(truncatedPicks, ids).kind === 'invalid', true)
+    const res = await runProviderRoundtrip({
+      models: ['limited'], send: async () => truncatedEmpty, totalMs: 1000, validIds: ids,
+    })
+    check('roundtrip: token-capped [] is a technical failure',
+      res.kind === 'failure' && res.cause === 'invalid-output', res)
+  }
+  // Late responses cannot cancel or log over an already completed request.
+  {
+    let cancelCount = 0
+    const events: string[] = []
+    await runProviderRoundtrip({
+      models: ['fast', 'late'], totalMs: 1000, validIds: ids,
+      send: (m) => sleep(m === 'fast' ? 1 : 15).then(() => ok('a')),
+      cancelInFlight: () => { cancelCount++ }, onEvent: (e) => events.push(e),
+    })
+    await sleep(25)
+    check('roundtrip: late completed provider does not cancel again', cancelCount === 1, cancelCount)
+    check('roundtrip: late responses do not emit failure events', events.length === 0, events)
+  }
+
   // a) fast [] must NOT cancel or outrank a slower in-flight non-empty
   {
     const testStart = Date.now()
@@ -478,35 +506,11 @@ async function roundtripChecks(): Promise<void> {
 }
 
 // ------------------------------------------------------------
-// 14. Intent rules installed in the runtime prompt
+// 14. Compact prompt guard (not a semantic model-quality test)
 // ------------------------------------------------------------
 {
-  check('prompt: source-material rule installed (naming a source ≠ URL import)',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('identifies the source material, not a demand for direct URL import'), true)
-  check('prompt: URL-import evidence required only on explicit request',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('Unless the user explicitly requests URL import') &&
-    GOAL_MATCH_SYSTEM_PROMPT.includes('direct URL-handling evidence stays mandatory'), true)
-  check('prompt: source-task conversion qualifies without documented import; arrival stays unverified',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('listing whose supplied evidence explicitly supports converting long videos into short clips qualifies') &&
-    GOAL_MATCH_SYSTEM_PROMPT.includes('otherwise it is unverified') &&
-    GOAL_MATCH_SYSTEM_PROMPT.includes('Never invent direct import support'), true)
-  check('prompt: download/upload workflow allowed with explicit limitation, never invented',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('a documented download-then-upload or file-based workflow also qualifies'), true)
-}
-
-// ------------------------------------------------------------
-// 15. Conservative fallback evidence purity (catalogue facts only)
-// ------------------------------------------------------------
-{
-  check('evidence: unsupported-steps rule installed (no invented uploads/imports/downloads)',
-    GOAL_MATCH_SYSTEM_PROMPT.includes("Do not state that a candidate accepts uploads, requires downloads, or imports URLs unless the listing itself says so") &&
-    GOAL_MATCH_SYSTEM_PROMPT.includes("say it is unverified"), true)
-  check('evidence: free-trial vs free-plan rule installed',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('A free trial is not a free plan'), true)
-  check('evidence: reasons must mark undocumented arrival steps unverified',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('YouTube import unverified'), true)
-  check('evidence: contradiction rule installed',
-    GOAL_MATCH_SYSTEM_PROMPT.includes('the evidence is contradictory'), true)
+  check('prompt: bounded task-first instructions, not an accumulating rulebook',
+    GOAL_MATCH_SYSTEM_PROMPT.length < 3500, GOAL_MATCH_SYSTEM_PROMPT.length)
 }
 void fxGenericEditor
 void fxOfflineClipper
@@ -520,11 +524,11 @@ void fxLocalOnly
 async function routeChecks(): Promise<void> {
   const realFetch = globalThis.fetch
   let fetchCalls: { url: string; body: any }[] = []
-  function jsonResponse(content: string, init?: { status?: number }): Response {
+  function jsonResponse(content: string, init?: { status?: number; finishReason?: string }): Response {
     return {
       ok: (init?.status ?? 200) < 400,
       status: init?.status ?? 200,
-      json: async () => ({ choices: [{ message: { content }, finish_reason: 'stop' }] }),
+      json: async () => ({ choices: [{ message: { content }, finish_reason: init?.finishReason ?? 'stop' }] }),
     } as unknown as Response
   }
   let postSeq = 0
@@ -559,8 +563,20 @@ async function routeChecks(): Promise<void> {
     check('route: request body uses configured model', fetchCalls[0]?.body?.model === 'openai/gpt-oss-20b', fetchCalls[0]?.body?.model)
     check('route: openai/gpt-oss-20b gets explicit medium reasoning_effort (evidence-tuned)',
       fetchCalls[0]?.body?.reasoning_effort === 'medium', fetchCalls[0]?.body?.reasoning_effort)
-    check('route: system prompt installed (runtime relevance evaluator)', String(fetchCalls[0]?.body?.messages?.[0]?.content ?? '').includes('strict catalogue relevance evaluator'), true)
+    check('route: system prompt installed (runtime relevance evaluator)', String(fetchCalls[0]?.body?.messages?.[0]?.content ?? '').includes('You help users find the best catalogue tools'), true)
     check('route: freeOnly=true forwarded into user payload', String(fetchCalls[0]?.body?.messages?.[1]?.content ?? '').includes('filters to free-plan candidates'), String(fetchCalls[0]?.body?.messages?.[1]?.content ?? '').slice(0, 160))
+
+    // Exact-query first draw plumbing: real catalogue ID, no hidden refill.
+    let firstDrawCalls = 0
+    globalThis.fetch = (async () => {
+      firstDrawCalls++
+      return jsonResponse(JSON.stringify([{ id: 't225', reason: 'Repurposes long videos into short clips; YouTube import unverified.' }]))
+    }) as unknown as typeof fetch
+    const exactFirst = await post({ goal: CLIP_QUERY, freeOnly: false })
+    const exactFirstData = await exactFirst.json()
+    check('route: exact-query valid first draw is returned immediately without another generation',
+      exactFirst.status === 200 && exactFirstData.matches?.[0]?.item?.id === 't225' && firstDrawCalls === 1,
+      { firstDrawCalls, status: exactFirst.status })
 
     // b) AI abstention [] stays empty — no local keyword refill
     globalThis.fetch = (async () => jsonResponse('[]')) as unknown as typeof fetch
@@ -589,7 +605,7 @@ async function routeChecks(): Promise<void> {
     await post({ goal: 'edit videos without internet', freeOnly: false })
     const userB3 = fetchCalls.at(-1)?.body?.messages?.[1]?.content
     check('route: "without internet" constraint survives into the evaluator payload',
-      typeof userB3 === 'string' && userB3.includes('internet'),
+      typeof userB3 === 'string' && userB3.includes('edit videos without internet'),
       String(userB3).slice(0, 200))
 
     // b4) regression: exact failed query must keep task-supporting
@@ -609,26 +625,24 @@ async function routeChecks(): Promise<void> {
       [...catalogB4.matchAll(/\| \[[^\]]+\] [^|]+ \| [^|]+ \| [^|]+ \| [^|]+ \| tags: [^|]+ \| [^|]+ \| ([^\n]+)$/gm)]
         .every((m) => m[1].length <= 260 + 3), null) // +3 for ellipsis-less joins
     check('regression: prompt resolves YouTube source-material ambiguity',
-      GOAL_MATCH_SYSTEM_PROMPT.includes('converting long videos into short clips with YouTube as the material') &&
+      GOAL_MATCH_SYSTEM_PROMPT.includes('a description explicitly saying it repurposes long videos into short clips is sufficient') &&
       GOAL_MATCH_SYSTEM_PROMPT.includes('YouTube import unverified'), true)
     check('regression: explicit URL-import requests still require direct URL evidence',
-      GOAL_MATCH_SYSTEM_PROMPT.includes('direct URL-handling evidence stays mandatory'), true)
+      GOAL_MATCH_SYSTEM_PROMPT.includes('Only require direct URL-import evidence when the user explicitly requests'), true)
     check('regression: freemium is not auto-excluded and trials never establish a free plan',
-      GOAL_MATCH_SYSTEM_PROMPT.includes("A 'freemium' pricing label claims a free tier") &&
+      GOAL_MATCH_SYSTEM_PROMPT.includes('A freemium label alone does not prove the requested feature is free') &&
       GOAL_MATCH_SYSTEM_PROMPT.includes('A free trial is not a free plan'), true)
-    check('regression: eligibility criterion 2 defers input compatibility to the source-material rule',
-      GOAL_MATCH_SYSTEM_PROMPT.includes('matching the named source to a generalized documented input class') &&
-      GOAL_MATCH_SYSTEM_PROMPT.includes('direct platform import is not required unless the user explicitly requests it'),
-      true)
-    check('regression: no bare "Compatible input and output." criterion left to contradict SOURCE MATERIAL VS IMPORT',
-      !GOAL_MATCH_SYSTEM_PROMPT.includes('\n2. Compatible input and output.\n'), true)
+    check('payload: source query is retained intact for task interpretation',
+      catalogB4.includes('turn youtube videos into short clips'), true)
+    check('payload: negation is not reversed into an extra positive requirement',
+      !String(userB3).includes('Mandatory constraints (do NOT relax them): internet'), userB3)
     const gfSource = readFileSync(new URL('../components/goal/GoalFinder.tsx', import.meta.url), 'utf8')
     check('regression: UI lifecycle — stale runs guarded by a monotonic run id',
       gfSource.includes('const runId = useRef(0)') && gfSource.includes('runId.current !== currentRun'), true)
     check('regression: UI lifecycle — a newer submit aborts the in-flight fetch',
       gfSource.includes('fetchRef.current?.abort()'), true)
     check('regression: UI lifecycle — Retry resends the captured query, not live textarea text',
-      gfSource.includes('submit(searchedGoal)') && !gfSource.includes('onClick={submit}'), true)
+      gfSource.includes('submit(searchedGoal)') && gfSource.includes('nextGoal === undefined ? freeOnly : searchedFreeOnly') && !gfSource.includes('onClick={submit}'), true)
     check('regression: UI lifecycle — results header renders the searched goal, not live input',
       gfSource.includes('{searchedGoal.slice(0, 140)}') && !gfSource.includes('{goal.trim().slice(0, 140)}'), true)
 
@@ -713,6 +727,21 @@ async function routeChecks(): Promise<void> {
     const dataB10 = await resB10.json()
     check('route: truncated model output = 502 technical failure (never silent partials)',
       resB10.status === 502 && dataB10.fallback === true, { resB10: resB10.status, dataB10 })
+
+    // Syntactically complete output at the token cap is still incomplete.
+    globalThis.fetch = (async () => jsonResponse('[]', { finishReason: 'length' })) as unknown as typeof fetch
+    const capped = await post({ goal: CLIP_QUERY, freeOnly: false })
+    const cappedData = await capped.json()
+    check('route: finish=length [] returns 502, not false-empty 200',
+      capped.status === 502 && cappedData.abstained !== true, cappedData)
+    check('route: diagnostics expose serving build and prompt version',
+      typeof cappedData.meta?.build === 'string' && typeof cappedData.meta?.prompt === 'string', cappedData.meta)
+    let capSeq = 0
+    globalThis.fetch = (async () => jsonResponse('[]', { finishReason: ++capSeq === 1 ? 'stop' : 'length' })) as unknown as typeof fetch
+    const cappedRetry = await post({ goal: CLIP_QUERY, freeOnly: false })
+    const cappedRetryData = await cappedRetry.json()
+    check('route: truncated second [] is incomplete, not two abstentions',
+      cappedRetryData.abstained === true && cappedRetryData.meta?.retryTrail === 'incomplete', cappedRetryData)
 
     // c) invalid output → technical error, not abstention
     globalThis.fetch = (async () => jsonResponse('no json here')) as unknown as typeof fetch

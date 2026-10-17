@@ -29,7 +29,15 @@ export interface ProviderResult {
   errName?: string
 }
 
-type Outcome = ReturnType<typeof parseModelOutput>
+// Completion status is part of the contract. Even syntactically valid
+// JSON (including []) may be an incomplete generation at the token cap.
+export function parseProviderOutput(res: ProviderResult, validIds: Set<string>): ReturnType<typeof parseModelOutput> {
+  if (!res.ok || !res.text) return { kind: 'invalid', reason: 'provider-error' }
+  if (res.finishReason && res.finishReason !== 'stop') {
+    return { kind: 'invalid', reason: `incomplete-finish:${res.finishReason}` }
+  }
+  return parseModelOutput(res.text, validIds)
+}
 
 export type RoundtripResult =
   | { kind: 'ok'; picks: { id: string; reason: string }[]; dropped: number; finishReason: string }
@@ -58,6 +66,7 @@ export function runProviderRoundtrip(deps: RoundtripDeps): Promise<RoundtripResu
   let abstentions = 0
   let invalids = 0
   let finished = false
+  let deadlineTimer: ReturnType<typeof setTimeout> | undefined
 
   let resolveWinner!: (w: Winner) => void
   const winner = new Promise<Winner>((resolve) => {
@@ -66,6 +75,7 @@ export function runProviderRoundtrip(deps: RoundtripDeps): Promise<RoundtripResu
   const finish = (w: Winner) => {
     if (!finished) {
       finished = true
+      if (deadlineTimer) clearTimeout(deadlineTimer)
       resolveWinner(w)
     }
   }
@@ -74,11 +84,12 @@ export function runProviderRoundtrip(deps: RoundtripDeps): Promise<RoundtripResu
     deps
       .send(model)
       .then((res) => {
+        if (finished) return
         if (!res.ok || !res.text) {
           deps.onEvent?.('provider-failed', { model, httpStatus: res.httpStatus, errName: res.errName })
           return
         }
-        const outcome = parseModelOutput(res.text, deps.validIds)
+        const outcome = parseProviderOutput(res, deps.validIds)
         if (outcome.kind === 'ok') {
           // Validated non-empty matches: return immediately. A sibling
           // response that already resolved with `[]` was parked, not
@@ -93,6 +104,7 @@ export function runProviderRoundtrip(deps: RoundtripDeps): Promise<RoundtripResu
         }
       })
       .catch((err: unknown) => {
+        if (finished) return
         deps.onEvent?.('provider-failed', { model, errName: err instanceof Error ? err.name : 'unknown' })
       })
       .finally(() => {
@@ -111,8 +123,8 @@ export function runProviderRoundtrip(deps: RoundtripDeps): Promise<RoundtripResu
   }
 
   const deadline = new Promise<{ deadline: true }>((resolve) => {
-    const t = setTimeout(() => resolve({ deadline: true }), deps.totalMs)
-    if (typeof t === 'object' && typeof t.unref === 'function') t.unref()
+    deadlineTimer = setTimeout(() => resolve({ deadline: true }), deps.totalMs)
+    if (pending === 0) finish({ kind: 'failure', cause: 'provider-error' })
   })
 
   return Promise.race([winner, deadline]).then((r): RoundtripResult => {
@@ -126,8 +138,10 @@ export function runProviderRoundtrip(deps: RoundtripDeps): Promise<RoundtripResu
         return { kind: 'failure', cause, deadlineExpired: false }
       }
     }
-    // Deadline expiry: let the deadline fully cancel in-flight attempts
-    // so the route stops paying for the request.
+    // Seal the outcome before cancellation can settle a late provider.
+    // Cancellation is best-effort and does not guarantee zero upstream cost.
+    finished = true
+    if (deadlineTimer) clearTimeout(deadlineTimer)
     deps.cancelInFlight?.()
     if (abstentions > 0) {
       deps.onEvent?.('deadline-after-abstention', { abstentions })

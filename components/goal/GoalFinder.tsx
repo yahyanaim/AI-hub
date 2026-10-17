@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowDown, ArrowUp, Loader2, Sparkles } from 'lucide-react'
 import type { GoalItemKind } from '@/lib/goal-finder'
 import { CLIENT_TIMEOUT_MS } from '@/lib/goal-timeouts'
@@ -61,13 +61,19 @@ export function GoalFinder() {
   // not keep the provider burning budget).
   const fetchRef = useRef<AbortController | null>(null)
 
+  useEffect(() => () => {
+    runId.current += 1
+    if (timer.current) clearTimeout(timer.current)
+    fetchRef.current?.abort()
+  }, [])
+
   const submit = (nextGoal?: string) => {
     // Manual Retry passes the CAPTURED goal; normal submits use the
     // textarea's live value. Empty text (input unresolved) aborts.
     if (searching) return
     const q = (nextGoal ?? goal).trim()
     if (!q) return
-    const freeFilter = freeOnly
+    const freeFilter = nextGoal === undefined ? freeOnly : searchedFreeOnly
     runId.current += 1
     const currentRun = runId.current
     setSearchedGoal(q)
