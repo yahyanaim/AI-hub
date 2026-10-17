@@ -21,6 +21,7 @@ export type ToolCategory =
   | 'email'
   | 'api-backend'
   | 'engineering-data'
+  | 'open-source'
   | 'open-source-ai'
   | 'seo'
   | 'education'
@@ -371,6 +372,7 @@ export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
   email: 'Email',
   'api-backend': 'API Backend',
   'engineering-data': 'Engineering & Data',
+  'open-source': 'Open Source',
   'open-source-ai': 'Open Source AI',
   seo: 'SEO Tools',
   education: 'Education',
