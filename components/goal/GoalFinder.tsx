@@ -40,6 +40,7 @@ export function GoalFinder() {
   const [searching, setSearching] = useState(false)
   const [matches, setMatches] = useState<ShownMatch[]>([])
   const [aiUsed, setAiUsed] = useState(false)
+  const [abstained, setAbstained] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const submit = () => {
@@ -50,9 +51,11 @@ export function GoalFinder() {
     setSearching(true)
     setMatches([])
     setAiUsed(false)
+    setAbstained(false)
     if (timer.current) clearTimeout(timer.current)
     // AI re-rank first (understands phrasing), local keyword matching as
-    // the instant fallback. The loader paints before either runs.
+    // the instant fallback. The fallback runs ONLY on technical failure —
+    // an AI abstention (empty list) is shown as-is, never refilled.
     const run = async () => {
       try {
         const controller = new AbortController()
@@ -61,12 +64,12 @@ export function GoalFinder() {
           const res = await fetch('/api/goal-match', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ goal: q, freeOnly: free }),
+            body: JSON.stringify({ goal: q, free: freeOnly }),
             signal: controller.signal,
           })
           if (res.ok) {
             const data = await res.json()
-            if (Array.isArray(data.matches) && data.matches.length) {
+            if (Array.isArray(data.matches)) {
               setMatches(
                 data.matches.map((m: { kind: GoalItemKind; item: Tool | DevTool | Repo; pct: number; reason: string }) => ({
                   kind: m.kind,
@@ -77,6 +80,7 @@ export function GoalFinder() {
                 }))
               )
               setAiUsed(true)
+              setAbstained(data.matches.length === 0)
               setSearching(false)
               return
             }
@@ -85,7 +89,7 @@ export function GoalFinder() {
           clearTimeout(timeout)
         }
       } catch {
-        // fall through to local matching
+        // fall through to local matching (technical failure only)
       }
       const local: GoalMatch[] = matchToolsByGoal(q, free)
       setMatches(
@@ -266,13 +270,21 @@ export function GoalFinder() {
           </div>
           <p className="mt-3 rounded-md border border-brand-orange/20 bg-brand-orange/[0.04] p-2.5 text-[10px] leading-relaxed text-muted-foreground">
             {aiUsed ? (
-              <>
-                <span className="inline-flex items-center gap-1 font-semibold text-brand-orange">
-                  <Sparkles className="h-3 w-3" /> AI-ranked
-                </span>{' '}
-                from real catalogue entries — every pick links to a published
-                detail page. No generated claims.
-              </>
+              matches.length ? (
+                <>
+                  <span className="inline-flex items-center gap-1 font-semibold text-brand-orange">
+                    <Sparkles className="h-3 w-3" /> AI-ranked
+                  </span>{' '}
+                  from real catalogue entries — every pick links to a published
+                  detail page. No generated claims.
+                </>
+              ) : (
+                <>
+                  The AI checked the catalogue and found no sufficiently
+                  supported match for this goal. Try broader terms or one of
+                  the suggestions above.
+                </>
+              )
             ) : (
               <>
                 Method: keyword overlap against published names, tags,
@@ -282,8 +294,9 @@ export function GoalFinder() {
           </p>
           {matches.length === 0 ? (
             <p className="mt-3 text-sm text-muted-foreground">
-              Nothing in the catalogue matches those words yet. Try broader
-              terms or one of the suggestions above.
+              {abstained
+                ? 'No sufficiently supported match was found in the supplied candidates. This does not prove that no suitable product exists elsewhere.'
+                : 'Nothing in the catalogue matches those words yet. Try broader terms or one of the suggestions above.'}
             </p>
           ) : (
             <>
@@ -304,7 +317,8 @@ export function GoalFinder() {
                             ? 'bg-green-500/10 text-green-600 dark:text-green-400'
                             : 'bg-red-500/10 text-red-500 dark:text-red-400'
                         }`}
-                        title={`${pct}% match`}
+                        title="Keyword overlap with your goal — a rough relevance signal, not a quality score or guarantee"
+                        aria-label={`Keyword overlap ${pct} percent`}
                       >
                         {pct}%
                         {pct >= 20 ? (

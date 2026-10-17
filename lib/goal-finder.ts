@@ -24,7 +24,57 @@ const STOP = new Set([
   'into', 'onto', 'over', 'under', 'from', 'about', 'than', 'then',
   'something', 'anything', 'thing', 'things', 'way', 'much', 'many',
   'une', 'des', 'les', 'pour', 'avec', 'dans', 'sur',
+  'est', 'pas', 'plus', 'tout', 'aux', 'ces', 'ses', 'mon', 'ton', 'son',
+  // Arabic stopwords (kept short list; tokens() already drops <3 chars)
+  'في', 'من', 'على', 'إلى', 'أن', 'إن', 'ما', 'لا', 'لم', 'لن', 'هذا',
+  'هذه', 'التي', 'الذي', 'مع', 'بين', 'عن', 'كل', 'أو', 'هو', 'هي',
+  'نحن', 'كما', 'بعد', 'قبل', 'حتى', 'غير', 'لكن', 'قد', 'عند', 'دون',
+  // Moroccan Darija fillers
+  'بغيت', 'ديال', 'باش', 'شنو', 'كيفاش', 'شني', 'دابا', 'بزاف',
 ])
+
+// Query-side glossary: Arabic / Darija / French intent words mapped to the
+// English vocabulary the catalogue is written in. Catalogue data is never
+// touched — this only lets non-English goals retrieve candidates for the
+// (multilingual) ranker to judge.
+const GLOSSARY: Record<string, string[]> = {
+  // learning & code
+  'تعلم': ['learn'], 'تعليم': ['learn'], 'apprendre': ['learn'],
+  'برمجة': ['code', 'programming'], 'كود': ['code'], 'programmation': ['code', 'programming'],
+  'مطور': ['developer'], 'مطورين': ['developer'], 'developpeur': ['developer'], 'développeur': ['developer'],
+  'بايثون': ['python'],
+  // transfer
+  'تحميل': ['download'], 'تنزيل': ['download'], 'حمل': ['download'],
+  'telecharger': ['download'], 'télécharger': ['download'],
+  'مجلد': ['folder'], 'مجلدات': ['folder'], 'dossier': ['folder'],
+  'جيتهاب': ['github'], 'جيت': ['git'],
+  'رفع': ['upload'],
+  // media
+  'فيديو': ['video'], 'فيديوهات': ['video'],
+  'صورة': ['photo'], 'صور': ['photo'],
+  'موسيقى': ['music'], 'صوت': ['audio'], 'أغنية': ['song'], 'اغنية': ['song'], 'musique': ['music'],
+  // text work
+  'ترجمة': ['translate'], 'traduire': ['translate'], 'traduction': ['translate'],
+  'كتابة': ['write'], 'اكتب': ['write'], 'écrire': ['write'], 'ecrire': ['write'],
+  'بريد': ['email'], 'ايميل': ['email'],
+  'ملخص': ['summary'], 'تلخيص': ['summary'],
+  'ملاحظات': ['notes'],
+  // edit & build
+  'تعديل': ['edit'], 'حرر': ['edit'], 'تحرير': ['edit'], 'modifier': ['edit'],
+  'حذف': ['remove'], 'احذف': ['remove'], 'supprimer': ['remove'],
+  'خلفية': ['background'], 'fond': ['background'],
+  'شعار': ['logo'],
+  'سيرة': ['resume'],
+  'بحث': ['search'], 'ابحث': ['search'], 'recherche': ['search'], 'chercher': ['search'],
+  'إنشاء': ['build'], 'انشئ': ['build'], 'creer': ['build'], 'créer': ['build'],
+  'تصميم': ['design'],
+  // comms & misc
+  'اجتماع': ['meeting'], 'اجتماعات': ['meeting'], 'reunion': ['meeting'], 'réunion': ['meeting'],
+  'دردشة': ['chat'], 'محادثة': ['chat'],
+  'أخبار': ['news'], 'اخبار': ['news'],
+  'لعبة': ['game'], 'ألعاب': ['game'], 'العاب': ['game'], 'jeu': ['game'],
+  'مجانا': ['free'], 'مجاني': ['free'], 'مجانية': ['free'], 'gratuit': ['free'],
+}
 
 const SYNONYMS: Record<string, string[]> = {
   photo: ['photo', 'photos', 'pic', 'pics', 'picture', 'pictures', 'image', 'images'],
@@ -42,8 +92,8 @@ const SYNONYMS: Record<string, string[]> = {
   meeting: ['meeting', 'meetings', 'call', 'calls', 'conference'],
   notes: ['notes', 'note', 'notetaking'],
   summary: ['summary', 'summaries', 'summarize', 'summarizer', 'tldr'],
-  translate: ['translate', 'translation', 'translator', 'dubbing', 'dub'],
-  chat: ['chat', 'chatbot', 'assistant', 'conversation'],
+  translate: ['translate', 'translation', 'translator'],
+  chat: ['chat', 'chatbot'],
   search: ['search', 'find', 'finder', 'lookup', 'discover'],
   build: ['build', 'builder', 'create', 'creator', 'generate', 'generator'],
   test: ['test', 'testing', 'tests', 'qa'],
@@ -61,12 +111,46 @@ function stem(t: string): string {
 function tokens(text: string): { raw: string; stem: string }[] {
   const seen = new Set<string>()
   const out: { raw: string; stem: string }[] = []
-  for (const raw of text.toLowerCase().split(/[^a-z0-9]+/)) {
+  // Unicode-aware split: keeps Arabic, French accents, and other scripts
+  // (a Latin-only split silently dropped non-Latin queries entirely).
+  for (const raw of text.toLowerCase().split(/[^\p{L}\p{N}]+/u)) {
     if (raw.length < 3 || STOP.has(raw)) continue
-    const s = stem(raw)
-    if (seen.has(s)) continue
-    seen.add(s)
-    out.push({ raw, stem: s })
+    // Arabic definite article: try the word with and without the ال prefix
+    // (query says البرمجة, catalogue language is keyed on برمجة).
+    const forms = [raw]
+    if (/^ال[\u0600-\u06FF]{2,}$/u.test(raw) && !STOP.has(raw)) {
+      const stripped = raw.slice(2)
+      if (stripped.length >= 3 && !STOP.has(stripped)) forms.push(stripped)
+    }
+    for (const form of forms) {
+      const gloss = GLOSSARY[form] ?? []
+      // A non-Latin term with glossary equivalents can never match the
+      // English catalogue itself — emit only the equivalents so it does
+      // not dilute the match percentage.
+      if (gloss.length > 0 && /[^\x00-\x7F]/.test(form)) {
+        for (const equiv of gloss) {
+          if (STOP.has(equiv)) continue
+          const es = stem(equiv)
+          if (seen.has(es)) continue
+          seen.add(es)
+          out.push({ raw: equiv, stem: es })
+        }
+        continue
+      }
+      const s = stem(form)
+      if (!seen.has(s)) {
+        seen.add(s)
+        out.push({ raw: form, stem: s })
+      }
+      // Glossary equivalents: same position in the term list, same weight.
+      for (const equiv of GLOSSARY[form] ?? []) {
+        if (STOP.has(equiv)) continue
+        const es = stem(equiv)
+        if (seen.has(es)) continue
+        seen.add(es)
+        out.push({ raw: equiv, stem: es })
+      }
+    }
   }
   return out
 }
@@ -250,8 +334,13 @@ export function matchToolsByGoal(goal: string, freeOnly = false, limit = 8): Goa
   // Minimum score 2 filters single body-word coincidences (one stray word
   // in a long description outranking genuinely relevant tools).
   const best = new Map<string, GoalMatch>()
+  // Conservative relevance: multi-term goals need evidence for at least two
+  // distinct terms (action + object together) — one stray word is not enough.
+  // Single-term goals keep the minimum-score bar only.
+  const needTerms = rawTerms.length > 1 ? 2 : 1
   for (const m of scored) {
     if (m.score < 2) continue
+    if (m.matched.length < needTerms) continue
     const key = m.item.name.toLowerCase().replace(/[^a-z0-9]/g, '')
     const prev = best.get(key)
     if (!prev || m.score > prev.score) best.set(key, m)
