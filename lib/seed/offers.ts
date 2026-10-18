@@ -18282,7 +18282,6 @@ export const SEED_OFFERS: Offer[] = [
     logoUrl: '/logos/orange.svg',
     partnerLogos: [
       { name: 'Orange', url: '/logos/orange.svg' },
-      { name: 'Capgemini', url: '/logos/capgemini.svg' },
     ],
     category: 'scholarship',
     tags: ['orange-digital-center', 'capgemini', 'generative-ai', 'workshop', 'employability', 'personal-assistant'],
