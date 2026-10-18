@@ -42,7 +42,7 @@ export function OfferDetail({ slug, initial }: { slug: string; initial?: Offer }
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <CategoryBadge kind="offer" category={offer.category} />
-              <PricingBadge pricing={offer.pricing} />
+              {offer.pricing && <PricingBadge pricing={offer.pricing} />}
               <OfferUrgencyBadge endsAt={offer.endsAt} />
               <a
                 href={offer.url}

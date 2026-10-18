@@ -2739,7 +2739,8 @@
   "qwen-38-flash-free-qoder": "ai-perks",
   "openwa-whatsapp-api": "api-access",
   "opencode-deepseek-v41-flash": "tool",
-  "gemini-4-argon-ai-studio": "tool"
+  "gemini-4-argon-ai-studio": "tool",
+  "ai-for-positive-futures-odc-capgemini": "learning"
  },
  "categories": {
   "coding": "/tools",

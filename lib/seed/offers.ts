@@ -18271,4 +18271,56 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o339',
+    slug: 'ai-for-positive-futures-odc-capgemini',
+    name: 'AI for Positive Futures',
+    tagline: 'Orange Digital Center x Capgemini : session IA et workshop pratique, le 21 octobre 2026 de 10h00 à 13h00.',
+    description:
+      'Et si l’IA devenait votre alliée pour construire votre avenir ? Participez à cette session organisée dans le cadre de la collaboration Orange Digital Center x Capgemini, le 21 octobre 2026 de 10h00 à 13h00. Découvrez comment l’intelligence artificielle peut vous aider à apprendre, vous organiser, préparer vos entretiens et donner vie à vos projets. Explorez des outils d’IA générative comme ChatGPT, Copilot et Claude à travers des cas d’usage concrets, puis participez à un workshop pratique pour créer votre propre AI Personal Assistant et accompagner vos projets personnels.',
+    url: 'https://forms.gle/KDWbBrwJzEqHbYfz8',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=orangedigitalcenters.com&sz=64',
+    category: 'learning',
+    tags: ['orange-digital-center', 'capgemini', 'generative-ai', 'workshop', 'employability', 'personal-assistant'],
+    steps: [
+      {
+        title: 'Inscrivez-vous à la session',
+        description: 'Utilisez le formulaire d’inscription pour la session du 21 octobre 2026, de 10h00 à 13h00.',
+        url: 'https://forms.gle/KDWbBrwJzEqHbYfz8',
+      },
+      {
+        title: 'Découvrez l’IA pour apprendre et préparer votre avenir',
+        description: 'Explorez ChatGPT, Copilot et Claude et identifiez des usages concrets pour soutenir l’apprentissage, l’employabilité, l’organisation et la préparation des entretiens.',
+      },
+      {
+        title: 'Créez votre AI Personal Assistant',
+        description: 'Participez au workshop pratique pour créer votre propre assistant et expérimentez l’IA pour accompagner vos projets personnels.',
+      },
+    ],
+    nameAr: 'الذكاء الاصطناعي من أجل مستقبل إيجابي',
+    taglineAr: 'جلسة وورشة تطبيقية من Orange Digital Center وCapgemini، يوم 21 أكتوبر 2026 من 10:00 إلى 13:00.',
+    descriptionAr:
+      'ماذا لو أصبح الذكاء الاصطناعي حليفك لبناء مستقبلك؟ شارك في هذه الجلسة المنظمة في إطار التعاون بين Orange Digital Center وCapgemini، يوم 21 أكتوبر 2026 من الساعة 10:00 إلى 13:00. اكتشف كيف يساعدك الذكاء الاصطناعي على التعلم والتنظيم والاستعداد لمقابلات العمل وتحويل أفكارك إلى مشاريع. استكشف أدوات الذكاء الاصطناعي التوليدي مثل ChatGPT وCopilot وClaude من خلال استخدامات عملية، ثم شارك في ورشة تطبيقية لإنشاء مساعدك الشخصي بالذكاء الاصطناعي وتجربة طرق لدعم مشاريعك الشخصية.',
+    stepsAr: [
+      {
+        title: 'سجّل في الجلسة',
+        description: 'استخدم استمارة التسجيل للمشاركة في جلسة 21 أكتوبر 2026، من الساعة 10:00 إلى 13:00.',
+        url: 'https://forms.gle/KDWbBrwJzEqHbYfz8',
+      },
+      {
+        title: 'اكتشف الذكاء الاصطناعي للتعلم والاستعداد للمستقبل',
+        description: 'استكشف ChatGPT وCopilot وClaude وتعرّف على استخدامات عملية لدعم التعلم وفرص التوظيف والتنظيم والتحضير لمقابلات العمل.',
+      },
+      {
+        title: 'أنشئ مساعدك الشخصي بالذكاء الاصطناعي',
+        description: 'شارك في الورشة التطبيقية لإنشاء مساعدك الخاص، وجرّب الذكاء الاصطناعي لدعم مشاريعك الشخصية.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: '2026-10-18T00:00:00.000Z',
+    updatedAt: '2026-10-18T00:00:00.000Z',
+  },
 ]

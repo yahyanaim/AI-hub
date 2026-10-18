@@ -80,7 +80,7 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
 
       <div className="mb-3 flex flex-wrap items-center gap-1.5">
         <CategoryBadge kind="offer" category={offer.category} />
-        <PricingBadge pricing={offer.pricing} />
+        {offer.pricing && <PricingBadge pricing={offer.pricing} />}
         <OfferUrgencyBadge endsAt={offer.endsAt} />
       </div>
 

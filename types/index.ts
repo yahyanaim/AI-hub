@@ -288,7 +288,8 @@ export interface Offer {
   logoUrl: string
   category: OfferCategory
   tags: string[]
-  pricing: Pricing
+  /** Omitted when the announcement does not specify a price. */
+  pricing?: Pricing
   steps: OfferStep[]
   upvotes: number
   bookmarks: number

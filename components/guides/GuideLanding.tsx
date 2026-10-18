@@ -62,7 +62,7 @@ export function GuideLanding({ offer }: { offer: Offer }) {
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <CategoryBadge kind="offer" category={offer.category} />
-              <PricingBadge pricing={offer.pricing} />
+              {offer.pricing && <PricingBadge pricing={offer.pricing} />}
               {offer.guarantee && (
                 <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                   <ShieldCheck className="h-3.5 w-3.5 text-green-600" /> {offer.guarantee}
