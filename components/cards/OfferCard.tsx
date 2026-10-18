@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { ExternalLink, ListChecks } from 'lucide-react'
-import { Logo } from '@/components/ui/Logo'
+import { OfferLogo } from '@/components/ui/OfferLogo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge, OfferUrgencyBadge, HotBadge, isHotOffer } from '@/components/ui/Badges'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
@@ -40,7 +40,7 @@ export function OfferCard({ offer, className, lang }: { offer: Offer; className?
       </Link>
 
       <div className="relative mb-3 flex items-start gap-3.5">
-        <Logo src={offer.logoUrl} name={offer.name} size={56} />
+        <OfferLogo offer={offer} size={56} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
             <h3 className="truncate font-heading text-base font-bold text-foreground transition-colors group-hover:text-brand-orange">

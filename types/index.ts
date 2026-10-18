@@ -286,6 +286,7 @@ export interface Offer {
   description: string
   url: string
   logoUrl: string
+  partnerLogos?: { name: string; url: string }[]
   category: OfferCategory
   tags: string[]
   /** Omitted when the announcement does not specify a price. */

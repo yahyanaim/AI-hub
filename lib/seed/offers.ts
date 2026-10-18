@@ -18279,7 +18279,11 @@ export const SEED_OFFERS: Offer[] = [
     description:
       'A session organized as part of the Orange Digital Center x Capgemini collaboration on 21 October 2026, from 10:00 to 13:00. Discover how AI can support learning and employability, help you stay organized, prepare for interviews and bring your projects to life. Explore generative AI tools such as ChatGPT, Copilot and Claude through practical use cases, then join a hands-on workshop to create your own AI Personal Assistant and experiment with AI for your personal projects.',
     url: 'https://forms.gle/KDWbBrwJzEqHbYfz8',
-    logoUrl: '',
+    logoUrl: '/logos/orange.svg',
+    partnerLogos: [
+      { name: 'Orange', url: '/logos/orange.svg' },
+      { name: 'Capgemini', url: '/logos/capgemini.svg' },
+    ],
     category: 'scholarship',
     tags: ['orange-digital-center', 'capgemini', 'generative-ai', 'workshop', 'employability', 'personal-assistant'],
     steps: [

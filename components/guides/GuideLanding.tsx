@@ -1,7 +1,7 @@
 'use client'
 
 import { MessageCircle, Lock, BadgeCheck, Star, BookOpen, ShieldCheck } from 'lucide-react'
-import { Logo } from '@/components/ui/Logo'
+import { OfferLogo } from '@/components/ui/OfferLogo'
 import { CategoryBadge, PricingBadge } from '@/components/ui/Badges'
 import { UpvoteButton } from '@/components/interactive/UpvoteButton'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
@@ -29,7 +29,7 @@ export function GuideLanding({ offer }: { offer: Offer }) {
       {/* Hero */}
       <div className="rounded-xl border border-border bg-muted p-6 md:p-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-start">
-          <Logo src={offer.logoUrl} name={offer.name} size={80} />
+          <OfferLogo offer={offer} size={80} />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded bg-green-600/10 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-green-700 dark:text-green-400">

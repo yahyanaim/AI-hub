@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ExternalLink, ShieldCheck } from 'lucide-react'
 import { useApp } from '@/lib/store'
-import { Logo } from '@/components/ui/Logo'
+import { OfferLogo } from '@/components/ui/OfferLogo'
 import { Avatar } from '@/components/ui/Avatar'
 import { CategoryBadge, PricingBadge, OfferUrgencyBadge } from '@/components/ui/Badges'
 import { UpvoteButton } from '@/components/interactive/UpvoteButton'
@@ -29,7 +29,7 @@ export function OfferDetail({ slug, initial }: { slug: string; initial?: Offer }
       {/* Header */}
       <div className="rounded-xl border border-border bg-muted p-6 md:p-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-start">
-          <Logo src={offer.logoUrl} name={offer.name} size={80} />
+          <OfferLogo offer={offer} size={80} />
           <div className="min-w-0 flex-1">
             <h1 className="font-heading text-3xl font-bold tracking-tight">
               <HoverTranslate en={offer.name} ar={offer.nameAr} as="span" />
