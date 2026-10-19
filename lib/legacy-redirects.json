@@ -2212,7 +2212,8 @@
   "dimensions-measure": "dev-extension",
   "web-developer-checklist": "dev-extension",
   "editthiscookie": "dev-extension",
-  "online-tools-10015": "dev-extension"
+  "online-tools-10015": "dev-extension",
+  "hairline": "library"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",
@@ -3373,7 +3374,8 @@
   "ark-archiver": "file",
   "adobe-premiere-pro": "video",
   "tella": "capture",
-  "voicemod": "audio"
+  "voicemod": "audio",
+  "hairline-github": "design"
  },
  "extensionTools": [
   "aiprm",

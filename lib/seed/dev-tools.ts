@@ -15986,4 +15986,24 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'd1097',
+    slug: 'hairline',
+    name: 'Hairline',
+    tagline: 'Interactive isometric SVG figures for React and vanilla JS',
+    description:
+      'Hairline by Lucas Marques is a collection of pointer-responsive isometric SVG figures for interface illustrations and empty states. React and vanilla JS APIs, adjustable interaction intensity, light/dark themes, and zero runtime dependencies under the MIT license.',
+    url: 'https://getstage.co/component-libraries/hairline',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/getstage.co.ico',
+    category: 'library',
+    tags: ['svg', 'animation', 'react', 'isometric', 'illustrations'],
+    pricing: 'open-source',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
