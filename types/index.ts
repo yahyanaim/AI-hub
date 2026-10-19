@@ -56,6 +56,7 @@ export type DevToolCategory =
   | 'feature-flags'
   | 'forms'
   | 'framework'
+  | 'freelancing'
   | 'help-desk'
   | 'hosting'
   | 'ide'
@@ -409,6 +410,7 @@ export const DEVTOOL_CATEGORY_LABELS: Record<DevToolCategory, string> = {
   'feature-flags': 'Feature Flags',
   forms: 'Forms',
   framework: 'Framework',
+  freelancing: 'Freelancing',
   'help-desk': 'Help Desk',
   hosting: 'Hosting & VPS',
   ide: 'IDE',
