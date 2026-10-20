@@ -5,7 +5,7 @@ import { SupportPage } from '@/components/layout/SupportPage'
 const baseUrl = SITE_URL
 
 export const metadata: Metadata = {
-  title: 'Support AI Hunt - Buy me a coffee',
+  title: { absolute: 'Support AI Hunt - Buy me a coffee' },
   description: 'Support AI Hunt via PayPal or direct bank transfer (CIH). Keep the platform free, ad-free, and independent.',
   openGraph: {
     title: 'Support AI Hunt - Buy me a coffee',

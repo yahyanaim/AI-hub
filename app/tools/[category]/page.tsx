@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
-import Script from 'next/script'
 import { redirect } from 'next/navigation'
 import { SEED_TOOLS } from '@/lib/seed'
 import { TOOL_CATEGORY_LABELS } from '@/types'
@@ -79,7 +78,7 @@ export default function ToolCategoryPage({ params }: { params: { category: strin
 
   return (
     <>
-      <Script id={`schema-collection-tools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id={`schema-collection-tools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
@@ -88,7 +87,7 @@ export default function ToolCategoryPage({ params }: { params: { category: strin
           url: `${baseUrl}/tools/${category}`,
         }),
       }} />
-      <Script id={`schema-breadcrumb-tools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id={`schema-breadcrumb-tools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd(
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
-import Script from 'next/script'
 import { redirect, notFound } from 'next/navigation'
 import { SEED_COURSES } from '@/lib/seed'
 import { COURSE_CATEGORY_LABELS } from '@/types'
@@ -74,7 +73,7 @@ export default function CourseCategoryPage({ params }: { params: { category: str
 
   return (
     <>
-      <Script id={`schema-collection-courses-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id={`schema-collection-courses-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
@@ -83,7 +82,7 @@ export default function CourseCategoryPage({ params }: { params: { category: str
           url: `${baseUrl}/courses/${category}`,
         }),
       }} />
-      <Script id={`schema-breadcrumb-courses-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id={`schema-breadcrumb-courses-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd(
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },

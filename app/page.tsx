@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { SITE_URL } from '@/lib/site'
 import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } from '@/lib/seed'
 import { HomeView } from '@/components/home/HomeView'
@@ -54,7 +53,7 @@ export default function HomePage() {
   }
   return (
     <>
-      <Script
+      <script
         id="schema-faq-home"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

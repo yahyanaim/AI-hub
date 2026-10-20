@@ -1,0 +1,1678 @@
+{
+  "date": "2026-10-20",
+  "repositoryBaseline": "68af4da82d473d46d73b903d4858c72dedf2f9eb",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "AI Hunt - Discover the Best AI Tools in Morocco",
+      "canonical": [
+        "https://www.aihubtools.ma"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "AI Hunt (AI Hub Tools) is a Morocco-first directory to discover AI tools, dev tools, coding courses and developer offers. Free, community-ranked resources for developers and students.",
+      "ogUrl": "https://www.aihubtools.ma",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": [],
+      "categoryQueryLinks": 27
+    },
+    {
+      "path": "/tools",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/tools",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Best AI Tools - Free Directory to Browse & Discover - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/tools"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Discover the best AI tools in one free directory. Browse by category: coding, writing, image, video, audio and productivity. Community-ranked with new tools added regularly.",
+      "ogUrl": "https://www.aihubtools.ma/tools",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/dev-tools",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/dev-tools",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Developer Tools Directory - Best Dev Tools for Engineers - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/dev-tools"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "IDEs, CI/CD, testing, monitoring, databases and API tools \u2014 community-ranked developer tools for engineers, including AI coding assistants. Popular with developers in Morocco and worldwide.",
+      "ogUrl": "https://www.aihubtools.ma/dev-tools",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/edittools",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/edittools",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Editing Tools - Free PDF, Image, Video & Audio Editors - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/edittools"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Free online editing tools: PDF editors, image and photo editors, video and audio editors, converters and design tools. Community-ranked and reviewed.",
+      "ogUrl": "https://www.aihubtools.ma/edittools",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/courses",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/courses",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Coding & AI Courses - Learn Programming Online - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/courses"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Free and paid coding courses and roadmaps: AI engineering, prompt engineering, Python, automation with n8n, web and backend development. Community-ranked learning paths.",
+      "ogUrl": "https://www.aihubtools.ma/courses",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/offers",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/offers",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Tech Opportunities & Deals for Developers - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/offers"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Fellowships, programs, student perks and developer deals with step-by-step claim guides. Curated tech opportunities, including programs for Morocco.",
+      "ogUrl": "https://www.aihubtools.ma/offers",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/about",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "About AI Hunt - Who runs this directory and how ranking works - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/about"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "AI Hunt is a free, community-driven directory of AI tools, dev tools, courses and offers, built Morocco-first by Yahia Naim. Learn how tools are ranked and reviewed.",
+      "ogUrl": "https://www.aihubtools.ma/about",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/support",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/support",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Support AI Hunt - Buy me a coffee - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/support"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Support AI Hunt via PayPal or direct bank transfer (CIH). Keep the platform free, ad-free, and independent.",
+      "ogUrl": "https://www.aihubtools.ma/support",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/find-by-goal",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/find-by-goal",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Find AI Tools by Goal - Describe It, Get Matches - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/find-by-goal"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Start with your goal and get matched AI tools from our catalogue. See why each matched, compare pricing, or ask the AI for guidance. Free, no account needed.",
+      "ogUrl": "https://www.aihubtools.ma/find-by-goal",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/tools/coding",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/tools/coding",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Coding AI Tools - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/tools/coding"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Discover 151 coding AI tools, ranked by the community. Compare features and pricing, and find top-rated alternatives.",
+      "ogUrl": "https://www.aihubtools.ma/tools/coding",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/dev-tools/ide",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/dev-tools/ide",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "IDE Developer Tools - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/dev-tools/ide"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Compare 10 curated ide developer tools for software engineers. Community-ranked with free and paid options.",
+      "ogUrl": "https://www.aihubtools.ma/dev-tools/ide",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/offers/scholarship",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/offers/scholarship",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Scholarship Opportunities & Deals - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/offers/scholarship"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "Claim 12 curated scholarship opportunities and deals, each with a step-by-step guide.",
+      "ogUrl": "https://www.aihubtools.ma/offers/scholarship",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/tools/other/chatgpt",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/tools/other/chatgpt",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "ChatGPT - The original conversational AI by OpenAI - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/tools/other/chatgpt"
+      ],
+      "robots": "index, follow",
+      "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1",
+      "description": "ChatGPT: ChatGPT is OpenAI's flagship conversational AI, capable of natural dialogue, coding, analysis, and creative tasks.",
+      "ogUrl": "https://www.aihubtools.ma/tools/other/chatgpt",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": [
+        "SoftwareApplication",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/offers/scholarship/ai-for-positive-futures-odc-capgemini",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/offers/scholarship/ai-for-positive-futures-odc-capgemini",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "AI for Positive Futures - AI session and hands-on workshop\u2026 - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/offers/scholarship/ai-for-positive-futures-odc-capgemini"
+      ],
+      "robots": null,
+      "googlebot": null,
+      "description": "AI for Positive Futures: A session organized as part of the Orange Digital Center x Capgemini collaboration on 21 October 2026, from 10:00 to 13:00.\u2026",
+      "ogUrl": "https://www.aihubtools.ma/offers/scholarship/ai-for-positive-futures-odc-capgemini",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": [
+        "Article",
+        "BreadcrumbList"
+      ]
+    },
+    {
+      "path": "/search?q=chatgpt",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/search?q=chatgpt",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Search AI Tools & Developer Resources - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/search"
+      ],
+      "robots": "noindex, follow",
+      "googlebot": null,
+      "description": "Search across AI tools, developer tools, open-source GitHub repos, and coding courses. Find the best developer resources on AI Hunt.",
+      "ogUrl": "https://www.aihubtools.ma",
+      "lang": "en",
+      "h1": 0,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/profile/nova",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/profile/nova",
+      "contentType": "text/html; charset=utf-8",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "title": "Nova Chen - AI Hunt",
+      "canonical": [
+        "https://www.aihubtools.ma/profile/nova"
+      ],
+      "robots": "noindex, follow",
+      "googlebot": null,
+      "description": "AI tinkerer. Building with LLMs since 2022.",
+      "ogUrl": "https://www.aihubtools.ma/profile/nova",
+      "lang": "en",
+      "h1": 1,
+      "rawJsonLdTypes": []
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/robots.txt",
+      "contentType": "text/plain",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/sitemap.xml",
+      "contentType": "application/xml",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true,
+      "count": 3309,
+      "unique": 3309
+    },
+    {
+      "path": "/logo.png",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/logo.png",
+      "contentType": "image/png",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true
+    },
+    {
+      "path": "/og.png",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/og.png",
+      "contentType": "image/png",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true
+    },
+    {
+      "path": "/og-hero.png",
+      "status": 200,
+      "url": "https://www.aihubtools.ma/og-hero.png",
+      "contentType": "image/png",
+      "xRobots": null,
+      "server": "envoy",
+      "vercel": true
+    }
+  ],
+  "redirects": [
+    {
+      "url": "http://aihubtools.ma/",
+      "trail": [
+        {
+          "url": "http://aihubtools.ma/",
+          "status": 308,
+          "location": "https://aihubtools.ma/"
+        },
+        {
+          "url": "https://aihubtools.ma/",
+          "status": 308,
+          "location": "https://www.aihubtools.ma/"
+        },
+        {
+          "url": "https://www.aihubtools.ma/",
+          "status": 200,
+          "location": null
+        }
+      ]
+    },
+    {
+      "url": "https://aihubtools.ma/",
+      "trail": [
+        {
+          "url": "https://aihubtools.ma/",
+          "status": 308,
+          "location": "https://www.aihubtools.ma/"
+        },
+        {
+          "url": "https://www.aihubtools.ma/",
+          "status": 200,
+          "location": null
+        }
+      ]
+    },
+    {
+      "url": "http://www.aihubtools.ma/",
+      "trail": [
+        {
+          "url": "http://www.aihubtools.ma/",
+          "status": 308,
+          "location": "https://www.aihubtools.ma/"
+        },
+        {
+          "url": "https://www.aihubtools.ma/",
+          "status": 200,
+          "location": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.aihubtools.ma/",
+      "trail": [
+        {
+          "url": "https://www.aihubtools.ma/",
+          "status": 200,
+          "location": null
+        }
+      ]
+    },
+    {
+      "url": "https://aihubtools.vercel.app/tools?category=coding",
+      "trail": [
+        {
+          "url": "https://aihubtools.vercel.app/tools?category=coding",
+          "status": 308,
+          "location": "https://www.aihubtools.ma/tools?category=coding"
+        },
+        {
+          "url": "https://www.aihubtools.ma/tools?category=coding",
+          "status": 200,
+          "location": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/chatgpt",
+      "trail": [
+        {
+          "url": "https://www.aihubtools.ma/tools/chatgpt",
+          "status": 308,
+          "location": "/tools/other/chatgpt"
+        },
+        {
+          "url": "https://www.aihubtools.ma/tools/other/chatgpt",
+          "status": 200,
+          "location": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/coding/no-such-tool",
+      "trail": [
+        {
+          "url": "https://www.aihubtools.ma/tools/coding/no-such-tool",
+          "status": 404,
+          "location": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.aihubtools.ma/guides",
+      "trail": [
+        {
+          "url": "https://www.aihubtools.ma/guides",
+          "status": 404,
+          "location": null
+        }
+      ]
+    }
+  ],
+  "sitemapSample": [
+    {
+      "url": "https://www.aihubtools.ma/tools/writing",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/writing",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/coding",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/coding",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/image",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/image",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/video",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/video",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/audio",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/audio",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/productivity",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/productivity",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/research",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/research",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/marketing",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/marketing",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/data",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/data",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/agents",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/agents",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/sales-leads",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/sales-leads",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/automation",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/automation",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/social-community",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/social-community",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/design-ui-ux",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/design-ui-ux",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/finance",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/finance",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/email",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/email",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/api-backend",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/api-backend",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/engineering-data",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/engineering-data",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/open-source",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/open-source",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/open-source-ai",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/open-source-ai",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/seo",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/seo",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/education",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/education",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/ai-skills",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/ai-skills",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/for-creators",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/for-creators",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/no-code-platforms",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/no-code-platforms",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/extension",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/extension",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/other",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/other",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/analytics",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/analytics",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/api",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/api",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/artifact",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/artifact",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/auth",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/auth",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/baas",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/baas",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/cdn",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/cdn",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/ci-cd",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/ci-cd",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/cli",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/cli",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/cms",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/cms",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/code-quality",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/code-quality",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/collaboration",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/collaboration",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/commenting",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/commenting",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/conception",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/conception",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/containers",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/containers",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/crash-reporting",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/crash-reporting",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/database",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/database",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/debugging",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/debugging",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/developer-tools",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/developer-tools",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/dns",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/dns",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/domain",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/domain",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/email",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/email",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/feature-flags",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/feature-flags",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/forms",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/forms",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/framework",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/framework",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/freelancing",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/freelancing",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/help-desk",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/help-desk",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/hosting",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/hosting",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/ide",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/ide",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/library",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/library",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/logging",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/logging",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/low-code",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/low-code",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/messaging",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/messaging",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/mobile",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/mobile",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/monitoring",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/monitoring",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/other",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/other",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/paas",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/paas",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/payment",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/payment",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/project-management",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/project-management",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/remote-desktop",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/remote-desktop",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/remote-work",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/remote-work",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/screenshot",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/screenshot",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/search",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/search",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/security",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/security",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/seo",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/seo",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/session-recording",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/session-recording",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/source-control",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/source-control",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/starter-pack",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/starter-pack",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/storage",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/storage",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/templates",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/templates",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/testing",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/testing",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/translation",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/translation",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/dev-extension",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/dev-extension",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/programmer-websites",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/programmer-websites",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/repo",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/repo",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/websites",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/websites",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/high-recommended",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/high-recommended",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/fullstack",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/fullstack",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/backend",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/backend",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/frontend",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/frontend",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/testing",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/testing",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/cloud",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/cloud",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/data-science",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/data-science",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/prompt-engineering",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/prompt-engineering",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/ai-engineering",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/ai-engineering",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/python",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/python",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/computer-science",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/computer-science",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/cybersecurity",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/cybersecurity",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/math",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/math",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/writing",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/writing",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/automation",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/automation",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/learn-from-repos",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/learn-from-repos",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/english",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/english",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/learning",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/learning",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/fellowship",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/fellowship",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/scholarship",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/scholarship",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/api-access",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/api-access",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/tool",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/tool",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/guide",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/guide",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/forstartups",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/forstartups",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/startup-discounts",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/startup-discounts",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/ai-perks",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/ai-perks",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/student-perks",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/student-perks",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/edu",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/edu",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/research/perplexity",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/research/perplexity",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/api-backend/val-town",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/api-backend/val-town",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/productivity/my-mind",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/productivity/my-mind",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/marketing/hubspot-crm",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/marketing/hubspot-crm",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/audio/mureka",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/audio/mureka",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/email/parsio",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/email/parsio",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/coding/nova",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/coding/nova",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/tools/no-code-platforms/bravo-studio",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/tools/no-code-platforms/bravo-studio",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/cli/biome",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/cli/biome",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/api/dialogflow",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/api/dialogflow",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/hosting/zeabur",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/hosting/zeabur",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/search/bonsai",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/search/bonsai",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/dev-tools/websites/normaltools",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/dev-tools/websites/normaltools",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/edittools/focus-magic",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/edittools/focus-magic",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/edittools/mylio",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/edittools/mylio",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/courses/frontend/frontend-engineering",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/courses/frontend/frontend-engineering",
+      "noindex": false,
+      "hasH1": true
+    },
+    {
+      "url": "https://www.aihubtools.ma/offers/forstartups/technovation-girls-morocco-2026",
+      "status": 200,
+      "final": "https://www.aihubtools.ma/offers/forstartups/technovation-girls-morocco-2026",
+      "noindex": false,
+      "hasH1": true
+    }
+  ],
+  "localValidation": {
+    "build": "passed,3356staticpages",
+    "goalTests": {
+      "passed": 101,
+      "failed": 0
+    },
+    "rawHttpPages": 18,
+    "homeCategoryLinks": 27,
+    "seoSmokeChecks": 24,
+    "sitemapUrlsPreserved": 3309,
+    "unsupportedDatesRemoved": 5,
+    "typecheck": "passed",
+    "lint": {
+      "errors": 0,
+      "preExistingWarnings": 9
+    },
+    "deployed": false,
+    "categoryLinkTargets": "Existing /tools?category=... preserved after final review",
+    "navigationBrowser": {
+      "browser": "155.0.8059.84",
+      "categories": [
+        {
+          "category": "writing",
+          "href": "/tools?category=writing",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "coding",
+          "href": "/tools?category=coding",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "image",
+          "href": "/tools?category=image",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "video",
+          "href": "/tools?category=video",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "audio",
+          "href": "/tools?category=audio",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "productivity",
+          "href": "/tools?category=productivity",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "research",
+          "href": "/tools?category=research",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "marketing",
+          "href": "/tools?category=marketing",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "data",
+          "href": "/tools?category=data",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "agents",
+          "href": "/tools?category=agents",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "sales-leads",
+          "href": "/tools?category=sales-leads",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "automation",
+          "href": "/tools?category=automation",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "social-community",
+          "href": "/tools?category=social-community",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "design-ui-ux",
+          "href": "/tools?category=design-ui-ux",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "finance",
+          "href": "/tools?category=finance",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "email",
+          "href": "/tools?category=email",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "api-backend",
+          "href": "/tools?category=api-backend",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "engineering-data",
+          "href": "/tools?category=engineering-data",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "open-source",
+          "href": "/tools?category=open-source",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "open-source-ai",
+          "href": "/tools?category=open-source-ai",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "seo",
+          "href": "/tools?category=seo",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "education",
+          "href": "/tools?category=education",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "ai-skills",
+          "href": "/tools?category=ai-skills",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "for-creators",
+          "href": "/tools?category=for-creators",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "no-code-platforms",
+          "href": "/tools?category=no-code-platforms",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "extension",
+          "href": "/tools?category=extension",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        },
+        {
+          "category": "other",
+          "href": "/tools?category=other",
+          "selected": true,
+          "pricing": "free",
+          "sort": "top",
+          "view": "list",
+          "back": true,
+          "forward": true
+        }
+      ],
+      "paginationAndClear": true
+    }
+  }
+}
