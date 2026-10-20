@@ -8293,24 +8293,4 @@ export const SEED_REPOS: Repo[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
-
-  {
-    id: 'r543',
-    slug: 'hairline-github',
-    name: 'Hairline',
-    tagline: 'Isometric line figures that answer the pointer',
-    description:
-      'Open-source library of thirty-three isometric line figures that respond to the pointer, for React and anything with a DOM. Zero dependencies, ESM only, shadcn registry support, reduced-motion and accessibility built in, MIT licensed.',
-    url: 'https://github.com/lucasmarkes/hairline',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/github.com.ico',
-    category: 'design',
-    tags: ['svg', 'animation', 'react', 'typescript', 'open-source'],
-    pricing: 'open-source',
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
 ];

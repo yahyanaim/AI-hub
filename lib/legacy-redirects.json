@@ -2238,7 +2238,8 @@
   "dribbble-freelance": "freelancing",
   "99designs": "freelancing",
   "malt": "freelancing",
-  "andela": "freelancing"
+  "andela": "freelancing",
+  "hairline-github": "repo"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",
@@ -3400,8 +3401,7 @@
   "ark-archiver": "file",
   "adobe-premiere-pro": "video",
   "tella": "capture",
-  "voicemod": "audio",
-  "hairline-github": "design"
+  "voicemod": "audio"
  },
  "extensionTools": [
   "aiprm",

@@ -15995,7 +15995,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Hairline by Lucas Marques is a collection of pointer-responsive isometric SVG figures for interface illustrations and empty states. React and vanilla JS APIs, adjustable interaction intensity, light/dark themes, and zero runtime dependencies under the MIT license.',
     url: 'https://getstage.co/component-libraries/hairline',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/getstage.co.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=getstage.co&sz=64',
     category: 'library',
     tags: ['svg', 'animation', 'react', 'isometric', 'illustrations'],
     pricing: 'open-source',
@@ -16015,7 +16015,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Upwork connects freelancers with clients posting contracts in development, design, writing, and marketing. Hourly and fixed-price work with escrow protection, free to join with a service fee per contract.',
     url: 'https://www.upwork.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/upwork.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=upwork.com&sz=64',
     category: 'freelancing',
     tags: ['freelance', 'marketplace', 'remote-work', 'contracts'],
     pricing: 'free',
@@ -16035,7 +16035,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Fiverr lets freelancers package services as gigs across programming, design, video, and AI services. Buyers order instantly, sellers level up from new to top-rated with reviews.',
     url: 'https://www.fiverr.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/fiverr.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=fiverr.com&sz=64',
     category: 'freelancing',
     tags: ['freelance', 'gigs', 'marketplace', 'services'],
     pricing: 'free',
@@ -16055,7 +16055,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Freelancer.com hosts millions of projects where freelancers bid competitively, plus public contests for design and naming work. Covers coding, data entry, and engineering gigs.',
     url: 'https://www.freelancer.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/freelancer.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=freelancer.com&sz=64',
     category: 'freelancing',
     tags: ['freelance', 'bidding', 'contests', 'marketplace'],
     pricing: 'free',
@@ -16075,7 +16075,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Toptal screens developers, designers, and finance experts through interviews and test projects, then matches them with clients for high-rate contracts. Premium positioning for senior freelancers.',
     url: 'https://www.toptal.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/toptal.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=toptal.com&sz=64',
     category: 'freelancing',
     tags: ['freelance', 'vetted', 'developers', 'premium'],
     pricing: 'free',
@@ -16095,7 +16095,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Contra gives freelancers a portfolio-first profile and charges zero commission on client payments. Built-in contracts, invoicing, and discovery for creatives and developers.',
     url: 'https://contra.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/contra.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=contra.com&sz=64',
     category: 'freelancing',
     tags: ['freelance', 'portfolio', 'no-commission', 'creatives'],
     pricing: 'freemium',
@@ -16115,7 +16115,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'PeoplePerHour matches businesses with freelancers for hourly or project-based work in tech, marketing, and design. AI-assisted matching plus buyer protection on every project.',
     url: 'https://www.peopleperhour.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/peopleperhour.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=peopleperhour.com&sz=64',
     category: 'freelancing',
     tags: ['freelance', 'hourly', 'marketplace', 'remote-work'],
     pricing: 'free',
@@ -16135,7 +16135,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Guru organizes freelance engagements into workrooms with agreements, milestones, and SafePay escrow. Strong in programming, admin support, and design contracts.',
     url: 'https://www.guru.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/guru.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=guru.com&sz=64',
     category: 'freelancing',
     tags: ['freelance', 'escrow', 'contracts', 'marketplace'],
     pricing: 'freemium',
@@ -16155,7 +16155,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Outlier by Scale AI pays domain experts to write prompts, rank model responses, and evaluate reasoning. Remote flexible tasks for writers, coders, and specialists improving frontier models.',
     url: 'https://outlier.ai',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/outlier.ai.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=outlier.ai&sz=64',
     category: 'freelancing',
     tags: ['ai-training', 'data-annotation', 'freelance', 'rlhf'],
     pricing: 'free',
@@ -16175,7 +16175,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Remotasks offers image annotation, lidar labeling, and language tasks that feed Scale AI training pipelines. Beginner-friendly onboarding with pay per completed task.',
     url: 'https://www.remotasks.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/remotasks.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=remotasks.com&sz=64',
     category: 'freelancing',
     tags: ['data-annotation', 'microtasks', 'ai-training', 'labeling'],
     pricing: 'free',
@@ -16195,7 +16195,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Clickworker distributes text creation, categorization, surveys, and image tagging microtasks to a global crowd. UHRS partner tasks available for higher hourly-style earnings.',
     url: 'https://www.clickworker.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/clickworker.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=clickworker.com&sz=64',
     category: 'freelancing',
     tags: ['microtasks', 'data-annotation', 'crowdwork', 'surveys'],
     pricing: 'free',
@@ -16215,7 +16215,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Appen provides search relevance rating, transcription, and data collection projects for AI labs. Long-running part-time projects plus short microtasks, paid per hour or per unit.',
     url: 'https://appen.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/appen.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=appen.com&sz=64',
     category: 'freelancing',
     tags: ['ai-training', 'transcription', 'crowdwork', 'rating'],
     pricing: 'free',
@@ -16235,7 +16235,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'TELUS International AI Community offers data annotation, transcription, and linguistic tasks contributors complete from home. Hourly pay with weekly payouts for approved work.',
     url: 'https://www.telusinternational.com/solutions/ai-data-solutions/ai-community',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/telusinternational.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=telusinternational.com&sz=64',
     category: 'freelancing',
     tags: ['ai-training', 'data-annotation', 'transcription', 'remote-work'],
     pricing: 'free',
@@ -16255,7 +16255,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Centaur Lab pays contributors to annotate medical audio, transcribe speech, and label health datasets used in research. Mobile-friendly tasks with per-label earnings.',
     url: 'https://centaurlab.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/centaurlab.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=centaurlab.com&sz=64',
     category: 'freelancing',
     tags: ['data-annotation', 'medical', 'transcription', 'ai-training'],
     pricing: 'free',
@@ -16275,7 +16275,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'MTurk lists thousands of HITs like surveys, transcription, and content moderation requesters post for crowd workers. Low barrier to entry with payments per completed batch.',
     url: 'https://www.mturk.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/mturk.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=mturk.com&sz=64',
     category: 'freelancing',
     tags: ['microtasks', 'crowdwork', 'surveys', 'moderation'],
     pricing: 'free',
@@ -16295,7 +16295,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Prolific connects researchers with vetted participants for surveys, interviews, and behavioral studies. Known for fair hourly-equivalent pay and transparent screening.',
     url: 'https://www.prolific.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/prolific.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=prolific.com&sz=64',
     category: 'freelancing',
     tags: ['research', 'surveys', 'crowdwork', 'studies'],
     pricing: 'free',
@@ -16315,7 +16315,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Data Annotation hires remote specialists for RLHF ranking, red-teaming, and multilingual evaluation of AI outputs. Competitive hourly rates for qualified coders and writers.',
     url: 'https://www.dataannotation.tech',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/dataannotation.tech.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=dataannotation.tech&sz=64',
     category: 'freelancing',
     tags: ['ai-training', 'data-annotation', 'rlhf', 'evaluation'],
     pricing: 'free',
@@ -16335,7 +16335,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Toloka serves labeling, search evaluation, and content moderation tasks from AI companies to millions of performers. Skill-based pay tiers with mobile app support.',
     url: 'https://toloka.ai',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/toloka.ai.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=toloka.ai&sz=64',
     category: 'freelancing',
     tags: ['data-annotation', 'crowdwork', 'labeling', 'moderation'],
     pricing: 'free',
@@ -16355,7 +16355,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Swagbucks rewards members with points for surveys, web discovery, and partner offers, redeemable for gift cards or PayPal. Casual side income rather than full-time freelancing.',
     url: 'https://www.swagbucks.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/swagbucks.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=swagbucks.com&sz=64',
     category: 'freelancing',
     tags: ['surveys', 'rewards', 'side-income', 'crowdwork'],
     pricing: 'free',
@@ -16375,7 +16375,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Arc.dev screens developers with interviews and code reviews, then matches them to remote jobs and freelance contracts at startups and tech companies worldwide.',
     url: 'https://arc.dev',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/arc.dev.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=arc.dev&sz=64',
     category: 'freelancing',
     tags: ['developers', 'remote-work', 'vetted', 'contracts'],
     pricing: 'free',
@@ -16395,7 +16395,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Lemon.io vets senior developers and hand-matches them with startup projects in days. Replace-without-risk trial period plus support for long-term engagements.',
     url: 'https://lemon.io',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/lemon.io.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=lemon.io&sz=64',
     category: 'freelancing',
     tags: ['developers', 'vetted', 'startups', 'remote-work'],
     pricing: 'free',
@@ -16415,7 +16415,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Gun.io qualifies senior software engineers and pairs them with companies needing contract or full-time help. Fast matching with dedicated success managers.',
     url: 'https://gun.io',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/gun.io.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=gun.io&sz=64',
     category: 'freelancing',
     tags: ['developers', 'vetted', 'contracts', 'remote-work'],
     pricing: 'free',
@@ -16435,7 +16435,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Dribbble freelance board connects vetted product, brand, and motion designers with clients browsing portfolios first. Project board plus Pro designer profiles.',
     url: 'https://dribbble.com/jobs',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/dribbble.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=dribbble.com&sz=64',
     category: 'freelancing',
     tags: ['design', 'portfolio', 'freelance', 'creatives'],
     pricing: 'freemium',
@@ -16455,7 +16455,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       '99designs runs logo, web, and packaging contests where dozens of designers submit concepts, or clients hire designers directly. Winner-takes-prize plus one-to-one projects.',
     url: 'https://99designs.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/99designs.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=99designs.com&sz=64',
     category: 'freelancing',
     tags: ['design', 'contests', 'freelance', 'creatives'],
     pricing: 'free',
@@ -16475,7 +16475,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Malt connects companies with vetted developers, data experts, and designers across Europe and Morocco. Direct contracts, secure payments, and no bidding wars.',
     url: 'https://www.malt.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/malt.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=malt.com&sz=64',
     category: 'freelancing',
     tags: ['freelance', 'vetted', 'europe', 'developers'],
     pricing: 'free',
@@ -16495,10 +16495,30 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     description:
       'Andela matches pre-vetted engineers, designers, and product talent with remote contracts at leading companies. Skills assessments plus long-term placement support.',
     url: 'https://andela.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/andela.com.ico',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=andela.com&sz=64',
     category: 'freelancing',
     tags: ['developers', 'vetted', 'remote-work', 'contracts'],
     pricing: 'free',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+
+  {
+    id: 'd1123',
+    slug: 'hairline-github',
+    name: 'Hairline (GitHub)',
+    tagline: 'Isometric line figures that answer the pointer',
+    description:
+      'Open-source library of thirty-three isometric line figures that respond to the pointer, for React and anything with a DOM. Zero dependencies, ESM only, shadcn registry support, reduced-motion and accessibility built in, MIT licensed.',
+    url: 'https://github.com/lucasmarkes/hairline',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=github.com&sz=64',
+    category: 'repo',
+    tags: ['svg', 'animation', 'react', 'typescript', 'open-source'],
+    pricing: 'open-source',
     upvotes: 0,
     bookmarks: 0,
     submittedBy: 'u1',
