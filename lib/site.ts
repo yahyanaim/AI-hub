@@ -27,11 +27,17 @@ export const SITE_URL = resolveSiteUrl()
 // Resolve an item logo to an absolute og:image URL for link previews.
 // Absolute URLs pass through, site-relative paths get the site origin,
 // empty/missing logos fall back to the generic site banner.
+// SVG logos are NEVER emitted: Facebook/X/LinkedIn/WhatsApp crawlers cannot
+// render SVG og:images, so they show no preview at all. Those fall back to
+// the banner (on-site <img> rendering is unaffected — this only feeds metadata).
 export function resolveOgImage(logoUrl?: string): { src: string; isLogo: boolean } {
   const raw = logoUrl?.trim()
   if (raw) {
-    if (/^https?:\/\//i.test(raw)) return { src: raw, isLogo: true }
-    if (raw.startsWith('/')) return { src: `${SITE_URL}${raw}`, isLogo: true }
+    const path = raw.split(/[?#]/)[0] ?? ''
+    if (!/\.svg$/i.test(path)) {
+      if (/^https?:\/\//i.test(raw)) return { src: raw, isLogo: true }
+      if (raw.startsWith('/')) return { src: `${SITE_URL}${raw}`, isLogo: true }
+    }
   }
   return { src: `${SITE_URL}/og.png`, isLogo: false }
 }

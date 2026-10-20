@@ -16248,26 +16248,6 @@ export const SEED_DEV_TOOLS: DevTool[] = [
   },
 
   {
-    id: 'd1110',
-    slug: 'centaur-lab',
-    name: 'Centaur Lab',
-    tagline: 'Label medical and voice data for AI research',
-    description:
-      'Centaur Lab pays contributors to annotate medical audio, transcribe speech, and label health datasets used in research. Mobile-friendly tasks with per-label earnings.',
-    url: 'https://centaurlab.com',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=centaurlab.com&sz=64',
-    category: 'freelancing',
-    tags: ['data-annotation', 'medical', 'transcription', 'ai-training'],
-    pricing: 'free',
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
-
-  {
     id: 'd1111',
     slug: 'amazon-mechanical-turk',
     name: 'Amazon Mechanical Turk',
