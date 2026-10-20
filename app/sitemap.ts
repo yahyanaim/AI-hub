@@ -4,19 +4,14 @@ import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } fro
 import { isPaidGuide, isEduCollegePage, GUIDES_ENABLED } from '@/lib/guides'
 import { DEVTOOL_CATEGORY_LABELS, OFFER_CATEGORY_LABELS, COURSE_CATEGORY_LABELS, TOOL_CATEGORY_LABELS } from '@/types'
 
-/**
- * lastmod source of truth per section: the newest item `updatedAt`, or the
- * build date when there is no content signal (static pages). This keeps Google
- * trusting lastmod instead of churning all 88 hub URLs on every deploy.
- */
-const BUILD_DATE = new Date()
-
-function safeDate(value: string | undefined): Date {
-  const d = value ? new Date(value) : BUILD_DATE
-  return Number.isNaN(d.getTime()) ? BUILD_DATE : d
+/** Only advertise modification dates backed by catalogue content. */
+function safeDate(value: string | undefined): Date | undefined {
+  if (!value) return undefined
+  const d = new Date(value)
+  return Number.isNaN(d.getTime()) ? undefined : d
 }
 
-function newestUpdatedAt(values: (string | undefined)[]): Date {
+function newestUpdatedAt(values: (string | undefined)[]): Date | undefined {
   let best: Date | null = null
   for (const v of values) {
     if (!v) continue
@@ -24,7 +19,7 @@ function newestUpdatedAt(values: (string | undefined)[]): Date {
     if (Number.isNaN(d.getTime())) continue
     if (!best || d > best) best = d
   }
-  return best ?? BUILD_DATE
+  return best ?? undefined
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -41,26 +36,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
   )
 
   const staticPages = [
-    { url: baseUrl, lastModified: BUILD_DATE, changeFrequency: 'daily' as const, priority: 1 },
+    { url: baseUrl, changeFrequency: 'daily' as const, priority: 1 },
     { url: `${baseUrl}/tools`, lastModified: toolsMod, changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/dev-tools`, lastModified: devToolsMod, changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/edittools`, lastModified: reposMod, changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/courses`, lastModified: coursesMod, changeFrequency: 'daily' as const, priority: 0.9 },
     { url: `${baseUrl}/offers`, lastModified: offersMod, changeFrequency: 'daily' as const, priority: 0.9 },
-    { url: `${baseUrl}/support`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.5 },
-    { url: `${baseUrl}/about`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
-    { url: `${baseUrl}/find-by-goal`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${baseUrl}/support`, changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: `${baseUrl}/about`, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/find-by-goal`, changeFrequency: 'monthly' as const, priority: 0.7 },
   ]
 
   const byDevToolCategory = new Map<string, Date>()
   for (const t of SEED_DEV_TOOLS) {
     const d = safeDate(t.updatedAt)
+    if (!d) continue
     const prev = byDevToolCategory.get(t.category)
     if (!prev || d > prev) byDevToolCategory.set(t.category, d)
   }
   const byCourseCategory = new Map<string, Date>()
   for (const c of SEED_COURSES) {
     const d = safeDate(c.updatedAt)
+    if (!d) continue
     const prev = byCourseCategory.get(c.category)
     if (!prev || d > prev) byCourseCategory.set(c.category, d)
   }
@@ -68,6 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const byOfferCategory = new Map<string, Date>()
   for (const o of visibleOffers) {
     const d = safeDate(o.updatedAt)
+    if (!d) continue
     const prev = byOfferCategory.get(o.category)
     if (!prev || d > prev) byOfferCategory.set(o.category, d)
   }
@@ -86,13 +84,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const byToolCategory = new Map<string, Date>()
   for (const t of SEED_TOOLS) {
     const d = safeDate(t.updatedAt)
+    if (!d) continue
     const prev = byToolCategory.get(t.category)
     if (!prev || d > prev) byToolCategory.set(t.category, d)
   }
 
   const toolCategoryPages = Object.keys(TOOL_CATEGORY_LABELS).map((category) => ({
     url: `${baseUrl}/tools/${category}`,
-    lastModified: byToolCategory.get(category) ?? BUILD_DATE,
+    lastModified: byToolCategory.get(category),
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }))
@@ -106,7 +105,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const devToolCategoryPages = Object.keys(DEVTOOL_CATEGORY_LABELS).map((category) => ({
     url: `${baseUrl}/dev-tools/${category}`,
-    lastModified: byDevToolCategory.get(category) ?? BUILD_DATE,
+    lastModified: byDevToolCategory.get(category),
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }))
@@ -127,14 +126,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const courseCategoryPages = Object.keys(COURSE_CATEGORY_LABELS).map((category) => ({
     url: `${baseUrl}/courses/${category}`,
-    lastModified: byCourseCategory.get(category) ?? BUILD_DATE,
+    lastModified: byCourseCategory.get(category),
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }))
 
   const offerCategoryPages = Object.keys(OFFER_CATEGORY_LABELS).map((category) => ({
     url: `${baseUrl}/offers/${category}`,
-    lastModified: byOfferCategory.get(category) ?? BUILD_DATE,
+    lastModified: byOfferCategory.get(category),
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }))
@@ -153,7 +152,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paidGuides = GUIDES_ENABLED ? SEED_OFFERS.filter(isPaidGuide) : []
   const guidePages = GUIDES_ENABLED
     ? [
-        { url: `${baseUrl}/guides`, lastModified: BUILD_DATE, changeFrequency: 'weekly' as const, priority: 0.8 },
+        { url: `${baseUrl}/guides`, changeFrequency: 'weekly' as const, priority: 0.8 },
         ...paidGuides.map((g) => ({
           url: `${baseUrl}/guides/${g.slug}`,
           lastModified: safeDate(g.updatedAt),

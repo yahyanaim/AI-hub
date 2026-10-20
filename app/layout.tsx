@@ -137,17 +137,20 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('ai-hunt-theme');if(t==='dark'){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}else{document.documentElement.classList.remove('dark');document.documentElement.style.colorScheme='light';}}catch(e){}})();`,
           }}
         />
-        <Script
+        <script
           id="schema-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: safeJsonLd({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
+              '@id': `${baseUrl}/#website`,
+              alternateName: 'AI Hub Tools',
               name: 'AI Hunt',
               url: baseUrl,
               description: 'Community-driven discovery platform for AI tools, n8n automation, developer tools, open-source repos, coding courses, and freelancing skills - popular with developers and students in Morocco.',
-              inLanguage: ['en', 'fr', 'ar'],
+              inLanguage: 'en',
+              publisher: { '@id': `${baseUrl}/#organization` },
               potentialAction: {
                 '@type': 'SearchAction',
                 target: {
@@ -167,13 +170,14 @@ export default function RootLayout({
             }),
           }}
         />
-        <Script
+        <script
           id="schema-organization"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: safeJsonLd({
               '@context': 'https://schema.org',
               '@type': 'Organization',
+              '@id': `${baseUrl}/#organization`,
               name: 'AI Hunt',
               url: baseUrl,
               logo: `${baseUrl}/logo.png`,

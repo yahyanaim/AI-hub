@@ -18,7 +18,7 @@ export default function robots(): MetadataRoute.Robots {
         // The 108 raw /skills/*.md skill documents are third-party content
         // served verbatim — indexable thin content under our domain, so it is
         // blocked outright (see SEO_GEO_AUDIT.md §6.5b).
-        disallow: ['/api/', '/_next/', ...(GUIDES_ENABLED ? [] : ['/guides']), '/skills/'],
+        disallow: ['/api/', ...(GUIDES_ENABLED ? [] : ['/guides']), '/skills/'],
       },
       // GEO: explicitly allow AI crawlers / assistants so ChatGPT,
       // Claude, Perplexity and Gemini can cite AI Hunt.
@@ -46,7 +46,7 @@ export default function robots(): MetadataRoute.Robots {
           'YouBot',
         ],
         allow: '/',
-        disallow: ['/api/', '/_next/', ...(GUIDES_ENABLED ? [] : ['/guides']), '/skills/'],
+        disallow: ['/api/', ...(GUIDES_ENABLED ? [] : ['/guides']), '/skills/'],
       },
       // Images can be indexed for Google Images traffic.
       {

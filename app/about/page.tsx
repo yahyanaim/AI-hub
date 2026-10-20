@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Script from 'next/script'
 import { SITE_URL } from '@/lib/site'
 import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS, SEED_COURSES, SEED_OFFERS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
@@ -10,7 +9,7 @@ const totalEntries =
   SEED_TOOLS.length + SEED_DEV_TOOLS.length + SEED_REPOS.length + SEED_COURSES.length + SEED_OFFERS.length
 
 export const metadata: Metadata = {
-  title: 'About AI Hunt - Who runs this directory and how ranking works',
+  title: { absolute: 'About AI Hunt - Who runs this directory and how ranking works' },
   description:
     'AI Hunt is a free, community-driven directory of AI tools, dev tools, courses and offers, built Morocco-first by Yahia Naim. Learn how tools are ranked and reviewed.',
   openGraph: {
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Script
+      <script
         id="schema-about"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

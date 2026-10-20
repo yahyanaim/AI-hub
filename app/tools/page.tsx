@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { SITE_URL } from '@/lib/site'
-import Script from 'next/script'
 import { ToolsView } from '@/components/listing/ToolsView'
 import { SEED_TOOLS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
 export default function ToolsPage() {
   return (
     <>
-      <Script id="schema-collection-tools" type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id="schema-collection-tools" type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
@@ -62,7 +61,7 @@ export default function ToolsPage() {
       }} />
       {/* 2-level breadcrumb — replaces the incorrect site-wide one that used to
           live in app/layout.tsx (see SEO_GEO_AUDIT.md §6.2). */}
-      <Script id="schema-breadcrumb-tools" type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id="schema-breadcrumb-tools" type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd(
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },

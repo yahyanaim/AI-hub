@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
-import Script from 'next/script'
 import { redirect, notFound } from 'next/navigation'
 import { SEED_DEV_TOOLS } from '@/lib/seed'
 import { DEVTOOL_CATEGORY_LABELS } from '@/types'
@@ -65,7 +64,7 @@ export default function DevToolCategoryPage({ params }: { params: { category: st
 
   return (
     <>
-      <Script id={`schema-collection-devtools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id={`schema-collection-devtools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
@@ -74,7 +73,7 @@ export default function DevToolCategoryPage({ params }: { params: { category: st
           url: `${baseUrl}/dev-tools/${category}`,
         }),
       }} />
-      <Script id={`schema-breadcrumb-devtools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id={`schema-breadcrumb-devtools-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd(
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },

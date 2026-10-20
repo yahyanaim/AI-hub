@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { SITE_URL } from '@/lib/site'
 import { GoalFinder } from '@/components/goal/GoalFinder'
 import { safeJsonLd } from '@/lib/json-ld'
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
 export default function FindByGoalPage() {
   return (
     <>
-      <Script
+      <script
         id="schema-howto-goal"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

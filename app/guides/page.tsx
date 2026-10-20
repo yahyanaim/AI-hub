@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Script from 'next/script'
 import { SITE_URL } from '@/lib/site'
 import { SEED_OFFERS } from '@/lib/seed'
 import { isPaidGuide, GUIDES_ENABLED } from '@/lib/guides'
@@ -38,7 +37,7 @@ export default function GuidesPage() {
   if (!GUIDES_ENABLED) notFound()
   return (
     <>
-      <Script
+      <script
         id="schema-collection-guides"
         type="application/ld+json"
         dangerouslySetInnerHTML={{

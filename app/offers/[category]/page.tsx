@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
-import Script from 'next/script'
 import { redirect, notFound } from 'next/navigation'
 import { SEED_OFFERS } from '@/lib/seed'
 import { OFFER_CATEGORY_LABELS } from '@/types'
@@ -78,7 +77,7 @@ export default function OfferCategoryPage({ params }: { params: { category: stri
 
   return (
     <>
-      <Script id={`schema-collection-offers-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id={`schema-collection-offers-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
@@ -87,7 +86,7 @@ export default function OfferCategoryPage({ params }: { params: { category: stri
           url: `${baseUrl}/offers/${category}`,
         }),
       }} />
-      <Script id={`schema-breadcrumb-offers-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id={`schema-breadcrumb-offers-${category}`} type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd(
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },

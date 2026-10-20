@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
-import Script from 'next/script'
 import { DevToolsView } from '@/components/listing/DevToolsView'
 import { SEED_DEV_TOOLS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
 export default function DevToolsPage() {
   return (
     <>
-      <Script id="schema-collection-devtools" type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id="schema-collection-devtools" type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
@@ -58,7 +57,7 @@ export default function DevToolsPage() {
           },
         }),
       }} />
-      <Script id="schema-breadcrumb-dev-tools" type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id="schema-breadcrumb-dev-tools" type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd(
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },

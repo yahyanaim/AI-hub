@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { SITE_URL } from '@/lib/site'
-import Script from 'next/script'
 import { OffersView } from '@/components/listing/OffersView'
 import { SEED_OFFERS } from '@/lib/seed'
 import { safeJsonLd } from '@/lib/json-ld'
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
 export default function OffersPage() {
   return (
     <>
-      <Script id="schema-collection-offers" type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id="schema-collection-offers" type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd({
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
@@ -58,7 +57,7 @@ export default function OffersPage() {
           },
         }),
       }} />
-      <Script id="schema-breadcrumb-offers" type="application/ld+json" dangerouslySetInnerHTML={{
+      <script id="schema-breadcrumb-offers" type="application/ld+json" dangerouslySetInnerHTML={{
         __html: safeJsonLd(
           breadcrumbJsonLd(baseUrl, [
             { name: 'Home', path: '/' },
