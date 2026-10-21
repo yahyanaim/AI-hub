@@ -3400,7 +3400,12 @@
   "ark-archiver": "file",
   "adobe-premiere-pro": "video",
   "tella": "capture",
-  "voicemod": "audio"
+  "voicemod": "audio",
+  "freebooksy": "free-books",
+  "the-fussy-librarian": "free-books",
+  "ereader-news-today": "free-books",
+  "bookraid": "free-books",
+  "booksprout": "free-books"
  },
  "extensionTools": [
   "aiprm",
