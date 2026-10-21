@@ -16506,4 +16506,24 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'd1124',
+    slug: 'beui',
+    name: 'beUI',
+    tagline: 'Animated components for React, Next.js and React Native',
+    description:
+      'beUI is a free, open-source library of animated components for React, Next.js and React Native, built with Motion, Tailwind CSS and Reanimated. Copy the source straight into your project or install the CLI, with a matching React Native package on the same design system.',
+    url: 'https://github.com/starc007/ui-components',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=beui.dev&sz=64',
+    category: 'repo',
+    tags: ['react', 'nextjs', 'react-native', 'animation', 'tailwind', 'open-source'],
+    pricing: 'open-source',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
