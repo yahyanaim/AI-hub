@@ -2239,7 +2239,8 @@
   "malt": "freelancing",
   "andela": "freelancing",
   "hairline-github": "repo",
-  "beui": "repo"
+  "beui": "repo",
+  "affectui": "library"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",

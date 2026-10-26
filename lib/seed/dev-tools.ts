@@ -16526,4 +16526,24 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'd1125',
+    slug: 'affectui',
+    name: 'affectUI',
+    tagline: 'Agent-ready React UI for AI products with 120+ components',
+    description:
+      'affectUI is a React component library with 120+ components, blocks and more, built agent-ready for AI products. Copy production-ready UI for chat interfaces, agent workflows and AI app screens straight into your project, styled for Tailwind CSS and compatible with modern React and Next.js codebases, so you skip scaffolding UI from scratch.',
+    url: 'https://affectui.com',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=affectui.com&sz=64',
+    category: 'library',
+    tags: ['react', 'ui-components', 'blocks', 'tailwind', 'ai-products'],
+    pricing: 'free',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
