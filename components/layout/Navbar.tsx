@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
 import { ThemeToggle } from '@/components/layout/ThemeToggle'
+import { NotificationBell } from '@/components/layout/NotificationBell'
 
 const NAV_LINKS = [
   { href: '/tools', label: 'Tools' },
@@ -82,6 +83,7 @@ export function Navbar() {
         {/* Right side: actions */}
         <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
+          <NotificationBell />
 
           {/* Global search (opens the command palette) */}
           {showSearch && (

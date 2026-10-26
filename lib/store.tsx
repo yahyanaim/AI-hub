@@ -18,6 +18,7 @@ import type {
   Repo,
   Course,
   Offer,
+  OfferCategory,
   User,
   Comment,
   ItemType,
@@ -32,8 +33,37 @@ const STORAGE_KEY = 'ai-hunt-state-v4' // v4+: stores only user deltas, not seed
 const MAX_COMMENT_LENGTH = 2000
 const MAX_COMMENTS_STORED = 500
 const MAX_USERS_STORED = 100
+const MAX_NOTIFICATIONS_STORED = 30
 const MIN_USERNAME_LENGTH = 2
 const MAX_USERNAME_LENGTH = 24
+
+/** Which detail page a notification opens (canonical card hrefs). */
+export function notificationHref(n: AppNotification): string {
+  switch (n.itemType) {
+    case 'offer':
+      return `/offers/${n.category}/${n.slug}`
+    case 'devtool':
+      return `/dev-tools/${n.category}/${n.slug}`
+    case 'repo':
+      return `/edittools/${n.slug}`
+    default:
+      return `/tools/${n.category}/${n.slug}`
+  }
+}
+
+/**
+ * One notification entry: a submitted item (tool/devtool/repo/offer) the user
+ * added, so the bell can send them straight back to its detail page.
+ */
+export interface AppNotification {
+  id: string
+  itemType: 'tool' | 'devtool' | 'repo' | 'offer'
+  name: string
+  category: string
+  slug: string
+  createdAt: string
+  read: boolean
+}
 
 /** Accept only http(s) URLs to avoid javascript:/data: payloads in submissions. */
 function assertHttpUrl(value: string, field: string): string {
@@ -73,6 +103,7 @@ interface StoredDelta {
   addedCourses: Course[]
   addedOffers: Offer[]
   addedComments: Comment[] // user comments on any item
+  notifications: AppNotification[] // bell entries for submitted items
 }
 
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -87,6 +118,26 @@ function isValidUser(u: unknown): u is User {
     Array.isArray(u.upvotedItems) &&
     Array.isArray(u.bookmarkedItems)
   )
+}
+
+function pickNotifications(v: unknown): AppNotification[] {
+  if (!Array.isArray(v)) return []
+  const valid = v.filter(
+    (x) =>
+      isRecord(x) &&
+      typeof x.id === 'string' &&
+      typeof x.itemType === 'string' &&
+      typeof x.slug === 'string' &&
+      typeof x.createdAt === 'string'
+  ) as Record<string, unknown>[]
+  return valid
+    .slice(0, MAX_NOTIFICATIONS_STORED)
+    .map((x) => ({
+      ...(x as unknown as AppNotification),
+      read: Boolean(x.read),
+      name: String(x.name ?? ''),
+      category: String(x.category ?? ''),
+    }))
 }
 
 function sanitizeDelta(raw: unknown): StoredDelta | null {
@@ -109,6 +160,7 @@ function sanitizeDelta(raw: unknown): StoredDelta | null {
     addedCourses: pick<Course>(raw.addedCourses),
     addedOffers: pick<Offer>(raw.addedOffers),
     addedComments: pick<Comment>(raw.addedComments),
+    notifications: pickNotifications(raw.notifications),
   }
 }
 
@@ -123,6 +175,7 @@ interface PersistedState {
   comments: Comment[]
   currentUserId: string | null
   recentSearches: string[]
+  notifications: AppNotification[]
 }
 
 interface SubmitToolInput {
@@ -167,6 +220,16 @@ interface SubmitRepoInput {
   pricing: Pricing
 }
 
+interface SubmitOfferInput {
+  name: string
+  tagline: string
+  description: string
+  url: string
+  logoUrl: string
+  category: OfferCategory
+  tags: string[]
+}
+
 export type OffersLang = 'en' | 'ar'
 
 interface AppContextValue {
@@ -206,6 +269,14 @@ interface AppContextValue {
   submitDevTool: (input: SubmitDevToolInput) => DevTool
   submitPrompt: (input: SubmitPromptInput) => Prompt
   submitRepo: (input: SubmitRepoInput) => Repo
+  submitOffer: (input: SubmitOfferInput) => Offer
+
+  // notifications (bell)
+  notifications: AppNotification[]
+  unreadNotificationCount: number
+  markNotificationRead: (id: string) => void
+  markAllNotificationsRead: () => void
+  clearNotifications: () => void
 
   // delete
   deleteTool: (id: string) => void
@@ -318,6 +389,7 @@ function freshSeed(): PersistedState {
     comments: EMPTY_COMMENTS,
     currentUserId: null,
     recentSearches: [],
+    notifications: [],
   }
 }
 
@@ -431,6 +503,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           next.users = delta.users?.length ? delta.users : next.users
           next.currentUserId = delta.currentUserId ?? next.currentUserId
           next.recentSearches = delta.recentSearches ?? next.recentSearches
+          next.notifications = delta.notifications ?? next.notifications
         }
         return next
       })
@@ -524,6 +597,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
             courses: mergeAdded(prev.courses, delta.addedCourses),
             offers: mergeAdded(prev.offers, delta.addedOffers),
             comments: mergeAdded(prev.comments, delta.addedComments).slice(0, MAX_COMMENTS_STORED),
+            notifications: mergeAdded(prev.notifications, delta.notifications).slice(
+              0,
+              MAX_NOTIFICATIONS_STORED
+            ),
           }
         })
       } catch {
@@ -554,6 +631,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         addedCourses: state.courses.filter((c) => !ids.courses.has(c.id)),
         addedOffers: state.offers.filter((o) => !ids.offers.has(o.id)),
         addedComments: state.comments.filter((c) => !ids.comments.has(c.id)),
+        notifications: state.notifications,
       }
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(delta))
@@ -694,6 +772,27 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [state.comments]
   )
 
+  // ---------------- Notifications (bell) ----------------
+  const unreadNotificationCount = state.notifications.filter((n) => !n.read).length
+
+  const markNotificationRead = useCallback((id: string) => {
+    setState((prev) => ({
+      ...prev,
+      notifications: prev.notifications.map((n) => (n.id === id ? { ...n, read: true } : n)),
+    }))
+  }, [])
+
+  const markAllNotificationsRead = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      notifications: prev.notifications.map((n) => ({ ...n, read: true })),
+    }))
+  }, [])
+
+  const clearNotifications = useCallback(() => {
+    setState((prev) => ({ ...prev, notifications: [] }))
+  }, [])
+
   // ---------------- Auth (local mock) ----------------
   const signIn = useCallback((username: string) => {
     const raw = username.trim().slice(0, MAX_USERNAME_LENGTH)
@@ -774,9 +873,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
       createdAt: now,
       updatedAt: now,
     }
+    const notif: AppNotification = {
+      id: uuid(),
+      itemType: 'tool',
+      name: finalTool.name,
+      category: finalTool.category,
+      slug: finalTool.slug,
+      createdAt: now,
+      read: false,
+    }
     setState((p) => ({
       ...p,
       tools: [finalTool, ...p.tools],
+      notifications: [notif, ...p.notifications].slice(0, MAX_NOTIFICATIONS_STORED),
       users: submitter
         ? p.users.map((u) =>
             u.id === submitter.id
@@ -860,9 +969,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
       createdAt: now,
       updatedAt: now,
     }
+    const notif: AppNotification = {
+      id: uuid(),
+      itemType: 'devtool',
+      name: final.name,
+      category: final.category,
+      slug: final.slug,
+      createdAt: now,
+      read: false,
+    }
     setState((p) => ({
       ...p,
       devTools: [final, ...p.devTools],
+      notifications: [notif, ...p.notifications].slice(0, MAX_NOTIFICATIONS_STORED),
       users: submitter
         ? p.users.map((u) =>
             u.id === submitter.id
@@ -904,9 +1023,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
       createdAt: now,
       updatedAt: now,
     }
+    const notif: AppNotification = {
+      id: uuid(),
+      itemType: 'repo',
+      name: final.name,
+      category: final.category,
+      slug: final.slug,
+      createdAt: now,
+      read: false,
+    }
     setState((p) => ({
       ...p,
       repos: [final, ...p.repos],
+      notifications: [notif, ...p.notifications].slice(0, MAX_NOTIFICATIONS_STORED),
       users: submitter
         ? p.users.map((u) =>
             u.id === submitter.id
@@ -914,6 +1043,59 @@ export function AppProvider({ children }: { children: ReactNode }) {
               : u
           )
         : p.users,
+    }))
+    return final
+  }, [])
+
+  const submitOffer = useCallback((input: SubmitOfferInput): Offer => {
+    const id = uuid()
+    const url = assertHttpUrl(input.url, 'offer URL')
+    const logoUrl = input.logoUrl.trim()
+    if (logoUrl) assertHttpUrl(logoUrl, 'logo URL')
+    const slugBase = slugify(input.name) || `offer-${id.slice(0, 6)}`
+    const now = new Date().toISOString()
+    // See submitTool: computed synchronously from the ref mirror.
+    const prev = stateRef.current
+    const submitter = prev.currentUserId
+      ? prev.users.find((u) => u.id === prev.currentUserId)
+      : undefined
+    const final: Offer = {
+      id,
+      slug: uniqueSlug(slugBase, new Set(prev.offers.map((o) => o.slug))),
+      name: input.name.trim().slice(0, 80),
+      tagline: input.tagline.trim().slice(0, 140),
+      description: input.description.trim().slice(0, 5000),
+      url,
+      logoUrl: logoUrl || '/placeholder-logo.svg',
+      category: input.category,
+      tags: input.tags.map((t) => t.trim().slice(0, 30)).filter(Boolean).slice(0, 12),
+      steps: [
+        {
+          title: 'How to participate',
+          description: 'Open the offer link and follow the instructions.',
+          url,
+        },
+      ],
+      upvotes: 0,
+      bookmarks: 0,
+      submittedBy: submitter?.id ?? '',
+      featured: false,
+      createdAt: now,
+      updatedAt: now,
+    }
+    const notif: AppNotification = {
+      id: uuid(),
+      itemType: 'offer',
+      name: final.name,
+      category: final.category,
+      slug: final.slug,
+      createdAt: now,
+      read: false,
+    }
+    setState((p) => ({
+      ...p,
+      offers: [final, ...p.offers],
+      notifications: [notif, ...p.notifications].slice(0, MAX_NOTIFICATIONS_STORED),
     }))
     return final
   }, [])
@@ -1094,6 +1276,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       submitDevTool,
       submitPrompt,
       submitRepo,
+      submitOffer,
       deleteTool,
       deleteDevTool,
       deleteRepo,
@@ -1101,6 +1284,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
       getItemBySlug,
       addRecentSearch,
       clearRecentSearches,
+      notifications: state.notifications,
+      unreadNotificationCount,
+      markNotificationRead,
+      markAllNotificationsRead,
+      clearNotifications,
       authModalOpen,
       setAuthModalOpen,
       paletteOpen,
@@ -1140,6 +1328,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       submitDevTool,
       submitPrompt,
       submitRepo,
+      submitOffer,
       deleteTool,
       deleteDevTool,
       deleteRepo,
@@ -1148,6 +1337,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       addRecentSearch,
       clearRecentSearches,
       resolvePendingAction,
+      unreadNotificationCount,
+      markNotificationRead,
+      markAllNotificationsRead,
+      clearNotifications,
       authModalOpen,
       paletteOpen,
       pendingAction,

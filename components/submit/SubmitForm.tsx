@@ -17,14 +17,16 @@ import {
   Globe,
   Star,
   Package,
+  Gift,
 } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { cn, slugify } from '@/lib/utils'
-import type { ItemType, Pricing, ToolCategory, DevToolCategory, EditToolCategory } from '@/types'
+import type { ItemType, Pricing, ToolCategory, DevToolCategory, EditToolCategory, OfferCategory } from '@/types'
 import {
   TOOL_CATEGORY_LABELS,
   DEVTOOL_CATEGORY_LABELS,
   REPO_CATEGORY_LABELS,
+  OFFER_CATEGORY_LABELS,
 } from '@/types'
 
 type Step = 0 | 1 | 2 | 3
@@ -48,7 +50,7 @@ const STEPS = ['Type', 'Source', 'Details', 'Review'] as const
 
 export function SubmitForm() {
   const router = useRouter()
-  const { submitTool, submitDevTool, submitRepo, currentUser, setAuthModalOpen } =
+  const { submitTool, submitDevTool, submitRepo, submitOffer, currentUser, setAuthModalOpen } =
     useApp()
   const [showDonation, setShowDonation] = useState(false)
   const [logoError, setLogoError] = useState<string | null>(null)
@@ -81,7 +83,7 @@ export function SubmitForm() {
   const setType = (type: ItemType) => {
     // Reset category to a valid default for the new type so stale values
     // (e.g. 'coding' kept when switching Tool -> Repo) can't pass through.
-    const defaults: Record<string, string> = { tool: 'coding', devtool: 'developer-tools', repo: 'other' }
+    const defaults: Record<string, string> = { tool: 'coding', devtool: 'developer-tools', repo: 'other', offer: 'learning' }
     setForm((f) => ({ ...f, type, category: defaults[type] ?? 'other' }))
   }
 
@@ -91,6 +93,7 @@ export function SubmitForm() {
       if (form.type === 'tool') return !!form.url && !!form.name
       if (form.type === 'devtool') return !!form.url && !!form.name
       if (form.type === 'repo') return !!form.url && !!form.name
+      if (form.type === 'offer') return !!form.url && !!form.name
     }
     if (step === 2) {
       if (form.type === 'tool')
@@ -99,6 +102,8 @@ export function SubmitForm() {
         return !!form.tagline && !!form.description && !!form.category
       if (form.type === 'repo')
         return !!form.tagline && !!form.description && !!form.category
+      if (form.type === 'offer')
+        return !!form.tagline && !!form.description && !!form.category
     }
     return true
   }
@@ -106,7 +111,7 @@ export function SubmitForm() {
   // Simulated metadata auto-fetch
   const fetchMetadata = async () => {
     if (fetching) return
-    if ((form.type === 'tool' || form.type === 'devtool') && form.url) {
+    if ((form.type === 'tool' || form.type === 'devtool' || form.type === 'offer') && form.url) {
       let domain = ''
       try {
         domain = new URL(form.url).hostname.replace(/^www\./, '')
@@ -170,7 +175,9 @@ export function SubmitForm() {
           ? (Object.keys(DEVTOOL_CATEGORY_LABELS) as string[]).includes(form.category)
           : form.type === 'repo'
             ? (Object.keys(REPO_CATEGORY_LABELS) as string[]).includes(form.category)
-            : false
+            : form.type === 'offer'
+              ? (Object.keys(OFFER_CATEGORY_LABELS) as string[]).includes(form.category)
+              : false
     if (!validCategory) {
       setSubmitError('Pick a valid category for this type.')
       return
@@ -195,7 +202,7 @@ export function SubmitForm() {
         tags: form.tags,
         pricing: form.pricing,
       })
-      setSubmitted({ type: 'tool', slug: tool.slug })
+      setSubmitted({ type: 'tool', slug: tool.slug, category: tool.category })
     } else if (form.type === 'devtool') {
       const devTool = submitDevTool({
         name: form.name,
@@ -220,6 +227,17 @@ export function SubmitForm() {
         pricing: form.pricing,
       })
       setSubmitted({ type: 'repo', slug: repo.slug })
+    } else if (form.type === 'offer') {
+      const offer = submitOffer({
+        name: form.name,
+        tagline: form.tagline,
+        description: form.description,
+        url: form.url,
+        logoUrl: trimmedLogo,
+        category: form.category as OfferCategory,
+        tags: form.tags,
+      })
+      setSubmitted({ type: 'offer', slug: offer.slug, category: offer.category })
     }
     } catch (err) {
       // Store-level validation (e.g. non-http URL) surfaces here.
@@ -247,7 +265,9 @@ export function SubmitForm() {
             const cat = submitted.category ?? (form.category as string)
             router.push(`/dev-tools/${cat}/${submitted.slug}`)
           } else if (submitted.type === 'repo') router.push(`/edittools/${submitted.slug}`)
-          else router.push(`/${submitted.type}s/${submitted.slug}`)
+          else if (submitted.type === 'offer')
+            router.push(`/offers/${submitted.category}/${submitted.slug}`)
+          else router.push(`/tools/${submitted.category}/${submitted.slug}`)
         }}
         onAnother={() => {
           setSubmitted(null)
@@ -323,7 +343,7 @@ export function SubmitForm() {
             <p className="mt-1 text-sm text-muted-foreground">
               Choose a category to get started.
             </p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {(
                 [
                   {
@@ -345,6 +365,13 @@ export function SubmitForm() {
                     icon: Share2,
                     title: 'Editing Tool',
                     desc: 'A PDF, image, video, or design tool',
+                  },
+
+                  {
+                    type: 'offer',
+                    icon: Gift,
+                    title: 'Offer',
+                    desc: 'A scholarship, deal, or freebie',
                   },
                 ] as const
               ).map(({ type, icon: Icon, title, desc }) => (
@@ -379,6 +406,7 @@ export function SubmitForm() {
               {form.type === 'tool' && 'Tool URL'}
               {form.type === 'devtool' && 'Dev Tool URL'}
               {form.type === 'repo' && 'Editing Tool URL'}
+              {form.type === 'offer' && 'Offer link'}
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
               {form.type === 'tool' &&
@@ -387,10 +415,12 @@ export function SubmitForm() {
                 'We’ll auto-fetch the logo and metadata from the page.'}
               {form.type === 'repo' &&
                 'We’ll auto-fetch the logo and metadata from the page.'}
+              {form.type === 'offer' &&
+                'Link the offer page; we’ll auto-fetch the logo and name.'}
             </p>
 
             <div className="mt-6 space-y-4">
-              {(form.type === 'tool' || form.type === 'devtool' || form.type === 'repo') && (
+              {(form.type === 'tool' || form.type === 'devtool' || form.type === 'repo' || form.type === 'offer') && (
                 <>
                   <div>
                     <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -666,6 +696,63 @@ export function SubmitForm() {
               </>
             )}
 
+            {form.type === 'offer' && (
+              <>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Tagline (&le; 80 chars)
+                  </label>
+                  <input
+                    value={form.tagline}
+                    onChange={(e) => set('tagline', e.target.value)}
+                    placeholder="A one-line pitch"
+                    maxLength={80}
+                    className="input"
+                  />
+                  <span className="mt-1 block text-right text-xs text-muted-foreground">
+                    {form.tagline.length}/80
+                  </span>
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Description (markdown supported)
+                  </label>
+                  <textarea
+                    value={form.description}
+                    onChange={(e) => set('description', e.target.value)}
+                    placeholder="Who it's for, what's included, eligibility, deadline…"
+                    rows={5}
+                    className="input resize-y"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Category
+                  </label>
+                  <select
+                    value={form.category}
+                    onChange={(e) => set('category', e.target.value)}
+                    className="input"
+                  >
+                    {Object.entries(OFFER_CATEGORY_LABELS).map(([v, l]) => (
+                      <option key={v} value={v}>
+                        {l}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <TagInput
+                  label="Tags"
+                  items={form.tags}
+                  input={tagInput}
+                  setInput={setTagInput}
+                  onAdd={addTag}
+                  onRemove={(t) => set('tags', form.tags.filter((x) => x !== t))}
+                  placeholder="scholarship, students, free"
+                />
+              </>
+            )}
+
           </div>
         )}
 
@@ -707,6 +794,15 @@ export function SubmitForm() {
                   <ReviewRow label="URL" value={form.url} />
                   <ReviewRow label="Category" value={form.category} />
                   <ReviewRow label="Pricing" value={form.pricing} />
+                  <ReviewRow label="Tags" value={form.tags.join(', ')} />
+                </>
+              )}
+              {form.type === 'offer' && (
+                <>
+                  <ReviewRow label="Name" value={form.name} />
+                  <ReviewRow label="Tagline" value={form.tagline} />
+                  <ReviewRow label="URL" value={form.url} />
+                  <ReviewRow label="Category" value={form.category} />
                   <ReviewRow label="Tags" value={form.tags.join(', ')} />
                 </>
               )}
