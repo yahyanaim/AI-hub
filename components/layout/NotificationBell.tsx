@@ -135,9 +135,9 @@ export function NotificationBell() {
           className={cn(
             'z-50 overflow-hidden rounded-xl border border-border bg-background shadow-xl',
             // Mobile: fixed sheet matching the navbar pill's exact width
-            // (12px insets like the navbar container) with a 8px breathing
-            // gap below it — the pill is 88px tall (56px logo + padding).
-            'fixed left-3 right-3 top-[6rem]',
+            // (12px insets like the navbar container), sitting close to it —
+            // only a 4px gap below the pill (88px tall: 56px logo + padding).
+            'fixed left-3 right-3 top-[5.75rem]',
             // Desktop+: anchored dropdown from the bell.
             'sm:absolute sm:inset-x-auto sm:right-0 sm:top-11 sm:w-80'
           )}

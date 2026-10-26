@@ -17,6 +17,8 @@ import { Avatar } from '@/components/ui/Avatar'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
+import { OfferCard } from '@/components/cards/OfferCard'
+import { CourseCard } from '@/components/cards/CourseCard'
 import { cn, formatNumber, formatDate, relativeTime } from '@/lib/utils'
 
 type Tab = 'submitted' | 'upvoted' | 'bookmarked'
@@ -28,6 +30,8 @@ export function ProfileView({ username }: { username: string }) {
     devTools,
     prompts,
     repos,
+    courses,
+    offers,
     currentUser,
   } = useApp()
 
@@ -60,6 +64,8 @@ export function ProfileView({ username }: { username: string }) {
   const bookmarkedTools = tools.filter((t) => user.bookmarkedItems.includes(t.id))
   const bookmarkedDevTools = devTools.filter((d) => user.bookmarkedItems.includes(d.id))
   const bookmarkedRepos = repos.filter((r) => user.bookmarkedItems.includes(r.id))
+  const bookmarkedCourses = courses.filter((c) => user.bookmarkedItems.includes(c.id))
+  const bookmarkedOffers = offers.filter((o) => user.bookmarkedItems.includes(o.id))
 
   const isOwn = currentUser?.id === user.id
 
@@ -208,9 +214,17 @@ export function ProfileView({ username }: { username: string }) {
             {bookmarkedRepos.length > 0 && (
               <Section items={bookmarkedRepos} label="Repos" type="repo" />
             )}
-            {bookmarkedTools.length === 0 && bookmarkedDevTools.length === 0 && bookmarkedRepos.length === 0 && (
-              <EmptyState message="No bookmarks yet." />
+            {bookmarkedCourses.length > 0 && (
+              <Section items={bookmarkedCourses} label="Courses" type="course" />
             )}
+            {bookmarkedOffers.length > 0 && (
+              <Section items={bookmarkedOffers} label="Offers" type="offer" />
+            )}
+            {bookmarkedTools.length === 0 &&
+              bookmarkedDevTools.length === 0 &&
+              bookmarkedRepos.length === 0 &&
+              bookmarkedCourses.length === 0 &&
+              bookmarkedOffers.length === 0 && <EmptyState message="No bookmarks yet." />}
           </div>
         )}
       </div>
@@ -243,7 +257,7 @@ function Section({
 }: {
   items: Array<{ id: string }>
   label: string
-  type: 'tool' | 'devtool' | 'prompt' | 'repo'
+  type: 'tool' | 'devtool' | 'prompt' | 'repo' | 'course' | 'offer'
 }) {
   return (
     <div>
@@ -260,6 +274,14 @@ function Section({
                 key={item.id}
                 devtool={item as import('@/types').DevTool}
               />
+            )
+          if (type === 'course')
+            return (
+              <CourseCard key={item.id} course={item as import('@/types').Course} />
+            )
+          if (type === 'offer')
+            return (
+              <OfferCard key={item.id} offer={item as import('@/types').Offer} />
             )
           return (
             <RepoCard key={item.id} repo={item as import('@/types').Repo} />

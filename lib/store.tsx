@@ -34,7 +34,7 @@ const MAX_COMMENT_LENGTH = 2000
 const MAX_COMMENTS_STORED = 500
 const MAX_USERS_STORED = 100
 const MAX_NOTIFICATIONS_STORED = 30
-const MAX_SEEN_IDS_PER_SLICE = 500
+const MAX_SEEN_IDS_PER_SLICE = 2500
 const MAX_CATALOG_NOTIFICATIONS_PER_LOAD = 10
 const MIN_USERNAME_LENGTH = 2
 const MAX_USERNAME_LENGTH = 24
@@ -97,7 +97,7 @@ function uniqueSlug(base: string, taken: Set<string>): string {
  * What we persist: ONLY user-specific data. Seed content (tools, courses,
  * offers…) always comes fresh from lib/seed so code updates reach everyone.
  */
-const STORED_DELTA_VERSION = 4
+const STORED_DELTA_VERSION = 5
 
 interface StoredDelta {
   v?: number
@@ -197,7 +197,16 @@ function sanitizeDelta(raw: unknown): StoredDelta | null {
     addedOffers: pick<Offer>(raw.addedOffers),
     addedComments: pick<Comment>(raw.addedComments),
     notifications: pickNotifications(raw.notifications),
-    seenCatalogIds: pickSeenCatalogIds(raw.seenCatalogIds),
+    /**
+     * v5+ only: v4 visitors carry short (500-capped) legacy registries that
+     * marked only the newest 500 seed ids "seen" — treating them as valid
+     * would resurrect hundreds of old items as notifications on every load.
+     * Their registries are thrown away and re-baselined silently instead.
+     */
+    seenCatalogIds:
+      (typeof raw.v === 'number' ? raw.v : 0) === STORED_DELTA_VERSION
+        ? pickSeenCatalogIds(raw.seenCatalogIds)
+        : {},
   }
 }
 
@@ -572,7 +581,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
             const prior = seenDelta?.[slice] ?? next.seenCatalogIds[slice]
             if (!prior || prior.length === 0) {
               // Baseline: first load of this slice with no registry — remember
-              // today's catalogue silently instead of notifying for all of it.
+              // today's full catalogue silently instead of notifying for all of it.
               nextSeenCatalog[slice] = items.map((i) => i.id).slice(-MAX_SEEN_IDS_PER_SLICE)
               continue
             }
