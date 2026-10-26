@@ -2,16 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Bell, Gift, Package, Share2, Wrench, Check, Trash2 } from 'lucide-react'
+import { Bell, Check, Trash2 } from 'lucide-react'
 import { useApp, notificationHref, type AppNotification } from '@/lib/store'
 import { cn, relativeTime } from '@/lib/utils'
-
-const ICONS: Record<AppNotification['itemType'], typeof Bell> = {
-  tool: Wrench,
-  devtool: Package,
-  repo: Share2,
-  offer: Gift,
-}
+import { Logo } from '@/components/ui/Logo'
 
 const LABELS: Record<AppNotification['itemType'], string> = {
   tool: 'AI Tool added',
@@ -63,6 +57,10 @@ export function NotificationBell() {
     markNotificationRead,
     markAllNotificationsRead,
     clearNotifications,
+    tools,
+    devTools,
+    repos,
+    offers,
   } = useApp()
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
@@ -105,10 +103,31 @@ export function NotificationBell() {
 
   if (!currentUser) return null
 
+  // Belt-and-braces ordering: the newest entry always reads first, no matter
+  // how the stored list was merged.
+  const sorted = [...notifications].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  )
+
   const openNotification = (n: AppNotification) => {
     markNotificationRead(n.id)
     setOpen(false)
     router.push(notificationHref(n))
+  }
+
+  // Real item favicon/logo for the notification row, resolved from the data
+  // lists by slug (types Tool/DevTool/Repo/Offer all carry logoUrl).
+  const logoFor = (n: AppNotification): string | undefined => {
+    switch (n.itemType) {
+      case 'tool':
+        return tools.find((t) => t.slug === n.slug)?.logoUrl
+      case 'devtool':
+        return devTools.find((d) => d.slug === n.slug)?.logoUrl
+      case 'offer':
+        return offers.find((o) => o.slug === n.slug)?.logoUrl
+      default:
+        return repos.find((r) => r.slug === n.slug)?.logoUrl
+    }
   }
 
   return (
@@ -168,14 +187,13 @@ export function NotificationBell() {
             )}
           </div>
 
-          {notifications.length === 0 ? (
+          {sorted.length === 0 ? (
             <p className="flex min-h-20 items-center justify-center px-4 py-6 text-center text-xs text-muted-foreground">
               Nothing here yet.
             </p>
           ) : (
             <ul className="max-h-[min(20rem,50vh)] overflow-y-auto overscroll-contain">
-              {notifications.map((n) => {
-                const Icon = ICONS[n.itemType]
+              {sorted.map((n) => {
                 return (
                   <li key={n.id}>
                     <button
@@ -185,18 +203,14 @@ export function NotificationBell() {
                         !n.read && 'bg-brand-orange/5'
                       )}
                     >
-                      <span
-                        className={cn(
-                          'mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg',
-                          n.source === 'catalog'
-                            ? 'bg-accent/10 text-accent'
-                            : n.itemType === 'offer'
-                              ? 'bg-brand-green/10 text-brand-green'
-                              : 'bg-secondary text-muted-foreground'
-                        )}
-                      >
-                        <Icon className="h-3.5 w-3.5" />
-                      </span>
+                      {/* Real item logo; falls back to the type icon only
+                          when the item's own logo is missing/broken. */}
+                      <Logo
+                        src={logoFor(n)}
+                        name={n.name}
+                        size={28}
+                        className="mt-0.5 size-7 shrink-0 rounded-lg"
+                      />
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center gap-1.5">
                           <span className="truncate text-xs font-medium text-muted-foreground">

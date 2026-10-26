@@ -85,6 +85,12 @@ export interface AppNotification {
   source?: 'submission' | 'catalog'
 }
 
+/** Milliseconds for a notification/service timestamp (guards sorting on bad data). */
+function dateValue(iso: string): number {
+  const t = new Date(iso).getTime()
+  return Number.isNaN(t) ? 0 : t
+}
+
 /** Accept only http(s) URLs to avoid javascript:/data: payloads in submissions. */
 function assertHttpUrl(value: string, field: string): string {
   const trimmed = value.trim()
@@ -563,7 +569,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
           next.users = delta.users?.length ? delta.users : next.users
           next.currentUserId = delta.currentUserId ?? next.currentUserId
           next.recentSearches = delta.recentSearches ?? next.recentSearches
-          next.notifications = delta.notifications ?? next.notifications
+          next.notifications = delta.notifications
+            ? [...delta.notifications].sort((a, b) => dateValue(b.createdAt) - dateValue(a.createdAt))
+            : next.notifications
           // Restore the seen-catalogue registry so a partial slice load can't
           // drop registries for slices not in this batch (a lost registry
           // would trigger a silent re-baseline and swallow notifications).
@@ -747,10 +755,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
             courses: mergeAdded(prev.courses, delta.addedCourses),
             offers: mergeAdded(prev.offers, delta.addedOffers),
             comments: mergeAdded(prev.comments, delta.addedComments).slice(0, MAX_COMMENTS_STORED),
-            notifications: mergeAdded(prev.notifications, delta.notifications).slice(
-              0,
-              MAX_NOTIFICATIONS_STORED
-            ),
+            // Sort notifications newest-first after every cross-tab merge:
+            // the generic id-merge above appends, which would rank older
+            // (already-present) entries above freshly arrived ones.
+            notifications: mergeAdded(prev.notifications, delta.notifications)
+              .sort((a, b) => dateValue(b.createdAt) - dateValue(a.createdAt))
+              .slice(0, MAX_NOTIFICATIONS_STORED),
             seenCatalogIds: mergeSeenCatalog(delta.seenCatalogIds ?? {}, prev.seenCatalogIds),
           }
         })
