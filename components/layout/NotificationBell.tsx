@@ -20,9 +20,44 @@ const LABELS: Record<AppNotification['itemType'], string> = {
   offer: 'Offer added',
 }
 
+const CATALOG_LABELS: Record<AppNotification['itemType'], string> = {
+  tool: 'New AI Tool',
+  devtool: 'New Dev Tool',
+  repo: 'New Editing Tool',
+  offer: 'New Offer',
+}
+
+const labelFor = (n: AppNotification) =>
+  (n.source === 'catalog' ? CATALOG_LABELS : LABELS)[n.itemType]
+
+/** Short two-tone chime via Web Audio (no asset, no autoplay policy issue
+ * after a user gesture — submissions happen on click so the context resumes). */
+function playNotificationSound() {
+  try {
+    const w = window as Window & { webkitAudioContext?: typeof AudioContext }
+    const Ctx = window.AudioContext ?? w.webkitAudioContext
+    if (!Ctx) return
+    const ctx = new Ctx()
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.type = 'sine'
+    osc.frequency.setValueAtTime(880, ctx.currentTime)
+    osc.frequency.setValueAtTime(1174.7, ctx.currentTime + 0.12)
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime)
+    gain.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime + 0.02)
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.45)
+    osc.connect(gain)
+    gain.connect(ctx.destination)
+    osc.start(ctx.currentTime)
+    osc.stop(ctx.currentTime + 0.5)
+    osc.onended = () => ctx.close().catch(() => {})
+  } catch {}
+}
+
 export function NotificationBell() {
   const router = useRouter()
   const {
+    currentUser,
     notifications,
     unreadNotificationCount,
     markNotificationRead,
@@ -31,6 +66,25 @@ export function NotificationBell() {
   } = useApp()
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
+
+  // Notifications are a signed-in feature: signed-out visitors get no bell,
+  // no sound, nothing. Hook order stays stable — the gate sits below all hooks.
+  const prevUnreadRef = useRef<number | null>(null)
+
+  // Chime whenever the unread count GROWS (a new item was just submitted or
+  // arrived via another tab). The first observed value is skipped so a page
+  // load with old unread entries never beeps on open.
+  useEffect(() => {
+    const prev = prevUnreadRef.current
+    prevUnreadRef.current = unreadNotificationCount
+    if (prev === null) return
+    if (unreadNotificationCount > prev) playNotificationSound()
+  }, [unreadNotificationCount])
+
+  // Reset the panel when signed out.
+  useEffect(() => {
+    if (!currentUser) setOpen(false)
+  }, [currentUser])
 
   // Close on outside click / Escape.
   useEffect(() => {
@@ -48,6 +102,8 @@ export function NotificationBell() {
       document.removeEventListener('keydown', onKeyDown)
     }
   }, [open])
+
+  if (!currentUser) return null
 
   const openNotification = (n: AppNotification) => {
     markNotificationRead(n.id)
@@ -75,7 +131,15 @@ export function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-11 z-50 w-80 max-w-[calc(100vw-1.5rem)] overflow-hidden rounded-xl border border-border bg-background shadow-xl">
+        <div
+          className={cn(
+            'z-50 overflow-hidden rounded-xl border border-border bg-background shadow-xl',
+            // Mobile: fixed sheet centered under the navbar pill, full width.
+            'fixed inset-x-3 top-[4.75rem]',
+            // Desktop+: anchored dropdown from the bell.
+            'sm:absolute sm:inset-x-auto sm:right-0 sm:top-11 sm:w-80'
+          )}
+        >
           <div className="flex items-center justify-between border-b border-border px-3 py-2">
             <span className="text-sm font-semibold text-foreground">Notifications</span>
             {notifications.length > 0 && (
@@ -107,7 +171,7 @@ export function NotificationBell() {
               Nothing here yet. Items you submit (tools or offers) will show up here.
             </p>
           ) : (
-            <ul className="max-h-80 overflow-y-auto">
+            <ul className="max-h-[min(20rem,50vh)] overflow-y-auto overscroll-contain">
               {notifications.map((n) => {
                 const Icon = ICONS[n.itemType]
                 return (
@@ -122,9 +186,11 @@ export function NotificationBell() {
                       <span
                         className={cn(
                           'mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg',
-                          n.itemType === 'offer'
-                            ? 'bg-brand-green/10 text-brand-green'
-                            : 'bg-secondary text-muted-foreground'
+                          n.source === 'catalog'
+                            ? 'bg-accent/10 text-accent'
+                            : n.itemType === 'offer'
+                              ? 'bg-brand-green/10 text-brand-green'
+                              : 'bg-secondary text-muted-foreground'
                         )}
                       >
                         <Icon className="h-3.5 w-3.5" />
@@ -132,7 +198,7 @@ export function NotificationBell() {
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center gap-1.5">
                           <span className="truncate text-xs font-medium text-muted-foreground">
-                            {LABELS[n.itemType]}
+                            {labelFor(n)}
                           </span>
                           {!n.read && (
                             <span className="size-1.5 shrink-0 rounded-full bg-brand-orange" aria-label="Unread" />

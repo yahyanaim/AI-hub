@@ -34,8 +34,14 @@ const MAX_COMMENT_LENGTH = 2000
 const MAX_COMMENTS_STORED = 500
 const MAX_USERS_STORED = 100
 const MAX_NOTIFICATIONS_STORED = 30
+const MAX_SEEN_IDS_PER_SLICE = 500
+const MAX_CATALOG_NOTIFICATIONS_PER_LOAD = 10
 const MIN_USERNAME_LENGTH = 2
 const MAX_USERNAME_LENGTH = 24
+
+/** Catalogue slices that generate bell notifications when the site ships new content. */
+const SEEN_CATALOG_SLICES = ['tools', 'devTools', 'repos', 'offers'] as const
+type SeenCatalogSlice = (typeof SEEN_CATALOG_SLICES)[number]
 
 /** Which detail page a notification opens (canonical card hrefs). */
 export function notificationHref(n: AppNotification): string {
@@ -52,8 +58,9 @@ export function notificationHref(n: AppNotification): string {
 }
 
 /**
- * One notification entry: a submitted item (tool/devtool/repo/offer) the user
- * added, so the bell can send them straight back to its detail page.
+ * One notification entry. `source` says who produced it:
+ * 'submission' — the visitor added it themselves; 'catalog' — the site
+ * published it (new seed item), pushed to every signed-in visitor.
  */
 export interface AppNotification {
   id: string
@@ -63,6 +70,7 @@ export interface AppNotification {
   slug: string
   createdAt: string
   read: boolean
+  source?: 'submission' | 'catalog'
 }
 
 /** Accept only http(s) URLs to avoid javascript:/data: payloads in submissions. */
@@ -104,6 +112,9 @@ interface StoredDelta {
   addedOffers: Offer[]
   addedComments: Comment[] // user comments on any item
   notifications: AppNotification[] // bell entries for submitted items
+  /** Per-browser registry of catalogue ids already seen/registered. Used to
+   * detect newly-published seed items on later visits (push notifications). */
+  seenCatalogIds?: Partial<Record<SeenCatalogSlice, string[]>>
 }
 
 function isRecord(v: unknown): v is Record<string, unknown> {
@@ -140,6 +151,31 @@ function pickNotifications(v: unknown): AppNotification[] {
     }))
 }
 
+function pickSeenCatalogIds(v: unknown): Partial<Record<SeenCatalogSlice, string[]>> {
+  if (!isRecord(v)) return {}
+  const out: Partial<Record<SeenCatalogSlice, string[]>> = {}
+  for (const key of SEEN_CATALOG_SLICES) {
+    const arr = v[key]
+    if (Array.isArray(arr)) {
+      out[key] = arr.filter((s): s is string => typeof s === 'string').slice(-MAX_SEEN_IDS_PER_SLICE)
+    }
+  }
+  return out
+}
+
+/** Union of two seen-id registries (cross-tab sync), capped per slice. */
+function mergeSeenCatalog(
+  a: Partial<Record<SeenCatalogSlice, string[]>>,
+  b: Partial<Record<SeenCatalogSlice, string[]>>
+): Partial<Record<SeenCatalogSlice, string[]>> {
+  const out: Partial<Record<SeenCatalogSlice, string[]>> = {}
+  for (const key of SEEN_CATALOG_SLICES) {
+    if (!a[key] && !b[key]) continue
+    out[key] = [...new Set([...(a[key] ?? []), ...(b[key] ?? [])])].slice(-MAX_SEEN_IDS_PER_SLICE)
+  }
+  return out
+}
+
 function sanitizeDelta(raw: unknown): StoredDelta | null {
   if (!isRecord(raw)) return null
   const pick = <T extends { id: string }>(v: unknown): T[] =>
@@ -161,6 +197,7 @@ function sanitizeDelta(raw: unknown): StoredDelta | null {
     addedOffers: pick<Offer>(raw.addedOffers),
     addedComments: pick<Comment>(raw.addedComments),
     notifications: pickNotifications(raw.notifications),
+    seenCatalogIds: pickSeenCatalogIds(raw.seenCatalogIds),
   }
 }
 
@@ -176,6 +213,7 @@ interface PersistedState {
   currentUserId: string | null
   recentSearches: string[]
   notifications: AppNotification[]
+  seenCatalogIds: Partial<Record<SeenCatalogSlice, string[]>>
 }
 
 interface SubmitToolInput {
@@ -390,6 +428,7 @@ function freshSeed(): PersistedState {
     currentUserId: null,
     recentSearches: [],
     notifications: [],
+    seenCatalogIds: {},
   }
 }
 
@@ -505,6 +544,71 @@ export function AppProvider({ children }: { children: ReactNode }) {
           next.recentSearches = delta.recentSearches ?? next.recentSearches
           next.notifications = delta.notifications ?? next.notifications
         }
+        // ---------------- Catalogue push notifications ----------------
+        // New seed content shipped by the site (e.g. the admin adding a tool
+        // to lib/seed and deploying) generates bell notifications for every
+        // signed-in visitor: each load diffs the just-downloaded seed slices
+        // against a per-browser "seen ids" registry. Anonymous visits never
+        // record seen state, so signing in later triggers a one-time baseline
+        // (everything marks as seen, nothing spams) and from then on each new
+        // deploy shows only its genuinely new items.
+        const signedIn = !!next.currentUserId
+        if (signedIn) {
+          type CatalogItem = { id: string; slug: string; name: string; category: string }
+          const seenDelta = delta?.seenCatalogIds
+          const nextSeenCatalog: Partial<Record<SeenCatalogSlice, string[]>> = {
+            ...next.seenCatalogIds,
+          }
+          const notifsToAdd: AppNotification[] = []
+          const itemTypeBySlice: Record<SeenCatalogSlice, AppNotification['itemType']> = {
+            tools: 'tool',
+            devTools: 'devtool',
+            repos: 'repo',
+            offers: 'offer',
+          }
+          for (const { key, items } of pairs) {
+            const slice = key as SeenCatalogSlice
+            if (!(SEEN_CATALOG_SLICES as readonly string[]).includes(slice)) continue
+            const prior = seenDelta?.[slice] ?? next.seenCatalogIds[slice]
+            if (!prior || prior.length === 0) {
+              // Baseline: first load of this slice with no registry — remember
+              // today's catalogue silently instead of notifying for all of it.
+              nextSeenCatalog[slice] = items.map((i) => i.id).slice(-MAX_SEEN_IDS_PER_SLICE)
+              continue
+            }
+            const priorSet = new Set(prior)
+            const fresh = (items as unknown as CatalogItem[]).filter((i) => !priorSet.has(i.id))
+            if (fresh.length === 0) continue
+            const itemType = itemTypeBySlice[slice]
+            for (const item of fresh.slice(-MAX_CATALOG_NOTIFICATIONS_PER_LOAD)) {
+              const dupe =
+                notifsToAdd.some((n) => n.itemType === itemType && n.slug === item.slug) ||
+                next.notifications.some((n) => n.itemType === itemType && n.slug === item.slug)
+              if (!dupe) {
+                notifsToAdd.push({
+                  id: uuid(),
+                  itemType,
+                  name: item.name,
+                  category: item.category ?? '',
+                  slug: item.slug,
+                  createdAt: new Date().toISOString(),
+                  read: false,
+                  source: 'catalog',
+                })
+              }
+            }
+            nextSeenCatalog[slice] = [...prior, ...fresh.map((i) => i.id)].slice(
+              -MAX_SEEN_IDS_PER_SLICE
+            )
+          }
+          if (notifsToAdd.length > 0) {
+            next.notifications = [...notifsToAdd, ...next.notifications].slice(
+              0,
+              MAX_NOTIFICATIONS_STORED
+            )
+          }
+          next.seenCatalogIds = nextSeenCatalog
+        }
         return next
       })
     } finally {
@@ -601,6 +705,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
               0,
               MAX_NOTIFICATIONS_STORED
             ),
+            seenCatalogIds: mergeSeenCatalog(delta.seenCatalogIds ?? {}, prev.seenCatalogIds),
           }
         })
       } catch {
@@ -632,6 +737,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         addedOffers: state.offers.filter((o) => !ids.offers.has(o.id)),
         addedComments: state.comments.filter((c) => !ids.comments.has(c.id)),
         notifications: state.notifications,
+        seenCatalogIds: state.seenCatalogIds,
       }
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(delta))
