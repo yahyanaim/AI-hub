@@ -2239,7 +2239,12 @@
   "andela": "freelancing",
   "hairline-github": "repo",
   "beui": "repo",
-  "affectui": "library"
+  "affectui": "library",
+  "usagerank": "programmer-websites",
+  "agent-skills": "repo",
+  "claude-mem": "repo",
+  "iconaut": "library",
+  "minimal-gallery": "websites"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",
