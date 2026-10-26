@@ -34,6 +34,9 @@ const MAX_COMMENT_LENGTH = 2000
 const MAX_COMMENTS_STORED = 500
 const MAX_USERS_STORED = 100
 const MAX_NOTIFICATIONS_STORED = 30
+/** Catalogue ("published") notifications expire after 24h — the bell only
+ * carries items the site shipped in the last day. */
+const NOTIFICATION_TTL_MS = 24 * 3600 * 1000
 const MAX_SEEN_IDS_PER_SLICE = 2500
 const MAX_CATALOG_NOTIFICATIONS_PER_LOAD = 10
 const MIN_USERNAME_LENGTH = 2
@@ -42,6 +45,15 @@ const MAX_USERNAME_LENGTH = 24
 /** Catalogue slices that generate bell notifications when the site ships new content. */
 const SEEN_CATALOG_SLICES = ['tools', 'devTools', 'repos', 'offers'] as const
 type SeenCatalogSlice = (typeof SEEN_CATALOG_SLICES)[number]
+
+/**
+ * When a slice is first registered (fresh visitor / version migration) the
+ * already-shipped catalogue is marked seen SILENTLY except for the newest
+ * few entries at the tail of its seed array — that's where the admin appends
+ * new items — which DO notify. This keeps "only the last added tools" true
+ * even for people who install during a migration.
+ */
+const BASELINE_NOTIFY_LAST = 3
 
 /** Which detail page a notification opens (canonical card hrefs). */
 export function notificationHref(n: AppNotification): string {
@@ -97,7 +109,7 @@ function uniqueSlug(base: string, taken: Set<string>): string {
  * What we persist: ONLY user-specific data. Seed content (tools, courses,
  * offers…) always comes fresh from lib/seed so code updates reach everyone.
  */
-const STORED_DELTA_VERSION = 5
+const STORED_DELTA_VERSION = 6
 
 interface StoredDelta {
   v?: number
@@ -552,6 +564,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
           next.currentUserId = delta.currentUserId ?? next.currentUserId
           next.recentSearches = delta.recentSearches ?? next.recentSearches
           next.notifications = delta.notifications ?? next.notifications
+          // Restore the seen-catalogue registry so a partial slice load can't
+          // drop registries for slices not in this batch (a lost registry
+          // would trigger a silent re-baseline and swallow notifications).
+          next.seenCatalogIds = { ...next.seenCatalogIds, ...delta.seenCatalogIds }
         }
         // ---------------- Catalogue push notifications ----------------
         // New seed content shipped by the site (e.g. the admin adding a tool
@@ -580,8 +596,29 @@ export function AppProvider({ children }: { children: ReactNode }) {
             if (!(SEEN_CATALOG_SLICES as readonly string[]).includes(slice)) continue
             const prior = seenDelta?.[slice] ?? next.seenCatalogIds[slice]
             if (!prior || prior.length === 0) {
-              // Baseline: first load of this slice with no registry — remember
-              // today's full catalogue silently instead of notifying for all of it.
+              // Baseline: first load of this slice with no registry. Register
+              // the full catalogue silently, EXCEPT the newest few entries at
+              // the tail (where the admin appends) which notify — so migrations
+              // still surface the last added items instead of swallowing them.
+              const notifyItems = (items as unknown as CatalogItem[]).slice(-BASELINE_NOTIFY_LAST)
+              const itemType = itemTypeBySlice[slice]
+              for (const item of notifyItems) {
+                const dupe =
+                  notifsToAdd.some((n) => n.itemType === itemType && n.slug === item.slug) ||
+                  next.notifications.some((n) => n.itemType === itemType && n.slug === item.slug)
+                if (!dupe) {
+                  notifsToAdd.push({
+                    id: uuid(),
+                    itemType,
+                    name: item.name,
+                    category: item.category ?? '',
+                    slug: item.slug,
+                    createdAt: new Date().toISOString(),
+                    read: false,
+                    source: 'catalog',
+                  })
+                }
+              }
               nextSeenCatalog[slice] = items.map((i) => i.id).slice(-MAX_SEEN_IDS_PER_SLICE)
               continue
             }
@@ -907,6 +944,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const clearNotifications = useCallback(() => {
     setState((prev) => ({ ...prev, notifications: [] }))
   }, [])
+
+  // Keep the bell fresh: expired (>24h) catalogue notifications drop quietly
+  // once the app has hydrated.
+  useEffect(() => {
+    if (!hydrated) return
+    const cutoff = Date.now() - NOTIFICATION_TTL_MS
+    setState((prev) => {
+      const next = prev.notifications.filter(
+        (n) =>
+          n.source !== 'catalog' ||
+          Number.isNaN(new Date(n.createdAt).getTime()) ||
+          new Date(n.createdAt).getTime() > cutoff
+      )
+      if (next.length === prev.notifications.length) return prev
+      return { ...prev, notifications: next }
+    })
+  }, [hydrated])
 
   // ---------------- Auth (local mock) ----------------
   const signIn = useCallback((username: string) => {

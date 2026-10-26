@@ -14049,26 +14049,6 @@ export const SEED_DEV_TOOLS: DevTool[] = [
   },
 
   {
-    id: 'd983',
-    slug: 'easyocr',
-    name: 'EasyOCR',
-    tagline: 'Open-source OCR in 80+ languages',
-    description:
-      'Free open-source optical character recognition library: convert scans and photos into searchable, editable text with support for 80+ languages. Install via pip and run locally.',
-    url: 'https://jaided.ai',
-    logoUrl: 'https://jaided.ai/static/img/favicon.svg',
-    category: 'library',
-    tags: ['ocr', 'open-source', 'python', 'text-extraction'],
-    pricing: 'open-source',
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
-
-  {
     id: 'd984',
     slug: 'primer-css',
     name: 'Primer CSS',
