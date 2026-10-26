@@ -18353,6 +18353,27 @@ export const SEED_OFFERS: Offer[] = [
           'Import Signature Pad into your application, customize its appearance, and connect the captured signature to your forms. Export signatures as PNG or SVG files.',
       },
     ],
+    nameAr: 'Arc UI Signature Pad',
+    taglineAr: 'مكوّن تواقيع مجاني ومفتوح المصدر لـ React مع تصدير PNG/SVG',
+    descriptionAr:
+      'يقدّم Arc UI مكوّن Signature Pad مجاني وقابل للتخصيص لتطبيقات React. يتيح للمستخدمين رسم تواقيع بخط اليد عبر الماوس أو الإصبع أو قلم اللمس، بضربات ناعمة مع تراجع/إعادة وإعادة تشغيل، وتصدير بصيغة PNG أو SVG.\n\nمناسب لتوقيع المستندات وتأكيدات التوصيل ونماذج الموافقة وتطبيقات SaaS. مبني لـ React ومتوافق مع بيئات عمل shadcn/ui، ويساعد المطوّرين على دمج التقاط التواقيع دون بنائه من الصفر.',
+    stepsAr: [
+      {
+        title: 'انتقل إلى Arc UI',
+        description: 'افتح صفحة Signature Pad لاستعراض العرض التجريبي الحي والوثائق والشيفرة المصدرية.',
+        url: 'https://uiarc.dev/components/signature-pad',
+      },
+      {
+        title: 'ثبّت المكوّن',
+        description:
+          'أضف Signature Pad إلى مشروع React الخاص بك باستخدام أداة سطر الأوامر shadcn CLI: pnpm dlx shadcn@latest add @uiarc/signature-pad. اضبط سجل Arc UI أولاً إذا لم يكن مضبوطاً من قبل.',
+      },
+      {
+        title: 'ادمج المكوّن وخصّصه',
+        description:
+          'استورد Signature Pad داخل تطبيقك، خصّص مظهره، واربط التواقيع المُلتقطة بنماذجك. صدّر التواقيع بصيغة PNG أو SVG.',
+      },
+    ],
     upvotes: 0,
     bookmarks: 0,
     submittedBy: 'u1',

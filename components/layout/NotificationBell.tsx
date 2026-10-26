@@ -168,7 +168,7 @@ export function NotificationBell() {
 
           {notifications.length === 0 ? (
             <p className="flex min-h-20 items-center justify-center px-4 py-6 text-center text-xs text-muted-foreground">
-              Nothing here yet. Items you submit (tools or offers) will show up here.
+              Nothing here yet.
             </p>
           ) : (
             <ul className="max-h-[min(20rem,50vh)] overflow-y-auto overscroll-contain">
