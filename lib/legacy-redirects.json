@@ -2767,7 +2767,8 @@
   "openwa-whatsapp-api": "api-access",
   "opencode-deepseek-v41-flash": "tool",
   "gemini-4-argon-ai-studio": "tool",
-  "ai-for-positive-futures-odc-capgemini": "scholarship"
+  "ai-for-positive-futures-odc-capgemini": "scholarship",
+  "arc-ui-signature-pad": "tool"
  },
  "categories": {
   "coding": "/tools",

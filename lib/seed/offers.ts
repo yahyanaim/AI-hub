@@ -18323,4 +18323,41 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: '2026-10-18T00:00:00.000Z',
     updatedAt: '2026-10-18T00:00:00.000Z',
   },
+  {
+    id: 'o340',
+    slug: 'arc-ui-signature-pad',
+    name: 'Arc UI Signature Pad',
+    tagline: 'Free, open-source React signature component with PNG/SVG export',
+    description:
+      'Arc UI offers a free, customizable Signature Pad component for React applications. Let users draw handwritten signatures with a mouse, finger, or stylus, with smooth strokes, undo/redo, replay, and PNG or SVG export.\n\nIdeal for document signing, delivery confirmations, consent forms, and SaaS applications. Built for React and compatible with shadcn/ui workflows, it helps developers integrate signature capture without building it from scratch.',
+    url: 'https://uiarc.dev/components/signature-pad',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=uiarc.dev&sz=64',
+    category: 'tool',
+    tags: ['react', 'signature', 'open-source', 'shadcn-ui', 'png-svg'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Visit Arc UI',
+        description:
+          'Open the Signature Pad page to explore the live demo, documentation, and source code.',
+        url: 'https://uiarc.dev/components/signature-pad',
+      },
+      {
+        title: 'Install the component',
+        description:
+          'Add Signature Pad to your React project using the shadcn CLI: pnpm dlx shadcn@latest add @uiarc/signature-pad. Configure the Arc UI registry first if it is not already registered.',
+      },
+      {
+        title: 'Integrate and customize',
+        description:
+          'Import Signature Pad into your application, customize its appearance, and connect the captured signature to your forms. Export signatures as PNG or SVG files.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: true,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
