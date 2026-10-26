@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
+import { AdminBadge } from '@/components/profile/AdminBadge'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
@@ -84,6 +85,9 @@ export function ProfileView({ username }: { username: string }) {
           <div className="min-w-0 flex-1">
             <h1 className="font-heading text-2xl font-bold">{user.displayName}</h1>
             <p className="text-sm text-muted-foreground">@{user.username}</p>
+            {/* Admin-only signup counter (JWT-verified server side) */}
+            {isOwn && <AdminBadge username={user.username} />}
+
             {user.bio && (
               <p className="mt-2 max-w-lg text-sm text-muted-foreground">{user.bio}</p>
             )}

@@ -963,12 +963,33 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [hydrated])
 
   // ---------------- Auth (local mock) ----------------
+  // Signup analytics ping: fire-and-forget, every genuinely new account bumps
+  // the global counter on the server. Rate-limited server-side per IP;
+  // failures are silently ignored so the local experience is never blocked.
+  const pingSignupCount = useCallback(() => {
+    try {
+      fetch('/api/analytics/signup', {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'account-created' }),
+      }).catch(() => {})
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
   const signIn = useCallback((username: string) => {
     const raw = username.trim().slice(0, MAX_USERNAME_LENGTH)
     const clean = raw.toLowerCase().replace(/[^a-z0-9_]/g, '')
     // Reject empty/short handles (e.g. '___' sanitizes to '') and cap the
     // local user list so fake accounts can't grow localStorage unboundedly.
     if (clean.length < MIN_USERNAME_LENGTH) return
+    // New-account detection happens outside the updater (stateRef mirrors the
+    // latest state) so the analytics ping fires exactly once per signup.
+    const isNewSignup = !stateRef.current.users.find(
+      (u) => u.username.toLowerCase() === clean
+    )
     setState((prev) => {
       const existing = prev.users.find(
         (u) => u.username.toLowerCase() === clean
@@ -992,7 +1013,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }
       return { ...prev, users: [...prev.users, newUser], currentUserId: newUser.id }
     })
-  }, [])
+    if (isNewSignup) pingSignupCount()
+  }, [pingSignupCount])
 
   const signOut = useCallback(() => {
     setState((prev) => ({ ...prev, currentUserId: null }))
