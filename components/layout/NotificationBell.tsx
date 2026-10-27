@@ -159,13 +159,12 @@ export function NotificationBell() {
             // only a 4px gap below the pill (88px tall: 56px logo + padding).
             'fixed left-3 right-3 top-[5.75rem]',
             // Desktop+: anchored dropdown from the bell.
-            'sm:absolute sm:inset-x-auto sm:right-0 sm:top-11 sm:w-80'
+            'sm:absolute sm:inset-x-auto sm:right-0 sm:top-11 sm:w-[26rem]'
           )}
         >
-          <div className="flex items-center justify-between border-b border-border px-3 py-2">
+          <div className="flex items-center justify-between border-b border-border px-3.5 py-2.5">
             <span className="text-sm font-semibold text-foreground">Notifications</span>
             <div className="flex items-center gap-2">
-              <PushSubscribeButton />
               {notifications.length > 0 && (
                 <>
                   {unreadNotificationCount > 0 && (
@@ -189,6 +188,11 @@ export function NotificationBell() {
                 </>
               )}
             </div>
+          </div>
+
+          <div className="flex items-center justify-between border-b border-border px-3.5 py-2">
+            <span className="text-xs text-muted-foreground">Push for new tools</span>
+            <PushSubscribeButton />
           </div>
 
           {sorted.length === 0 ? (
