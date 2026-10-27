@@ -1342,7 +1342,9 @@
   "microsoft-translator": "extension",
   "multion": "extension",
   "naturalreader": "extension",
-  "notta": "extension"
+  "notta": "extension",
+  "reelfolio": "video",
+  "on-design": "for-creators"
  },
  "devtools": {
   "vs-code": "ide",
@@ -2244,7 +2246,15 @@
   "agent-skills": "repo",
   "claude-mem": "repo",
   "iconaut": "library",
-  "minimal-gallery": "websites"
+  "minimal-gallery": "websites",
+  "modulify-templates": "templates",
+  "motionin": "library",
+  "devault-ascii": "conception",
+  "landdding": "websites",
+  "the-internet-designs": "websites",
+  "godly": "websites",
+  "cta-gallery": "websites",
+  "devault": "templates"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",
