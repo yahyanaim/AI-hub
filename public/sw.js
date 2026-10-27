@@ -38,10 +38,10 @@ self.addEventListener('push', (event) => {
         (item) =>
           self.registration.showNotification(item.title || 'AI Hub', {
             body: item.body || '',
-            // Facebook-style: always show the AI Hub brand icon, like native
-            // app notifications (square art required by Android). Query param
-            // busts any stale HTTP cache on devices with an old SW.
-            icon: '/icons/icon-512.png?v=3',
+            // Right-side large icon = the tool's own logo (brand fallback).
+            // The left-side small icon is Chrome's slot: it shows the AI Hub
+            // launcher icon when the site is installed to the home screen.
+            icon: item.icon || '/icons/icon-512.png?v=3',
             badge: '/icons/icon-192.png?v=3',
             tag: item.url || 'aihub', // one notification per tool, replaces dupes
             data: { url: item.url || '/' },
