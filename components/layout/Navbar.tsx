@@ -13,6 +13,7 @@ import {
   Coffee,
   Search,
   ChevronDown,
+  ChevronRight,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useApp } from '@/lib/store'
@@ -240,30 +241,53 @@ export function Navbar() {
               </button>
             )}
             {/* Mobile mirror of the desktop tools selector */}
-            <button
-              onClick={() => setMobileToolsOpen((o) => !o)}
-              aria-expanded={mobileToolsOpen}
-              className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
-            >
-              AI Tools
-              <ChevronDown
-                className={cn(
-                  'h-4 w-4 transition-transform',
-                  mobileToolsOpen && 'rotate-180'
-                )}
-              />
-            </button>
-            {mobileToolsOpen &&
-              TOOLS_SELECTOR.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="ml-4 block rounded-xl border-l border-border px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <div className="overflow-hidden rounded-xl border border-border bg-secondary/40">
+              <button
+                onClick={() => setMobileToolsOpen((o) => !o)}
+                aria-expanded={mobileToolsOpen}
+                className="flex w-full items-center gap-2.5 px-3.5 py-3 text-left"
+              >
+                <span className="flex size-7 items-center justify-center rounded-lg bg-brand-orange/10">
+                  <Sparkles className="h-4 w-4 text-brand-orange" />
+                </span>
+                <span className="flex-1 text-sm font-semibold text-foreground">
+                  AI Tools
+                </span>
+                <span className="rounded-full bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">
+                  3
+                </span>
+                <ChevronDown
+                  className={cn(
+                    'h-4 w-4 text-muted-foreground transition-transform',
+                    mobileToolsOpen && 'rotate-180'
+                  )}
+                />
+              </button>
+              {mobileToolsOpen && (
+                <div className="border-t border-border/70 p-1">
+                  {TOOLS_SELECTOR.map((link) => {
+                    const active =
+                      pathname === link.href || pathname?.startsWith(link.href)
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={cn(
+                          'flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                          active
+                            ? 'bg-secondary text-foreground'
+                            : 'text-muted-foreground hover:bg-secondary/70 hover:text-foreground'
+                        )}
+                      >
+                        {link.label}
+                        <ChevronRight className="h-3.5 w-3.5 opacity-50" />
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
