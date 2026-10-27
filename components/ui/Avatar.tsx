@@ -30,5 +30,5 @@ export function Avatar({ name, src, size = 32, className }: AvatarProps) {
       />
     )
   }
-  return <FruitAvatar name={name} size={size} className={className} />
+  return <FruitAvatar name={name} size={size} className={cn('rounded-full', className)} />
 }

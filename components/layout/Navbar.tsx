@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   Plus,
   Menu,
@@ -12,6 +12,7 @@ import {
   Sparkles,
   Coffee,
   Search,
+  ChevronDown,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useApp } from '@/lib/store'
@@ -19,10 +20,14 @@ import { Avatar } from '@/components/ui/Avatar'
 import { ThemeToggle } from '@/components/layout/ThemeToggle'
 import { NotificationBell } from '@/components/layout/NotificationBell'
 
-const NAV_LINKS = [
-  { href: '/tools', label: 'Tools' },
+/** All catalogue pages grouped behind a single desktop nav selector. */
+const TOOLS_SELECTOR = [
+  { href: '/tools', label: 'AI Tools' },
   { href: '/dev-tools', label: 'Dev Tools' },
   { href: '/edittools', label: 'Editing Tools' },
+]
+
+const NAV_LINKS = [
   { href: '/courses', label: 'Courses' },
   { href: '/offers', label: 'Offers' },
   { href: '/find-by-goal', label: 'Find by Goal' },
@@ -33,12 +38,36 @@ export function Navbar() {
   const pathname = usePathname()
   const { currentUser, setAuthModalOpen, signOut, setPaletteOpen } = useApp()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [toolsOpen, setToolsOpen] = useState(false)
+  const toolsRef = useRef<HTMLDivElement>(null)
   // Global search lives on every page except /support.
   const showSearch = pathname !== '/support'
+  const toolsActive = TOOLS_SELECTOR.some(
+    (t) => pathname === t.href || pathname?.startsWith(t.href)
+  )
 
   useEffect(() => {
     setMobileOpen(false)
   }, [pathname])
+
+  // Close the tools selector on outside click / Escape.
+  useEffect(() => {
+    if (!toolsOpen) return
+    const onPointerDown = (e: MouseEvent) => {
+      if (toolsRef.current && !toolsRef.current.contains(e.target as Node)) {
+        setToolsOpen(false)
+      }
+    }
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setToolsOpen(false)
+    }
+    document.addEventListener('mousedown', onPointerDown)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [toolsOpen])
 
   return (
     <header className="sticky top-0 z-40 px-3 pt-3 sm:px-5 sm:pt-4">
@@ -57,6 +86,50 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <nav aria-label="Primary" className="ml-4 hidden items-center gap-1 lg:flex">
+            {/* Grouped catalogue selector: AI Tools / Dev Tools / Editing Tools */}
+            <div ref={toolsRef} className="relative">
+              <button
+                onClick={() => setToolsOpen((o) => !o)}
+                aria-haspopup="menu"
+                aria-expanded={toolsOpen}
+                className={cn(
+                  'flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm transition-colors',
+                  toolsActive
+                    ? 'bg-secondary font-semibold text-foreground'
+                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                )}
+              >
+                AI Tools
+                <ChevronDown
+                  className={cn(
+                    'h-3.5 w-3.5 transition-transform',
+                    toolsOpen && 'rotate-180'
+                  )}
+                />
+              </button>
+              {toolsOpen && (
+                <div className="absolute left-0 top-10 z-50 w-44 overflow-hidden rounded-xl border border-border bg-background p-1 shadow-xl">
+                  {TOOLS_SELECTOR.map((t) => {
+                    const active = pathname === t.href || pathname?.startsWith(t.href)
+                    return (
+                      <Link
+                        key={t.href}
+                        href={t.href}
+                        onClick={() => setToolsOpen(false)}
+                        className={cn(
+                          'block rounded-lg px-3 py-2 text-sm transition-colors',
+                          active
+                            ? 'bg-secondary font-semibold text-foreground'
+                            : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                        )}
+                      >
+                        {t.label}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
             {NAV_LINKS.map((link) => {
               const active =
                 pathname === link.href ||
@@ -165,7 +238,7 @@ export function Navbar() {
                 <Search className="h-4 w-4" /> Search
               </button>
             )}
-            {NAV_LINKS.map((link) => (
+            {TOOLS_SELECTOR.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
