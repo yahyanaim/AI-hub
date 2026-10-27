@@ -16668,26 +16668,6 @@ export const SEED_DEV_TOOLS: DevTool[] = [
   },
 
   {
-    id: 'd1133',
-    slug: 'devault-ascii',
-    name: 'Devault ASCII',
-    tagline: 'Free ASCII art generator: turn images and videos into ASCII',
-    description:
-      'Devault ASCII is a free browser-based generator turning images and videos into ASCII art, braille, halftone dots, dither or brick mosaics. Ten styles and 14 presets with live tuning, colour/outline/glow finishing, and MP4 export up to 4K — everything runs locally, with no watermark and nothing uploaded.',
-    url: 'https://devault-ascii.pages.dev',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=devault-ascii.pages.dev&sz=64',
-    category: 'conception',
-    tags: ['ascii-art', 'generator', 'image-conversion', 'video', 'browser-tool'],
-    pricing: 'free',
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
-
-  {
     id: 'd1134',
     slug: 'landdding',
     name: 'Landdding',
@@ -16759,26 +16739,6 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     category: 'websites',
     tags: ['cta', 'design-inspiration', 'conversion', 'ui-ux'],
     pricing: 'free',
-    upvotes: 0,
-    bookmarks: 0,
-    submittedBy: 'u1',
-    featured: false,
-    createdAt: daysAgo(0),
-    updatedAt: daysAgo(0),
-  },
-
-  {
-    id: 'd1138',
-    slug: 'devault',
-    name: 'Devault',
-    tagline: '390K+ design assets, email designs and DESIGN.md systems',
-    description:
-      'Devault is a massive design library: 390K+ real design assets, 1,800+ email designs from real brands, and 2,300+ DESIGN.md systems feeding your AI editor. Includes designs, flows and UI evolution, gradients and ASCII patterns, a Figma plugin and an MCP server for your AI tools.',
-    url: 'https://devault.design',
-    logoUrl: 'https://www.google.com/s2/favicons?domain=devault.design&sz=64',
-    category: 'templates',
-    tags: ['design-assets', 'design-systems', 'email-design', 'figma', 'ai-editor'],
-    pricing: 'freemium',
     upvotes: 0,
     bookmarks: 0,
     submittedBy: 'u1',
