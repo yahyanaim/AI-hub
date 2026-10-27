@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShieldCheck, LogOut, Loader2 } from 'lucide-react'
-import { formatNumber } from '@/lib/utils'
+import { ShieldCheck, LogOut, Loader2, Megaphone } from 'lucide-react'
+import { cn, formatNumber } from '@/lib/utils'
 
 /**
  * Admin-only signup counter badge. The number is served exclusively by
@@ -20,6 +20,42 @@ export function AdminBadge({ username }: { username: string }) {
   const [error, setError] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [open, setOpen] = useState(false)
+  // Push broadcast state: idle -> sending -> done/error message (inline).
+  const [pushState, setPushState] = useState<'idle' | 'sending' | 'sent' | 'error'>(
+    'idle'
+  )
+  const [pushMsg, setPushMsg] = useState<string | null>(null)
+
+  const broadcast = async () => {
+    setPushState('sending')
+    setPushMsg(null)
+    try {
+      const res = await fetch('/api/admin/push-broadcast', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      })
+      const data = (await res.json()) as {
+        prepared?: number
+        sent?: number
+        pruned?: number
+        total?: number
+        error?: string
+      }
+      if (!res.ok) {
+        setPushState('error')
+        setPushMsg(data.error === 'push-not-configured' ? 'Push env not set.' : 'Broadcast failed.')
+        return
+      }
+      setPushState('sent')
+      setPushMsg(
+        `${data.prepared} notification(s) → sent ${data.sent}/${data.total} device(s)${data.pruned ? `, pruned ${data.pruned}` : ''}.`
+      )
+    } catch {
+      setPushState('error')
+      setPushMsg('Broadcast failed — network error.')
+    }
+  }
 
   const load = useCallback(async () => {
     try {
@@ -182,6 +218,29 @@ export function AdminBadge({ username }: { username: string }) {
         <LogOut className="h-3.5 w-3.5" />
         Log out
       </button>
+      <button
+        onClick={broadcast}
+        disabled={pushState === 'sending'}
+        className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground disabled:opacity-60"
+        title="Send the newest tools as a push notification to all subscribers"
+      >
+        {pushState === 'sending' ? (
+          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+        ) : (
+          <Megaphone className="h-3.5 w-3.5" />
+        )}
+        Push new tools
+      </button>
+      {pushMsg && (
+        <span
+          className={cn(
+            'text-[10px]',
+            pushState === 'error' ? 'text-red-500' : 'text-brand-green'
+          )}
+        >
+          {pushMsg}
+        </span>
+      )}
     </div>
   )
 }

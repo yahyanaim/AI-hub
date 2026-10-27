@@ -6,6 +6,7 @@ import { Bell, Check, Trash2 } from 'lucide-react'
 import { useApp, notificationHref, type AppNotification } from '@/lib/store'
 import { cn, relativeTime } from '@/lib/utils'
 import { Logo } from '@/components/ui/Logo'
+import { PushSubscribeButton } from '@/components/layout/PushSubscribeButton'
 
 const LABELS: Record<AppNotification['itemType'], string> = {
   tool: 'AI Tool added',
@@ -163,28 +164,31 @@ export function NotificationBell() {
         >
           <div className="flex items-center justify-between border-b border-border px-3 py-2">
             <span className="text-sm font-semibold text-foreground">Notifications</span>
-            {notifications.length > 0 && (
-              <div className="flex items-center gap-2">
-                {unreadNotificationCount > 0 && (
+            <div className="flex items-center gap-2">
+              <PushSubscribeButton />
+              {notifications.length > 0 && (
+                <>
+                  {unreadNotificationCount > 0 && (
+                    <button
+                      onClick={markAllNotificationsRead}
+                      className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                      title="Mark all as read"
+                    >
+                      <Check className="h-3 w-3" />
+                      Mark all read
+                    </button>
+                  )}
                   <button
-                    onClick={markAllNotificationsRead}
-                    className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-                    title="Mark all as read"
+                    onClick={clearNotifications}
+                    className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-red-500"
+                    title="Clear all notifications"
                   >
-                    <Check className="h-3 w-3" />
-                    Mark all read
+                    <Trash2 className="h-3 w-3" />
+                    Clear
                   </button>
-                )}
-                <button
-                  onClick={clearNotifications}
-                  className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-red-500"
-                  title="Clear all notifications"
-                >
-                  <Trash2 className="h-3 w-3" />
-                  Clear
-                </button>
-              </div>
-            )}
+                </>
+              )}
+            </div>
           </div>
 
           {sorted.length === 0 ? (
