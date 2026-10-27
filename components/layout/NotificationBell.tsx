@@ -64,6 +64,9 @@ export function NotificationBell() {
     offers,
   } = useApp()
   const [open, setOpen] = useState(false)
+  // The push opt-in row is admin-only: visitors never see it, so only the
+  // admin's devices receive "new tool" pushes for now.
+  const [isAdmin, setIsAdmin] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
 
   // Notifications are a signed-in feature: signed-out visitors get no bell,
@@ -84,6 +87,19 @@ export function NotificationBell() {
   useEffect(() => {
     if (!currentUser) setOpen(false)
   }, [currentUser])
+
+  // Admin check for the push opt-in row (verifies the HttpOnly JWT cookie).
+  useEffect(() => {
+    let alive = true
+    fetch('/api/admin/ping')
+      .then((r) => (r.ok ? setIsAdmin(true) : setIsAdmin(false)))
+      .catch(() => {
+        if (alive) setIsAdmin(false)
+      })
+    return () => {
+      alive = false
+    }
+  }, [])
 
   // Close on outside click / Escape.
   useEffect(() => {
@@ -190,10 +206,12 @@ export function NotificationBell() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between border-b border-border px-3.5 py-2">
-            <span className="text-xs text-muted-foreground">Push for new tools</span>
-            <PushSubscribeButton />
-          </div>
+          {isAdmin && (
+            <div className="flex items-center justify-between border-b border-border px-3.5 py-2">
+              <span className="text-xs text-muted-foreground">Push for new tools</span>
+              <PushSubscribeButton />
+            </div>
+          )}
 
           {sorted.length === 0 ? (
             <p className="flex min-h-20 items-center justify-center px-4 py-6 text-center text-xs text-muted-foreground">
