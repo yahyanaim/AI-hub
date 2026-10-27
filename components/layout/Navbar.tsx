@@ -39,6 +39,7 @@ export function Navbar() {
   const { currentUser, setAuthModalOpen, signOut, setPaletteOpen } = useApp()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [toolsOpen, setToolsOpen] = useState(false)
+  const [mobileToolsOpen, setMobileToolsOpen] = useState(true)
   const toolsRef = useRef<HTMLDivElement>(null)
   // Global search lives on every page except /support.
   const showSearch = pathname !== '/support'
@@ -238,7 +239,32 @@ export function Navbar() {
                 <Search className="h-4 w-4" /> Search
               </button>
             )}
-            {[...TOOLS_SELECTOR, ...NAV_LINKS].map((link) => (
+            {/* Mobile mirror of the desktop tools selector */}
+            <button
+              onClick={() => setMobileToolsOpen((o) => !o)}
+              aria-expanded={mobileToolsOpen}
+              className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+            >
+              AI Tools
+              <ChevronDown
+                className={cn(
+                  'h-4 w-4 transition-transform',
+                  mobileToolsOpen && 'rotate-180'
+                )}
+              />
+            </button>
+            {mobileToolsOpen &&
+              TOOLS_SELECTOR.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="ml-4 block rounded-xl border-l border-border px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
