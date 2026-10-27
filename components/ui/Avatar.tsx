@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { cn, getInitials, colorFromString } from '@/lib/utils'
+import { cn } from '@/lib/utils'
+import { FruitAvatar } from '@/components/ui/FruitAvatar'
 
 interface AvatarProps {
   name: string
@@ -11,8 +12,6 @@ interface AvatarProps {
 }
 
 export function Avatar({ name, src, size = 32, className }: AvatarProps) {
-  const initials = getInitials(name) || '?'
-  const bg = colorFromString(name)
   const [failed, setFailed] = useState(false)
   if (src && !failed) {
     // eslint-disable-next-line @next/next/no-img-element
@@ -31,20 +30,5 @@ export function Avatar({ name, src, size = 32, className }: AvatarProps) {
       />
     )
   }
-  return (
-    <div
-      className={cn(
-        'flex shrink-0 items-center justify-center rounded-full font-heading text-xs font-semibold text-white',
-        className
-      )}
-      style={{
-        width: size,
-        height: size,
-        background: `linear-gradient(135deg, ${bg}, ${bg}cc)`,
-      }}
-      aria-hidden
-    >
-      {initials}
-    </div>
-  )
+  return <FruitAvatar name={name} size={size} className={className} />
 }
