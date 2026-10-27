@@ -24,8 +24,8 @@ self.addEventListener('push', (event) => {
     event.waitUntil(
       self.registration.showNotification('AI Hub', {
         body: 'New content was just added.',
-        icon: '/icons/icon-512.png',
-        badge: '/icons/icon-192.png',
+        icon: '/icons/icon-512.png?v=3',
+        badge: '/icons/icon-192.png?v=3',
         data: { url: '/' },
       })
     )
@@ -39,9 +39,10 @@ self.addEventListener('push', (event) => {
           self.registration.showNotification(item.title || 'AI Hub', {
             body: item.body || '',
             // Facebook-style: always show the AI Hub brand icon, like native
-            // app notifications (square art required by Android).
-            icon: '/icons/icon-512.png',
-            badge: '/icons/icon-192.png',
+            // app notifications (square art required by Android). Query param
+            // busts any stale HTTP cache on devices with an old SW.
+            icon: '/icons/icon-512.png?v=3',
+            badge: '/icons/icon-192.png?v=3',
             tag: item.url || 'aihub', // one notification per tool, replaces dupes
             data: { url: item.url || '/' },
           })
