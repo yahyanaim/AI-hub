@@ -17614,7 +17614,7 @@ export const SEED_TOOLS: Tool[] = [
     tagline: 'Platform for students to share and access study materials',
     description: 'Studocu is a platform for students to share and access study materials globally, including notes, summaries, and practice exams.',
     url: 'https://www.studocu.com',
-    logoUrl: 'https://studocu.com/apple-touch-icon.png',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=studocu.com&sz=64',
     category: 'other',
     tags: ['study', 'education', 'students', 'notes'],
     pricing: 'freemium',
