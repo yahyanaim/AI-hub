@@ -83,10 +83,13 @@ export function ProfileView({ username }: { username: string }) {
             className="ring-2 ring-accent/30 ring-offset-2 ring-offset-background"
           />
           <div className="min-w-0 flex-1">
-            <h1 className="font-heading text-2xl font-bold">{user.displayName}</h1>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <h1 className="font-heading text-2xl font-bold">{user.displayName}</h1>
+              {/* Admin-only signup counter (JWT-verified server side), inline
+                  next to the name */}
+              {isOwn && <AdminBadge username={user.username} />}
+            </div>
             <p className="text-sm text-muted-foreground">@{user.username}</p>
-            {/* Admin-only signup counter (JWT-verified server side) */}
-            {isOwn && <AdminBadge username={user.username} />}
 
             {user.bio && (
               <p className="mt-2 max-w-lg text-sm text-muted-foreground">{user.bio}</p>

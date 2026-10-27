@@ -158,7 +158,7 @@ export function AdminBadge({ username }: { username: string }) {
   }
 
   return (
-    <div className="mt-3 flex items-center gap-3">
+    <div className="flex items-center gap-2">
       <AnimatePresence mode="wait">
         <motion.span
           key={count}
@@ -166,15 +166,14 @@ export function AdminBadge({ username }: { username: string }) {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-          className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm"
+          className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1 text-xs font-semibold text-white shadow-sm"
           title="Total signups — only visible to the admin"
         >
-          <ShieldCheck className="h-4 w-4" />
+          <ShieldCheck className="h-3.5 w-3.5" />
           {count === null ? '…' : formatNumber(count)}{' '}
           {count === 1 ? 'signup' : 'signups'}
         </motion.span>
       </AnimatePresence>
-      <span className="text-xs text-muted-foreground">@{username}</span>
       <button
         onClick={logout}
         className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"

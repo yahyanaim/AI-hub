@@ -16724,7 +16724,7 @@ export const SEED_TOOLS: Tool[] = [
     tagline: 'Developer API for image and video generation',
     description: 'Prodia is a developer API for AI image and video generation. Send requests to clean REST endpoints and Prodia runs inference on its own infrastructure, no GPUs to provision. Bundles 50+ open and closed models behind one API.',
     url: 'https://prodia.com',
-    logoUrl: '/placeholder-logo.svg',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/prodia.ai.ico',
     category: 'api-backend',
     tags: ['image-generation', 'video-generation', 'api', 'stable-diffusion'],
     pricing: 'paid',
