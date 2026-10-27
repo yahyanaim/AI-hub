@@ -238,7 +238,7 @@ export function Navbar() {
                 <Search className="h-4 w-4" /> Search
               </button>
             )}
-            {TOOLS_SELECTOR.map((link) => (
+            {[...TOOLS_SELECTOR, ...NAV_LINKS].map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
