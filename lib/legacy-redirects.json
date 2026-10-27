@@ -1344,7 +1344,8 @@
   "naturalreader": "extension",
   "notta": "extension",
   "reelfolio": "video",
-  "on-design": "for-creators"
+  "on-design": "for-creators",
+  "iter0": "no-code-platforms"
  },
  "devtools": {
   "vs-code": "ide",
@@ -2254,7 +2255,16 @@
   "the-internet-designs": "websites",
   "godly": "websites",
   "cta-gallery": "websites",
-  "devault": "templates"
+  "devault": "templates",
+  "inspora": "websites",
+  "backgrounds-supply": "library",
+  "v0-templates": "templates",
+  "mobbin": "library",
+  "navbar-gallery": "websites",
+  "60fps-design": "websites",
+  "land-book": "websites",
+  "wedoflow": "templates",
+  "fontshare": "library"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",

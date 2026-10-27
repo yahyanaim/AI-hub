@@ -25128,4 +25128,23 @@ export const SEED_TOOLS: Tool[] = [
     updatedAt: daysAgo(0),
   },
 
+  {
+    id: 't1950',
+    slug: 'iter0',
+    name: 'iter0',
+    tagline: 'AI website builder that studies competitors then builds your site',
+    description: `iter0 builds your startup's website end to end: it checks your competitors, sharpens your pitch, shows you three design directions and builds the one you pick — ready to launch. Made for founders who want a credible, conversion-focused site without starting from a blank canvas.`,
+    url: 'https://iter0.com/',
+    logoUrl: 'https://www.google.com/s2/favicons?domain=iter0.com&sz=64',
+    category: 'no-code-platforms',
+    tags: ["website-builder", "ai-design", "founders", "startup"],
+    pricing: 'freemium',
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u1',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+
 ]
