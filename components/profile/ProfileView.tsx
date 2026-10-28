@@ -71,9 +71,8 @@ function ContributionBanner({
   }, [])
 
   const weeks = Math.max(8, Math.floor(bannerW / step))
-  // The grid hugs the top edge but takes only part of the banner height —
-  // capped so it never dominates, leaving calm space at the bottom.
-  const rows = Math.min(8, Math.max(4, Math.floor(bannerH / step) - 2))
+  // The grid fills the banner from the top edge down — no gap above.
+  const rows = Math.max(4, Math.floor((bannerH - 4) / step))
   const width = weeks * step
   const height = rows * step
   const density = contributions === 0 ? 0 : Math.min(56, 10 + contributions * 3)
@@ -205,7 +204,7 @@ export function ProfileView({ username }: { username: string }) {
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             <h1 className="font-heading text-2xl font-bold leading-tight">{user.displayName}</h1>
             {/* Legacy members signed up before the counter existed have no
                 signupNumber — they are early members by definition. */}
@@ -217,15 +216,6 @@ export function ProfileView({ username }: { username: string }) {
                 <BadgeCheck className="h-5 w-5 fill-brand-orange stroke-white" />
               </span>
             )}
-            {user.signupNumber != null && (
-              <span
-                title={`Member number ${user.signupNumber}`}
-                aria-label={`Member number ${user.signupNumber}`}
-                className="-ml-1.5 font-heading text-xs font-bold text-brand-orange"
-              >
-                #{user.signupNumber}
-              </span>
-            )}
             {isOwn && (
               <AdminBadge
                 username={user.username}
@@ -233,7 +223,18 @@ export function ProfileView({ username }: { username: string }) {
               />
             )}
           </div>
-          <p className="text-sm text-muted-foreground">@{user.username}</p>
+          <p className="mt-0.5 flex items-center gap-1.5 text-sm text-muted-foreground">
+            @{user.username}
+            {user.signupNumber != null && (
+              <span
+                title={`Member number ${user.signupNumber}`}
+                aria-label={`Member number ${user.signupNumber}`}
+                className="font-heading text-xs font-bold text-brand-orange"
+              >
+                #{user.signupNumber}
+              </span>
+            )}
+          </p>
 
           {user.bio && (
             <p className="mt-2 max-w-lg text-sm text-foreground">{user.bio}</p>
