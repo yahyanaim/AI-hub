@@ -114,11 +114,11 @@ function ContributionBanner({
         ))}
       </svg>
       <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent" />
-      <div className="absolute left-5 top-4 flex items-center gap-1.5 rounded-full border border-zinc-300/80 bg-zinc-200/90 px-3 py-1 text-xs font-medium text-zinc-800 shadow-sm">
+      <div className="absolute left-5 top-4 flex items-center gap-1.5 rounded-full border border-zinc-300/70 bg-zinc-100/90 px-3 py-1 text-xs font-medium text-zinc-800 shadow-sm">
         <Sparkles className="h-3.5 w-3.5 text-brand-orange" />
         {formatNumber(contributions)} contributions
       </div>
-      <div className="absolute bottom-3 right-5 flex items-center gap-2 rounded-full bg-zinc-200/90 px-2.5 py-1 text-[10px] font-medium text-zinc-800 shadow-sm">
+      <div className="absolute bottom-3 right-5 flex items-center gap-2 rounded-full border border-zinc-300/60 bg-zinc-100/90 px-2.5 py-1 text-[10px] font-medium text-zinc-700">
         Less
         {HEAT_LEVELS.map((c, i) => (
           <span key={i} className="inline-block size-2.5 rounded-[3px]" style={{ background: c }} />
