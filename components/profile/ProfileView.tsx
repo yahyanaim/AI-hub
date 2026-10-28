@@ -3,7 +3,6 @@
 import { notFound, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import {
   Wrench,
   TerminalSquare,
@@ -11,6 +10,7 @@ import {
   Star,
   Bookmark,
   ExternalLink,
+  Sparkles,
 } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
@@ -20,16 +20,93 @@ import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
 import { OfferCard } from '@/components/cards/OfferCard'
 import { CourseCard } from '@/components/cards/CourseCard'
-import { cn, formatNumber, formatDate, relativeTime } from '@/lib/utils'
+import { cn, formatNumber, formatDate } from '@/lib/utils'
 
 type Tab = 'submitted' | 'upvoted' | 'bookmarked'
+
+function hashStr(s: string): number {
+  let hash = 0
+  for (let i = 0; i < s.length; i++) {
+    hash = s.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  return Math.abs(hash)
+}
+
+const HEAT_LEVELS = [
+  'rgba(128,128,128,0.14)',
+  'rgba(255,107,0,0.25)',
+  'rgba(255,107,0,0.45)',
+  'rgba(255,107,0,0.7)',
+  '#FF6B00',
+]
+
+/** GitHub-style contribution heatmap rendered as the profile banner. */
+function ContributionBanner({
+  username,
+  contributions,
+}: {
+  username: string
+  contributions: number
+}) {
+  const weeks = 44
+  const cell = 11
+  const gap = 3
+  const width = weeks * (cell + gap)
+  const height = 7 * (cell + gap)
+  const density = contributions === 0 ? 0 : Math.min(72, 14 + contributions * 4)
+
+  const cells: Array<{ x: number; y: number; level: number }> = []
+  for (let w = 0; w < weeks; w++) {
+    for (let d = 0; d < 7; d++) {
+      const h = hashStr(`${username}:${w}:${d}`)
+      const level = h % 100 < density ? 1 + ((h >> 3) % 4) : 0
+      cells.push({ x: w * (cell + gap), y: d * (cell + gap), level })
+    }
+  }
+
+  return (
+    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 md:h-44">
+      <svg
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        className="absolute right-0 top-1/2 -translate-y-1/2 opacity-90"
+        preserveAspectRatio="xMaxYMid meet"
+        aria-hidden
+      >
+        {cells.map((c, i) => (
+          <rect
+            key={i}
+            x={c.x}
+            y={c.y}
+            width={cell}
+            height={cell}
+            rx={2.5}
+            fill={HEAT_LEVELS[c.level]}
+          />
+        ))}
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/40 to-transparent" />
+      <div className="absolute left-5 top-4 flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+        <Sparkles className="h-3.5 w-3.5 text-brand-orange" />
+        {formatNumber(contributions)} contributions
+      </div>
+      <div className="absolute bottom-3 right-5 flex items-center gap-2 text-[10px] text-white/60">
+        Less
+        {HEAT_LEVELS.map((c, i) => (
+          <span key={i} className="inline-block size-2.5 rounded-[3px]" style={{ background: c }} />
+        ))}
+        More
+      </div>
+    </div>
+  )
+}
 
 export function ProfileView({ username }: { username: string }) {
   const {
     getUserByUsername,
     tools,
     devTools,
-    prompts,
     repos,
     courses,
     offers,
@@ -68,106 +145,117 @@ export function ProfileView({ username }: { username: string }) {
   const bookmarkedCourses = courses.filter((c) => user.bookmarkedItems.includes(c.id))
   const bookmarkedOffers = offers.filter((o) => user.bookmarkedItems.includes(o.id))
 
+  const totalSubmitted =
+    user.submittedTools.length +
+    user.submittedDevTools.length +
+    user.submittedRepos.length
+  const totalContributions = totalSubmitted + user.upvotedItems.length + user.bookmarkedItems.length
+
   const isOwn = currentUser?.id === user.id
+
+  const tabs = [
+    { value: 'submitted' as Tab, label: 'Submitted', count: totalSubmitted },
+    { value: 'upvoted' as Tab, label: 'Upvoted', count: user.upvotedItems.length },
+    ...(isOwn
+      ? [{ value: 'bookmarked' as Tab, label: 'Bookmarked', count: user.bookmarkedItems.length }]
+      : []),
+  ]
 
   return (
     <div className="container-page py-8">
-      {/* Profile header */}
-      <div className="relative overflow-hidden rounded-xl border border-border bg-muted p-6 md:p-8">
-        <div className="absolute -top-16 right-0 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
-        <div className="relative flex flex-col gap-6 sm:flex-row sm:items-start">
-          <Avatar
-            name={user.displayName}
-            src={user.avatarUrl}
-            size={80}
-            className="ring-2 ring-accent/30 ring-offset-2 ring-offset-background"
-          />
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <h1 className="font-heading text-2xl font-bold">{user.displayName}</h1>
-              {/* Admin-only signup counter (JWT-verified server side), inline
-                  next to the name */}
-              {isOwn && <AdminBadge username={user.username} />}
-            </div>
-            <p className="text-sm text-muted-foreground">@{user.username}</p>
+      <div className="overflow-hidden rounded-xl border border-border bg-background">
+        {/* Banner: GitHub-style contribution heatmap */}
+        <ContributionBanner username={user.username} contributions={totalContributions} />
 
-            {user.bio && (
-              <p className="mt-2 max-w-lg text-sm text-muted-foreground">{user.bio}</p>
-            )}
-            <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <Star className="h-3 w-3 text-brand-orange" />
-                {formatNumber(user.karma)} karma
+        {/* Twitter-style header: overlapping avatar + identity */}
+        <div className="px-5 pb-4 md:px-7">
+          <div className="relative -mt-10 mb-3 flex items-end justify-between sm:-mt-12">
+            <Avatar
+              name={user.displayName}
+              src={user.avatarUrl}
+              size={88}
+              className="rounded-full ring-4 ring-background"
+            />
+            {isOwn && <AdminBadge username={user.username} />}
+          </div>
+
+          <h1 className="font-heading text-2xl font-bold leading-tight">{user.displayName}</h1>
+          <p className="text-sm text-muted-foreground">@{user.username}</p>
+
+          {user.bio && (
+            <p className="mt-2 max-w-lg text-sm text-foreground">{user.bio}</p>
+          )}
+
+          {/* Twitter-style inline stats */}
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+            <span className="flex items-center gap-1.5">
+              <Wrench className="h-3.5 w-3.5 text-brand-orange" />
+              <b>{formatNumber(totalSubmitted)}</b>
+              <span className="text-muted-foreground">Submitted</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Star className="h-3.5 w-3.5 text-brand-orange" />
+              <b>{formatNumber(user.upvotedItems.length)}</b>
+              <span className="text-muted-foreground">Upvoted</span>
+            </span>
+            {isOwn && (
+              <span className="flex items-center gap-1.5">
+                <Bookmark className="h-3.5 w-3.5 text-brand-orange" />
+                <b>{formatNumber(user.bookmarkedItems.length)}</b>
+                <span className="text-muted-foreground">Bookmarked</span>
               </span>
-              <span>Joined {formatDate(user.createdAt)}</span>
-              {user.website && (
-                <a
-                  href={user.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-accent hover:underline"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  Website
-                </a>
-              )}
-              {user.githubHandle && (
-                <a
-                  href={`https://github.com/${user.githubHandle}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
-                >
-                  <Github className="h-3 w-3" />
-                  {user.githubHandle}
-                </a>
-              )}
-            </div>
+            )}
+            <span className="text-muted-foreground">
+              {formatNumber(user.karma)} karma
+            </span>
+          </div>
+
+          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+            <span>Joined {formatDate(user.createdAt)}</span>
+            {user.website && (
+              <a
+                href={user.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-accent hover:underline"
+              >
+                <ExternalLink className="h-3 w-3" />
+                Website
+              </a>
+            )}
+            {user.githubHandle && (
+              <a
+                href={`https://github.com/${user.githubHandle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-foreground"
+              >
+                <Github className="h-3 w-3" />
+                {user.githubHandle}
+              </a>
+            )}
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="mt-6 grid grid-cols-3 gap-4 rounded-lg border border-border bg-card/40 p-4">
-          <StatBox
-            label="Submitted"
-            value={
-              user.submittedTools.length +
-          user.submittedDevTools.length +
-          user.submittedRepos.length
-            }
-            icon={Wrench}
-          />
-          <StatBox label="Upvoted" value={user.upvotedItems.length} icon={Star} />
-          <StatBox
-            label="Bookmarked"
-            value={user.bookmarkedItems.length}
-            icon={Bookmark}
-          />
+        {/* Twitter-style tab bar */}
+        <div className="flex items-center border-b border-border">
+          {tabs.map(({ value, label, count }) => (
+            <button
+              key={value}
+              onClick={() => setTab(value)}
+              className={cn(
+                'relative flex-1 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-secondary/60 sm:flex-none sm:px-6',
+                tab === value ? 'text-foreground' : 'text-muted-foreground'
+              )}
+            >
+              {label}
+              <span className="ml-1.5 text-xs text-muted-foreground">{count}</span>
+              {tab === value && (
+                <span className="absolute inset-x-4 bottom-0 h-1 rounded-full bg-brand-orange sm:inset-x-6" />
+              )}
+            </button>
+          ))}
         </div>
-      </div>
-
-      {/* Tabs */}
-      <div className="mt-6 flex items-center gap-1 border-b border-border">
-        {(
-          [
-            { value: 'submitted' as Tab, label: 'Submitted' },
-            { value: 'upvoted' as Tab, label: 'Upvoted' },
-            ...(isOwn ? [{ value: 'bookmarked' as Tab, label: 'Bookmarked' }] : []),
-          ] as const
-        ).map(({ value, label }) => (
-          <button
-            key={value}
-            onClick={() => setTab(value)}
-            className={cn(
-              'border-b-2 px-4 py-3 text-sm font-medium transition-colors',
-              tab === value
-                ? 'border-accent text-foreground'
-                : 'border-transparent text-muted-foreground hover:text-muted-foreground'
-            )}
-          >
-            {label}
-          </button>
-        ))}
       </div>
 
       {/* Content */}
@@ -235,24 +323,6 @@ export function ProfileView({ username }: { username: string }) {
           </div>
         )}
       </div>
-    </div>
-  )
-}
-
-function StatBox({
-  label,
-  value,
-  icon: Icon,
-}: {
-  label: string
-  value: number
-  icon: React.ComponentType<{ className?: string }>
-}) {
-  return (
-    <div className="text-center">
-      <Icon className="mx-auto mb-1 h-4 w-4 text-accent" />
-      <div className="font-heading text-xl font-bold">{value}</div>
-      <div className="text-xs text-muted-foreground">{label}</div>
     </div>
   )
 }
