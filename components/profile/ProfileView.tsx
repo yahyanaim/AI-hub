@@ -11,6 +11,7 @@ import {
   Bookmark,
   ExternalLink,
   Sparkles,
+  Flame,
 } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
@@ -33,7 +34,7 @@ function hashStr(s: string): number {
 }
 
 const HEAT_LEVELS = [
-  'rgba(128,128,128,0.14)',
+  'rgba(0,0,0,0.07)',
   'rgba(255,107,0,0.25)',
   'rgba(255,107,0,0.45)',
   'rgba(255,107,0,0.7)',
@@ -65,7 +66,7 @@ function ContributionBanner({
   }
 
   return (
-    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 md:h-44">
+    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-orange-50 via-white to-zinc-50 md:h-44">
       <svg
         width={width}
         height={height}
@@ -86,12 +87,12 @@ function ContributionBanner({
           />
         ))}
       </svg>
-      <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/40 to-transparent" />
-      <div className="absolute left-5 top-4 flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+      <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent" />
+      <div className="absolute left-5 top-4 flex items-center gap-1.5 rounded-full border border-orange-200/70 bg-white/80 px-3 py-1 text-xs font-medium text-foreground backdrop-blur-sm">
         <Sparkles className="h-3.5 w-3.5 text-brand-orange" />
         {formatNumber(contributions)} contributions
       </div>
-      <div className="absolute bottom-3 right-5 flex items-center gap-2 text-[10px] text-white/60">
+      <div className="absolute bottom-3 right-5 flex items-center gap-2 text-[10px] text-zinc-500">
         Less
         {HEAT_LEVELS.map((c, i) => (
           <span key={i} className="inline-block size-2.5 rounded-[3px]" style={{ background: c }} />
@@ -169,46 +170,24 @@ export function ProfileView({ username }: { username: string }) {
 
         {/* Twitter-style header: overlapping avatar + identity */}
         <div className="px-5 pb-4 md:px-7">
-          <div className="relative -mt-10 mb-3 flex items-end justify-between sm:-mt-12">
+          <div className="relative -mt-10 mb-3 flex items-end sm:-mt-12">
             <Avatar
               name={user.displayName}
               src={user.avatarUrl}
               size={88}
               className="rounded-full ring-4 ring-background"
             />
-            {isOwn && <AdminBadge username={user.username} />}
           </div>
 
-          <h1 className="font-heading text-2xl font-bold leading-tight">{user.displayName}</h1>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h1 className="font-heading text-2xl font-bold leading-tight">{user.displayName}</h1>
+            {isOwn && <AdminBadge username={user.username} />}
+          </div>
           <p className="text-sm text-muted-foreground">@{user.username}</p>
 
           {user.bio && (
             <p className="mt-2 max-w-lg text-sm text-foreground">{user.bio}</p>
           )}
-
-          {/* Twitter-style inline stats */}
-          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
-            <span className="flex items-center gap-1.5">
-              <Wrench className="h-3.5 w-3.5 text-brand-orange" />
-              <b>{formatNumber(totalSubmitted)}</b>
-              <span className="text-muted-foreground">Submitted</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Star className="h-3.5 w-3.5 text-brand-orange" />
-              <b>{formatNumber(user.upvotedItems.length)}</b>
-              <span className="text-muted-foreground">Upvoted</span>
-            </span>
-            {isOwn && (
-              <span className="flex items-center gap-1.5">
-                <Bookmark className="h-3.5 w-3.5 text-brand-orange" />
-                <b>{formatNumber(user.bookmarkedItems.length)}</b>
-                <span className="text-muted-foreground">Bookmarked</span>
-              </span>
-            )}
-            <span className="text-muted-foreground">
-              {formatNumber(user.karma)} karma
-            </span>
-          </div>
 
           <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
             <span>Joined {formatDate(user.createdAt)}</span>
@@ -234,6 +213,31 @@ export function ProfileView({ username }: { username: string }) {
                 {user.githubHandle}
               </a>
             )}
+          </div>
+
+          {/* Twitter-style inline stats */}
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+            <span className="flex items-center gap-1.5">
+              <Wrench className="h-3.5 w-3.5 text-brand-orange" />
+              <b>{formatNumber(totalSubmitted)}</b>
+              <span className="text-muted-foreground">Submitted</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Star className="h-3.5 w-3.5 text-brand-orange" />
+              <b>{formatNumber(user.upvotedItems.length)}</b>
+              <span className="text-muted-foreground">Upvoted</span>
+            </span>
+            {isOwn && (
+              <span className="flex items-center gap-1.5">
+                <Bookmark className="h-3.5 w-3.5 text-brand-orange" />
+                <b>{formatNumber(user.bookmarkedItems.length)}</b>
+                <span className="text-muted-foreground">Bookmarked</span>
+              </span>
+            )}
+            <span className="flex items-center gap-1.5">
+              <Flame className="h-3.5 w-3.5 text-brand-orange" />
+              <span className="text-muted-foreground">{formatNumber(user.karma)} karma</span>
+            </span>
           </div>
         </div>
 
