@@ -2,7 +2,7 @@
 
 import { notFound, useParams } from 'next/navigation'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Wrench,
   TerminalSquare,
@@ -41,7 +41,8 @@ const HEAT_LEVELS = [
   '#FF6B00',
 ]
 
-/** GitHub-style contribution heatmap rendered as the profile banner. */
+/** GitHub-style contribution heatmap rendered as the profile banner.
+ *  The dot grid always spans the full banner width, newest week on the right. */
 function ContributionBanner({
   username,
   contributions,
@@ -49,11 +50,25 @@ function ContributionBanner({
   username: string
   contributions: number
 }) {
-  const weeks = 44
+  const rowRef = useRef<HTMLDivElement>(null)
+  const [bannerW, setBannerW] = useState(1200)
   const cell = 11
   const gap = 3
-  const width = weeks * (cell + gap)
-  const height = 7 * (cell + gap)
+  const step = cell + gap
+
+  useEffect(() => {
+    const el = rowRef.current
+    if (!el) return
+    const update = () => setBannerW(el.offsetWidth)
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  const weeks = Math.max(8, Math.floor(bannerW / step))
+  const width = weeks * step
+  const height = 7 * step
   const density = contributions === 0 ? 0 : Math.min(72, 14 + contributions * 4)
 
   const cells: Array<{ x: number; y: number; level: number }> = []
@@ -61,18 +76,20 @@ function ContributionBanner({
     for (let d = 0; d < 7; d++) {
       const h = hashStr(`${username}:${w}:${d}`)
       const level = h % 100 < density ? 1 + ((h >> 3) % 4) : 0
-      cells.push({ x: w * (cell + gap), y: d * (cell + gap), level })
+      cells.push({ x: w * step, y: d * step, level })
     }
   }
 
   return (
-    <div className="relative h-36 overflow-hidden bg-gradient-to-br from-orange-50 via-white to-zinc-50 md:h-44">
+    <div
+      ref={rowRef}
+      className="relative h-36 overflow-hidden bg-gradient-to-br from-orange-50 via-white to-zinc-50 md:h-44"
+    >
       <svg
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        className="absolute right-0 top-1/2 -translate-y-1/2 opacity-90"
-        preserveAspectRatio="xMaxYMid meet"
+        className="absolute right-0 top-1/2 -translate-y-1/2"
         aria-hidden
       >
         {cells.map((c, i) => (
