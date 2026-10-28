@@ -71,10 +71,12 @@ function ContributionBanner({
   }, [])
 
   const weeks = Math.max(8, Math.floor(bannerW / step))
-  const rows = Math.max(4, Math.floor(bannerH / step))
+  // The grid hugs the top edge but takes only part of the banner height —
+  // capped so it never dominates, leaving calm space at the bottom.
+  const rows = Math.min(8, Math.max(4, Math.floor(bannerH / step) - 2))
   const width = weeks * step
   const height = rows * step
-  const density = contributions === 0 ? 0 : Math.min(72, 14 + contributions * 4)
+  const density = contributions === 0 ? 0 : Math.min(56, 10 + contributions * 3)
 
   const cells: Array<{ x: number; y: number; level: number }> = []
   for (let w = 0; w < weeks; w++) {
@@ -205,9 +207,23 @@ export function ProfileView({ username }: { username: string }) {
 
           <div className="flex flex-wrap items-center gap-2.5">
             <h1 className="font-heading text-2xl font-bold leading-tight">{user.displayName}</h1>
-            {user.signupNumber && user.signupNumber <= 1000 && (
-              <span title={`Verified — member #${user.signupNumber}`} className="inline-flex">
+            {/* Legacy members signed up before the counter existed have no
+                signupNumber — they are early members by definition. */}
+            {(user.signupNumber == null || user.signupNumber <= 1000) && (
+              <span
+                title={user.signupNumber ? `Verified — member #${user.signupNumber}` : 'Verified — early member'}
+                className="inline-flex"
+              >
                 <BadgeCheck className="h-5 w-5 fill-brand-orange stroke-white" />
+              </span>
+            )}
+            {user.signupNumber != null && (
+              <span
+                title={`Member number ${user.signupNumber}`}
+                aria-label={`Member number ${user.signupNumber}`}
+                className="-ml-1.5 font-heading text-xs font-bold text-brand-orange"
+              >
+                #{user.signupNumber}
               </span>
             )}
             {isOwn && (
