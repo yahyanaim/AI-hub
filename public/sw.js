@@ -24,8 +24,8 @@ self.addEventListener('push', (event) => {
     event.waitUntil(
       self.registration.showNotification('AI Hub', {
         body: 'New content was just added.',
-        icon: '/icons/icon-512.png?v=3',
-        badge: '/icons/icon-192.png?v=3',
+        icon: '/icons/push-icon-512.png?v=4',
+        badge: '/icons/push-icon-192.png?v=4',
         data: { url: '/' },
       })
     )
@@ -41,8 +41,8 @@ self.addEventListener('push', (event) => {
             // Right-side large icon = the tool's own logo (brand fallback).
             // The left-side small icon is Chrome's slot: it shows the AI Hub
             // launcher icon when the site is installed to the home screen.
-            icon: item.icon || '/icons/icon-512.png?v=3',
-            badge: '/icons/icon-192.png?v=3',
+            icon: item.icon || '/icons/push-icon-512.png?v=4',
+            badge: '/icons/push-icon-192.png?v=4',
             tag: item.url || 'aihub', // one notification per tool, replaces dupes
             data: { url: item.url || '/' },
           })

@@ -973,17 +973,29 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [hydrated])
 
   // ---------------- Auth (local mock) ----------------
-  // Signup analytics ping: fire-and-forget, every genuinely new account bumps
-  // the global counter on the server. Rate-limited server-side per IP;
-  // failures are silently ignored so the local experience is never blocked.
-  const pingSignupCount = useCallback(() => {
+  // Signup analytics ping: every genuinely new account bumps the global
+  // counter on the server. The returned count doubles as the member's signup
+  // number — members 1-1000 earn the orange verified badge. Failures are
+  // silently ignored so the local experience is never blocked.
+  const pingSignupCount = useCallback(async (username: string) => {
     try {
-      fetch('/api/analytics/signup', {
+      const res = await fetch('/api/analytics/signup', {
         method: 'POST',
         keepalive: true,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'account-created' }),
-      }).catch(() => {})
+      })
+      if (!res.ok) return
+      const data = (await res.json()) as { counted?: boolean; count?: number }
+      if (!data.counted || typeof data.count !== 'number') return
+      setState((prev) => ({
+        ...prev,
+        users: prev.users.map((u) =>
+          u.username.toLowerCase() === username && !u.signupNumber
+            ? { ...u, signupNumber: data.count! }
+            : u
+        ),
+      }))
     } catch {
       /* ignore */
     }
@@ -1023,7 +1035,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }
       return { ...prev, users: [...prev.users, newUser], currentUserId: newUser.id }
     })
-    if (isNewSignup) pingSignupCount()
+    if (isNewSignup) void pingSignupCount(clean)
   }, [pingSignupCount])
 
   const signOut = useCallback(() => {

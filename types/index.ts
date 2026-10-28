@@ -340,6 +340,8 @@ export interface User {
   submittedPrompts: string[]
   karma: number
   createdAt: string
+  /** Sequential signup index from the server counter; verified when <= 1000. */
+  signupNumber?: number
 }
 
 export type AnyItem = Tool | DevTool | Prompt | Repo | Course | Offer

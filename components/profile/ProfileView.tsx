@@ -5,13 +5,13 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import {
   Wrench,
-  TerminalSquare,
   Github,
   Star,
   Bookmark,
   ExternalLink,
   Sparkles,
   Flame,
+  BadgeCheck,
 } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
@@ -52,6 +52,7 @@ function ContributionBanner({
 }) {
   const rowRef = useRef<HTMLDivElement>(null)
   const [bannerW, setBannerW] = useState(1200)
+  const [bannerH, setBannerH] = useState(160)
   const cell = 11
   const gap = 3
   const step = cell + gap
@@ -59,7 +60,10 @@ function ContributionBanner({
   useEffect(() => {
     const el = rowRef.current
     if (!el) return
-    const update = () => setBannerW(el.offsetWidth)
+    const update = () => {
+      setBannerW(el.offsetWidth)
+      setBannerH(el.offsetHeight)
+    }
     update()
     const ro = new ResizeObserver(update)
     ro.observe(el)
@@ -67,15 +71,18 @@ function ContributionBanner({
   }, [])
 
   const weeks = Math.max(8, Math.floor(bannerW / step))
+  const rows = Math.max(4, Math.floor(bannerH / step))
   const width = weeks * step
-  const height = 7 * step
+  const height = rows * step
   const density = contributions === 0 ? 0 : Math.min(72, 14 + contributions * 4)
 
   const cells: Array<{ x: number; y: number; level: number }> = []
   for (let w = 0; w < weeks; w++) {
-    for (let d = 0; d < 7; d++) {
-      const h = hashStr(`${username}:${w}:${d}`)
-      const level = h % 100 < density ? 1 + ((h >> 3) % 4) : 0
+    for (let d = 0; d < rows; d++) {
+      // Unsigned conversion: the raw hash can exceed int32 and bitwise ops
+      // would flip it negative, producing negative array indices.
+      const h = hashStr(`${username}:${w}:${d}`) >>> 0
+      const level = h % 100 < density ? 1 + ((h >>> 3) % 4) : 0
       cells.push({ x: w * step, y: d * step, level })
     }
   }
@@ -89,7 +96,7 @@ function ContributionBanner({
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        className="absolute right-0 top-1/2 -translate-y-1/2"
+        className="absolute right-0 top-0"
         aria-hidden
       >
         {cells.map((c, i) => (
@@ -109,7 +116,7 @@ function ContributionBanner({
         <Sparkles className="h-3.5 w-3.5 text-brand-orange" />
         {formatNumber(contributions)} contributions
       </div>
-      <div className="absolute bottom-3 right-5 flex items-center gap-2 text-[10px] text-zinc-500">
+      <div className="absolute bottom-3 right-5 flex items-center gap-2 rounded-full bg-white/75 px-2.5 py-1 text-[10px] text-zinc-500 backdrop-blur-sm">
         Less
         {HEAT_LEVELS.map((c, i) => (
           <span key={i} className="inline-block size-2.5 rounded-[3px]" style={{ background: c }} />
@@ -198,7 +205,17 @@ export function ProfileView({ username }: { username: string }) {
 
           <div className="flex flex-wrap items-center gap-2.5">
             <h1 className="font-heading text-2xl font-bold leading-tight">{user.displayName}</h1>
-            {isOwn && <AdminBadge username={user.username} />}
+            {user.signupNumber && user.signupNumber <= 1000 && (
+              <span title={`Verified — member #${user.signupNumber}`} className="inline-flex">
+                <BadgeCheck className="h-5 w-5 fill-brand-orange stroke-white" />
+              </span>
+            )}
+            {isOwn && (
+              <AdminBadge
+                username={user.username}
+                canSee={currentUser?.username.toLowerCase() === 'yahianaim'}
+              />
+            )}
           </div>
           <p className="text-sm text-muted-foreground">@{user.username}</p>
 

@@ -40,7 +40,9 @@ export async function POST(req: NextRequest) {
   if (!incrRes || incrRes.error || typeof incrRes.result !== 'number') {
     return NextResponse.json({ ok: false }, { status: 502 })
   }
-  return NextResponse.json({ ok: true, counted: true })
+  // The incremented value doubles as this member's sequential signup number
+  // (verified badge for members 1-1000).
+  return NextResponse.json({ ok: true, counted: true, count: incrRes.result })
 }
 
 // Keep the count unreadable via GET without an admin JWT.

@@ -10,7 +10,13 @@ import { cn, formatNumber } from '@/lib/utils'
  * /api/admin/signups after the server verifies the HttpOnly admin JWT cookie —
  * a forged admin state in the browser shows nothing.
  */
-export function AdminBadge({ username }: { username: string }) {
+export function AdminBadge({
+  username,
+  canSee = true,
+}: {
+  username: string
+  canSee?: boolean
+}) {
   const [count, setCount] = useState<number | null>(null)
   const [status, setStatus] = useState<'loading' | 'authed' | 'auth' | 'unavailable'>(
     'loading'
@@ -127,6 +133,9 @@ export function AdminBadge({ username }: { username: string }) {
   }
 
   if (!open && status === 'loading') return null
+
+  // Hidden from regular users: only the site owner sees any admin UI.
+  if (!canSee) return null
 
   if (status === 'auth') {
     if (!open) {

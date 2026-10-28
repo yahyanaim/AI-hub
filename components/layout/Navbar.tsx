@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import {
   Plus,
@@ -38,6 +38,7 @@ const NAV_LINKS = [
 export function Navbar() {
   const pathname = usePathname()
   const { currentUser, setAuthModalOpen, signOut, setPaletteOpen } = useApp()
+  const router = useRouter()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [toolsOpen, setToolsOpen] = useState(false)
   const [mobileToolsOpen, setMobileToolsOpen] = useState(true)
@@ -195,7 +196,10 @@ export function Navbar() {
                 />
               </Link>
               <button
-                onClick={signOut}
+                onClick={() => {
+                  signOut()
+                  router.push('/')
+                }}
                 className="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="Sign out"
                 title="Sign out"
