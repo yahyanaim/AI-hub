@@ -566,7 +566,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // can't grow the stored list past localStorage quota.
         next.comments = next.comments.slice(0, MAX_COMMENTS_STORED)
         if (restoreUsers && delta) {
-          next.users = delta.users?.length ? delta.users : next.users
+          // Merge per-user instead of replacing wholesale: a browser delta
+          // saved before the signup counter existed has no signupNumber, and
+          // clobbering the fresh seed users would erase the member-number
+          // feature for returning visitors. Seed's signupNumber survives
+          // unless the delta user carries its own; delta-only users append.
+          next.users = [
+            ...next.users.map((seedU) => {
+              const saved = delta.users?.find(
+                (x) => x.username.toLowerCase() === seedU.username.toLowerCase()
+              )
+              return saved ? { ...saved, signupNumber: saved.signupNumber ?? seedU.signupNumber } : seedU
+            }),
+            ...(delta.users?.filter(
+              (x) => !next.users.some((s) => s.username.toLowerCase() === x.username.toLowerCase())
+            ) ?? []),
+          ]
           next.currentUserId = delta.currentUserId ?? next.currentUserId
           next.recentSearches = delta.recentSearches ?? next.recentSearches
           next.notifications = delta.notifications
@@ -745,7 +760,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
               : current
           return {
             ...prev,
-            users: delta.users?.length ? delta.users : prev.users,
+            users:
+              delta.users?.length
+                ? [
+                    ...prev.users.map((seedU) => {
+                      const saved = delta.users!.find(
+                        (x) => x.username.toLowerCase() === seedU.username.toLowerCase()
+                      )
+                      return saved ? { ...saved, signupNumber: saved.signupNumber ?? seedU.signupNumber } : seedU
+                    }),
+                    ...delta.users.filter(
+                      (x) => !prev.users.some((s) => s.username.toLowerCase() === x.username.toLowerCase())
+                    ),
+                  ]
+                : prev.users,
             currentUserId: delta.currentUserId ?? prev.currentUserId,
             recentSearches: delta.recentSearches ?? prev.recentSearches,
             tools: mergeAdded(prev.tools, delta.addedTools),

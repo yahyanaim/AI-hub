@@ -71,8 +71,9 @@ function ContributionBanner({
   }, [])
 
   const weeks = Math.max(8, Math.floor(bannerW / step))
-  // The grid fills the banner from the top edge down — no gap above.
-  const rows = Math.max(4, Math.floor((bannerH - 4) / step))
+  // Full-depth grid from the top, with a small breathing gap above so the
+  // squares don't butt against the banner's edge.
+  const rows = Math.max(4, Math.floor((bannerH - 12) / step))
   const width = weeks * step
   const height = rows * step
   const density = contributions === 0 ? 0 : Math.min(56, 10 + contributions * 3)
@@ -97,7 +98,7 @@ function ContributionBanner({
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        className="absolute right-0 top-0"
+        className="absolute right-0 top-1.5"
         aria-hidden
       >
         {cells.map((c, i) => (
