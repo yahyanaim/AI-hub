@@ -2453,7 +2453,22 @@
   "esl-reading": "english",
   "topics-magazine": "english",
   "toefl-ets-official": "english",
-  "mango-languages-english": "english"
+  "mango-languages-english": "english",
+  "python-data-fundamentals": "data-science",
+  "ai-fundamentals-datacamp": "ai-engineering",
+  "sql-fundamentals-datacamp": "data-science",
+  "aws-cloud-practitioner-clf-c02": "cloud",
+  "microsoft-azure-fundamentals-az-900": "cloud",
+  "github-foundations-datacamp": "computer-science",
+  "github-copilot-fundamentals-gh-300": "ai-engineering",
+  "excel-fundamentals-datacamp": "data-science",
+  "developing-ai-applications-datacamp": "ai-engineering",
+  "python-programming-fundamentals-datacamp": "python",
+  "ai-agent-fundamentals-datacamp": "ai-engineering",
+  "snowflake-foundations-datacamp": "cloud",
+  "java-fundamentals-datacamp": "backend",
+  "git-fundamentals-datacamp": "computer-science",
+  "ai-for-software-engineering-datacamp": "ai-engineering"
  },
  "offers": {
   "future-skills-academy": "learning",
