@@ -60,11 +60,13 @@ export async function POST(req: NextRequest) {
                 ? `New Offer: ${item.name}`
                 : `New Editing Tool: ${item.name}`,
         body: item.tagline,
-        icon: item.logoUrl
-          ? item.logoUrl.startsWith('http')
+        icon:
+          // Remote logos pass through; any local non-icon placeholder maps to
+          // the bold orange atom mark (the white /logo.png renders as a white
+          // blob at notification size on Android).
+          item.logoUrl && item.logoUrl.startsWith('http')
             ? item.logoUrl
-            : '/logo.png'
-          : '/logo.png',
+            : '/icons/push-icon-512.png?v=4',
         url: href(itemType, item.category, item.slug),
       })
     }
