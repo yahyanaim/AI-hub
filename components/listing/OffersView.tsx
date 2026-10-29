@@ -5,6 +5,7 @@ import { useApp } from '@/lib/store'
 import { OFFER_CATEGORY_LABELS, type Offer } from '@/types'
 import { GUIDES_ENABLED, isPaidGuide } from '@/lib/guides'
 import { offerTrendingScore } from '@/lib/listing-order'
+import { getOfferUrgency } from '@/components/ui/Badges'
 import { useRouter } from 'next/navigation'
 const categoryOptions: FilterOption[] = Object.entries(OFFER_CATEGORY_LABELS).map(
   ([value, label]) => ({ value, label })
@@ -23,7 +24,11 @@ export function OffersView({
   // Server-prerendered first page (see lib/listing-order.ts). Guides stay hidden
   // from it while GUIDES_ENABLED is false, matching the client filter below.
   const source = offers.length ? offers : initialItems
-  const visibleOffers = GUIDES_ENABLED ? source : source.filter((o) => !isPaidGuide(o))
+  // Offers past their end date leave the feed entirely — a dead offer sitting
+  // between ongoing ones reads as still claimable. Their detail URLs remain
+  // reachable where the Ended badge tells the story.
+  const activeOffers = source.filter((o) => getOfferUrgency(o.endsAt) !== 'ended')
+  const visibleOffers = GUIDES_ENABLED ? activeOffers : activeOffers.filter((o) => !isPaidGuide(o))
   return (
     <>
       <div className="container-page pt-2 text-center text-xs text-muted-foreground">
