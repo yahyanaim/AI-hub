@@ -8393,4 +8393,24 @@ export const SEED_REPOS: Repo[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+
+  {
+    id: 'r548',
+    slug: 'archify',
+    name: 'Archify',
+    tagline: 'Turn any idea, plan, or codebase into interactive diagrams',
+    description:
+      'Archify is an agent skill for Claude Code, Codex, OpenCode and other coding agents that turns any idea, plan, or codebase into beautiful interactive diagrams — architecture diagrams, flowcharts, sequence diagrams and more, rendered as browsable visuals directly from your agent output.',
+    url: 'https://github.com/tt-a1i/archify',
+    logoUrl: '/logos/archify.png',
+    category: 'diagram',
+    tags: ['diagrams', 'claude-code', 'codex', 'architecture', 'agent-skills', 'mermaid'],
+    pricing: 'free',
+    upvotes: 91,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ];
