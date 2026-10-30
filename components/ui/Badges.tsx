@@ -80,6 +80,24 @@ export function RecodedBadge({ className }: { className?: string }) {
   )
 }
 
+/** True for DataCamp skill tracks, which include free-tier access. */
+export function isDatacampFreeWithPlan(url: string): boolean {
+  return url.includes('datacamp.com/learn/skill-tracks/')
+}
+
+/** Badge shown on DataCamp skill tracks: free tier available in DataCamp. */
+export function DatacampBadge({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn('inline-flex items-center gap-1 rounded-md bg-teal-500/10 px-2 py-0.5 text-[11px] font-medium text-teal-600 dark:text-teal-400', className)}
+      title="Free with DataCamp"
+    >
+      <GraduationCap className="h-3 w-3" />
+      Free with DataCamp
+    </span>
+  )
+}
+
 /** Days before the deadline at which an offer counts as ending soon. */
 export const OFFER_ENDING_SOON_DAYS = 7
 
