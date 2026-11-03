@@ -5072,6 +5072,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['hackathon', 'revenuecat', 'apps', 'prizes', 'shipaton'],
     pricing: 'free',
+    endsAt: '2026-09-30',
     steps: [
       {
         title: 'Create Devpost and join hackathon',
@@ -5524,6 +5525,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['yc', 'y-combinator', 'accelerator', '500k', '7percent'],
     pricing: 'free',
+    endsAt: '2026-07-27',
     steps: [
       {
         title: 'Apply by July 27, 2026 8pm PT',
@@ -7906,6 +7908,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'learning',
     tags: ['datacamp', 'free-week', 'python', 'sql', 'ai', 'limited-time'],
     pricing: 'free',
+    endsAt: '2026-08-30',
     steps: [
       {
         title: 'Create your account NOW (Aug 24-30)',
@@ -9860,6 +9863,7 @@ export const SEED_OFFERS: Offer[] = [
     category: 'forstartups',
     tags: ['bootcamp', 'ai', 'cybersecurity', 'cisco', 'certificate', 'free'],
     pricing: 'free',
+    endsAt: '2025-09-30',
     steps: [
       {
         title: 'Register online',
@@ -18282,6 +18286,7 @@ export const SEED_OFFERS: Offer[] = [
     logoUrl: '/logos/orange-og.png',
     category: 'scholarship',
     tags: ['orange-digital-center', 'capgemini', 'generative-ai', 'workshop', 'employability', 'personal-assistant'],
+    endsAt: '2026-10-21',
     steps: [
       {
         title: 'Register for the session',
