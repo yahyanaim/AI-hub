@@ -5,7 +5,7 @@ import { ExternalLink, ShieldCheck } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { OfferLogo } from '@/components/ui/OfferLogo'
 import { Avatar } from '@/components/ui/Avatar'
-import { CategoryBadge, PricingBadge, OfferUrgencyBadge } from '@/components/ui/Badges'
+import { CategoryBadge, PricingBadge, OfferUrgencyBadge, OfferDateBadge } from '@/components/ui/Badges'
 import { UpvoteButton } from '@/components/interactive/UpvoteButton'
 import { BookmarkButton } from '@/components/interactive/BookmarkButton'
 import { HoverTranslate } from '@/components/ui/HoverTranslate'
@@ -44,6 +44,7 @@ export function OfferDetail({ slug, initial }: { slug: string; initial?: Offer }
               <CategoryBadge kind="offer" category={offer.category} />
               {offer.pricing && <PricingBadge pricing={offer.pricing} />}
               <OfferUrgencyBadge endsAt={offer.endsAt} />
+              <OfferDateBadge endsAt={offer.endsAt} />
               <a
                 href={offer.url}
                 target="_blank"

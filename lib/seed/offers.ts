@@ -18381,4 +18381,39 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o341',
+    slug: 'heygen-voice-turbo-free-api',
+    name: 'HeyGen Voice Turbo',
+    tagline: 'Free HeyGen voice API model for developers through Nov 30',
+    description:
+      "HeyGen's fastest voice model, Voice Turbo, is free for developers until November 30: bring an API key, pick a voice, and start shipping speech today. Convert text to natural speech through the HeyGen API with no charge for the model during the promo window.",
+    url: 'https://www.heygen.com/blog/heygen-voice-turbo',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/heygen.com.ico',
+    category: 'api-access',
+    tags: ['voice', 'tts', 'api', 'developers', 'heygen'],
+    pricing: 'free',
+    endsAt: '2026-11-30',
+    steps: [
+      {
+        title: 'Read the announcement',
+        description: 'Open the HeyGen blog post to learn how Voice Turbo free access works and what is included.',
+        url: 'https://www.heygen.com/blog/heygen-voice-turbo',
+      },
+      {
+        title: 'Get an API key',
+        description: 'Create or log into a HeyGen account, then generate an API key from the developer dashboard.',
+      },
+      {
+        title: 'Pick a voice and ship',
+        description: 'Choose a voice in the HeyGen API docs and call the voice model from your app to start converting text to speech.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]

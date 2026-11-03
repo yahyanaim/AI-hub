@@ -180,6 +180,24 @@ export function isHotOffer(offer: { featured?: boolean; endsAt?: string }, now: 
   return !!offer.featured && getOfferUrgency(offer.endsAt, now) === 'ending-soon'
 }
 
+/** Plain date badge: shows the offer's end date itself (e.g. "Until Nov 30").
+ *  Unlike the urgency badge it never depends on how close the date is. */
+export function OfferDateBadge({ endsAt, className }: { endsAt?: string; className?: string }) {
+  const end = parseOfferEnd(endsAt)
+  if (end === null) return null
+  const d = new Date(end)
+  const label = `Until ${d.toLocaleDateString('en', { month: 'short', day: 'numeric' })}${d.getFullYear() !== new Date().getFullYear() ? ` ${d.getFullYear()}` : ''}`
+  return (
+    <span
+      className={cn('inline-flex items-center gap-1 rounded-md border border-border bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground', className)}
+      title={`Offer valid until ${d.toLocaleDateString('en', { month: 'long', day: 'numeric', year: 'numeric' })}`}
+    >
+      <CalendarX2 className="h-3 w-3" />
+      {label}
+    </span>
+  )
+}
+
 /** Fiery HOT badge for featured time-limited offers. */
 export function HotBadge({ className }: { className?: string }) {
   return (
