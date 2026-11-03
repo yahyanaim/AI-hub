@@ -18390,6 +18390,9 @@ export const SEED_OFFERS: Offer[] = [
     id: 'o341',
     slug: 'heygen-voice-turbo-free-api',
     name: 'HeyGen Voice Turbo',
+    taglineAr: 'نموذج الصوت HeyGen Turbo مجاني للمطورين حتى 30 نونبر',
+    descriptionAr:
+      'أسرع نموذج صوتي لدى HeyGen، Voice Turbo، مجاني للمطورين حتى 30 نونبر: أحضر مفتاح الـ API، اختر الصوت المناسب، وابدأ إطلاق الكلام اليوم. حوّل النص إلى كلام طبيعي عبر واجهة HeyGen API دون أي تكلفة على النموذج طوال فترة العرض.',
     tagline: 'Free HeyGen voice API model for developers through Nov 30',
     description:
       "HeyGen's fastest voice model, Voice Turbo, is free for developers until November 30: bring an API key, pick a voice, and start shipping speech today. Convert text to natural speech through the HeyGen API with no charge for the model during the promo window.",

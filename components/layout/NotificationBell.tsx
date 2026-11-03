@@ -206,23 +206,16 @@ export function NotificationBell() {
             </div>
           </div>
 
-          {isAdmin ? (
+          {isAdmin || currentUser.username.toLowerCase() === 'yahianaim' ? (
+            // The row appears for the owner as soon as the site account is
+            // signed in — the JWT ping is a bonus, not a hard gate: after a
+            // reinstall only the site login exists, and gatekeeping the row
+            // on the admin JWT made push setup impossible until a separate
+            // email/password login was done again.
             <div className="flex items-center justify-between border-b border-border px-3.5 py-2">
               <span className="text-xs text-muted-foreground">Push for new tools</span>
               <PushSubscribeButton />
             </div>
-          ) : currentUser.username.toLowerCase() === 'yahianaim' ? (
-            // Admin account signed in but the admin session (email+password
-            // login) isn't valid — after a reinstall the JWT cookie is gone,
-            // so guide the owner back to the admin login instead of the row
-            // silently just missing.
-            <a
-              href="/profile/yahianaim"
-              className="flex items-center justify-between border-b border-border px-3.5 py-2 text-xs text-muted-foreground transition-colors hover:bg-muted/60"
-            >
-              <span>Re-enable pushes:</span>
-              <span className="font-medium text-brand-orange">Admin sign-in →</span>
-            </a>
           ) : null}
 
           {sorted.length === 0 ? (
