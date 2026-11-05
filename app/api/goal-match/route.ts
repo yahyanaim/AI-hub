@@ -8,7 +8,13 @@ import type { Tool, DevTool, Repo } from '@/types'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 const API_KEY = process.env.NVIDIA_API_KEY ?? ''
-const DEFAULT_MODEL = 'openai/gpt-oss-20b'
+// openai/gpt-oss-20b is still LISTED but its inference endpoint hangs
+// forever (audit Nov 2026: valid key, /v1/models 200ms, other models
+// answer; 20b and deepseek-v4.1-flash stall with no response and no
+// error). Migrated to the measured-fast successors on the same key/
+// endpoint: 95s-budget live draw on the real 30-candidate payload —
+// nemotron-3.5-lightning 21.4s valid JSON, minimax-m3.1-flash 26.4s.
+const DEFAULT_MODEL = 'nvidia/nemotron-3.5-lightning-30b-a3b'
 // Measured (Oct 2026, production payload for the reported false-empty
 // query): glm-5.3-flash never delivered inside ANY budget (45s, 60s,
 // 90s; >60s even with thinking-disabled request variants), while the
@@ -16,7 +22,7 @@ const DEFAULT_MODEL = 'openai/gpt-oss-20b'
 // deadline actively wastes the user's wait on abstentions and partial
 // failures (park/until-deadline semantics), so the fan-out stays single
 // — replace only with a model measured FASTER on the actual payload.
-const FALLBACK_MODELS: string[] = []
+const FALLBACK_MODELS: string[] = ['minimaxai/minimax-m3.1-flash']
 
 // Candidates are prefiltered and RANKED locally so the prompt stays small
 // and the model can only pick from REAL catalogue entries (IDs validated
