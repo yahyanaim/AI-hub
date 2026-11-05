@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
+import { matchToolsByGoal } from '@/lib/goal-finder'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 const API_KEY = process.env.NVIDIA_API_KEY ?? ''
@@ -32,11 +33,17 @@ export async function GET() {
   try {
     const raw = JSON.parse(modelsRes.body || '{}') as never
   } catch {}
+  const picks = matchToolsByGoal('Turn YouTube videos into short clips', false, 30)
+  const userPrompt =
+    'Goal: "Turn YouTube videos into short clips"\n\nCatalogue:\n' +
+    picks
+      .map((m) => `- [${m.kind === 'devtool' ? 'DevTool' : m.kind === 'repo' ? 'Repo' : 'Tool'}] ${m.item.id} | ${m.item.name} | ${m.item.category} | ${m.item.pricing} | tags: ${m.item.tags.join(', ')} | ${m.item.tagline}`)
+      .join('\n')
   const chat = (name: string, model: string, budgetMs = 30_000) =>
     timedFetch(name, 'https://integrate.api.nvidia.com/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model, messages: [{ role: 'system', content: GOAL_MATCH_SYSTEM_PROMPT }, { role: 'user', content: 'Goal: "turn long youtube videos into clips"' }], max_tokens: 4000, temperature: 0.2, stream: false }),
+      body: JSON.stringify({ model, messages: [{ role: 'system', content: GOAL_MATCH_SYSTEM_PROMPT }, { role: 'user', content: userPrompt }], max_tokens: 4000, temperature: 0.2, stream: false }),
     }, budgetMs)
   const results = await Promise.all([
     chat('deepseek', 'deepseek-ai/deepseek-v4.1-flash'),
@@ -63,7 +70,7 @@ export async function GET() {
   ])
   const ids = results.find((r) => 'ids' in r)?.ids ?? []
   return NextResponse.json(
-    { keyPresent: API_KEY.length > 0, target: target.toString(), ids, results },
+    { keyPresent: API_KEY.length > 0, target: target.toString(), candidates: picks.length, userChars: userPrompt.length, ids, results },
     {
       status: 200,
       headers: { 'X-Diag-Raw': 'goal-probe' },
