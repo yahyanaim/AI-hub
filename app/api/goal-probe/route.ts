@@ -27,6 +27,9 @@ async function timedFetch(label: string, url: string, init: RequestInit, ms: num
 export async function GET() {
   const target = new URL(process.env.GOAL_PROBE_URL ?? API_URL)
   const results = await Promise.all([
+    timedFetch('generic-post', 'https://postman-echo.com/post', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"ping":1}' }, 12_000),
+    timedFetch('llama-tiny', 'https://integrate.api.nvidia.com/v1/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'meta/llama-3.1-8b-instruct', messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }) }, 35_000),
+    timedFetch('gptoss120-tiny', 'https://integrate.api.nvidia.com/v1/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'openai/gpt-oss-120b', messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }) }, 35_000),
     timedFetch(
       'models',
       'https://integrate.api.nvidia.com/v1/models',
