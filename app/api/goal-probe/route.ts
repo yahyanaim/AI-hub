@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 const API_KEY = process.env.NVIDIA_API_KEY ?? ''
@@ -35,7 +36,7 @@ export async function GET() {
     timedFetch(name, 'https://integrate.api.nvidia.com/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model, messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }),
+      body: JSON.stringify({ model, messages: [{ role: 'system', content: GOAL_MATCH_SYSTEM_PROMPT }, { role: 'user', content: 'Goal: "turn long youtube videos into clips"' }], max_tokens: 4000, temperature: 0.2, stream: false }),
     }, budgetMs)
   const results = await Promise.all([
     chat('deepseek', 'deepseek-ai/deepseek-v4.1-flash'),
