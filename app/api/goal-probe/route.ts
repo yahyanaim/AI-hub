@@ -12,7 +12,7 @@ async function timedFetch(label: string, url: string, init: RequestInit, ms: num
   try {
     const res = await fetch(url, { ...init, signal: c.signal })
     const text = await res.text()
-    return { label, status: res.status, ms: Date.now() - start, body: text.slice(0, 220) }
+    return { label, status: res.status, ms: Date.now() - start, body: text.slice(0, 800) }
   } catch (err) {
     return {
       label,
@@ -39,17 +39,16 @@ export async function GET() {
     picks
       .map((m) => `- [${m.kind === 'devtool' ? 'DevTool' : m.kind === 'repo' ? 'Repo' : 'Tool'}] ${m.item.id} | ${m.item.name} | ${m.item.category} | ${m.item.pricing} | tags: ${m.item.tags.join(', ')} | ${m.item.tagline}`)
       .join('\n')
-  const chat = (name: string, model: string, budgetMs = 30_000) =>
+  const chat = (name: string, model: string, budgetMs = 95_000) =>
     timedFetch(name, 'https://integrate.api.nvidia.com/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model, messages: [{ role: 'system', content: GOAL_MATCH_SYSTEM_PROMPT }, { role: 'user', content: userPrompt }], max_tokens: 4000, temperature: 0.2, stream: false }),
+      body: JSON.stringify({ model, messages: [{ role: 'system', content: GOAL_MATCH_SYSTEM_PROMPT }, { role: 'user', content: userPrompt }], max_tokens: 8000, temperature: 0.2, stream: false }),
     }, budgetMs)
   const results = await Promise.all([
-    chat('deepseek', 'deepseek-ai/deepseek-v4.1-flash'),
-    chat('minimax', 'minimaxai/minimax-m3.1-flash'),
     chat('nemotron', 'nvidia/nemotron-3.5-lightning-30b-a3b'),
-    chat('oss20b', 'openai/gpt-oss-20b', 20_000),
+    chat('minimax', 'minimaxai/minimax-m3.1-flash'),
+    chat('kimi', 'moonshotai/kimi-k2.6'),
     fetch('https://integrate.api.nvidia.com/v1/models', { headers: { Authorization: `Bearer ${API_KEY}` }, signal: AbortSignal.timeout(12_000) })
       .then(async (res) => {
         const data = (await res.json().catch(() => ({}))) as { data?: { id?: string }[] }
