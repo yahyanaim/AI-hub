@@ -18417,6 +18417,21 @@ export const SEED_OFFERS: Offer[] = [
         description: 'Choose a voice in the HeyGen API docs and call the voice model from your app to start converting text to speech.',
       },
     ],
+    stepsAr: [
+      {
+        title: 'اقرأ بيان العرض',
+        description: 'افتح مقالة مدونة HeyGen لتتعرف على كيفية عمل الوصول المجاني لنموذج Voice Turbo وما يشمله.',
+        url: 'https://www.heygen.com/blog/heygen-voice-turbo',
+      },
+      {
+        title: 'احصل على مفتاح API',
+        description: 'أنشئ حساباً في HeyGen أو سجّل الدخول إليه، ثم أنشئ مفتاح API من لوحة المطور.',
+      },
+      {
+        title: 'اختر الصوت وابدأ الإطلاق',
+        description: 'اختر الصوت المناسب من توثيق HeyGen API واستدعِ نموذج الصوت من داخل تطبيقك لبدء تحويل النص إلى كلام طبيعي.',
+      },
+    ],
     upvotes: 0,
     bookmarks: 0,
     submittedBy: 'u6',
