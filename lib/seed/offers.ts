@@ -18439,4 +18439,58 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o342',
+    slug: '365datascience-free-access-november',
+    name: '365 Data Science Free Access',
+    taglineAr: 'وصول مجاني 100% لمنصة 365 Data Science من 5 إلى 20 نونبر',
+    descriptionAr:
+      'بتنظيم من 5 إلى 20 نونبر فقط: اشتغل ساعات معينة كاملة على منصة 365 Data Science دون أد.formData. جميع الدورات، كل المشاريع العملية، وكل الشهادات في علوم البيانات، الذكاء الاصطناعي، بايثون وتعلم الآلة - كل ما كان مدفوعاً صار مجاناً بالكامل لفترة محدودة. فرصة مثالية لتطوير مهاراتك ورفع مستواك المهني.',
+    tagline: '100% FREE access to the whole 365 Data Science platform, November 5-20 only',
+    description:
+      "For a limited time only, November 5-20: unlock free access to the entire 365 Data Science learning platform. ALL courses on data science, AI, Python, machine learning and more, ALL hands-on projects to build practical skills, and ALL certificates to showcase your achievements - everything that usually costs extra is completely FREE during the promo window. Don't miss this opportunity to level up your skills and start learning today.",
+    url: 'https://365datascience.com/pricing/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/365datascience.com.ico',
+    category: 'learning',
+    tags: ['365datascience', 'data-science', 'ai', 'python', 'machine-learning', 'certificates', 'free-access'],
+    pricing: 'free',
+    endsAt: '2026-11-20',
+    steps: [
+      {
+        title: 'Open the offer page',
+        description: 'Visit the 365 Data Science pricing page between November 5 and 20, 2026 to find the 100% free access deal.',
+        url: 'https://365datascience.com/pricing/',
+      },
+      {
+        title: 'Sign up for free',
+        description: 'Create a free account (or log in) to activate your free access to the entire platform.',
+      },
+      {
+        title: 'Learn, build and certify',
+        description: 'Take any course, complete hands-on projects, and earn certificates before the offer ends on November 20.',
+      },
+    ],
+    stepsAr: [
+      {
+        title: 'افتح صفحة العرض',
+        description: 'زُر صفحة الأسعار في 365 Data Science بين 5 و20 نونبر 2026 للاستفادة من دخول مجانٍ بنسبة 100%.',
+        url: 'https://365datascience.com/pricing/',
+      },
+      {
+        title: 'أنشئ حساباً مجانياً',
+        description: 'أنشئ حساباً مجانياً (أو سجّل الدخول) لتفعيل وصولك المجاني إلى كامل المنصة.',
+      },
+      {
+        title: 'تعلم وطبّق واحصل على الشهادة',
+        description: 'اشترك في أي دورة، أنجز المشاريع التطبيقية، واحصل على شهاداتك قبل انتهاء العرض في 20 نونبر.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+
 ]
