@@ -31,10 +31,17 @@ export async function GET() {
   try {
     const raw = JSON.parse(modelsRes.body || '{}') as never
   } catch {}
+  const chat = (name: string, model: string, budgetMs = 30_000) =>
+    timedFetch(name, 'https://integrate.api.nvidia.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model, messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }),
+    }, budgetMs)
   const results = await Promise.all([
-    timedFetch('generic-post', 'https://postman-echo.com/post', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"ping":1}' }, 12_000),
-    timedFetch('llama-tiny', 'https://integrate.api.nvidia.com/v1/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'meta/llama-3.1-8b-instruct', messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }) }, 35_000),
-    timedFetch('gptoss120-tiny', 'https://integrate.api.nvidia.com/v1/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'openai/gpt-oss-120b', messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }) }, 35_000),
+    chat('deepseek', 'deepseek-ai/deepseek-v4.1-flash'),
+    chat('minimax', 'minimaxai/minimax-m3.1-flash'),
+    chat('nemotron', 'nvidia/nemotron-3.5-lightning-30b-a3b'),
+    chat('oss20b', 'openai/gpt-oss-20b', 20_000),
     fetch('https://integrate.api.nvidia.com/v1/models', { headers: { Authorization: `Bearer ${API_KEY}` }, signal: AbortSignal.timeout(12_000) })
       .then(async (res) => {
         const data = (await res.json().catch(() => ({}))) as { data?: { id?: string }[] }
