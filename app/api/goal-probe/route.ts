@@ -35,27 +35,20 @@ export async function GET() {
     timedFetch('generic-post', 'https://postman-echo.com/post', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"ping":1}' }, 12_000),
     timedFetch('llama-tiny', 'https://integrate.api.nvidia.com/v1/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'meta/llama-3.1-8b-instruct', messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }) }, 35_000),
     timedFetch('gptoss120-tiny', 'https://integrate.api.nvidia.com/v1/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'openai/gpt-oss-120b', messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }) }, 35_000),
-    timedFetch(
-      'models',
-      'https://integrate.api.nvidia.com/v1/models',
-      { headers: { Authorization: `Bearer ${API_KEY}` } },
-      12_000
-    ).then((r) => {
-      try {
-        const data = JSON.parse(r.body || '{}') as { data?: { id?: string }[] }
+    fetch('https://integrate.api.nvidia.com/v1/models', { headers: { Authorization: `Bearer ${API_KEY}` }, signal: AbortSignal.timeout(12_000) })
+      .then(async (res) => {
+        const data = (await res.json().catch(() => ({}))) as { data?: { id?: string }[] }
         const ids = (data.data ?? []).map((m) => m.id ?? '').filter(Boolean)
-        return { ...r, ids: ids.filter((i) => /gpt-oss|glm|qwen|deepseek|llama-3|kimi/i.test(i)).slice(0, 40) }
-      } catch {
-        return { ...r, ids: [] as string[] }
-      }
-    }),
+        return { label: 'models', status: res.status, ids }
+      })
+      .catch((err) => ({ label: 'models', status: 0, ids: [] as string[], errName: err instanceof Error ? err.name : 'x' })),
     timedFetch(
       'chat-candidate',
       target.toString(),
       {
         method: 'POST',
         headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model: 'openai/gpt-oss-20b-fp4', messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }),
+        body: JSON.stringify({ model: 'zai-org/glm-4.7-flash', messages: [{ role: 'user', content: 'hi' }], max_tokens: 16, stream: false }),
       },
       35_000
     ),
