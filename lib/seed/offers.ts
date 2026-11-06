@@ -18492,5 +18492,60 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o343',
+    slug: 'azure-free-account-200-credit',
+    name: 'Azure Free Account & $200 Credit',
+    taglineAr: 'رصيد 200$ مجاني لمدة 30 يوماً + 12 شهراً من الخدمات السحابية المجانية على Microsoft Azure',
+    descriptionAr:
+      'حساب Azure المجاني يمنحك رصيداً بـ 200$ للاستخدام خلال أول 30 يوماً على أي خدمة سحابية، مع حماية من المصاريف غير المتوقعة - لا خصم من البطاقة إلا بعد الترقية بنفسك. تشمل الحزمة أعداداً شهرية مجانية لأكثر من 20 خدمة شهيرة طوال 12 شهراً (750 ساعة شهرياً من الأجهزة الافتراضية الصغيرة B-series، Azure App Service، سجل حاويات Standard بسعة 100GB، قواعد بيانات PostgreSQL وMySQL المُدارة، و400 RU/s إضافية + 25GB تخزين في Cosmos DB)، إضافة إلى أكثر من 65 خدمة "مجانية دائماً" بحدود شهرية متجددة طوال حياة الحساب: Azure Functions ( مليون طلب شهرياً)، Cosmos DB (1000 RU/s + 25GB دائماً)، Azure DevOps (5 مستخدمين ومستودعات Git خاصة بلا حدود)، Azure Speech (500 ألف حرف عصبي شهرياً)، Azure Container Apps، وبدائل Azure SQL من دون الخادم (100 ألف ثانية vCore + 32GB). مثالي للتجارب وتطوير التطبيقات قبل الانتقال إلى الدفع حسب الاستخدام.',
+    tagline: '$200 free credit for 30 days + 12 months of free cloud services on Microsoft Azure',
+    description:
+      "The Azure free account gives you a $200 credit to spend on any cloud service during your first 30 days, with spending protection - your card is never charged unless you upgrade yourself. It stacks free monthly amounts of 20+ popular services for 12 months: 750 hours/month of small burstable B-series VMs, Azure App Service, a Standard Container Registry with 100GB storage, managed PostgreSQL and MySQL databases, and an extra 400 RU/s + 25GB in Cosmos DB. On top of that, 65+ always-free services keep renewing monthly free amounts as long as your account lives: Azure Functions (1 million requests/month), Cosmos DB (1000 RU/s + 25GB), Azure DevOps (5 users with unlimited private Git repos), Azure Speech (0.5 million neural characters/month), Azure Container Apps, and serverless Azure SQL (100,000 vCore seconds + 32GB). Perfect for building and testing before moving to pay-as-you-go.",
+    url: 'https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/azure.microsoft.com.ico',
+    category: 'api-access',
+    tags: ['azure', 'microsoft', 'cloud', 'free-credit', 'free-tier', 'virtual-machines', 'cosmos-db', 'azure-functions', 'devops'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create your Azure free account',
+        description: 'Sign up at azure.microsoft.com/free with your email and a card for identity check (never charged unless you upgrade). Your $200 credit activates for 30 days.',
+        url: 'https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account',
+      },
+      {
+        title: 'Turn on the free services',
+        description: 'From the Azure portal, create the always-free services (Functions, Cosmos DB free tier, DevOps) and the 12-month free ones (B-series VMs 750 h/month, App Service, Container Registry, PostgreSQL/MySQL).',
+        url: 'https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services',
+      },
+      {
+        title: 'Track credit and quotas',
+        description: 'Monitor your remaining $200 and monthly free amounts in Cost Management. The spending limit stops services instead of charging; upgrade to pay-as-you-go only when you want more.',
+      },
+    ],
+    stepsAr: [
+      {
+        title: 'أنشئ حساب Azure المجاني',
+        description: 'سجّل على azure.microsoft.com/free باستخدام بريدك وبطاقة للتحقق من الهوية (لا خصم إلا إذا رقّيت بنفسك). يُفعَّل رصيد الـ 200$ لمدة 30 يوماً.',
+        url: 'https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account',
+      },
+      {
+        title: 'شغّل الخدمات المجانية',
+        description: 'من بوابة Azure أنشئ الخدمات "المجانية دائماً" (Functions، Cosmos DB بحد مجاني، DevOps) والخدمات المجانية لـ 12 شهراً (أجهزة B-series بـ 750 ساعة شهرياً، App Service، سجل الحاويات، PostgreSQL/MySQL).',
+        url: 'https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-free-services',
+      },
+      {
+        title: 'راقب الرصيد والحصص',
+        description: 'تابع ما تبقّى من الـ 200$ والأعداد المجانية الشهرية في Cost Management. حد الإنفاق يوقف الخدمات بدل خصم البطاقة؛ ورّق إلى الدفع حسب الاستخدام فقط عند الحاجة.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
+
 
 ]
