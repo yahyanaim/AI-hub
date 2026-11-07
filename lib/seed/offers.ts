@@ -18546,6 +18546,74 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
-
-
+  {
+    id: 'o344',
+    slug: 'lattice-opencode-free-ai-latex-editor',
+    name: 'Lattice - Free AI LaTeX Editor',
+    taglineAr: 'محرر LaTeX مفتوح المصدر مع ذكاء اصطناعي مجاني عبر OpenCode وOpenRouter',
+    descriptionAr:
+      'Lattice محرر LaTeX مجاني ومفتوح المصدر لنظام macOS لكتابة الأوراق البحثية والكتب الأكاديمية ومستندات PDF الاحترافية مع معاينة مباشرة. اربطه بوكيل OpenCode عبر مفتاح OpenRouter المجاني لتوليد الجذور اللاتيه، إصلاح الأخطاء، تنسيق المعادلات وتحسين المستندات دون اشتراك مدفوع. الحدود المجانية: حتى 50 طلب API يومياً على المستوى المجاني، نماذج مجانية بحدود رموز إضافية، وتجهيز PDF محلياً لا يستهلك أي طلبات. يتطلب macOS 14 أو أحدث.',
+    tagline: 'Free AI LaTeX editor: research papers and books with OpenCode + OpenRouter free API',
+    description:
+      "Lattice is a free open-source LaTeX editor for macOS to write research papers, academic books and professional PDFs with a live preview. Connect it to the OpenCode agent through a free OpenRouter API key to generate LaTeX, fix errors, format equations and improve documents with no paid AI subscription. Free limits: up to 50 API requests/day on OpenRouter's basic tier, free models carry extra rate/token limits, and local PDF compilation never consumes requests. Requires macOS 14+.",
+    url: 'https://leo1oel.github.io/lattice/',
+    logoUrl: '/logos/lattice-latex.png',
+    category: 'api-access',
+    tags: ['latex', 'academic-writing', 'ai-editor', 'opencode', 'openrouter', 'pdf', 'research'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Install Lattice + BasicTeX',
+        description: 'Download Lattice and set up BasicTeX so PDF compilation runs locally (it never consumes API requests).',
+        url: 'https://leo1oel.github.io/lattice/',
+      },
+      {
+        title: 'Get a free OpenRouter key',
+        description: 'Create an OpenRouter account and generate your API key from the settings.',
+        url: 'https://openrouter.ai/settings/keys',
+      },
+      {
+        title: 'Install OpenCode',
+        description: 'Run `brew install opencode` in Terminal.',
+      },
+      {
+        title: 'Connect the API',
+        description: 'Launch opencode, type /connect, pick OpenRouter, paste your key, then use /models to select a free model.',
+      },
+      {
+        title: 'Start writing',
+        description: 'Open Lattice, select OpenCode in the Agent panel, and write or edit LaTeX with AI assistance.',
+      },
+    ],
+    stepsAr: [
+      {
+        title: 'ثبّت Lattice وBasicTeX',
+        description: 'حمّل Lattice وأعد تجهيز BasicTeX حتى يعمل تجهيز الـ PDF محلياً (لا يستهلك أي طلبات API).',
+        url: 'https://leo1oel.github.io/lattice/',
+      },
+      {
+        title: 'احصل على مفتاح OpenRouter مجاني',
+        description: 'أنشئ حساب OpenRouter وأنشئ مفتاح API من الإعدادات.',
+        url: 'https://openrouter.ai/settings/keys',
+      },
+      {
+        title: 'ثبّت OpenCode',
+        description: 'نفّذ الأمر `brew install opencode` في الطرفية.',
+      },
+      {
+        title: 'اربط المفتاح',
+        description: 'شغّل opencode، اكتب /connect، اختر OpenRouter، أدخل المفتاح، ثم استخدم /models لاختيار نموذج مجاني.',
+      },
+      {
+        title: 'ابدأ الكتابة',
+        description: 'افتح Lattice، اختر OpenCode من لوحة الوكيل، وابدأ كتابة أو تحرير LaTeX بمساعدة الذكاء الاصطناعي.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
