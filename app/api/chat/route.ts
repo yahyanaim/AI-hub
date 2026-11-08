@@ -2,11 +2,14 @@ import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
-// Verified working on this account (Feb 2026 probe: fast 2-3s for trivial prompt).
-// kimi-k3 works but needs 25-35s+ per request — keep it as last-resort fallback only.
-// deepseek-v4-flash returns 410 Gone (retired) — gpt-oss-20b verified live.
-const DEFAULT_MODEL = 'openai/gpt-oss-20b'
-const FALLBACK_MODELS = ['z-ai/glm-5.3-flash']
+// Nov 2026 audit: openai/gpt-oss-20b is still LISTED on integrate.api.nvidia.com
+// but its inference hangs forever (no response, no error) — the career advisor
+// surfaced "AI service temporarily unavailable" from the 45s abort. deepseek-v4.1-
+// flash also hangs; kimi-k2.6 is 404 for this account. Measured live on production
+// with the FULL system prompt: nvidia/nemotron-3.5-lightning-30b-a3b delivers in
+// 21-50s and minimaxai/minimax-m3.1-flash in ~26s — both return valid content.
+const DEFAULT_MODEL = 'nvidia/nemotron-3.5-lightning-30b-a3b'
+const FALLBACK_MODELS = ['minimaxai/minimax-m3.1-flash']
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
