@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Send, Loader2, SearchX, MessageSquare, Plus, Search,
+  Send, Loader2, SearchX, MessageSquare, Plus, Search, SquarePen,
   PanelLeft, PanelLeftClose, Trash2, ChevronDown, X,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -298,7 +299,7 @@ export default function ChatPage() {
   }
 
   const SidebarInner = (
-    <div className="flex h-full w-[268px] max-w-[85vw] flex-col border-r border-border bg-muted/60 @[680px]/sidebar:rounded-none">
+    <div className="flex h-full w-[268px] max-w-[85vw] flex-col border-r border-border bg-muted @[680px]/sidebar:rounded-none">
       {/* Top: logo + collapse */}
       <div className="flex items-center justify-between px-3 py-3">
         <img src="/icons/push-icon-192.png" alt="AI Hunt" className="h-8 w-8 rounded-lg" />
@@ -372,7 +373,7 @@ export default function ChatPage() {
       </nav>
 
       {/* Bottom: per-user identity */}
-      <div className="border-t border-border/60 p-2">
+      <div className="border-t border-border/60 p-2" style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}>
         {username && (
           <div className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-sm">
             <img src="/icons/push-icon-192.png" alt="" className="h-6 w-6 shrink-0 rounded-full" />
@@ -426,17 +427,32 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-dvh overflow-hidden bg-background text-foreground">
-      {/* ---- SIDEBAR (static column on desktop, drawer on mobile) ---- */}
-      {isMobile && sidebarOpen && (
-        <>
-          <button
-            className="fixed inset-0 z-40 bg-black/40"
+      {/* ---- SIDEBAR (static column on desktop, slide-in drawer on mobile) ---- */}
+      <AnimatePresence>
+        {isMobile && sidebarOpen && (
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             onClick={() => setSidebarOpen(false)}
-            aria-label="Close sidebar"
+            className="fixed inset-0 z-40 bg-black/50"
           />
-          <aside className="fixed inset-y-0 left-0 z-50">{SidebarInner}</aside>
-        </>
-      )}
+        )}
+        {isMobile && sidebarOpen && (
+          <motion.aside
+            key="drawer"
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ type: 'tween', duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+            className="fixed inset-y-0 left-0 z-50 shadow-2xl"
+          >
+            {SidebarInner}
+          </motion.aside>
+        )}
+      </AnimatePresence>
       {!isMobile && sidebarOpen && <aside className="shrink-0">{SidebarInner}</aside>}
 
       {/* ---- MAIN ---- */}
@@ -449,7 +465,7 @@ export default function ChatPage() {
                 className="mr-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted"
                 aria-label="Open sidebar"
               >
-                {isMobile ? <MessageSquare className="h-5 w-5" /> : <PanelLeft className="h-5 w-5" />}
+                <PanelLeft className="h-5 w-5" />
               </button>
             )}
             <span className="flex items-center gap-1 truncate text-[15px] font-semibold">
@@ -457,6 +473,15 @@ export default function ChatPage() {
               <ChevronDown className="h-4 w-4 text-muted-foreground" />
             </span>
           </div>
+          {isMobile && (
+            <button
+              onClick={newChat}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted"
+              aria-label="New chat"
+            >
+              <SquarePen className="h-5 w-5" />
+            </button>
+          )}
         </header>
 
         <main className="flex-1 overflow-y-auto bg-gradient-to-b from-brand-orange/[0.06] via-background/0 to-brand-orange/[0.13]">
@@ -500,7 +525,7 @@ export default function ChatPage() {
         </main>
 
         {/* Composer */}
-        <div className="shrink-0 px-3 pb-3 pt-1 sm:px-6 sm:pb-4">
+        <div className="shrink-0 px-3 pt-1 sm:px-6" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
           <div className="mx-auto w-full max-w-3xl">
             <div
               className={cn(
