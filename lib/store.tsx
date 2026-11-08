@@ -1035,6 +1035,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     // Reject empty/short handles (e.g. '___' sanitizes to '') and cap the
     // local user list so fake accounts can't grow localStorage unboundedly.
     if (clean.length < MIN_USERNAME_LENGTH) return
+    // Marker for cross-tab clients that need the plain username (e.g. the
+    // standalone AI advisor at /chat) without re-implementing the store.
+    try {
+      localStorage.setItem('ai-hunt-username', clean)
+    } catch {}
     // New-account detection happens outside the updater (stateRef mirrors the
     // latest state) so the analytics ping fires exactly once per signup.
     const isNewSignup = !stateRef.current.users.find(

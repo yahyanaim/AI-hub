@@ -18616,4 +18616,56 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o345',
+    slug: 'simular-box-free-cloud-computer',
+    name: 'Simular Box - Free Cloud Computer for AI Agents',
+    taglineAr: 'حاسوب سحابي مجاني ومستمر لوكالات الذكاء الاصطناعي عبر MCP',
+    descriptionAr:
+      'Simular Box يمنح وكلاء الذكاء الاصطناعي حاسوباً سحابياً كاملاً بنظام Ubuntu مجاناً: متصفح Chrome، طرفية Terminal، وأتمتة حقيقية للشاشة - يفتح المواقع، ينقر، يكتب محتوى الشاشة ونفّذ الأوامر، كل ذلك من دون تلاعب في جهازك الشخصي. يعمل مع Claude وChatGPT وClaude Code وCodex وCursor وأي أداة متوافقة مع MCP، مع ملفات ومساحة عمل تبقى محفوظة حتى عند نوم الحساب. استدعاءات النماذج تستهلك الأرصدة اليومية لحسابك. مناسب لـ: المطورون ومهندسو الذكاء الاصطناعي وذوي الأتمتة الذين يبنون سير عمل ذاتي التشغيل.',
+    tagline: "Free persistent Ubuntu cloud desktop for your AI agents via MCP",
+    description:
+      "Give your AI agents their own cloud computer for free: Simular Box provides a free persistent Ubuntu cloud desktop connected to your favorite AI tools through MCP. Agents can open Chrome, browse sites, click, type, read the screen and run terminal commands without touching your personal computer. Works with Claude, ChatGPT, Claude Code, Codex, Cursor and any MCP-compatible tool, with live screen monitoring you can take over manually at any time, and files plus workspace that persist even while the computer sleeps. Model calls consume your account's daily credits. Best for developers, AI engineers and automation enthusiasts building autonomous workflows.",
+    url: 'https://box.simular.ai/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/simular.ai.ico',
+    category: 'api-access',
+    tags: ['mcp', 'ai-agents', 'cloud-computer', 'browser-automation', 'ubuntu', 'claude', 'opencode', 'automation'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Open Simular Box',
+        description: 'Visit box.simular.ai and sign in with your Simular account.',
+        url: 'https://box.simular.ai/',
+      },
+      {
+        title: 'Connect your AI agent',
+        description: 'Link Claude, ChatGPT, Claude Code, Codex, Cursor, or any MCP-compatible tool to the cloud computer.',
+      },
+      {
+        title: 'Start automating',
+        description: 'Let your agent open Chrome, browse, click, type, and run terminal commands on the persistent Ubuntu workspace while you monitor the screen live and can take control at any moment.',
+      },
+    ],
+    stepsAr: [
+      {
+        title: 'افتح Simular Box',
+        description: 'زر box.simular.ai وسجّل الدخول بحساب Simular الخاص بك.',
+        url: 'https://box.simular.ai/',
+      },
+      {
+        title: 'اربط وكيل الذكاء الاصطناعي',
+        description: 'اربط Claude أو ChatGPT أو Claude Code أو Codex أو Cursor أو أي أداة متوافقة مع MCP بالحاسوب السحابي.',
+      },
+      {
+        title: 'ابدأ الأتمتة',
+        description: 'دَع الوكيل يفتح Chrome ويجول وينقر ويكتب ويشغّل أوامر الطرفية في مساحة Ubuntu المستمرة بينما تراقب الشاشة مباشرة وتتولى التحكم متى شئت.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
