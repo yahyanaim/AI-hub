@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, User, Sparkles, Loader2, X, MessageSquare, AlertCircle, Lock } from 'lucide-react'
+import { Send, User, Sparkles, Loader2, X, AlertCircle, Lock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
 import { DonationGateChat } from './DonationGateChat'
@@ -179,7 +179,7 @@ export function ChatBot() {
           )}
           aria-label="Open chat"
         >
-          {hasDonated ? <MessageSquare className="h-6 w-6" /> : <Lock className="h-5 w-5" />}
+          <img src="/chatbot-mascot.svg" alt="" className="h-11 w-11 rounded-full object-contain" />
         </button>
       )}
       {!hasDonated && !open && (
@@ -219,8 +219,8 @@ export function ChatBot() {
                 }}
               >
                 <img
-                  src="/logo.png"
-                  alt="AI Hunt"
+                  src="/chatbot-mascot.svg"
+                  alt="AIHubTools AI assistant"
                   className="h-7 w-7 rounded-full"
                 />
               </a>
@@ -259,7 +259,7 @@ export function ChatBot() {
                     )}
                   >
                     {msg.role === 'assistant' ? (
-                      <img src="/logo.png" alt="AI Hunt" className="h-5 w-5 rounded-full" />
+                      <img src="/chatbot-mascot.svg" alt="AIHubTools AI assistant" className="h-5 w-5 rounded-full" />
                     ) : (
                       <User className="h-3.5 w-3.5" />
                     )}
@@ -282,7 +282,7 @@ export function ChatBot() {
               ))}
               {loading && !messages.some(m => m.role === 'assistant' && m.content === '') && (
                 <div className="mb-4 flex gap-3">
-                  <img src="/logo.png" alt="AI Hunt" className="h-5 w-5 rounded-full" />
+                  <img src="/chatbot-mascot.svg" alt="AIHubTools AI assistant" className="h-5 w-5 rounded-full" />
                   <div className="rounded-lg bg-muted/50 px-3.5 py-2.5">
                     <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                   </div>
