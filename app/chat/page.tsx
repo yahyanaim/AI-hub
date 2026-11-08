@@ -28,6 +28,13 @@ export default function ChatPage() {
   const [error, setError] = useState('')
   const [hasDonated, setHasDonated] = useState<boolean | null>(null)
   const [gateOpen, setGateOpen] = useState(false)
+  // Matches the inline widget's behavior: the gate is informational and
+  // dismissible — dismissing it lets the user chat without donating.
+  const [unlocked, setUnlocked] = useState(false)
+  const unlock = () => {
+    setUnlocked(true)
+    setGateOpen(false)
+  }
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
@@ -35,6 +42,7 @@ export default function ChatPage() {
     try {
       const donated = localStorage.getItem('ai-hunt-donated') === 'true'
       setHasDonated(donated)
+      setUnlocked(donated)
       if (!donated) setGateOpen(true)
     } catch {
       setHasDonated(false)
@@ -160,7 +168,7 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-dvh flex-col bg-background">
-      <DonationGateChat open={gateOpen && hasDonated === false} onDismiss={() => setGateOpen(false)} />
+      <DonationGateChat open={gateOpen && hasDonated === false} onDismiss={unlock} />
 
       {/* Top bar */}
       <header className="flex shrink-0 items-center justify-between border-b border-border bg-muted/40 px-4 py-3">
@@ -247,7 +255,7 @@ export default function ChatPage() {
             />
             <button
               onClick={sendMessage}
-              disabled={!input.trim() || loading || hasDonated === false}
+              disabled={!input.trim() || loading || !unlocked}
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-orange text-white transition-colors hover:bg-orange-600 disabled:opacity-40"
               aria-label="Send"
             >
