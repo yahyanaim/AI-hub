@@ -251,7 +251,7 @@ export default function ChatPage() {
               onKeyDown={handleKeyDown}
               placeholder="Describe your career goal, current skills, and constraints..."
               className="max-h-40 min-h-[1.5rem] flex-1 resize-none bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground disabled:opacity-60"
-              disabled={loading || hasDonated === false}
+              disabled={loading || !unlocked}
             />
             <button
               onClick={sendMessage}
