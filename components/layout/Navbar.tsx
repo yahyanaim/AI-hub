@@ -83,7 +83,7 @@ export function Navbar() {
             aria-label="AI Hunt home"
           >
             <span className="flex size-14 items-center justify-center overflow-hidden bg-transparent transition-transform group-hover:scale-105">
-              <Image src="/aihubtools-geometric.svg" alt="AIHubTools" width={56} height={56} className="h-full w-full object-contain" />
+              <Image src="/logo.png" alt="AI Hunt" width={56} height={56} className="h-full w-full object-contain" />
             </span>
           </Link>
 
