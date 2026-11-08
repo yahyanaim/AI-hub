@@ -51,23 +51,22 @@ export function DonationGateChat({ open, onDismiss }: { open: boolean; onDismiss
               </p>
 
               <a
-                href="https://ko-fi.com/yahianaim"
+                href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=yahyanaim2001%40gmail.com&item_name=AI+Career+Advisor+API+costs&currency_code=USD"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleSupport}
-                className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+                className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#003087] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#00246b]"
               >
-                <Coffee className="h-5 w-5" />
-                Support API costs on Ko-fi
+                <span className="font-bold italic tracking-tight">PayPal</span>
+                Donate
                 <ArrowRight className="h-4 w-4" />
               </a>
 
               <button
                 onClick={onDismiss}
-                disabled={!supported}
-                className="mt-3 w-full rounded-lg border border-border bg-card py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                className="mt-3 w-full rounded-lg border border-border bg-card py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
-                {supported ? "I've supported - start chatting" : 'Click Ko-fi link above first'}
+                {supported ? "I've donated - start chatting" : 'Donate to unlock — or close to continue'}
               </button>
             </div>
           </motion.div>

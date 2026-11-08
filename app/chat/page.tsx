@@ -30,6 +30,10 @@ const GREETING =
   "Hey! I'm your AI Career Advisor from AI Hunt. I'll help you build your skills, find the right tools and courses, and create a learning plan that actually works for you. What are you looking to achieve?"
 
 const STATE_KEY = 'ai-hunt-state-v4'
+// PayPal donation destination (owner email). PayPal's email donate URL both
+// explains the purpose and goes straight to checkout — no third-party page.
+const PAYPAL_URL =
+  'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=yahyanaim2001%40gmail.com&item_name=AI+Career+Advisor+API+costs&currency_code=USD'
 const USERNAME_KEY = 'ai-hunt-username'
 const MAX_CONTEXT_MESSAGES = 40
 
@@ -321,7 +325,7 @@ export default function ChatPage() {
     <div className="flex h-full w-[268px] max-w-[85vw] flex-col border-r border-border bg-muted/60 @[680px]/sidebar:rounded-none">
       {/* Top: logo + collapse */}
       <div className="flex items-center justify-between px-3 py-3">
-        <img src="/logo.png" alt="AI Hunt" className="h-8 w-8 rounded-lg" />
+        <img src="/icons/push-icon-192.png" alt="AI Hunt" className="h-8 w-8 rounded-lg" />
         <button
           onClick={sidebarToggle}
           className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted"
@@ -404,13 +408,13 @@ export default function ChatPage() {
           </div>
         )}
         <a
-          href="https://ko-fi.com/yahianaim"
+          href={PAYPAL_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-foreground hover:bg-muted"
         >
           <Coffee className="h-4 w-4 shrink-0 text-brand-orange" />
-          <span>Support API costs</span>
+          <span>Support via PayPal</span>
         </a>
       </div>
     </div>
@@ -503,7 +507,7 @@ export default function ChatPage() {
               <div key={i} className={cn('mb-6 sm:mb-7', msg.role === 'user' && 'flex justify-end')}>
                 {msg.role === 'assistant' ? (
                   <div className="flex gap-2.5 sm:gap-3">
-                    <img src="/logo.png" alt="" className="mt-0.5 h-7 w-7 shrink-0 rounded-full border border-border sm:h-8 sm:w-8" />
+                    <img src="/icons/push-icon-192.png" alt="" className="mt-0.5 h-7 w-7 shrink-0 rounded-full border border-border sm:h-8 sm:w-8" />
                     <div className="min-w-0 flex-1 pt-0.5">
                       {msg.content === '' && loading ? (
                         <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
@@ -521,7 +525,7 @@ export default function ChatPage() {
             ))}
             {stillLoadingEmpty && (
               <div className="mb-6 flex gap-2.5 sm:mb-7 sm:gap-3">
-                <img src="/logo.png" alt="" className="h-7 w-7 rounded-full border border-border sm:h-8 sm:w-8" />
+                <img src="/icons/push-icon-192.png" alt="" className="h-7 w-7 rounded-full border border-border sm:h-8 sm:w-8" />
                 <div className="pt-2">
                   <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                 </div>
@@ -542,7 +546,7 @@ export default function ChatPage() {
           <div className="mx-auto w-full max-w-3xl">
             <div
               className={cn(
-                'flex items-end gap-2 rounded-[24px] border border-border bg-card px-3 py-2.5 shadow-[0_2px_12px_hsl(var(--foreground)/0.06)] focus-within:border-brand-orange/50 sm:rounded-[28px] sm:px-4',
+                'flex items-end gap-2 rounded-[24px] border border-border bg-card px-3 py-2.5 shadow-[0_2px_12px_hsl(var(--foreground)/0.06)] focus-within:border-brand-orange/60 focus-within:ring-2 focus-within:ring-brand-orange/20 sm:rounded-[28px] sm:px-4',
                 !unlocked && 'opacity-90'
               )}
             >
@@ -571,7 +575,7 @@ export default function ChatPage() {
               <button
                 onClick={sendMessage}
                 disabled={!input.trim() || loading || !unlocked}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-foreground text-background transition-opacity hover:opacity-80 disabled:opacity-30"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-orange text-white transition-colors hover:bg-orange-600 disabled:opacity-30"
                 aria-label="Send"
               >
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
