@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Send, User, Sparkles, Loader2, X, MessageSquare, AlertCircle, Lock } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import ReactMarkdown from 'react-markdown'
+import { Markdown } from '@/components/ui/Markdown'
 import { DonationGateChat } from './DonationGateChat'
 
 type Message = {
@@ -260,9 +260,7 @@ export function ChatBot() {
                     )}
                   >
                     {msg.role === 'assistant' ? (
-                      <div className="prose prose-sm dark:prose-invert max-w-none text-left [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_p]:text-left [&_ul]:pl-4 [&_li]:text-sm [&_li]:text-left [&_code]:rounded [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-xs">
-                        <ReactMarkdown>{msg.content}</ReactMarkdown>
-                      </div>
+                      <Markdown className="text-left text-sm">{msg.content}</Markdown>
                     ) : (
                       <p className="whitespace-pre-wrap text-left">{msg.content}</p>
                     )}
