@@ -154,11 +154,15 @@ export default function ChatPage() {
 
   useEffect(() => {
     setIsMobile(window.matchMedia('(max-width: 767px)').matches)
-    setSidebarOpen(!window.matchMedia('(max-width: 767px)').matches)
+    const mobile = window.matchMedia('(max-width: 767px)').matches
+    setSidebarOpen(!mobile)
     try {
-      setHasDonated(localStorage.getItem('ai-hunt-donated') === 'true')
-      // NOTE: donation flag does not gate typing — the gate is dismissible
-      // (parité with the inline widget). Account presence gates persistence.
+      const donated = localStorage.getItem('ai-hunt-donated') === 'true'
+      setHasDonated(donated)
+      // The gate is informational and dismissible (same rule as the inline
+      // widget): show it once for donors-to-be; donated users skip it.
+      if (donated) setUnlocked(true)
+      else setGateOpen(true)
     } catch {}
     try {
       const name = localStorage.getItem(USERNAME_KEY)
