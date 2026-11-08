@@ -6,6 +6,7 @@ import './globals.css'
 import { AppProvider } from '@/lib/store'
 import { SITE_URL } from '@/lib/site'
 import { Navbar } from '@/components/layout/Navbar'
+import { ChatBare } from '@/components/layout/ChatBare'
 import { FooterGate } from '@/components/layout/FooterGate'
 import { SupportReminder } from '@/components/layout/SupportReminder'
 import { ReferralDonateModal } from '@/components/layout/ReferralDonateModal'
@@ -199,12 +200,16 @@ export default function RootLayout({
       <body>
         <AppProvider>
           <div className="relative z-10 flex min-h-screen flex-col">
-            <Navbar />
+            <ChatBare>
+              <Navbar />
+            </ChatBare>
             <main className="flex-1">{children}</main>
-            <div className="container-page">
-              <SupportReminder />
-            </div>
-            <FooterGate />
+            <ChatBare>
+              <div className="container-page">
+                <SupportReminder />
+              </div>
+              <FooterGate />
+            </ChatBare>
           </div>
           <CommandPalette />
           <AuthModal />
@@ -224,7 +229,9 @@ export default function RootLayout({
               </Script>
             </>
           )}
-          <ChatBot />
+          <ChatBare>
+            <ChatBot />
+          </ChatBare>
         </AppProvider>
       </body>
     </html>
