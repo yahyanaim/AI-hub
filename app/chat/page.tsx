@@ -2,12 +2,11 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import {
-  Send, Loader2, SearchX, MessageSquare, Lock, Plus, Search,
-  PanelLeft, PanelLeftClose, Trash2, ChevronDown, Coffee, Settings, UserRound, X,
+  Send, Loader2, SearchX, MessageSquare, Plus, Search,
+  PanelLeft, PanelLeftClose, Trash2, ChevronDown, X,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
-import { DonationGateChat } from '@/components/chat/DonationGateChat'
 
 // Standalone AI Career Advisor (opened from the widget header logo). Mirrors
 // the ChatGPT layout: collapsible left sidebar with the per-account chat
@@ -30,10 +29,6 @@ const GREETING =
   "Hey! I'm your AI Career Advisor from AI Hunt. I'll help you build your skills, find the right tools and courses, and create a learning plan that actually works for you. What are you looking to achieve?"
 
 const STATE_KEY = 'ai-hunt-state-v4'
-// PayPal donation destination (owner email). PayPal's email donate URL both
-// explains the purpose and goes straight to checkout — no third-party page.
-const PAYPAL_URL =
-  'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=yahyanaim2001%40gmail.com&item_name=AI+Career+Advisor+API+costs&currency_code=USD'
 const USERNAME_KEY = 'ai-hunt-username'
 const MAX_CONTEXT_MESSAGES = 40
 
@@ -69,15 +64,6 @@ export default function ChatPage() {
   const [accountChecked, setAccountChecked] = useState(false)
   const [signupName, setSignupName] = useState('')
   const [signupError, setSignupError] = useState<string | null>(null)
-
-  // ---- Donation unlock (gate is informational + dismissible) --------------
-  const [hasDonated, setHasDonated] = useState<boolean | null>(null)
-  const [unlocked, setUnlocked] = useState(false)
-  const [gateOpen, setGateOpen] = useState(false)
-  const unlock = () => {
-    setUnlocked(true)
-    setGateOpen(false)
-  }
 
   // ---- Chat state ---------------------------------------------------------
   const [sessions, setSessions] = useState<ChatSession[]>([])
@@ -150,11 +136,6 @@ export default function ChatPage() {
             ? firstStored.id
             : 'greet'
       )
-      // The donation gate is info for non-donors, shown once the account
-      // exists so it can never block the signup screen itself.
-      try {
-        if (localStorage.getItem('ai-hunt-donated') !== 'true') setGateOpen(true)
-      } catch {}
       return true
     } catch {
       return false
@@ -165,11 +146,6 @@ export default function ChatPage() {
     setIsMobile(window.matchMedia('(max-width: 767px)').matches)
     const mobile = window.matchMedia('(max-width: 767px)').matches
     setSidebarOpen(!mobile)
-    try {
-      const donated = localStorage.getItem('ai-hunt-donated') === 'true'
-      setHasDonated(donated)
-      setUnlocked(donated) // donors skip the gate; others see it after signup
-    } catch {}
     try {
       const name = localStorage.getItem(USERNAME_KEY)
       if (name && name.length >= 2) signIn(name)
@@ -183,8 +159,8 @@ export default function ChatPage() {
   }, [sessions, activeId, username])
 
   useEffect(() => {
-    if (unlocked && !isMobile) inputRef.current?.focus()
-  }, [unlocked, activeId, isMobile])
+    if (!isMobile) inputRef.current?.focus()
+  }, [activeId, isMobile])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -225,7 +201,7 @@ export default function ChatPage() {
   // ---- Streaming fetch ----------------------------------------------------
   const sendMessage = async () => {
     const text = input.trim()
-    if (!text || loading || !unlocked) return
+    if (!text || loading) return
 
     const isSeed = activeIdRef.current === 'greet'
     const sid = isSeed ? `c${Date.now()}` : activeIdRef.current
@@ -395,27 +371,17 @@ export default function ChatPage() {
         ))}
       </nav>
 
-      {/* Bottom: per-user identity + support */}
+      {/* Bottom: per-user identity */}
       <div className="border-t border-border/60 p-2">
         {username && (
           <div className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-sm">
-            <UserRound className="h-6 w-6 rounded-full bg-muted p-1 text-foreground" />
+            <img src="/icons/push-icon-192.png" alt="" className="h-6 w-6 shrink-0 rounded-full" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">@{username}</p>
               <p className="text-[11px] text-muted-foreground">Chats saved to your account</p>
             </div>
-            <Settings className="h-4 w-4 shrink-0 text-muted-foreground" />
           </div>
         )}
-        <a
-          href={PAYPAL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-foreground hover:bg-muted"
-        >
-          <Coffee className="h-4 w-4 shrink-0 text-brand-orange" />
-          <span>Support via PayPal</span>
-        </a>
       </div>
     </div>
   )
@@ -424,7 +390,6 @@ export default function ChatPage() {
   if (accountChecked && !username) {
     return (
       <div className="flex h-dvh items-center justify-center bg-background px-4">
-        <DonationGateChat open={gateOpen && hasDonated === false} onDismiss={unlock} />
         <div className="w-full max-w-sm rounded-2xl border border-border bg-card p-6 shadow-xl">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-orange/10">
             <MessageSquare className="h-6 w-6 text-brand-orange" />
@@ -461,8 +426,6 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-dvh overflow-hidden bg-background text-foreground">
-      <DonationGateChat open={gateOpen && hasDonated === false} onDismiss={unlock} />
-
       {/* ---- SIDEBAR (static column on desktop, drawer on mobile) ---- */}
       {isMobile && sidebarOpen && (
         <>
@@ -477,8 +440,8 @@ export default function ChatPage() {
       {!isMobile && sidebarOpen && <aside className="shrink-0">{SidebarInner}</aside>}
 
       {/* ---- MAIN ---- */}
-      <div className="flex min-w-0 flex-1 flex-col bg-background">
-        <header className="flex shrink-0 items-center justify-between px-3 py-2.5 sm:px-4">
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header className="flex shrink-0 items-center justify-between bg-gradient-to-b from-brand-orange/[0.07] to-transparent px-3 py-2.5 sm:px-4">
           <div className="flex min-w-0 items-center gap-1.5">
             {!sidebarOpen && (
               <button
@@ -494,14 +457,9 @@ export default function ChatPage() {
               <ChevronDown className="h-4 w-4 text-muted-foreground" />
             </span>
           </div>
-          {(hasDonated === false || hasDonated === null) && !unlocked && (
-            <span className="flex shrink-0 items-center gap-1 rounded-full bg-muted px-2 py-1 text-[11px] text-muted-foreground">
-              <Lock className="h-3 w-3" /> Donate to unlock
-            </span>
-          )}
         </header>
 
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto bg-gradient-to-b from-brand-orange/[0.06] via-background/0 to-brand-orange/[0.13]">
           <div className="mx-auto flex w-full max-w-3xl flex-col px-3 py-5 sm:px-6">
             {messages.map((msg, i) => (
               <div key={i} className={cn('mb-6 sm:mb-7', msg.role === 'user' && 'flex justify-end')}>
@@ -547,7 +505,6 @@ export default function ChatPage() {
             <div
               className={cn(
                 'flex items-end gap-2 rounded-[24px] border border-border bg-card px-3 py-2.5 shadow-[0_2px_12px_hsl(var(--foreground)/0.06)] focus-within:border-brand-orange/60 focus-within:ring-2 focus-within:ring-brand-orange/20 sm:rounded-[28px] sm:px-4',
-                !unlocked && 'opacity-90'
               )}
             >
               <button
@@ -569,12 +526,12 @@ export default function ChatPage() {
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask anything"
-                disabled={loading || !unlocked}
+                disabled={loading}
                 className="max-h-40 min-h-[1.5rem] flex-1 resize-none bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground disabled:opacity-60 sm:text-sm"
               />
               <button
                 onClick={sendMessage}
-                disabled={!input.trim() || loading || !unlocked}
+                disabled={!input.trim() || loading}
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-orange text-white transition-colors hover:bg-orange-600 disabled:opacity-30"
                 aria-label="Send"
               >
