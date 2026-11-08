@@ -93,7 +93,13 @@ export function ChatBot() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: updated.map(({ role, content }) => ({ role, content })),
+          // Long assistant turns (full roadmap phase replies) can blow past
+          // the server's per-message cap — clip defensively so the payload
+          // never rejects mid-conversation.
+          messages: updated.map(({ role, content }) => ({
+            role,
+            content: content.length > 18_000 ? content.slice(0, 18_000) : content,
+          })),
         }),
       })
 

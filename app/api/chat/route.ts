@@ -137,8 +137,13 @@ ${COURSE_CATALOG}`
 // ---- Public-endpoint guards (tune after launch based on real usage) ----
 const RATE_LIMIT_MAX_REQUESTS = 20 // requests...
 const RATE_LIMIT_WINDOW_MS = 60_000 // ...per this window, per IP
-const MAX_MESSAGES_COUNT = 40 // reject payloads with more messages than this
-const MAX_MESSAGE_CHARS = 4000 // reject any single message longer than this
+// Assistant turns legitimately exceed 4k chars here: the roadmap phases the
+// advisor produces are long documents, and the client echoes them back on
+// every follow-up — a 40x4000 payload guard made the chat unusable after the
+// first roadmap. Limits raised to fit real advisor turns; per-request token
+// cost stays controlled by MAX_CONTEXT_MESSAGES below.
+const MAX_MESSAGES_COUNT = 60 // reject payloads with more messages than this
+const MAX_MESSAGE_CHARS = 20_000 // reject any single message longer than this
 const MAX_CONTEXT_MESSAGES = 20 // only send the last N messages to the model
 
 // In-memory sliding window: ip -> timestamps of recent requests
