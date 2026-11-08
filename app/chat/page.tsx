@@ -159,10 +159,7 @@ export default function ChatPage() {
     try {
       const donated = localStorage.getItem('ai-hunt-donated') === 'true'
       setHasDonated(donated)
-      // The gate is informational and dismissible (same rule as the inline
-      // widget): show it once for donors-to-be; donated users skip it.
-      if (donated) setUnlocked(true)
-      else setGateOpen(true)
+      setUnlocked(donated) // donors skip the gate; others see it after signup
     } catch {}
     try {
       const name = localStorage.getItem(USERNAME_KEY)
