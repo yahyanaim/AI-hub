@@ -23096,7 +23096,7 @@ export const SEED_TOOLS: Tool[] = [
     tagline: 'Fast low-latency TTS & STT APIs for real-time voice AI',
     description: `Nari Labs provides fast **text-to-speech and speech-to-text APIs** for voice AI products. Nari Qwen3-TTS 1.7B delivers 50ms time-to-first-audio at $5/1M chars. Nari Qwen3-ASR 1.7B delivers 40ms streaming transcription at $0.06/hour. Ideal for conversational agents, narration, and real-time voice apps. Free public beta, dedicated inference, and fine-tuning. YC-backed, 2M+ Hugging Face downloads, 20k+ GitHub stars (Dia, Narvatar).`,
     url: 'https://narilabs.com',
-    logoUrl: 'https://icons.duckduckgo.com/ip3/narilabs.com.ico',
+    logoUrl: '/logos/nari-labs.png',
     category: 'audio',
     tags: ['tts', 'stt', 'tts-api', 'stt-api', 'text-to-speech', 'speech-to-text', 'voice-ai', 'voice-agents', 'streaming', 'api'],
     pricing: 'freemium',
