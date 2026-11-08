@@ -146,6 +146,11 @@ export default function ChatPage() {
             ? firstStored.id
             : 'greet'
       )
+      // The donation gate is info for non-donors, shown once the account
+      // exists so it can never block the signup screen itself.
+      try {
+        if (localStorage.getItem('ai-hunt-donated') !== 'true') setGateOpen(true)
+      } catch {}
       return true
     } catch {
       return false
