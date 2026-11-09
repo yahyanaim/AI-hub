@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
-import { FruitAvatar } from '@/components/ui/FruitAvatar'
+import { Avatar } from '@/components/ui/Avatar'
 
 // Standalone AI Career Advisor (opened from the widget header logo). Mirrors
 // the ChatGPT layout: collapsible left sidebar with the per-account chat
@@ -63,6 +63,7 @@ function persist(username: string | null, sessions: ChatSession[], activeId: str
 export default function ChatPage() {
   // ---- Account requirement ------------------------------------------------
   const [username, setUsername] = useState<string | null>(null)
+  const [avatarUrl, setAvatarUrl] = useState('')
   const [accountChecked, setAccountChecked] = useState(false)
   const [signupName, setSignupName] = useState('')
   const [signupError, setSignupError] = useState<string | null>(null)
@@ -95,7 +96,7 @@ export default function ChatPage() {
       const rawState = localStorage.getItem(STATE_KEY)
       if (rawState) {
         const delta = JSON.parse(rawState) as {
-          users?: { id: string; username: string; [k: string]: unknown }[]
+          users?: { id: string; username: string; avatarUrl?: string; [k: string]: unknown }[]
           currentUserId?: string | null
           [k: string]: unknown
         }
@@ -124,6 +125,10 @@ export default function ChatPage() {
         const last = users[users.length - 1]
         delta.currentUserId = existing?.id ?? (last ? last.id : null)
         localStorage.setItem(STATE_KEY, JSON.stringify(delta))
+        // Same profile photo as the site's profile page (falls back to the
+        // deterministic fruit avatar via <Avatar /> when none is set).
+        const me = existing ?? last
+        setAvatarUrl(typeof me?.avatarUrl === 'string' ? me.avatarUrl : '')
       }
       localStorage.setItem(USERNAME_KEY, clean)
       setUsername(clean)
@@ -357,9 +362,12 @@ export default function ChatPage() {
 
   const SidebarInner = (
     <div className="flex h-full w-[280px] max-w-[85vw] flex-col bg-background">
-      {/* Top: mascot + collapse */}
+      {/* Top: mascot + platform name + collapse */}
       <div className="flex items-center justify-between px-3 py-3">
-        <img src="/chatbot-mascot.svg" alt="AI Hunt" className="h-8 w-8" />
+        <span className="flex items-center gap-1.5">
+          <img src="/chatbot-mascot.svg" alt="AI Hunt" className="h-8 w-8" />
+          <span className="font-heading text-sm font-bold text-foreground">AI Hunt</span>
+        </span>
         <button
           onClick={sidebarToggle}
           className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
@@ -433,7 +441,12 @@ export default function ChatPage() {
       <div className="p-2" style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}>
         {username && (
           <div className="flex w-full items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-colors hover:bg-foreground/[0.06]">
-            <FruitAvatar name={username} size={28} className="shrink-0 rounded-full" />
+            <Avatar
+              name={username}
+              src={avatarUrl || undefined}
+              size={28}
+              className="shrink-0 rounded-full"
+            />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">@{username}</p>
               <p className="text-[11px] text-muted-foreground">Chats saved to your account</p>
@@ -511,12 +524,55 @@ export default function ChatPage() {
         )}
       </AnimatePresence>
       {!isMobile && sidebarOpen && <aside className="shrink-0">{SidebarInner}</aside>}
+      {/* Minimized sidebar: ChatGPT-style icon rail */}
+      {!isMobile && !sidebarOpen && (
+        <aside className="flex w-[76px] shrink-0 flex-col items-center gap-1 py-4">
+          <img src="/chatbot-mascot.svg" alt="AI Hunt" className="mx-0 mb-2 h-8 w-8" />
+          <button
+            onClick={sidebarToggle}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+            aria-label="Open sidebar"
+            title="Open sidebar"
+          >
+            <PanelLeft className="h-5 w-5" />
+          </button>
+          <button
+            onClick={newChat}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+            aria-label="New chat"
+            title="New chat"
+          >
+            <Plus className="h-5 w-5" />
+          </button>
+          <button
+            onClick={() => {
+              setSidebarOpen(true)
+              setSearchOpen(true)
+            }}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
+            aria-label="Search chats"
+            title="Search chats"
+          >
+            <Search className="h-5 w-5" />
+          </button>
+          {username && (
+            <button
+              onClick={sidebarToggle}
+              className="mt-auto rounded-full transition-opacity hover:opacity-80"
+              aria-label="Open sidebar"
+              title={username}
+            >
+              <Avatar name={username} src={avatarUrl || undefined} size={32} />
+            </button>
+          )}
+        </aside>
+      )}
 
       {/* ---- MAIN ---- */}
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex shrink-0 items-center justify-between px-3 py-2.5 sm:px-4">
           <div className="flex min-w-0 items-center gap-1.5">
-            {!sidebarOpen && (
+            {isMobile && !sidebarOpen && (
               <button
                 onClick={sidebarToggle}
                 className="mr-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted"
@@ -525,7 +581,8 @@ export default function ChatPage() {
                 <PanelLeft className="h-5 w-5" />
               </button>
             )}
-            <span className="truncate text-[15px] font-semibold">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-3 py-1 text-sm font-semibold text-brand-orange">
+              <img src="/chatbot-mascot.svg" alt="" className="h-4 w-4" />
               AI Career Advisor
             </span>
           </div>
