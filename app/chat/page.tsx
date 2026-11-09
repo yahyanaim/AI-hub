@@ -965,16 +965,13 @@ export default function ChatPage() {
             className="absolute inset-y-0 right-0 z-40 flex w-full flex-col bg-background md:relative md:z-auto md:h-full md:shrink-0 md:shadow-none md:w-[min(680px,55vw)]"
           >
             <div
-              className="flex shrink-0 items-center gap-2 border-b border-border bg-background px-3 py-2.5"
-              style={{ paddingTop: 'max(0.6rem, env(safe-area-inset-top))' }}
+              className="flex shrink-0 items-center gap-2 border-b border-border/70 bg-background px-3 py-2"
+              style={{ paddingTop: 'max(0.55rem, env(safe-area-inset-top))' }}
             >
               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-brand-orange/10">
                 <FileText className="h-4 w-4 text-brand-orange" />
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-foreground">{openDoc.title}</p>
-                <p className="text-[11px] text-muted-foreground">Document · saved with your account</p>
-              </div>
+              <p className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">{openDoc.title}</p>
               <button
                 onClick={exportPdf}
                 disabled={exportingPdf}
@@ -995,9 +992,9 @@ export default function ChatPage() {
             <div className="flex-1 overflow-y-auto bg-white">
               <div
                 ref={pdfRef}
-                className="mx-auto w-full max-w-2xl px-6 py-10 text-[15px] leading-relaxed text-neutral-900 sm:px-8 sm:py-12"
+                className="doc-body mx-auto w-full max-w-2xl px-6 py-10 text-neutral-900 sm:px-8 sm:py-12"
               >
-                <Markdown className="text-[15px]">{openDoc.body}</Markdown>
+                <Markdown>{openDoc.body}</Markdown>
               </div>
             </div>
           </motion.div>

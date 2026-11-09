@@ -105,6 +105,100 @@ p {
   text-align: justify;
 }
 
+/* Document pane (roadmap artifact) — ChatGPT canvas typography.
+   Explicit start alignment overrides the site-wide justify rule. */
+.doc-body {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #374151;
+}
+.doc-body > *:first-child {
+  margin-top: 0;
+}
+.doc-body h1 {
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 600;
+  color: #111827;
+  margin: 30px 0 12px;
+}
+.doc-body h2 {
+  font-size: 21px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 26px 0 10px;
+}
+.doc-body h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 20px 0 8px;
+}
+.doc-body p {
+  margin: 10px 0;
+  text-align: start;
+}
+.doc-body ul,
+.doc-body ol {
+  margin: 10px 0;
+  padding-left: 26px;
+}
+.doc-body li {
+  margin: 5px 0;
+  text-align: start;
+}
+.doc-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+.doc-body th {
+  background: #f9fafb;
+  font-weight: 600;
+  text-align: start;
+}
+.doc-body th,
+.doc-body td {
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  color: #374151;
+}
+.doc-body hr {
+  border-color: #e5e7eb;
+  margin: 24px 0;
+}
+.doc-body blockquote {
+  border-left: 3px solid #ff6b00;
+  padding-left: 14px;
+  color: #6b7280;
+}
+.doc-body code {
+  background: #f3f4f6;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.9em;
+  color: #111827;
+}
+.doc-body pre {
+  background: #f8f9fa;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 14px;
+  overflow-x: auto;
+}
+.doc-body pre code {
+  background: transparent;
+  padding: 0;
+}
+.doc-body a {
+  color: #ff6b00;
+  text-decoration: underline;
+}
+.doc-body strong {
+  color: #111827;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
