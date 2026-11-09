@@ -145,6 +145,7 @@ const RATE_LIMIT_WINDOW_MS = 60_000 // ...per this window, per IP
 const MAX_MESSAGES_COUNT = 60 // reject payloads with more messages than this
 const MAX_MESSAGE_CHARS = 20_000 // reject any single message longer than this
 const MAX_CONTEXT_MESSAGES = 20 // only send the last N messages to the model
+const MAX_CV_CHARS = 12_000 // attached CV is context-only — parsed text, never stored
 
 // In-memory sliding window: ip -> timestamps of recent requests
 const rateLimitMap = new Map<string, number[]>()
@@ -223,6 +224,11 @@ export async function POST(request: Request) {
       .filter((m: { role: string }) => m.role === 'user' || m.role === 'assistant')
       .slice(-MAX_CONTEXT_MESSAGES)
 
+    // Attached CV (parsed text from the client) rides along in memory for the
+    // request only — included as context, never persisted anywhere.
+    const cvRaw = typeof (body as { cv?: unknown })?.cv === 'string' ? (body as { cv: string }).cv : ''
+    const cv = cvRaw.length > MAX_CV_CHARS ? cvRaw.slice(0, MAX_CV_CHARS) : cvRaw
+
     const primaryModel = process.env.NVIDIA_MODEL || DEFAULT_MODEL
 
     async function callNvidia(model: string): Promise<Response> {
@@ -234,7 +240,12 @@ export async function POST(request: Request) {
       const payload: Record<string, unknown> = {
         model,
         messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
+          {
+            role: 'system',
+            content: cv
+              ? `${SYSTEM_PROMPT}\n\n## Attached CV (session-only, not stored)\nThe user attached their CV as parsed text. Base career advice on it: strengths, gaps, and concrete next steps.\n\n${cv}`
+              : SYSTEM_PROMPT,
+          },
           ...normalizedConversation,
         ],
         max_tokens: 4096,

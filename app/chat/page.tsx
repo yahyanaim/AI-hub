@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Send, Loader2, SearchX, MessageSquare, Plus, Search, SquarePen,
-  PanelLeft, PanelLeftClose, Trash2, X,
+  PanelLeft, PanelLeftClose, Trash2, X, Paperclip, FileText,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
@@ -79,6 +79,14 @@ export default function ChatPage() {
   const [isMobile, setIsMobile] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [search, setSearch] = useState('')
+  // Attached CV: file bytes are parsed to text once (PDF via the transient
+  // parse endpoint) and live ONLY in this state — never written to disk,
+  // localStorage, or the server. Removing the chip or reloading discards it.
+  const [cvName, setCvName] = useState<string | null>(null)
+  const [cvText, setCvText] = useState('')
+  const [cvBusy, setCvBusy] = useState(false)
+  const [cvError, setCvError] = useState<string | null>(null)
+  const cvInputRef = useRef<HTMLInputElement>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
   const firstRender = useRef(true)
   const activeIdRef = useRef<string>('greet')
@@ -231,15 +239,51 @@ export default function ChatPage() {
     (s) => !search || s.title.toLowerCase().includes(search.toLowerCase())
   )
 
+  // ---- CV attach (parse in memory, never store) ---------------------------
+  const handleCvFile = async (file: File) => {
+    setCvError(null)
+    const lower = file.name.toLowerCase()
+    if (!lower.endsWith('.pdf') && !lower.endsWith('.txt') && !lower.endsWith('.md')) {
+      setCvError('Please attach a PDF or TXT file (export DOCX to PDF first).')
+      return
+    }
+    if (file.size > 4 * 1024 * 1024) {
+      setCvError('File too large (max 4MB).')
+      return
+    }
+    setCvBusy(true)
+    try {
+      let text: string
+      if (lower.endsWith('.pdf')) {
+        const form = new FormData()
+        form.append('file', file)
+        const res = await fetch('/api/chat/cv', { method: 'POST', body: form })
+        const data = await res.json().catch(() => ({}))
+        if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`)
+        text = data.text as string
+      } else {
+        text = await file.text()
+      }
+      setCvName(file.name)
+      setCvText(text)
+      inputRef.current?.focus()
+    } catch (err: any) {
+      setCvError(err?.message || 'Could not read this file.')
+    } finally {
+      setCvBusy(false)
+      if (cvInputRef.current) cvInputRef.current.value = ''
+    }
+  }
+
   // ---- Streaming fetch ----------------------------------------------------
   const sendMessage = async () => {
     const text = input.trim()
-    if (!text || loading) return
+    if ((!text && !cvText) || loading) return
 
     const isSeed = activeIdRef.current === 'greet'
     const sid = isSeed ? `c${Date.now()}` : activeIdRef.current
-    const title = isSeed ? text.slice(0, 48) : active.title
-    const withUser: Message[] = [...messages, { role: 'user', content: text }]
+    const title = isSeed ? (text || 'CV analysis').slice(0, 48) : active.title
+    const withUser: Message[] = [...messages, { role: 'user', content: text || 'Please analyse the CV I attached.' }]
 
     const placeholder: ChatSession = {
       id: sid,
@@ -271,6 +315,7 @@ export default function ChatPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          cv: cvText || undefined,
           messages: withUser
             .map(({ role, content }) => ({ role, content: content.length > 18_000 ? content.slice(0, 18_000) : content }))
             .slice(-MAX_CONTEXT_MESSAGES),
@@ -323,6 +368,41 @@ export default function ChatPage() {
 
   const stillLoadingEmpty = loading && !messages.some((m) => m.role === 'assistant' && m.content === '')
   const isFresh = active.id === 'greet'
+  // Attached-CV chip: rendered above the composer. This text lives in memory
+  // only (column above) — the file is never uploaded to long-term storage.
+  const CvChip = cvName ? (
+    <div className="mx-auto mb-2 flex w-full max-w-3xl items-center gap-2 rounded-xl border border-border bg-muted/60 px-3 py-1.5 text-xs text-foreground">
+      <FileText className="h-3.5 w-3.5 shrink-0 text-brand-orange" />
+      <span className="truncate font-medium">{cvName}</span>
+      <span className="ml-auto shrink-0 text-muted-foreground">attached · not stored</span>
+      <button
+        onClick={() => {
+          setCvName(null)
+          setCvText('')
+          setCvError(null)
+        }}
+        className="shrink-0 rounded-full p-0.5 text-muted-foreground hover:bg-muted"
+        aria-label="Remove CV"
+      >
+        <X className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  ) : null
+
+  const CvErrorChip = cvError ? (
+    <div className="mx-auto mb-2 flex w-full max-w-3xl items-center gap-2 rounded-xl bg-red-500/10 px-3 py-1.5 text-xs text-red-500">
+      <SearchX className="h-3.5 w-3.5 shrink-0" />
+      <span className="truncate">{cvError}</span>
+      <button
+        onClick={() => setCvError(null)}
+        className="ml-auto shrink-0 rounded-full p-0.5 hover:bg-red-500/10"
+        aria-label="Dismiss"
+      >
+        <X className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  ) : null
+
   const ComposerPill = (
     <div className="flex items-end gap-2 rounded-[24px] border border-border bg-card px-3 py-2.5 shadow-[0_2px_12px_hsl(var(--foreground)/0.06)] focus-within:shadow-[0_2px_16px_hsl(var(--foreground)/0.1)] sm:rounded-[28px] sm:px-4">
       <button
@@ -332,6 +412,25 @@ export default function ChatPage() {
         title="New chat"
       >
         <Plus className="h-4 w-4" />
+      </button>
+      <input
+        ref={cvInputRef}
+        type="file"
+        accept=".pdf,.txt,.md,application/pdf,text/plain"
+        className="hidden"
+        onChange={(e) => {
+          const f = e.target.files?.[0]
+          if (f) handleCvFile(f)
+        }}
+      />
+      <button
+        onClick={() => cvInputRef.current?.click()}
+        disabled={cvBusy || loading}
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-muted disabled:opacity-60"
+        aria-label="Attach CV"
+        title="Attach CV (PDF or TXT) — parsed in memory, never stored"
+      >
+        {cvBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Paperclip className="h-4 w-4" />}
       </button>
       <textarea
         ref={inputRef}
@@ -349,7 +448,7 @@ export default function ChatPage() {
       />
       <button
         onClick={sendMessage}
-        disabled={!input.trim() || loading}
+        disabled={(!input.trim() && !cvText) || loading}
         className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-orange text-white transition-colors hover:bg-orange-600 disabled:opacity-30"
         aria-label="Send"
       >
@@ -615,6 +714,8 @@ export default function ChatPage() {
               What can I help with?
             </h2>
             <div className="w-full max-w-3xl">
+              {CvChip}
+              {CvErrorChip}
               {ComposerPill}
               <p className="mt-2 text-center text-[11px] text-muted-foreground">
                 AI can make mistakes. Verify courses and offers on their official pages.
@@ -669,6 +770,8 @@ export default function ChatPage() {
               style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
             >
               <div className="mx-auto w-full max-w-3xl">
+                {CvChip}
+                {CvErrorChip}
                 {ComposerPill}
                 <p className="mt-2 text-center text-[11px] text-muted-foreground">
                   AI can make mistakes. Verify courses and offers on their official pages.
