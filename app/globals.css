@@ -164,6 +164,13 @@ p {
   padding: 8px 12px;
   color: #374151;
 }
+.doc-body tr:nth-child(even) td {
+  background: #fcfcfd;
+}
+.doc-body h1,
+.doc-body h2 {
+  scroll-margin-top: 24px;
+}
 .doc-body hr {
   border-color: #e5e7eb;
   margin: 24px 0;

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Send, Loader2, SearchX, MessageSquare, Plus, Search, SquarePen,
   PanelLeft, PanelLeftClose, Trash2, X, Paperclip, FileText, Download,
+  ListTree, Copy, Check,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
@@ -117,6 +118,9 @@ export default function ChatPage() {
   const [docs, setDocs] = useState<ChatDoc[]>([])
   const [openDocId, setOpenDocId] = useState<string | null>(null)
   const [exportingPdf, setExportingPdf] = useState(false)
+  const [tocOpen, setTocOpen] = useState(false)
+  const [toc, setToc] = useState<{ id: string; level: number; text: string }[]>([])
+  const [copied, setCopied] = useState(false)
   // Attached CV: file bytes are parsed to text once (PDF via the transient
   // parse endpoint) and live ONLY in this state — never written to disk,
   // localStorage, or the server. Removing the chip or reloading discards it.
@@ -259,7 +263,29 @@ export default function ChatPage() {
   activeIdRef.current = activeId
   docsRef.current = docs
 
+  const docScrollRef = useRef<HTMLDivElement>(null)
+
   const openDoc = docs.find((d) => d.id === openDocId) ?? null
+
+  // Build the outline (Contents) from the rendered doc headings.
+  useEffect(() => {
+    if (!openDoc) return
+    const raf = requestAnimationFrame(() => {
+      const el = pdfRef.current
+      if (!el) return
+      const heads = Array.from(el.querySelectorAll('h1, h2')) as HTMLElement[]
+      const items: { id: string; level: number; text: string }[] = []
+      heads.forEach((h) => {
+        const text = (h.textContent || '').trim()
+        if (!text) return
+        const id = `doc-h-${items.length}`
+        h.id = id
+        items.push({ id, level: h.tagName === 'H1' ? 1 : 2, text })
+      })
+      setToc(items)
+    })
+    return () => cancelAnimationFrame(raf)
+  }, [openDoc])
 
   // Store (or refresh) a document captured from a chat message; returns its id.
   const ensureDoc = (body: string): string => {
@@ -280,6 +306,18 @@ export default function ChatPage() {
     setDocs((prev) => prev.filter((d) => d.id !== id))
     if (openDocId === id) setOpenDocId(null)
   }
+
+  const copyDoc = async () => {
+    if (!openDoc) return
+    try {
+      await navigator.clipboard.writeText(openDoc.body)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {}
+  }
+
+  const docWordCount = openDoc ? openDoc.body.replace(/[#|\-*`>\\n]/g, ' ').split(/\\s+/).filter(Boolean).length : 0
+  const docBodyNoH1 = openDoc ? openDoc.body.replace(/^#\\s+[^\\n]+\\n?/, '') : ''
 
   // ---- PDF export (client-side: html2canvas + jsPDF, A4 multi-page) -------
   const exportPdf = async () => {
@@ -965,13 +1003,33 @@ export default function ChatPage() {
             className="absolute inset-y-0 right-0 z-40 flex w-full flex-col bg-background md:relative md:z-auto md:h-full md:shrink-0 md:shadow-none md:w-[min(680px,55vw)]"
           >
             <div
-              className="flex shrink-0 items-center gap-2 border-b border-border/70 bg-background px-3 py-2"
+              className="relative flex shrink-0 items-center gap-1.5 border-b border-border/70 bg-background px-2.5 py-2"
               style={{ paddingTop: 'max(0.55rem, env(safe-area-inset-top))' }}
             >
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-brand-orange/10">
-                <FileText className="h-4 w-4 text-brand-orange" />
+              <button
+                onClick={() => setTocOpen((v) => !v)}
+                disabled={toc.length === 0}
+                className={cn(
+                  'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40',
+                  tocOpen && 'bg-foreground/[0.08] text-foreground'
+                )}
+                title="Contents"
+              >
+                <ListTree className="h-4 w-4" />
+              </button>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold text-foreground">{openDoc.title}</p>
+                <p className="text-[11px] text-muted-foreground">
+                  {docWordCount.toLocaleString()} words · {Math.max(1, Math.round(docWordCount / 220))} min read
+                </p>
               </div>
-              <p className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">{openDoc.title}</p>
+              <button
+                onClick={copyDoc}
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                title="Copy document"
+              >
+                {copied ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+              </button>
               <button
                 onClick={exportPdf}
                 disabled={exportingPdf}
@@ -982,19 +1040,45 @@ export default function ChatPage() {
                 <span className="hidden sm:inline">Download</span>
               </button>
               <button
-                onClick={() => setOpenDocId(null)}
+                onClick={() => {
+                  setOpenDocId(null)
+                  setTocOpen(false)
+                }}
                 className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="Close document"
               >
                 <X className="h-4 w-4" />
               </button>
+              {tocOpen && (
+                <div className="absolute left-2 top-full z-50 mt-1.5 max-h-[70%] w-72 overflow-y-auto rounded-xl border border-border bg-card p-1.5 shadow-xl">
+                  <p className="px-2.5 pb-1 pt-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                    Contents
+                  </p>
+                  {toc.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => {
+                        document.getElementById(t.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        setTocOpen(false)
+                      }}
+                      className={cn(
+                        'block w-full truncate rounded-lg px-2.5 py-1.5 text-left text-[13px] text-foreground/90 transition-colors hover:bg-muted',
+                        t.level === 1 && 'font-medium'
+                      )}
+                      style={t.level === 2 ? { paddingLeft: '1.4rem' } : undefined}
+                    >
+                      {t.text}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="flex-1 overflow-y-auto bg-white">
+            <div ref={docScrollRef} className="flex-1 overflow-y-auto bg-white">
               <div
                 ref={pdfRef}
                 className="doc-body mx-auto w-full max-w-2xl px-6 py-10 text-neutral-900 sm:px-8 sm:py-12"
               >
-                <Markdown>{openDoc.body}</Markdown>
+                <Markdown>{docBodyNoH1}</Markdown>
               </div>
             </div>
           </motion.div>
