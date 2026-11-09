@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Send, Loader2, SearchX, MessageSquare, Plus, Search, SquarePen,
-  PanelLeft, PanelLeftClose, Trash2, X, Paperclip, FileText,
+  PanelLeft, PanelLeftClose, Trash2, X, Paperclip, FileText, Download,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
@@ -40,6 +40,41 @@ function greeting(): ChatSession {
 
 function sessionsKey(username: string) {
   return `ai-hunt-chat-sessions::${username}`
+}
+
+// ---- Documents (ChatGPT-like artifacts) -----------------------------------
+// Complete roadmaps the advisor delivers as ```roadmap blocks become
+// documents: listed in the sidebar, previewable in a side panel, and
+// exportable as PDF. The full markdown lives with the chat message (so the
+// advisor keeps its context); the doc list is just the readable copy.
+type ChatDoc = { id: string; title: string; body: string; createdAt: number }
+
+const ROADMAP_FENCE = /```roadmap\s*\n([\s\S]*?)(?:```|$)/
+
+function extractDocBody(content: string): string | null {
+  const m = content.match(ROADMAP_FENCE)
+  if (!m || !m[1]) return null
+  return m[1].trim()
+}
+
+function docTitleFrom(body: string): string {
+  const line = body.split('\n').find((l) => l.trim().length > 0) || ''
+  const title = line.replace(/^#+\s*/, '').trim()
+  return title || 'Career roadmap'
+}
+
+function docsKey(username: string) {
+  return `ai-hunt-chat-docs::${username}`
+}
+
+function loadDocs(username: string): ChatDoc[] {
+  try {
+    const raw = localStorage.getItem(docsKey(username))
+    const list = raw ? (JSON.parse(raw) as ChatDoc[]) : []
+    return Array.isArray(list) ? list.filter((d) => d.id && d.title && d.body) : []
+  } catch {
+    return []
+  }
 }
 
 function loadSessions(username: string): ChatSession[] {
@@ -79,6 +114,9 @@ export default function ChatPage() {
   const [isMobile, setIsMobile] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [search, setSearch] = useState('')
+  const [docs, setDocs] = useState<ChatDoc[]>([])
+  const [openDocId, setOpenDocId] = useState<string | null>(null)
+  const [exportingPdf, setExportingPdf] = useState(false)
   // Attached CV: file bytes are parsed to text once (PDF via the transient
   // parse endpoint) and live ONLY in this state — never written to disk,
   // localStorage, or the server. Removing the chip or reloading discards it.
@@ -88,6 +126,8 @@ export default function ChatPage() {
   const [cvError, setCvError] = useState<string | null>(null)
   const cvInputRef = useRef<HTMLInputElement>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const docsRef = useRef<ChatDoc[]>([])
+  const pdfRef = useRef<HTMLDivElement>(null)
   const firstRender = useRef(true)
   const activeIdRef = useRef<string>('greet')
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -148,6 +188,7 @@ export default function ChatPage() {
       const stored = loadSessions(clean)
       const storedActive = localStorage.getItem(`ai-hunt-chat-active::${clean}`)
       setSessions(stored.length > 0 ? stored : [greeting()])
+      setDocs(loadDocs(clean))
       const firstStored: ChatSession | undefined = stored[0]
       setActiveId(
         storedActive && stored.some((s) => s.id === storedActive)
@@ -200,6 +241,13 @@ export default function ChatPage() {
   }, [sessions, activeId, username])
 
   useEffect(() => {
+    if (!username) return
+    try {
+      localStorage.setItem(docsKey(username), JSON.stringify(docs.slice(0, 30)))
+    } catch {}
+  }, [docs, username])
+
+  useEffect(() => {
     if (!isMobile) inputRef.current?.focus()
   }, [activeId, isMobile])
 
@@ -209,6 +257,65 @@ export default function ChatPage() {
 
   // Keep a mirrored ref of activeId for streaming handlers.
   activeIdRef.current = activeId
+  docsRef.current = docs
+
+  const openDoc = docs.find((d) => d.id === openDocId) ?? null
+
+  // Store (or refresh) a document captured from a chat message; returns its id.
+  const ensureDoc = (body: string): string => {
+    const title = docTitleFrom(body)
+    const existing = docsRef.current.find((d) => d.title === title)
+    if (existing) {
+      if (existing.body !== body) {
+        setDocs((prev) => prev.map((d) => (d.title === title ? { ...d, body } : d)))
+      }
+      return existing.id
+    }
+    const id = `d${Date.now()}`
+    setDocs((prev) => [{ id, title, body, createdAt: Date.now() }, ...prev].slice(0, 30))
+    return id
+  }
+
+  const deleteDoc = (id: string) => {
+    setDocs((prev) => prev.filter((d) => d.id !== id))
+    if (openDocId === id) setOpenDocId(null)
+  }
+
+  // ---- PDF export (client-side: html2canvas + jsPDF, A4 multi-page) -------
+  const exportPdf = async () => {
+    const el = pdfRef.current
+    if (!el || !openDoc) return
+    setExportingPdf(true)
+    try {
+      const html2canvas = (await import('html2canvas')).default
+      const { jsPDF } = await import('jspdf')
+      const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#ffffff', useCORS: true })
+      const pdf = new jsPDF({ unit: 'mm', format: 'a4' })
+      const margin = 10
+      const imgW = 210 - margin * 2
+      const pageH = 297 - margin * 2
+      const chunkPx = Math.floor((canvas.width * pageH) / imgW)
+      const pages = Math.ceil(canvas.height / chunkPx)
+      for (let p = 0; p < pages; p++) {
+        if (p > 0) pdf.addPage()
+        const h = Math.min(chunkPx, canvas.height - p * chunkPx)
+        const tmp = document.createElement('canvas')
+        tmp.width = canvas.width
+        tmp.height = h
+        const ctx = tmp.getContext('2d')
+        if (!ctx) break
+        ctx.fillStyle = '#ffffff'
+        ctx.fillRect(0, 0, tmp.width, tmp.height)
+        ctx.drawImage(canvas, 0, p * chunkPx, canvas.width, h, 0, 0, canvas.width, h)
+        pdf.addImage(tmp.toDataURL('image/jpeg', 0.92), 'JPEG', margin, margin, imgW, (h * imgW) / canvas.width, undefined, 'FAST')
+      }
+      pdf.save(`${openDoc.title.replace(/[^\w -]/g, '').trim().slice(0, 80) || 'roadmap'}.pdf`)
+    } catch (err) {
+      console.error('[pdf-export]', err)
+    } finally {
+      setExportingPdf(false)
+    }
+  }
 
   // ---- Session management -------------------------------------------------
   const newChat = () => {
@@ -350,6 +457,9 @@ export default function ChatPage() {
         }
       }
       if (!assistantMsg) throw new Error('Empty response from AI')
+      // A complete roadmap in this reply becomes a document (auto-opens, ChatGPT-like)
+      const docBody = extractDocBody(assistantMsg)
+      if (docBody) setOpenDocId(ensureDoc(docBody))
     } catch (err: any) {
       const msg = err?.message || 'Something went wrong. Please try again.'
       setError(msg)
@@ -541,6 +651,43 @@ export default function ChatPage() {
             </button>
           </div>
         ))}
+
+        {docs.length > 0 && (
+          <>
+            <div className="px-2.5 pb-1 pt-4 text-xs font-medium text-muted-foreground">Documents</div>
+            {docs.map((d) => (
+              <div
+                key={d.id}
+                className={cn(
+                  'group relative flex w-full items-center rounded-xl px-2.5 py-2 text-sm text-foreground/90 transition-colors hover:bg-foreground/[0.06]',
+                  openDocId === d.id && 'bg-foreground/[0.08] font-medium text-foreground'
+                )}
+              >
+                <FileText className="mr-2 h-4 w-4 shrink-0 text-brand-orange" />
+                <button
+                  onClick={() => {
+                    setOpenDocId(d.id)
+                    if (isMobile) setSidebarOpen(false)
+                  }}
+                  className="min-w-0 flex-1 truncate pr-6 text-left"
+                  title={d.title}
+                >
+                  {d.title}
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    deleteDoc(d.id)
+                  }}
+                  className="absolute right-1.5 hidden rounded p-1 text-muted-foreground transition-colors hover:bg-foreground/[0.08] hover:text-foreground group-hover:block"
+                  aria-label="Delete document"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ))}
+          </>
+        )}
       </nav>
 
       {/* Bottom: per-user identity */}
@@ -726,7 +873,9 @@ export default function ChatPage() {
           <>
             <main className="flex-1 overflow-y-auto bg-background">
               <div className="mx-auto flex w-full max-w-3xl flex-col px-3 py-5 sm:px-6">
-                {messages.map((msg, i) => (
+                {messages.map((msg, i) => {
+                  const docBody = msg.role === 'assistant' ? extractDocBody(msg.content) : null
+                  return (
                   <div key={i} className={cn('mb-6 sm:mb-7', msg.role === 'user' && 'flex justify-end')}>
                     {msg.role === 'assistant' ? (
                       <div className="flex gap-2.5 sm:gap-3">
@@ -735,7 +884,27 @@ export default function ChatPage() {
                           {msg.content === '' && loading ? (
                             <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                           ) : (
-                            <Markdown className="text-[15px] sm:text-sm">{msg.content}</Markdown>
+                            <>
+                              <Markdown className="text-[15px] sm:text-sm">{docBody ? msg.content.replace(ROADMAP_FENCE, '') : msg.content}</Markdown>
+                              {docBody && (
+                                <button
+                                  onClick={() => {
+                                    const id = ensureDoc(docBody)
+                                    setOpenDocId(id)
+                                    if (isMobile) setSidebarOpen(false)
+                                  }}
+                                  className="mt-3 flex w-full items-center gap-2.5 rounded-xl border border-border bg-card px-3.5 py-3 text-left text-sm transition-colors hover:border-brand-orange/50 hover:bg-muted/70"
+                                >
+                                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-orange/10">
+                                    <FileText className="h-4 w-4 text-brand-orange" />
+                                  </span>
+                                  <span className="min-w-0 flex-1">
+                                    <span className="block truncate font-medium text-foreground">{docTitleFrom(docBody)}</span>
+                                    <span className="block text-xs text-muted-foreground">Document — view in panel · download as PDF</span>
+                                  </span>
+                                </button>
+                              )}
+                            </>
                           )}
                         </div>
                       </div>
@@ -745,7 +914,8 @@ export default function ChatPage() {
                       </div>
                     )}
                   </div>
-                ))}
+                  )
+                })}
                 {stillLoadingEmpty && (
                   <div className="mb-6 flex gap-2.5 sm:mb-7 sm:gap-3">
                     <img src="/chatbot-mascot.svg" alt="" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
@@ -781,6 +951,56 @@ export default function ChatPage() {
           </>
         )}
       </div>
+
+      {/* ---- Document panel (ChatGPT canvas-style side view) ---------------- */}
+      <AnimatePresence>
+        {openDoc && (
+          <motion.div
+            key="doc-panel"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+            className="fixed inset-y-0 right-0 z-40 flex w-full flex-col border-l border-border bg-background shadow-2xl md:w-[min(720px,62vw)]"
+          >
+            <div
+              className="flex shrink-0 items-center gap-2.5 border-b border-border px-4 py-3"
+              style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
+            >
+              <img src="/chatbot-mascot.svg" alt="" className="h-6 w-6 shrink-0" />
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium text-foreground">{openDoc.title}</p>
+                <p className="text-[11px] text-muted-foreground">
+                  {new Date(openDoc.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} · saved with your account
+                </p>
+              </div>
+              <button
+                onClick={exportPdf}
+                disabled={exportingPdf}
+                className="flex shrink-0 items-center gap-1.5 rounded-full bg-brand-orange px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-orange-600 disabled:opacity-60"
+              >
+                {exportingPdf ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+                PDF
+              </button>
+              <button
+                onClick={() => setOpenDocId(null)}
+                className="shrink-0 rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                aria-label="Close document"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto bg-muted/30 px-3 py-4 sm:px-6">
+              <div
+                ref={pdfRef}
+                className="mx-auto w-full max-w-3xl rounded-xl bg-white px-5 py-6 text-[15px] leading-relaxed text-neutral-900 sm:px-8 sm:py-8"
+              >
+                <Markdown className="text-[15px]">{openDoc.body}</Markdown>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

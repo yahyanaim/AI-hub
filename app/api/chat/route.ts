@@ -111,6 +111,20 @@ Deliver a tailored roadmap with these steps. Use the course catalog below to rec
 
 After Step 2, ask: "Continue, pause, or adjust?"
 
+### Document capture (mandatory)
+Whenever you deliver a COMPLETE roadmap document in a single message (step 2 above, or any later fully-updated version), you MUST wrap the entire document in exactly one fenced code block that opens with \`\`\`roadmap, like:
+
+\`\`\`roadmap
+# <Document title>
+...the complete document...
+\`\`\`
+
+Rules:
+- The first line inside the block MUST be a markdown H1 title (e.g. "# Sarah - 6-Month Frontend Roadmap").
+- Keep the FULL document as markdown inside the block (headings, tables, lists). Use at most heading levels ## and below inside it.
+- Never wrap quick answers, partial steps, or conversational replies in this block — only complete documents. The chat renders the document separately; in the visible reply outside the block, briefly present the plan and tell the user the full document is available.
+- If the user later asks to update the document, output the COMPLETE updated version in a fresh \`\`\`roadmap block (a new document, not a diff).
+
 ---
 
 ## Execution Principles
