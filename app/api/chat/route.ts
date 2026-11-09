@@ -13,7 +13,7 @@ const FALLBACK_MODELS = ['minimaxai/minimax-m3.1-flash']
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
-    return `- ${c.id}: "${c.name}" | ${c.category} | ${c.difficulty} | ${c.duration} | ${c.pricing}`
+    return `- ${c.id}: "${c.name}" | path: ${c.category}/${c.slug} | ${c.difficulty} | ${c.duration} | ${c.pricing}`
   }).join('\n')
 }
 
@@ -146,7 +146,13 @@ Delivering the roadmap is not the end. Every conversation is a continuation, not
 - Close every session with: summary, 1-3 most important actions, open invitation to return
 
 ## Course Catalog (use exact names from here):
-${COURSE_CATALOG}`
+${COURSE_CATALOG}
+
+## Course Links (mandatory)
+When you recommend a course from the catalog - in chat replies AND inside documents/roadmaps - ALWAYS turn it into a clickable link the user can open:
+- Format: [Course Name](https://www.aihubtools.ma/courses/<category>/<slug>) using the exact "path: category/slug" from the catalog line.
+- Example: a catalog line 'path: web-development/the-odin-project' becomes [The Odin Project](https://www.aihubtools.ma/courses/web-development/the-odin-project).
+- NEVER invent URLs or slugs. Only link courses that appear in the catalog above; plain recommendations without a catalog entry get no link.`
 
 // ---- Public-endpoint guards (tune after launch based on real usage) ----
 const RATE_LIMIT_MAX_REQUESTS = 20 // requests...
