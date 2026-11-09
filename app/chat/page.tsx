@@ -952,7 +952,8 @@ export default function ChatPage() {
         )}
       </div>
 
-      {/* ---- Document panel (ChatGPT canvas-style side view) ---------------- */}
+      {/* ---- Document pane (ChatGPT canvas-style: sits beside the chat on
+            desktop, full-screen on mobile) ---------------------------------- */}
       <AnimatePresence>
         {openDoc && (
           <motion.div
@@ -961,39 +962,40 @@ export default function ChatPage() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
-            className="fixed inset-y-0 right-0 z-40 flex w-full flex-col border-l border-border bg-background shadow-2xl md:w-[min(720px,62vw)]"
+            className="absolute inset-y-0 right-0 z-40 flex w-full flex-col bg-background md:relative md:z-auto md:h-full md:shrink-0 md:shadow-none md:w-[min(680px,55vw)]"
           >
             <div
-              className="flex shrink-0 items-center gap-2.5 border-b border-border px-4 py-3"
-              style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
+              className="flex shrink-0 items-center gap-2 border-b border-border bg-background px-3 py-2.5"
+              style={{ paddingTop: 'max(0.6rem, env(safe-area-inset-top))' }}
             >
-              <img src="/chatbot-mascot.svg" alt="" className="h-6 w-6 shrink-0" />
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-brand-orange/10">
+                <FileText className="h-4 w-4 text-brand-orange" />
+              </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-foreground">{openDoc.title}</p>
-                <p className="text-[11px] text-muted-foreground">
-                  {new Date(openDoc.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} · saved with your account
-                </p>
+                <p className="text-[11px] text-muted-foreground">Document · saved with your account</p>
               </div>
               <button
                 onClick={exportPdf}
                 disabled={exportingPdf}
-                className="flex shrink-0 items-center gap-1.5 rounded-full bg-brand-orange px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-orange-600 disabled:opacity-60"
+                className="flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium text-foreground transition-colors hover:bg-muted disabled:opacity-60"
+                title="Download as PDF"
               >
-                {exportingPdf ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
-                PDF
+                {exportingPdf ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+                <span className="hidden sm:inline">Download</span>
               </button>
               <button
                 onClick={() => setOpenDocId(null)}
-                className="shrink-0 rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="Close document"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <div className="flex-1 overflow-y-auto bg-muted/30 px-3 py-4 sm:px-6">
+            <div className="flex-1 overflow-y-auto bg-white">
               <div
                 ref={pdfRef}
-                className="mx-auto w-full max-w-3xl rounded-xl bg-white px-5 py-6 text-[15px] leading-relaxed text-neutral-900 sm:px-8 sm:py-8"
+                className="mx-auto w-full max-w-2xl px-6 py-10 text-[15px] leading-relaxed text-neutral-900 sm:px-8 sm:py-12"
               >
                 <Markdown className="text-[15px]">{openDoc.body}</Markdown>
               </div>
