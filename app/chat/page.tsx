@@ -1050,7 +1050,7 @@ export default function ChatPage() {
                 <X className="h-4 w-4" />
               </button>
               {tocOpen && (
-                <div className="absolute left-2 top-full z-50 mt-1.5 max-h-[70%] w-72 overflow-y-auto rounded-xl border border-border bg-card p-1.5 shadow-xl">
+                <div className="absolute left-2 top-full z-50 mt-1.5 max-h-[60vh] w-72 overflow-y-auto rounded-xl border border-border bg-card p-1.5 shadow-xl">
                   <p className="px-2.5 pb-1 pt-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
                     Contents
                   </p>
