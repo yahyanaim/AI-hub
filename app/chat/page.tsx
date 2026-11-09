@@ -316,8 +316,8 @@ export default function ChatPage() {
     } catch {}
   }
 
-  const docWordCount = openDoc ? openDoc.body.replace(/[#|\-*`>\\n]/g, ' ').split(/\\s+/).filter(Boolean).length : 0
-  const docBodyNoH1 = openDoc ? openDoc.body.replace(/^#\\s+[^\\n]+\\n?/, '') : ''
+  const docWordCount = openDoc ? openDoc.body.replace(/[#|\-*`>]/g, ' ').split(/\s+/).filter(Boolean).length : 0
+  const docBodyNoH1 = openDoc ? openDoc.body.replace(/^#\s+[^\n]+\n?/, '') : ''
 
   // ---- PDF export (client-side: html2canvas + jsPDF, A4 multi-page) -------
   const exportPdf = async () => {
