@@ -18668,4 +18668,63 @@ export const SEED_OFFERS: Offer[] = [
     createdAt: daysAgo(0),
     updatedAt: daysAgo(0),
   },
+  {
+    id: 'o346',
+    slug: 'skilling-africa-with-google',
+    name: 'Skilling Africa with Google - Free AI & Digital Skills Hub',
+    tagline: "Google's free learning hub for Africa: 175+ courses in AI, data and cloud",
+    descriptionAr: '',
+    taglineAr: 'منصة جوجل المجانية لتعلم مهارات الذكاء الاصطناعي والمهارات الرقمية في أفريقيا',
+    description:
+      "Google's new free learning hub for Africa, launched on November 2, 2026: 175+ short, expert-built courses across AI & Machine Learning, Data & Analytics, Web Development, Digital Marketing, Cloud & Infrastructure, and Cybersecurity. Lessons come in 5-minute bites you can download on Wi-Fi and study fully offline; progress is tracked on visual skill trees with streaks, and you earn verifiable badges and certificates (including Google Career Certificates) as you level up. An AI study companion called SCOUT answers questions, explains terms and builds a study schedule around your goals. Languages include English, Swahili and Arabic, with more African languages on the way. Built for phones and low bandwidth: one sign-in with your Google account, no app, no setup. Google aims to equip 3 million Africans with digital and AI skills by 2030. Best for: students, job seekers, entrepreneurs and developers anywhere in Africa",
+    url: 'https://skillingafrica.withgoogle.com/',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/skillingafrica.withgoogle.com.ico',
+    category: 'learning',
+    tags: ['free', 'google', 'ai', 'digital-skills', 'africa', 'certificate', 'offline-learning'],
+    pricing: 'free',
+    steps: [
+      {
+        title: 'Create your free account',
+        description: 'Visit skillingafrica.withgoogle.com and sign in with your Google account in one click - no app download and no setup required.',
+        url: 'https://skillingafrica.withgoogle.com/',
+      },
+      {
+        title: 'Pick a skill',
+        description: 'Choose from 175+ free courses across AI & Machine Learning, Data & Analytics, Web Development, Digital Marketing, Cloud & Infrastructure, and Cybersecurity.',
+      },
+      {
+        title: 'Learn in 5-minute bites',
+        description: 'Short, focused lessons that fit your day - download them on Wi-Fi and study completely offline without spending mobile data.',
+      },
+      {
+        title: 'Earn badges and certificates',
+        description: 'Track progress on visual skill trees, keep learning streaks alive, and unlock verifiable badges and certificates you can show to employers.',
+      },
+    ],
+    stepsAr: [
+      {
+        title: 'أنشئ حسابك المجاني',
+        description: 'زر skillingafrica.withgoogle.com وسجّل الدخول بحساب جوجل بنقرة واحدة - بلا تطبيق ولا إعداد.',
+        url: 'https://skillingafrica.withgoogle.com/',
+      },
+      {
+        title: 'اختر مهارة',
+        description: 'أكثر من 175 دورة مجانية في الذكاء الاصطناعي وتعلم الآلة، البيانات والتحليلات، تطوير الويب، التسويق الرقمي، الحوسبة السحابية والأمن السيبراني.',
+      },
+      {
+        title: 'تعلّم في جملات 5 دقائق',
+        description: 'دروس قصيرة مركزة تناسب يومك - حمّلها على الواي فاي وادرسها كلياً دون استهلاك باقة الإنترنت.',
+      },
+      {
+        title: 'اكسب شارات وشهادات',
+        description: 'تابع تقدّمك عبر أشجار المهارات البصرية، حافظ على سلسلة التعلّم، وافتح شارات وشهادات موثّقة تعرضها على أصحاب العمل.',
+      },
+    ],
+    upvotes: 0,
+    bookmarks: 0,
+    submittedBy: 'u6',
+    featured: false,
+    createdAt: daysAgo(0),
+    updatedAt: daysAgo(0),
+  },
 ]
