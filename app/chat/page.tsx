@@ -27,15 +27,43 @@ type ChatSession = {
   updatedAt: number
 }
 
-const GREETING =
-  "Hey! I'm your AI Career Advisor from AI Hunt. I'll help you build your skills, find the right tools and courses, and create a learning plan that actually works for you. What are you looking to achieve?"
+// The advisor runs in the visitor's language: on a fresh chat they are asked
+// to pick English / Français / العربية once, then every reply continues in it.
+type Lang = 'en' | 'fr' | 'ar'
+
+const LANG_LABEL: Record<Lang, string> = {
+  en: 'English',
+  fr: 'Français',
+  ar: 'العربية',
+}
+
+const LANG_HEADINGS: Record<Lang, string> = {
+  en: 'What can I help with?',
+  fr: 'Comment puis-je t’aider ?',
+  ar: 'كيف يمكنني مساعدتك؟',
+}
+
+const LANG_WELCOME: Record<Lang, string> = {
+  en: "Hey! I'm your AI Career Advisor from AI Hunt. I'll help you build your skills, find the right tools and courses, and create a learning plan that actually works for you. What are you looking to achieve?",
+  fr: "Salut ! Je suis ton conseiller carrière IA d'AI Hunt. Je t'aide à développer tes compétences, à trouver les bons outils et cours, et à créer un plan d'apprentissage qui fonctionne vraiment pour toi. Qu'est-ce que tu veux accomplir ?",
+  ar: 'مرحباً! أنا مستشارك للمسار المهني الذكي من AI Hunt. سأساعدك على بناء مهاراتك، والبحث عن أفضل الأدوات والدورات المناسبة لك، وإنشاء خطة تعلُّم فعلاً تناسبك. ما الذي تريد تحقيقه؟',
+}
+
+function greetingFor(lang: Lang | null): ChatSession {
+  return {
+    id: 'greet',
+    title: 'New chat',
+    messages: [{ role: 'assistant', content: LANG_WELCOME[lang ?? 'en'] }],
+    updatedAt: Date.now(),
+  }
+}
 
 const STATE_KEY = 'ai-hunt-state-v4'
 const USERNAME_KEY = 'ai-hunt-username'
 const MAX_CONTEXT_MESSAGES = 40
 
 function greeting(): ChatSession {
-  return { id: 'greet', title: 'New chat', messages: [{ role: 'assistant', content: GREETING }], updatedAt: Date.now() }
+  return greetingFor(null)
 }
 
 function sessionsKey(username: string) {
@@ -65,6 +93,7 @@ export default function ChatPage() {
   const [username, setUsername] = useState<string | null>(null)
   const [avatarUrl, setAvatarUrl] = useState('')
   const [displayName, setDisplayName] = useState('')
+  const [lang, setLang] = useState<Lang | null>(null)
   const [accountChecked, setAccountChecked] = useState(false)
   const [signupName, setSignupName] = useState('')
   const [signupError, setSignupError] = useState<string | null>(null)
@@ -139,7 +168,15 @@ export default function ChatPage() {
       setUsername(clean)
       const stored = loadSessions(clean)
       const storedActive = localStorage.getItem(`ai-hunt-chat-active::${clean}`)
-      setSessions(stored.length > 0 ? stored : [greeting()])
+      // Language persists per account: once the visitor picks English /
+      // Français / العربية, every new chat continues in it (no re-asking).
+      let savedLang: Lang | null = null
+      try {
+        const raw = localStorage.getItem(`ai-hunt-chat-lang::${clean}`)
+        if (raw === 'en' || raw === 'fr' || raw === 'ar') savedLang = raw
+      } catch {}
+      setLang(savedLang)
+      setSessions(stored.length > 0 ? stored : [greetingFor(savedLang)])
       const firstStored: ChatSession | undefined = stored[0]
       setActiveId(
         storedActive && stored.some((s) => s.id === storedActive)
@@ -204,7 +241,7 @@ export default function ChatPage() {
 
   // ---- Session management -------------------------------------------------
   const newChat = () => {
-    const s = greeting()
+    const s = greetingFor(lang)
     setSessions((prev) => [s, ...prev.filter((p) => p.id !== 'greet')])
     setActiveId(s.id)
     setError('')
@@ -217,6 +254,24 @@ export default function ChatPage() {
     setActiveId(id)
     setError('')
     if (isMobile) setSidebarOpen(false)
+  }
+
+  // First-time language pick: persists for the account and opens a welcome
+  // chat in that language. Every reply continues in it from here on.
+  const chooseLang = (l: Lang) => {
+    setLang(l)
+    try {
+      if (username) localStorage.setItem(`ai-hunt-chat-lang::${username}`, l)
+    } catch {}
+    const s: ChatSession = {
+      id: `c${Date.now()}`,
+      title: 'New chat',
+      messages: [{ role: 'assistant', content: LANG_WELCOME[l] }],
+      updatedAt: Date.now(),
+    }
+    setSessions((prev) => [s, ...prev.filter((p) => p.id !== 'greet')])
+    setActiveId(s.id)
+    inputRef.current?.focus()
   }
 
   const deleteChat = (id: string) => {
@@ -271,6 +326,7 @@ export default function ChatPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          language: lang ?? undefined,
           messages: withUser
             .map(({ role, content }) => ({ role, content: content.length > 18_000 ? content.slice(0, 18_000) : content }))
             .slice(-MAX_CONTEXT_MESSAGES),
@@ -612,10 +668,26 @@ export default function ChatPage() {
           <div className="flex flex-1 flex-col items-center justify-center px-4 pb-16">
             <img src="/chatbot-mascot.svg" alt="" className="mb-4 h-16 w-16" />
             <h2 className="mb-6 text-center font-heading text-2xl font-semibold text-foreground sm:text-[28px]">
-              What can I help with?
+              {LANG_HEADINGS[lang ?? 'en']}
             </h2>
             <div className="w-full max-w-3xl">
               {ComposerPill}
+              {!lang && (
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                  <span className="mr-1 text-xs text-muted-foreground">Choose your language / شغلك بْها / اِختر لغة :
+
+                  </span>
+                  {(Object.keys(LANG_LABEL) as Lang[]).map((l) => (
+                    <button
+                      key={l}
+                      onClick={() => chooseLang(l)}
+                      className="rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-brand-orange hover:bg-brand-orange/10 hover:text-brand-orange"
+                    >
+                      {LANG_LABEL[l]}
+                    </button>
+                  ))}
+                </div>
+              )}
               <p className="mt-2 text-center text-[11px] text-muted-foreground">
                 AI can make mistakes. Verify courses and offers on their official pages.
               </p>
@@ -630,7 +702,7 @@ export default function ChatPage() {
                     {msg.role === 'assistant' ? (
                       <div className="flex gap-2.5 sm:gap-3">
                         <img src="/chatbot-mascot.svg" alt="" className="mt-0.5 h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
-                        <div className="min-w-0 flex-1 pt-0.5">
+                        <div className="chat-left min-w-0 flex-1 pt-0.5" dir="auto">
                           {msg.content === '' && loading ? (
                             <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                           ) : (
@@ -639,7 +711,7 @@ export default function ChatPage() {
                         </div>
                       </div>
                     ) : (
-                      <div className="max-w-[88%] rounded-3xl bg-muted px-3.5 py-2 text-[15px] leading-relaxed text-foreground sm:max-w-[80%] sm:px-4 sm:py-2.5 sm:text-sm">
+                      <div className="chat-left max-w-[88%] rounded-3xl bg-muted px-3.5 py-2 text-[15px] leading-relaxed text-foreground sm:max-w-[80%] sm:px-4 sm:py-2.5 sm:text-sm" dir="auto">
                         <p className="whitespace-pre-wrap">{msg.content}</p>
                       </div>
                     )}

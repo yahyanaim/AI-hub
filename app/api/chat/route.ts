@@ -134,6 +134,14 @@ Delivering the roadmap is not the end. Every conversation is a continuation, not
 ## Course Catalog (use exact names from here):
 ${COURSE_CATALOG}`
 
+// Reply language: the visitor picks English / Français / العربية on a fresh
+// chat, then every answer continues in it (right-to-left for Arabic).
+const LANG_INSTRUCTIONS: Record<string, string> = {
+  en: 'ALWAYS reply in English.',
+  fr: 'ALWAYS reply in French (français).',
+  ar: 'ALWAYS reply in Arabic (العربية) written in Arabic script, continuing the whole conversation in Arabic.',
+}
+
 // ---- Public-endpoint guards (tune after launch based on real usage) ----
 const RATE_LIMIT_MAX_REQUESTS = 20 // requests...
 const RATE_LIMIT_WINDOW_MS = 60_000 // ...per this window, per IP
@@ -223,6 +231,13 @@ export async function POST(request: Request) {
       .filter((m: { role: string }) => m.role === 'user' || m.role === 'assistant')
       .slice(-MAX_CONTEXT_MESSAGES)
 
+    const langRule =
+      typeof (body as { language?: unknown })?.language === 'string' &&
+      (body as { language: string }).language in LANG_INSTRUCTIONS
+        ? LANG_INSTRUCTIONS[(body as { language: string }).language!]
+        : null
+    const systemPrompt = langRule ? `${SYSTEM_PROMPT}\n\n## Language\n${langRule}` : SYSTEM_PROMPT
+
     const primaryModel = process.env.NVIDIA_MODEL || DEFAULT_MODEL
 
     async function callNvidia(model: string): Promise<Response> {
@@ -234,7 +249,7 @@ export async function POST(request: Request) {
       const payload: Record<string, unknown> = {
         model,
         messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'system', content: systemPrompt },
           ...normalizedConversation,
         ],
         max_tokens: 4096,
