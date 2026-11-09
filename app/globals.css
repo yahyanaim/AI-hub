@@ -105,13 +105,6 @@ p {
   text-align: justify;
 }
 
-/* Chat bubbles stay start-aligned: the site-wide justify paragraph rule
-   makes long AI answers unreadable, and Arabic replies must flow RTL. */
-.chat-left p,
-.chat-left li {
-  text-align: start;
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

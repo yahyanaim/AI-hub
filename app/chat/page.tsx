@@ -322,6 +322,7 @@ export default function ChatPage() {
   }
 
   const stillLoadingEmpty = loading && !messages.some((m) => m.role === 'assistant' && m.content === '')
+  const isFresh = active.id === 'greet'
   const ComposerPill = (
     <div className="flex items-end gap-2 rounded-[24px] border border-border bg-card px-3 py-2.5 shadow-[0_2px_12px_hsl(var(--foreground)/0.06)] focus-within:shadow-[0_2px_16px_hsl(var(--foreground)/0.1)] sm:rounded-[28px] sm:px-4">
       <button
@@ -606,58 +607,76 @@ export default function ChatPage() {
           )}
         </header>
 
-        <main className="flex-1 overflow-y-auto bg-background">
-          <div className="mx-auto flex w-full max-w-3xl flex-col px-3 py-5 sm:px-6">
-            {messages.map((msg, i) => (
-              <div key={i} className={cn('mb-6 sm:mb-7', msg.role === 'user' && 'flex justify-end')}>
-                {msg.role === 'assistant' ? (
-                  <div className="flex gap-2.5 sm:gap-3">
-                    <img src="/chatbot-mascot.svg" alt="" className="mt-0.5 h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
-                    <div className="chat-left min-w-0 flex-1 pt-0.5" dir="auto">
-                      {msg.content === '' && loading ? (
-                        <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                      ) : (
-                        <Markdown className="text-[15px] sm:text-sm">{msg.content}</Markdown>
-                      )}
+        {isFresh ? (
+          /* Fresh chat: ChatGPT-style centered composer with the mascot */
+          <div className="flex flex-1 flex-col items-center justify-center px-4 pb-16">
+            <img src="/chatbot-mascot.svg" alt="" className="mb-4 h-16 w-16" />
+            <h2 className="mb-6 text-center font-heading text-2xl font-semibold text-foreground sm:text-[28px]">
+              What can I help with?
+            </h2>
+            <div className="w-full max-w-3xl">
+              {ComposerPill}
+              <p className="mt-2 text-center text-[11px] text-muted-foreground">
+                AI can make mistakes. Verify courses and offers on their official pages.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <main className="flex-1 overflow-y-auto bg-background">
+              <div className="mx-auto flex w-full max-w-3xl flex-col px-3 py-5 sm:px-6">
+                {messages.map((msg, i) => (
+                  <div key={i} className={cn('mb-6 sm:mb-7', msg.role === 'user' && 'flex justify-end')}>
+                    {msg.role === 'assistant' ? (
+                      <div className="flex gap-2.5 sm:gap-3">
+                        <img src="/chatbot-mascot.svg" alt="" className="mt-0.5 h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
+                        <div className="min-w-0 flex-1 pt-0.5">
+                          {msg.content === '' && loading ? (
+                            <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                          ) : (
+                            <Markdown className="text-[15px] sm:text-sm">{msg.content}</Markdown>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="max-w-[88%] rounded-3xl bg-muted px-3.5 py-2 text-[15px] leading-relaxed text-foreground sm:max-w-[80%] sm:px-4 sm:py-2.5 sm:text-sm">
+                        <p className="whitespace-pre-wrap">{msg.content}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {stillLoadingEmpty && (
+                  <div className="mb-6 flex gap-2.5 sm:mb-7 sm:gap-3">
+                    <img src="/chatbot-mascot.svg" alt="" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
+                    <div className="pt-2">
+                      <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                     </div>
                   </div>
-                ) : (
-                  <div className="chat-left max-w-[88%] rounded-3xl bg-muted px-3.5 py-2 text-[15px] leading-relaxed text-foreground sm:max-w-[80%] sm:px-4 sm:py-2.5 sm:text-sm" dir="auto">
-                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                )}
+                {error && !loading && (
+                  <div className="mb-5 flex items-center gap-2 rounded-xl bg-red-500/10 px-4 py-2.5 text-sm text-red-500">
+                    <SearchX className="h-4 w-4 shrink-0" />
+                    <span>{error}</span>
                   </div>
                 )}
+                <div ref={bottomRef} />
               </div>
-            ))}
-            {stillLoadingEmpty && (
-              <div className="mb-6 flex gap-2.5 sm:mb-7 sm:gap-3">
-                <img src="/chatbot-mascot.svg" alt="" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
-                <div className="pt-2">
-                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                </div>
-              </div>
-            )}
-            {error && !loading && (
-              <div className="mb-5 flex items-center gap-2 rounded-xl bg-red-500/10 px-4 py-2.5 text-sm text-red-500">
-                <SearchX className="h-4 w-4 shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
-            <div ref={bottomRef} />
-          </div>
-        </main>
+            </main>
 
-        {/* Composer (docked bottom) */}
-        <div
-          className="shrink-0 px-3 pt-1 sm:px-6"
-          style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
-        >
-          <div className="mx-auto w-full max-w-3xl">
-            {ComposerPill}
-            <p className="mt-2 text-center text-[11px] text-muted-foreground">
-              AI can make mistakes. Verify courses and offers on their official pages.
-            </p>
-          </div>
-        </div>
+            {/* Composer (docked bottom) */}
+            <div
+              className="shrink-0 px-3 pt-1 sm:px-6"
+              style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
+            >
+              <div className="mx-auto w-full max-w-3xl">
+                {ComposerPill}
+                <p className="mt-2 text-center text-[11px] text-muted-foreground">
+                  AI can make mistakes. Verify courses and offers on their official pages.
+                </p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
