@@ -383,6 +383,8 @@ export function ProfileView({ username }: { username: string }) {
   )
 }
 
+const SECTION_PAGE = 12
+
 function Section({
   items,
   label,
@@ -392,13 +394,17 @@ function Section({
   label: string
   type: 'tool' | 'devtool' | 'prompt' | 'repo' | 'course' | 'offer'
 }) {
+  const [visible, setVisible] = useState(SECTION_PAGE)
+  const shown = items.slice(0, visible)
+  const remaining = items.length - shown.length
+
   return (
     <div>
       <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         {label} ({items.length})
       </h3>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => {
+        {shown.map((item) => {
           if (type === 'tool')
             return <ToolCard key={item.id} tool={item as import('@/types').Tool} />
           if (type === 'devtool')
@@ -421,6 +427,16 @@ function Section({
           )
         })}
       </div>
+      {remaining > 0 && (
+        <div className="mt-5 flex justify-center">
+          <button
+            onClick={() => setVisible((v) => v + SECTION_PAGE)}
+            className="rounded-full border border-border bg-card px-5 py-2 text-sm font-medium text-foreground transition-colors hover:border-brand-orange/50 hover:text-brand-orange"
+          >
+            Show more ({remaining} remaining)
+          </button>
+        </div>
+      )}
     </div>
   )
 }

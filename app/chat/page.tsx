@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
+import { FruitAvatar } from '@/components/ui/FruitAvatar'
 
 // Standalone AI Career Advisor (opened from the widget header logo). Mirrors
 // the ChatGPT layout: collapsible left sidebar with the per-account chat
@@ -148,7 +149,23 @@ export default function ChatPage() {
     const mobile = window.matchMedia('(max-width: 767px)').matches
     setSidebarOpen(!mobile)
     try {
-      const name = localStorage.getItem(USERNAME_KEY)
+      // Already logged in on the site? Derive the username from the site
+      // state (currentUserId) — never re-ask for a name.
+      let name = localStorage.getItem(USERNAME_KEY)
+      if (!name) {
+        const rawState = localStorage.getItem(STATE_KEY)
+        if (rawState) {
+          const delta = JSON.parse(rawState) as {
+            users?: { id: string; username: string }[]
+            currentUserId?: string | null
+          }
+          const users = Array.isArray(delta.users) ? delta.users : []
+          const cu = delta.currentUserId
+            ? users.find((u) => u.id === delta.currentUserId)
+            : null
+          if (typeof cu?.username === 'string') name = cu.username
+        }
+      }
       if (name && name.length >= 2) signIn(name)
     } catch {}
     // Prefill from the widget handoff: /chat?q=<question>
@@ -297,7 +314,7 @@ export default function ChatPage() {
   const stillLoadingEmpty = loading && !messages.some((m) => m.role === 'assistant' && m.content === '')
   const isFresh = active.id === 'greet'
   const ComposerPill = (
-    <div className="flex items-end gap-2 rounded-[24px] border border-border bg-card px-3 py-2.5 shadow-[0_2px_12px_hsl(var(--foreground)/0.06)] focus-within:border-brand-orange/60 focus-within:ring-2 focus-within:ring-brand-orange/20 sm:rounded-[28px] sm:px-4">
+    <div className="flex items-end gap-2 rounded-[24px] border border-border bg-card px-3 py-2.5 shadow-[0_2px_12px_hsl(var(--foreground)/0.06)] focus-within:shadow-[0_2px_16px_hsl(var(--foreground)/0.1)] sm:rounded-[28px] sm:px-4">
       <button
         onClick={newChat}
         className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-muted"
@@ -318,7 +335,7 @@ export default function ChatPage() {
         onKeyDown={handleKeyDown}
         placeholder="Ask anything"
         disabled={loading}
-        className="max-h-40 min-h-[1.5rem] flex-1 resize-none bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground disabled:opacity-60 sm:text-sm"
+        className="max-h-40 min-h-[1.5rem] flex-1 resize-none border-0 bg-transparent text-base text-foreground outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-muted-foreground disabled:opacity-60 sm:text-sm"
       />
       <button
         onClick={sendMessage}
@@ -339,7 +356,7 @@ export default function ChatPage() {
   }
 
   const SidebarInner = (
-    <div className="flex h-full w-[280px] max-w-[85vw] flex-col bg-background border-r border-border">
+    <div className="flex h-full w-[280px] max-w-[85vw] flex-col bg-background">
       {/* Top: mascot + collapse */}
       <div className="flex items-center justify-between px-3 py-3">
         <img src="/chatbot-mascot.svg" alt="AI Hunt" className="h-8 w-8" />
@@ -416,7 +433,7 @@ export default function ChatPage() {
       <div className="p-2" style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}>
         {username && (
           <div className="flex w-full items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-colors hover:bg-foreground/[0.06]">
-            <img src="/icons/push-icon-192.png" alt="" className="h-7 w-7 shrink-0 rounded-full" />
+            <FruitAvatar name={username} size={28} className="shrink-0 rounded-full" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">@{username}</p>
               <p className="text-[11px] text-muted-foreground">Chats saved to your account</p>
@@ -550,12 +567,12 @@ export default function ChatPage() {
                           {msg.content === '' && loading ? (
                             <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                           ) : (
-                            <Markdown className="text-sm">{msg.content}</Markdown>
+                            <Markdown className="text-[15px] sm:text-sm">{msg.content}</Markdown>
                           )}
                         </div>
                       </div>
                     ) : (
-                      <div className="max-w-[88%] rounded-3xl bg-muted px-3.5 py-2 text-sm leading-relaxed text-foreground sm:max-w-[80%] sm:px-4 sm:py-2.5">
+                      <div className="max-w-[88%] rounded-3xl bg-muted px-3.5 py-2 text-[15px] leading-relaxed text-foreground sm:max-w-[80%] sm:px-4 sm:py-2.5 sm:text-sm">
                         <p className="whitespace-pre-wrap">{msg.content}</p>
                       </div>
                     )}
