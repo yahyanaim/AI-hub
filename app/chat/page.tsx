@@ -151,6 +151,11 @@ export default function ChatPage() {
       const name = localStorage.getItem(USERNAME_KEY)
       if (name && name.length >= 2) signIn(name)
     } catch {}
+    // Prefill from the widget handoff: /chat?q=<question>
+    try {
+      const q = new URLSearchParams(window.location.search).get('q')
+      if (q) setInput(q)
+    } catch {}
     setAccountChecked(true)
   }, [signIn])
 
@@ -299,13 +304,13 @@ export default function ChatPage() {
   }
 
   const SidebarInner = (
-    <div className="flex h-full w-[268px] max-w-[85vw] flex-col border-r border-border bg-muted @[680px]/sidebar:rounded-none">
+    <div className="flex h-full w-[280px] max-w-[85vw] flex-col bg-muted">
       {/* Top: logo + collapse */}
       <div className="flex items-center justify-between px-3 py-3">
         <img src="/icons/push-icon-192.png" alt="AI Hunt" className="h-8 w-8 rounded-lg" />
         <button
           onClick={sidebarToggle}
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted"
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
           aria-label="Toggle sidebar"
         >
           {isMobile ? <X className="h-5 w-5" /> : sidebarOpen ? <PanelLeftClose className="h-5 w-5" /> : <PanelLeft className="h-5 w-5" />}
@@ -317,7 +322,7 @@ export default function ChatPage() {
         <button
           onClick={newChat}
           title="New chat"
-          className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium text-foreground hover:bg-muted"
+          className="flex w-full items-center gap-2 rounded-xl px-2.5 py-2 text-sm font-medium text-foreground transition-colors hover:bg-foreground/[0.06]"
         >
           <Plus className="h-4 w-4 shrink-0" />
           New chat
@@ -325,7 +330,7 @@ export default function ChatPage() {
         <button
           onClick={() => setSearchOpen((v) => !v)}
           title="Search chats"
-          className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium text-foreground hover:bg-muted"
+          className="flex w-full items-center gap-2 rounded-xl px-2.5 py-2 text-sm font-medium text-foreground transition-colors hover:bg-foreground/[0.06]"
         >
           <Search className="h-4 w-4 shrink-0" />
           Search chats
@@ -336,14 +341,14 @@ export default function ChatPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search chats"
-            className="mt-1 w-full rounded-lg border border-border bg-card px-2.5 py-1.5 text-sm outline-none focus:border-brand-orange/50"
+            className="mt-1 w-full rounded-xl border border-border bg-card px-2.5 py-1.5 text-sm outline-none focus:border-brand-orange/50"
           />
         )}
       </div>
 
       {/* Chats list */}
-      <nav className="mt-2 flex-1 overflow-y-auto px-2 pb-3">
-        <div className="px-2.5 pb-1 pt-3 text-xs font-medium text-muted-foreground">Your chats</div>
+      <nav className="mt-1 flex-1 overflow-y-auto px-2 pb-3">
+        <div className="px-2.5 pb-1 pt-4 text-xs font-medium text-muted-foreground">Your chats</div>
         {shownSessions.length === 0 && (
           <div className="px-2.5 py-1.5 text-xs text-muted-foreground">No chats found</div>
         )}
@@ -351,8 +356,8 @@ export default function ChatPage() {
           <div
             key={s.id}
             className={cn(
-              'group relative flex w-full items-center rounded-lg px-2.5 py-2 text-sm text-foreground hover:bg-muted',
-              active.id === s.id && 'bg-muted/80 font-medium'
+              'group relative flex w-full items-center rounded-xl px-2.5 py-2 text-sm text-foreground/90 transition-colors hover:bg-foreground/[0.06]',
+              active.id === s.id && 'bg-foreground/[0.08] font-medium text-foreground'
             )}
           >
             <button onClick={() => selectChat(s.id)} className="min-w-0 flex-1 truncate pr-6 text-left">
@@ -363,7 +368,7 @@ export default function ChatPage() {
                 e.stopPropagation()
                 deleteChat(s.id)
               }}
-              className="absolute right-1.5 hidden rounded p-1 text-muted-foreground hover:bg-muted group-hover:block"
+              className="absolute right-1.5 hidden rounded p-1 text-muted-foreground transition-colors hover:bg-foreground/[0.08] hover:text-foreground group-hover:block"
               aria-label="Delete chat"
             >
               <Trash2 className="h-3.5 w-3.5" />
@@ -373,10 +378,10 @@ export default function ChatPage() {
       </nav>
 
       {/* Bottom: per-user identity */}
-      <div className="border-t border-border/60 p-2" style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}>
+      <div className="p-2" style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}>
         {username && (
-          <div className="flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-sm">
-            <img src="/icons/push-icon-192.png" alt="" className="h-6 w-6 shrink-0 rounded-full" />
+          <div className="flex w-full items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-colors hover:bg-foreground/[0.06]">
+            <img src="/icons/push-icon-192.png" alt="" className="h-7 w-7 shrink-0 rounded-full" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">@{username}</p>
               <p className="text-[11px] text-muted-foreground">Chats saved to your account</p>
@@ -457,7 +462,7 @@ export default function ChatPage() {
 
       {/* ---- MAIN ---- */}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex shrink-0 items-center justify-between bg-gradient-to-b from-brand-orange/[0.07] to-transparent px-3 py-2.5 sm:px-4">
+        <header className="flex shrink-0 items-center justify-between px-3 py-2.5 sm:px-4">
           <div className="flex min-w-0 items-center gap-1.5">
             {!sidebarOpen && (
               <button
@@ -484,7 +489,7 @@ export default function ChatPage() {
           )}
         </header>
 
-        <main className="flex-1 overflow-y-auto bg-gradient-to-b from-brand-orange/[0.06] via-background/0 to-brand-orange/[0.13]">
+        <main className="flex-1 overflow-y-auto bg-background">
           <div className="mx-auto flex w-full max-w-3xl flex-col px-3 py-5 sm:px-6">
             {messages.map((msg, i) => (
               <div key={i} className={cn('mb-6 sm:mb-7', msg.role === 'user' && 'flex justify-end')}>
