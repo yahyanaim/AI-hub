@@ -27,44 +27,15 @@ type ChatSession = {
   updatedAt: number
 }
 
-// The advisor runs in the visitor's language: on a fresh chat they are asked
-// to pick English / Français / العربية once, then every reply continues in it.
-type Lang = 'en' | 'fr' | 'ar'
-
-const LANG_LABEL: Record<Lang, string> = {
-  en: 'English',
-  fr: 'Français',
-  ar: 'العربية',
-}
-
-const LANG_WELCOME: Record<Lang, string> = {
-  en: "Hey! I'm your AI Career Advisor from AI Hunt. I'll help you build your skills, find the right tools and courses, and create a learning plan that actually works for you. What are you looking to achieve?",
-  fr: "Salut ! Je suis ton conseiller carrière IA d'AI Hunt. Je t'aide à développer tes compétences, à trouver les bons outils et cours, et à créer un plan d'apprentissage qui fonctionne vraiment pour toi. Qu'est-ce que tu veux accomplir ?",
-  ar: 'مرحباً! أنا مستشارك للمسار المهني الذكي من AI Hunt. سأساعدك على بناء مهاراتك، والبحث عن أفضل الأدوات والدورات المناسبة لك، وإنشاء خطة تعلُّم فعلاً تناسبك. ما الذي تريد تحقيقه؟',
-}
-
-// Language-neutral opening message: the advisor asks the conversation
-// language inside the chat itself and the visitor answers with a chip.
-const LANG_ASK =
-  '👋 Welcome to your **AI Career Advisor**!\n\nBefore we dive in — which language would you like to chat in?\n\n**English / Français / العربية** 👇'
-
-function greetingFor(lang: Lang | null): ChatSession {
-  return {
-    id: 'greet',
-    title: 'New chat',
-    // No language chosen yet → the advisor opens by asking; once the chunk
-    // pick exists (per-account) new chats open with that welcome directly.
-    messages: [{ role: 'assistant', content: lang ? LANG_WELCOME[lang] : LANG_ASK }],
-    updatedAt: Date.now(),
-  }
-}
+const GREETING =
+  "Hey! I'm your AI Career Advisor from AI Hunt. I'll help you build your skills, find the right tools and courses, and create a learning plan that actually works for you. What are you looking to achieve?"
 
 const STATE_KEY = 'ai-hunt-state-v4'
 const USERNAME_KEY = 'ai-hunt-username'
 const MAX_CONTEXT_MESSAGES = 40
 
 function greeting(): ChatSession {
-  return greetingFor(null)
+  return { id: 'greet', title: 'New chat', messages: [{ role: 'assistant', content: GREETING }], updatedAt: Date.now() }
 }
 
 function sessionsKey(username: string) {
@@ -94,7 +65,6 @@ export default function ChatPage() {
   const [username, setUsername] = useState<string | null>(null)
   const [avatarUrl, setAvatarUrl] = useState('')
   const [displayName, setDisplayName] = useState('')
-  const [lang, setLang] = useState<Lang | null>(null)
   const [accountChecked, setAccountChecked] = useState(false)
   const [signupName, setSignupName] = useState('')
   const [signupError, setSignupError] = useState<string | null>(null)
@@ -169,15 +139,7 @@ export default function ChatPage() {
       setUsername(clean)
       const stored = loadSessions(clean)
       const storedActive = localStorage.getItem(`ai-hunt-chat-active::${clean}`)
-      // Language persists per account: once the visitor picks English /
-      // Français / العربية, every new chat continues in it (no re-asking).
-      let savedLang: Lang | null = null
-      try {
-        const raw = localStorage.getItem(`ai-hunt-chat-lang::${clean}`)
-        if (raw === 'en' || raw === 'fr' || raw === 'ar') savedLang = raw
-      } catch {}
-      setLang(savedLang)
-      setSessions(stored.length > 0 ? stored : [greetingFor(savedLang)])
+      setSessions(stored.length > 0 ? stored : [greeting()])
       const firstStored: ChatSession | undefined = stored[0]
       setActiveId(
         storedActive && stored.some((s) => s.id === storedActive)
@@ -242,7 +204,7 @@ export default function ChatPage() {
 
   // ---- Session management -------------------------------------------------
   const newChat = () => {
-    const s = greetingFor(lang)
+    const s = greeting()
     setSessions((prev) => [s, ...prev.filter((p) => p.id !== 'greet')])
     setActiveId(s.id)
     setError('')
@@ -255,24 +217,6 @@ export default function ChatPage() {
     setActiveId(id)
     setError('')
     if (isMobile) setSidebarOpen(false)
-  }
-
-  // First-time language pick: persists for the account, swaps the opening
-  // question for the welcome in that language, and every reply continues
-  // in it from here on.
-  const chooseLang = (l: Lang) => {
-    setLang(l)
-    try {
-      if (username) localStorage.setItem(`ai-hunt-chat-lang::${username}`, l)
-    } catch {}
-    setSessions((prev) =>
-      prev.map((p) =>
-        p.id === 'greet'
-          ? { ...p, messages: [{ role: 'assistant' as const, content: LANG_WELCOME[l] }] }
-          : p
-      )
-    )
-    inputRef.current?.focus()
   }
 
   const deleteChat = (id: string) => {
@@ -327,7 +271,6 @@ export default function ChatPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          language: lang ?? undefined,
           messages: withUser
             .map(({ role, content }) => ({ role, content: content.length > 18_000 ? content.slice(0, 18_000) : content }))
             .slice(-MAX_CONTEXT_MESSAGES),
@@ -558,8 +501,6 @@ export default function ChatPage() {
     )
   }
 
-  // ---- Fresh visitors: language is asked in the conversation itself --------
-
   return (
     <div className="flex h-dvh overflow-hidden bg-background text-foreground">
       {/* ---- SIDEBAR (static column on desktop, slide-in drawer on mobile) ---- */}
@@ -677,21 +618,6 @@ export default function ChatPage() {
                         <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                       ) : (
                         <Markdown className="text-[15px] sm:text-sm">{msg.content}</Markdown>
-                      )}
-                      {/* The very first thing a visitor sees: the advisor asks
-                          the conversation language inline, ChatGPT-chip style. */}
-                      {active.id === 'greet' && i === 0 && !lang && msg.content === LANG_ASK && (
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {(['en', 'fr', 'ar'] as Lang[]).map((l) => (
-                            <button
-                              key={l}
-                              onClick={() => chooseLang(l)}
-                              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground transition-colors hover:border-brand-orange hover:text-brand-orange"
-                            >
-                              {LANG_LABEL[l]}
-                            </button>
-                          ))}
-                        </div>
                       )}
                     </div>
                   </div>
