@@ -64,6 +64,7 @@ export default function ChatPage() {
   // ---- Account requirement ------------------------------------------------
   const [username, setUsername] = useState<string | null>(null)
   const [avatarUrl, setAvatarUrl] = useState('')
+  const [displayName, setDisplayName] = useState('')
   const [accountChecked, setAccountChecked] = useState(false)
   const [signupName, setSignupName] = useState('')
   const [signupError, setSignupError] = useState<string | null>(null)
@@ -126,9 +127,13 @@ export default function ChatPage() {
         delta.currentUserId = existing?.id ?? (last ? last.id : null)
         localStorage.setItem(STATE_KEY, JSON.stringify(delta))
         // Same profile photo as the site's profile page (falls back to the
-        // deterministic fruit avatar via <Avatar /> when none is set).
+        // same deterministic fruit avatar — Avatar must get displayName,
+        // the exact input the profile page feeds it).
         const me = existing ?? last
         setAvatarUrl(typeof me?.avatarUrl === 'string' ? me.avatarUrl : '')
+        setDisplayName(
+          typeof me?.displayName === 'string' ? me.displayName : rawName.trim().slice(0, 32) || clean
+        )
       }
       localStorage.setItem(USERNAME_KEY, clean)
       setUsername(clean)
@@ -362,11 +367,13 @@ export default function ChatPage() {
 
   const SidebarInner = (
     <div className="flex h-full w-[280px] max-w-[85vw] flex-col bg-background">
-      {/* Top: mascot + platform name + collapse */}
-      <div className="flex items-center justify-between px-3 py-3">
-        <span className="flex items-center gap-1.5">
-          <img src="/chatbot-mascot.svg" alt="AI Hunt" className="h-8 w-8" />
-          <span className="font-heading text-sm font-bold text-foreground">AI Hunt</span>
+      {/* Top: mascot + badge + collapse */}
+      <div className="flex items-center justify-between gap-1 px-3 py-3">
+        <span className="flex min-w-0 items-center gap-2 pl-0.5">
+          <img src="/chatbot-mascot.svg" alt="AI Hunt" className="h-8 w-8 shrink-0" />
+          <span className="inline-flex shrink-0 items-center rounded-full border border-brand-orange/30 bg-brand-orange/10 px-2.5 py-1 text-xs font-semibold text-brand-orange">
+            AI Career Advisor
+          </span>
         </span>
         <button
           onClick={sidebarToggle}
@@ -442,7 +449,7 @@ export default function ChatPage() {
         {username && (
           <div className="flex w-full items-center gap-2 rounded-xl px-2.5 py-2 text-sm transition-colors hover:bg-foreground/[0.06]">
             <Avatar
-              name={username}
+              name={displayName || username}
               src={avatarUrl || undefined}
               size={28}
               className="shrink-0 rounded-full"
@@ -562,7 +569,7 @@ export default function ChatPage() {
               aria-label="Open sidebar"
               title={username}
             >
-              <Avatar name={username} src={avatarUrl || undefined} size={32} />
+              <Avatar name={displayName || username} src={avatarUrl || undefined} size={32} />
             </button>
           )}
         </aside>
@@ -581,10 +588,13 @@ export default function ChatPage() {
                 <PanelLeft className="h-5 w-5" />
               </button>
             )}
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-3 py-1 text-sm font-semibold text-brand-orange">
-              <img src="/chatbot-mascot.svg" alt="" className="h-4 w-4" />
-              AI Career Advisor
-            </span>
+            {/* When the sidebar is minimized the badge lives in the header;
+                otherwise it sits at the top of the sidebar itself. */}
+            {!sidebarOpen && (
+              <span className="inline-flex shrink-0 items-center rounded-full border border-brand-orange/30 bg-brand-orange/10 px-3 py-1 text-sm font-semibold text-brand-orange">
+                AI Career Advisor
+              </span>
+            )}
           </div>
           {isMobile && (
             <button
