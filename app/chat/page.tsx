@@ -558,6 +558,37 @@ export default function ChatPage() {
     )
   }
 
+  // ---- Fresh visitors: pick the language before the chat opens ------------
+  if (accountChecked && username && !lang) {
+    return (
+      <div className="flex h-dvh items-center justify-center bg-background px-4">
+        <div className="w-full max-w-sm text-center">
+          <img src="/chatbot-mascot.svg" alt="" className="mx-auto mb-5 h-20 w-20" />
+          <h1 className="font-heading text-2xl font-bold text-foreground">
+            Welcome to your AI Career Advisor
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Choose your language to continue — every reply will use it.
+          </p>
+          <div className="mt-6 flex flex-col gap-2.5">
+            {(['en', 'fr', 'ar'] as Lang[]).map((l) => (
+              <button
+                key={l}
+                onClick={() => chooseLang(l)}
+                className="rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-brand-orange hover:bg-brand-orange/5 hover:text-brand-orange"
+              >
+                {LANG_LABEL[l]}
+              </button>
+            ))}
+          </div>
+          <p className="mt-4 text-[11px] text-muted-foreground">
+            You can start a different language in a new chat anytime.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex h-dvh overflow-hidden bg-background text-foreground">
       {/* ---- SIDEBAR (static column on desktop, slide-in drawer on mobile) ---- */}
@@ -672,22 +703,6 @@ export default function ChatPage() {
             </h2>
             <div className="w-full max-w-3xl">
               {ComposerPill}
-              {!lang && (
-                <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-                  <span className="mr-1 text-xs text-muted-foreground">Choose your language / شغلك بْها / اِختر لغة :
-
-                  </span>
-                  {(Object.keys(LANG_LABEL) as Lang[]).map((l) => (
-                    <button
-                      key={l}
-                      onClick={() => chooseLang(l)}
-                      className="rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-brand-orange hover:bg-brand-orange/10 hover:text-brand-orange"
-                    >
-                      {LANG_LABEL[l]}
-                    </button>
-                  ))}
-                </div>
-              )}
               <p className="mt-2 text-center text-[11px] text-muted-foreground">
                 AI can make mistakes. Verify courses and offers on their official pages.
               </p>
