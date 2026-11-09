@@ -1017,10 +1017,13 @@ export default function ChatPage() {
               >
                 <ListTree className="h-4 w-4" />
               </button>
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-orange/10 text-brand-orange">
+                <FileText className="h-4 w-4" />
+              </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-foreground">{openDoc.title}</p>
-                <p className="text-[11px] text-muted-foreground">
-                  {docWordCount.toLocaleString()} words · {Math.max(1, Math.round(docWordCount / 220))} min read
+                <p className="truncate text-[13.5px] font-semibold text-foreground">{openDoc.title}</p>
+                <p className="text-[10.5px] uppercase tracking-[0.06em] text-muted-foreground">
+                  Document · {docWordCount.toLocaleString()} words · {Math.max(1, Math.round(docWordCount / 220))} min read
                 </p>
               </div>
               <button
@@ -1076,9 +1079,15 @@ export default function ChatPage() {
             <div ref={docScrollRef} className="flex-1 overflow-y-auto bg-white">
               <div
                 ref={pdfRef}
-                className="doc-body mx-auto w-full max-w-2xl px-6 py-10 text-neutral-900 sm:px-8 sm:py-12"
+                className="doc-body mx-auto w-full max-w-2xl px-6 py-10 text-neutral-900 sm:px-8 sm:py-14"
               >
                 <Markdown>{docBodyNoH1}</Markdown>
+                <div className="mt-16 border-t border-neutral-200 pt-5 text-[12.5px] leading-relaxed text-neutral-400">
+                  Generated for you by the AI Hunt Career Advisor ·{' '}
+                  {new Date(openDoc.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                  <br />
+                  Verify courses and offers on their official pages before enrolling.
+                </div>
               </div>
             </div>
           </motion.div>
