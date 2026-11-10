@@ -240,7 +240,13 @@ export default function ChatPage() {
   }, [signIn])
 
   useEffect(() => {
-    if (!username || firstRender.current) return
+    if (!username) return
+    // Skip only the first render (sessions just loaded from storage) —
+    // every later change is saved to the local browser storage.
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
     persist(username, sessions, activeId)
   }, [sessions, activeId, username])
 
