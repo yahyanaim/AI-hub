@@ -200,7 +200,7 @@ async function fetchJsonT(url: string, ms = 6000): Promise<any> {
 async function githubSnapshotFromText(text: string): Promise<string | null> {
   const m = text.match(/github\.com\/([A-Za-z0-9][A-Za-z0-9-]{0,38})/i)
   if (!m) return null
-  const login = m[1].toLowerCase()
+  const login = m[1]?.toLowerCase() || ''
   if (GH_RESERVED_PATHS.has(login)) return null
   const cached = GH_CACHE.get(login)
   if (cached && Date.now() - cached.at < 10 * 60_000) return cached.text || null
