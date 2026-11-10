@@ -1002,46 +1002,17 @@ export default function ChatPage() {
             transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
             className="absolute inset-y-0 right-0 z-40 flex w-full flex-col bg-background md:relative md:z-auto md:h-full md:shrink-0 md:shadow-none md:w-[min(680px,55vw)]"
           >
+            {/* Canvas header: doc-type chip + title, actions live in the floating bar */}
             <div
-              className="relative flex shrink-0 items-center gap-1.5 border-b border-border/70 bg-background px-2.5 py-2"
-              style={{ paddingTop: 'max(0.55rem, env(safe-area-inset-top))' }}
+              className="flex shrink-0 items-center gap-2.5 border-b border-border/70 bg-background px-4 py-2.5"
+              style={{ paddingTop: 'max(0.6rem, env(safe-area-inset-top))' }}
             >
-              <button
-                onClick={() => setTocOpen((v) => !v)}
-                disabled={toc.length === 0}
-                className={cn(
-                  'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-40',
-                  tocOpen && 'bg-foreground/[0.08] text-foreground'
-                )}
-                title="Contents"
-              >
-                <ListTree className="h-4 w-4" />
-              </button>
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-orange/10 text-brand-orange">
-                <FileText className="h-4 w-4" />
-              </div>
+              <span className="shrink-0 rounded-md bg-brand-orange/10 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-orange">
+                Roadmap
+              </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[13.5px] font-semibold text-foreground">{openDoc.title}</p>
-                <p className="text-[10.5px] uppercase tracking-[0.06em] text-muted-foreground">
-                  Document · {docWordCount.toLocaleString()} words · {Math.max(1, Math.round(docWordCount / 220))} min read
-                </p>
+                <p className="truncate text-sm font-semibold text-foreground">{openDoc.title}</p>
               </div>
-              <button
-                onClick={copyDoc}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                title="Copy document"
-              >
-                {copied ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
-              </button>
-              <button
-                onClick={exportPdf}
-                disabled={exportingPdf}
-                className="flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[13px] font-medium text-foreground transition-colors hover:bg-muted disabled:opacity-60"
-                title="Download as PDF"
-              >
-                {exportingPdf ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-                <span className="hidden sm:inline">Download</span>
-              </button>
               <button
                 onClick={() => {
                   setOpenDocId(null)
@@ -1052,31 +1023,8 @@ export default function ChatPage() {
               >
                 <X className="h-4 w-4" />
               </button>
-              {tocOpen && (
-                <div className="absolute left-2 top-full z-50 mt-1.5 max-h-[60vh] w-72 overflow-y-auto rounded-xl border border-border bg-card p-1.5 shadow-xl">
-                  <p className="px-2.5 pb-1 pt-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                    Contents
-                  </p>
-                  {toc.map((t) => (
-                    <button
-                      key={t.id}
-                      onClick={() => {
-                        document.getElementById(t.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                        setTocOpen(false)
-                      }}
-                      className={cn(
-                        'block w-full truncate rounded-lg px-2.5 py-1.5 text-left text-[13px] text-foreground/90 transition-colors hover:bg-muted',
-                        t.level === 1 && 'font-medium'
-                      )}
-                      style={t.level === 2 ? { paddingLeft: '1.4rem' } : undefined}
-                    >
-                      {t.text}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
-            <div ref={docScrollRef} className="flex-1 overflow-y-auto bg-white">
+            <div ref={docScrollRef} className="relative flex-1 overflow-y-auto bg-white">
               <div
                 ref={pdfRef}
                 className="doc-body mx-auto w-full max-w-2xl px-6 py-10 text-neutral-900 sm:px-8 sm:py-14"
@@ -1087,6 +1035,63 @@ export default function ChatPage() {
                   {new Date(openDoc.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                   <br />
                   Verify courses and offers on their official pages before enrolling.
+                </div>
+              </div>
+              {/* Floating document toolbar (canvas style) */}
+              <div
+                className="pointer-events-none sticky bottom-0 z-10 flex justify-center px-4"
+                style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
+              >
+                <div className="pointer-events-auto relative flex items-center gap-0.5 rounded-full border border-border bg-card/95 p-1 shadow-[0_8px_30px_hsl(var(--foreground)/0.14)] backdrop-blur">
+                  <button
+                    onClick={() => setTocOpen((v) => !v)}
+                    disabled={toc.length === 0}
+                    className={cn(
+                      'flex items-center gap-1.5 rounded-full px-3 py-2 text-[12.5px] font-medium text-foreground/90 transition-colors hover:bg-foreground/[0.06] disabled:opacity-40',
+                      tocOpen && 'bg-foreground/[0.08] text-foreground'
+                    )}
+                  >
+                    <ListTree className="h-4 w-4" />
+                    Contents
+                  </button>
+                  <button
+                    onClick={copyDoc}
+                    className="flex items-center gap-1.5 rounded-full px-3 py-2 text-[12.5px] font-medium text-foreground/90 transition-colors hover:bg-foreground/[0.06]"
+                  >
+                    {copied ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+                    {copied ? 'Copied' : 'Copy'}
+                  </button>
+                  <button
+                    onClick={exportPdf}
+                    disabled={exportingPdf}
+                    className="flex items-center gap-1.5 rounded-full bg-brand-orange px-3.5 py-2 text-[12.5px] font-semibold text-white transition-colors hover:bg-orange-600 disabled:opacity-70"
+                  >
+                    {exportingPdf ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+                    PDF
+                  </button>
+                  {tocOpen && (
+                    <div className="absolute bottom-full left-0 z-50 mb-2 max-h-[50vh] w-72 overflow-y-auto rounded-xl border border-border bg-card p-1.5 shadow-xl">
+                      <p className="px-2.5 pb-1 pt-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                        Contents
+                      </p>
+                      {toc.map((t) => (
+                        <button
+                          key={t.id}
+                          onClick={() => {
+                            document.getElementById(t.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                            setTocOpen(false)
+                          }}
+                          className={cn(
+                            'block w-full truncate rounded-lg px-2.5 py-1.5 text-left text-[13px] text-foreground/90 transition-colors hover:bg-muted',
+                            t.level === 1 && 'font-medium'
+                          )}
+                          style={t.level === 2 ? { paddingLeft: '1.4rem' } : undefined}
+                        >
+                          {t.text}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
