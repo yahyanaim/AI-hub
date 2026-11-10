@@ -167,6 +167,78 @@ const MAX_MESSAGE_CHARS = 20_000 // reject any single message longer than this
 const MAX_CONTEXT_MESSAGES = 20 // only send the last N messages to the model
 const MAX_CV_CHARS = 12_000 // attached CV is context-only — parsed text, never stored
 
+// ---- GitHub snapshot (live, read-only, in-memory cache) --------------------
+// When the user pastes a github.com/<user> link, fetch public profile + repo
+// data so the advisor analyzes real projects instead of saying it cannot
+// browse. Cached 10 minutes per login; failures degrade to no snapshot.
+const GH_CACHE = new Map<string, { at: number; text: string }>()
+const GH_RESERVED_PATHS = new Set([
+  'features', 'apps', 'about', 'topics', 'collections', 'trending', 'orgs',
+  'site', 'settings', 'marketplace', 'enterprise', 'customer-stories',
+  'sponsors', 'education', 'developers', 'readme', 'events', 'explore', 'login',
+  'signup', 'pricing', 'search', 'pulls', 'issues', 'notifications', 'watch',
+])
+
+async function fetchJsonT(url: string, ms = 6000): Promise<any> {
+  try {
+    const ctl = new AbortController()
+    const t = setTimeout(() => ctl.abort(), ms)
+    const headers: Record<string, string> = {
+      'User-Agent': 'AIHubTools-Career-Advisor',
+      Accept: 'application/vnd.github+json',
+    }
+    if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
+    const res = await fetch(url, { headers, signal: ctl.signal })
+    clearTimeout(t)
+    if (!res.ok) return null
+    return await res.json()
+  } catch {
+    return null
+  }
+}
+
+async function githubSnapshotFromText(text: string): Promise<string | null> {
+  const m = text.match(/github\.com\/([A-Za-z0-9][A-Za-z0-9-]{0,38})/i)
+  if (!m) return null
+  const login = m[1].toLowerCase()
+  if (GH_RESERVED_PATHS.has(login)) return null
+  const cached = GH_CACHE.get(login)
+  if (cached && Date.now() - cached.at < 10 * 60_000) return cached.text || null
+
+  const [user, repos] = await Promise.all([
+    fetchJsonT(`https://api.github.com/users/${login}`),
+    fetchJsonT(`https://api.github.com/users/${login}/repos?sort=updated&per_page=30`),
+  ])
+  if (!user || user.message || !Array.isArray(repos)) return null // 404 / rate-limited / timeout
+
+  const lines: string[] = []
+  if (user.name) lines.push(`User: ${user.name} (@${user.login})`)
+  else lines.push(`User: @${user.login}`)
+  if (user.bio) lines.push(`Bio: ${user.bio}`)
+  if (user.company) lines.push(`Company: ${user.company}`)
+  if (user.blog) lines.push(`Site: ${user.blog}`)
+  lines.push(`Public repos: ${user.public_repos} · Followers: ${user.followers}`)
+  const langAgg: Record<string, number> = {}
+  for (const r of repos.slice(0, 12)) {
+    if (!r || r.fork) continue
+    lines.push(
+      `- ${r.name} (${r.language || 'unknown'}) ★${r.stargazers_count} · updated ${(r.updated_at || '').slice(0, 10)}${r.description ? ' — ' + r.description : ''}`
+    )
+    if (r.language) langAgg[r.language] = (langAgg[r.language] || 0) + 1
+  }
+  const kept = lines.length
+  if (repos.length > 12) lines.splice(kept, 0, `(showing the 12 most recently updated of ${repos.length} repos)`)
+  const langs = Object.entries(langAgg)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([l, c]) => `${l} (${c})`)
+  if (langs.length) lines.push(`Most-used languages by repo count: ${langs.join(', ')}`)
+  const snapshot = lines.join('\n').slice(0, 4000)
+  GH_CACHE.set(login, { at: Date.now(), text: snapshot })
+  if (GH_CACHE.size > 200) GH_CACHE.clear()
+  return snapshot
+}
+
 // In-memory sliding window: ip -> timestamps of recent requests
 const rateLimitMap = new Map<string, number[]>()
 
@@ -249,6 +321,13 @@ export async function POST(request: Request) {
     const cvRaw = typeof (body as { cv?: unknown })?.cv === 'string' ? (body as { cv: string }).cv : ''
     const cv = cvRaw.length > MAX_CV_CHARS ? cvRaw.slice(0, MAX_CV_CHARS) : cvRaw
 
+    // Live GitHub snapshot when the user shared a github.com link recently.
+    const recentUserText = messages
+      .slice(-4)
+      .map((m: { role: string; content: string }) => (m.role === 'user' ? m.content : ''))
+      .join(' ')
+    const ghSnapshot = await githubSnapshotFromText(recentUserText)
+
     const primaryModel = process.env.NVIDIA_MODEL || DEFAULT_MODEL
 
     async function callNvidia(model: string): Promise<Response> {
@@ -262,9 +341,14 @@ export async function POST(request: Request) {
         messages: [
           {
             role: 'system',
-            content: cv
-              ? `${SYSTEM_PROMPT}\n\n## Attached CV (session-only, not stored)\nThe user attached their CV as parsed text. Base career advice on it: strengths, gaps, and concrete next steps.\n\n${cv}`
-              : SYSTEM_PROMPT,
+            content:
+              SYSTEM_PROMPT +
+              (cv
+                ? `\n\n## Attached CV (session-only, not stored)\nThe user attached their CV as parsed text. Base career advice on it: strengths, gaps, and concrete next steps.\n\n${cv}`
+                : '') +
+              (ghSnapshot
+                ? `\n\n## GitHub profile snapshot (fetched live, read-only)\n${ghSnapshot}\n\nThe user actually shared this GitHub profile. Analyze these REAL projects (repos, languages, activity) when working on AREA 1 (CV & Portfolio) — never say you cannot browse GitHub; this data IS their GitHub.`
+                : ''),
           },
           ...normalizedConversation,
         ],
