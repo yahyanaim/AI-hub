@@ -83,6 +83,179 @@ function normalizeAtsBody(title: string, body: string): string {
     .join('\n')
 }
 
+type AtsSection = { title: string; lines: string[] }
+
+function parseAtsSections(body: string): { header: string[]; sections: AtsSection[] } {
+  const header: string[] = []
+  const sections: AtsSection[] = []
+  let cur: AtsSection | null = null
+  for (const raw of body.split('\n')) {
+    const line = raw.trim().replace(/\*\*/g, '')
+    if (!line || /^#\s/.test(line)) continue
+    if (/^##\s/.test(line)) {
+      cur = { title: line.replace(/^##\s+/, '').trim(), lines: [] }
+      sections.push(cur)
+      continue
+    }
+    if (cur) cur.lines.push(line)
+    else header.push(line)
+  }
+  return { header, sections }
+}
+
+const cleanBullet = (l: string) => l.replace(/^[-•*]\s+/, '')
+
+async function exportAtsPdf(body: string, title: string) {
+  const { jsPDF } = await import('jspdf')
+  const pdf = new jsPDF({ unit: 'mm', format: 'a4' })
+  const M = 18
+  const W = 210 - M * 2
+  const DARK: [number, number, number] = [51, 65, 78]
+  const STEEL: [number, number, number] = [95, 126, 149]
+  const GRAY: [number, number, number] = [85, 85, 85]
+  const INK: [number, number, number] = [30, 30, 30]
+  const RULE: [number, number, number] = [201, 211, 218]
+  let y = 20
+  const ensure = (h: number) => {
+    if (y + h > 284) {
+      pdf.addPage()
+      y = 20
+    }
+  }
+  const name = title.replace(/\s*[—-]\s*ATS\s*CV\s*$/i, '').trim() || title
+  const { header, sections } = parseAtsSections(body)
+  const contactSec = sections.find((s) => /contact/i.test(s.title))
+  const contactLines = [...header, ...(contactSec?.lines ?? [])]
+    .map(cleanBullet)
+    .filter((l) => l && name.toLowerCase().indexOf(l.toLowerCase()) === -1)
+
+  pdf.setFont('times', 'bold')
+  pdf.setFontSize(23)
+  pdf.setTextColor(DARK[0], DARK[1], DARK[2])
+  pdf.text(name.toUpperCase(), 105, y, { align: 'center' })
+  y += 5.5
+  pdf.setDrawColor(DARK[0], DARK[1], DARK[2])
+  pdf.setLineWidth(0.5)
+  pdf.line(M, y, M + W, y)
+  y += 5
+  if (contactLines.length) {
+    pdf.setFont('helvetica', 'normal')
+    pdf.setFontSize(8.8)
+    pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
+    const arr = pdf.splitTextToSize(contactLines.join('    |    '), W) as string[]
+    pdf.text(arr, 105, y, { align: 'center' })
+    y += arr.length * 4.2
+  }
+
+  const para = (text: string) => {
+    pdf.setFont('helvetica', 'normal')
+    pdf.setFontSize(9.8)
+    pdf.setTextColor(INK[0], INK[1], INK[2])
+    const arr = pdf.splitTextToSize(text, W) as string[]
+    for (const t of arr) {
+      ensure(5)
+      pdf.text(t, M, y)
+      y += 4.6
+    }
+    y += 0.8
+  }
+  const bullet = (text: string) => {
+    pdf.setFont('helvetica', 'normal')
+    pdf.setFontSize(9.8)
+    pdf.setTextColor(INK[0], INK[1], INK[2])
+    const arr = pdf.splitTextToSize(text, W - 4) as string[]
+    arr.forEach((t, i) => {
+      ensure(5)
+      if (i === 0) pdf.text('•', M + 0.8, y)
+      pdf.text(t, M + 4, y)
+      y += 4.6
+    })
+  }
+  const entryLine = (line: string) => {
+    const idx = line.lastIndexOf('|')
+    const left = (idx > 0 ? line.slice(0, idx) : line).trim()
+    const right = idx > 0 ? line.slice(idx + 1).trim() : ''
+    pdf.setFont('helvetica', 'bold')
+    pdf.setFontSize(9.9)
+    pdf.setTextColor(INK[0], INK[1], INK[2])
+    const arr = pdf.splitTextToSize(left, W - 48) as string[]
+    ensure(Math.max(arr.length, 1) * 4.6 + 1)
+    if (right) {
+      pdf.setFont('helvetica', 'normal')
+      pdf.setFontSize(9)
+      pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
+      pdf.text(right, M + W, y, { align: 'right' })
+    }
+    pdf.setFont('helvetica', 'bold')
+    pdf.setFontSize(9.9)
+    pdf.setTextColor(INK[0], INK[1], INK[2])
+    for (const t of arr) {
+      pdf.text(t, M, y)
+      y += 4.6
+    }
+    y += 0.6
+  }
+  const heading = (t: string) => {
+    ensure(15)
+    y += 4.5
+    pdf.setFont('helvetica', 'bold')
+    pdf.setFontSize(10.4)
+    pdf.setTextColor(STEEL[0], STEEL[1], STEEL[2])
+    pdf.setCharSpace(0.7)
+    pdf.text(t.toUpperCase(), M, y)
+    pdf.setCharSpace(0)
+    y += 2.8
+    pdf.setDrawColor(RULE[0], RULE[1], RULE[2])
+    pdf.setLineWidth(0.35)
+    pdf.line(M, y, M + W, y)
+    y += 5
+  }
+
+  for (const sec of sections) {
+    if (/contact/i.test(sec.title)) continue
+    heading(sec.title)
+    if (/skill/i.test(sec.title)) {
+      const bullets = sec.lines.filter((l) => /^[-•*]\s/.test(l)).map(cleanBullet)
+      const plain = sec.lines.filter((l) => !/^[-•*]\s/.test(l))
+      const items = [...bullets, ...(plain.length ? [plain.join(' • ')] : [])]
+      const cols = 3
+      const colW = W / cols
+      for (let i = 0; i < items.length; i += cols) {
+        const row = items.slice(i, i + cols)
+        let rowLines = 1
+        const cells = row.map((it) => {
+          pdf.setFont('helvetica', 'normal')
+          pdf.setFontSize(9.6)
+          const arr = pdf.splitTextToSize(it, colW - 4) as string[]
+          rowLines = Math.max(rowLines, arr.length)
+          return arr
+        })
+        ensure(rowLines * 4.4 + 2)
+        let cx = M
+        for (const cell of cells) {
+          pdf.setFont('helvetica', 'normal')
+          pdf.setFontSize(9.6)
+          pdf.setTextColor(INK[0], INK[1], INK[2])
+          pdf.text('•', cx + 0.8, y)
+          pdf.text(cell, cx + 4, y)
+          cx += colW
+        }
+        y += rowLines * 4.4 + 1.4
+      }
+      continue
+    }
+    for (const raw of sec.lines) {
+      const line = raw.trim()
+      if (!line) continue
+      if (/^[-•*]\s/.test(line)) bullet(cleanBullet(line))
+      else if (line.includes('|')) entryLine(line)
+      else para(line)
+    }
+  }
+
+  pdf.save(`${name.replace(/[^\w -]/g, '').trim().slice(0, 60) || 'ats-cv'} - ATS CV.pdf`)
+}
+
 function docsKey(username: string) {
   return `ai-hunt-chat-docs::${username}`
 }
@@ -347,8 +520,20 @@ export default function ChatPage() {
 
   // ---- PDF export (client-side: html2canvas + jsPDF, A4 multi-page) -------
   const exportPdf = async () => {
+    if (!openDoc) return
+    if (/ats/i.test(openDoc.title)) {
+      setExportingPdf(true)
+      try {
+        await exportAtsPdf(openDoc.body, openDoc.title)
+      } catch (err) {
+        console.error('[pdf-export]', err)
+      } finally {
+        setExportingPdf(false)
+      }
+      return
+    }
     const el = pdfRef.current
-    if (!el || !openDoc) return
+    if (!el) return
     setExportingPdf(true)
     try {
       const html2canvas = (await import('html2canvas')).default
