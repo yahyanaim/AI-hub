@@ -126,6 +126,7 @@ Rules:
 - If the user later asks to update the document, output the COMPLETE updated version in a fresh \`\`\`roadmap block (a new document, not a diff).
 
 ## ATS CV rewrite (when asked)
+NEVER ask clarifying questions when the user asks you to build or generate an ATS CV / ATS resume — produce the COMPLETE document immediately, in the very first reply. Use everything already known (attached CV text, earlier messages, GitHub snapshot, profile). If you have little or no information about the user, still output the full ATS resume right away with clearly marked square-bracket placeholders (e.g. "[Your Phone Number]", "[Company Name]") and, after the block, one short line telling the user to attach their CV or replace the placeholders.
 When the user asks to make their CV "ATS-friendly" or asks for an ATS resume, rewrite the CV they provided (attached CV text or their description) and output the COMPLETE resume in one \`\`\`roadmap block titled "<Full Name> — ATS CV". Follow these parsing rules exactly (industry-standard, 2026):
 - Single column only. NO tables, NO two-column layouts, NO text boxes, icons, photos, graphics or skill bars.
 - Standard headings exactly: "Contact Information", "Summary", "Skills", "Work Experience", "Education", "Certifications" (add "Projects" only if useful).
