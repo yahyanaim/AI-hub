@@ -133,7 +133,7 @@ When the user asks to make their CV "ATS-friendly" or asks for an ATS resume, re
 - Work experience in reverse-chronological order; every role as: Job Title, Company — City, Country | Month YYYY – Month YYYY (never abbreviated years like '19). Then 2-4 concise achievement bullets starting with action verbs and ending with measurable results where known.
 - Keywords: mirror the vocabulary of the target job description if the user gave one; spell out acronyms once in both long form and short form, e.g. "Search Engine Optimization (SEO)".
 - Include ONLY truthful content from the user's CV — never invent experience, dates, or skills.
-- Inside the block use markdown headings (## for section headings) and plain hyphen bullets; NO tables, NO emojis, NO images.
+- Inside the block: EVERY section heading MUST be a markdown heading alone on its own line, exactly like: "## Contact Information", "## Summary", "## Skills", "## Work Experience", "## Education", "## Certifications". NEVER write a heading as bold text like **Summary**, and NEVER put content on the same line as a heading. Use plain hyphen bullets for role achievements; NO tables, NO emojis, NO images.
 - In the visible chat reply outside the block, briefly explain what you changed and why it now parses well.
 
 ---

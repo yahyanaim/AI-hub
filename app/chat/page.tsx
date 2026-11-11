@@ -64,6 +64,25 @@ function docTitleFrom(body: string): string {
   return title || 'Career roadmap'
 }
 
+// Models sometimes write ATS-CV section headings as bold inline text
+// (**Summary** content…). ATS docs must parse as real markdown headings,
+// so normalize those lines into "## Heading" before the doc is stored.
+const ATS_HEADING_RE =
+  /^\s*\*\*(Contact Information|Summary|Professional Summary|Objective|Skills|Work Experience|Experience|Education|Certifications|Licenses|Projects|Awards|Languages|Volunteer Experience|Interests|References)\*\*\s*:?\s*(.*)$/
+
+function normalizeAtsBody(title: string, body: string): string {
+  if (!/ats/i.test(title)) return body
+  return body
+    .split('\n')
+    .map((line) => {
+      const m = line.match(ATS_HEADING_RE)
+      if (!m || !m[1]) return line
+      const rest = (m[2] || '').trim()
+      return rest ? `## ${m[1]}\n${rest}` : `## ${m[1]}`
+    })
+    .join('\n')
+}
+
 function docsKey(username: string) {
   return `ai-hunt-chat-docs::${username}`
 }
@@ -294,8 +313,9 @@ export default function ChatPage() {
   }, [openDoc])
 
   // Store (or refresh) a document captured from a chat message; returns its id.
-  const ensureDoc = (body: string): string => {
-    const title = docTitleFrom(body)
+  const ensureDoc = (rawBody: string): string => {
+    const title = docTitleFrom(rawBody)
+    const body = normalizeAtsBody(title, rawBody)
     const existing = docsRef.current.find((d) => d.title === title)
     if (existing) {
       if (existing.body !== body) {
