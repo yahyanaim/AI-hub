@@ -427,8 +427,8 @@ export default function ChatPage() {
   }
 
   // ---- Streaming fetch ----------------------------------------------------
-  const sendMessage = async () => {
-    const text = input.trim()
+  const sendMessage = async (override?: string) => {
+    const text = (typeof override === 'string' ? override : input).trim()
     if ((!text && !cvText) || loading) return
 
     const isSeed = activeIdRef.current === 'greet'
@@ -531,6 +531,19 @@ export default function ChatPage() {
       <span className="ml-auto shrink-0 text-muted-foreground">attached · not stored</span>
       <button
         onClick={() => {
+          if (!cvText) return
+          sendMessage(
+            'Rewrite my CV as a clean ATS-friendly resume: single column, standard headings (Contact Information, Summary, Skills, Work Experience, Education, Certifications), reverse-chronological roles with Month YYYY dates, no tables/columns/graphics, keywords optimized, concise achievement bullets. Keep it strictly truthful to my CV. Output the complete ATS CV as a document.'
+          )
+        }}
+        disabled={loading || cvBusy}
+        className="shrink-0 rounded-full border border-brand-orange/40 px-2.5 py-1 text-[11px] font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10 disabled:opacity-40"
+        title="Generate an ATS-friendly version of the attached CV"
+      >
+        ATS
+      </button>
+      <button
+        onClick={() => {
           setCvName(null)
           setCvText('')
           setCvError(null)
@@ -601,7 +614,7 @@ export default function ChatPage() {
         className="max-h-40 min-h-[1.5rem] flex-1 resize-none border-0 bg-transparent text-base text-foreground outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-muted-foreground disabled:opacity-60 sm:text-sm"
       />
       <button
-        onClick={sendMessage}
+        onClick={() => sendMessage()}
         disabled={(!input.trim() && !cvText) || loading}
         className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-orange text-white transition-colors hover:bg-orange-600 disabled:opacity-30"
         aria-label="Send"
@@ -1014,7 +1027,7 @@ export default function ChatPage() {
               style={{ paddingTop: 'max(0.6rem, env(safe-area-inset-top))' }}
             >
               <span className="shrink-0 rounded-md bg-brand-orange/10 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-orange">
-                Roadmap
+                {/ats/i.test(openDoc.title) ? 'ATS CV' : /cv|resume/i.test(openDoc.title) ? 'CV' : 'Roadmap'}
               </span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-semibold text-foreground">{openDoc.title}</p>
@@ -1036,12 +1049,14 @@ export default function ChatPage() {
                 className="doc-body mx-auto w-full max-w-2xl px-6 py-10 text-neutral-900 sm:px-8 sm:py-14"
               >
                 <Markdown>{docBodyNoH1}</Markdown>
-                <div className="mt-16 border-t border-neutral-200 pt-5 text-[12.5px] leading-relaxed text-neutral-400">
-                  Generated for you by the AI Hunt Career Advisor ·{' '}
-                  {new Date(openDoc.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
-                  <br />
-                  Verify courses and offers on their official pages before enrolling.
-                </div>
+                {!/ats/i.test(openDoc.title) && (
+                  <div className="mt-16 border-t border-neutral-200 pt-5 text-[12.5px] leading-relaxed text-neutral-400">
+                    Generated for you by the AI Hunt Career Advisor ·{' '}
+                    {new Date(openDoc.createdAt).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                    <br />
+                    Verify courses and offers on their official pages before enrolling.
+                  </div>
+                )}
               </div>
               {/* Floating document toolbar (canvas style) */}
               <div
