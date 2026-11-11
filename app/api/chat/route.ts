@@ -393,89 +393,148 @@ export async function POST(request: Request) {
       }
     }
 
-    let apiResponse: Response | null = null
+    // Some upstream models return HTTP 200 but produce ZERO content (silent
+    // hangs, content filters, 4xx JSON bodies dressed as 200). The client
+    // surfaced those as "Empty response from AI". So: buffer each model's
+    // stream fully, validate it produced text, and only then forward it —
+    // otherwise fall back to the next model. Returns '' for empty/failed
+    // streams, or an object for non-OK HTTP responses.
+    async function readUpstream(model: string): Promise<string | { status: number; body: string }> {
+      let res: Response
+      try {
+        res = await callNvidia(model)
+      } catch (e: unknown) {
+        const msg = e instanceof Error && e.name === 'AbortError' ? 'upstream timeout' : String(e)
+        console.error('[chat] fetch failed', model, msg)
+        return ''
+      }
+      if (!res.ok) {
+        return { status: res.status, body: (await res.text().catch(() => '')).slice(0, 400) }
+      }
+      if (!res.body) return ''
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let buffer = ''
+      let content = ''
+      const started = Date.now()
+      while (true) {
+        // 30s of stream inactivity, or 120s overall, ends the read (keeping what arrived)
+        const idleBudget = Math.min(30_000, Math.max(0, 120_000 - (Date.now() - started)))
+        if (idleBudget === 0) {
+          console.error('[chat] stream deadline', model, 'chars so far', content.length)
+          break
+        }
+        let timer: ReturnType<typeof setTimeout> | undefined
+        let chunk: { done: boolean; value?: Uint8Array }
+        try {
+          chunk = await Promise.race([
+            reader.read(),
+            new Promise<{ done: boolean; value?: Uint8Array }>((resolve) => {
+              timer = setTimeout(() => resolve({ done: true }), idleBudget)
+            }),
+          ])
+        } catch {
+          break
+        } finally {
+          clearTimeout(timer)
+        }
+        if (chunk.done) break
+        buffer += decoder.decode(chunk.value, { stream: true })
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
+        for (const line of lines) {
+          const trimmed = line.trim()
+          if (!trimmed.startsWith('data: ')) continue
+          const data = trimmed.slice(6)
+          if (data === '[DONE]') continue
+          try {
+            const json = JSON.parse(data)
+            const piece = json.choices?.[0]?.delta?.content
+            if (typeof piece === 'string') content += piece
+          } catch {}
+        }
+      }
+      try {
+        await reader.cancel()
+      } catch {}
+      return content
+    }
+
+    let apiText = ''
     let usedModel = primaryModel
-    let upstreamBody = ''
-    const modelsToTry = [primaryModel, ...FALLBACK_MODELS.filter(m => m !== primaryModel)]
+    const modelsToTry = [primaryModel, ...FALLBACK_MODELS.filter((m) => m !== primaryModel)]
 
     for (const m of modelsToTry) {
-      try {
-        const res = await callNvidia(m)
-        if (res.ok) {
-          apiResponse = res
+      const r = await readUpstream(m)
+      if (typeof r === 'string') {
+        if (r.trim()) {
+          apiText = r
           usedModel = m
           break
         }
-        const body = await res.text()
-        console.error('[chat] upstream error', m, res.status, body)
-        const isLast = m === modelsToTry[modelsToTry.length - 1]
-        // Auth failures won't fix themselves on retry — fail fast.
-        // Everything else (dead model, gone/EOL, rate-limit, overload) → try next model.
-        if ((res.status === 401 || res.status === 403) || isLast) {
-          let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
-          if (res.status === 401 || res.status === 403) {
-            clientError = `AI auth failed (upstream ${res.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
-          } else if (res.status === 410) {
-            clientError = `Model "${m}" is retired (upstream 410 Gone).`
-          } else if (res.status === 404 || res.status === 400 || res.status === 422) {
-            const hint = body.slice(0, 200).replace(/\s+/g, ' ')
-            clientError = `Model "${m}" rejected (upstream ${res.status}). ${hint}`
-          } else if (res.status === 429) {
-            clientError = `AI rate limited/quota exhausted (upstream 429). Try in 60s or check build.nvidia.com credits.`
-          } else if (res.status >= 500) {
-            clientError = `AI upstream overloaded (upstream ${res.status}). Retry in a few seconds.`
-          } else {
-            clientError = `AI service error (upstream ${res.status}). Please retry shortly.`
-          }
-          return NextResponse.json(
-            { error: clientError, upstreamStatus: res.status },
-            { status: 502 }
-          )
-        }
-        upstreamBody = body
+        console.error('[chat] empty stream from', m, '— trying next model')
         continue
-      } catch (e: unknown) {
-        // fetch timeout/network — retry next model if available, else 502
-        if (m !== modelsToTry[modelsToTry.length - 1]) continue
-        return NextResponse.json(
-          { error: 'The AI service is temporarily unavailable. Please try again shortly.' },
-          { status: 502 }
-        )
+      }
+      console.error('[chat] upstream error', m, r.status, r.body)
+      const isLast = m === modelsToTry[modelsToTry.length - 1]
+      // Auth failures won't fix themselves on retry — fail fast.
+      // Everything else (dead model, gone/EOL, rate-limit, overload) → try next model.
+      if ((r.status === 401 || r.status === 403) || isLast) {
+        let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
+        if (r.status === 401 || r.status === 403) {
+          clientError = `AI auth failed (upstream ${r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
+        } else if (r.status === 410) {
+          clientError = `Model "${m}" is retired (upstream 410 Gone).`
+        } else if (r.status === 404 || r.status === 400 || r.status === 422) {
+          const hint = r.body.slice(0, 200).replace(/\s+/g, ' ')
+          clientError = `Model "${m}" rejected (upstream ${r.status}). ${hint}`
+        } else if (r.status === 429) {
+          clientError = `AI rate limited/quota exhausted (upstream 429). Try in 60s or check build.nvidia.com credits.`
+        } else if (r.status >= 500) {
+          clientError = `AI upstream overloaded (upstream ${r.status}). Retry in a few seconds.`
+        } else {
+          clientError = `AI service error (upstream ${r.status}). Please retry shortly.`
+        }
+        return NextResponse.json({ error: clientError, upstreamStatus: r.status }, { status: 502 })
       }
     }
 
-    if (!apiResponse || !apiResponse.ok) {
+    if (!apiText.trim()) {
       return NextResponse.json(
-        { error: `All models failed (tried ${modelsToTry.join(', ')}). Last: ${upstreamBody.slice(0,120)}` },
+        { error: 'The AI service is temporarily unavailable. Please try again shortly.' },
         { status: 502 }
       )
     }
+    console.log('[chat] streaming with model', usedModel, 'chars', apiText.length)
 
-    const stream = new ReadableStream({
-      async start(controller) {
-        console.log('[chat] streaming with model', usedModel)
-        const reader = apiResponse!.body!.getReader()
+    // Re-emit the validated content in the SSE chunk format the client parses,
+    // in ~180-char frames so the reply still paints progressively.
+    const encoder = new TextEncoder()
+    const frames: Uint8Array[] = []
+    for (let i = 0; i < apiText.length; i += 180) {
+      frames.push(
+        encoder.encode(
+          `data: ${JSON.stringify({ choices: [{ delta: { content: apiText.slice(i, i + 180) } }] })}\n\n`
+        )
+      )
+    }
+    frames.push(encoder.encode('data: [DONE]\n\n'))
 
-        try {
-          while (true) {
-            const { done, value } = await reader.read()
-            if (done) break
-            controller.enqueue(value)
-          }
-        } finally {
+    return new Response(
+      new ReadableStream({
+        start(controller) {
+          for (const f of frames) controller.enqueue(f)
           controller.close()
-          reader.releaseLock()
-        }
-      },
-    })
-
-    return new Response(stream, {
-      headers: {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-      },
-    })
+        },
+      }),
+      {
+        headers: {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        },
+      }
+    )
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : String(error)
     console.error('[chat] handler error', msg, error)
