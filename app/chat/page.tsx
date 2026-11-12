@@ -108,148 +108,279 @@ const cleanBullet = (l: string) => l.replace(/^[-•*]\s+/, '')
 async function exportAtsPdf(body: string, title: string) {
   const { jsPDF } = await import('jspdf')
   const pdf = new jsPDF({ unit: 'mm', format: 'a4' })
-  const M = 18
+  const M = 16
   const W = 210 - M * 2
   const DARK: [number, number, number] = [51, 65, 78]
   const STEEL: [number, number, number] = [95, 126, 149]
-  const GRAY: [number, number, number] = [85, 85, 85]
-  const INK: [number, number, number] = [30, 30, 30]
-  const RULE: [number, number, number] = [201, 211, 218]
-  let y = 20
-  const ensure = (h: number) => {
-    if (y + h > 284) {
-      pdf.addPage()
-      y = 20
-    }
-  }
+  const GRAY: [number, number, number] = [90, 96, 102]
+  const INK: [number, number, number] = [32, 35, 38]
+  const RULE: [number, number, number] = [190, 200, 208]
   const name = title.replace(/\s*[—-]\s*ATS\s*CV\s*$/i, '').trim() || title
   const { header, sections } = parseAtsSections(body)
   const contactSec = sections.find((s) => /contact/i.test(s.title))
-  const contactLines = [...header, ...(contactSec?.lines ?? [])]
-    .map(cleanBullet)
-    .filter((l) => l && name.toLowerCase().indexOf(l.toLowerCase()) === -1)
+  const contactSegs = [...header, ...(contactSec?.lines ?? [])]
+    .flatMap((l) => cleanBullet(l).split('|'))
+    .map((s) =>
+      s
+        .trim()
+        .replace(
+          /^(name|full name|address|city(, ? country)?|city,? country|location|phone( number)?|tel|mobile|email( address)?|mail|linkedin( profile url)?|github( profile url)?|site|website|portfolio)\s*:\s*/i,
+          ''
+        )
+        .trim()
+    )
+    .filter((s) => s && s.toLowerCase() !== name.toLowerCase())
 
-  pdf.setFont('times', 'bold')
-  pdf.setFontSize(23)
-  pdf.setTextColor(DARK[0], DARK[1], DARK[2])
-  pdf.text(name.toUpperCase(), 105, y, { align: 'center' })
-  y += 5.5
-  pdf.setDrawColor(DARK[0], DARK[1], DARK[2])
-  pdf.setLineWidth(0.5)
-  pdf.line(M, y, M + W, y)
-  y += 5
-  if (contactLines.length) {
-    pdf.setFont('helvetica', 'normal')
-    pdf.setFontSize(8.8)
-    pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
-    const arr = pdf.splitTextToSize(contactLines.join('    |    '), W) as string[]
-    pdf.text(arr, 105, y, { align: 'center' })
-    y += arr.length * 4.2
-  }
+  type AtsBlock =
+    | { kind: 'para'; text: string }
+    | { kind: 'entry'; role: string; company: string | null; loc: string | null; dates: string | null }
+    | { kind: 'bullet'; text: string }
+    | { kind: 'grid'; items: string[] }
+    | { kind: 'heading'; text: string }
 
-  const para = (text: string) => {
-    pdf.setFont('helvetica', 'normal')
-    pdf.setFontSize(9.8)
-    pdf.setTextColor(INK[0], INK[1], INK[2])
-    const arr = pdf.splitTextToSize(text, W) as string[]
-    for (const t of arr) {
-      ensure(5)
-      pdf.text(t, M, y)
-      y += 4.6
+  const parseEntry = (line: string): AtsBlock & { kind: 'entry' } => {
+    const pIdx = line.lastIndexOf('|')
+    let left = line.trim()
+    let right = ''
+    if (pIdx > 0) {
+      left = line.slice(0, pIdx).trim()
+      right = line.slice(pIdx + 1).trim()
     }
-    y += 0.8
-  }
-  const bullet = (text: string) => {
-    pdf.setFont('helvetica', 'normal')
-    pdf.setFontSize(9.8)
-    pdf.setTextColor(INK[0], INK[1], INK[2])
-    const arr = pdf.splitTextToSize(text, W - 4) as string[]
-    arr.forEach((t, i) => {
-      ensure(5)
-      if (i === 0) pdf.text('•', M + 0.8, y)
-      pdf.text(t, M + 4, y)
-      y += 4.6
-    })
-  }
-  const entryLine = (line: string) => {
-    const idx = line.lastIndexOf('|')
-    const left = (idx > 0 ? line.slice(0, idx) : line).trim()
-    const right = idx > 0 ? line.slice(idx + 1).trim() : ''
-    pdf.setFont('helvetica', 'bold')
-    pdf.setFontSize(9.9)
-    pdf.setTextColor(INK[0], INK[1], INK[2])
-    const arr = pdf.splitTextToSize(left, W - 48) as string[]
-    ensure(Math.max(arr.length, 1) * 4.6 + 1)
+    let loc: string | null = null
+    let dates: string | null = null
     if (right) {
-      pdf.setFont('helvetica', 'normal')
-      pdf.setFontSize(9)
-      pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
-      pdf.text(right, M + W, y, { align: 'right' })
+      const parts = right.split('|').map((x) => x.trim()).filter(Boolean)
+      dates = parts.pop() ?? null
+      loc = parts.join(' — ') || null
     }
-    pdf.setFont('helvetica', 'bold')
-    pdf.setFontSize(9.9)
-    pdf.setTextColor(INK[0], INK[1], INK[2])
-    for (const t of arr) {
-      pdf.text(t, M, y)
-      y += 4.6
+    let role = left
+    let company: string | null = null
+    const dashIdx = left.indexOf(' — ')
+    if (dashIdx > 0) {
+      const city = left.slice(dashIdx + 3).trim()
+      if (city && !loc) loc = city
+      left = left.slice(0, dashIdx).trim()
     }
-    y += 0.6
-  }
-  const heading = (t: string) => {
-    ensure(15)
-    y += 4.5
-    pdf.setFont('helvetica', 'bold')
-    pdf.setFontSize(10.4)
-    pdf.setTextColor(STEEL[0], STEEL[1], STEEL[2])
-    pdf.setCharSpace(0.7)
-    pdf.text(t.toUpperCase(), M, y)
-    pdf.setCharSpace(0)
-    y += 2.8
-    pdf.setDrawColor(RULE[0], RULE[1], RULE[2])
-    pdf.setLineWidth(0.35)
-    pdf.line(M, y, M + W, y)
-    y += 5
+    const cIdx = left.indexOf(', ')
+    if (cIdx > 0) {
+      role = left.slice(0, cIdx).trim()
+      company = left.slice(cIdx + 2).trim() || null
+    }
+    return { kind: 'entry', role: role || left, company, loc, dates }
   }
 
+  const blocks: AtsBlock[] = []
   for (const sec of sections) {
     if (/contact/i.test(sec.title)) continue
-    heading(sec.title)
+    blocks.push({ kind: 'heading', text: sec.title })
     if (/skill/i.test(sec.title)) {
-      const bullets = sec.lines.filter((l) => /^[-•*]\s/.test(l)).map(cleanBullet)
-      const plain = sec.lines.filter((l) => !/^[-•*]\s/.test(l))
-      const items = [...bullets, ...(plain.length ? [plain.join(' • ')] : [])]
-      const cols = 3
-      const colW = W / cols
-      for (let i = 0; i < items.length; i += cols) {
-        const row = items.slice(i, i + cols)
-        let rowLines = 1
-        const cells = row.map((it) => {
-          pdf.setFont('helvetica', 'normal')
-          pdf.setFontSize(9.6)
-          const arr = pdf.splitTextToSize(it, colW - 4) as string[]
-          rowLines = Math.max(rowLines, arr.length)
-          return arr
-        })
-        ensure(rowLines * 4.4 + 2)
-        let cx = M
-        for (const cell of cells) {
-          pdf.setFont('helvetica', 'normal')
-          pdf.setFontSize(9.6)
-          pdf.setTextColor(INK[0], INK[1], INK[2])
-          pdf.text('•', cx + 0.8, y)
-          pdf.text(cell, cx + 4, y)
-          cx += colW
+      const items = sec.lines.filter((l) => /^[-•*]\s/.test(l)).map(cleanBullet)
+      for (const p of sec.lines.filter((l) => !/^[-•*]\s/.test(l))) {
+        for (const part of p.split(/[,;•|]/)) {
+          const t = part.trim()
+          if (t) items.push(t)
         }
-        y += rowLines * 4.4 + 1.4
       }
+      blocks.push({ kind: 'grid', items })
       continue
     }
     for (const raw of sec.lines) {
       const line = raw.trim()
       if (!line) continue
-      if (/^[-•*]\s/.test(line)) bullet(cleanBullet(line))
-      else if (line.includes('|')) entryLine(line)
-      else para(line)
+      if (/^[-•*]\s/.test(line)) blocks.push({ kind: 'bullet', text: cleanBullet(line) })
+      else if (line.includes('|')) blocks.push(parseEntry(line))
+      else blocks.push({ kind: 'para', text: line })
+    }
+  }
+
+  const setFont = (style: 'normal' | 'bold', size: number, color: [number, number, number]) => {
+    pdf.setFont(style === 'bold' ? 'times' : 'helvetica', style)
+    pdf.setFontSize(size)
+    pdf.setTextColor(color[0], color[1], color[2])
+  }
+
+  const measure = (s: number): number => {
+    let h = 0
+    h += (9 + 4.5) * s
+    if (contactSegs.length) {
+      pdf.setFont('helvetica', 'normal')
+      pdf.setFontSize(8.4 * s)
+      h += (pdf.splitTextToSize(contactSegs.join('   |   '), W).length + 1.2) * 4.1 * s
+    }
+    for (const b of blocks) {
+      if (b.kind === 'heading') {
+        h += (4.2 + 2.6 + 4.6) * s
+      } else if (b.kind === 'para') {
+        pdf.setFont('helvetica', 'normal')
+        pdf.setFontSize(9.6 * s)
+        h += (pdf.splitTextToSize(b.text, W).length * 4.3 + 1) * s
+      } else if (b.kind === 'bullet') {
+        pdf.setFont('helvetica', 'normal')
+        pdf.setFontSize(9.6 * s)
+        h += pdf.splitTextToSize(b.text, W - 4).length * 4.3 * s
+      } else if (b.kind === 'entry') {
+        pdf.setFont('times', 'bold')
+        pdf.setFontSize(9.9 * s)
+        const roleLines = pdf.splitTextToSize(b.role, W - 46).length
+        pdf.setFont('helvetica', 'normal')
+        pdf.setFontSize(9.3 * s)
+        const subLines = b.company ? pdf.splitTextToSize(b.company, W - 46).length : 0
+        const rows = Math.max(roleLines + subLines, b.loc && b.dates ? 2 : 1, 1)
+        h += (rows * 4.3 + 0.9) * s
+      } else if (b.kind === 'grid') {
+        pdf.setFont('helvetica', 'normal')
+        pdf.setFontSize(9.4 * s)
+        const colW = W / 3
+        for (let i = 0; i < b.items.length; i += 3) {
+          let rowLines = 1
+          for (const it of b.items.slice(i, i + 3)) {
+            rowLines = Math.max(rowLines, pdf.splitTextToSize(it, colW - 4).length)
+          }
+          h += (rowLines * 4.2 + 1.3) * s
+        }
+      }
+    }
+    return h
+  }
+
+  let s = 1
+  const AVAIL = 284 - 18
+  for (let i = 0; i < 4; i++) {
+    const total = measure(s) + 18
+    if (total <= AVAIL + 18) break
+    const next = Math.max(0.55, s * ((AVAIL + 18) / total) * 0.995)
+    if (Math.abs(next - s) < 0.005) break
+    s = next
+  }
+  measure(s)
+
+  let y = 18
+  const ensure = (h: number) => {
+    if (y + h > 285) {
+      pdf.addPage()
+      y = 20
+    }
+  }
+
+  pdf.setFont('times', 'bold')
+  pdf.setFontSize(23 * s)
+  pdf.setTextColor(DARK[0], DARK[1], DARK[2])
+  pdf.setCharSpace(0.6)
+  pdf.text(name.toUpperCase(), 105, y, { align: 'center' })
+  pdf.setCharSpace(0)
+  y += 6.2 * s
+  pdf.setDrawColor(DARK[0], DARK[1], DARK[2])
+  pdf.setLineWidth(0.5)
+  pdf.line(M, y, M + W, y)
+  y += 3.4 * s
+  if (contactSegs.length) {
+    pdf.setFont('helvetica', 'normal')
+    pdf.setFontSize(8.4 * s)
+    pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
+    const arr = pdf.splitTextToSize(contactSegs.join('   |   '), W) as string[]
+    pdf.text(arr, 105, y, { align: 'center' })
+    y += arr.length * 4.1 * s + 1.6 * s
+  }
+
+  for (const b of blocks) {
+    if (b.kind === 'heading') {
+      ensure(15 * s)
+      y += 4.2 * s
+      pdf.setFont('helvetica', 'bold')
+      pdf.setFontSize(10.2 * s)
+      pdf.setTextColor(STEEL[0], STEEL[1], STEEL[2])
+      pdf.setCharSpace(0.7)
+      pdf.text(b.text.toUpperCase(), M, y)
+      pdf.setCharSpace(0)
+      y += 2.6 * s
+      pdf.setDrawColor(RULE[0], RULE[1], RULE[2])
+      pdf.setLineWidth(0.35)
+      pdf.line(M, y, M + W, y)
+      y += 4.6 * s
+    } else if (b.kind === 'para') {
+      pdf.setFont('helvetica', 'normal')
+      pdf.setFontSize(9.6 * s)
+      pdf.setTextColor(INK[0], INK[1], INK[2])
+      const arr = pdf.splitTextToSize(b.text, W) as string[]
+      for (const t of arr) {
+        ensure(5 * s)
+        pdf.text(t, M, y)
+        y += 4.3 * s
+      }
+      y += 1 * s
+    } else if (b.kind === 'bullet') {
+      pdf.setFont('helvetica', 'normal')
+      pdf.setFontSize(9.6 * s)
+      pdf.setTextColor(INK[0], INK[1], INK[2])
+      const arr = pdf.splitTextToSize(b.text, W - 4) as string[]
+      arr.forEach((t, i) => {
+        ensure(5 * s)
+        if (i === 0) pdf.text('•', M + 0.8, y)
+        pdf.text(t, M + 4, y)
+        y += 4.3 * s
+      })
+    } else if (b.kind === 'entry') {
+      pdf.setFont('times', 'bold')
+      pdf.setFontSize(9.9 * s)
+      pdf.setTextColor(INK[0], INK[1], INK[2])
+      const roleArr = pdf.splitTextToSize(b.role, W - 46) as string[]
+      pdf.setFont('helvetica', 'normal')
+      pdf.setFontSize(9.3 * s)
+      const subArr = b.company ? (pdf.splitTextToSize(b.company, W - 46) as string[]) : []
+      const rows = Math.max(roleArr.length + subArr.length, b.loc && b.dates ? 2 : 1, 1)
+      ensure(rows * 4.3 * s + 0.9 * s)
+      if (b.loc) {
+        pdf.setFont('helvetica', 'normal')
+        pdf.setFontSize(8.8 * s)
+        pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
+        pdf.text(b.loc, M + W, y, { align: 'right' })
+      }
+      if (b.dates) {
+        pdf.setFont('helvetica', 'normal')
+        pdf.setFontSize(8.8 * s)
+        pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
+        pdf.text(b.dates, M + W, y + (b.loc ? 4.1 * s : 0), { align: 'right' })
+      }
+      pdf.setFont('times', 'bold')
+      pdf.setFontSize(9.9 * s)
+      pdf.setTextColor(INK[0], INK[1], INK[2])
+      for (const t of roleArr) {
+        pdf.text(t, M, y)
+        y += 4.3 * s
+      }
+      pdf.setFont('helvetica', 'normal')
+      pdf.setFontSize(9.3 * s)
+      for (const t of subArr) {
+        pdf.text(t, M, y)
+        y += 4.3 * s
+      }
+      y += 0.9 * s
+    } else if (b.kind === 'grid') {
+      pdf.setFont('helvetica', 'normal')
+      pdf.setFontSize(9.4 * s)
+      const colW = W / 3
+      for (let i = 0; i < b.items.length; i += 3) {
+        const row = b.items.slice(i, i + 3)
+        let rowLines = 1
+        const cells = row.map((it) => {
+          pdf.setFont('helvetica', 'normal')
+          pdf.setFontSize(9.4 * s)
+          const arr = pdf.splitTextToSize(it, colW - 4) as string[]
+          rowLines = Math.max(rowLines, arr.length)
+          return arr
+        })
+        ensure(rowLines * 4.2 * s + 1.3 * s)
+        let cx = M
+        for (const cell of cells) {
+          pdf.setFont('helvetica', 'normal')
+          pdf.setFontSize(9.4 * s)
+          pdf.setTextColor(INK[0], INK[1], INK[2])
+          pdf.text('•', cx + 0.8, y)
+          pdf.text(cell, cx + 4, y)
+          cx += colW
+        }
+        y += rowLines * 4.2 * s + 1.3 * s
+      }
     }
   }
 
