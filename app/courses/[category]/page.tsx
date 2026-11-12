@@ -97,7 +97,10 @@ export default function CourseCategoryPage({ params }: { params: { category: str
         heading={{
           title: `${label} Courses`,
           eyebrow: label,
-          description: `Follow ${count} curated ${label.toLowerCase()} courses and learning paths, from beginner fundamentals to advanced practice.`,
+          description:
+            category === 'datacamp'
+              ? `DataCamp is an official partner of AIHubTools. Follow ${count} curated DataCamp courses and learning paths, from beginner fundamentals to advanced practice.`
+              : `Follow ${count} curated ${label.toLowerCase()} courses and learning paths, from beginner fundamentals to advanced practice.`,
         }}
       />
     </>

@@ -363,7 +363,7 @@ function ListingViewInner<T extends { id: string }>({
 
   return (
     <div className={config.title ? 'container-page py-8' : ''}>
-      <ListingHeader config={config as ListingConfig<never>} />
+      <ListingHeader config={config as ListingConfig<never>} activeCategory={category} />
 
       {/* Filters */}
       <div className="mb-6 space-y-3 border-b border-border pb-4">
@@ -496,8 +496,42 @@ function ListingViewInner<T extends { id: string }>({
  * Extracted so the static fallback and the interactive view render byte-identical
  * markup — the <h1> must exist in the prerendered HTML.
  */
-function ListingHeader({ config }: { config: ListingConfig<never> }) {
+function ListingHeader({
+  config,
+  activeCategory,
+}: {
+  config: ListingConfig<never>
+  activeCategory?: string
+}) {
   if (!config.title) return null
+  const isDataCamp =
+    activeCategory === 'datacamp' ||
+    config.initialCategory === 'datacamp' ||
+    config.eyebrow?.toLowerCase() === 'datacamp'
+
+  if (isDataCamp) {
+    return (
+      <section aria-label="DataCamp Official Partner" className="mb-8 w-full">
+        <div className="sr-only">
+          <span>{config.eyebrow} — Official Partner of AIHubTools</span>
+          <h1>{config.title}</h1>
+          <p>
+            DataCamp is an official partner of AIHubTools. {config.description}
+          </p>
+        </div>
+        <div className="w-full overflow-hidden rounded-2xl border border-[#03EF62]/35 bg-[#05192D] shadow-[0_8px_32px_rgba(3,239,98,0.12)]">
+          <img
+            src="/datacamp-partner-banner.jpg"
+            alt="DataCamp × AIHubTools Official Partner — DataCamp Courses: Follow 16 curated DataCamp courses and learning paths, from beginner fundamentals to advanced practice."
+            width={2536}
+            height={920}
+            className="block h-auto w-full object-cover"
+          />
+        </div>
+      </section>
+    )
+  }
+
   return (
     <div className="mb-8">
       <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-accent">
@@ -538,7 +572,7 @@ function ListingStatic<T extends { id: string }>({
 
   return (
     <div className={config.title ? 'container-page py-8' : ''}>
-      <ListingHeader config={config as ListingConfig<never>} />
+      <ListingHeader config={config as ListingConfig<never>} activeCategory={config.initialCategory} />
       {initial.length > 0 && (
         <>
           <div className="mb-4 text-sm text-muted-foreground">
