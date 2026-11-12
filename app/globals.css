@@ -113,7 +113,28 @@ p {
   line-height: 1.8;
   color: #3f4450;
 }
+@font-face {
+  font-family: 'CMU Serif';
+  src: url('/fonts/cmunrm.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CMU Serif';
+  src: url('/fonts/cmunbx.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.latex-cv {
+  font-family: 'CMU Serif', 'Latin Modern Roman', 'Computer Modern', Georgia, 'Times New Roman', serif;
+}
+
 .ats-body {
+  font-family: 'CMU Serif', 'Latin Modern Roman', 'Computer Modern', Georgia, 'Times New Roman', serif;
   font-size: 13px;
   line-height: 1.5;
   color: #0f0f0f;

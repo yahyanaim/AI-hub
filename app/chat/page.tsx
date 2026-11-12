@@ -83,6 +83,15 @@ function normalizeAtsBody(title: string, body: string): string {
     .join('\n')
 }
 
+function stripMd(s: string): string {
+  return s
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+    .replace(/^#+\s*/, '')
+    .replace(/\*\*|__/g, '')
+    .replace(/`+/g, '')
+    .trim()
+}
+
 type AtsSection = { title: string; lines: string[] }
 
 function parseAtsSections(body: string): { header: string[]; sections: AtsSection[] } {
@@ -90,20 +99,21 @@ function parseAtsSections(body: string): { header: string[]; sections: AtsSectio
   const sections: AtsSection[] = []
   let cur: AtsSection | null = null
   for (const raw of body.split('\n')) {
-    const line = raw.trim().replace(/\*\*/g, '')
-    if (!line || /^#\s/.test(line)) continue
-    if (/^##\s/.test(line)) {
-      cur = { title: line.replace(/^##\s+/, '').trim(), lines: [] }
+    const trimmed = raw.trim()
+    if (!trimmed || /^#\s/.test(trimmed)) continue
+    if (/^##\s/.test(trimmed)) {
+      cur = { title: stripMd(trimmed.replace(/^##\s+/, '')), lines: [] }
       sections.push(cur)
       continue
     }
+    const line = trimmed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1').replace(/\*\*|__/g, '')
     if (cur) cur.lines.push(line)
     else header.push(line)
   }
   return { header, sections }
 }
 
-const cleanBullet = (l: string) => l.replace(/^[-•*]\s+/, '').trim()
+const cleanBullet = (l: string) => stripMd(l.replace(/^[-•*]\s+/, ''))
 
 type ContactIconKind = 'pin' | 'phone' | 'mail' | 'link'
 
@@ -137,11 +147,41 @@ type ParsedAtsCv = {
 }
 
 const DATE_RE =
-  /\b(19|20)\d{2}\b|\b20xx\b|present|current|en cours|aujourd'hui|now|janv?|févr?|fevr?|mars?|avr|apr|mai|may|juin|jun|juil|jul|août|aout|aug|sept?|oct|nov|déc|dec/i
+  /\b(19|20)\d{2}\b|\b20xx\b|present|current|en cours|aujourd'hui|now|january|february|march|april|may|june|july|august|september|october|november|december|janv?|févr?|fevr?|mars?|avr|apr|mai|juin|jun|juil|jul|août|aout|aug|sept?|oct|nov|déc|dec/i
+
+function isPureDateLine(s: string): boolean {
+  const c = stripMd(s)
+  if (!c || c.includes('|') || !DATE_RE.test(c)) return false
+  const leftover = c
+    .replace(
+      /\b(19|20)\d{2}\b|\b20xx\b|present|current|en cours|aujourd'hui|now|january|february|march|april|may|june|july|august|september|october|november|december|janv?|févr?|fevr?|mars?|avr|apr|mai|juin|jun|juil|jul|août|aout|aug|sept?|oct|nov|déc|dec|\bto\b|\bà\b/gi,
+      ''
+    )
+    .replace(/[\d\s–—−/.,()-]/g, '')
+    .trim()
+  return leftover.length === 0
+}
+
+function splitRoleAndCompany(raw: string): { role: string; company: string } {
+  const s = stripMd(raw)
+  const atMatch = s.match(/^(.+?)\s+(?:at|chez|@)\s+(.+)$/i)
+  if (atMatch?.[1] && atMatch[2]) {
+    return { role: atMatch[1].trim(), company: atMatch[2].trim() }
+  }
+  const parenMatch = s.match(/^([^(]+?)\s*\(([^)]+)\)\s*$/)
+  if (parenMatch?.[1] && parenMatch[2]) {
+    return { role: parenMatch[1].trim(), company: parenMatch[2].trim() }
+  }
+  const cIdx = s.indexOf(', ')
+  if (cIdx > 0) {
+    return { role: s.slice(0, cIdx).trim(), company: s.slice(cIdx + 2).trim() }
+  }
+  return { role: s, company: '' }
+}
 
 function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
   const h1Match = body.match(/^#\s+([^\n]+)/m)
-  const rawTitle = (h1Match?.[1] || docTitle || 'PRÉNOM NOM').replace(/\*\*/g, '').trim()
+  const rawTitle = stripMd(h1Match?.[1] || docTitle || 'PRÉNOM NOM')
   const name = rawTitle.replace(/\s*[—–-]\s*(ATS\s*)?(CV|Resume)\s*$/i, '').trim() || rawTitle
 
   const { header, sections } = parseAtsSections(body)
@@ -160,17 +200,17 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
       /^(role|job title|title|target role|intitulé du poste|poste|titre|headline)\s*:\s*(.+)$/i
     )
     if (roleMatch?.[2] && !jobTitle) {
-      jobTitle = roleMatch[2].trim()
+      jobTitle = stripMd(roleMatch[2])
       continue
     }
     for (const seg of cleaned.split('|')) {
-      const s = seg.trim()
+      const s = stripMd(seg)
       if (!s) continue
       const rMatch = s.match(
         /^(role|job title|title|target role|intitulé du poste|poste|titre|headline)\s*:\s*(.+)$/i
       )
       if (rMatch?.[2] && !jobTitle) {
-        jobTitle = rMatch[2].trim()
+        jobTitle = stripMd(rMatch[2])
         continue
       }
       const val = s
@@ -178,6 +218,7 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
           /^(name|full name|nom|address|adresse|city(, ? country)?|city,? country|location|ville|lieu|phone( number)?|tél(éphone)?|tel|mobile|email( address)?|e-mail|mail|courriel|linkedin( profile url)?|github( profile url)?|site|website|portfolio)\s*:\s*/i,
           ''
         )
+        .replace(/^mailto:/i, '')
         .trim()
       if (!val || val.toLowerCase() === name.toLowerCase() || val.toLowerCase() === jobTitle.toLowerCase()) continue
       if (val.includes('@') || /\[.*(email|mail).*\]/i.test(val)) {
@@ -185,7 +226,7 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
       } else if (/(\+?\d[\d\s().-]{6,}\d)|\[.*(phone|tél|tel|numéro).*\]/i.test(val)) {
         if (!phone) phone = val
       } else if (/https?:\/\/|linkedin\.com|github\.com|www\./i.test(val)) {
-        extraLinks.push(val.replace(/^https?:\/\/(www\.)?/i, '').replace(/\/$/, ''))
+        extraLinks.push(val.replace(/^https?:\/\/(www\.)?/i, '').replace(/^www\./i, '').replace(/\/$/, ''))
       } else if (!location && (val.includes(',') || /france|maroc|morocco|canada|uk|usa|paris|lyon|casablanca|rabat|\[.*(city|location|ville).*\]/i.test(val))) {
         location = val
       } else if (!jobTitle && !/\d/.test(val)) {
@@ -197,8 +238,8 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
   }
 
   const parseExpEntryLine = (line: string): Omit<AtsExpItem, 'bullets'> => {
-    const clean = line.replace(/^###+\s*/, '').trim()
-    const parts = clean.split('|').map((x) => x.trim()).filter(Boolean)
+    const clean = stripMd(line)
+    const parts = clean.split('|').map((x) => stripMd(x)).filter(Boolean)
     let left = parts[0] || clean
     let loc = ''
     let dates = ''
@@ -217,33 +258,34 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
     if (dashIdx > 0) {
       const before = left.slice(0, dashIdx).trim()
       const after = left.slice(dashIdx + 3).trim()
-      const cIdx = before.indexOf(', ')
-      if (cIdx > 0) {
-        role = before.slice(0, cIdx).trim()
-        company = before.slice(cIdx + 2).trim()
+      const splitBefore = splitRoleAndCompany(before)
+      if (splitBefore.company) {
+        role = splitBefore.role
+        company = splitBefore.company
         if (!loc) loc = after
       } else {
         role = before
-        if (!loc && (after.includes(',') || !company)) {
-          if (after.includes(',')) loc = after
-          else company = after
-        }
+        if (!loc && after.includes(',')) loc = after
+        else company = after
       }
     } else {
-      const cIdx = left.indexOf(', ')
-      if (cIdx > 0) {
-        role = left.slice(0, cIdx).trim()
-        company = left.slice(cIdx + 2).trim()
-      }
+      const split = splitRoleAndCompany(left)
+      role = split.role
+      company = split.company
     }
-    return { role: role || left, company, location: loc, dates }
+    return {
+      role: role || left,
+      company,
+      location: loc,
+      dates: dates.replace(/\s+-\s+/g, ' – '),
+    }
   }
 
   const parsedSections: ParsedAtsSection[] = []
 
   for (const sec of sections) {
     if (/contact|coordonn/i.test(sec.title)) continue
-    const t = sec.title
+    const t = stripMd(sec.title)
 
     if (/profil|summary|objective|about|résumé|propos/i.test(t)) {
       const text = sec.lines
@@ -256,23 +298,31 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
 
     if (/comp[eé]tence|skill|technolog|outil|expertise/i.test(t)) {
       const items: string[] = []
+      const seen = new Set<string>()
+      const addSkill = (rawItem: string) => {
+        const s = stripMd(rawItem).replace(/\.$/, '').trim()
+        if (!s || s.length > 32) return
+        const key = s.toLowerCase()
+        if (seen.has(key)) return
+        seen.add(key)
+        items.push(s)
+      }
       for (const raw of sec.lines) {
         let l = cleanBullet(raw)
         if (!l) continue
-        if (l.includes(':') && (l.includes(',') || l.includes(';') || l.split(':')[0]!.split(/\s+/).length <= 3)) {
+        if (l.includes(':')) {
           const after = l.slice(l.indexOf(':') + 1).trim()
           if (after) l = after
         }
         if (/^[-•*]\s/.test(raw) && !l.includes(',') && !l.includes(';') && !l.includes('|')) {
-          items.push(l)
+          addSkill(l)
         } else {
           for (const part of l.split(/[,;•|]/)) {
-            const item = part.trim()
-            if (item) items.push(item)
+            addSkill(part)
           }
         }
       }
-      if (items.length) parsedSections.push({ kind: 'skills', title: t, items })
+      if (items.length) parsedSections.push({ kind: 'skills', title: t, items: items.slice(0, 12) })
       continue
     }
 
@@ -283,7 +333,7 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
         if (!l) continue
         const parts = l.includes('|') ? l.split('|') : l.includes(';') ? l.split(';') : [l]
         for (const p of parts) {
-          const item = p.trim().replace(/\s*:\s*/, ' : ')
+          const item = stripMd(p).replace(/\s*:\s*/, ' : ')
           if (item) items.push(item)
         }
       }
@@ -296,15 +346,21 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
       for (const raw of sec.lines) {
         const line = raw.trim()
         if (!line) continue
+        const isHeadingLine = /^#+\s/.test(line)
         const isBullet = /^[-•*]\s/.test(line)
         const clean = cleanBullet(line)
         const hasPipe = clean.includes('|')
         const lastEdu = items[items.length - 1]
 
-        if (!isBullet && hasPipe) {
+        if (lastEdu && isPureDateLine(clean) && !lastEdu.dates) {
+          lastEdu.dates = clean.replace(/\s+-\s+/g, ' – ')
+          continue
+        }
+
+        if (!isBullet && (hasPipe || isHeadingLine)) {
           const pIdx = clean.lastIndexOf('|')
-          const left = clean.slice(0, pIdx).trim()
-          const right = clean.slice(pIdx + 1).trim()
+          const left = pIdx > 0 ? clean.slice(0, pIdx).trim() : clean
+          const right = pIdx > 0 ? clean.slice(pIdx + 1).trim() : ''
           let degree = left
           let school = ''
           const cIdx = left.indexOf(', ')
@@ -316,7 +372,7 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
             degree = left.slice(0, dIdx).trim()
             school = left.slice(dIdx + 3).trim()
           }
-          items.push({ degree, dates: right, school, details: [] })
+          items.push({ degree, dates: right.replace(/\s+-\s+/g, ' – '), school, details: [] })
         } else if (
           !isBullet &&
           lastEdu &&
@@ -340,16 +396,26 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
     for (const raw of sec.lines) {
       const line = raw.trim()
       if (!line) continue
+      const isHeadingLine = /^#+\s/.test(line)
       if (/^[-•*]\s/.test(line)) {
         if (expItems.length === 0) {
           expItems.push({ role: '', company: '', location: '', dates: '', bullets: [] })
         }
         expItems[expItems.length - 1]!.bullets.push(cleanBullet(line))
+      } else if (!isHeadingLine && isPureDateLine(line) && expItems.length > 0) {
+        const prev = expItems[expItems.length - 1]!
+        if (!prev.dates) prev.dates = stripMd(line).replace(/\s+-\s+/g, ' – ')
       } else {
         const prev = expItems[expItems.length - 1]
-        if (prev && prev.bullets.length === 0 && !prev.company && (!prev.dates || !prev.location)) {
+        if (
+          !isHeadingLine &&
+          prev &&
+          prev.bullets.length === 0 &&
+          !prev.company &&
+          (!prev.dates || !prev.location)
+        ) {
           const sub = parseExpEntryLine(line)
-          prev.company = sub.role
+          if (sub.role && !isPureDateLine(sub.role)) prev.company = sub.role
           if (sub.dates && !prev.dates) prev.dates = sub.dates
           if (sub.location && !prev.location) prev.location = sub.location
         } else {
@@ -357,13 +423,40 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
         }
       }
     }
-    if (expItems.length) parsedSections.push({ kind: 'experience', title: t, items: expItems })
+    const cleanedExp = expItems
+      .filter((it, idx) => it.bullets.length > 0 || it.dates || idx === 0)
+      .map((it) => ({
+        ...it,
+        location: it.location || (it.company ? location : ''),
+      }))
+    if (cleanedExp.length) parsedSections.push({ kind: 'experience', title: t, items: cleanedExp })
   }
 
+  // Canonical template section order: Profile -> Experience -> Education -> Skills -> Languages
+  const kindOrder: Record<ParsedAtsSection['kind'], number> = {
+    profile: 1,
+    experience: 2,
+    education: 3,
+    skills: 4,
+    languages: 5,
+  }
+  parsedSections.sort((a, b) => kindOrder[a.kind] - kindOrder[b.kind])
+
   if (!jobTitle) {
-    const firstExp = parsedSections.find((s): s is ParsedAtsSection & { kind: 'experience' } => s.kind === 'experience')
-    if (firstExp?.items[0]?.role) jobTitle = firstExp.items[0].role
-    else jobTitle = 'INTITULÉ DU POSTE'
+    const profileSec = parsedSections.find((s): s is ParsedAtsSection & { kind: 'profile' } => s.kind === 'profile')
+    const pText = profileSec?.paragraphs[0] || ''
+    const roleFromProfile = pText.match(
+      /\b(full[- ]?stack\s+developer|front[- ]?end\s+developer|back[- ]?end\s+developer|software\s+engineer|web\s+developer|data\s+scientist|data\s+analyst|data\s+engineer|devops\s+engineer|ai\s+engineer|machine\s+learning\s+engineer|mobile\s+developer|ui\/?ux\s+designer|product\s+manager|project\s+manager|développeur\s+full[- ]?stack|développeur\s+web|ingénieur\s+logiciel|assistante?\s+communication|stagiaire\s+marketing)\b/i
+    )
+    if (roleFromProfile?.[1]) {
+      jobTitle = roleFromProfile[1]
+    } else {
+      const firstExp = parsedSections.find(
+        (s): s is ParsedAtsSection & { kind: 'experience' } => s.kind === 'experience'
+      )
+      if (firstExp?.items[0]?.role) jobTitle = firstExp.items[0].role
+      else jobTitle = 'INTITULÉ DU POSTE'
+    }
   }
 
   const contacts: { kind: ContactIconKind; text: string }[] = []
@@ -375,50 +468,89 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
   return { name, jobTitle, contacts, sections: parsedSections }
 }
 
-const iconCache: Partial<Record<ContactIconKind, string>> = {}
-
-function getContactIconPng(kind: ContactIconKind): string {
-  if (iconCache[kind]) return iconCache[kind]!
-  const canvas = document.createElement('canvas')
-  canvas.width = 128
-  canvas.height = 128
-  const ctx = canvas.getContext('2d')!
-  ctx.scale(128 / 24, 128 / 24)
-  ctx.fillStyle = '#0f0f0f'
-  ctx.strokeStyle = '#0f0f0f'
-  ctx.lineCap = 'round'
-  ctx.lineJoin = 'round'
+function drawContactIconPdf(pdf: any, kind: ContactIconKind, x: number, yBaseline: number, sz: number) {
+  const cx = x + sz / 2
+  const cy = yBaseline - sz * 0.36
+  const r = sz * 0.44
+  pdf.setFillColor(15, 15, 15)
+  pdf.setDrawColor(15, 15, 15)
 
   if (kind === 'pin') {
-    ctx.fill(
-      new Path2D(
-        'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z'
-      ),
-      'evenodd'
+    const headCy = cy - sz * 0.1
+    const headR = sz * 0.34
+    pdf.circle(cx, headCy, headR, 'F')
+    pdf.triangle(
+      cx - headR * 0.92,
+      headCy + headR * 0.35,
+      cx + headR * 0.92,
+      headCy + headR * 0.35,
+      cx,
+      cy + sz * 0.48,
+      'F'
     )
+    pdf.setFillColor(255, 255, 255)
+    pdf.circle(cx, headCy, headR * 0.42, 'F')
+    pdf.setFillColor(15, 15, 15)
   } else if (kind === 'phone') {
-    ctx.fill(
-      new Path2D(
-        'M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.25 1.01l-2.2 2.2z'
-      )
-    )
+    pdf.setLineWidth(0.45)
+    pdf.circle(cx - r * 0.45, cy - r * 0.45, r * 0.28, 'F')
+    pdf.circle(cx + r * 0.45, cy + r * 0.45, r * 0.28, 'F')
+    pdf.setLineWidth(0.75)
+    pdf.line(cx - r * 0.45, cy - r * 0.45, cx - r * 0.1, cy + r * 0.15)
+    pdf.line(cx - r * 0.1, cy + r * 0.15, cx + r * 0.45, cy + r * 0.45)
   } else if (kind === 'mail') {
-    ctx.lineWidth = 1.8
-    ctx.strokeRect(2, 4, 20, 16)
-    ctx.stroke(new Path2D('M2 4l10 9 10-9M2 20l7-7M22 20l-7-7'))
+    const w = sz * 0.96
+    const h = sz * 0.68
+    const rx = cx - w / 2
+    const ry = cy - h / 2
+    pdf.setLineWidth(0.32)
+    pdf.rect(rx, ry, w, h, 'S')
+    pdf.line(rx, ry, cx, cy + h * 0.08)
+    pdf.line(cx, cy + h * 0.08, rx + w, ry)
+    pdf.line(rx, ry + h, cx - w * 0.16, cy - h * 0.02)
+    pdf.line(rx + w, ry + h, cx + w * 0.16, cy - h * 0.02)
   } else {
-    ctx.lineWidth = 1.8
-    ctx.stroke(new Path2D('M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18'))
+    pdf.setLineWidth(0.32)
+    pdf.circle(cx, cy, r, 'S')
+    pdf.ellipse(cx, cy, r * 0.48, r, 'S')
+    pdf.line(cx - r, cy, cx + r, cy)
   }
+}
 
-  const url = canvas.toDataURL('image/png')
-  iconCache[kind] = url
-  return url
+let cachedFontB64: { rm: string; bx: string } | null = null
+
+async function loadLatexFonts(pdf: any): Promise<string> {
+  try {
+    if (!cachedFontB64) {
+      const fetchB64 = async (url: string) => {
+        const res = await fetch(url)
+        if (!res.ok) throw new Error('font fetch failed')
+        const buf = await res.arrayBuffer()
+        const bytes = new Uint8Array(buf)
+        let bin = ''
+        const chunk = 0x8000
+        for (let i = 0; i < bytes.length; i += chunk) {
+          bin += String.fromCharCode(...bytes.subarray(i, i + chunk))
+        }
+        return btoa(bin)
+      }
+      const [rm, bx] = await Promise.all([fetchB64('/fonts/cmunrm.ttf'), fetchB64('/fonts/cmunbx.ttf')])
+      cachedFontB64 = { rm, bx }
+    }
+    pdf.addFileToVFS('cmunrm.ttf', cachedFontB64.rm)
+    pdf.addFont('cmunrm.ttf', 'CMUSerif', 'normal')
+    pdf.addFileToVFS('cmunbx.ttf', cachedFontB64.bx)
+    pdf.addFont('cmunbx.ttf', 'CMUSerif', 'bold')
+    return 'CMUSerif'
+  } catch {
+    return 'times'
+  }
 }
 
 async function exportAtsPdf(body: string, title: string, photoDataUrl?: string | null) {
   const { jsPDF } = await import('jspdf')
   const pdf = new jsPDF({ unit: 'mm', format: 'a4' })
+  const FONT = await loadLatexFonts(pdf)
   const cv = parseAtsCv(body, title)
 
   const M = 12.5
@@ -432,51 +564,50 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
     for (const sec of cv.sections) {
       h += (7.2 + 2.1 + 5.2) * s
       if (sec.kind === 'profile') {
-        pdf.setFont('helvetica', 'normal')
-        pdf.setFontSize(9.4 * s)
+        pdf.setFont(FONT, 'normal')
+        pdf.setFontSize(9.8 * s)
         for (const p of sec.paragraphs) {
           const lines = pdf.splitTextToSize(p, W) as string[]
-          h += lines.length * 4.15 * s + 1.2 * s
+          h += lines.length * 4.2 * s + 1.2 * s
         }
       } else if (sec.kind === 'experience') {
         sec.items.forEach((it, idx) => {
-          pdf.setFont('helvetica', 'bold')
-          pdf.setFontSize(9.8 * s)
+          pdf.setFont(FONT, 'bold')
+          pdf.setFontSize(10.2 * s)
           const rLines = pdf.splitTextToSize(it.role, W - 48).length
-          pdf.setFont('helvetica', 'normal')
-          pdf.setFontSize(9.4 * s)
+          pdf.setFont(FONT, 'normal')
+          pdf.setFontSize(9.6 * s)
           const cLines = it.company ? pdf.splitTextToSize(it.company, W - 48).length : 0
           const headerRows = Math.max(rLines + cLines, it.location && it.dates ? 2 : 1, 1)
           h += headerRows * 4.5 * s + 1.4 * s
           for (const b of it.bullets) {
             const bLines = pdf.splitTextToSize(b, W - 3.6).length
-            h += bLines * 4.15 * s
+            h += bLines * 4.2 * s
           }
           if (idx < sec.items.length - 1) h += 4.2 * s
         })
       } else if (sec.kind === 'education') {
         sec.items.forEach((it, idx) => {
           const topText = it.dates ? `${it.degree} | ${it.dates}` : it.degree
-          pdf.setFont('helvetica', 'bold')
-          pdf.setFontSize(9.8 * s)
+          pdf.setFont(FONT, 'bold')
+          pdf.setFontSize(10.2 * s)
           h += pdf.splitTextToSize(topText, W).length * 4.5 * s
           if (it.school) {
-            pdf.setFont('helvetica', 'normal')
-            pdf.setFontSize(9.4 * s)
+            pdf.setFont(FONT, 'normal')
+            pdf.setFontSize(9.6 * s)
             h += pdf.splitTextToSize(it.school, W).length * 4.4 * s
           }
           for (const d of it.details) {
-            pdf.setFont('helvetica', 'normal')
-            pdf.setFontSize(9.4 * s)
+            pdf.setFont(FONT, 'normal')
+            pdf.setFontSize(9.6 * s)
             h += pdf.splitTextToSize(d, W).length * 4.3 * s + 0.5 * s
           }
           if (idx < sec.items.length - 1) h += 4.5 * s
         })
       } else if (sec.kind === 'skills') {
-        pdf.setFont('helvetica', 'normal')
-        pdf.setFontSize(9.4 * s)
-        const maxLen = Math.max(...sec.items.map((i) => i.length), 1)
-        const cols = maxLen <= 24 ? 4 : 3
+        pdf.setFont(FONT, 'normal')
+        pdf.setFontSize(9.6 * s)
+        const cols = 4
         const colW = W / cols
         for (let i = 0; i < sec.items.length; i += cols) {
           let rowLines = 1
@@ -493,7 +624,7 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
     return h
   }
 
-  const startBodyY = 51
+  const startBodyY = 50
   const availH = 285 - startBodyY
   let s = 1
   for (let i = 0; i < 5; i++) {
@@ -516,21 +647,24 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
   const hx2 = hasPhoto ? 194.5 : 188
   const hcx = (hx1 + hx2) / 2
 
-  // PRÉNOM NOM (large uppercase serif in slate blue-grey)
-  pdf.setFont('times', 'bold')
-  pdf.setFontSize(24 * Math.max(s, 0.85))
-  pdf.setTextColor(SLATE[0], SLATE[1], SLATE[2])
-  pdf.setCharSpace(0.75)
-  pdf.text(cv.name.toUpperCase(), hcx, 20, { align: 'center' })
-  pdf.setCharSpace(0)
+  const drawCenteredTracked = (text: string, centerX: number, yPos: number, charSpace: number) => {
+    pdf.setCharSpace(charSpace)
+    const w = pdf.getTextWidth(text) + charSpace * Math.max(0, text.length - 1)
+    pdf.text(text, centerX - w / 2, yPos)
+    pdf.setCharSpace(0)
+  }
 
-  // INTITULÉ DU POSTE (uppercase sans-serif subtitle above rule)
-  pdf.setFont('helvetica', 'normal')
-  pdf.setFontSize(10 * Math.max(s, 0.85))
+  // PRÉNOM NOM (large uppercase LaTeX serif in slate blue-grey)
+  pdf.setFont(FONT, 'bold')
+  pdf.setFontSize(24.5 * Math.max(s, 0.85))
+  pdf.setTextColor(SLATE[0], SLATE[1], SLATE[2])
+  drawCenteredTracked(cv.name.toUpperCase(), hcx, 20, 0.75)
+
+  // INTITULÉ DU POSTE (uppercase subtitle above rule)
+  pdf.setFont(FONT, 'normal')
+  pdf.setFontSize(10.2 * Math.max(s, 0.85))
   pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
-  pdf.setCharSpace(0.45)
-  pdf.text(cv.jobTitle.toUpperCase(), hcx, 27.5, { align: 'center' })
-  pdf.setCharSpace(0)
+  drawCenteredTracked(cv.jobTitle.toUpperCase(), hcx, 27.5, 0.45)
 
   // Black horizontal header rule
   pdf.setDrawColor(BLACK[0], BLACK[1], BLACK[2])
@@ -539,8 +673,8 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
 
   // Contact row with vector icons centered below header rule
   if (cv.contacts.length > 0) {
-    const cFontSize = 9.2 * Math.max(s, 0.85)
-    pdf.setFont('helvetica', 'normal')
+    const cFontSize = 9.5 * Math.max(s, 0.85)
+    pdf.setFont(FONT, 'normal')
     pdf.setFontSize(cFontSize)
     pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
     const iconSz = 3.5
@@ -551,10 +685,10 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
     let cx = hcx - totalW / 2
     const cy = 36.2
     cv.contacts.forEach((c, idx) => {
-      try {
-        const iconUrl = getContactIconPng(c.kind)
-        pdf.addImage(iconUrl, 'PNG', cx, cy - 2.95, iconSz, iconSz)
-      } catch {}
+      drawContactIconPdf(pdf, c.kind, cx, cy, iconSz)
+      pdf.setFont(FONT, 'normal')
+      pdf.setFontSize(cFontSize)
+      pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
       pdf.text(c.text, cx + iconSz + iconTextGap, cy)
       cx += widths[idx]! + itemGap
     })
@@ -571,12 +705,12 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
   for (let sIdx = 0; sIdx < cv.sections.length; sIdx++) {
     const sec = cv.sections[sIdx]!
     ensure(16 * s)
-    if (sIdx > 0) y += 7.2 * s
-    else y += 5.5 * s
+    if (sIdx > 0) y += 7.0 * s
+    else y += 5.2 * s
 
     // Section heading in uppercase slate blue-grey + crisp black full-width underline
-    pdf.setFont('helvetica', 'bold')
-    pdf.setFontSize(11 * s)
+    pdf.setFont(FONT, 'bold')
+    pdf.setFontSize(11.2 * s)
     pdf.setTextColor(SLATE[0], SLATE[1], SLATE[2])
     pdf.setCharSpace(0.55)
     pdf.text(sec.title.toUpperCase(), M, y)
@@ -588,52 +722,52 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
     y += 5.4 * s
 
     if (sec.kind === 'profile') {
-      pdf.setFont('helvetica', 'normal')
-      pdf.setFontSize(9.4 * s)
+      pdf.setFont(FONT, 'normal')
+      pdf.setFontSize(9.8 * s)
       pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
       for (const p of sec.paragraphs) {
         const lines = pdf.splitTextToSize(p, W) as string[]
         for (const l of lines) {
           ensure(4.5 * s)
           pdf.text(l, M, y)
-          y += 4.15 * s
+          y += 4.2 * s
         }
       }
     } else if (sec.kind === 'experience') {
       sec.items.forEach((it, idx) => {
-        pdf.setFont('helvetica', 'bold')
-        pdf.setFontSize(9.8 * s)
+        pdf.setFont(FONT, 'bold')
+        pdf.setFontSize(10.2 * s)
         const roleArr = pdf.splitTextToSize(it.role, W - 48) as string[]
-        pdf.setFont('helvetica', 'normal')
-        pdf.setFontSize(9.4 * s)
+        pdf.setFont(FONT, 'normal')
+        pdf.setFontSize(9.6 * s)
         const compArr = it.company ? (pdf.splitTextToSize(it.company, W - 48) as string[]) : []
         const rows = Math.max(roleArr.length + compArr.length, it.location && it.dates ? 2 : 1, 1)
         ensure((rows * 4.5 + 5) * s)
 
         // Right-aligned location & dates in muted grey
         if (it.location) {
-          pdf.setFont('helvetica', 'normal')
-          pdf.setFontSize(9.2 * s)
+          pdf.setFont(FONT, 'normal')
+          pdf.setFontSize(9.4 * s)
           pdf.setTextColor(MUTED[0], MUTED[1], MUTED[2])
           pdf.text(it.location, M + W, y, { align: 'right' })
         }
         if (it.dates) {
-          pdf.setFont('helvetica', 'normal')
-          pdf.setFontSize(9.2 * s)
+          pdf.setFont(FONT, 'normal')
+          pdf.setFontSize(9.4 * s)
           pdf.setTextColor(MUTED[0], MUTED[1], MUTED[2])
           pdf.text(it.dates, M + W, y + (it.location ? 4.6 * s : 0), { align: 'right' })
         }
 
         // Left-aligned bold role + normal company
-        pdf.setFont('helvetica', 'bold')
-        pdf.setFontSize(9.8 * s)
+        pdf.setFont(FONT, 'bold')
+        pdf.setFontSize(10.2 * s)
         pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
         for (const r of roleArr) {
           pdf.text(r, M, y)
           y += 4.6 * s
         }
-        pdf.setFont('helvetica', 'normal')
-        pdf.setFontSize(9.4 * s)
+        pdf.setFont(FONT, 'normal')
+        pdf.setFontSize(9.6 * s)
         pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
         for (const c of compArr) {
           pdf.text(c, M, y)
@@ -646,8 +780,8 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
         if (it.bullets.length > 0) {
           y += 1.2 * s
           for (const b of it.bullets) {
-            pdf.setFont('helvetica', 'normal')
-            pdf.setFontSize(9.4 * s)
+            pdf.setFont(FONT, 'normal')
+            pdf.setFontSize(9.6 * s)
             pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
             const bArr = pdf.splitTextToSize(b, W - 3.6) as string[]
             bArr.forEach((line, bIdx) => {
@@ -657,7 +791,7 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
                 pdf.circle(M + 0.9, y - 1.05 * s, 0.52 * s, 'F')
               }
               pdf.text(line, M + 3.4, y)
-              y += 4.15 * s
+              y += 4.2 * s
             })
           }
         }
@@ -667,8 +801,8 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
       sec.items.forEach((it, idx) => {
         ensure(14 * s)
         const topLine = it.dates ? `${it.degree} | ${it.dates}` : it.degree
-        pdf.setFont('helvetica', 'bold')
-        pdf.setFontSize(9.8 * s)
+        pdf.setFont(FONT, 'bold')
+        pdf.setFontSize(10.2 * s)
         pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
         const topArr = pdf.splitTextToSize(topLine, W) as string[]
         for (const l of topArr) {
@@ -676,8 +810,8 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
           y += 4.6 * s
         }
         if (it.school) {
-          pdf.setFont('helvetica', 'normal')
-          pdf.setFontSize(9.4 * s)
+          pdf.setFont(FONT, 'normal')
+          pdf.setFontSize(9.6 * s)
           pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
           const sArr = pdf.splitTextToSize(it.school, W) as string[]
           for (const l of sArr) {
@@ -693,12 +827,12 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
             if (colonMatch?.[1] && colonMatch[2]) {
               const label = `${colonMatch[1]} `
               const rest = colonMatch[2]
-              pdf.setFont('helvetica', 'bold')
-              pdf.setFontSize(9.4 * s)
+              pdf.setFont(FONT, 'bold')
+              pdf.setFontSize(9.6 * s)
               pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
               const labelW = pdf.getTextWidth(label)
               pdf.text(label, M, y)
-              pdf.setFont('helvetica', 'normal')
+              pdf.setFont(FONT, 'normal')
               const firstLineAvail = W - labelW
               const restWords = rest.split(/\s+/)
               let firstLine = ''
@@ -721,8 +855,8 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
                 }
               }
             } else {
-              pdf.setFont('helvetica', 'normal')
-              pdf.setFontSize(9.4 * s)
+              pdf.setFont(FONT, 'normal')
+              pdf.setFontSize(9.6 * s)
               pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
               const dArr = pdf.splitTextToSize(d, W) as string[]
               for (const dl of dArr) {
@@ -735,19 +869,17 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
         if (idx < sec.items.length - 1) y += 4.5 * s
       })
     } else if (sec.kind === 'skills') {
-      pdf.setFont('helvetica', 'normal')
-      pdf.setFontSize(9.4 * s)
-      const maxLen = Math.max(...sec.items.map((i) => i.length), 1)
-      const cols = maxLen <= 24 ? 4 : 3
-      const colOffsets = cols === 4 ? [0, 0.318 * W, 0.595 * W, 0.845 * W] : [0, 0.34 * W, 0.68 * W]
-      const colWidths =
-        cols === 4 ? [0.31 * W, 0.27 * W, 0.24 * W, 0.155 * W] : [0.33 * W, 0.33 * W, 0.32 * W]
+      pdf.setFont(FONT, 'normal')
+      pdf.setFontSize(9.6 * s)
+      const cols = 4
+      const colOffsets = [0, 0.318 * W, 0.595 * W, 0.845 * W]
+      const colWidths = [0.31 * W, 0.27 * W, 0.24 * W, 0.155 * W]
       for (let i = 0; i < sec.items.length; i += cols) {
         const row = sec.items.slice(i, i + cols)
         let rowLines = 1
         const cells = row.map((it, cIdx) => {
-          pdf.setFont('helvetica', 'normal')
-          pdf.setFontSize(9.4 * s)
+          pdf.setFont(FONT, 'normal')
+          pdf.setFontSize(9.6 * s)
           const arr = pdf.splitTextToSize(it, (colWidths[cIdx] ?? W / cols) - 4) as string[]
           rowLines = Math.max(rowLines, arr.length)
           return arr
@@ -757,16 +889,16 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
           const cx = M + (colOffsets[cIdx] ?? cIdx * (W / cols))
           pdf.setFillColor(BLACK[0], BLACK[1], BLACK[2])
           pdf.circle(cx + 0.9, y - 1.05 * s, 0.52 * s, 'F')
-          pdf.setFont('helvetica', 'normal')
-          pdf.setFontSize(9.4 * s)
+          pdf.setFont(FONT, 'normal')
+          pdf.setFontSize(9.6 * s)
           pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
           pdf.text(cell, cx + 3.4, y)
         })
         y += rowLines * 4.2 * s + 1.8 * s
       }
     } else if (sec.kind === 'languages') {
-      pdf.setFont('helvetica', 'normal')
-      pdf.setFontSize(9.4 * s)
+      pdf.setFont(FONT, 'normal')
+      pdf.setFontSize(9.6 * s)
       pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
       for (let i = 0; i < sec.items.length; i += 3) {
         const row = sec.items.slice(i, i + 3)
@@ -835,7 +967,7 @@ function AtsCvPreview({
 }) {
   const cv = parseAtsCv(body, title)
   return (
-    <div className="mx-auto w-full max-w-[680px] bg-white px-5 py-7 font-sans text-[13px] leading-[1.45] text-[#0f0f0f] sm:px-8 sm:py-9">
+    <div className="latex-cv mx-auto w-full max-w-[680px] bg-white px-5 py-7 text-[13.5px] leading-[1.45] text-[#0f0f0f] sm:px-8 sm:py-9">
       {/* Header matching reference image */}
       <div className="mb-6 flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
         <div className="group relative h-[108px] w-[108px] shrink-0 overflow-hidden bg-neutral-100">
@@ -865,17 +997,17 @@ function AtsCvPreview({
         <div className="min-w-0 flex-1 text-center">
           <h1
             id="doc-h-0"
-            className="font-serif text-[27px] font-bold uppercase tracking-[0.06em] text-[#7d929f] sm:text-[30px]"
-            style={{ fontFamily: "Georgia, 'Times New Roman', Times, serif", border: 'none', margin: 0, padding: 0 }}
+            className="text-[28px] font-bold uppercase tracking-[0.06em] text-[#7d929f] sm:text-[31px]"
+            style={{ border: 'none', margin: 0, padding: 0 }}
           >
             {cv.name}
           </h1>
-          <p className="mt-1 text-center text-[13px] font-normal uppercase tracking-[0.08em] text-[#0f0f0f]">
+          <p className="mt-1 text-center text-[13.5px] font-normal uppercase tracking-[0.08em] text-[#0f0f0f]">
             {cv.jobTitle}
           </p>
           <div className="my-2.5 h-[1.5px] w-full bg-[#0f0f0f]" />
           {cv.contacts.length > 0 && (
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-[12.5px] text-[#0f0f0f]">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-[13px] text-[#0f0f0f]">
               {cv.contacts.map((c, idx) => (
                 <span key={idx} className="inline-flex items-center gap-2">
                   <ContactIconSvg kind={c.kind} />
@@ -892,7 +1024,7 @@ function AtsCvPreview({
         <section key={idx} className="mt-5">
           <h2
             id={`doc-h-${idx + 1}`}
-            className="border-b-[1.5px] border-[#0f0f0f] pb-1 text-[14px] font-bold uppercase tracking-[0.06em] text-[#7d929f]"
+            className="border-b-[1.5px] border-[#0f0f0f] pb-1 text-[14.5px] font-bold uppercase tracking-[0.06em] text-[#7d929f]"
             style={{ margin: '0 0 10px 0' }}
           >
             {sec.title}
@@ -901,7 +1033,7 @@ function AtsCvPreview({
           {sec.kind === 'profile' && (
             <div className="space-y-2">
               {sec.paragraphs.map((p, pIdx) => (
-                <p key={pIdx} className="m-0 text-start text-[12.8px] leading-[1.5] text-[#0f0f0f]">
+                <p key={pIdx} className="m-0 text-start text-[13.2px] leading-[1.5] text-[#0f0f0f]">
                   {p}
                 </p>
               ))}
@@ -913,19 +1045,19 @@ function AtsCvPreview({
               {sec.items.map((it, eIdx) => (
                 <div key={eIdx}>
                   <div className="flex items-baseline justify-between gap-4">
-                    <span className="text-[13.2px] font-bold text-[#0f0f0f]">{it.role}</span>
-                    {it.location && <span className="shrink-0 text-[12.5px] text-[#555555]">{it.location}</span>}
+                    <span className="text-[13.8px] font-bold text-[#0f0f0f]">{it.role}</span>
+                    {it.location && <span className="shrink-0 text-[12.8px] text-[#555555]">{it.location}</span>}
                   </div>
                   {(it.company || it.dates) && (
                     <div className="mt-0.5 flex items-baseline justify-between gap-4">
-                      <span className="text-[12.8px] text-[#0f0f0f]">{it.company}</span>
-                      {it.dates && <span className="shrink-0 text-[12.5px] text-[#555555]">{it.dates}</span>}
+                      <span className="text-[13.2px] text-[#0f0f0f]">{it.company}</span>
+                      {it.dates && <span className="shrink-0 text-[12.8px] text-[#555555]">{it.dates}</span>}
                     </div>
                   )}
                   {it.bullets.length > 0 && (
                     <ul className="mt-1.5 list-none space-y-0.5 p-0">
                       {it.bullets.map((b, bIdx) => (
-                        <li key={bIdx} className="relative pl-3.5 text-start text-[12.8px] leading-[1.45] text-[#0f0f0f]">
+                        <li key={bIdx} className="relative pl-3.5 text-start text-[13.2px] leading-[1.45] text-[#0f0f0f]">
                           <span className="absolute left-0 top-0 font-bold text-[#0f0f0f]">•</span>
                           {b}
                         </li>
@@ -941,14 +1073,14 @@ function AtsCvPreview({
             <div className="space-y-3.5">
               {sec.items.map((it, edIdx) => (
                 <div key={edIdx}>
-                  <div className="text-[13.2px] font-bold text-[#0f0f0f]">
+                  <div className="text-[13.8px] font-bold text-[#0f0f0f]">
                     {it.dates ? `${it.degree} | ${it.dates}` : it.degree}
                   </div>
-                  {it.school && <div className="mt-0.5 text-[12.8px] text-[#0f0f0f]">{it.school}</div>}
+                  {it.school && <div className="mt-0.5 text-[13.2px] text-[#0f0f0f]">{it.school}</div>}
                   {it.details.map((d, dIdx) => {
                     const colonMatch = d.match(/^([^:]{2,32}\s*:)\s*(.+)$/)
                     return (
-                      <div key={dIdx} className="mt-1 text-[12.8px] leading-[1.45] text-[#0f0f0f]">
+                      <div key={dIdx} className="mt-1 text-[13.2px] leading-[1.45] text-[#0f0f0f]">
                         {colonMatch?.[1] && colonMatch[2] ? (
                           <>
                             <strong className="font-bold text-[#0f0f0f]">{colonMatch[1]}</strong> {colonMatch[2]}
@@ -967,7 +1099,7 @@ function AtsCvPreview({
           {sec.kind === 'skills' && (
             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 sm:grid-cols-4">
               {sec.items.map((sk, sIdx) => (
-                <div key={sIdx} className="relative pl-3.5 text-[12.8px] text-[#0f0f0f]">
+                <div key={sIdx} className="relative pl-3.5 text-[13.2px] text-[#0f0f0f]">
                   <span className="absolute left-0 top-0 font-bold text-[#0f0f0f]">•</span>
                   {sk}
                 </div>
@@ -976,7 +1108,7 @@ function AtsCvPreview({
           )}
 
           {sec.kind === 'languages' && (
-            <div className="flex flex-wrap items-center justify-between gap-4 text-[12.8px] text-[#0f0f0f]">
+            <div className="flex flex-wrap items-center justify-between gap-4 text-[13.2px] text-[#0f0f0f]">
               {sec.items.map((lg, lIdx) => (
                 <span key={lIdx}>{lg}</span>
               ))}
