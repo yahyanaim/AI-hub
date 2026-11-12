@@ -100,7 +100,13 @@ function parseAtsSections(body: string): { header: string[]; sections: AtsSectio
   let cur: AtsSection | null = null
   for (const raw of body.split('\n')) {
     const trimmed = raw.trim()
-    if (!trimmed || /^#\s/.test(trimmed)) continue
+    if (!trimmed) {
+      if (cur && cur.lines.length > 0 && cur.lines[cur.lines.length - 1] !== '') {
+        cur.lines.push('')
+      }
+      continue
+    }
+    if (/^#\s/.test(trimmed)) continue
     if (/^##\s/.test(trimmed)) {
       cur = { title: stripMd(trimmed.replace(/^##\s+/, '')), lines: [] }
       sections.push(cur)
@@ -343,21 +349,12 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
 
     if (/formation|education|[eé]tudes|academic|dipl[oô]me|certification|licen[cs]e/i.test(t)) {
       const items: AtsEduItem[] = []
-      for (const raw of sec.lines) {
-        const line = raw.trim()
-        if (!line) continue
-        const isHeadingLine = /^#+\s/.test(line)
-        const isBullet = /^[-•*]\s/.test(line)
-        const clean = cleanBullet(line)
-        const hasPipe = clean.includes('|')
-        const lastEdu = items[items.length - 1]
+      let afterBlank = false
+      const DEGREE_START_RE =
+        /\b(bachelor|master|licen[cs]e|baccalaur[eé]at|\bbac\b|dipl[oô]me|technicien|ing[eé]nieur|engineer|doctorat|phd|dut|bts|deug|deust|certificat|certification|formation|cycle|classe\s+pr[eé]pa|youcode|1337|ofppt|ista|ismo|ensam|emi|ensias|fst|est|fsjes|encg|ensa|mastere|mba|b\.?sc|m\.?sc)\b/i
 
-        if (lastEdu && isPureDateLine(clean) && !lastEdu.dates) {
-          lastEdu.dates = clean.replace(/\s+-\s+/g, ' – ')
-          continue
-        }
-
-        if (!isBullet && (hasPipe || isHeadingLine)) {
+      const parseDegreeLine = (clean: string): AtsEduItem => {
+        if (clean.includes('|')) {
           const pIdx = clean.lastIndexOf('|')
           const left = pIdx > 0 ? clean.slice(0, pIdx).trim() : clean
           const right = pIdx > 0 ? clean.slice(pIdx + 1).trim() : ''
@@ -372,22 +369,75 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
             degree = left.slice(0, dIdx).trim()
             school = left.slice(dIdx + 3).trim()
           }
-          items.push({ degree, dates: right.replace(/\s+-\s+/g, ' – '), school, details: [] })
-        } else if (
-          !isBullet &&
-          lastEdu &&
-          !lastEdu.school &&
-          lastEdu.details.length === 0 &&
-          !/^(projet|project|key|cours|mention|gpa)/i.test(clean)
-        ) {
+          return { degree, dates: right.replace(/\s+-\s+/g, ' – '), school, details: [] }
+        }
+        // Check for trailing date after a dash/paren or at end of line, e.g. "Licence SMI — 2020 - 2023" or "Baccalauréat (2018 - 2019)"
+        const parenDate = clean.match(/^(.+?)\s*\(((?:19|20)\d{2}(?:\s*[–—-]\s*(?:(?:19|20)\d{2}|present|en cours|current))?)\)\s*$/i)
+        if (parenDate?.[1] && parenDate[2]) {
+          return { degree: parenDate[1].trim(), dates: parenDate[2].replace(/\s+-\s+/g, ' – '), school: '', details: [] }
+        }
+        const dashDate = clean.match(/^(.+?)\s+[—–-]\s+((?:19|20)\d{2}(?:\s*[–—-]\s*(?:(?:19|20)\d{2}|present|en cours|current))?)$/i)
+        if (dashDate?.[1] && dashDate[2]) {
+          return { degree: dashDate[1].trim(), dates: dashDate[2].replace(/\s+-\s+/g, ' – '), school: '', details: [] }
+        }
+        if (clean.includes(' — ')) {
+          const dIdx = clean.indexOf(' — ')
+          return {
+            degree: clean.slice(0, dIdx).trim(),
+            dates: '',
+            school: clean.slice(dIdx + 3).trim(),
+            details: [],
+          }
+        }
+        return { degree: clean, dates: '', school: '', details: [] }
+      }
+
+      for (const raw of sec.lines) {
+        const line = raw.trim()
+        if (!line) {
+          afterBlank = true
+          continue
+        }
+        const isHeadingLine = /^#+\s/.test(line)
+        const isBullet = /^[-•*]\s/.test(line)
+        const clean = cleanBullet(line)
+        const hasPipe = clean.includes('|')
+        const lastEdu = items[items.length - 1]
+
+        if (lastEdu && isPureDateLine(clean) && !lastEdu.dates) {
+          lastEdu.dates = clean.replace(/\s+-\s+/g, ' – ')
+          afterBlank = false
+          continue
+        }
+
+        const isDetailLine = /^(projet|project|key|cours|mention|gpa|sp[eé]cialit[eé]|focus|option|th[eè]se|pfe)/i.test(clean)
+        const startsNewEntry =
+          hasPipe ||
+          isHeadingLine ||
+          !lastEdu ||
+          (isBullet && (hasPipe || DEGREE_START_RE.test(clean))) ||
+          (!isDetailLine &&
+            (afterBlank || Boolean(lastEdu.school) || lastEdu.details.length > 0) &&
+            (DEGREE_START_RE.test(clean) || /\b(19|20)\d{2}\b/.test(clean)))
+
+        if (startsNewEntry) {
+          items.push(parseDegreeLine(clean))
+        } else if (!isBullet && lastEdu && !lastEdu.school && lastEdu.details.length === 0 && !isDetailLine) {
           lastEdu.school = clean.replace(/\s*—\s*/g, ', ')
         } else if (lastEdu) {
           lastEdu.details.push(clean)
         } else {
-          items.push({ degree: clean, dates: '', school: '', details: [] })
+          items.push(parseDegreeLine(clean))
         }
+        afterBlank = false
       }
-      if (items.length) parsedSections.push({ kind: 'education', title: t, items })
+      if (items.length) {
+        const existingEdu = parsedSections.find(
+          (s): s is ParsedAtsSection & { kind: 'education' } => s.kind === 'education'
+        )
+        if (existingEdu) existingEdu.items.push(...items)
+        else parsedSections.push({ kind: 'education', title: t, items })
+      }
       continue
     }
 
@@ -561,14 +611,14 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
 
   const measureBody = (s: number): number => {
     let h = 0
-    for (const sec of cv.sections) {
-      h += (7.2 + 2.1 + 5.2) * s
+    cv.sections.forEach((sec, sIdx) => {
+      h += ((sIdx > 0 ? 7.0 : 5.2) + 2.1 + 5.4) * s
       if (sec.kind === 'profile') {
         pdf.setFont(FONT, 'normal')
         pdf.setFontSize(9.8 * s)
         for (const p of sec.paragraphs) {
           const lines = pdf.splitTextToSize(p, W) as string[]
-          h += lines.length * 4.2 * s + 1.2 * s
+          h += lines.length * 4.2 * s
         }
       } else if (sec.kind === 'experience') {
         sec.items.forEach((it, idx) => {
@@ -579,10 +629,13 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
           pdf.setFontSize(9.6 * s)
           const cLines = it.company ? pdf.splitTextToSize(it.company, W - 48).length : 0
           const headerRows = Math.max(rLines + cLines, it.location && it.dates ? 2 : 1, 1)
-          h += headerRows * 4.5 * s + 1.4 * s
-          for (const b of it.bullets) {
-            const bLines = pdf.splitTextToSize(b, W - 3.6).length
-            h += bLines * 4.2 * s
+          h += headerRows * 4.6 * s
+          if (it.bullets.length > 0) {
+            h += 1.2 * s
+            for (const b of it.bullets) {
+              const bLines = pdf.splitTextToSize(b, W - 3.6).length
+              h += bLines * 4.2 * s
+            }
           }
           if (idx < sec.items.length - 1) h += 4.2 * s
         })
@@ -591,16 +644,19 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
           const topText = it.dates ? `${it.degree} | ${it.dates}` : it.degree
           pdf.setFont(FONT, 'bold')
           pdf.setFontSize(10.2 * s)
-          h += pdf.splitTextToSize(topText, W).length * 4.5 * s
+          h += pdf.splitTextToSize(topText, W).length * 4.6 * s
           if (it.school) {
             pdf.setFont(FONT, 'normal')
             pdf.setFontSize(9.6 * s)
-            h += pdf.splitTextToSize(it.school, W).length * 4.4 * s
+            h += pdf.splitTextToSize(it.school, W).length * 4.6 * s
           }
-          for (const d of it.details) {
-            pdf.setFont(FONT, 'normal')
-            pdf.setFontSize(9.6 * s)
-            h += pdf.splitTextToSize(d, W).length * 4.3 * s + 0.5 * s
+          if (it.details.length > 0) {
+            h += 0.6 * s
+            for (const d of it.details) {
+              pdf.setFont(FONT, 'normal')
+              pdf.setFontSize(9.6 * s)
+              h += pdf.splitTextToSize(d, W).length * 4.2 * s
+            }
           }
           if (idx < sec.items.length - 1) h += 4.5 * s
         })
@@ -608,30 +664,30 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
         pdf.setFont(FONT, 'normal')
         pdf.setFontSize(9.6 * s)
         const cols = 4
-        const colW = W / cols
+        const colWidths = [0.31 * W, 0.27 * W, 0.24 * W, 0.155 * W]
         for (let i = 0; i < sec.items.length; i += cols) {
           let rowLines = 1
-          for (const it of sec.items.slice(i, i + cols)) {
-            rowLines = Math.max(rowLines, pdf.splitTextToSize(it, colW - 4.5).length)
-          }
-          h += rowLines * 4.2 * s + 1.6 * s
+          sec.items.slice(i, i + cols).forEach((it, cIdx) => {
+            rowLines = Math.max(rowLines, pdf.splitTextToSize(it, (colWidths[cIdx] ?? W / cols) - 4).length)
+          })
+          h += rowLines * 4.2 * s + 1.8 * s
         }
       } else if (sec.kind === 'languages') {
         const rows = Math.ceil(sec.items.length / 3)
         h += rows * 5.2 * s
       }
-    }
+    })
     return h
   }
 
-  const startBodyY = 50
-  const availH = 285 - startBodyY
+  const startBodyY = 46.5
+  const availH = 286 - startBodyY
   let s = 1
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     const needed = measureBody(s)
     if (needed <= availH) break
-    const next = Math.max(0.62, s * (availH / needed) * 0.99)
-    if (Math.abs(next - s) < 0.005) break
+    const next = Math.max(0.45, s * (availH / needed) * 0.985)
+    if (Math.abs(next - s) < 0.003) break
     s = next
   }
 
@@ -695,12 +751,8 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
   }
 
   let y = startBodyY
-  const ensure = (h: number) => {
-    if (y + h > 286) {
-      pdf.addPage()
-      y = 16
-    }
-  }
+  // Always keep the ATS CV strictly on 1 page (auto-scaled above via `s`)
+  const ensure = (_h: number) => {}
 
   for (let sIdx = 0; sIdx < cv.sections.length; sIdx++) {
     const sec = cv.sections[sIdx]!

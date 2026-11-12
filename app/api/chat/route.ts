@@ -144,15 +144,15 @@ When the user asks to make their CV "ATS-friendly" or asks for an ATS resume, re
   - \`Email: <Email Address>\`
 - Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`):
   1. \`## Profil professionnel\` (or \`## Professional Summary\`): One cohesive 3–4 line paragraph summarizing the candidate's profile, core competencies, and career objective.
-  2. \`## Expériences professionnelles\` (or \`## Work Experience\`): Reverse-chronological roles. Format each role header line as:
+  2. \`## Expériences professionnelles\` (or \`## Work Experience\`): Include EVERY role, internship (stage), and freelance experience from the attached CV in reverse-chronological order (never omit any entry). Format each role header line as:
      \`Job Title, Company — City, Country | Mon. YYYY – Mon. YYYY\`
-     followed by 3–4 concise achievement bullets (\`- ...\`) starting with action verbs.
-  3. \`## Formation\` (or \`## Education\`): Format each degree entry as 2–3 lines:
-     Line 1: \`Degree Name | YYYY – YYYY\`
-     Line 2: \`School / University Name, City, Country\`
-     Line 3 (optional): \`Projet réalisé : <concise project or focus description>\` (or \`Key project: <description>\`)
-  4. \`## Compétences\` (or \`## Skills\`): Output 8 concise standalone skill items as hyphen bullets (\`- Skill name\`, 1–3 words each, NO category prefixes like "Frontend:").
-  5. \`## Langues\` (or \`## Languages\`): Output 2–3 languages as hyphen bullets in the exact format \`- Français : Langue maternelle\`, \`- Anglais : Courant (C1)\`, \`- Espagnol : Professionnel (B2)\`.
+     followed by 2–3 concise 1-line achievement bullets (\`- ...\`) starting with action verbs so the entire CV fits cleanly on 1 page.
+  3. \`## Formation\` (or \`## Education\`): CRITICAL — Include the COMPLETE education parcours from the attached CV in reverse-chronological order: EVERY degree, licence, master, engineering cycle, specialized technician diploma (OFPPT / ISTA / BTS / DUT), bootcamp (YouCode, 1337, etc.), preparatory class, and Baccalauréat. NEVER omit or skip any school, diploma, or education entry present in the original CV. Format each education entry as 2–3 lines (separated by a blank line between entries):
+     Line 1: \`Degree / Diploma Title | YYYY – YYYY\`
+     Line 2: \`School / University / Institution Name, City, Country\`
+     Line 3 (optional, 1 concise line if applicable): \`Projet réalisé : <concise project or focus description>\` (or \`Key project: <description>\`)
+  4. \`## Compétences\` (or \`## Skills\`): Output 8–12 concise standalone skill items as hyphen bullets (\`- Skill name\`, 1–3 words each, NO category prefixes like "Frontend:").
+  5. \`## Langues\` (or \`## Languages\`): Output all languages from the user's CV as hyphen bullets in the exact format \`- Français : Langue maternelle\`, \`- Anglais : Courant (C1)\`, \`- Arabe : Langue maternelle\`.
 - Include ONLY truthful content from the user's CV — never invent experience, dates, or skills.
 - Inside the block: EVERY section heading MUST be a markdown \`## \` heading alone on its own line. NEVER write a heading as bold text like **Summary**, and NEVER put content on the same line as a heading. NO markdown tables, NO emojis.
 - In the visible chat reply outside the block, briefly explain what you changed and why it now parses well.
