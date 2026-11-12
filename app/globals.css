@@ -113,6 +113,63 @@ p {
   line-height: 1.8;
   color: #3f4450;
 }
+.ats-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #202326;
+}
+.ats-body > *:first-child {
+  margin-top: 0;
+}
+.ats-body h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #33414e;
+  border-bottom: 2px solid #33414e;
+  padding-bottom: 10px;
+  margin: 0 0 16px;
+}
+.ats-body h2 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #5f7e95;
+  border-bottom: 1px solid #bec8d0;
+  padding-bottom: 5px;
+  margin: 26px 0 10px;
+}
+.ats-body p {
+  font-size: 14px;
+  text-align: start;
+  margin: 0 0 8px;
+}
+.ats-body ul,
+.ats-body ol {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 8px;
+}
+.ats-body li {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 4px;
+  text-align: start;
+}
+.ats-body li::before {
+  content: '•';
+  position: absolute;
+  left: 2px;
+  color: #33414e;
+}
+.ats-body strong {
+  color: #202326;
+  font-weight: 600;
+}
 .doc-body > *:first-child {
   margin-top: 0;
 }

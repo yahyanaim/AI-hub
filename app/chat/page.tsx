@@ -136,6 +136,7 @@ async function exportAtsPdf(body: string, title: string) {
     | { kind: 'entry'; role: string; company: string | null; loc: string | null; dates: string | null }
     | { kind: 'bullet'; text: string }
     | { kind: 'grid'; items: string[] }
+    | { kind: 'rowgrid'; items: string[] }
     | { kind: 'heading'; text: string }
 
   const parseEntry = (line: string): AtsBlock & { kind: 'entry' } => {
@@ -184,6 +185,13 @@ async function exportAtsPdf(body: string, title: string) {
       blocks.push({ kind: 'grid', items })
       continue
     }
+    if (/langue|language/i.test(sec.title)) {
+      const items = sec.lines
+        .map((l) => (/^[-•*]\s/.test(l) ? cleanBullet(l) : l.trim()))
+        .filter(Boolean)
+      blocks.push({ kind: 'rowgrid', items })
+      continue
+    }
     for (const raw of sec.lines) {
       const line = raw.trim()
       if (!line) continue
@@ -219,7 +227,7 @@ async function exportAtsPdf(body: string, title: string) {
         pdf.setFontSize(9.6 * s)
         h += pdf.splitTextToSize(b.text, W - 4).length * 4.3 * s
       } else if (b.kind === 'entry') {
-        pdf.setFont('times', 'bold')
+        pdf.setFont('helvetica', 'bold')
         pdf.setFontSize(9.9 * s)
         const roleLines = pdf.splitTextToSize(b.role, W - 46).length
         pdf.setFont('helvetica', 'normal')
@@ -230,13 +238,26 @@ async function exportAtsPdf(body: string, title: string) {
       } else if (b.kind === 'grid') {
         pdf.setFont('helvetica', 'normal')
         pdf.setFontSize(9.4 * s)
+        const maxLen = Math.max(...b.items.map((i) => i.length), 1)
+        const cols = maxLen <= 16 ? 4 : 3
+        const colW = W / cols
+        for (let i = 0; i < b.items.length; i += cols) {
+          let rowLines = 1
+          for (const it of b.items.slice(i, i + cols)) {
+            rowLines = Math.max(rowLines, pdf.splitTextToSize(it, colW - 4).length)
+          }
+          h += (rowLines * 4.2 + 1.3) * s
+        }
+      } else if (b.kind === 'rowgrid') {
+        pdf.setFont('helvetica', 'normal')
+        pdf.setFontSize(9.4 * s)
         const colW = W / 3
         for (let i = 0; i < b.items.length; i += 3) {
           let rowLines = 1
           for (const it of b.items.slice(i, i + 3)) {
             rowLines = Math.max(rowLines, pdf.splitTextToSize(it, colW - 4).length)
           }
-          h += (rowLines * 4.2 + 1.3) * s
+          h += (rowLines * 4.2 + 1.6) * s
         }
       }
     }
@@ -278,7 +299,7 @@ async function exportAtsPdf(body: string, title: string) {
     pdf.setFontSize(8.4 * s)
     pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
     const arr = pdf.splitTextToSize(contactSegs.join('   |   '), W) as string[]
-    pdf.text(arr, 105, y, { align: 'center' })
+    pdf.text(arr, M, y)
     y += arr.length * 4.1 * s + 1.6 * s
   }
 
@@ -320,7 +341,7 @@ async function exportAtsPdf(body: string, title: string) {
         y += 4.3 * s
       })
     } else if (b.kind === 'entry') {
-      pdf.setFont('times', 'bold')
+      pdf.setFont('helvetica', 'bold')
       pdf.setFontSize(9.9 * s)
       pdf.setTextColor(INK[0], INK[1], INK[2])
       const roleArr = pdf.splitTextToSize(b.role, W - 46) as string[]
@@ -341,7 +362,7 @@ async function exportAtsPdf(body: string, title: string) {
         pdf.setTextColor(GRAY[0], GRAY[1], GRAY[2])
         pdf.text(b.dates, M + W, y + (b.loc ? 4.1 * s : 0), { align: 'right' })
       }
-      pdf.setFont('times', 'bold')
+      pdf.setFont('helvetica', 'bold')
       pdf.setFontSize(9.9 * s)
       pdf.setTextColor(INK[0], INK[1], INK[2])
       for (const t of roleArr) {
@@ -358,9 +379,11 @@ async function exportAtsPdf(body: string, title: string) {
     } else if (b.kind === 'grid') {
       pdf.setFont('helvetica', 'normal')
       pdf.setFontSize(9.4 * s)
-      const colW = W / 3
-      for (let i = 0; i < b.items.length; i += 3) {
-        const row = b.items.slice(i, i + 3)
+      const maxLen = Math.max(...b.items.map((i) => i.length), 1)
+      const cols = maxLen <= 16 ? 4 : 3
+      const colW = W / cols
+      for (let i = 0; i < b.items.length; i += cols) {
+        const row = b.items.slice(i, i + cols)
         let rowLines = 1
         const cells = row.map((it) => {
           pdf.setFont('helvetica', 'normal')
@@ -380,6 +403,31 @@ async function exportAtsPdf(body: string, title: string) {
           cx += colW
         }
         y += rowLines * 4.2 * s + 1.3 * s
+      }
+    } else if (b.kind === 'rowgrid') {
+      pdf.setFont('helvetica', 'normal')
+      pdf.setFontSize(9.4 * s)
+      const colW = W / 3
+      for (let i = 0; i < b.items.length; i += 3) {
+        const row = b.items.slice(i, i + 3)
+        let rowLines = 1
+        const cells = row.map((it) => {
+          pdf.setFont('helvetica', 'normal')
+          pdf.setFontSize(9.4 * s)
+          const arr = pdf.splitTextToSize(it, colW - 4) as string[]
+          rowLines = Math.max(rowLines, arr.length)
+          return arr
+        })
+        ensure(rowLines * 4.2 * s + 1.6 * s)
+        let cx = M
+        for (const cell of cells) {
+          pdf.setFont('helvetica', 'normal')
+          pdf.setFontSize(9.4 * s)
+          pdf.setTextColor(INK[0], INK[1], INK[2])
+          pdf.text(cell, cx, y)
+          cx += colW
+        }
+        y += rowLines * 4.2 * s + 1.6 * s
       }
     }
   }
@@ -1396,7 +1444,7 @@ export default function ChatPage() {
             <div ref={docScrollRef} className="relative flex-1 overflow-y-auto bg-white">
               <div
                 ref={pdfRef}
-                className="doc-body mx-auto w-full max-w-2xl px-6 py-10 text-neutral-900 sm:px-8 sm:py-14"
+                className={`doc-body mx-auto w-full max-w-2xl px-6 py-10 text-neutral-900 sm:px-8 sm:py-14${/ats/i.test(openDoc.title) ? ' ats-body' : ''}`}
               >
                 <Markdown>{docBodyNoH1}</Markdown>
                 {!/ats/i.test(openDoc.title) && (
