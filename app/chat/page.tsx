@@ -1606,7 +1606,13 @@ export default function ChatPage() {
     try {
       try {
         assistantMsg = await runOnce()
-      } catch (firstErr) {
+      } catch (firstErr: any) {
+        const em = String(firstErr?.message || '')
+        // Only retry transient network/empty errors; if the server already
+        // exhausted its multi-model fallback chain, don't double the wait.
+        if (em.includes('temporarily unavailable') || em.includes('auth failed') || em.includes('rate limited')) {
+          throw firstErr
+        }
         assistantMsg = await runOnce()
       }
       // A complete roadmap in this reply becomes a document (auto-opens, ChatGPT-like)

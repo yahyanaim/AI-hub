@@ -8,13 +8,13 @@ const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 // flash also hangs; kimi-k2.6 is 404 for this account. Measured live on production
 // with the FULL system prompt: nvidia/nemotron-3.5-lightning-30b-a3b delivers in
 // 21-50s and minimaxai/minimax-m3.1-flash in ~26s — both return valid content.
-const DEFAULT_MODEL = 'nvidia/nemotron-3.5-lightning-30b-a3b'
+const DEFAULT_MODEL = 'minimaxai/minimax-m3.1-flash'
 // Fallback chain — probed live against this NVIDIA account (Nov 2026): these
 // four are the only listed chat models actually deployed for it; everything
 // else (mistral-large-2, gemma-4-31b, nemotron-51b, jamba, phi, mixtral,
 // granite, mistral-nemo) returns 404 Not found for account.
 const FALLBACK_MODELS = [
-  'minimaxai/minimax-m3.1-flash',
+  'nvidia/nemotron-3.5-lightning-30b-a3b',
   'mistralai/mistral-large-4-1t-a52b',
   'meta/llama-3.2-90b-vision-instruct',
 ]
@@ -364,50 +364,56 @@ export async function POST(request: Request) {
 
     const primaryModel = process.env.NVIDIA_MODEL || DEFAULT_MODEL
 
-    async function callNvidia(model: string): Promise<Response> {
-      // Normalize conversation to support vision (content as string or array) like your axios snippet
-      const normalizedConversation = conversation.map((m: { role: string; content: unknown }) => {
-        // If content already array (vision), pass through; else string
-        return m
-      })
+    const systemMessageContent =
+      SYSTEM_PROMPT +
+      (cv
+        ? `\n\n## Attached CV (session-only, not stored)\nThe user attached their CV as parsed text. Base career advice on it: strengths, gaps, and concrete next steps.\n\n${cv}`
+        : '') +
+      (ghSnapshot
+        ? `\n\n## GitHub profile snapshot (fetched live, read-only)\n${ghSnapshot}\n\nThe user actually shared this GitHub profile. Analyze these REAL projects (repos, languages, activity) when working on AREA 1 (CV & Portfolio) — never say you cannot browse GitHub; this data IS their GitHub.`
+        : '')
+
+    async function callNvidia(
+      model: string,
+      maxTokens = 4096,
+      signal?: AbortSignal,
+      streamMode = true
+    ): Promise<Response> {
+      const normalizedConversation = conversation.map((m: { role: string; content: unknown }) => m)
+      const isVisionOrLlama = model.startsWith('meta/')
       const payload: Record<string, unknown> = {
         model,
         messages: [
           {
             role: 'system',
-            content:
-              SYSTEM_PROMPT +
-              (cv
-                ? `\n\n## Attached CV (session-only, not stored)\nThe user attached their CV as parsed text. Base career advice on it: strengths, gaps, and concrete next steps.\n\n${cv}`
-                : '') +
-              (ghSnapshot
-                ? `\n\n## GitHub profile snapshot (fetched live, read-only)\n${ghSnapshot}\n\nThe user actually shared this GitHub profile. Analyze these REAL projects (repos, languages, activity) when working on AREA 1 (CV & Portfolio) — never say you cannot browse GitHub; this data IS their GitHub.`
-                : ''),
+            content: systemMessageContent,
           },
           ...normalizedConversation,
         ],
-        max_tokens: 8192,
-        temperature: 1,
-        stream: true,
-        seed: 0,
+        max_tokens: maxTokens,
+        temperature: isVisionOrLlama ? 0.6 : 0.7,
+        stream: streamMode,
       }
       const controller = new AbortController()
-      const timeout = setTimeout(() => controller.abort(), 45_000)
+      const timeout = setTimeout(() => controller.abort(), 35_000)
+      const combinedSignal =
+        signal && typeof AbortSignal.any === 'function'
+          ? AbortSignal.any([controller.signal, signal])
+          : controller.signal
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${API_KEY}`,
+            Authorization: `Bearer ${API_KEY}`,
             'Content-Type': 'application/json',
-            'Accept': 'text/event-stream',
+            Accept: streamMode ? 'text/event-stream' : 'application/json',
           },
           body: JSON.stringify(payload),
-          signal: controller.signal,
+          signal: combinedSignal,
         })
         return res
       } catch (e: unknown) {
-        clearTimeout(timeout)
-        const msg = e instanceof Error && e.name === 'AbortError' ? 'Upstream timeout after 60s' : String(e)
+        const msg = e instanceof Error && e.name === 'AbortError' ? 'Upstream connection timeout' : String(e)
         console.error('[chat] fetch failed', model, msg)
         throw e
       } finally {
@@ -415,36 +421,79 @@ export async function POST(request: Request) {
       }
     }
 
-    // Some upstream models return HTTP 200 but produce ZERO content (silent
-    // hangs, content filters, 4xx JSON bodies dressed as 200). The client
-    // surfaced those as "Empty response from AI". So: buffer each model's
-    // stream fully, validate it produced text, and only then forward it —
-    // otherwise fall back to the next model. Returns '' for empty/failed
-    // streams, or an object for non-OK HTTP responses.
-    async function readUpstream(model: string): Promise<string | { status: number; body: string }> {
+    type UpstreamSuccess = {
+      ok: true
+      model: string
+      initialText: string
+      reader: ReadableStreamDefaultReader<Uint8Array> | null
+      decoder: TextDecoder
+      remainderBuffer: string
+      abortController: AbortController
+    }
+    type UpstreamFailure = {
+      ok: false
+      model: string
+      status?: number
+      body?: string
+      reason: string
+    }
+    type UpstreamAttemptResult = UpstreamSuccess | UpstreamFailure
+
+    // Connect to an upstream model and wait until it produces its first real
+    // content tokens (proving it isn't a dead/empty stream or reasoning-only
+    // stall), then return the open reader so the rest of the response streams
+    // live to the client in real time.
+    async function openValidatedStream(
+      model: string,
+      firstTokenBudgetMs: number,
+      externalSignal?: AbortSignal
+    ): Promise<UpstreamAttemptResult> {
+      const abortController = new AbortController()
+      const linkedSignal =
+        externalSignal && typeof AbortSignal.any === 'function'
+          ? AbortSignal.any([abortController.signal, externalSignal])
+          : abortController.signal
+
       let res: Response
       try {
-        res = await callNvidia(model)
+        res = await callNvidia(model, 4096, linkedSignal, true)
+        // If 4096 tokens was rejected with 400/422 (e.g. tight context window), retry once with 2048
+        if (res.status === 400 || res.status === 422) {
+          res = await callNvidia(model, 2048, linkedSignal, true)
+        }
       } catch (e: unknown) {
-        const msg = e instanceof Error && e.name === 'AbortError' ? 'upstream timeout' : String(e)
-        console.error('[chat] fetch failed', model, msg)
-        return ''
+        const msg = e instanceof Error && e.name === 'AbortError' ? 'timeout/aborted' : String(e)
+        return { ok: false, model, reason: msg }
       }
+
       if (!res.ok) {
-        return { status: res.status, body: (await res.text().catch(() => '')).slice(0, 400) }
+        const body = (await res.text().catch(() => '')).slice(0, 300)
+        return { ok: false, model, status: res.status, body, reason: `HTTP ${res.status}` }
       }
-      if (!res.body) return ''
+      if (!res.body) {
+        return { ok: false, model, reason: 'empty response body' }
+      }
+
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
       let buffer = ''
-      let content = ''
+      let initialText = ''
+      let reasoningChars = 0
+      let finishReason = ''
       const started = Date.now()
-      while (true) {
-        // 25s of stream inactivity, or 90s overall, ends the read (keeping what arrived)
-        const idleBudget = Math.min(25_000, Math.max(0, 90_000 - (Date.now() - started)))
-        if (idleBudget === 0) {
-          console.error('[chat] stream deadline', model, 'chars so far', content.length)
-          break
+
+      while (initialText.trim().length === 0) {
+        const remaining = firstTokenBudgetMs - (Date.now() - started)
+        if (remaining <= 0) {
+          try {
+            abortController.abort()
+            await reader.cancel()
+          } catch {}
+          return {
+            ok: false,
+            model,
+            reason: `first-token timeout after ${Math.round(firstTokenBudgetMs / 1000)}s (reasoning=${reasoningChars})`,
+          }
         }
         let timer: ReturnType<typeof setTimeout> | undefined
         let chunk: { done: boolean; value?: Uint8Array }
@@ -452,15 +501,40 @@ export async function POST(request: Request) {
           chunk = await Promise.race([
             reader.read(),
             new Promise<{ done: boolean; value?: Uint8Array }>((resolve) => {
-              timer = setTimeout(() => resolve({ done: true }), idleBudget)
+              timer = setTimeout(() => resolve({ done: true }), Math.min(20_000, remaining))
             }),
           ])
-        } catch {
-          break
+        } catch (err) {
+          try {
+            await reader.cancel()
+          } catch {}
+          return { ok: false, model, reason: err instanceof Error ? err.name : 'read error' }
         } finally {
           clearTimeout(timer)
         }
-        if (chunk.done) break
+
+        if (chunk.done) {
+          try {
+            await reader.cancel()
+          } catch {}
+          if (initialText.trim().length > 0) {
+            return {
+              ok: true,
+              model,
+              initialText,
+              reader: null,
+              decoder,
+              remainderBuffer: '',
+              abortController,
+            }
+          }
+          return {
+            ok: false,
+            model,
+            reason: `empty content (finish=${finishReason || 'eof'}, reasoning=${reasoningChars})`,
+          }
+        }
+
         buffer += decoder.decode(chunk.value, { stream: true })
         const lines = buffer.split('\n')
         buffer = lines.pop() || ''
@@ -471,29 +545,33 @@ export async function POST(request: Request) {
           if (data === '[DONE]') continue
           try {
             const json = JSON.parse(data)
-            const piece = json.choices?.[0]?.delta?.content
-            if (typeof piece === 'string') content += piece
+            const choice = json.choices?.[0]
+            const piece = choice?.delta?.content
+            const rPiece = choice?.delta?.reasoning_content
+            if (typeof piece === 'string' && piece.length > 0) initialText += piece
+            if (typeof rPiece === 'string') reasoningChars += rPiece.length
+            if (choice?.finish_reason) finishReason = String(choice.finish_reason)
           } catch {}
         }
       }
-      try {
-        await reader.cancel()
-      } catch {}
-      return content
+
+      return {
+        ok: true,
+        model,
+        initialText,
+        reader,
+        decoder,
+        remainderBuffer: buffer,
+        abortController,
+      }
     }
 
-    let apiText = ''
-    let usedModel = primaryModel
     const modelsToTry = [primaryModel, ...FALLBACK_MODELS.filter((m) => m !== primaryModel)]
 
     // SSE frame format the client parses: data: {"choices":[{"delta":{"content": ...}}]}
     const encoder = new TextEncoder()
     const sseFrame = (obj: unknown) => `data: ${JSON.stringify(obj)}\n\n`
 
-    // Start the client response immediately and run model selection INSIDE the
-    // stream: comment pings every 3s keep the connection alive through the
-    // long buffered generation (which can span two models), and errors are
-    // delivered as an SSE {"error": ...} frame the client understands.
     const stream = new ReadableStream({
       async start(controller) {
         let closed = false
@@ -513,62 +591,175 @@ export async function POST(request: Request) {
             controller.close()
           } catch {}
         }
+
         try {
-          for (const m of modelsToTry) {
-            const r = await readUpstream(m)
-            if (typeof r === 'string') {
-              if (r.trim()) {
-                apiText = r
-                usedModel = m
+          const diagnostics: string[] = []
+          let winner: UpstreamSuccess | null = null
+
+          // Race the top two fast models in parallel (with a 1.5s head start for
+          // primaryModel) so if one model stalls in reasoning or hits a cold start,
+          // the other immediately delivers first tokens without doubling latency.
+          const pair = modelsToTry.slice(0, 2)
+          const rest = modelsToTry.slice(2)
+
+          if (pair.length === 2) {
+            const c0 = new AbortController()
+            const c1 = new AbortController()
+            const p0 = openValidatedStream(pair[0]!, 42_000, c0.signal)
+            const p1 = new Promise<UpstreamAttemptResult>((resolve) => {
+              const hedgeTimer = setTimeout(() => {
+                openValidatedStream(pair[1]!, 42_000, c1.signal).then(resolve)
+              }, 1500)
+              c1.signal.addEventListener(
+                'abort',
+                () => {
+                  clearTimeout(hedgeTimer)
+                  resolve({ ok: false, model: pair[1]!, reason: 'hedged-cancelled' })
+                },
+                { once: true }
+              )
+            })
+
+            const firstSettled = await Promise.race([
+              p0.then((r) => ({ idx: 0, r })),
+              p1.then((r) => ({ idx: 1, r })),
+            ])
+
+            if (firstSettled.r.ok) {
+              winner = firstSettled.r
+              if (firstSettled.idx === 0) c1.abort()
+              else c0.abort()
+            } else {
+              diagnostics.push(`${firstSettled.r.model}: ${firstSettled.r.reason}`)
+              // If auth failed (401/403), fail immediately
+              if (firstSettled.r.status === 401 || firstSettled.r.status === 403) {
+                c0.abort()
+                c1.abort()
+                controller.enqueue(
+                  encoder.encode(
+                    sseFrame({
+                      error: `AI auth failed (upstream ${firstSettled.r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`,
+                    })
+                  )
+                )
+                finish()
+                return
+              }
+              const other = firstSettled.idx === 0 ? await p1 : await p0
+              if (other.ok) {
+                winner = other
+              } else {
+                diagnostics.push(`${other.model}: ${other.reason}`)
+              }
+            }
+          } else if (pair.length === 1) {
+            const r0 = await openValidatedStream(pair[0]!, 42_000)
+            if (r0.ok) winner = r0
+            else diagnostics.push(`${r0.model}: ${r0.reason}`)
+          }
+
+          // If neither of the raced primary/secondary models produced content,
+          // try remaining fallback models sequentially with a tight 25s budget.
+          if (!winner) {
+            for (const m of rest) {
+              const r = await openValidatedStream(m, 25_000)
+              if (r.ok) {
+                winner = r
                 break
               }
-              console.error('[chat] empty stream from', m, '— trying next model')
-              continue
-            }
-            console.error('[chat] upstream error', m, r.status, r.body)
-            const isLast = m === modelsToTry[modelsToTry.length - 1]
-            // Auth failures won't fix themselves on retry — fail fast.
-            // Everything else (dead model, gone/EOL, rate-limit, overload) → try next model.
-            if ((r.status === 401 || r.status === 403) || isLast) {
-              let clientError = 'The AI service is temporarily unavailable. Please try again shortly.'
+              diagnostics.push(`${r.model}: ${r.reason}`)
               if (r.status === 401 || r.status === 403) {
-                clientError = `AI auth failed (upstream ${r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`
-              } else if (r.status === 410) {
-                clientError = `Model "${m}" is retired (upstream 410 Gone).`
-              } else if (r.status === 404 || r.status === 400 || r.status === 422) {
-                const hint = r.body.slice(0, 200).replace(/\s+/g, ' ')
-                clientError = `Model "${m}" rejected (upstream ${r.status}). ${hint}`
-              } else if (r.status === 429) {
-                clientError = `AI rate limited/quota exhausted (upstream 429). Try in 60s or check build.nvidia.com credits.`
-              } else if (r.status >= 500) {
-                clientError = `AI upstream overloaded (upstream ${r.status}). Retry in a few seconds.`
-              } else {
-                clientError = `AI service error (upstream ${r.status}). Please retry shortly.`
+                controller.enqueue(
+                  encoder.encode(
+                    sseFrame({
+                      error: `AI auth failed (upstream ${r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`,
+                    })
+                  )
+                )
+                finish()
+                return
               }
-              controller.enqueue(encoder.encode(sseFrame({ error: clientError })))
-              finish()
-              return
             }
           }
 
-          if (!apiText.trim()) {
+          if (!winner) {
+            console.error('[chat] all models failed:', diagnostics.join(' | '))
+            const detail = diagnostics.length ? ` (${diagnostics.join('; ')})` : ''
             controller.enqueue(
               encoder.encode(
-                sseFrame({ error: 'The AI service is temporarily unavailable. Please try again shortly.' })
+                sseFrame({
+                  error: `The AI service is temporarily unavailable. Please try again shortly.${detail}`,
+                })
               )
             )
             finish()
             return
           }
-          console.log('[chat] streaming with model', usedModel, 'chars', apiText.length)
 
-          for (let i = 0; i < apiText.length; i += 180) {
-            controller.enqueue(
-              encoder.encode(
-                sseFrame({ choices: [{ delta: { content: apiText.slice(i, i + 180) } }] })
-              )
+          console.log('[chat] streaming live with model', winner.model)
+          let totalChars = winner.initialText.length
+
+          // Immediately flush the validated initial content to the client
+          controller.enqueue(
+            encoder.encode(
+              sseFrame({ choices: [{ delta: { content: winner.initialText } }] })
             )
+          )
+
+          // Continue streaming the rest of the upstream response live
+          if (winner.reader) {
+            const reader = winner.reader
+            const decoder = winner.decoder
+            let buffer = winner.remainderBuffer
+            const streamStart = Date.now()
+            while (true) {
+              const remainingTotal = 150_000 - (Date.now() - streamStart)
+              if (remainingTotal <= 0) break
+              let timer: ReturnType<typeof setTimeout> | undefined
+              let chunk: { done: boolean; value?: Uint8Array }
+              try {
+                chunk = await Promise.race([
+                  reader.read(),
+                  new Promise<{ done: boolean; value?: Uint8Array }>((resolve) => {
+                    timer = setTimeout(() => resolve({ done: true }), Math.min(25_000, remainingTotal))
+                  }),
+                ])
+              } catch {
+                break
+              } finally {
+                clearTimeout(timer)
+              }
+              if (chunk.done) break
+              buffer += decoder.decode(chunk.value, { stream: true })
+              const lines = buffer.split('\n')
+              buffer = lines.pop() || ''
+              let batch = ''
+              for (const line of lines) {
+                const trimmed = line.trim()
+                if (!trimmed.startsWith('data: ')) continue
+                const data = trimmed.slice(6)
+                if (data === '[DONE]') continue
+                try {
+                  const json = JSON.parse(data)
+                  const piece = json.choices?.[0]?.delta?.content
+                  if (typeof piece === 'string' && piece.length > 0) {
+                    batch += piece
+                    totalChars += piece.length
+                  }
+                } catch {}
+              }
+              if (batch.length > 0) {
+                controller.enqueue(
+                  encoder.encode(sseFrame({ choices: [{ delta: { content: batch } }] }))
+                )
+              }
+            }
+            try {
+              await reader.cancel()
+            } catch {}
           }
+
+          console.log('[chat] completed stream with model', winner.model, 'chars', totalChars)
           controller.enqueue(encoder.encode('data: [DONE]\n\n'))
           finish()
         } catch (e: unknown) {
