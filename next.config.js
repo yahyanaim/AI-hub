@@ -13,6 +13,15 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+      {
         // The 108 raw /skills/*.md documents are third-party markdown served
         // verbatim — belt-and-braces noindex at the HTTP layer in addition to
         // the robots.txt Disallow (see SEO_GEO_AUDIT.md §6.5b).

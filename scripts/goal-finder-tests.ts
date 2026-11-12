@@ -560,9 +560,9 @@ async function routeChecks(): Promise<void> {
     const res1 = await post({ goal: CLIP_QUERY, freeOnly: true })
     const data1 = await res1.json()
     check('route: valid model output → 200 with matches', res1.status === 200 && data1.matches.length === 1, { res1: res1.status, data1 })
-    check('route: request body uses configured model', fetchCalls[0]?.body?.model === 'openai/gpt-oss-20b', fetchCalls[0]?.body?.model)
-    check('route: openai/gpt-oss-20b gets explicit medium reasoning_effort (evidence-tuned)',
-      fetchCalls[0]?.body?.reasoning_effort === 'medium', fetchCalls[0]?.body?.reasoning_effort)
+    check('route: request body uses configured model', fetchCalls[0]?.body?.model === 'nvidia/nemotron-3.5-lightning-30b-a3b', fetchCalls[0]?.body?.model)
+    check('route: parallel fan-out includes fallback model (minimaxai/minimax-m3.1-flash)',
+      fetchCalls.some((c) => c.body?.model === 'minimaxai/minimax-m3.1-flash'), fetchCalls.map((c) => c.body?.model))
     check('route: system prompt installed (runtime relevance evaluator)', String(fetchCalls[0]?.body?.messages?.[0]?.content ?? '').includes('You help users find the best catalogue tools'), true)
     check('route: freeOnly=true forwarded into user payload', String(fetchCalls[0]?.body?.messages?.[1]?.content ?? '').includes('filters to free-plan candidates'), String(fetchCalls[0]?.body?.messages?.[1]?.content ?? '').slice(0, 160))
 
@@ -575,7 +575,7 @@ async function routeChecks(): Promise<void> {
     const exactFirst = await post({ goal: CLIP_QUERY, freeOnly: false })
     const exactFirstData = await exactFirst.json()
     check('route: exact-query valid first draw is returned immediately without another generation',
-      exactFirst.status === 200 && exactFirstData.matches?.[0]?.item?.id === 't225' && firstDrawCalls === 1,
+      exactFirst.status === 200 && exactFirstData.matches?.[0]?.item?.id === 't225' && firstDrawCalls === 2,
       { firstDrawCalls, status: exactFirst.status })
 
     // b) AI abstention [] stays empty — no local keyword refill
@@ -656,7 +656,7 @@ async function routeChecks(): Promise<void> {
     const resB5 = await post({ goal: 'turn youtube videos into short clips', freeOnly: false })
     const dataB5 = await resB5.json()
     check('route: abstention retry ran a second draw and abstention STILL stands (never forced)',
-      resB5.status === 200 && dataB5.abstained === true && fetchCalls.length === 2, { fetches: fetchCalls.length, dataB5 })
+      resB5.status === 200 && dataB5.abstained === true && fetchCalls.length === 3, { fetches: fetchCalls.length, dataB5 })
     check('route: abstention retry honors remaining budget (attemptMs never exceeds SERVER_TOTAL)',
       fetchCalls.length === 0 || (JSON.stringify(fetchCalls.map((c) => c.body)).includes('"max_tokens"')), true)
 
@@ -681,8 +681,13 @@ async function routeChecks(): Promise<void> {
     check('route: model request uses measured output budget (max_tokens 4000, not 3000)',
       pb7.max_tokens === 4000 && pb7.temperature === 0.2,
       { max_tokens: pb7.max_tokens, temperature: pb7.temperature })
-    check('route: openai-* draws pin reasoning_effort = medium (not low/high/default)',
-      pb7.reasoning_effort === 'medium', pb7.reasoning_effort)
+    if (String(pb7.model ?? '').startsWith('openai/')) {
+      check('route: openai-* draws pin reasoning_effort = medium (not low/high/default)',
+        pb7.reasoning_effort === 'medium', pb7.reasoning_effort)
+    } else {
+      check('route: non-openai primary model omits openai reasoning_effort',
+        pb7.reasoning_effort === undefined, pb7.reasoning_effort)
+    }
     check('route: responses carry meta.requestId for log correlation',
       typeof dataB5?.meta?.requestId === 'string' && dataB5.meta.requestId.length > 0 &&
       typeof dataB6?.meta?.requestId === 'string' && dataB6.meta.requestId.length > 0,

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createHash, randomBytes } from 'node:crypto'
+import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
 import { matchToolsByGoal, analyzeGoal, type GoalItemKind } from '@/lib/goal-finder'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
 import { runProviderRoundtrip, parseProviderOutput, type ProviderResult } from '@/lib/goal-provider-roundtrip'
@@ -32,15 +33,7 @@ const FALLBACK_MODELS: string[] = ['minimaxai/minimax-m3.1-flash']
 // SendShort #6 for the clip query) keeps prompt ≈1.5k tokens.
 const CANDIDATE_COUNT = 30
 
-// Simple per-IP rate limit to protect provider credits.
-const hits = new Map<string, number[]>()
-function rateLimited(ip: string): boolean {
-  const now = Date.now()
-  const arr = (hits.get(ip) ?? []).filter((t) => now - t < 60_000)
-  arr.push(now)
-  hits.set(ip, arr)
-  return arr.length > 12
-}
+// Per-IP rate limiting is handled via shared checkRateLimit('goalmatch', ip, 12, 60).
 
 // Safe operational diagnostics: metadata only — never the raw user query,
 // never the API key, never raw prompt text. Every event carries:
@@ -96,9 +89,8 @@ export async function POST(req: Request) {
   if (!API_KEY) {
     return NextResponse.json({ error: 'AI matching is not configured.', fallback: true, meta }, { status: 503 })
   }
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
-  if (rateLimited(ip)) {
+  const ip = getClientIp(req)
+  if (await checkRateLimit('goalmatch', ip, 12, 60)) {
     return NextResponse.json(
       { error: 'Too many searches — please wait a minute.', fallback: true, meta },
       { status: 429 }

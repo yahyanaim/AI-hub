@@ -24,20 +24,22 @@ export function CoursesView({
   const items = courses.length ? courses : initialItems
   return (
     <>
-      <div className="container-page pt-6 md:pt-8">
-      <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200">
-        <strong>Free access & certification:</strong> To get free access and earn a Coursera certificate, fill out{' '}
-        <a
-          href="https://recoded.typeform.com/apricot?typeform-source=l.facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-semibold underline hover:text-blue-600 dark:hover:text-blue-300"
-        >
-          this form
-        </a>
-        .
-      </div>
-      </div>
+      {initialCategory !== 'datacamp' && (
+        <div className="container-page pt-6 md:pt-8">
+          <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200">
+            <strong>Free access & certification:</strong> To get free access and earn a Coursera certificate, fill out{' '}
+            <a
+              href="https://recoded.typeform.com/apricot?typeform-source=l.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline hover:text-blue-600 dark:hover:text-blue-300"
+            >
+              this form
+            </a>
+            .
+          </div>
+        </div>
+      )}
         {/* Server-rendered crawl links: cards open modals on plain click, so
             this invisible nav is what ships real item URLs to non-JS crawlers. */}
         <ListingCrawlLinks

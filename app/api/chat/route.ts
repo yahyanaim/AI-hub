@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed'
+import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 // Nov 2026 audit: openai/gpt-oss-20b is still LISTED on integrate.api.nvidia.com
@@ -304,43 +305,12 @@ async function githubSnapshotFromText(text: string): Promise<string | null> {
   return snapshot
 }
 
-// In-memory sliding window: ip -> timestamps of recent requests
-const rateLimitMap = new Map<string, number[]>()
-
-function getClientIp(request: Request): string {
-  const fwd = request.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0]?.trim() ?? 'unknown'
-  return request.headers.get('x-real-ip') ?? 'unknown'
-}
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now()
-  const hits = (rateLimitMap.get(ip) ?? []).filter(
-    (ts) => now - ts < RATE_LIMIT_WINDOW_MS
-  )
-  if (hits.length >= RATE_LIMIT_MAX_REQUESTS) {
-    rateLimitMap.set(ip, hits)
-    return true
-  }
-  hits.push(now)
-  rateLimitMap.set(ip, hits)
-  // Opportunistic cleanup so the map doesn't grow unbounded
-  if (rateLimitMap.size > 5000) {
-    for (const [key, timestamps] of rateLimitMap) {
-      if (timestamps.every((ts) => now - ts >= RATE_LIMIT_WINDOW_MS)) {
-        rateLimitMap.delete(key)
-      }
-    }
-  }
-  return false
-}
-
 export const maxDuration = 300
 
 export async function POST(request: Request) {
   try {
     const ip = getClientIp(request)
-    if (isRateLimited(ip)) {
+    if (await checkRateLimit('chat', ip, RATE_LIMIT_MAX_REQUESTS, Math.ceil(RATE_LIMIT_WINDOW_MS / 1000))) {
       return NextResponse.json(
         { error: 'Too many requests. Please wait a minute and try again.' },
         { status: 429 }

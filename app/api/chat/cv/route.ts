@@ -1,36 +1,19 @@
 import { NextResponse } from 'next/server'
 import { extractText, getDocumentProxy } from 'unpdf'
+import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
 
 // Transient CV parser. The uploaded file is received in memory, converted to
 // plain text, returned to the client, and immediately discarded — nothing is
 // written to disk or any store. The chat API never sees the binary either.
 const MAX_FILE_BYTES = 4 * 1024 * 1024 // 4MB (Vercel request body ceiling)
 const MAX_TEXT_CHARS = 12_000
-
-const RATE = { max: 10, windowMs: 60_000 }
-const hits = new Map<string, number[]>()
-
-function clientIpHeader(request: Request): string | null {
-  const fwd = request.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0]?.trim() || null
-  return null
-}
-
-function rateLimited(ip: string) {
-    const now = Date.now()
-    const list = (hits.get(ip) || []).filter((t) => now - t < RATE.windowMs)
-    if (list.length >= RATE.max) return true
-    list.push(now)
-    hits.set(ip, [...list])
-  if (hits.size > 500) hits.clear()
-  return false
-}
+const RATE_MAX = 10
+const RATE_WINDOW_SECONDS = 60
 
 export async function POST(request: Request) {
   try {
-    const ip =
-      clientIpHeader(request) || request.headers.get('x-real-ip') || 'unknown'
-    if (rateLimited(ip)) {
+    const ip = getClientIp(request)
+    if (await checkRateLimit('cvparse', ip, RATE_MAX, RATE_WINDOW_SECONDS)) {
       return NextResponse.json({ error: 'Too many uploads. Please wait a minute.' }, { status: 429 })
     }
 
@@ -51,6 +34,14 @@ export async function POST(request: Request) {
       text = await (file as Blob).text()
     } else if (lower.endsWith('.pdf')) {
       const bytes = new Uint8Array(await (file as Blob).arrayBuffer())
+      // Verify PDF magic header (%PDF-) before passing bytes to unpdf
+      const header = String.fromCharCode(...bytes.slice(0, 5))
+      if (header !== '%PDF-') {
+        return NextResponse.json(
+          { error: 'Invalid PDF file. Please upload a genuine PDF document.' },
+          { status: 415 }
+        )
+      }
       const pdf = await getDocumentProxy(bytes)
       // mergePages keeps the natural reading order of a CV (scanned-image PDFs
       // contain no text layer and yield '' here — surfaced as an error below)

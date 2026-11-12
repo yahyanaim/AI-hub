@@ -37,13 +37,14 @@ interface HeroSectionProps {
   offerCount: number
 }
 
+const PHRASES = ['AI tools', 'dev tools', 'courses']
+const phraseAt = (i: number) => PHRASES[i % PHRASES.length] ?? 'AI tools'
+
 export function HeroSection({ onSearch, toolCount, promptCount, repoCount, courseCount, offerCount }: HeroSectionProps) {
   const totalCount = toolCount + promptCount + repoCount + courseCount + offerCount
   const reduceMotion = useReducedMotion()
 
   // Typewriter for the headline keyword
-  const PHRASES = ['AI tools', 'dev tools', 'courses']
-  const phraseAt = (i: number) => PHRASES[i % PHRASES.length] ?? 'AI tools'
   const [phraseIdx, setPhraseIdx] = useState(0)
   const [charCount, setCharCount] = useState(phraseAt(0).length)
   const [deleting, setDeleting] = useState(true)

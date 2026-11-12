@@ -1,10 +1,19 @@
 import { NextResponse } from 'next/server'
+import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 // Buttondown caps addresses at 255 chars; keep payloads small.
 const MAX_EMAIL_LENGTH = 255
 
 export async function POST(req: Request) {
+  const ip = getClientIp(req)
+  if (await checkRateLimit('newsletter', ip, 10, 60 * 60)) {
+    return NextResponse.json(
+      { message: 'Too many subscription attempts. Please try again later.' },
+      { status: 429 }
+    )
+  }
+
   const apiKey = process.env.BUTTONDOWN_API_KEY
   if (!apiKey) {
     return NextResponse.json(
