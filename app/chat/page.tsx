@@ -68,7 +68,7 @@ function docTitleFrom(body: string): string {
 // (**Summary** content…). ATS docs must parse as real markdown headings,
 // so normalize those lines into "## Heading" before the doc is stored.
 const ATS_HEADING_RE =
-  /^\s*\*\*(Contact Information|Coordonnées|Profil professionnel|Profil|Summary|Professional Summary|Objective|Compétences|Skills|Expériences professionnelles|Work Experience|Experience|Formation|Education|Certifications|Licenses|Projects|Projets|Awards|Langues|Languages|Volunteer Experience|Interests|References)\*\*\s*:?\s*(.*)$/i
+  /^\s*\*\*(Contact Information|Coordonnées|Profil professionnel|Profil|Summary|Professional Summary|Objective|Compétences|Skills|Expériences professionnelles|Work Experience|Experience|Formation|Education|Certifications|Licenses|Projects|Projets|Awards|Langues|Languages|Loisirs|Centres d'intérêt|Intérêts|Hobbies|Hobbies & Interests|Interests|Volunteer Experience|References)\*\*\s*:?\s*(.*)$/i
 
 function normalizeAtsBody(title: string, body: string): string {
   if (!/ats/i.test(title)) return body
@@ -144,6 +144,7 @@ type ParsedAtsSection =
   | { kind: 'education'; title: string; items: AtsEduItem[] }
   | { kind: 'skills'; title: string; items: string[] }
   | { kind: 'languages'; title: string; items: string[] }
+  | { kind: 'hobbies'; title: string; items: string[] }
 
 type ParsedAtsCv = {
   name: string
@@ -332,7 +333,28 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
       continue
     }
 
-    if (/langue|language|int[eé]r[eê]t|interest|loisir/i.test(t)) {
+    if (/loisir|int[eé]r[eê]t|interest|hobb|sport|activit/i.test(t)) {
+      const items: string[] = []
+      for (const raw of sec.lines) {
+        const l = cleanBullet(raw)
+        if (!l) continue
+        const parts = l.includes('|')
+          ? l.split('|')
+          : l.includes(';')
+          ? l.split(';')
+          : l.includes(',') && !/^[-•*]\s/.test(raw)
+          ? l.split(',')
+          : [l]
+        for (const p of parts) {
+          const item = stripMd(p).replace(/\.$/, '').trim()
+          if (item) items.push(item)
+        }
+      }
+      if (items.length) parsedSections.push({ kind: 'hobbies', title: t, items })
+      continue
+    }
+
+    if (/langue|language/i.test(t)) {
       const items: string[] = []
       for (const raw of sec.lines) {
         const l = cleanBullet(raw)
@@ -482,13 +504,14 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
     if (cleanedExp.length) parsedSections.push({ kind: 'experience', title: t, items: cleanedExp })
   }
 
-  // Canonical template section order: Profile -> Experience -> Education -> Skills -> Languages
+  // Canonical template section order: Profile -> Experience -> Education -> Skills -> Languages -> Hobbies (Loisirs)
   const kindOrder: Record<ParsedAtsSection['kind'], number> = {
     profile: 1,
     experience: 2,
     education: 3,
     skills: 4,
     languages: 5,
+    hobbies: 6,
   }
   parsedSections.sort((a, b) => kindOrder[a.kind] - kindOrder[b.kind])
 
@@ -672,8 +695,8 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
           })
           h += rowLines * 4.2 * s + 1.8 * s
         }
-      } else if (sec.kind === 'languages') {
-        const rows = Math.ceil(sec.items.length / 3)
+      } else if (sec.kind === 'languages' || sec.kind === 'hobbies') {
+        const rows = Math.ceil(sec.items.length / (sec.kind === 'hobbies' ? 4 : 3))
         h += rows * 5.2 * s
       }
     })
@@ -967,6 +990,25 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
         }
         y += 5.2 * s
       }
+    } else if (sec.kind === 'hobbies') {
+      pdf.setFont(FONT, 'normal')
+      pdf.setFontSize(9.6 * s)
+      const cols = Math.min(4, Math.max(1, sec.items.length))
+      const colW = W / cols
+      for (let i = 0; i < sec.items.length; i += 4) {
+        const row = sec.items.slice(i, i + 4)
+        ensure(5.2 * s)
+        row.forEach((it, cIdx) => {
+          const cx = M + cIdx * colW
+          pdf.setFillColor(BLACK[0], BLACK[1], BLACK[2])
+          pdf.circle(cx + 0.9, y - 1.05 * s, 0.52 * s, 'F')
+          pdf.setFont(FONT, 'normal')
+          pdf.setFontSize(9.6 * s)
+          pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
+          pdf.text(it, cx + 3.4, y)
+        })
+        y += 5.2 * s
+      }
     }
   }
 
@@ -1163,6 +1205,17 @@ function AtsCvPreview({
             <div className="flex flex-wrap items-center justify-between gap-4 text-[13.2px] text-[#0f0f0f]">
               {sec.items.map((lg, lIdx) => (
                 <span key={lIdx}>{lg}</span>
+              ))}
+            </div>
+          )}
+
+          {sec.kind === 'hobbies' && (
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 sm:grid-cols-4">
+              {sec.items.map((hb, hIdx) => (
+                <div key={hIdx} className="relative pl-3.5 text-[13.2px] text-[#0f0f0f]">
+                  <span className="absolute left-0 top-0 font-bold text-[#0f0f0f]">•</span>
+                  {hb}
+                </div>
               ))}
             </div>
           )}

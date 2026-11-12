@@ -37,7 +37,7 @@ Follow these exact rules so the CV renders into the 1-page executive LaTeX templ
   - \`Location: <City, Country>\`
   - \`Phone: <Phone Number>\`
   - \`Email: <Email Address>\`
-- Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`):
+- Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`, \`## Loisirs\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`, \`## Hobbies & Interests\`):
   1. \`## Profil professionnel\` (or \`## Professional Summary\`): One cohesive 3–4 line paragraph summarizing the candidate's profile, core competencies, and career objective.
   2. \`## Expériences professionnelles\` (or \`## Work Experience\`): Include EVERY role, internship (stage), and freelance experience from the attached CV in reverse-chronological order (never omit any entry). Format each role header line as:
      \`Job Title, Company — City, Country | Mon. YYYY – Mon. YYYY\`
@@ -48,6 +48,7 @@ Follow these exact rules so the CV renders into the 1-page executive LaTeX templ
      Line 3 (optional, 1 concise line if applicable): \`Projet réalisé : <concise project or focus description>\` (or \`Key project: <description>\`)
   4. \`## Compétences\` (or \`## Skills\`): Output 8–12 concise standalone skill items as hyphen bullets (\`- Skill name\`, 1–3 words each, NO category prefixes like "Frontend:").
   5. \`## Langues\` (or \`## Languages\`): Output all languages from the user's CV as hyphen bullets in the exact format \`- Français : Langue maternelle\`, \`- Anglais : Courant (C1)\`, \`- Arabe : Langue maternelle\`.
+  6. \`## Loisirs\` (or \`## Hobbies & Interests\`): Place this section directly under \`## Langues\` / \`## Languages\`. Output 3–4 concise hobbies/interests from the user's CV (or relevant professional interests if none listed) as hyphen bullets (\`- ...\`).
 - Include ONLY truthful content from the user's CV — never invent experience, dates, or skills.
 - Inside the block: EVERY section heading MUST be a markdown \`## \` heading alone on its own line. NEVER use \`###\` subheadings, NEVER write a heading as bold text like **Summary**, and NEVER put content on the same line as a heading. NO markdown tables, NO raw markdown links, NO emojis.
 - Outside the \`\`\`roadmap block, write at most 2 short sentences explaining that their 1-page ATS CV is ready.`
@@ -167,7 +168,7 @@ When the user asks to make their CV "ATS-friendly" or asks for an ATS resume, re
   - \`Location: <City, Country>\`
   - \`Phone: <Phone Number>\`
   - \`Email: <Email Address>\`
-- Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`):
+- Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`, \`## Loisirs\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`, \`## Hobbies & Interests\`):
   1. \`## Profil professionnel\` (or \`## Professional Summary\`): One cohesive 3–4 line paragraph summarizing the candidate's profile, core competencies, and career objective.
   2. \`## Expériences professionnelles\` (or \`## Work Experience\`): Include EVERY role, internship (stage), and freelance experience from the attached CV in reverse-chronological order (never omit any entry). Format each role header line as:
      \`Job Title, Company — City, Country | Mon. YYYY – Mon. YYYY\`
@@ -178,6 +179,7 @@ When the user asks to make their CV "ATS-friendly" or asks for an ATS resume, re
      Line 3 (optional, 1 concise line if applicable): \`Projet réalisé : <concise project or focus description>\` (or \`Key project: <description>\`)
   4. \`## Compétences\` (or \`## Skills\`): Output 8–12 concise standalone skill items as hyphen bullets (\`- Skill name\`, 1–3 words each, NO category prefixes like "Frontend:").
   5. \`## Langues\` (or \`## Languages\`): Output all languages from the user's CV as hyphen bullets in the exact format \`- Français : Langue maternelle\`, \`- Anglais : Courant (C1)\`, \`- Arabe : Langue maternelle\`.
+  6. \`## Loisirs\` (or \`## Hobbies & Interests\`): Place this section directly under \`## Langues\` / \`## Languages\`. Output 3–4 concise hobbies/interests from the user's CV (or relevant professional interests if none listed) as hyphen bullets (\`- ...\`).
 - Include ONLY truthful content from the user's CV — never invent experience, dates, or skills.
 - Inside the block: EVERY section heading MUST be a markdown \`## \` heading alone on its own line. NEVER write a heading as bold text like **Summary**, and NEVER put content on the same line as a heading. NO markdown tables, NO emojis.
 - In the visible chat reply outside the block, briefly explain what you changed and why it now parses well.
