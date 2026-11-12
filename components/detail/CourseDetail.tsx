@@ -203,10 +203,10 @@ export function CourseDetailModal() {
               </div>
               <button
                 onClick={() => downloadRoadmapPlan(course)}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-brand-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-orange-600 md:px-4 md:py-2 md:text-sm"
               >
                 Download Plan
-                <Download className="h-4 w-4" />
+                <Download className="h-3.5 w-3.5 md:h-4 md:w-4" />
               </button>
             </div>
           </motion.div>
@@ -316,10 +316,10 @@ export function CourseDetail({ slug, initial }: { slug: string; initial?: Course
           <BookmarkButton itemType="course" itemId={course.id} variant="detail" />
           <button
             onClick={() => downloadRoadmapPlan(course)}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-brand-orange px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-orange-600 md:px-4 md:py-2 md:text-sm"
           >
             Download Plan
-            <Download className="h-4 w-4" />
+            <Download className="h-3.5 w-3.5 md:h-4 md:w-4" />
           </button>
         </div>
       </div>
