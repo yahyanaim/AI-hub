@@ -9,14 +9,14 @@ const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 // with the FULL system prompt: nvidia/nemotron-3.5-lightning-30b-a3b delivers in
 // 21-50s and minimaxai/minimax-m3.1-flash in ~26s — both return valid content.
 const DEFAULT_MODEL = 'nvidia/nemotron-3.5-lightning-30b-a3b'
-// Deep fallback chain: the first two are measured-working; the rest are
-// non-reasoning instruct models that cannot hit the reasoning-token
-// exhaustion failure mode (empty content) — they fail fast if unavailable.
+// Fallback chain — probed live against this NVIDIA account (Nov 2026): these
+// four are the only listed chat models actually deployed for it; everything
+// else (mistral-large-2, gemma-4-31b, nemotron-51b, jamba, phi, mixtral,
+// granite, mistral-nemo) returns 404 Not found for account.
 const FALLBACK_MODELS = [
   'minimaxai/minimax-m3.1-flash',
-  'mistralai/mistral-large-2-instruct',
-  'google/gemma-4-31b-it',
-  'nvidia/llama-3.1-nemotron-51b-instruct',
+  'mistralai/mistral-large-4-1t-a52b',
+  'meta/llama-3.2-90b-vision-instruct',
 ]
 
 function buildCourseCatalog(): string {
