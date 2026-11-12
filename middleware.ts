@@ -167,9 +167,11 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // The canonical-host check above must see EVERY path (/, /search?q=…,
-  // deep links, API routes), so the matcher is intentionally broad. Static
-  // assets and _next internals are unaffected: the middleware body only
-  // inspects the URL and calls NextResponse.next() for them.
-  matcher: ['/', '/:path*'],
+  // Match all page/API/SEO routes (for canonical host 308 and legacy URL
+  // handling) while skipping _next internals and static image/font/CSS/JS
+  // assets to avoid unnecessary Edge Middleware invocations.
+  matcher: [
+    '/',
+    '/((?!_next/static|_next/image|favicon\\.ico|icons/|.*\\.(?:png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|css|js|map)$).*)',
+  ],
 }

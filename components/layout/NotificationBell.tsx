@@ -89,17 +89,39 @@ export function NotificationBell() {
   }, [currentUser])
 
   // Admin check for the push opt-in row (verifies the HttpOnly JWT cookie).
+  // Only check when signed in and cache per-session to avoid hitting the
+  // serverless endpoint on every page navigation.
   useEffect(() => {
+    if (!currentUser) {
+      setIsAdmin(false)
+      return
+    }
+    try {
+      const cached = sessionStorage.getItem('aihub_admin_ping_v1')
+      if (cached) {
+        const parsed = JSON.parse(cached) as { v?: boolean; ts?: number }
+        if (typeof parsed.v === 'boolean' && typeof parsed.ts === 'number' && Date.now() - parsed.ts < 10 * 60_000) {
+          setIsAdmin(parsed.v)
+          return
+        }
+      }
+    } catch {}
     let alive = true
     fetch('/api/admin/ping')
-      .then((r) => (r.ok ? setIsAdmin(true) : setIsAdmin(false)))
+      .then((r) => {
+        const ok = r.ok
+        if (alive) setIsAdmin(ok)
+        try {
+          sessionStorage.setItem('aihub_admin_ping_v1', JSON.stringify({ v: ok, ts: Date.now() }))
+        } catch {}
+      })
       .catch(() => {
         if (alive) setIsAdmin(false)
       })
     return () => {
       alive = false
     }
-  }, [])
+  }, [currentUser])
 
   // Close on outside click / Escape.
   useEffect(() => {

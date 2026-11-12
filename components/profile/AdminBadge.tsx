@@ -118,6 +118,7 @@ export function AdminBadge({
       setEmail('')
       setPassword('')
       setOpen(false)
+      try { sessionStorage.removeItem('aihub_admin_ping_v1') } catch {}
       await load()
     } catch {
       setError('Network error, try again.')
@@ -128,6 +129,7 @@ export function AdminBadge({
 
   const logout = async () => {
     await fetch('/api/auth/admin-logout', { method: 'POST' }).catch(() => {})
+    try { sessionStorage.removeItem('aihub_admin_ping_v1') } catch {}
     setCount(null)
     setStatus('auth')
   }

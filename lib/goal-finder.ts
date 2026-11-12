@@ -31,7 +31,9 @@
 //   capability evidence from brand-name fragments)
 // ============================================================
 
-import { SEED_TOOLS, SEED_DEV_TOOLS, SEED_REPOS } from '@/lib/seed'
+import { SEED_TOOLS } from '@/lib/seed/tools'
+import { SEED_DEV_TOOLS } from '@/lib/seed/dev-tools'
+import { SEED_REPOS } from '@/lib/seed/repos'
 import type { Tool, DevTool, Repo } from '@/types'
 
 const STOP = new Set([

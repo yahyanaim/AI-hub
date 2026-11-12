@@ -10,5 +10,8 @@ export async function GET() {
     return NextResponse.json({ error: 'push-not-configured' }, { status: 503 })
   }
   const key = getVapidPublicKey()
-  return NextResponse.json({ key })
+  return NextResponse.json(
+    { key },
+    { headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=86400' } }
+  )
 }

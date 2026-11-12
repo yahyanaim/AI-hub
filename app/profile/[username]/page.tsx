@@ -3,6 +3,8 @@ import { SITE_URL } from '@/lib/site'
 import { SEED_USERS } from '@/lib/seed/users'
 import { ProfileView } from '@/components/profile/ProfileView'
 
+export const revalidate = 3600
+
 export async function generateStaticParams() {
   return SEED_USERS.map((user) => ({ username: user.username }))
 }

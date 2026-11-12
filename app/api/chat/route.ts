@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { SEED_COURSES } from '@/lib/seed'
+import { SEED_COURSES } from '@/lib/seed/courses'
 import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
@@ -674,54 +674,40 @@ export async function POST(request: Request) {
           const diagnostics: string[] = []
           let winner: UpstreamSuccess | null = null
 
-          // Race the top 3 models in parallel (with small staggered starts) and a
-          // generous 75s first-token budget so reasoning models have time to finish
-          // thinking AND emit content tokens without premature abort.
-          const raceModels = modelsToTry.slice(0, 3)
-          const rest = modelsToTry.slice(3)
+          // Primary-first with delayed hedging: start only primaryModel at t=0.
+          // If it responds within 12s (typical), no extra upstream SSE streams
+          // are opened. Only launch modelsToTry[1] if primaryModel is still
+          // pending after 12s, or immediately if primaryModel fails early.
+          const HEDGE_DELAY_MS = 12_000
+          const primaryCtl = new AbortController()
+          const primaryPromise = openValidatedStream(modelsToTry[0]!, 75_000, primaryCtl.signal)
+          const restModels = modelsToTry.slice(1)
 
-          if (raceModels.length >= 2) {
-            const controllers = raceModels.map(() => new AbortController())
-            const promises = raceModels.map((m, idx) => {
-              const sig = controllers[idx]!.signal
-              const delayMs = idx * 1200
-              if (delayMs === 0) {
-                return openValidatedStream(m, 75_000, sig).then((r) => ({ idx, r }))
-              }
-              return new Promise<{ idx: number; r: UpstreamAttemptResult }>((resolve) => {
-                const t = setTimeout(() => {
-                  openValidatedStream(m, 75_000, sig).then((r) => resolve({ idx, r }))
-                }, delayMs)
-                sig.addEventListener(
-                  'abort',
-                  () => {
-                    clearTimeout(t)
-                    resolve({ idx, r: { ok: false, model: m, reason: 'hedged-cancelled' } })
-                  },
-                  { once: true }
-                )
-              })
-            })
+          if (restModels.length === 0) {
+            const r0 = await primaryPromise
+            if (r0.ok) winner = r0
+            else diagnostics.push(`${r0.model}: ${r0.reason}`)
+          } else {
+            let hedgeTimer: ReturnType<typeof setTimeout> | undefined
+            const earlyOrHedge = await Promise.race([
+              primaryPromise.then((r) => ({ kind: 'primary' as const, r })),
+              new Promise<{ kind: 'hedge' }>((resolve) => {
+                hedgeTimer = setTimeout(() => resolve({ kind: 'hedge' }), HEDGE_DELAY_MS)
+              }),
+            ])
+            clearTimeout(hedgeTimer)
 
-            const pending = new Set(promises.map((_, i) => i))
-            while (pending.size > 0 && !winner) {
-              const activePromises = Array.from(pending).map((i) => promises[i]!)
-              const settled = await Promise.race(activePromises)
-              pending.delete(settled.idx)
-              if (settled.r.ok) {
-                winner = settled.r
-                controllers.forEach((c, i) => {
-                  if (i !== settled.idx) c.abort()
-                })
-                break
+            if (earlyOrHedge.kind === 'primary') {
+              const r0 = earlyOrHedge.r
+              if (r0.ok) {
+                winner = r0
               } else {
-                diagnostics.push(`${settled.r.model}: ${settled.r.reason}`)
-                if (settled.r.status === 401 || settled.r.status === 403) {
-                  controllers.forEach((c) => c.abort())
+                diagnostics.push(`${r0.model}: ${r0.reason}`)
+                if (r0.status === 401 || r0.status === 403) {
                   controller.enqueue(
                     encoder.encode(
                       sseFrame({
-                        error: `AI auth failed (upstream ${settled.r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`,
+                        error: `AI auth failed (upstream ${r0.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`,
                       })
                     )
                   )
@@ -729,16 +715,69 @@ export async function POST(request: Request) {
                   return
                 }
               }
+            } else {
+              // Primary is still thinking at 12s — launch one hedge model in parallel
+              const hedgeCtl = new AbortController()
+              const hedgePromise = openValidatedStream(restModels[0]!, 60_000, hedgeCtl.signal)
+              const raced = [
+                primaryPromise.then((r) => ({ who: 'primary' as const, r })),
+                hedgePromise.then((r) => ({ who: 'hedge' as const, r })),
+              ]
+              const first = await Promise.race(raced)
+              if (first.r.ok) {
+                winner = first.r
+                if (first.who === 'primary') hedgeCtl.abort()
+                else primaryCtl.abort()
+              } else {
+                diagnostics.push(`${first.r.model}: ${first.r.reason}`)
+                if (first.r.status === 401 || first.r.status === 403) {
+                  primaryCtl.abort()
+                  hedgeCtl.abort()
+                  controller.enqueue(
+                    encoder.encode(
+                      sseFrame({
+                        error: `AI auth failed (upstream ${first.r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`,
+                      })
+                    )
+                  )
+                  finish()
+                  return
+                }
+                const second = first.who === 'primary' ? await hedgePromise : await primaryPromise
+                if (second.ok) {
+                  winner = second
+                } else {
+                  diagnostics.push(`${second.model}: ${second.reason}`)
+                }
+              }
+              // Consume remaining fallback models sequentially if both failed
+              if (!winner) {
+                for (const m of restModels.slice(1)) {
+                  const r = await openValidatedStream(m, 40_000)
+                  if (r.ok) {
+                    winner = r
+                    break
+                  }
+                  diagnostics.push(`${r.model}: ${r.reason}`)
+                  if (r.status === 401 || r.status === 403) {
+                    controller.enqueue(
+                      encoder.encode(
+                        sseFrame({
+                          error: `AI auth failed (upstream ${r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`,
+                        })
+                      )
+                    )
+                    finish()
+                    return
+                  }
+                }
+              }
             }
-          } else if (raceModels.length === 1) {
-            const r0 = await openValidatedStream(raceModels[0]!, 75_000)
-            if (r0.ok) winner = r0
-            else diagnostics.push(`${r0.model}: ${r0.reason}`)
           }
 
-          // If none of the raced models produced content, try any remaining fallback model
-          if (!winner) {
-            for (const m of rest) {
+          // If primaryModel failed fast (<12s), try remaining fallback models sequentially
+          if (!winner && restModels.length > 0 && diagnostics.length === 1) {
+            for (const m of restModels) {
               const r = await openValidatedStream(m, 40_000)
               if (r.ok) {
                 winner = r
