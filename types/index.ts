@@ -194,6 +194,7 @@ export type CourseCategory =
   | 'testing'
   | 'cloud'
   | 'data-science'
+  | 'datacamp'
   | 'prompt-engineering'
   | 'ai-engineering'
   | 'python'
@@ -476,6 +477,7 @@ export const COURSE_CATEGORY_LABELS: Record<CourseCategory, string> = {
   testing: 'Testing',
   cloud: 'Cloud (AWS & Oracle)',
   'data-science': 'Data Science',
+  datacamp: 'DataCamp',
   'prompt-engineering': 'Prompt Engineering',
   'ai-engineering': 'AI Engineering',
   python: 'Python',
