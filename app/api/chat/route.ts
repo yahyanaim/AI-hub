@@ -32,11 +32,14 @@ CRITICAL: Do NOT overthink or spend tokens on long internal reasoning. Output th
 
 Follow these exact rules so the CV renders into the 1-page executive LaTeX template (match the language of the user's CV, French or English):
 - First line inside the \`\`\`roadmap block: \`# <Full Name> — ATS CV\`
-- Next section \`## Contact Information\` with these exact labeled lines:
+- Next section \`## Contact Information\` with these exact labeled lines (include LinkedIn and GitHub if present in the CV or GitHub snapshot):
   - \`Role: <Target Job Title / Intitulé du poste>\`
   - \`Location: <City, Country>\`
   - \`Phone: <Phone Number>\`
   - \`Email: <Email Address>\`
+  - \`LinkedIn: <linkedin.com/in/...>\` (optional, if present)
+  - \`GitHub: <github.com/...>\` (optional, if present)
+- If the user also provided a target Job Offer / Job Description, naturally mirror its required keywords, technologies, and action verbs in \`Profil professionnel\`, \`Expériences professionnelles\`, and \`Compétences\` while staying 100% truthful to the candidate's real background.
 - Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`, \`## Loisirs\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`, \`## Hobbies & Interests\`):
   1. \`## Profil professionnel\` (or \`## Professional Summary\`): One cohesive 3–4 line paragraph summarizing the candidate's profile, core competencies, and career objective.
   2. \`## Expériences professionnelles\` (or \`## Work Experience\`): Include EVERY role, internship (stage), and freelance experience from the attached CV in reverse-chronological order (never omit any entry). Format each role header line as:
@@ -168,6 +171,9 @@ When the user asks to make their CV "ATS-friendly" or asks for an ATS resume, re
   - \`Location: <City, Country>\`
   - \`Phone: <Phone Number>\`
   - \`Email: <Email Address>\`
+  - \`LinkedIn: <linkedin.com/in/... (include if present in the CV)>\`
+  - \`GitHub: <github.com/... or portfolio URL (include if present in the CV)>\`
+- If the user also provides a target Job Description / Job Offer, naturally mirror the exact ATS keywords, skills, and role terminology from that job offer where truthful to the candidate's actual background.
 - Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`, \`## Loisirs\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`, \`## Hobbies & Interests\`):
   1. \`## Profil professionnel\` (or \`## Professional Summary\`): One cohesive 3–4 line paragraph summarizing the candidate's profile, core competencies, and career objective.
   2. \`## Expériences professionnelles\` (or \`## Work Experience\`): Include EVERY role, internship (stage), and freelance experience from the attached CV in reverse-chronological order (never omit any entry). Format each role header line as:

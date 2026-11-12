@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   Send, Loader2, SearchX, MessageSquare, Plus, Search, SquarePen,
   PanelLeft, PanelLeftClose, Trash2, X, Paperclip, FileText, Download,
-  ListTree, Copy, Check, ImagePlus,
+  ListTree, Copy, Check, ImagePlus, Target, Pencil, Eye,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
@@ -149,7 +149,7 @@ type ParsedAtsSection =
 type ParsedAtsCv = {
   name: string
   jobTitle: string
-  contacts: { kind: ContactIconKind; text: string }[]
+  contacts: { kind: ContactIconKind; text: string; href?: string }[]
   sections: ParsedAtsSection[]
 }
 
@@ -532,11 +532,18 @@ function parseAtsCv(body: string, docTitle: string): ParsedAtsCv {
     }
   }
 
-  const contacts: { kind: ContactIconKind; text: string }[] = []
+  const contacts: { kind: ContactIconKind; text: string; href?: string }[] = []
   if (location) contacts.push({ kind: 'pin', text: location })
   if (phone) contacts.push({ kind: 'phone', text: phone })
-  if (email) contacts.push({ kind: 'mail', text: email })
-  if (contacts.length < 3 && extraLinks[0]) contacts.push({ kind: 'link', text: extraLinks[0] })
+  if (email) contacts.push({ kind: 'mail', text: email, href: `mailto:${email}` })
+  for (const link of extraLinks.slice(0, 2)) {
+    const cleanLink = link.replace(/^https?:\/\/(www\.)?/i, '').replace(/\/$/, '')
+    contacts.push({
+      kind: 'link',
+      text: cleanLink,
+      href: `https://${cleanLink}`,
+    })
+  }
 
   return { name, jobTitle, contacts, sections: parsedSections }
 }
@@ -626,6 +633,18 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
   const FONT = await loadLatexFonts(pdf)
   const cv = parseAtsCv(body, title)
 
+  const skillSec = cv.sections.find((sec): sec is ParsedAtsSection & { kind: 'skills' } => sec.kind === 'skills')
+  const keywordsList = [cv.jobTitle, ...(skillSec?.items ?? [])].filter(Boolean).join(', ')
+  try {
+    pdf.setProperties({
+      title: `${cv.name} — ${cv.jobTitle} (CV)`,
+      author: cv.name,
+      subject: `${cv.jobTitle} — ATS Resume / CV`,
+      keywords: keywordsList,
+      creator: 'AIHubTools Executive LaTeX CV Generator',
+    })
+  } catch {}
+
   const M = 12.5
   const W = 210 - M * 2 // 185mm
   const SLATE: [number, number, number] = [125, 146, 159] // #7d929f exact template slate blue-grey
@@ -703,7 +722,7 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
     return h
   }
 
-  const startBodyY = 46.5
+  const startBodyY = cv.contacts.length > 3 ? 50.5 : 46.5
   const availH = 286 - startBodyY
   let s = 1
   for (let i = 0; i < 6; i++) {
@@ -750,30 +769,60 @@ async function exportAtsPdf(body: string, title: string, photoDataUrl?: string |
   pdf.setLineWidth(0.45)
   pdf.line(hx1, 30.6, hx2, 30.6)
 
-  // Contact row with vector icons centered below header rule
+  // Contact row(s) with vector icons centered below header rule (supports clickable links & wraps cleanly if >3 items)
+  let contactEndY = 38
   if (cv.contacts.length > 0) {
-    const cFontSize = 9.5 * Math.max(s, 0.85)
+    const cFontSize = (cv.contacts.length > 3 ? 8.8 : 9.5) * Math.max(s, 0.85)
     pdf.setFont(FONT, 'normal')
     pdf.setFontSize(cFontSize)
     pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
-    const iconSz = 3.5
-    const iconTextGap = 2.3
-    const itemGap = 8.5
-    const widths = cv.contacts.map((c) => iconSz + iconTextGap + pdf.getTextWidth(c.text))
-    const totalW = widths.reduce((a, b) => a + b, 0) + itemGap * (cv.contacts.length - 1)
-    let cx = hcx - totalW / 2
-    const cy = 36.2
-    cv.contacts.forEach((c, idx) => {
-      drawContactIconPdf(pdf, c.kind, cx, cy, iconSz)
-      pdf.setFont(FONT, 'normal')
-      pdf.setFontSize(cFontSize)
-      pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
-      pdf.text(c.text, cx + iconSz + iconTextGap, cy)
-      cx += widths[idx]! + itemGap
-    })
+    const iconSz = 3.3
+    const iconTextGap = 2.1
+    const itemGap = cv.contacts.length > 3 ? 6.0 : 8.5
+    const maxRowW = hx2 - hx1
+    const rows: (typeof cv.contacts)[] = []
+    let curRow: typeof cv.contacts = []
+    let curW = 0
+    for (const c of cv.contacts) {
+      const w = iconSz + iconTextGap + pdf.getTextWidth(c.text)
+      const nextW = curRow.length === 0 ? w : curW + itemGap + w
+      if (curRow.length > 0 && nextW > maxRowW) {
+        rows.push(curRow)
+        curRow = [c]
+        curW = w
+      } else {
+        curRow.push(c)
+        curW = nextW
+      }
+    }
+    if (curRow.length > 0) rows.push(curRow)
+
+    let cy = 35.8
+    for (const row of rows) {
+      const widths = row.map((c) => iconSz + iconTextGap + pdf.getTextWidth(c.text))
+      const totalW = widths.reduce((a, b) => a + b, 0) + itemGap * (row.length - 1)
+      let cx = hcx - totalW / 2
+      row.forEach((c, idx) => {
+        drawContactIconPdf(pdf, c.kind, cx, cy, iconSz)
+        pdf.setFont(FONT, 'normal')
+        pdf.setFontSize(cFontSize)
+        pdf.setTextColor(BLACK[0], BLACK[1], BLACK[2])
+        const tx = cx + iconSz + iconTextGap
+        const tw = pdf.getTextWidth(c.text)
+        pdf.text(c.text, tx, cy)
+        if (c.href) {
+          try {
+            pdf.link(tx, cy - 3.2, tw, 4.2, { url: c.href })
+          } catch {}
+        }
+        cx += widths[idx]! + itemGap
+      })
+      contactEndY = cy
+      cy += 4.8
+    }
   }
 
-  let y = startBodyY
+  let y = Math.max(startBodyY, contactEndY + 7.5)
   // Always keep the ATS CV strictly on 1 page (auto-scaled above via `s`)
   const ensure = (_h: number) => {}
 
@@ -1102,12 +1151,25 @@ function AtsCvPreview({
           <div className="my-2.5 h-[1.5px] w-full bg-[#0f0f0f]" />
           {cv.contacts.length > 0 && (
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-[13px] text-[#0f0f0f]">
-              {cv.contacts.map((c, idx) => (
-                <span key={idx} className="inline-flex items-center gap-2">
-                  <ContactIconSvg kind={c.kind} />
-                  <span>{c.text}</span>
-                </span>
-              ))}
+              {cv.contacts.map((c, idx) =>
+                c.href ? (
+                  <a
+                    key={idx}
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 hover:underline"
+                  >
+                    <ContactIconSvg kind={c.kind} />
+                    <span>{c.text}</span>
+                  </a>
+                ) : (
+                  <span key={idx} className="inline-flex items-center gap-2">
+                    <ContactIconSvg kind={c.kind} />
+                    <span>{c.text}</span>
+                  </span>
+                )
+              )}
             </div>
           )}
         </div>
@@ -1282,6 +1344,9 @@ export default function ChatPage() {
   const [tocOpen, setTocOpen] = useState(false)
   const [toc, setToc] = useState<{ id: string; level: number; text: string }[]>([])
   const [copied, setCopied] = useState(false)
+  const [editingDoc, setEditingDoc] = useState(false)
+  const [jobOfferOpen, setJobOfferOpen] = useState(false)
+  const [jobOfferText, setJobOfferText] = useState('')
   // Attached CV: file bytes are parsed to text once (PDF via the transient
   // parse endpoint) and live ONLY in this state — never written to disk,
   // localStorage, or the server. Removing the chip or reloading discards it.
@@ -1474,7 +1539,18 @@ export default function ChatPage() {
 
   const deleteDoc = (id: string) => {
     setDocs((prev) => prev.filter((d) => d.id !== id))
-    if (openDocId === id) setOpenDocId(null)
+    if (openDocId === id) {
+      setOpenDocId(null)
+      setEditingDoc(false)
+    }
+  }
+
+  const updateOpenDocBody = (newBody: string) => {
+    if (!openDoc) return
+    const nextTitle = docTitleFrom(newBody) || openDoc.title
+    setDocs((prev) =>
+      prev.map((d) => (d.id === openDoc.id ? { ...d, title: nextTitle, body: newBody } : d))
+    )
   }
 
   const copyDoc = async () => {
@@ -1743,35 +1819,95 @@ export default function ChatPage() {
   const isFresh = active.id === 'greet'
   // Attached-CV chip: rendered above the composer. This text lives in memory
   // only (column above) — the file is never uploaded to long-term storage.
+  const atsBasePrompt =
+    'Rewrite my CV as a clean 1-page ATS CV matching our executive template: include Contact Information (Role, Location, Phone, Email, and LinkedIn/GitHub if present), Profil professionnel / Professional Summary (one cohesive paragraph), Expériences professionnelles / Work Experience (reverse-chronological: Job Title, Company — City, Country | Dates + 2-3 concise action bullets), Formation / Education (complete education parcours: Degree | Dates on line 1, School, City, Country on line 2, Projet réalisé : ... on line 3), Compétences / Skills (8-12 concise standalone skills), Langues / Languages (Language : Level), and Loisirs / Hobbies & Interests under Languages. Keep it strictly truthful to my CV and in the same language. Output the complete ATS CV as a document.'
+
   const CvChip = cvName ? (
-    <div className="mx-auto mb-2 flex w-full max-w-3xl items-center gap-2 rounded-xl border border-border bg-muted/60 px-3 py-1.5 text-xs text-foreground">
-      <FileText className="h-3.5 w-3.5 shrink-0 text-brand-orange" />
-      <span className="truncate font-medium">{cvName}</span>
-      <span className="ml-auto shrink-0 text-muted-foreground">attached · not stored</span>
-      <button
-        onClick={() => {
-          if (!cvText) return
-          sendMessage(
-            'Rewrite my CV as a clean 1-page ATS CV matching our executive template: include Contact Information (Role, Location, Phone, Email), Profil professionnel / Professional Summary (one cohesive paragraph), Expériences professionnelles / Work Experience (reverse-chronological: Job Title, Company — City, Country | Dates + 2-3 concise action bullets), Formation / Education (complete education parcours: Degree | Dates on line 1, School, City, Country on line 2, Projet réalisé : ... on line 3), Compétences / Skills (8-12 concise standalone skills), Langues / Languages (Language : Level), and Loisirs / Hobbies & Interests under Languages. Keep it strictly truthful to my CV and in the same language. Output the complete ATS CV as a document.'
-          )
-        }}
-        disabled={loading || cvBusy}
-        className="shrink-0 rounded-full border border-brand-orange/40 px-2.5 py-1 text-[11px] font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10 disabled:opacity-40"
-        title="Generate an ATS-friendly version of the attached CV"
-      >
-        ATS
-      </button>
-      <button
-        onClick={() => {
-          setCvName(null)
-          setCvText('')
-          setCvError(null)
-        }}
-        className="shrink-0 rounded-full p-0.5 text-muted-foreground hover:bg-muted"
-        aria-label="Remove CV"
-      >
-        <X className="h-3.5 w-3.5" />
-      </button>
+    <div className="mx-auto mb-2 w-full max-w-3xl space-y-2">
+      <div className="flex w-full items-center gap-2 rounded-xl border border-border bg-muted/60 px-3 py-1.5 text-xs text-foreground">
+        <FileText className="h-3.5 w-3.5 shrink-0 text-brand-orange" />
+        <span className="truncate font-medium">{cvName}</span>
+        <span className="ml-auto hidden shrink-0 text-muted-foreground sm:inline">attached · not stored</span>
+        <button
+          onClick={() => {
+            if (!cvText) return
+            sendMessage(atsBasePrompt)
+          }}
+          disabled={loading || cvBusy}
+          className="shrink-0 rounded-full border border-brand-orange/40 px-2.5 py-1 text-[11px] font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10 disabled:opacity-40"
+          title="Generate a 1-page ATS-friendly version of the attached CV"
+        >
+          ATS
+        </button>
+        <button
+          onClick={() => setJobOfferOpen((v) => !v)}
+          disabled={loading || cvBusy}
+          className={cn(
+            'inline-flex shrink-0 items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-colors disabled:opacity-40',
+            jobOfferOpen
+              ? 'border-brand-orange bg-brand-orange text-white'
+              : 'border-border bg-card text-foreground hover:border-brand-orange/40 hover:text-brand-orange'
+          )}
+          title="Tailor your ATS CV keywords to a specific job offer"
+        >
+          <Target className="h-3 w-3" />
+          Tailor to Job
+        </button>
+        <button
+          onClick={() => {
+            setCvName(null)
+            setCvText('')
+            setCvError(null)
+            setJobOfferOpen(false)
+            setJobOfferText('')
+          }}
+          className="shrink-0 rounded-full p-0.5 text-muted-foreground hover:bg-muted"
+          aria-label="Remove CV"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      </div>
+      {jobOfferOpen && (
+        <div className="rounded-xl border border-border bg-card p-3 shadow-sm">
+          <div className="mb-1.5 flex items-center justify-between text-xs">
+            <span className="font-semibold text-foreground">
+              Target Job Offer / Description (ATS Keyword Matcher)
+            </span>
+            <button
+              type="button"
+              onClick={() => setJobOfferOpen(false)}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              Close
+            </button>
+          </div>
+          <textarea
+            rows={3}
+            value={jobOfferText}
+            onChange={(e) => setJobOfferText(e.target.value)}
+            placeholder="Paste the job description or target role requirements here — the AI will align your Summary, Role title, and Skills to match its exact ATS keywords while staying 100% truthful to your CV..."
+            className="w-full resize-y rounded-lg border border-border bg-background px-3 py-2 text-xs text-foreground outline-none focus:border-brand-orange/50"
+          />
+          <div className="mt-2 flex justify-end gap-2">
+            <button
+              type="button"
+              disabled={!jobOfferText.trim() || loading || cvBusy}
+              onClick={() => {
+                if (!cvText || !jobOfferText.trim()) return
+                const offer = jobOfferText.trim().slice(0, 4000)
+                setJobOfferOpen(false)
+                sendMessage(
+                  `${atsBasePrompt}\n\nTailor the Role title, Professional Summary, Work Experience bullets, and Skills to naturally mirror the exact ATS keywords and requirements from this target Job Offer where truthful to my background:\n"""\n${offer}\n"""`
+                )
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-orange-600 disabled:opacity-40"
+            >
+              <Target className="h-3.5 w-3.5" />
+              Generate Tailored ATS CV
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   ) : null
 
@@ -2255,6 +2391,7 @@ export default function ChatPage() {
                 onClick={() => {
                   setOpenDocId(null)
                   setTocOpen(false)
+                  setEditingDoc(false)
                 }}
                 className="shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="Close document"
@@ -2274,7 +2411,28 @@ export default function ChatPage() {
                   e.target.value = ''
                 }}
               />
-              {/ats/i.test(openDoc.title) ? (
+              {editingDoc ? (
+                <div className="mx-auto flex min-h-[calc(100%-4rem)] w-full max-w-[680px] flex-col px-5 py-6 sm:px-8">
+                  <div className="mb-3 flex items-center justify-between rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2 text-xs text-neutral-600">
+                    <span>
+                      Direct Edit Mode — modify any section, role, date, or skill below. Changes update your CV preview &amp; PDF immediately.
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setEditingDoc(false)}
+                      className="ml-3 shrink-0 rounded-md bg-brand-orange px-2.5 py-1 font-semibold text-white hover:bg-orange-600"
+                    >
+                      Done
+                    </button>
+                  </div>
+                  <textarea
+                    value={openDoc.body}
+                    onChange={(e) => updateOpenDocBody(e.target.value)}
+                    spellCheck={false}
+                    className="min-h-[68vh] w-full flex-1 resize-y rounded-xl border border-neutral-300 bg-white p-4 font-mono text-[13px] leading-relaxed text-neutral-900 outline-none focus:border-brand-orange"
+                  />
+                </div>
+              ) : /ats/i.test(openDoc.title) ? (
                 <div ref={pdfRef}>
                   <AtsCvPreview
                     body={openDoc.body}
@@ -2306,7 +2464,7 @@ export default function ChatPage() {
                 <div className="pointer-events-auto relative flex items-center gap-0.5 rounded-full border border-border bg-card/95 p-1 shadow-[0_8px_30px_hsl(var(--foreground)/0.14)] backdrop-blur">
                   <button
                     onClick={() => setTocOpen((v) => !v)}
-                    disabled={toc.length === 0}
+                    disabled={toc.length === 0 || editingDoc}
                     className={cn(
                       'flex items-center gap-1.5 rounded-full px-3 py-2 text-[12.5px] font-medium text-foreground/90 transition-colors hover:bg-foreground/[0.06] disabled:opacity-40',
                       tocOpen && 'bg-foreground/[0.08] text-foreground'
@@ -2314,6 +2472,20 @@ export default function ChatPage() {
                   >
                     <ListTree className="h-4 w-4" />
                     Contents
+                  </button>
+                  <button
+                    onClick={() => {
+                      setEditingDoc((v) => !v)
+                      setTocOpen(false)
+                    }}
+                    className={cn(
+                      'flex items-center gap-1.5 rounded-full px-3 py-2 text-[12.5px] font-medium text-foreground/90 transition-colors hover:bg-foreground/[0.06]',
+                      editingDoc && 'bg-brand-orange/15 text-brand-orange'
+                    )}
+                    title={editingDoc ? 'Return to formatted CV preview' : 'Edit CV text directly'}
+                  >
+                    {editingDoc ? <Eye className="h-4 w-4" /> : <Pencil className="h-4 w-4" />}
+                    {editingDoc ? 'Preview' : 'Edit'}
                   </button>
                   {/ats/i.test(openDoc.title) && (
                     <button
