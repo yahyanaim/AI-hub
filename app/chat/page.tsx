@@ -1752,7 +1752,7 @@ export default function ChatPage() {
         onClick={() => {
           if (!cvText) return
           sendMessage(
-            'Rewrite my CV as a clean 1-page ATS CV matching our executive template: include Contact Information (Role, Location, Phone, Email), Profil professionnel / Professional Summary (one cohesive paragraph), Expériences professionnelles / Work Experience (reverse-chronological: Job Title, Company — City, Country | Dates + 3-4 concise action bullets), Formation / Education (Degree | Dates on line 1, School, City, Country on line 2, Projet réalisé : ... on line 3), Compétences / Skills (8 concise standalone skills), and Langues / Languages (Language : Level). Keep it strictly truthful to my CV and in the same language. Output the complete ATS CV as a document.'
+            'Rewrite my CV as a clean 1-page ATS CV matching our executive template: include Contact Information (Role, Location, Phone, Email), Profil professionnel / Professional Summary (one cohesive paragraph), Expériences professionnelles / Work Experience (reverse-chronological: Job Title, Company — City, Country | Dates + 2-3 concise action bullets), Formation / Education (complete education parcours: Degree | Dates on line 1, School, City, Country on line 2, Projet réalisé : ... on line 3), Compétences / Skills (8-12 concise standalone skills), Langues / Languages (Language : Level), and Loisirs / Hobbies & Interests under Languages. Keep it strictly truthful to my CV and in the same language. Output the complete ATS CV as a document.'
           )
         }}
         disabled={loading || cvBusy}
@@ -2185,8 +2185,8 @@ export default function ChatPage() {
                         </div>
                       </div>
                     ) : (
-                      <div className="max-w-[88%] rounded-3xl bg-muted px-3.5 py-2 text-[15px] leading-relaxed text-foreground sm:max-w-[80%] sm:px-4 sm:py-2.5 sm:text-sm">
-                        <p className="whitespace-pre-wrap">{msg.content}</p>
+                      <div className="max-w-[88%] rounded-3xl bg-muted px-3.5 py-2 text-left text-[15px] leading-relaxed text-foreground sm:max-w-[80%] sm:px-4 sm:py-2.5 sm:text-sm">
+                        <p className="whitespace-pre-wrap text-left">{msg.content}</p>
                       </div>
                     )}
                   </div>
