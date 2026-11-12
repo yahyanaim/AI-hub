@@ -665,8 +665,7 @@ export default function ChatPage() {
     if (isMobile) inputRef.current?.blur()
     setLoading(true)
 
-    let assistantMsg = ''
-    try {
+    const runOnce = async (): Promise<string> => {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -684,6 +683,7 @@ export default function ChatPage() {
       const reader = res.body!.getReader()
       const decoder = new TextDecoder()
       let buffer = ''
+      let acc = ''
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
@@ -695,18 +695,31 @@ export default function ChatPage() {
           if (!trimmed.startsWith('data: ')) continue
           const data = trimmed.slice(6)
           if (data === '[DONE]') break
+          let json: { error?: string; choices?: { delta?: { content?: string } }[] }
           try {
-            const json = JSON.parse(data)
-            if (json.error) throw new Error(json.error)
-            const chunk = json.choices?.[0]?.delta?.content
-            if (chunk) {
-              assistantMsg += chunk
-              patch(assistantMsg)
-            }
-          } catch {}
+            json = JSON.parse(data)
+          } catch {
+            continue
+          }
+          if (json.error) throw new Error(json.error)
+          const chunk = json.choices?.[0]?.delta?.content
+          if (chunk) {
+            acc += chunk
+            patch(acc)
+          }
         }
       }
-      if (!assistantMsg) throw new Error('Empty response from AI')
+      if (!acc) throw new Error('Empty response from AI')
+      return acc
+    }
+
+    let assistantMsg = ''
+    try {
+      try {
+        assistantMsg = await runOnce()
+      } catch (firstErr) {
+        assistantMsg = await runOnce()
+      }
       // A complete roadmap in this reply becomes a document (auto-opens, ChatGPT-like)
       const docBody = extractDocBody(assistantMsg)
       if (docBody) setOpenDocId(ensureDoc(docBody))

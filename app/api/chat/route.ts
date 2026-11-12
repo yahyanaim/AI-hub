@@ -366,7 +366,7 @@ export async function POST(request: Request) {
           },
           ...normalizedConversation,
         ],
-        max_tokens: 4096,
+        max_tokens: 8192,
         temperature: 1,
         stream: true,
         seed: 0,
