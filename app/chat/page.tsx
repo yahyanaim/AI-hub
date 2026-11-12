@@ -697,6 +697,7 @@ export default function ChatPage() {
           if (data === '[DONE]') break
           try {
             const json = JSON.parse(data)
+            if (json.error) throw new Error(json.error)
             const chunk = json.choices?.[0]?.delta?.content
             if (chunk) {
               assistantMsg += chunk
