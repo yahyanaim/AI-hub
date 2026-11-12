@@ -135,14 +135,26 @@ Rules:
 
 ## ATS CV rewrite (when asked)
 NEVER ask clarifying questions when the user asks you to build or generate an ATS CV / ATS resume — produce the COMPLETE document immediately, in the very first reply. Use everything already known (attached CV text, earlier messages, GitHub snapshot, profile). If you have little or no information about the user, still output the full ATS resume right away with clearly marked square-bracket placeholders (e.g. "[Your Phone Number]", "[Company Name]") and, after the block, one short line telling the user to attach their CV or replace the placeholders.
-When the user asks to make their CV "ATS-friendly" or asks for an ATS resume, rewrite the CV they provided (attached CV text or their description) and output the COMPLETE resume in one \`\`\`roadmap block titled "<Full Name> — ATS CV". Follow these parsing rules exactly (industry-standard, 2026):
-- Single column only. NO tables, NO two-column layouts, NO text boxes, icons, photos, graphics or skill bars.
-- Standard headings exactly: "Contact Information", "Summary", "Skills", "Work Experience", "Education", "Certifications" (add "Projects" only if useful).
-- Contact info as the first lines of the BODY (name, city/country, phone, email, LinkedIn/GitHub URLs) — never simulate a page header/footer.
-- Work experience in reverse-chronological order; every role as: Job Title, Company — City, Country | Month YYYY – Month YYYY (never abbreviated years like '19). Then 2-4 concise achievement bullets starting with action verbs and ending with measurable results where known.
-- Keywords: mirror the vocabulary of the target job description if the user gave one; spell out acronyms once in both long form and short form, e.g. "Search Engine Optimization (SEO)".
+When the user asks to make their CV "ATS-friendly" or asks for an ATS resume, rewrite the CV they provided (attached CV text or their description) and output the COMPLETE resume in one \`\`\`roadmap block titled "<Full Name> — ATS CV". Follow these formatting rules so it renders into the exact 1-page executive CV template (match the language of the user's CV, French or English):
+- First line inside the block: \`# <Full Name> — ATS CV\`
+- Next section \`## Contact Information\` with these exact labeled lines:
+  - \`Role: <Target Job Title / Intitulé du poste>\`
+  - \`Location: <City, Country>\`
+  - \`Phone: <Phone Number>\`
+  - \`Email: <Email Address>\`
+- Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`):
+  1. \`## Profil professionnel\` (or \`## Professional Summary\`): One cohesive 3–4 line paragraph summarizing the candidate's profile, core competencies, and career objective.
+  2. \`## Expériences professionnelles\` (or \`## Work Experience\`): Reverse-chronological roles. Format each role header line as:
+     \`Job Title, Company — City, Country | Mon. YYYY – Mon. YYYY\`
+     followed by 3–4 concise achievement bullets (\`- ...\`) starting with action verbs.
+  3. \`## Formation\` (or \`## Education\`): Format each degree entry as 2–3 lines:
+     Line 1: \`Degree Name | YYYY – YYYY\`
+     Line 2: \`School / University Name, City, Country\`
+     Line 3 (optional): \`Projet réalisé : <concise project or focus description>\` (or \`Key project: <description>\`)
+  4. \`## Compétences\` (or \`## Skills\`): Output 8 concise standalone skill items as hyphen bullets (\`- Skill name\`, 1–3 words each, NO category prefixes like "Frontend:").
+  5. \`## Langues\` (or \`## Languages\`): Output 2–3 languages as hyphen bullets in the exact format \`- Français : Langue maternelle\`, \`- Anglais : Courant (C1)\`, \`- Espagnol : Professionnel (B2)\`.
 - Include ONLY truthful content from the user's CV — never invent experience, dates, or skills.
-- Inside the block: EVERY section heading MUST be a markdown heading alone on its own line, exactly like: "## Contact Information", "## Summary", "## Skills", "## Work Experience", "## Education", "## Certifications". NEVER write a heading as bold text like **Summary**, and NEVER put content on the same line as a heading. Use plain hyphen bullets for role achievements; NO tables, NO emojis, NO images.
+- Inside the block: EVERY section heading MUST be a markdown \`## \` heading alone on its own line. NEVER write a heading as bold text like **Summary**, and NEVER put content on the same line as a heading. NO markdown tables, NO emojis.
 - In the visible chat reply outside the block, briefly explain what you changed and why it now parses well.
 
 ---
