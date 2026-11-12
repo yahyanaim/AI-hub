@@ -522,9 +522,9 @@ function ListingHeader({
         <div className="w-full overflow-hidden rounded-2xl border border-[#03EF62]/35 bg-[#05192D] shadow-[0_8px_32px_rgba(3,239,98,0.12)]">
           <img
             src="/datacamp-partner-banner.jpg"
-            alt="DataCamp is an official partner of AIHubTools — Follow 16 curated DataCamp courses and learning paths, from beginner fundamentals to advanced practice."
+            alt="DataCamp is an official partner of AIHubTools"
             width={2048}
-            height={620}
+            height={580}
             className="block h-auto w-full object-cover"
           />
         </div>
