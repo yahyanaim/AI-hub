@@ -27,6 +27,31 @@ function buildCourseCatalog(): string {
 
 const COURSE_CATALOG = buildCourseCatalog()
 
+const ATS_CV_SYSTEM_PROMPT = `You are an expert ATS Resume & Executive CV Writer for AI Hunt.
+CRITICAL: Do NOT overthink or spend tokens on long internal reasoning. Output the COMPLETE ATS CV immediately in your very first reply inside one \`\`\`roadmap block titled "<Full Name> — ATS CV". Never ask clarifying questions first.
+
+Follow these exact rules so the CV renders into the 1-page executive LaTeX template (match the language of the user's CV, French or English):
+- First line inside the \`\`\`roadmap block: \`# <Full Name> — ATS CV\`
+- Next section \`## Contact Information\` with these exact labeled lines:
+  - \`Role: <Target Job Title / Intitulé du poste>\`
+  - \`Location: <City, Country>\`
+  - \`Phone: <Phone Number>\`
+  - \`Email: <Email Address>\`
+- Section headings (use French headings if the CV is in French: \`## Profil professionnel\`, \`## Expériences professionnelles\`, \`## Formation\`, \`## Compétences\`, \`## Langues\`; or English headings if in English: \`## Professional Summary\`, \`## Work Experience\`, \`## Education\`, \`## Skills\`, \`## Languages\`):
+  1. \`## Profil professionnel\` (or \`## Professional Summary\`): One cohesive 3–4 line paragraph summarizing the candidate's profile, core competencies, and career objective.
+  2. \`## Expériences professionnelles\` (or \`## Work Experience\`): Include EVERY role, internship (stage), and freelance experience from the attached CV in reverse-chronological order (never omit any entry). Format each role header line as:
+     \`Job Title, Company — City, Country | Mon. YYYY – Mon. YYYY\`
+     followed by 2–3 concise 1-line achievement bullets (\`- ...\`) starting with action verbs so the entire CV fits cleanly on 1 page.
+  3. \`## Formation\` (or \`## Education\`): CRITICAL — Include the COMPLETE education parcours from the attached CV in reverse-chronological order: EVERY degree, licence, master, engineering cycle, specialized technician diploma (OFPPT / ISTA / BTS / DUT), bootcamp (YouCode, 1337, etc.), preparatory class, and Baccalauréat. NEVER omit or skip any school, diploma, or education entry present in the original CV. Format each education entry as 2–3 lines (separated by a blank line between entries):
+     Line 1: \`Degree / Diploma Title | YYYY – YYYY\`
+     Line 2: \`School / University / Institution Name, City, Country\`
+     Line 3 (optional, 1 concise line if applicable): \`Projet réalisé : <concise project or focus description>\` (or \`Key project: <description>\`)
+  4. \`## Compétences\` (or \`## Skills\`): Output 8–12 concise standalone skill items as hyphen bullets (\`- Skill name\`, 1–3 words each, NO category prefixes like "Frontend:").
+  5. \`## Langues\` (or \`## Languages\`): Output all languages from the user's CV as hyphen bullets in the exact format \`- Français : Langue maternelle\`, \`- Anglais : Courant (C1)\`, \`- Arabe : Langue maternelle\`.
+- Include ONLY truthful content from the user's CV — never invent experience, dates, or skills.
+- Inside the block: EVERY section heading MUST be a markdown \`## \` heading alone on its own line. NEVER use \`###\` subheadings, NEVER write a heading as bold text like **Summary**, and NEVER put content on the same line as a heading. NO markdown tables, NO raw markdown links, NO emojis.
+- Outside the \`\`\`roadmap block, write at most 2 short sentences explaining that their 1-page ATS CV is ready.`
+
 const SYSTEM_PROMPT = `You are a Development Career Advisor and Skill Development Coach for AI Hunt - a platform for AI tools, developer tools, open-source repos, and coding courses.
 
 Your single mission is to deeply understand the person in front of you and produce a fully personalized, structured roadmap for their development career. You never give generic advice. Every recommendation must map back to what this specific person told you about themselves.
@@ -364,22 +389,38 @@ export async function POST(request: Request) {
 
     const primaryModel = process.env.NVIDIA_MODEL || DEFAULT_MODEL
 
+    // Detect if the user is asking for an ATS CV / resume rewrite so we can use
+    // the focused, conflict-free ATS_CV_SYSTEM_PROMPT instead of the 170-line
+    // 3-phase roadmap + course-catalog prompt (which caused reasoning models to
+    // burn 6k-11k thinking tokens reconciling Phase 0 vs ATS CV instructions).
+    const lastUserMsg =
+      [...conversation].reverse().find((m: { role: string }) => m.role === 'user')?.content || ''
+    const isAtsRequest =
+      /\b(ats|resume|cv|curriculum|réécri|rewrit|template|format.*cv|make.*cv|build.*cv)\b/i.test(
+        String(lastUserMsg)
+      ) ||
+      (Boolean(cv) && conversation.length <= 4 && /\b(ats|cv|resume|analyse|analyze)\b/i.test(String(lastUserMsg)))
+
+    const activeBasePrompt = isAtsRequest ? ATS_CV_SYSTEM_PROMPT : SYSTEM_PROMPT
+    const effectiveConversation = isAtsRequest ? conversation.slice(-4) : conversation
+
     const systemMessageContent =
-      SYSTEM_PROMPT +
+      activeBasePrompt +
       (cv
-        ? `\n\n## Attached CV (session-only, not stored)\nThe user attached their CV as parsed text. Base career advice on it: strengths, gaps, and concrete next steps.\n\n${cv}`
+        ? `\n\n## Attached CV (session-only, not stored)\nThe user attached their CV as parsed text. Use every work experience and every education/formation entry from it:\n\n${cv}`
         : '') +
       (ghSnapshot
-        ? `\n\n## GitHub profile snapshot (fetched live, read-only)\n${ghSnapshot}\n\nThe user actually shared this GitHub profile. Analyze these REAL projects (repos, languages, activity) when working on AREA 1 (CV & Portfolio) — never say you cannot browse GitHub; this data IS their GitHub.`
+        ? `\n\n## GitHub profile snapshot (fetched live, read-only)\n${ghSnapshot}\n\nThe user actually shared this GitHub profile. Analyze these REAL projects (repos, languages, activity).`
         : '')
 
     async function callNvidia(
       model: string,
-      maxTokens = 4096,
+      maxTokens = 8192,
       signal?: AbortSignal,
-      streamMode = true
+      streamMode = true,
+      disableThinking = false
     ): Promise<Response> {
-      const normalizedConversation = conversation.map((m: { role: string; content: unknown }) => m)
+      const normalizedConversation = effectiveConversation.map((m: { role: string; content: unknown }) => m)
       const isVisionOrLlama = model.startsWith('meta/')
       const payload: Record<string, unknown> = {
         model,
@@ -393,6 +434,14 @@ export async function POST(request: Request) {
         max_tokens: maxTokens,
         temperature: isVisionOrLlama ? 0.6 : 0.7,
         stream: streamMode,
+        ...(disableThinking
+          ? {
+              chat_template_kwargs: {
+                enable_thinking: false,
+                thinking: false,
+              },
+            }
+          : {}),
       }
       const controller = new AbortController()
       const timeout = setTimeout(() => controller.abort(), 35_000)
@@ -439,6 +488,24 @@ export async function POST(request: Request) {
     }
     type UpstreamAttemptResult = UpstreamSuccess | UpstreamFailure
 
+    // Extract a ```roadmap ... ``` block from reasoning text if a reasoning model
+    // accidentally drafted the entire document inside delta.reasoning_content and
+    // hit max_tokens before emitting delta.content.
+    function salvageFromReasoning(reasoningText: string): string {
+      const fenced = reasoningText.match(/```roadmap\s*\n([\s\S]*?)```/i)
+      if (fenced?.[1] && fenced[1].trim().length > 120) {
+        return `Here is your tailored 1-page ATS CV:\n\n\`\`\`roadmap\n${fenced[1].trim()}\n\`\`\``
+      }
+      const openFenceIdx = reasoningText.lastIndexOf('```roadmap')
+      if (openFenceIdx !== -1) {
+        const body = reasoningText.slice(openFenceIdx + 10).trim()
+        if (body.length > 200 && /^#\s+/m.test(body)) {
+          return `Here is your tailored 1-page ATS CV:\n\n\`\`\`roadmap\n${body.replace(/```$/, '').trim()}\n\`\`\``
+        }
+      }
+      return ''
+    }
+
     // Connect to an upstream model and wait until it produces its first real
     // content tokens (proving it isn't a dead/empty stream or reasoning-only
     // stall), then return the open reader so the rest of the response streams
@@ -454,12 +521,21 @@ export async function POST(request: Request) {
           ? AbortSignal.any([abortController.signal, externalSignal])
           : abortController.signal
 
+      const supportsDisableThinking =
+        model.startsWith('nvidia/nemotron') ||
+        model.startsWith('minimaxai/') ||
+        model.startsWith('mistralai/')
+      const initialMaxTokens = model.startsWith('meta/') ? 4096 : 8192
+
       let res: Response
       try {
-        res = await callNvidia(model, 4096, linkedSignal, true)
-        // If 4096 tokens was rejected with 400/422 (e.g. tight context window), retry once with 2048
+        res = await callNvidia(model, initialMaxTokens, linkedSignal, true, supportsDisableThinking)
+        // If chat_template_kwargs or 8192 tokens was rejected with 400/422, retry cleanly with 4096 and no extra kwargs
         if (res.status === 400 || res.status === 422) {
-          res = await callNvidia(model, 2048, linkedSignal, true)
+          res = await callNvidia(model, 4096, linkedSignal, true, false)
+        }
+        if (res.status === 400 || res.status === 422) {
+          res = await callNvidia(model, 2048, linkedSignal, true, false)
         }
       } catch (e: unknown) {
         const msg = e instanceof Error && e.name === 'AbortError' ? 'timeout/aborted' : String(e)
@@ -478,7 +554,7 @@ export async function POST(request: Request) {
       const decoder = new TextDecoder()
       let buffer = ''
       let initialText = ''
-      let reasoningChars = 0
+      let reasoningText = ''
       let finishReason = ''
       const started = Date.now()
 
@@ -489,10 +565,22 @@ export async function POST(request: Request) {
             abortController.abort()
             await reader.cancel()
           } catch {}
+          const salvaged = salvageFromReasoning(reasoningText)
+          if (salvaged) {
+            return {
+              ok: true,
+              model,
+              initialText: salvaged,
+              reader: null,
+              decoder,
+              remainderBuffer: '',
+              abortController,
+            }
+          }
           return {
             ok: false,
             model,
-            reason: `first-token timeout after ${Math.round(firstTokenBudgetMs / 1000)}s (reasoning=${reasoningChars})`,
+            reason: `first-token timeout after ${Math.round(firstTokenBudgetMs / 1000)}s (reasoning=${reasoningText.length})`,
           }
         }
         let timer: ReturnType<typeof setTimeout> | undefined
@@ -501,7 +589,7 @@ export async function POST(request: Request) {
           chunk = await Promise.race([
             reader.read(),
             new Promise<{ done: boolean; value?: Uint8Array }>((resolve) => {
-              timer = setTimeout(() => resolve({ done: true }), Math.min(20_000, remaining))
+              timer = setTimeout(() => resolve({ done: true }), Math.min(25_000, remaining))
             }),
           ])
         } catch (err) {
@@ -528,10 +616,22 @@ export async function POST(request: Request) {
               abortController,
             }
           }
+          const salvaged = salvageFromReasoning(reasoningText)
+          if (salvaged) {
+            return {
+              ok: true,
+              model,
+              initialText: salvaged,
+              reader: null,
+              decoder,
+              remainderBuffer: '',
+              abortController,
+            }
+          }
           return {
             ok: false,
             model,
-            reason: `empty content (finish=${finishReason || 'eof'}, reasoning=${reasoningChars})`,
+            reason: `empty content (finish=${finishReason || 'eof'}, reasoning=${reasoningText.length})`,
           }
         }
 
@@ -549,7 +649,7 @@ export async function POST(request: Request) {
             const piece = choice?.delta?.content
             const rPiece = choice?.delta?.reasoning_content
             if (typeof piece === 'string' && piece.length > 0) initialText += piece
-            if (typeof rPiece === 'string') reasoningChars += rPiece.length
+            if (typeof rPiece === 'string') reasoningText += rPiece
             if (choice?.finish_reason) finishReason = String(choice.finish_reason)
           } catch {}
         }
@@ -596,73 +696,72 @@ export async function POST(request: Request) {
           const diagnostics: string[] = []
           let winner: UpstreamSuccess | null = null
 
-          // Race the top two fast models in parallel (with a 1.5s head start for
-          // primaryModel) so if one model stalls in reasoning or hits a cold start,
-          // the other immediately delivers first tokens without doubling latency.
-          const pair = modelsToTry.slice(0, 2)
-          const rest = modelsToTry.slice(2)
+          // Race the top 3 models in parallel (with small staggered starts) and a
+          // generous 75s first-token budget so reasoning models have time to finish
+          // thinking AND emit content tokens without premature abort.
+          const raceModels = modelsToTry.slice(0, 3)
+          const rest = modelsToTry.slice(3)
 
-          if (pair.length === 2) {
-            const c0 = new AbortController()
-            const c1 = new AbortController()
-            const p0 = openValidatedStream(pair[0]!, 42_000, c0.signal)
-            const p1 = new Promise<UpstreamAttemptResult>((resolve) => {
-              const hedgeTimer = setTimeout(() => {
-                openValidatedStream(pair[1]!, 42_000, c1.signal).then(resolve)
-              }, 1500)
-              c1.signal.addEventListener(
-                'abort',
-                () => {
-                  clearTimeout(hedgeTimer)
-                  resolve({ ok: false, model: pair[1]!, reason: 'hedged-cancelled' })
-                },
-                { once: true }
-              )
+          if (raceModels.length >= 2) {
+            const controllers = raceModels.map(() => new AbortController())
+            const promises = raceModels.map((m, idx) => {
+              const sig = controllers[idx]!.signal
+              const delayMs = idx * 1200
+              if (delayMs === 0) {
+                return openValidatedStream(m, 75_000, sig).then((r) => ({ idx, r }))
+              }
+              return new Promise<{ idx: number; r: UpstreamAttemptResult }>((resolve) => {
+                const t = setTimeout(() => {
+                  openValidatedStream(m, 75_000, sig).then((r) => resolve({ idx, r }))
+                }, delayMs)
+                sig.addEventListener(
+                  'abort',
+                  () => {
+                    clearTimeout(t)
+                    resolve({ idx, r: { ok: false, model: m, reason: 'hedged-cancelled' } })
+                  },
+                  { once: true }
+                )
+              })
             })
 
-            const firstSettled = await Promise.race([
-              p0.then((r) => ({ idx: 0, r })),
-              p1.then((r) => ({ idx: 1, r })),
-            ])
-
-            if (firstSettled.r.ok) {
-              winner = firstSettled.r
-              if (firstSettled.idx === 0) c1.abort()
-              else c0.abort()
-            } else {
-              diagnostics.push(`${firstSettled.r.model}: ${firstSettled.r.reason}`)
-              // If auth failed (401/403), fail immediately
-              if (firstSettled.r.status === 401 || firstSettled.r.status === 403) {
-                c0.abort()
-                c1.abort()
-                controller.enqueue(
-                  encoder.encode(
-                    sseFrame({
-                      error: `AI auth failed (upstream ${firstSettled.r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`,
-                    })
-                  )
-                )
-                finish()
-                return
-              }
-              const other = firstSettled.idx === 0 ? await p1 : await p0
-              if (other.ok) {
-                winner = other
+            const pending = new Set(promises.map((_, i) => i))
+            while (pending.size > 0 && !winner) {
+              const activePromises = Array.from(pending).map((i) => promises[i]!)
+              const settled = await Promise.race(activePromises)
+              pending.delete(settled.idx)
+              if (settled.r.ok) {
+                winner = settled.r
+                controllers.forEach((c, i) => {
+                  if (i !== settled.idx) c.abort()
+                })
+                break
               } else {
-                diagnostics.push(`${other.model}: ${other.reason}`)
+                diagnostics.push(`${settled.r.model}: ${settled.r.reason}`)
+                if (settled.r.status === 401 || settled.r.status === 403) {
+                  controllers.forEach((c) => c.abort())
+                  controller.enqueue(
+                    encoder.encode(
+                      sseFrame({
+                        error: `AI auth failed (upstream ${settled.r.status}). Check NVIDIA_API_KEY on Vercel and redeploy.`,
+                      })
+                    )
+                  )
+                  finish()
+                  return
+                }
               }
             }
-          } else if (pair.length === 1) {
-            const r0 = await openValidatedStream(pair[0]!, 42_000)
+          } else if (raceModels.length === 1) {
+            const r0 = await openValidatedStream(raceModels[0]!, 75_000)
             if (r0.ok) winner = r0
             else diagnostics.push(`${r0.model}: ${r0.reason}`)
           }
 
-          // If neither of the raced primary/secondary models produced content,
-          // try remaining fallback models sequentially with a tight 25s budget.
+          // If none of the raced models produced content, try any remaining fallback model
           if (!winner) {
             for (const m of rest) {
-              const r = await openValidatedStream(m, 25_000)
+              const r = await openValidatedStream(m, 40_000)
               if (r.ok) {
                 winner = r
                 break
