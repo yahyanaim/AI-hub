@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import NextImage from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Send, Loader2, SearchX, MessageSquare, Plus, Search, SquarePen,
@@ -1116,7 +1117,7 @@ function AtsCvPreview({
         <div className="group relative h-[108px] w-[108px] shrink-0 overflow-hidden bg-neutral-100">
           {photo ? (
             <>
-              <img src={photo} alt={cv.name} className="h-full w-full object-cover" />
+              <NextImage src={photo} alt={cv.name} width={108} height={108} unoptimized className="h-full w-full object-cover" />
               <button
                 type="button"
                 onClick={onClearPhoto}
@@ -2002,7 +2003,7 @@ export default function ChatPage() {
       {/* Top: mascot + badge + collapse */}
       <div className="flex items-center justify-between gap-1 px-3 py-3">
         <span className="flex min-w-0 items-center gap-2 pl-0.5">
-          <img src="/chatbot-mascot.svg" alt="AI Hunt" className="h-8 w-8 shrink-0" />
+          <NextImage src="/chatbot-mascot.svg" alt="AI Hunt" width={32} height={32} unoptimized className="h-8 w-8 shrink-0" />
           <span className="inline-flex shrink-0 items-center rounded-full border border-brand-orange/30 bg-brand-orange/10 px-2.5 py-1 text-xs font-semibold text-brand-orange">
             AI Career Advisor
           </span>
@@ -2203,7 +2204,7 @@ export default function ChatPage() {
       {/* Minimized sidebar: ChatGPT-style icon rail */}
       {!isMobile && !sidebarOpen && (
         <aside className="flex w-[76px] shrink-0 flex-col items-center gap-1 py-4">
-          <img src="/chatbot-mascot.svg" alt="AI Hunt" className="mx-0 mb-2 h-8 w-8" />
+          <NextImage src="/chatbot-mascot.svg" alt="AI Hunt" width={32} height={32} unoptimized className="mx-0 mb-2 h-8 w-8" />
           <button
             onClick={sidebarToggle}
             className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -2279,7 +2280,7 @@ export default function ChatPage() {
         {isFresh ? (
           /* Fresh chat: ChatGPT-style centered composer with the mascot */
           <div className="flex flex-1 flex-col items-center justify-center px-4 pb-16">
-            <img src="/chatbot-mascot.svg" alt="" className="mb-4 h-16 w-16" />
+            <NextImage src="/chatbot-mascot.svg" alt="" width={64} height={64} unoptimized className="mb-4 h-16 w-16" />
             <h2 className="mb-6 text-center font-heading text-2xl font-semibold text-foreground sm:text-[28px]">
               What can I help with?
             </h2>
@@ -2302,7 +2303,7 @@ export default function ChatPage() {
                   <div key={i} className={cn('mb-6 sm:mb-7', msg.role === 'user' && 'flex justify-end')}>
                     {msg.role === 'assistant' ? (
                       <div className="flex gap-2.5 sm:gap-3">
-                        <img src="/chatbot-mascot.svg" alt="" className="mt-0.5 h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
+                        <NextImage src="/chatbot-mascot.svg" alt="" width={32} height={32} unoptimized className="mt-0.5 h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
                         <div className="min-w-0 flex-1 pt-0.5">
                           {msg.content === '' && loading ? (
                             <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
@@ -2341,7 +2342,7 @@ export default function ChatPage() {
                 })}
                 {stillLoadingEmpty && (
                   <div className="mb-6 flex gap-2.5 sm:mb-7 sm:gap-3">
-                    <img src="/chatbot-mascot.svg" alt="" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
+                    <NextImage src="/chatbot-mascot.svg" alt="" width={32} height={32} unoptimized className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
                     <div className="pt-2">
                       <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                     </div>

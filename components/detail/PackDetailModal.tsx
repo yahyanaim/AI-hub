@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ExternalLink, Download } from 'lucide-react'
 import type { DevTool } from '@/types'
@@ -296,11 +297,12 @@ export function PackDetailModal({ pack, onClose }: PackDetailModalProps) {
             {/* Header */}
             <div className="flex items-start gap-4 px-6 pb-0 pt-6">
               {PACK_LOGOS[pack.slug] ? (
-                <img
-                  src={PACK_LOGOS[pack.slug]}
+                <Image
+                  src={PACK_LOGOS[pack.slug] ?? ''}
                   alt={`${pack.name} logo`}
-                  loading="lazy"
-                  decoding="async"
+                  width={36}
+                  height={36}
+                  unoptimized
                   className="h-9 w-9 object-contain"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none'
@@ -335,11 +337,12 @@ export function PackDetailModal({ pack, onClose }: PackDetailModalProps) {
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
                           {logo ? (
-                            <img
+                            <Image
                               src={logo}
                               alt={`${tool} logo`}
-                              loading="lazy"
-                              decoding="async"
+                              width={20}
+                              height={20}
+                              unoptimized
                               className="h-5 w-5 rounded"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).style.display = 'none'

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Heart, ExternalLink } from 'lucide-react'
 import { cn, formatNumber } from '@/lib/utils'
@@ -131,11 +132,12 @@ export function StarterPackCard({
       <div className="relative mb-3 flex items-start gap-3.5">
         <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white shadow-lg ring-1 ring-border">
           {PACK_LOGOS[devtool.slug] ? (
-            <img
-              src={PACK_LOGOS[devtool.slug]}
+            <Image
+              src={PACK_LOGOS[devtool.slug] ?? ''}
               alt={`${devtool.name} logo`}
-              loading="lazy"
-              decoding="async"
+              width={32}
+              height={32}
+              unoptimized
               className="h-8 w-8 rounded object-contain"
               onError={(e) => {
                 (e.target as HTMLImageElement).style.display = 'none'
@@ -176,11 +178,12 @@ export function StarterPackCard({
                 title={tool}
               >
                 {logo ? (
-                  <img
+                  <Image
                     src={logo}
                     alt={`${tool} logo`}
-                    loading="lazy"
-                    decoding="async"
+                    width={16}
+                    height={16}
+                    unoptimized
                     className="h-4 w-4 rounded"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = 'none'

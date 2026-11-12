@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useEffect, useRef } from 'react'
 import { Suspense } from 'react'
+import Image from 'next/image'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { SearchX, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
 import { CardGrid } from '@/components/cards/CardPrimitives'
@@ -520,11 +521,12 @@ function ListingHeader({
           </p>
         </div>
         <div className="w-full overflow-hidden rounded-2xl border border-[#03EF62]/35 bg-[#05192D] shadow-[0_8px_32px_rgba(3,239,98,0.12)]">
-          <img
+          <Image
             src="/datacamp-partner-banner.jpg"
             alt="DataCamp is an official partner of AIHubTools"
             width={2048}
             height={580}
+            priority
             className="block h-auto w-full object-cover"
           />
         </div>
