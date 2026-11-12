@@ -9,7 +9,15 @@ const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 // with the FULL system prompt: nvidia/nemotron-3.5-lightning-30b-a3b delivers in
 // 21-50s and minimaxai/minimax-m3.1-flash in ~26s — both return valid content.
 const DEFAULT_MODEL = 'nvidia/nemotron-3.5-lightning-30b-a3b'
-const FALLBACK_MODELS = ['minimaxai/minimax-m3.1-flash']
+// Deep fallback chain: the first two are measured-working; the rest are
+// non-reasoning instruct models that cannot hit the reasoning-token
+// exhaustion failure mode (empty content) — they fail fast if unavailable.
+const FALLBACK_MODELS = [
+  'minimaxai/minimax-m3.1-flash',
+  'mistralai/mistral-large-2-instruct',
+  'google/gemma-4-31b-it',
+  'nvidia/llama-3.1-nemotron-51b-instruct',
+]
 
 function buildCourseCatalog(): string {
   return SEED_COURSES.map(c => {
