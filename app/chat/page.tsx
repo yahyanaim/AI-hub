@@ -1819,8 +1819,19 @@ export default function ChatPage() {
   const isFresh = active.id === 'greet'
   // Attached-CV chip: rendered above the composer. This text lives in memory
   // only (column above) — the file is never uploaded to long-term storage.
-  const atsBasePrompt =
-    'Rewrite my CV as a clean 1-page ATS CV matching our executive template: include Contact Information (Role, Location, Phone, Email, and LinkedIn/GitHub if present), Profil professionnel / Professional Summary (one cohesive paragraph), Expériences professionnelles / Work Experience (reverse-chronological: Job Title, Company — City, Country | Dates + 2-3 concise action bullets), Formation / Education (complete education parcours: Degree | Dates on line 1, School, City, Country on line 2, Projet réalisé : ... on line 3), Compétences / Skills (8-12 concise standalone skills), Langues / Languages (Language : Level), and Loisirs / Hobbies & Interests under Languages. Keep it strictly truthful to my CV and in the same language. Output the complete ATS CV as a document.'
+  const atsBasePrompt = [
+    'Rewrite my CV as a clean 1-page ATS CV matching our executive template:',
+    '',
+    '1. Contact Information: Role, Location, Phone, Email (and LinkedIn / GitHub if present)',
+    '2. Profil professionnel / Professional Summary: One cohesive paragraph',
+    '3. Expériences professionnelles / Work Experience: Reverse-chronological (Job Title, Company — City, Country | Dates + 2-3 concise action bullets)',
+    '4. Formation / Education: Complete education parcours (Degree | Dates on line 1, School, City, Country on line 2, Projet réalisé : ... on line 3)',
+    '5. Compétences / Skills: 8-12 concise standalone skills',
+    '6. Langues / Languages: Language : Level',
+    '7. Loisirs / Hobbies & Interests: Directly under Languages',
+    '',
+    'Keep it strictly truthful to my CV and in the same language. Output the complete ATS CV as a document.',
+  ].join('\n')
 
   const CvChip = cvName ? (
     <div className="mx-auto mb-2 w-full max-w-3xl space-y-2">

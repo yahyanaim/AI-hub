@@ -511,7 +511,7 @@ function ListingHeader({
 
   if (isDataCamp) {
     return (
-      <section aria-label="DataCamp Official Partner" className="mb-8 w-full">
+      <section aria-label="DataCamp Official Partner" className="mb-6 w-full">
         <div className="sr-only">
           <span>{config.eyebrow} — Official Partner of AIHubTools</span>
           <h1>{config.title}</h1>
@@ -524,7 +524,7 @@ function ListingHeader({
             src="/datacamp-partner-banner.jpg"
             alt="DataCamp × AIHubTools Official Partner — DataCamp Courses: Follow 16 curated DataCamp courses and learning paths, from beginner fundamentals to advanced practice."
             width={2536}
-            height={920}
+            height={520}
             className="block h-auto w-full object-cover"
           />
         </div>
