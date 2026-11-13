@@ -33,15 +33,22 @@
 - **Vercel Pro Controls Required:** Enabling **Spend Management → On-Demand Budget + Pause Production Deployments** and **Vercel Firewall** rate limits on `/api/*` is required to cap infrastructure spend.
 - **SEO Preserved:** All `3,418` static/SSG pages, `robots.txt`, `sitemap.xml`, canonicals, and crawlers (`Googlebot`, `Bingbot`) remain completely unchallenged.
 
-## 7. Test Results
+## 7. Verification Matrix & Test Results
 
-- `./node_modules/.bin/tsc -p tsconfig.json --noEmit`: **0 errors**
-- `npm run lint`: **0 errors, 0 warnings**
-- `npm run seed:check`: **Passed** (`3,267` entries across 5 datasets)
-- `npm run test:api`: **15 passed, 0 failed**
-- `npm run test:cost`: **41 passed, 0 failed** *(in-memory store + mocked `fetch` for Redis outage, Redis error classification & Turnstile `siteverify`)*
-- `npm run test:goal`: **101 passed, 0 failed**
-- `npm run build`: **Passed (`3,418/3,418` static pages)**
+| Component | Status | Evidence | Remaining Action |
+|---|---|---|---|
+| TypeScript | **PASS** | `./node_modules/.bin/tsc -p tsconfig.json --noEmit` — 0 errors | None |
+| Lint | **PASS** | `npm run lint` — 0 errors, 0 warnings | None |
+| API tests | **PASS** | `npm run test:api` — 15 passed, 0 failed | None |
+| Cost tests | **PASS** | `npm run test:cost` — 41 passed, 0 failed *(in-memory store + mocked `fetch` for Redis outage, Redis error classification & Turnstile `siteverify`)* | None |
+| Goal tests | **PASS** | `npm run test:goal` — 101 passed, 0 failed | None |
+| Production build | **PASS** | `npm run build` — 3,418/3,418 static/SSG pages generated | None |
+| Live Upstash | **BLOCKED** | `npx tsx --conditions=react-server scripts/redis-smoke-test.ts` → `BLOCKED: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are not configured` | Export Upstash credentials and run `npx tsx --conditions=react-server scripts/redis-smoke-test.ts` |
+| Turnstile browser test | **BLOCKED** | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` & `TURNSTILE_SECRET_KEY` unset locally; no authorized Preview deployment | Test Chat, CV, and Goal Match across Chrome/Safari/Firefox on an authorized Preview deployment with real Turnstile keys |
+| Vercel environment | **UNVERIFIED** | `vercel env ls` → codebase not linked locally; `.env` / `.env.local` absent | Verify `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `AUTH_SECRET` (>=32 chars), `NVIDIA_API_KEY` in Vercel Production |
+| Spending controls | **UNVERIFIED** | Vercel Dashboard billing/Spend Management cannot be read locally | Enable Pro Spend Management, On-Demand Budget, **Pause Production Deployments**, Billing Alerts, and Vercel Firewall `/api/*` rule |
+
+Additional check: `npm run seed:check` → **PASS** (`1345` tools, `915` devtools, `461` repos, `205` courses, `341` offers).
 
 ## 8. Live Redis Test Status
 
@@ -68,6 +75,6 @@
 ## 12. Final Recommendation
 
 **CONDITIONAL GO** — Ready to merge and deploy to a Preview/Staging environment **only after**:
-1. Running `npx tsx scripts/redis-smoke-test.ts` against real Upstash Redis credentials and confirming `ok`.
+1. Running `npx tsx --conditions=react-server scripts/redis-smoke-test.ts` against real Upstash Redis credentials and confirming `ok`.
 2. Setting `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, and `AUTH_SECRET` (`>= 32` chars) in Vercel Environment Variables.
 3. Enabling Vercel Pro Spend Management (**Pause Production Deployments**) and Billing Alerts in the Vercel Dashboard.

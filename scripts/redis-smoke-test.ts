@@ -1,7 +1,7 @@
 /**
  * Safe Live Upstash Redis REST EVAL Smoke Test (`aihunt:test:cost-protection:*` namespace).
  * Never modifies production counters and never logs credentials.
- * Run: npx tsx scripts/redis-smoke-test.ts
+ * Run: npx tsx --conditions=react-server scripts/redis-smoke-test.ts
  */
 import { randomBytes } from 'node:crypto'
 import { isRedisConfigured, redisCommand, redisEval } from '../lib/server/redis'
