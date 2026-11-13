@@ -1355,6 +1355,7 @@ export default function ChatPage() {
   const [cvText, setCvText] = useState('')
   const [cvBusy, setCvBusy] = useState(false)
   const [cvError, setCvError] = useState<string | null>(null)
+  const [cvQuota, setCvQuota] = useState<{ limit: number; remaining: number; resetAt: string } | null>(null)
   const [cvPhoto, setCvPhoto] = useState<string | null>(null)
   const cvInputRef = useRef<HTMLInputElement>(null)
   const photoInputRef = useRef<HTMLInputElement>(null)
@@ -1666,9 +1667,29 @@ export default function ChatPage() {
     (s) => !search || s.title.toLowerCase().includes(search.toLowerCase())
   )
 
+  // Fetch monthly CV upload quota once on mount (read-only, never reveals visitor IDs)
+  useEffect(() => {
+    let alive = true
+    fetch('/api/chat/cv')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (alive && d && typeof d.remaining === 'number' && typeof d.limit === 'number' && typeof d.resetAt === 'string') {
+          setCvQuota({ limit: d.limit, remaining: d.remaining, resetAt: d.resetAt })
+        }
+      })
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
+  }, [])
+
   // ---- CV attach (parse in memory, never store) ---------------------------
   const handleCvFile = async (file: File) => {
     setCvError(null)
+    if (cvQuota && cvQuota.remaining <= 0) {
+      setCvError('Monthly CV limit reached. Try again next month.')
+      return
+    }
     const lower = file.name.toLowerCase()
     if (!lower.endsWith('.pdf') && !lower.endsWith('.txt') && !lower.endsWith('.md')) {
       setCvError('Please attach a PDF or TXT file (export DOCX to PDF first).')
@@ -1686,6 +1707,13 @@ export default function ChatPage() {
         form.append('file', file)
         const res = await fetch('/api/chat/cv', { method: 'POST', body: form })
         const data = await res.json().catch(() => ({}))
+        if (data?.quota && typeof data.quota.remaining === 'number' && typeof data.quota.limit === 'number') {
+          setCvQuota({
+            limit: data.quota.limit,
+            remaining: data.quota.remaining,
+            resetAt: data.quota.resetAt || cvQuota?.resetAt || '',
+          })
+        }
         if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`)
         text = data.text as string
       } else {
@@ -1921,6 +1949,19 @@ export default function ChatPage() {
         </div>
       )}
     </div>
+  ) : null
+
+  const cvResetLabel = cvQuota?.resetAt
+    ? new Date(cvQuota.resetAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
+    : null
+
+  const CvQuotaNotice = cvQuota ? (
+    <p className="mt-1 text-center text-[11px] text-muted-foreground">
+      {cvQuota.remaining > 0
+        ? `${cvQuota.remaining} CV ${cvQuota.remaining === 1 ? 'upload' : 'uploads'} remaining this month`
+        : 'Monthly CV limit reached. Try again next month.'}
+      {cvResetLabel ? ` · Resets ${cvResetLabel} (UTC)` : ''}
+    </p>
   ) : null
 
   const CvErrorChip = cvError ? (
@@ -2288,6 +2329,7 @@ export default function ChatPage() {
               {CvChip}
               {CvErrorChip}
               {ComposerPill}
+              {CvQuotaNotice}
               <p className="mt-2 text-center text-[11px] text-muted-foreground">
                 AI can make mistakes. Verify courses and offers on their official pages.
               </p>
@@ -2367,6 +2409,7 @@ export default function ChatPage() {
                 {CvChip}
                 {CvErrorChip}
                 {ComposerPill}
+                {CvQuotaNotice}
                 <p className="mt-2 text-center text-[11px] text-muted-foreground">
                   AI can make mistakes. Verify courses and offers on their official pages.
                 </p>

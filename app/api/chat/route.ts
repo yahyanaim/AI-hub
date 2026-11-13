@@ -1,6 +1,18 @@
 import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed/courses'
-import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
+import { getBudgetConfig } from '@/lib/server/budget-config'
+import { checkExpensiveAiBotGuard } from '@/lib/server/bot-guard'
+import {
+  acquireAiExecutionBudget,
+  secondsUntilNextUtcDay,
+  secondsUntilNextUtcMonth,
+  utcDayKey,
+  utcHourKey,
+  utcMinuteKey,
+  utcMonthKey,
+  type QuotaWindowSpec,
+} from '@/lib/server/quota'
+import { attachVisitorCookie, resolveVisitorIdentity } from '@/lib/server/visitor'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 // Nov 2026 audit: openai/gpt-oss-20b is still LISTED on integrate.api.nvidia.com
@@ -308,14 +320,54 @@ async function githubSnapshotFromText(text: string): Promise<string | null> {
 export const maxDuration = 300
 
 export async function POST(request: Request) {
+  const identity = resolveVisitorIdentity(request)
+  let releaseBudget: (() => Promise<void>) | null = null
+  const jsonErr = (body: unknown, status: number, extraHeaders?: Record<string, string>) => {
+    const res = NextResponse.json(body, { status, headers: extraHeaders })
+    attachVisitorCookie(res, identity)
+    return res
+  }
+
   try {
-    const ip = getClientIp(request)
-    if (await checkRateLimit('chat', ip, RATE_LIMIT_MAX_REQUESTS, Math.ceil(RATE_LIMIT_WINDOW_MS / 1000))) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please wait a minute and try again.' },
-        { status: 429 }
-      )
+    const bot = await checkExpensiveAiBotGuard(request, { maxContentLengthBytes: 300_000 })
+    if (!bot.ok) {
+      return jsonErr({ error: bot.error }, bot.status)
     }
+
+    const cfg = getBudgetConfig()
+    const now = new Date()
+    const min = utcMinuteKey(now)
+    const hr = utcHourKey(now)
+    const day = utcDayKey(now)
+    const month = utcMonthKey(now)
+    const dayTtl = secondsUntilNextUtcDay(now) + 300
+    const monthTtl = secondsUntilNextUtcMonth(now) + 3600
+
+    const visitorSpecs: QuotaWindowSpec[] = [
+      { key: `aihunt:chat:min:${min}:ip:${identity.ipHash}`, limit: cfg.chatPerMinuteLimit, ttlSeconds: 70 },
+      { key: `aihunt:chat:min:${min}:dev:${identity.deviceHash}`, limit: cfg.chatPerMinuteLimit, ttlSeconds: 70 },
+      { key: `aihunt:chat:hr:${hr}:ip:${identity.ipHash}`, limit: cfg.chatPerHourLimit, ttlSeconds: 3700 },
+      { key: `aihunt:chat:hr:${hr}:dev:${identity.deviceHash}`, limit: cfg.chatPerHourLimit, ttlSeconds: 3700 },
+      { key: `aihunt:chat:d:${day}:ip:${identity.ipHash}`, limit: cfg.chatPerDayLimit, ttlSeconds: dayTtl },
+      { key: `aihunt:chat:d:${day}:dev:${identity.deviceHash}`, limit: cfg.chatPerDayLimit, ttlSeconds: dayTtl },
+      { key: `aihunt:chat:m:${month}:ip:${identity.ipHash}`, limit: cfg.chatPerMonthLimit, ttlSeconds: monthTtl },
+      { key: `aihunt:chat:m:${month}:dev:${identity.deviceHash}`, limit: cfg.chatPerMonthLimit, ttlSeconds: monthTtl },
+    ]
+
+    const budget = await acquireAiExecutionBudget(
+      'chat',
+      identity,
+      visitorSpecs,
+      cfg.chatMaxConcurrent,
+      180
+    )
+    if (!budget.ok) {
+      const headers = budget.retryAfterSeconds
+        ? { 'Retry-After': String(budget.retryAfterSeconds) }
+        : undefined
+      return jsonErr({ error: budget.error }, budget.status, headers)
+    }
+    releaseBudget = budget.release
 
     const body = await request.json().catch(() => null)
     const { messages } = body ?? {}
@@ -333,19 +385,20 @@ export async function POST(request: Request) {
           ((m as { content: string }).content ?? '').length > MAX_MESSAGE_CHARS
       )
     ) {
-      return NextResponse.json(
+      await releaseBudget()
+      releaseBudget = null
+      return jsonErr(
         { error: `Invalid messages payload (max ${MAX_MESSAGES_COUNT} messages, ${MAX_MESSAGE_CHARS} characters each).` },
-        { status: 400 }
+        400
       )
     }
 
     const API_KEY = process.env.NVIDIA_API_KEY || process.env.DAHL_API_KEY
     if (!API_KEY) {
+      await releaseBudget()
+      releaseBudget = null
       console.error('[chat] missing API key — set NVIDIA_API_KEY in Vercel env and redeploy')
-      return NextResponse.json(
-        { error: 'API key not configured' },
-        { status: 500 }
-      )
+      return jsonErr({ error: 'API key not configured' }, 500)
     }
 
     // Never trust client-supplied system prompts; cap context to control token cost
@@ -665,10 +718,15 @@ export async function POST(request: Request) {
           if (closed) return
           closed = true
           clearInterval(pinger)
+          if (releaseBudget) {
+            void releaseBudget().catch(() => {})
+            releaseBudget = null
+          }
           try {
             controller.close()
           } catch {}
         }
+        request.signal?.addEventListener('abort', finish, { once: true })
 
         try {
           const diagnostics: string[] = []
@@ -890,21 +948,30 @@ export async function POST(request: Request) {
           finish()
         }
       },
+      cancel() {
+        if (releaseBudget) {
+          void releaseBudget().catch(() => {})
+          releaseBudget = null
+        }
+      },
     })
 
-    return new Response(stream, {
+    const res = new Response(stream, {
       headers: {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
       },
     })
+    attachVisitorCookie(res, identity)
+    return res
   } catch (error: unknown) {
+    if (releaseBudget) {
+      await releaseBudget().catch(() => {})
+      releaseBudget = null
+    }
     const msg = error instanceof Error ? error.message : String(error)
     console.error('[chat] handler error', msg, error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    return jsonErr({ error: 'Internal server error' }, 500)
   }
 }

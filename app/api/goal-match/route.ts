@@ -1,6 +1,18 @@
 import { NextResponse } from 'next/server'
 import { createHash, randomBytes } from 'node:crypto'
-import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
+import { getBudgetConfig } from '@/lib/server/budget-config'
+import { checkExpensiveAiBotGuard } from '@/lib/server/bot-guard'
+import {
+  acquireAiExecutionBudget,
+  secondsUntilNextUtcDay,
+  secondsUntilNextUtcMonth,
+  utcDayKey,
+  utcMinuteKey,
+  utcMonthKey,
+  type QuotaWindowSpec,
+} from '@/lib/server/quota'
+import { isRedisConfigured, redisCommand } from '@/lib/server/redis'
+import { attachVisitorCookie, resolveVisitorIdentity } from '@/lib/server/visitor'
 import { matchToolsByGoal, analyzeGoal, type GoalItemKind } from '@/lib/goal-finder'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
 import { runProviderRoundtrip, parseProviderOutput, type ProviderResult } from '@/lib/goal-provider-roundtrip'
@@ -85,32 +97,89 @@ export async function POST(req: Request) {
     build: process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.COMMIT_SHA ?? process.env.NEXT_PUBLIC_COMMIT_SHA ?? 'dev',
     prompt: PROMPT_VERSION,
   }
+  const identity = resolveVisitorIdentity(req)
+  const jsonWithCookie = (body: unknown, status = 200, extraHeaders?: Record<string, string>) => {
+    const res = NextResponse.json(body, { status, headers: extraHeaders })
+    attachVisitorCookie(res, identity)
+    return res
+  }
+
+  const bot = await checkExpensiveAiBotGuard(req, { maxContentLengthBytes: 8_192 })
+  if (!bot.ok) {
+    return jsonWithCookie({ error: bot.error, fallback: true, meta }, bot.status)
+  }
 
   if (!API_KEY) {
-    return NextResponse.json({ error: 'AI matching is not configured.', fallback: true, meta }, { status: 503 })
+    return jsonWithCookie({ error: 'AI matching is not configured.', fallback: true, meta }, 503)
   }
-  const ip = getClientIp(req)
-  if (await checkRateLimit('goalmatch', ip, 12, 60)) {
-    return NextResponse.json(
-      { error: 'Too many searches — please wait a minute.', fallback: true, meta },
-      { status: 429 }
+
+  const cfg = getBudgetConfig()
+  const now = new Date()
+  const min = utcMinuteKey(now)
+  const day = utcDayKey(now)
+  const month = utcMonthKey(now)
+  const dayTtl = secondsUntilNextUtcDay(now) + 300
+  const monthTtl = secondsUntilNextUtcMonth(now) + 3600
+
+  const visitorSpecs: QuotaWindowSpec[] = [
+    { key: `aihunt:goal:min:${min}:ip:${identity.ipHash}`, limit: cfg.goalPerMinuteLimit, ttlSeconds: 70 },
+    { key: `aihunt:goal:min:${min}:dev:${identity.deviceHash}`, limit: cfg.goalPerMinuteLimit, ttlSeconds: 70 },
+    { key: `aihunt:goal:d:${day}:ip:${identity.ipHash}`, limit: cfg.goalPerDayLimit, ttlSeconds: dayTtl },
+    { key: `aihunt:goal:d:${day}:dev:${identity.deviceHash}`, limit: cfg.goalPerDayLimit, ttlSeconds: dayTtl },
+    { key: `aihunt:goal:m:${month}:ip:${identity.ipHash}`, limit: cfg.goalPerMonthLimit, ttlSeconds: monthTtl },
+    { key: `aihunt:goal:m:${month}:dev:${identity.deviceHash}`, limit: cfg.goalPerMonthLimit, ttlSeconds: monthTtl },
+  ]
+
+  const budget = await acquireAiExecutionBudget(
+    'goal',
+    identity,
+    visitorSpecs,
+    cfg.goalMaxConcurrent,
+    90
+  )
+  if (!budget.ok) {
+    const headers = budget.retryAfterSeconds
+      ? { 'Retry-After': String(budget.retryAfterSeconds) }
+      : undefined
+    return jsonWithCookie(
+      { error: budget.error, fallback: true, meta },
+      budget.status,
+      headers
     )
   }
 
-  let goal = ''
-  let freeOnly = false
   try {
-    const body = await req.json()
-    goal = String(body.goal ?? '').slice(0, 500).trim()
-    // Frontend sends freeOnly; honor the legacy 'free' key too so the
-    // filter is never silently lost in transit.
-    freeOnly = body.freeOnly === true || body.free === true
-  } catch {
-    return NextResponse.json({ error: 'Invalid request.', meta }, { status: 400 })
-  }
-  if (goal.length < 2) {
-    return NextResponse.json({ error: 'Describe your goal first.', meta }, { status: 400 })
-  }
+    let goal = ''
+    let freeOnly = false
+    try {
+      const body = await req.json()
+      goal = String(body.goal ?? '').slice(0, 500).trim()
+      // Frontend sends freeOnly; honor the legacy 'free' key too so the
+      // filter is never silently lost in transit.
+      freeOnly = body.freeOnly === true || body.free === true
+    } catch {
+      return jsonWithCookie({ error: 'Invalid request.', meta }, 400)
+    }
+    if (goal.length < 2) {
+      return jsonWithCookie({ error: 'Describe your goal first.', meta }, 400)
+    }
+
+    // Short-lived non-personalized cache in Redis for identical normalized queries
+    const cacheKey =
+      cfg.goalCacheTtlSeconds > 0 && isRedisConfigured()
+        ? `aihunt:goal:cache:${createHash('sha256').update(`${goal.toLowerCase()}|${freeOnly}`).digest('hex').slice(0, 24)}`
+        : null
+    if (cacheKey) {
+      const cachedRaw = await redisCommand<string>(['get', cacheKey])
+      if (cachedRaw) {
+        try {
+          const cached = JSON.parse(cachedRaw) as { matches?: unknown[] }
+          if (Array.isArray(cached.matches)) {
+            return jsonWithCookie({ matches: cached.matches, abstained: false, meta: { ...meta, cached: true } })
+          }
+        } catch {}
+      }
+    }
 
   // ---- Per-request diagnostics ------------------------------------------
   // rnd: stable id across all log lines of this request AND echoed in the
@@ -386,13 +455,19 @@ export async function POST(req: Request) {
       picked: matches.length,
       droppedByContract: result.dropped,
     })
-    return NextResponse.json({ matches, abstained: false, meta })
+    if (cacheKey && matches.length > 0) {
+      void redisCommand(['set', cacheKey, JSON.stringify({ matches }), 'EX', String(cfg.goalCacheTtlSeconds)])
+    }
+    return jsonWithCookie({ matches, abstained: false, meta })
   }
 
   // ---- States 4/5: technical failure vs deadline expiry ----------------
   logGoalMatch('goal-failure', { elapsedMs: Date.now() - started, cause: result.cause, deadlineExpired: result.deadlineExpired })
-  return NextResponse.json(
+  return jsonWithCookie(
     { error: 'AI matching unavailable right now.', fallback: true, deadlineExpired: result.cause === 'deadline', meta },
-    { status: 502 }
+    502
   )
+  } finally {
+    await budget.release()
+  }
 }
