@@ -49,12 +49,15 @@ async function run() {
   // 2. /api/chat/cv contract & magic-header validation
   {
     const ip = '198.51.100.11'
-    const makeCvReq = (file?: File) => {
+    const makeCvReq = (file?: File, reqIp = ip) => {
       const form = new FormData()
       if (file) form.append('file', file)
       return new Request('http://localhost/api/chat/cv', {
         method: 'POST',
-        headers: { 'x-vercel-forwarded-for': ip },
+        headers: {
+          'x-vercel-forwarded-for': reqIp,
+          'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X) AIHubTest/1.0',
+        },
         body: form,
       })
     }
@@ -76,11 +79,11 @@ async function run() {
     const validData = await rValid.json()
     check('cv: valid .txt CV → 200 with extracted text', rValid.status === 200 && validData.text === validCvText, validData)
 
-    // Exhaust remaining rate limit (already made 5 calls from this IP; limit is 10)
+    // Exhaust per-minute abuse limit with malformed uploads (refunds monthly quota, triggers 429 at 11th)
     for (let i = 0; i < 5; i++) {
-      await cvPost(makeCvReq(new File([validCvText], 'resume.txt', { type: 'text/plain' })))
+      await cvPost(makeCvReq(new File(['too short'], 'cv.txt', { type: 'text/plain' })))
     }
-    const rRateLimited = await cvPost(makeCvReq(new File([validCvText], 'resume.txt', { type: 'text/plain' })))
+    const rRateLimited = await cvPost(makeCvReq(new File(['too short'], 'cv.txt', { type: 'text/plain' })))
     check('cv: 11th upload from same IP → 429 rate limited', rRateLimited.status === 429, rRateLimited.status)
   }
 

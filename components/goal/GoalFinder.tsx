@@ -8,6 +8,7 @@ import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
 import type { Tool, DevTool, Repo } from '@/types'
+import { getTurnstileHeaders } from '@/lib/client/turnstile'
 
 interface ShownMatch {
   kind: GoalItemKind
@@ -103,9 +104,14 @@ export function GoalFinder() {
       const timeout = setTimeout(() => controller.abort(), CLIENT_TIMEOUT_MS)
       const stale = () => runId.current !== currentRun
       try {
+        const turnstileHeaders = await getTurnstileHeaders({
+          action: 'goal_match',
+          signal: controller.signal,
+        })
+        if (stale()) return
         const res = await fetch('/api/goal-match', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...turnstileHeaders },
           body: JSON.stringify({ goal: q, freeOnly: freeFilter }),
           signal: controller.signal,
         })

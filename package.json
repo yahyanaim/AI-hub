@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "test:goal": "tsx --conditions=react-server scripts/goal-finder-tests.ts",
     "test:api": "tsx --conditions=react-server scripts/api-security-tests.ts",
+    "test:cost": "tsx --conditions=react-server scripts/cost-protection-tests.ts",
     "seed:check": "node scripts/validate-seed.mjs"
   },
   "dependencies": {
