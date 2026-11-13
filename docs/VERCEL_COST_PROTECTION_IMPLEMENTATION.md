@@ -18,17 +18,20 @@
   - Uses Redis **ZSETs** (`LUA_LEASE_ACQUIRE`, `LUA_LEASE_RENEW`, `LUA_LEASE_RELEASE`) where each lease holds a unique random 96-bit `token` and `expiresAtMs` score.
   - `ZREMRANGEBYSCORE` prunes expired tokens before `ZCARD`; `release()` executes `ZREM key token` (atomic compare-and-release) so an expired or delayed request can **never** release a newer request's active lease.
   - `/api/chat` renews its `180s` lease every `60s` during long-running SSE streams and clears timers on `finish()` and `cancel()`.
-- **Idempotent CV Reserve / Commit / Refund (`reserveCvMonthlyQuota`, `commitCvMonthlyQuota`, `refundCvMonthlyQuota`)**:
-  - Keys: `aihunt:cv:m:<YYYY-MM>:ip:<ipHash>`, `aihunt:cv:m:<YYYY-MM>:dev:<deviceHash>`, and `aihunt:cv:res:<reservationId>` (TTL `300s`, storing the exact `ipKey|devKey` pair).
-  - `LUA_CV_RESERVE` atomically checks limits, increments counters, and records the `reservationId`.
-  - On success, `commitCvMonthlyQuota(reservationId)` deletes the reservation key; on failure, `LUA_CV_REFUND` atomically `DEL`s the reservation key and only decrements if the reservation existed—preventing duplicate refunds, post-commit refunds, expired-reservation refunds, and cross-month key mismatches.
+- **Crash-Safe CV Reserve / Commit / Refund / Lazy Recovery (`reserveCvMonthlyQuota`, `commitCvMonthlyQuota`, `refundCvMonthlyQuota`, `recoverExpiredCvReservations`)**:
+  - Keys: `aihunt:cv:m:<YYYY-MM>:ip:<ipHash>`, `aihunt:cv:m:<YYYY-MM>:dev:<deviceHash>`, `aihunt:cv:res:<reservationId>` (TTL = UTC month end + 3600s, storing `${ownerDeviceHash}|${ipKey}|${devKey}`), and `aihunt:cv:pending` ZSET (score = `staleAtMs = nowMs + 300_000`).
+  - `LUA_CV_RESERVE` atomically runs bounded lazy recovery (`LIMIT 0 10`) on stale pending reservations before checking limits, increments counters, persists `aihunt:cv:res:<reservationId>` for the full month TTL, and registers it in `aihunt:cv:pending`.
+  - On success, `LUA_CV_COMMIT` verifies owner match and atomically deletes both `aihunt:cv:res:<reservationId>` and the `aihunt:cv:pending` entry.
+  - On failure, `LUA_CV_REFUND` verifies owner match, atomically deletes both keys, and clamp-decrements the exact `ipKey`/`devKey` stored in the reservation metadata (safe across UTC month boundaries and immune to double-refund or post-commit refund).
+  - If a Function crashes before commit or refund, `LUA_CV_RECOVER_EXPIRED` (invoked lazily by `getCvMonthlyQuotaStatus` and `reserveCvMonthlyQuota`) atomically claims and refunds abandoned reservations after 300s.
   - Separate per-minute abuse counter (`aihunt:rl:cvabuse:<YYYY-MM-DDTHH:MM>:*`) prevents malformed-file spam.
 - **Fail-Closed Mode (`isFailClosedMode`)**: In production (`NODE_ENV=production` or `VERCEL_ENV=production` or `AIHUB_FAIL_CLOSED=1`), missing or unreachable Upstash Redis returns **HTTP 503** on expensive AI endpoints. `AIHUB_ALLOW_MEMORY_FALLBACK=1` is **strictly ignored in production**.
 
 ## 3. Bot Mitigation & Turnstile Integration (`lib/server/bot-guard.ts`, `lib/client/turnstile.ts`)
 
 - **Header & Origin Hardening**: Rejects `sec-fetch-site: cross-site`, `origin`/`host` mismatches, and automated CLI/scraper User-Agents on expensive AI `POST` endpoints (`403`) without affecting public `GET` catalog/SEO routes or Googlebot/Bingbot.
-- **Safe Client-Compatible Turnstile**: Server verification activates only when **both** `TURNSTILE_SECRET_KEY` and `NEXT_PUBLIC_TURNSTILE_SITE_KEY` are configured (unless `TURNSTILE_ENFORCE_WITHOUT_SITE_KEY=1` is explicitly set). When enabled, `lib/client/turnstile.ts` lazily executes an invisible widget and attaches `x-turnstile-token` on `/api/chat`, `/api/chat/cv`, and `/api/goal-match`. Supports `TURNSTILE_MODE=always` (default) or `TURNSTILE_MODE=risk` (challenges requests missing browser `sec-fetch-site`/`accept-language` headers).
+- **Accessible Client-Compatible Turnstile**: Server verification activates only when **both** `TURNSTILE_SECRET_KEY` and `NEXT_PUBLIC_TURNSTILE_SITE_KEY` are configured (unless `TURNSTILE_ENFORCE_WITHOUT_SITE_KEY=1` is explicitly set). `lib/client/turnstile.ts` serializes widget execution via an internal queue, uses `appearance: 'interaction-only'` inside an accessible `role="dialog"` overlay (never `display:none`), cleans up on abort/unmount/cancel, handles token expiry (`reset`) and slow/blocked scripts (`4.5s` load timeout), and binds `action` (`chat`, `cv`, `goal_match`).
+- **Action, Hostname & Replay Verification**: Server-side `siteverify` validates `action`, `hostname`, and single-use token replay (`aihunt:ts:used:<sha256>`, `SET NX EX 300`). Supports `TURNSTILE_MODE=always` (default) or `TURNSTILE_MODE=risk`.
 - **Vercel Firewall / WAF**: Recommended at the edge (Vercel Dashboard → Security → Firewall) to rate-limit `/api/*` before requests invoke Next.js functions.
 
 ## 3. Environment Variables (`lib/server/budget-config.ts`)

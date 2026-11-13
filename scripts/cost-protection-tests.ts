@@ -13,10 +13,12 @@ import {
   commitCvMonthlyQuota,
   getCvMonthlyQuotaStatus,
   nextUtcMonthResetIso,
+  recoverExpiredCvReservations,
   refundCvMonthlyQuota,
   reserveCvMonthlyQuota,
   utcMonthKey,
 } from '../lib/server/quota'
+import { __resetTurnstileReplayStoreForTests } from '../lib/server/bot-guard'
 import { isFailClosedMode } from '../lib/server/redis'
 import { resolveVisitorIdentity } from '../lib/server/visitor'
 import robotsGet from '../app/robots'
@@ -600,6 +602,199 @@ async function run() {
       )
       check('bot-guard: blocks cross-site and origin mismatch with 403', rCrossSite.status === 403 && rOriginMismatch.status === 403, { rCrossSite: rCrossSite.status, rOriginMismatch: rOriginMismatch.status })
     } finally {
+      if (prevSecret === undefined) delete process.env.TURNSTILE_SECRET_KEY
+      else process.env.TURNSTILE_SECRET_KEY = prevSecret
+      if (prevSiteKey === undefined) delete process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+      else process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY = prevSiteKey
+      if (prevMode === undefined) delete process.env.TURNSTILE_MODE
+      else process.env.TURNSTILE_MODE = prevMode
+      if (prevKey === undefined) delete process.env.NVIDIA_API_KEY
+      else process.env.NVIDIA_API_KEY = prevKey
+    }
+  }
+
+  // 24. Crash-safe CV reservation recovery, duplicate recovery, ownership, and month boundary
+  {
+    __resetLocalQuotaStoreForTests()
+    const owner = resolveVisitorIdentity(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': '198.51.100.250' } }))
+    const other = resolveVisitorIdentity(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': '198.51.100.251' } }))
+    const novEnd = new Date('2026-11-30T23:58:00Z')
+    const decStart = new Date('2026-12-01T00:05:00Z')
+
+    // Simulate 1 committed upload + 1 crashed/abandoned upload (1s stale window)
+    const committed = await reserveCvMonthlyQuota(owner, novEnd, 50)
+    const crashed = await reserveCvMonthlyQuota(owner, novEnd, 50)
+    if (committed.ok && crashed.ok) {
+      // Ownership check: other visitor cannot commit or refund owner's reservation
+      const stolenCommit = await commitCvMonthlyQuota(committed.reservationId, other)
+      const stolenRefund = await refundCvMonthlyQuota(other, crashed.reservationId, novEnd)
+      check('cv-recovery: ownership prevents other visitor commit/refund', !stolenCommit && !stolenRefund, { stolenCommit, stolenRefund })
+
+      // Owner commits first reservation
+      const okCommit = await commitCvMonthlyQuota(committed.reservationId, owner)
+      // Concurrent refund after commit must be false
+      const lateRefund = await refundCvMonthlyQuota(owner, committed.reservationId, novEnd)
+      check('cv-recovery: commit succeeds once and blocks subsequent refund', okCommit && !lateRefund)
+
+      // Advance past staleAtMs (50ms) into December -> lazy recovery refunds crashed Nov reservation without touching committed or Dec
+      const rec1 = await recoverExpiredCvReservations(decStart.getTime(), 10)
+      const rec2 = await recoverExpiredCvReservations(decStart.getTime(), 10)
+      const novStatus = await getCvMonthlyQuotaStatus(owner, novEnd)
+      const decStatus = await getCvMonthlyQuotaStatus(owner, decStart)
+      check(
+        'cv-recovery: expired crashed reservation recovered once across month boundary, committed preserved, no negative counters',
+        rec1.ok &&
+          rec1.recovered === 1 &&
+          rec2.ok &&
+          rec2.recovered === 0 &&
+          novStatus.ok &&
+          novStatus.status.used === 1 &&
+          novStatus.status.remaining === 2 &&
+          decStatus.ok &&
+          decStatus.status.used === 0 &&
+          decStatus.status.remaining === 3,
+        { rec1, rec2, novStatus, decStatus }
+      )
+    }
+  }
+
+  // 25. Concurrent commit and refund on same reservation: at most one wins
+  {
+    __resetLocalQuotaStoreForTests()
+    const id = resolveVisitorIdentity(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': '198.51.100.252' } }))
+    const now = new Date('2026-11-20T12:00:00Z')
+    const r = await reserveCvMonthlyQuota(id, now)
+    if (r.ok) {
+      const [cRes, rRes] = await Promise.all([
+        commitCvMonthlyQuota(r.reservationId, id),
+        refundCvMonthlyQuota(id, r.reservationId, now),
+      ])
+      check('cv-recovery: concurrent commit and refund resolves exclusively (exactly one true)', cRes !== rRes, { cRes, rRes })
+    }
+  }
+
+  // 26. Redis outage during commit and refund fails safely (returns false)
+  {
+    const prevFail = process.env.AIHUB_FAIL_CLOSED
+    const prevUrl = process.env.UPSTASH_REDIS_REST_URL
+    const prevTok = process.env.UPSTASH_REDIS_REST_TOKEN
+    const prevFetch = globalThis.fetch
+    process.env.AIHUB_FAIL_CLOSED = '1'
+    process.env.UPSTASH_REDIS_REST_URL = 'https://mock-upstash.invalid'
+    process.env.UPSTASH_REDIS_REST_TOKEN = 'mock-token'
+    globalThis.fetch = (async () => {
+      throw new Error('ECONNREFUSED')
+    }) as typeof fetch
+    try {
+      const id = resolveVisitorIdentity(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': '198.51.100.253' } }))
+      const comOutage = await commitCvMonthlyQuota('res-outage-1', id)
+      const refOutage = await refundCvMonthlyQuota(id, 'res-outage-1')
+      check('cv-recovery: Redis outage during commit/refund returns false cleanly', comOutage === false && refOutage === false, { comOutage, refOutage })
+    } finally {
+      globalThis.fetch = prevFetch
+      if (prevFail === undefined) delete process.env.AIHUB_FAIL_CLOSED
+      else process.env.AIHUB_FAIL_CLOSED = prevFail
+      if (prevUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL
+      else process.env.UPSTASH_REDIS_REST_URL = prevUrl
+      if (prevTok === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN
+      else process.env.UPSTASH_REDIS_REST_TOKEN = prevTok
+    }
+  }
+
+  // 27. Turnstile action binding, hostname verification, and replay prevention
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetTurnstileReplayStoreForTests()
+    const prevSecret = process.env.TURNSTILE_SECRET_KEY
+    const prevSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+    const prevMode = process.env.TURNSTILE_MODE
+    const prevKey = process.env.NVIDIA_API_KEY
+    const prevFetch = globalThis.fetch
+
+    process.env.TURNSTILE_SECRET_KEY = 'ts-secret'
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY = 'ts-site'
+    process.env.TURNSTILE_MODE = 'always'
+    process.env.NVIDIA_API_KEY = ''
+
+    let mockSiteverify: { success: boolean; action?: string; hostname?: string } = {
+      success: true,
+      action: 'chat',
+      hostname: 'www.aihubtools.ma',
+    }
+    globalThis.fetch = (async () =>
+      new Response(JSON.stringify(mockSiteverify), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })) as typeof fetch
+
+    try {
+      // Valid action + hostname succeeds once; replay of same token fails 403
+      const rOk = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            host: 'www.aihubtools.ma',
+            'x-turnstile-token': 'tok-unique-1',
+            'x-vercel-forwarded-for': '198.51.100.254',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      const rReplay = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            host: 'www.aihubtools.ma',
+            'x-turnstile-token': 'tok-unique-1',
+            'x-vercel-forwarded-for': '198.51.100.254',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      check('turnstile-hardening: valid token passes once, replay blocked (403)', rOk.status !== 403 && rReplay.status === 403, { rOk: rOk.status, rReplay: rReplay.status })
+
+      // Cross-endpoint action mismatch rejected (403)
+      mockSiteverify = { success: true, action: 'cv', hostname: 'www.aihubtools.ma' }
+      const rActionMismatch = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            host: 'www.aihubtools.ma',
+            'x-turnstile-token': 'tok-unique-2',
+            'x-vercel-forwarded-for': '198.51.100.255',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+
+      // Hostname mismatch rejected (403)
+      mockSiteverify = { success: true, action: 'chat', hostname: 'evil.example' }
+      const rHostMismatch = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            host: 'www.aihubtools.ma',
+            'x-turnstile-token': 'tok-unique-3',
+            'x-vercel-forwarded-for': '198.51.100.255',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      check(
+        'turnstile-hardening: rejects cross-endpoint action mismatch and hostname mismatch (403)',
+        rActionMismatch.status === 403 && rHostMismatch.status === 403,
+        { rActionMismatch: rActionMismatch.status, rHostMismatch: rHostMismatch.status }
+      )
+    } finally {
+      globalThis.fetch = prevFetch
       if (prevSecret === undefined) delete process.env.TURNSTILE_SECRET_KEY
       else process.env.TURNSTILE_SECRET_KEY = prevSecret
       if (prevSiteKey === undefined) delete process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY

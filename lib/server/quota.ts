@@ -76,8 +76,11 @@ type MemEntry = { count: number; expiresAt: number }
 const memStore = new Map<string, MemEntry>()
 // key -> Map<token, expiresAtMs>
 const memLeases = new Map<string, Map<string, number>>()
-// reservationId -> { keys: string[], expiresAtMs: number }
-const memReservations = new Map<string, { keys: string[]; expiresAtMs: number }>()
+// reservationId -> { ownerHash: string, keys: [string, string], staleAtMs: number, expiresAtMs: number }
+const memReservations = new Map<
+  string,
+  { ownerHash: string; keys: [string, string]; staleAtMs: number; expiresAtMs: number }
+>()
 const MAX_MEM_KEYS = 10_000
 
 function memGet(key: string, nowMs: number): number {
@@ -90,8 +93,7 @@ function memGet(key: string, nowMs: number): number {
   return entry.count
 }
 
-function memCheckAndIncr(specs: QuotaWindowSpec[]): QuotaCheckResult {
-  const nowMs = Date.now()
+function memCheckAndIncr(specs: QuotaWindowSpec[], nowMs = Date.now()): QuotaCheckResult {
   for (const s of specs) {
     const cur = memGet(s.key, nowMs)
     if (cur >= s.limit) {
@@ -119,8 +121,7 @@ function memCheckAndIncr(specs: QuotaWindowSpec[]): QuotaCheckResult {
   return { ok: true, remaining: Number.isFinite(minRemaining) ? minRemaining : 0 }
 }
 
-function memDecrClamp(keys: string[]): void {
-  const nowMs = Date.now()
+function memDecrClamp(keys: string[], nowMs = Date.now()): void {
   for (const key of keys) {
     const entry = memStore.get(key)
     if (!entry || entry.expiresAt <= nowMs) {
@@ -222,7 +223,37 @@ end
 return 1
 `
 
-// KEYS = [ipKey, devKey, reservationKey], ARGV = [ipLimit, ipTtl, devLimit, devTtl, resTtl, resValue]
+// KEYS = [pendingKey], ARGV = [nowMs, resPrefix, limit]
+export const LUA_CV_RECOVER_EXPIRED = `
+local nowMs = tonumber(ARGV[1])
+local resPrefix = ARGV[2]
+local limit = tonumber(ARGV[3] or '10')
+local staleIds = redis.call('ZRANGEBYSCORE', KEYS[1], '-inf', nowMs, 'LIMIT', 0, limit)
+local recovered = 0
+for _, resId in ipairs(staleIds) do
+  if redis.call('ZREM', KEYS[1], resId) == 1 then
+    local resKey = resPrefix .. resId
+    local meta = redis.call('GET', resKey)
+    redis.call('DEL', resKey)
+    if meta then
+      local _, ipKey, devKey = string.match(meta, '^([^|]+)|([^|]+)|([^|]+)$')
+      if ipKey then
+        local c1 = tonumber(redis.call('GET', ipKey) or '0')
+        if c1 > 0 then redis.call('DECR', ipKey) end
+      end
+      if devKey then
+        local c2 = tonumber(redis.call('GET', devKey) or '0')
+        if c2 > 0 then redis.call('DECR', devKey) end
+      end
+      recovered = recovered + 1
+    end
+  end
+end
+return recovered
+`
+
+// KEYS = [ipKey, devKey, reservationKey, pendingKey]
+// ARGV = [ipLimit, ipTtl, devLimit, devTtl, resTtl, resValue, nowMs, staleAtMs, reservationId, resPrefix]
 export const LUA_CV_RESERVE = `
 local ipLimit = tonumber(ARGV[1])
 local ipTtl = tonumber(ARGV[2])
@@ -230,6 +261,31 @@ local devLimit = tonumber(ARGV[3])
 local devTtl = tonumber(ARGV[4])
 local resTtl = tonumber(ARGV[5])
 local resValue = ARGV[6]
+local nowMs = tonumber(ARGV[7])
+local staleAtMs = tonumber(ARGV[8])
+local reservationId = ARGV[9]
+local resPrefix = ARGV[10]
+
+-- Bounded lazy recovery of expired/abandoned reservations before checking limits
+local staleIds = redis.call('ZRANGEBYSCORE', KEYS[4], '-inf', nowMs, 'LIMIT', 0, 10)
+for _, resId in ipairs(staleIds) do
+  if redis.call('ZREM', KEYS[4], resId) == 1 then
+    local oldKey = resPrefix .. resId
+    local meta = redis.call('GET', oldKey)
+    redis.call('DEL', oldKey)
+    if meta then
+      local _, oldIpKey, oldDevKey = string.match(meta, '^([^|]+)|([^|]+)|([^|]+)$')
+      if oldIpKey then
+        local c1 = tonumber(redis.call('GET', oldIpKey) or '0')
+        if c1 > 0 then redis.call('DECR', oldIpKey) end
+      end
+      if oldDevKey then
+        local c2 = tonumber(redis.call('GET', oldDevKey) or '0')
+        if c2 > 0 then redis.call('DECR', oldDevKey) end
+      end
+    end
+  end
+end
 
 local ipCur = tonumber(redis.call('GET', KEYS[1]) or '0')
 if ipCur >= ipLimit then
@@ -252,26 +308,58 @@ local nextDev = redis.call('INCR', KEYS[2])
 if nextDev == 1 then redis.call('EXPIRE', KEYS[2], devTtl) end
 
 redis.call('SET', KEYS[3], resValue, 'EX', resTtl)
+redis.call('ZADD', KEYS[4], staleAtMs, reservationId)
 
 local remIp = math.max(0, ipLimit - nextIp)
 local remDev = math.max(0, devLimit - nextDev)
 return {1, math.min(remIp, remDev)}
 `
 
-// KEYS = [reservationKey, ipKey, devKey]
-// Atomically deletes reservationKey; only decrements ipKey/devKey if reservation existed.
-export const LUA_CV_REFUND = `
-local existed = redis.call('DEL', KEYS[1])
-if existed == 0 then
+// KEYS = [reservationKey, pendingKey], ARGV = [reservationId, ownerHash]
+export const LUA_CV_COMMIT = `
+local reservationId = ARGV[1]
+local ownerHash = ARGV[2]
+local meta = redis.call('GET', KEYS[1])
+if not meta then
+  redis.call('ZREM', KEYS[2], reservationId)
   return 0
 end
-for i = 2, #KEYS do
-  local cur = tonumber(redis.call('GET', KEYS[i]) or '0')
-  if cur > 0 then
-    redis.call('DECR', KEYS[i])
+local storedOwner = string.match(meta, '^([^|]+)|')
+if ownerHash ~= '' and storedOwner ~= ownerHash then
+  return -1
+end
+local deleted = redis.call('DEL', KEYS[1])
+redis.call('ZREM', KEYS[2], reservationId)
+return deleted
+`
+
+// KEYS = [reservationKey, pendingKey], ARGV = [reservationId, ownerHash]
+// Atomically verifies ownership, deletes reservationKey + pending index entry, and clamp-decrements ipKey/devKey.
+export const LUA_CV_REFUND = `
+local reservationId = ARGV[1]
+local ownerHash = ARGV[2]
+local meta = redis.call('GET', KEYS[1])
+if not meta then
+  redis.call('ZREM', KEYS[2], reservationId)
+  return 0
+end
+local storedOwner, ipKey, devKey = string.match(meta, '^([^|]+)|([^|]+)|([^|]+)$')
+if ownerHash ~= '' and storedOwner ~= ownerHash then
+  return -1
+end
+local deleted = redis.call('DEL', KEYS[1])
+redis.call('ZREM', KEYS[2], reservationId)
+if deleted == 1 then
+  if ipKey then
+    local c1 = tonumber(redis.call('GET', ipKey) or '0')
+    if c1 > 0 then redis.call('DECR', ipKey) end
+  end
+  if devKey then
+    local c2 = tonumber(redis.call('GET', devKey) or '0')
+    if c2 > 0 then redis.call('DECR', devKey) end
   end
 end
-return 1
+return deleted
 `
 
 export async function atomicCheckAndIncr(specs: QuotaWindowSpec[]): Promise<QuotaCheckResult> {
@@ -444,7 +532,9 @@ export async function acquireConcurrencyLease(specs: QuotaWindowSpec[]): Promise
 
 // ---- CV Monthly Quota (3 / device / UTC Month, 12 / IP / UTC Month) --------
 
-const CV_RESERVATION_TTL_SECONDS = 300
+const CV_RESERVATION_STALE_MS = 300_000
+const CV_PENDING_ZSET = 'aihunt:cv:pending'
+const CV_RES_PREFIX = 'aihunt:cv:res:'
 
 export function cvQuotaKeys(identity: VisitorIdentity, now = new Date()): [string, string] {
   const month = utcMonthKey(now)
@@ -455,7 +545,42 @@ export function cvQuotaKeys(identity: VisitorIdentity, now = new Date()): [strin
 }
 
 function cvReservationKey(reservationId: string): string {
-  return `aihunt:cv:res:${reservationId}`
+  return `${CV_RES_PREFIX}${reservationId}`
+}
+
+function memRecoverExpiredCvReservations(nowMs = Date.now(), limit = 10): number {
+  let recovered = 0
+  for (const [resId, entry] of memReservations) {
+    if (recovered >= limit) break
+    if (entry.staleAtMs <= nowMs) {
+      memReservations.delete(resId)
+      memDecrClamp(entry.keys, nowMs)
+      recovered++
+    }
+  }
+  return recovered
+}
+
+export async function recoverExpiredCvReservations(
+  nowMs = Date.now(),
+  limit = 10
+): Promise<{ ok: true; recovered: number } | { ok: false; error: string }> {
+  if (isRedisConfigured()) {
+    const res = await redisEval<number>(LUA_CV_RECOVER_EXPIRED, [CV_PENDING_ZSET], [
+      nowMs,
+      CV_RES_PREFIX,
+      limit,
+    ])
+    if (res !== null && res !== undefined && !Number.isNaN(Number(res))) {
+      return { ok: true, recovered: Number(res) }
+    }
+    if (isFailClosedMode()) {
+      return { ok: false, error: 'CV reservation recovery service is temporarily unavailable.' }
+    }
+  } else if (isFailClosedMode()) {
+    return { ok: false, error: 'CV reservation recovery service is not configured.' }
+  }
+  return { ok: true, recovered: memRecoverExpiredCvReservations(nowMs, limit) }
 }
 
 function computeEffectiveCvStatus(ipUsed: number, devUsed: number, cvMonthlyLimit: number, cvIpMonthlyLimit: number, resetAt: string): CvQuotaStatus {
@@ -475,6 +600,10 @@ export async function getCvMonthlyQuotaStatus(
   identity: VisitorIdentity,
   now = new Date()
 ): Promise<{ ok: true; status: CvQuotaStatus } | { ok: false; error: string }> {
+  // Recover any stale/crashed reservations before reporting remaining quota
+  const rec = await recoverExpiredCvReservations(now.getTime(), 10)
+  if (!rec.ok) return rec
+
   const { cvMonthlyLimit, cvIpMonthlyLimit } = getBudgetConfig()
   const keys = cvQuotaKeys(identity, now)
   const resetAt = nextUtcMonthResetIso(now)
@@ -507,19 +636,34 @@ export async function getCvMonthlyQuotaStatus(
 
 export async function reserveCvMonthlyQuota(
   identity: VisitorIdentity,
-  now = new Date()
+  now = new Date(),
+  staleMs = CV_RESERVATION_STALE_MS
 ): Promise<CvReserveResult> {
   const { cvMonthlyLimit, cvIpMonthlyLimit } = getBudgetConfig()
   const ttl = secondsUntilNextUtcMonth(now) + 3600
   const [ipKey, devKey] = cvQuotaKeys(identity, now)
   const reservationId = randomBytes(12).toString('hex')
   const resKey = cvReservationKey(reservationId)
+  const nowMs = now.getTime()
+  const staleAtMs = nowMs + Math.max(1, staleMs)
+  const resValue = `${identity.deviceHash}|${ipKey}|${devKey}`
 
   if (isRedisConfigured()) {
     const res = await redisEval<[number, number, number?]>(
       LUA_CV_RESERVE,
-      [ipKey, devKey, resKey],
-      [cvIpMonthlyLimit, ttl, cvMonthlyLimit, ttl, CV_RESERVATION_TTL_SECONDS, `${ipKey}|${devKey}`]
+      [ipKey, devKey, resKey, CV_PENDING_ZSET],
+      [
+        cvIpMonthlyLimit,
+        ttl,
+        cvMonthlyLimit,
+        ttl,
+        ttl,
+        resValue,
+        nowMs,
+        staleAtMs,
+        reservationId,
+        CV_RES_PREFIX,
+      ]
     )
     if (Array.isArray(res) && res[0] === 1) {
       return { ok: true, reservationId, remaining: Number(res[1] ?? 0) }
@@ -545,55 +689,81 @@ export async function reserveCvMonthlyQuota(
     }
   }
 
-  const check = memCheckAndIncr([
-    { key: ipKey, limit: cvIpMonthlyLimit, ttlSeconds: ttl },
-    { key: devKey, limit: cvMonthlyLimit, ttlSeconds: ttl },
-  ])
+  memRecoverExpiredCvReservations(nowMs, 10)
+  const check = memCheckAndIncr(
+    [
+      { key: ipKey, limit: cvIpMonthlyLimit, ttlSeconds: ttl },
+      { key: devKey, limit: cvMonthlyLimit, ttlSeconds: ttl },
+    ],
+    nowMs
+  )
   if (!check.ok) return check
 
   memReservations.set(reservationId, {
+    ownerHash: identity.deviceHash,
     keys: [ipKey, devKey],
-    expiresAtMs: Date.now() + CV_RESERVATION_TTL_SECONDS * 1000,
+    staleAtMs,
+    expiresAtMs: nowMs + ttl * 1000,
   })
   return { ok: true, reservationId, remaining: check.remaining ?? 0 }
 }
 
-export async function commitCvMonthlyQuota(reservationId: string): Promise<void> {
-  if (!reservationId) return
-  if (isRedisConfigured()) {
-    await redisCommand(['del', cvReservationKey(reservationId)])
-    return
-  }
-  memReservations.delete(reservationId)
-}
-
-export async function refundCvMonthlyQuota(
-  identity: VisitorIdentity,
+export async function commitCvMonthlyQuota(
   reservationId: string,
-  now = new Date()
+  identity?: VisitorIdentity
 ): Promise<boolean> {
   if (!reservationId) return false
-  const [fallbackIpKey, fallbackDevKey] = cvQuotaKeys(identity, now)
-  const resKey = cvReservationKey(reservationId)
+  const ownerHash = identity?.deviceHash ?? ''
 
   if (isRedisConfigured()) {
-    const stored = await redisCommand<string | null>(['get', resKey])
-    const parts = typeof stored === 'string' && stored.includes('|') ? stored.split('|', 2) : null
-    const ipKeyToRefund = parts?.[0] || fallbackIpKey
-    const devKeyToRefund = parts?.[1] || fallbackDevKey
-    const res = await redisEval<number>(LUA_CV_REFUND, [resKey, ipKeyToRefund, devKeyToRefund], [])
+    const res = await redisEval<number>(
+      LUA_CV_COMMIT,
+      [cvReservationKey(reservationId), CV_PENDING_ZSET],
+      [reservationId, ownerHash]
+    )
+    if (res === null || res === undefined) {
+      return false
+    }
     return Number(res) === 1
   }
 
   if (isFailClosedMode()) return false
 
   const entry = memReservations.get(reservationId)
-  if (!entry || entry.expiresAtMs <= Date.now()) {
-    memReservations.delete(reservationId)
-    return false
-  }
+  if (!entry) return false
+  if (ownerHash && entry.ownerHash !== ownerHash) return false
   memReservations.delete(reservationId)
-  memDecrClamp(entry.keys)
+  return true
+}
+
+export async function refundCvMonthlyQuota(
+  identity: VisitorIdentity,
+  reservationId: string,
+  _now = new Date()
+): Promise<boolean> {
+  if (!reservationId) return false
+  const resKey = cvReservationKey(reservationId)
+  const ownerHash = identity.deviceHash
+
+  if (isRedisConfigured()) {
+    const res = await redisEval<number>(
+      LUA_CV_REFUND,
+      [resKey, CV_PENDING_ZSET],
+      [reservationId, ownerHash]
+    )
+    if (res === null || res === undefined) {
+      return false
+    }
+    return Number(res) === 1
+  }
+
+  if (isFailClosedMode()) return false
+
+  const entry = memReservations.get(reservationId)
+  if (!entry) return false
+  if (entry.ownerHash !== ownerHash) return false
+  memReservations.delete(reservationId)
+  memDecrClamp(entry.keys, _now.getTime())
   return true
 }
 

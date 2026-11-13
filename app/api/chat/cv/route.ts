@@ -90,6 +90,7 @@ export async function POST(request: Request) {
 
   const bot = await checkExpensiveAiBotGuard(request, {
     maxContentLengthBytes: MAX_MULTIPART_BYTES,
+    expectedAction: 'cv',
   })
   if (!bot.ok) {
     return respond({ error: bot.error }, bot.status)
@@ -218,7 +219,7 @@ export async function POST(request: Request) {
     }
     if (text.length > MAX_TEXT_CHARS) text = text.slice(0, MAX_TEXT_CHARS)
 
-    await commitCvMonthlyQuota(reservationId)
+    await commitCvMonthlyQuota(reservationId, identity)
     reservationId = null
 
     const remaining = Math.max(0, reservation.remaining ?? 0)

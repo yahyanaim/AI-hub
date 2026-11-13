@@ -104,7 +104,10 @@ export function GoalFinder() {
       const timeout = setTimeout(() => controller.abort(), CLIENT_TIMEOUT_MS)
       const stale = () => runId.current !== currentRun
       try {
-        const turnstileHeaders = await getTurnstileHeaders()
+        const turnstileHeaders = await getTurnstileHeaders({
+          action: 'goal_match',
+          signal: controller.signal,
+        })
         if (stale()) return
         const res = await fetch('/api/goal-match', {
           method: 'POST',

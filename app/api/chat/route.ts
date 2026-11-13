@@ -341,7 +341,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const bot = await checkExpensiveAiBotGuard(request, { maxContentLengthBytes: 300_000 })
+    const bot = await checkExpensiveAiBotGuard(request, { maxContentLengthBytes: 300_000, expectedAction: 'chat' })
     if (!bot.ok) {
       return jsonErr({ error: bot.error }, bot.status)
     }

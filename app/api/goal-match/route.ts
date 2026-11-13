@@ -115,7 +115,7 @@ export async function POST(req: Request) {
     return res
   }
 
-  const bot = await checkExpensiveAiBotGuard(req, { maxContentLengthBytes: 8_192 })
+  const bot = await checkExpensiveAiBotGuard(req, { maxContentLengthBytes: 8_192, expectedAction: 'goal_match' })
   if (!bot.ok) {
     return jsonWithCookie({ error: bot.error, fallback: true, meta }, bot.status)
   }

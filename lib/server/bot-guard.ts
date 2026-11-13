@@ -1,4 +1,6 @@
 import 'server-only'
+import { createHash } from 'node:crypto'
+import { isFailClosedMode, isRedisConfigured, redisCommand } from '@/lib/server/redis'
 
 const AUTOMATED_UA_RE =
   /\b(curl|wget|python-requests|python-urllib|httpx|aiohttp|go-http-client|libwww-perl|scrapy|httpclient|java\/|okhttp|node-fetch|undici|postmanruntime|insomnia)\b/i
@@ -6,6 +8,34 @@ const AUTOMATED_UA_RE =
 export type BotCheckResult =
   | { ok: true }
   | { ok: false; status: number; error: string }
+
+const memUsedTurnstileTokens = new Map<string, number>()
+
+export function __resetTurnstileReplayStoreForTests(): void {
+  memUsedTurnstileTokens.clear()
+}
+
+async function claimTurnstileTokenOnce(token: string): Promise<'ok' | 'reused' | 'unavailable'> {
+  const tokenHash = createHash('sha256').update(token).digest('hex').slice(0, 24)
+  const key = `aihunt:ts:used:${tokenHash}`
+
+  if (isRedisConfigured()) {
+    const res = await redisCommand<string | null>(['set', key, '1', 'NX', 'EX', '300'])
+    if (res === 'OK') return 'ok'
+    if (res === null) return 'reused'
+    if (isFailClosedMode()) return 'unavailable'
+  } else if (isFailClosedMode()) {
+    return 'unavailable'
+  }
+
+  const now = Date.now()
+  for (const [k, exp] of memUsedTurnstileTokens) {
+    if (exp <= now) memUsedTurnstileTokens.delete(k)
+  }
+  if (memUsedTurnstileTokens.has(key)) return 'reused'
+  memUsedTurnstileTokens.set(key, now + 300_000)
+  return 'ok'
+}
 
 export function isTurnstileServerConfigured(): boolean {
   const secret = process.env.TURNSTILE_SECRET_KEY?.trim()
@@ -30,7 +60,7 @@ function hasRiskSignals(request: Request): boolean {
  */
 export async function checkExpensiveAiBotGuard(
   request: Request,
-  options: { maxContentLengthBytes?: number } = {}
+  options: { maxContentLengthBytes?: number; expectedAction?: 'chat' | 'cv' | 'goal_match' } = {}
 ): Promise<BotCheckResult> {
   if (options.maxContentLengthBytes) {
     const rawLen = request.headers.get('content-length')
@@ -111,12 +141,51 @@ export async function checkExpensiveAiBotGuard(
           method: 'POST',
           body: form,
         })
-        const verified = (await verifyRes.json()) as { success?: boolean }
+        const verified = (await verifyRes.json()) as {
+          success?: boolean
+          hostname?: string
+          action?: string
+        }
         if (!verified.success) {
           return {
             ok: false,
             status: 403,
             error: 'Human verification failed. Please refresh and try again.',
+          }
+        }
+        if (options.expectedAction && verified.action && verified.action !== options.expectedAction) {
+          return {
+            ok: false,
+            status: 403,
+            error: 'Human verification action mismatch.',
+          }
+        }
+        const expectedHost =
+          process.env.TURNSTILE_EXPECTED_HOSTNAME?.trim().toLowerCase() ||
+          (request.headers.get('x-forwarded-host') || request.headers.get('host'))
+            ?.split(':')[0]
+            ?.trim()
+            .toLowerCase()
+        if (expectedHost && verified.hostname && verified.hostname.toLowerCase() !== expectedHost) {
+          return {
+            ok: false,
+            status: 403,
+            error: 'Human verification hostname mismatch.',
+          }
+        }
+        const replay = await claimTurnstileTokenOnce(token)
+        if (replay === 'reused') {
+          return {
+            ok: false,
+            status: 403,
+            error: 'Human verification token already used. Please retry.',
+          }
+        }
+        if (replay === 'unavailable') {
+          return {
+            ok: false,
+            status: 503,
+            error: 'Verification replay protection temporarily unavailable.',
           }
         }
       } catch {

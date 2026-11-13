@@ -1706,7 +1706,7 @@ export default function ChatPage() {
       if (lower.endsWith('.pdf')) {
         const form = new FormData()
         form.append('file', file)
-        const turnstileHeaders = await getTurnstileHeaders()
+        const turnstileHeaders = await getTurnstileHeaders({ action: 'cv' })
         const res = await fetch('/api/chat/cv', { method: 'POST', headers: turnstileHeaders, body: form })
         const data = await res.json().catch(() => ({}))
         if (data?.quota && typeof data.quota.remaining === 'number' && typeof data.quota.limit === 'number') {
@@ -1767,7 +1767,7 @@ export default function ChatPage() {
     setLoading(true)
 
     const runOnce = async (): Promise<string> => {
-      const turnstileHeaders = await getTurnstileHeaders()
+      const turnstileHeaders = await getTurnstileHeaders({ action: 'chat' })
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...turnstileHeaders },

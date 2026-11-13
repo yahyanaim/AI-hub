@@ -21,14 +21,14 @@
 
 ## 3. Vercel Dashboard Billing & Infrastructure Monitoring Checklist
 
-*(All items below must be configured in the Vercel Dashboard by the account owner — **Not Verified** from local CLI.)*
+Status legend: **Verified** (confirmed in repo/code), **Recommended** (target configuration), **Manual Action Required** (must be configured in Vercel Dashboard by account owner).
 
-1. Upgrade team `yahyanaims-projects` to **Vercel Pro** ($20/month base subscription) and review included monthly usage credits (CPU, memory, invocations, bandwidth).
-2. Enable **Spend Management** under **Team Settings → Billing → Spend Management** and configure a **Hard Spending Limit** (e.g., $20–$30 total / $0–$10 overage cap) with automatic pause/notifications.
-3. Set **Billing Alerts** at 50%, 75%, and 90% of included Fluid Active CPU, Function Invocations, Build Minutes, and Fast Data Transfer.
-4. Configure **Vercel Firewall / WAF** rules in **Project → Security → Firewall** (rate-limit `/api/*`, challenge suspicious ASNs/countries if needed) so abusive traffic is dropped at the edge before invoking Serverless Functions.
-5. Verify `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, and `AUTH_SECRET` (or `VISITOR_HMAC_SECRET`, **>=32 chars**) are set in Vercel Production Environment Variables before deploying, because `/api/chat`, `/api/chat/cv`, and `/api/goal-match` **fail closed (HTTP 503)** in production if Redis or the HMAC secret is missing or weak (`AIHUB_ALLOW_MEMORY_FALLBACK=1` is ignored in production).
-6. Monitor **Vercel Usage / Observability** weekly for: Fluid Active CPU, P95 duration on `/api/chat`, `503` error rate (which would indicate Redis or secret misconfiguration), and Upstash Redis command volume.
+1. **[Manual Action Required]** Upgrade team `yahyanaims-projects` to **Vercel Pro** ($20/month base subscription, includes flexible monthly usage credit across Fluid Active CPU, Provisioned Memory, Invocations, and Edge/CDN).
+2. **[Manual Action Required]** Enable **Spend Management** under **Team Settings → Billing → Spend Management**, set an **On-Demand Budget** (e.g. $0–$10 overage above included credits), and explicitly toggle on **Pause Production Deployments**. *(Note: Vercel checks metered usage every few minutes, so a brief delay can occur between crossing the threshold and pausing deployments.)*
+3. **[Manual Action Required]** Set **Billing Alerts** (email/SMS/webhook) at 50%, 75%, and 90% of included Fluid Active CPU, Function Invocations, Build Minutes, and Fast Data Transfer.
+4. **[Manual Action Required / Recommended]** Configure **Vercel Firewall / WAF** rules in **Project → Security → Firewall** to rate-limit `/api/*` at the edge before requests invoke Serverless Functions.
+5. **[Verified in Code / Manual Action Required in Env]** Verify `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, and `AUTH_SECRET` (or `VISITOR_HMAC_SECRET`, **>=32 chars**) are set in Vercel Production Environment Variables before deploying; `/api/chat`, `/api/chat/cv`, and `/api/goal-match` **fail closed (HTTP 503)** in production if Redis or the HMAC secret is missing or weak (`AIHUB_ALLOW_MEMORY_FALLBACK=1` is ignored in production).
+6. **[Recommended]** Monitor **Vercel Usage / Observability** weekly for Fluid Active CPU per route, P95 duration on `/api/chat`, `503` error rate, and Upstash Redis command volume.
 
 ## 4. Emergency Shutdown Procedure
 
