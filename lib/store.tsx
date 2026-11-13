@@ -315,7 +315,7 @@ interface AppContextValue {
   setOffersLang: (lang: OffersLang) => void
 
   // auth
-  signIn: (username: string) => void
+  signIn: (username: string, options?: { skipSignupPing?: boolean }) => void
   signOut: () => void
   getUser: (id: string) => User | undefined
   getUserByUsername: (username: string) => User | undefined
@@ -1029,7 +1029,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const signIn = useCallback((username: string) => {
+  const signIn = useCallback((username: string, options?: { skipSignupPing?: boolean }) => {
     const raw = username.trim().slice(0, MAX_USERNAME_LENGTH)
     const clean = raw.toLowerCase().replace(/[^a-z0-9_]/g, '')
     // Reject empty/short handles (e.g. '___' sanitizes to '') and cap the
@@ -1068,7 +1068,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }
       return { ...prev, users: [...prev.users, newUser], currentUserId: newUser.id }
     })
-    if (isNewSignup) void pingSignupCount(clean)
+    if (isNewSignup && !options?.skipSignupPing) void pingSignupCount(clean)
   }, [pingSignupCount])
 
   const signOut = useCallback(() => {
@@ -1089,7 +1089,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const serverUser = d.user.username.toLowerCase()
         const cur = stateRef.current.users.find((u) => u.id === stateRef.current.currentUserId)
         if (!cur || cur.username.toLowerCase() !== serverUser) {
-          signIn(serverUser)
+          signIn(serverUser, { skipSignupPing: true })
         }
       })
       .catch(() => {})

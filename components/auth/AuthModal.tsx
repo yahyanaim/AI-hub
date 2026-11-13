@@ -69,7 +69,7 @@ export function AuthModal() {
         setNameError(data.error || 'Authentication failed.')
         return
       }
-      signIn(data.user.username)
+      signIn(data.user.username, { skipSignupPing: true })
       window.dispatchEvent(new Event('aihunt-auth-changed'))
       setAuthModalOpen(false)
       setTimeout(() => resolvePendingAction(), 0)

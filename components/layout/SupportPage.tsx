@@ -1,13 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { Code2, Mail, Copy, Check, Landmark, User, Hash } from 'lucide-react'
+import Image from 'next/image'
+import { Code2, Mail, Copy, Check, Landmark, User, Hash, Globe } from 'lucide-react'
 
 const PAYPAL_EMAIL = 'yahyanaim2001@gmail.com'
 const PAYPAL_LINK = `https://www.paypal.com/myaccount/transfer/homepage/pay?recipient=${PAYPAL_EMAIL}`
 const BANK = {
-  holder: 'Yahia Naim',
-  rib: 'MA64 2305 9035 0524 0211 0025 0072',
+  holder: 'MONSIEUR YAHIA NAIM',
+  account: '3505240211002500',
+  rib: '230 590 3505240211002500 72',
+  iban: 'MA64 2305 9035 0524 0211 0025 0072',
   swift: 'CIHMMAMC',
   bank: 'CIH Bank',
 }
@@ -54,8 +57,8 @@ function CopyRow({
 
 export function SupportPage() {
   return (
-    <div className="container-page flex h-[calc(100dvh-4rem)] items-center overflow-hidden py-6">
-      <div className="mx-auto w-full max-w-3xl">
+    <div className="container-page flex min-h-[calc(100dvh-4rem)] items-center py-8">
+      <div className="mx-auto w-full max-w-4xl">
         {/* Hero */}
         <div className="text-center">
           <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-orange/10">
@@ -101,12 +104,31 @@ export function SupportPage() {
               Bank transfer
             </div>
             <p className="mb-3 text-xs leading-snug text-muted-foreground">
-              Direct transfer from Morocco or abroad via SWIFT. Tap any row to copy.
+              Direct transfer from Morocco or abroad via SWIFT. Tap any row to copy or scan the QR code.
             </p>
             <div className="mt-auto space-y-2">
               <CopyRow icon={<User className="h-3.5 w-3.5" />} label="Holder" value={BANK.holder} />
               <CopyRow icon={<Landmark className="h-3.5 w-3.5" />} label="Bank" value={`${BANK.bank} · ${BANK.swift}`} />
+              <CopyRow icon={<Hash className="h-3.5 w-3.5" />} label="Account" value={BANK.account} />
               <CopyRow icon={<Hash className="h-3.5 w-3.5" />} label="RIB" value={BANK.rib} />
+              <CopyRow icon={<Globe className="h-3.5 w-3.5" />} label="IBAN" value={BANK.iban} />
+            </div>
+            <div className="mt-3 flex items-center gap-3 rounded-xl border border-border bg-muted/30 p-2.5">
+              <div className="shrink-0 overflow-hidden rounded-lg bg-white p-1.5 shadow-sm">
+                <Image
+                  src="/cih-qr.png"
+                  alt="CIH Bank QR Code for Yahia Naim"
+                  width={84}
+                  height={84}
+                  className="h-20 w-20 object-contain"
+                />
+              </div>
+              <div className="text-xs text-muted-foreground">
+                <p className="font-semibold text-foreground">Scan with CIH Mobile</p>
+                <p className="mt-0.5 leading-snug">
+                  Open your banking app and scan the QR code for instant transfer.
+                </p>
+              </div>
             </div>
           </div>
         </div>

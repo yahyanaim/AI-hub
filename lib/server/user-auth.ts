@@ -1,6 +1,6 @@
 import 'server-only'
 import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto'
-import { isFailClosedMode, isRedisConfigured, redisCommandResult } from '@/lib/server/redis'
+import { isFailClosedMode, isRedisConfigured, redisCommandResult, SIGNUP_COUNT_KEY } from '@/lib/server/redis'
 
 const USER_KEY_PREFIX = 'aihunt:user:'
 
@@ -101,6 +101,9 @@ export async function registerUser(
       error: 'Username already exists. Please sign in instead.',
     }
   }
+  // Keep the admin signup counter accurate for every real new account
+  // regardless of whether signup happened via AuthModal or /chat.
+  await redisCommandResult(['incr', SIGNUP_COUNT_KEY]).catch(() => {})
   return { ok: true, user: { username: record.username, displayName: record.displayName } }
 }
 
