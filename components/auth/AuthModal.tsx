@@ -7,13 +7,18 @@ import { useApp } from '@/lib/store'
 
 export function AuthModal() {
   const { authModalOpen, setAuthModalOpen, signIn, resolvePendingAction } = useApp()
+  const [mode, setMode] = useState<'login' | 'signup'>('login')
   const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [nameError, setNameError] = useState<string | null>(null)
+  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     if (authModalOpen) {
       setUsername('')
+      setPassword('')
       setNameError(null)
+      setSubmitting(false)
     }
   }, [authModalOpen])
 
@@ -32,24 +37,47 @@ export function AuthModal() {
 
   if (!authModalOpen) return null
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
+    if (submitting) return
     const name = username
     if (!name.trim()) {
       setNameError('Enter a username first.')
       return
     }
-    // Mirror store sanitizing so invalid handles show an error instead of
-    // silently doing nothing (store ignores handles < 2 chars after cleanup).
     const clean = name.trim().toLowerCase().replace(/[^a-z0-9_]/g, '')
     if (clean.length < 2) {
       setNameError('Use at least 2 letters, numbers or underscores.')
       return
     }
+    if (password.length < 6) {
+      setNameError('Password must be at least 6 characters.')
+      return
+    }
     setNameError(null)
-    signIn(name.trim())
-    setAuthModalOpen(false)
-    // Defer one tick so signIn's setState commits before applying the gate.
-    setTimeout(() => resolvePendingAction(), 0)
+    setSubmitting(true)
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: name.trim(), password, mode }),
+      })
+      const data = (await res.json().catch(() => ({}))) as {
+        user?: { username: string }
+        error?: string
+      }
+      if (!res.ok || !data.user?.username) {
+        setNameError(data.error || 'Authentication failed.')
+        return
+      }
+      signIn(data.user.username)
+      window.dispatchEvent(new Event('aihunt-auth-changed'))
+      setAuthModalOpen(false)
+      setTimeout(() => resolvePendingAction(), 0)
+    } catch {
+      setNameError('Network error — please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -86,22 +114,31 @@ export function AuthModal() {
             </p>
           </div>
 
-          <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">
-              Demo build: pick a local username below. No real OAuth; your session lives in this browser only.
-            </p>
-          </div>
-
-          <div className="my-5 flex items-center gap-3">
-            <div className="h-px flex-1 bg-border" />
-            <span className="text-xs text-muted-foreground">pick a username</span>
-            <div className="h-px flex-1 bg-border" />
+          <div className="mb-4 flex rounded-lg border border-border bg-muted/40 p-1 text-xs font-medium">
+            <button
+              type="button"
+              onClick={() => { setMode('login'); setNameError(null) }}
+              className={`flex-1 rounded-md py-1.5 transition-colors ${
+                mode === 'login' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Sign in
+            </button>
+            <button
+              type="button"
+              onClick={() => { setMode('signup'); setNameError(null) }}
+              className={`flex-1 rounded-md py-1.5 transition-colors ${
+                mode === 'signup' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Create account
+            </button>
           </div>
 
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              handleSignIn()
+              void handleSignIn()
             }}
             className="space-y-3"
           >
@@ -111,26 +148,37 @@ export function AuthModal() {
               value={username}
               onChange={(e) => { setUsername(e.target.value); setNameError(null) }}
               placeholder="your-username"
-              maxLength={24}
+              maxLength={32}
               autoComplete="username"
               className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-input"
               autoFocus
+            />
+            <label htmlFor="auth-password" className="sr-only">Password</label>
+            <input
+              id="auth-password"
+              type="password"
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setNameError(null) }}
+              placeholder="Password (min. 6 characters)"
+              maxLength={128}
+              autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+              className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-input"
             />
             {nameError && (
               <p className="text-xs text-red-500" role="alert">{nameError}</p>
             )}
             <button
               type="submit"
-              disabled={!username.trim()}
+              disabled={!username.trim() || password.length < 6 || submitting}
               className="btn-primary w-full"
             >
               <Sparkles className="h-4 w-4" />
-              Continue
+              {submitting ? 'Please wait...' : mode === 'signup' ? 'Create account' : 'Sign in'}
             </button>
           </form>
 
           <p className="mt-5 text-center text-xs text-muted-foreground">
-            Demo build &mdash; no real OAuth. Your session lives in this browser only.
+            Your account &amp; AI quota stay synced across browsers.
           </p>
         </div>
       </div>

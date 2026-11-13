@@ -1328,6 +1328,9 @@ export default function ChatPage() {
   const [displayName, setDisplayName] = useState('')
   const [accountChecked, setAccountChecked] = useState(false)
   const [signupName, setSignupName] = useState('')
+  const [signupPassword, setSignupPassword] = useState('')
+  const [signupMode, setSignupMode] = useState<'login' | 'signup'>('login')
+  const [signupBusy, setSignupBusy] = useState(false)
   const [signupError, setSignupError] = useState<string | null>(null)
 
   // ---- Chat state ---------------------------------------------------------
@@ -1357,6 +1360,7 @@ export default function ChatPage() {
   const [cvBusy, setCvBusy] = useState(false)
   const [cvError, setCvError] = useState<string | null>(null)
   const [cvQuota, setCvQuota] = useState<{ limit: number; remaining: number; resetAt: string } | null>(null)
+  const [chatLocked, setChatLocked] = useState(false)
   const [cvPhoto, setCvPhoto] = useState<string | null>(null)
   const cvInputRef = useRef<HTMLInputElement>(null)
   const photoInputRef = useRef<HTMLInputElement>(null)
@@ -1467,7 +1471,24 @@ export default function ChatPage() {
       const q = new URLSearchParams(window.location.search).get('q')
       if (q) setInput(q)
     } catch {}
-    setAccountChecked(true)
+    // Check server-side HttpOnly session cookie (aihunt_user) so cross-browser
+    // accounts stay signed in and synced with their Redis quota.
+    let alive = true
+    fetch('/api/auth/me', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { user?: { username?: string } | null } | null) => {
+        if (!alive) return
+        if (d?.user?.username) {
+          signIn(d.user.username)
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (alive) setAccountChecked(true)
+      })
+    return () => {
+      alive = false
+    }
   }, [signIn])
 
   useEffect(() => {
@@ -1668,25 +1689,39 @@ export default function ChatPage() {
     (s) => !search || s.title.toLowerCase().includes(search.toLowerCase())
   )
 
-  // Fetch monthly CV upload quota once on mount (read-only, never reveals visitor IDs)
+  // Fetch monthly CV upload quota and chat lock state on mount and whenever
+  // the signed-in account changes (never reveals visitor IDs).
   useEffect(() => {
     let alive = true
-    fetch('/api/chat/cv')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (alive && d && typeof d.remaining === 'number' && typeof d.limit === 'number' && typeof d.resetAt === 'string') {
-          setCvQuota({ limit: d.limit, remaining: d.remaining, resetAt: d.resetAt })
-        }
-      })
-      .catch(() => {})
+    const refreshQuota = () => {
+      fetch('/api/chat/cv', { cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => {
+          if (!alive || !d) return
+          if (typeof d.chatLocked === 'boolean') {
+            setChatLocked(d.chatLocked)
+          }
+          if (typeof d.remaining === 'number' && typeof d.limit === 'number' && typeof d.resetAt === 'string') {
+            setCvQuota({ limit: d.limit, remaining: d.remaining, resetAt: d.resetAt })
+          }
+        })
+        .catch(() => {})
+    }
+    refreshQuota()
+    window.addEventListener('aihunt-auth-changed', refreshQuota)
     return () => {
       alive = false
+      window.removeEventListener('aihunt-auth-changed', refreshQuota)
     }
-  }, [])
+  }, [username])
 
   // ---- CV attach (parse in memory, never store) ---------------------------
   const handleCvFile = async (file: File) => {
     setCvError(null)
+    if (chatLocked) {
+      setCvError('AI chat is temporarily locked by the administrator.')
+      return
+    }
     if (cvQuota && cvQuota.remaining <= 0) {
       setCvError('Monthly CV limit reached. Try again next month.')
       return
@@ -1716,7 +1751,10 @@ export default function ChatPage() {
             resetAt: data.quota.resetAt || cvQuota?.resetAt || '',
           })
         }
-        if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`)
+        if (!res.ok) {
+          if (res.status === 423) setChatLocked(true)
+          throw new Error(data.error || `HTTP ${res.status}`)
+        }
         text = data.text as string
       } else {
         text = await file.text()
@@ -1735,7 +1773,7 @@ export default function ChatPage() {
   // ---- Streaming fetch ----------------------------------------------------
   const sendMessage = async (override?: string) => {
     const text = (typeof override === 'string' ? override : input).trim()
-    if ((!text && !cvText) || loading) return
+    if ((!text && !cvText) || loading || chatLocked) return
 
     const isSeed = activeIdRef.current === 'greet'
     const sid = isSeed ? `c${Date.now()}` : activeIdRef.current
@@ -1780,6 +1818,9 @@ export default function ChatPage() {
       })
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}))
+        if (res.status === 423) {
+          setChatLocked(true)
+        }
         throw new Error(errorData.details || errorData.error || `HTTP ${res.status}`)
       }
       const reader = res.body!.getReader()
@@ -1958,7 +1999,11 @@ export default function ChatPage() {
     ? new Date(cvQuota.resetAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
     : null
 
-  const CvQuotaNotice = cvQuota ? (
+  const CvQuotaNotice = chatLocked ? (
+    <p className="mt-1 text-center text-[11px] font-medium text-amber-600 dark:text-amber-400">
+      AI chat is temporarily locked by the administrator.
+    </p>
+  ) : cvQuota ? (
     <p className="mt-1 text-center text-[11px] text-muted-foreground">
       {cvQuota.remaining > 0
         ? `${cvQuota.remaining} CV ${cvQuota.remaining === 1 ? 'upload' : 'uploads'} remaining this month`
@@ -2003,7 +2048,7 @@ export default function ChatPage() {
       />
       <button
         onClick={() => cvInputRef.current?.click()}
-        disabled={cvBusy || loading}
+        disabled={cvBusy || loading || chatLocked}
         className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-muted disabled:opacity-60"
         aria-label="Attach CV"
         title="Attach CV (PDF or TXT) — parsed in memory, never stored"
@@ -2020,13 +2065,13 @@ export default function ChatPage() {
           e.target.style.height = Math.min(e.target.scrollHeight, 160) + 'px'
         }}
         onKeyDown={handleKeyDown}
-        placeholder="Ask anything"
-        disabled={loading}
+        placeholder={chatLocked ? 'AI chat is locked by the administrator' : 'Ask anything'}
+        disabled={loading || chatLocked}
         className="max-h-40 min-h-[1.5rem] flex-1 resize-none border-0 bg-transparent text-base text-foreground outline-none ring-0 focus:border-0 focus:outline-none focus:ring-0 placeholder:text-muted-foreground disabled:opacity-60 sm:text-sm"
       />
       <button
         onClick={() => sendMessage()}
-        disabled={(!input.trim() && !cvText) || loading}
+        disabled={(!input.trim() && !cvText) || loading || chatLocked}
         className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-orange text-white transition-colors hover:bg-orange-600 disabled:opacity-30"
         aria-label="Send"
       >
@@ -2180,37 +2225,110 @@ export default function ChatPage() {
 
   // ---- Not signed in: require the account --------------------------------
   if (accountChecked && !username) {
+    const submitChatAuth = async (e: React.FormEvent) => {
+      e.preventDefault()
+      if (signupBusy) return
+      const clean = signupName.trim().toLowerCase().replace(/[^a-z0-9_]/g, '')
+      if (clean.length < 2) {
+        setSignupError('Use at least 2 letters, numbers or underscores.')
+        return
+      }
+      if (signupPassword.length < 6) {
+        setSignupError('Password must be at least 6 characters.')
+        return
+      }
+      setSignupError(null)
+      setSignupBusy(true)
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: signupName.trim(),
+            password: signupPassword,
+            mode: signupMode,
+          }),
+        })
+        const data = (await res.json().catch(() => ({}))) as {
+          user?: { username: string }
+          error?: string
+        }
+        if (!res.ok || !data.user?.username) {
+          setSignupError(data.error || 'Authentication failed.')
+          return
+        }
+        signIn(data.user.username)
+        window.dispatchEvent(new Event('aihunt-auth-changed'))
+      } catch {
+        setSignupError('Network error — please try again.')
+      } finally {
+        setSignupBusy(false)
+      }
+    }
+
     return (
       <div className="flex h-dvh items-center justify-center bg-background px-4">
         <div className="w-full max-w-sm rounded-2xl border border-border bg-card p-6 shadow-xl">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-orange/10">
             <MessageSquare className="h-6 w-6 text-brand-orange" />
           </div>
-          <h1 className="text-center text-lg font-bold text-foreground">Create your account</h1>
+          <h1 className="text-center text-lg font-bold text-foreground">
+            {signupMode === 'signup' ? 'Create your account' : 'Sign in to AI Hunt'}
+          </h1>
           <p className="mt-2 text-center text-sm text-muted-foreground">
-            Pick a username to keep your advisor chats saved with your account far beyond this tab.
+            Your account &amp; monthly quota stay synced across every browser.
           </p>
-          <input
-            value={signupName}
-            onChange={(e) => {
-              setSignupName(e.target.value)
-              setSignupError(null)
-            }}
-            placeholder="e.g. aimar_dev"
-            className="mt-5 w-full rounded-xl border border-input bg-card px-4 py-2.5 text-sm outline-none focus:border-brand-orange/60"
-          />
-          {signupError && <p className="mt-2 text-center text-xs text-red-500">{signupError}</p>}
-          <button
-            onClick={() => {
-              if (!signIn(signupName)) setSignupError('Use at least 2 letters, numbers or underscores.')
-            }}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
-          >
-            Save chats to this account
-          </button>
-          <p className="mt-3 text-center text-[11px] text-muted-foreground">
-            Same username as on the site — your profile and chats stay linked.
-          </p>
+          <div className="mt-4 flex rounded-lg border border-border bg-muted/40 p-1 text-xs font-medium">
+            <button
+              type="button"
+              onClick={() => { setSignupMode('login'); setSignupError(null) }}
+              className={`flex-1 rounded-md py-1.5 transition-colors ${
+                signupMode === 'login' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Sign in
+            </button>
+            <button
+              type="button"
+              onClick={() => { setSignupMode('signup'); setSignupError(null) }}
+              className={`flex-1 rounded-md py-1.5 transition-colors ${
+                signupMode === 'signup' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Create account
+            </button>
+          </div>
+          <form onSubmit={submitChatAuth} className="mt-4 space-y-3">
+            <input
+              value={signupName}
+              onChange={(e) => {
+                setSignupName(e.target.value)
+                setSignupError(null)
+              }}
+              placeholder="Username (e.g. aimar_dev)"
+              autoComplete="username"
+              className="w-full rounded-xl border border-input bg-card px-4 py-2.5 text-sm outline-none focus:border-brand-orange/60"
+            />
+            <input
+              type="password"
+              value={signupPassword}
+              onChange={(e) => {
+                setSignupPassword(e.target.value)
+                setSignupError(null)
+              }}
+              placeholder="Password (min. 6 characters)"
+              autoComplete={signupMode === 'signup' ? 'new-password' : 'current-password'}
+              className="w-full rounded-xl border border-input bg-card px-4 py-2.5 text-sm outline-none focus:border-brand-orange/60"
+            />
+            {signupError && <p className="text-center text-xs text-red-500">{signupError}</p>}
+            <button
+              type="submit"
+              disabled={signupBusy || !signupName.trim() || signupPassword.length < 6}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-600 disabled:opacity-50"
+            >
+              {signupBusy ? 'Please wait...' : signupMode === 'signup' ? 'Create account' : 'Sign in'}
+            </button>
+          </form>
         </div>
       </div>
     )

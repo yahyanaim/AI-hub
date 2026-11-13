@@ -2,6 +2,7 @@ import 'server-only'
 import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto'
 import type { NextResponse } from 'next/server'
 import { isFailClosedMode } from '@/lib/server/redis'
+import { getUserSessionFromRequest } from '@/lib/server/user-session'
 
 export const VISITOR_COOKIE = 'aihunt_vid'
 const VISITOR_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
@@ -105,16 +106,19 @@ export type VisitorIdentity = {
   deviceHash: string
   rawDeviceId: string
   cookieTokenToSet: string | null
+  accountUsername?: string | null
 }
 
 /**
  * Resolve both IP-based and signed first-party cookie-based visitor hashes.
- * If no valid `aihunt_vid` cookie is present, mints a cryptographically random
- * 128-bit ID signed with HMAC-SHA256 for the response Set-Cookie header.
+ * When a signed `aihunt_user` session cookie is present, `deviceHash` is keyed
+ * to the authenticated account (`usr:<username>`) so quotas follow the account
+ * across browsers and devices. Otherwise falls back to `aihunt_vid` (`dev`).
  */
 export function resolveVisitorIdentity(request: Request): VisitorIdentity {
   const ip = getClientIp(request)
   const ipHash = hmacIdentifier('ip', ip)
+  const userSession = getUserSessionFromRequest(request)
 
   const rawCookie = parseCookieHeader(request.headers.get('cookie'), VISITOR_COOKIE)
   const verifiedId = rawCookie ? verifySignedVisitorId(rawCookie) : null
@@ -122,9 +126,12 @@ export function resolveVisitorIdentity(request: Request): VisitorIdentity {
   if (verifiedId) {
     return {
       ipHash,
-      deviceHash: hmacIdentifier('dev', verifiedId),
+      deviceHash: userSession
+        ? hmacIdentifier('usr', userSession.username)
+        : hmacIdentifier('dev', verifiedId),
       rawDeviceId: verifiedId,
       cookieTokenToSet: null,
+      accountUsername: userSession?.username ?? null,
     }
   }
 
@@ -132,9 +139,12 @@ export function resolveVisitorIdentity(request: Request): VisitorIdentity {
   const signedToken = signVisitorId(newId)
   return {
     ipHash,
-    deviceHash: hmacIdentifier('dev', newId),
+    deviceHash: userSession
+      ? hmacIdentifier('usr', userSession.username)
+      : hmacIdentifier('dev', newId),
     rawDeviceId: newId,
     cookieTokenToSet: signedToken,
+    accountUsername: userSession?.username ?? null,
   }
 }
 

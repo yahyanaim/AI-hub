@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShieldCheck, LogOut, Loader2, Megaphone } from 'lucide-react'
+import { ShieldCheck, LogOut, Loader2, Megaphone, Lock, Unlock } from 'lucide-react'
 import { cn, formatNumber } from '@/lib/utils'
 
 /**
@@ -31,6 +31,9 @@ export function AdminBadge({
     'idle'
   )
   const [pushMsg, setPushMsg] = useState<string | null>(null)
+  const [chatLocked, setChatLocked] = useState<boolean | null>(null)
+  const [chatLockPending, setChatLockPending] = useState(false)
+  const [chatLockMsg, setChatLockMsg] = useState<string | null>(null)
 
   const broadcast = async () => {
     setPushState('sending')
@@ -63,9 +66,37 @@ export function AdminBadge({
     }
   }
 
+  const toggleChatLock = async () => {
+    if (chatLockPending) return
+    const nextLocked = !(chatLocked ?? false)
+    setChatLockPending(true)
+    setChatLockMsg(null)
+    try {
+      const res = await fetch('/api/admin/chat-lock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ locked: nextLocked }),
+      })
+      const data = (await res.json()) as { locked?: boolean; error?: string }
+      if (!res.ok) {
+        setChatLockMsg(data.error ?? 'Failed to update chat lock.')
+        return
+      }
+      setChatLocked(Boolean(data.locked))
+      setChatLockMsg(data.locked ? 'Chat locked.' : 'Chat unlocked.')
+    } catch {
+      setChatLockMsg('Failed to update chat lock — network error.')
+    } finally {
+      setChatLockPending(false)
+    }
+  }
+
   const load = useCallback(async () => {
     try {
-      const res = await fetch('/api/admin/signups', { cache: 'no-store' })
+      const [res, lockRes] = await Promise.all([
+        fetch('/api/admin/signups', { cache: 'no-store' }),
+        fetch('/api/admin/chat-lock', { cache: 'no-store' }),
+      ])
       if (res.status === 401) {
         setStatus('auth')
         return
@@ -76,6 +107,10 @@ export function AdminBadge({
       }
       const data = (await res.json()) as { count: number; name: string }
       setCount(data.count)
+      if (lockRes.ok) {
+        const lockData = (await lockRes.json()) as { locked: boolean }
+        setChatLocked(Boolean(lockData.locked))
+      }
       setStatus('authed')
     } catch {
       setStatus('unavailable')
@@ -205,7 +240,7 @@ export function AdminBadge({
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       <AnimatePresence mode="wait">
         <motion.span
           key={count}
@@ -242,6 +277,29 @@ export function AdminBadge({
         )}
         Push new tools
       </button>
+      <button
+        onClick={toggleChatLock}
+        disabled={chatLockPending}
+        className={cn(
+          'inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors disabled:opacity-60',
+          chatLocked
+            ? 'border-amber-500/40 bg-amber-500/10 text-amber-600 hover:bg-amber-500/20 dark:text-amber-400'
+            : 'border-border text-muted-foreground hover:text-foreground'
+        )}
+        title={chatLocked ? 'Unlock AI chat for visitors' : 'Lock AI chat for all visitors'}
+      >
+        {chatLockPending ? (
+          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+        ) : chatLocked ? (
+          <Unlock className="h-3.5 w-3.5" />
+        ) : (
+          <Lock className="h-3.5 w-3.5" />
+        )}
+        {chatLocked ? 'Unlock Chat' : 'Lock Chat'}
+      </button>
+      {chatLockMsg && (
+        <span className="text-[11px] text-muted-foreground">{chatLockMsg}</span>
+      )}
       {pushMsg && (
         <span
           className={cn(

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed/courses'
 import { getBudgetConfig } from '@/lib/server/budget-config'
 import { checkExpensiveAiBotGuard } from '@/lib/server/bot-guard'
+import { isChatLocked } from '@/lib/server/chat-lock'
 import {
   acquireAiExecutionBudget,
   secondsUntilNextUtcDay,
@@ -341,6 +342,13 @@ export async function POST(request: Request) {
   }
 
   try {
+    if (await isChatLocked()) {
+      return jsonErr(
+        { error: 'AI chat is temporarily locked by the administrator.', chatLocked: true },
+        423
+      )
+    }
+
     const bot = await checkExpensiveAiBotGuard(request, { maxContentLengthBytes: 300_000, expectedAction: 'chat' })
     if (!bot.ok) {
       return jsonErr({ error: bot.error }, bot.status)

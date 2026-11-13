@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { extractText, getDocumentProxy } from 'unpdf'
 import { getBudgetConfig, isAiEmergencyDisabled } from '@/lib/server/budget-config'
 import { checkExpensiveAiBotGuard } from '@/lib/server/bot-guard'
+import { isChatLocked } from '@/lib/server/chat-lock'
 import {
   acquireConcurrencyLease,
   atomicCheckAndIncr,
@@ -51,9 +52,11 @@ export async function GET(request: Request) {
     return res
   }
 
-  const res = NextResponse.json(statusRes.status, {
-    headers: { 'Cache-Control': 'no-store' },
-  })
+  const chatLocked = await isChatLocked()
+  const res = NextResponse.json(
+    { ...statusRes.status, chatLocked },
+    { headers: { 'Cache-Control': 'no-store' } }
+  )
   attachVisitorCookie(res, identity)
   return res
 }
@@ -85,6 +88,13 @@ export async function POST(request: Request) {
     return respond(
       { error: 'CV processing is temporarily paused for maintenance. Please try again later.' },
       503
+    )
+  }
+
+  if (await isChatLocked()) {
+    return respond(
+      { error: 'AI chat is temporarily locked by the administrator.', chatLocked: true },
+      423
     )
   }
 

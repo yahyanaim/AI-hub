@@ -1072,8 +1072,31 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [pingSignupCount])
 
   const signOut = useCallback(() => {
+    try {
+      localStorage.removeItem('ai-hunt-username')
+    } catch {}
+    void fetch('/api/auth/logout', { method: 'POST' }).catch(() => {})
     setState((prev) => ({ ...prev, currentUserId: null }))
   }, [])
+
+  // Keep client store synced with the server-side HttpOnly session cookie (aihunt_user).
+  useEffect(() => {
+    let alive = true
+    fetch('/api/auth/me', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { user?: { username?: string } | null } | null) => {
+        if (!alive || !d?.user?.username) return
+        const serverUser = d.user.username.toLowerCase()
+        const cur = stateRef.current.users.find((u) => u.id === stateRef.current.currentUserId)
+        if (!cur || cur.username.toLowerCase() !== serverUser) {
+          signIn(serverUser)
+        }
+      })
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
+  }, [signIn])
 
   const getUser = useCallback(
     (id: string) => state.users.find((u) => u.id === id),

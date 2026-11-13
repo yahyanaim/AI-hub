@@ -3,9 +3,17 @@
  * Run: npm run test:cost
  */
 
+import { NextRequest } from 'next/server'
+import { GET as chatLockGet, POST as chatLockPost } from '../app/api/admin/chat-lock/route'
+import { POST as userLoginPost } from '../app/api/auth/login/route'
+import { POST as userLogoutPost } from '../app/api/auth/logout/route'
+import { GET as userMeGet } from '../app/api/auth/me/route'
 import { GET as cvGet, POST as cvPost } from '../app/api/chat/cv/route'
 import { POST as chatPost } from '../app/api/chat/route'
 import { POST as goalPost } from '../app/api/goal-match/route'
+import { ADMIN_COOKIE, signAdminJwt } from '../lib/server/auth'
+import { __resetChatLockForTests } from '../lib/server/chat-lock'
+import { __resetMemUsersForTests } from '../lib/server/user-auth'
 import {
   __resetLocalQuotaStoreForTests,
   acquireConcurrencyLease,
@@ -895,6 +903,255 @@ async function run() {
       else process.env.UPSTASH_REDIS_REST_TOKEN = prevTok
       if (prevKey === undefined) delete process.env.NVIDIA_API_KEY
       else process.env.NVIDIA_API_KEY = prevKey
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 15. Admin chat lock (401 unauthenticated, 423 when locked, unlock restores)
+  // ---------------------------------------------------------------------------
+  {
+    __resetChatLockForTests()
+    const prevAuthSecret = process.env.AUTH_SECRET
+    const prevKey = process.env.NVIDIA_API_KEY
+    process.env.AUTH_SECRET = 'test-auth-secret-at-least-32-chars-long'
+    delete process.env.NVIDIA_API_KEY
+
+    try {
+      const unauthGet = await chatLockGet(new NextRequest('http://localhost/api/admin/chat-lock'))
+      const unauthPost = await chatLockPost(
+        new NextRequest('http://localhost/api/admin/chat-lock', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ locked: true }),
+        })
+      )
+      check(
+        'admin-chat-lock: unauthenticated GET & POST return 401',
+        unauthGet.status === 401 && unauthPost.status === 401,
+        { get: unauthGet.status, post: unauthPost.status }
+      )
+
+      const jwt = await signAdminJwt()
+      const cookieHeader = `${ADMIN_COOKIE}=${jwt}`
+
+      const lockRes = await chatLockPost(
+        new NextRequest('http://localhost/api/admin/chat-lock', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', cookie: cookieHeader },
+          body: JSON.stringify({ locked: true }),
+        })
+      )
+      const lockBody = (await lockRes.json()) as { ok?: boolean; locked?: boolean }
+      const getLocked = await chatLockGet(
+        new NextRequest('http://localhost/api/admin/chat-lock', {
+          headers: { cookie: cookieHeader },
+        })
+      )
+      const getLockedBody = (await getLocked.json()) as { locked?: boolean }
+      check(
+        'admin-chat-lock: authenticated admin can lock chat',
+        lockRes.status === 200 && lockBody.locked === true && getLockedBody.locked === true,
+        { lockStatus: lockRes.status, lockBody, getLockedBody }
+      )
+
+      const cvStatusLocked = await cvGet(
+        new Request('http://localhost/api/chat/cv', {
+          headers: { 'user-agent': BROWSER_UA, 'x-vercel-forwarded-for': '198.51.100.250' },
+        })
+      )
+      const cvStatusLockedBody = (await cvStatusLocked.json()) as { chatLocked?: boolean }
+
+      const chatWhileLocked = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            'x-vercel-forwarded-for': '198.51.100.250',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      const cvWhileLocked = await cvPost(
+        new Request('http://localhost/api/chat/cv', {
+          method: 'POST',
+          headers: {
+            'user-agent': BROWSER_UA,
+            'x-vercel-forwarded-for': '198.51.100.250',
+          },
+        })
+      )
+      check(
+        'admin-chat-lock: locked state blocks /api/chat and /api/chat/cv with 423 & surfaces chatLocked',
+        cvStatusLockedBody.chatLocked === true &&
+          chatWhileLocked.status === 423 &&
+          cvWhileLocked.status === 423,
+        {
+          chatLocked: cvStatusLockedBody.chatLocked,
+          chatStatus: chatWhileLocked.status,
+          cvStatus: cvWhileLocked.status,
+        }
+      )
+
+      const unlockRes = await chatLockPost(
+        new NextRequest('http://localhost/api/admin/chat-lock', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', cookie: cookieHeader },
+          body: JSON.stringify({ locked: false }),
+        })
+      )
+      const cvStatusUnlocked = await cvGet(
+        new Request('http://localhost/api/chat/cv', {
+          headers: { 'user-agent': BROWSER_UA, 'x-vercel-forwarded-for': '198.51.100.250' },
+        })
+      )
+      const cvStatusUnlockedBody = (await cvStatusUnlocked.json()) as { chatLocked?: boolean }
+      const chatWhileUnlocked = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            'x-vercel-forwarded-for': '198.51.100.250',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      check(
+        'admin-chat-lock: unlock restores chat (chatLocked=false and POST /api/chat != 423)',
+        unlockRes.status === 200 &&
+          cvStatusUnlockedBody.chatLocked === false &&
+          chatWhileUnlocked.status !== 423,
+        {
+          unlockStatus: unlockRes.status,
+          chatLocked: cvStatusUnlockedBody.chatLocked,
+          chatStatus: chatWhileUnlocked.status,
+        }
+      )
+    } finally {
+      __resetChatLockForTests()
+      if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuthSecret
+      if (prevKey === undefined) delete process.env.NVIDIA_API_KEY
+      else process.env.NVIDIA_API_KEY = prevKey
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 16. Cross-browser account quota (user auth + aihunt_user session cookie)
+  // ---------------------------------------------------------------------------
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetMemUsersForTests()
+    const prevAuthSecret = process.env.AUTH_SECRET
+    process.env.AUTH_SECRET = 'test-auth-secret-at-least-32-chars-long'
+
+    try {
+      const signupRes = await userLoginPost(
+        new Request('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.240' },
+          body: JSON.stringify({ username: 'cross_user', password: 'password123', mode: 'signup' }),
+        })
+      )
+      const userCookie = extractCookieValue(signupRes.headers.get('set-cookie'))
+      const dupSignup = await userLoginPost(
+        new Request('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.240' },
+          body: JSON.stringify({ username: 'cross_user', password: 'password123', mode: 'signup' }),
+        })
+      )
+      const wrongPass = await userLoginPost(
+        new Request('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.240' },
+          body: JSON.stringify({ username: 'cross_user', password: 'wrong-password', mode: 'login' }),
+        })
+      )
+      const meRes = await userMeGet(
+        new Request('http://localhost/api/auth/me', { headers: { cookie: userCookie } })
+      )
+      const meBody = (await meRes.json()) as { user?: { username: string } | null }
+      check(
+        'user-auth: signup, duplicate 409, wrong password 401, and /api/auth/me',
+        signupRes.status === 200 &&
+          userCookie.startsWith('aihunt_user=') &&
+          dupSignup.status === 409 &&
+          wrongPass.status === 401 &&
+          meBody.user?.username === 'cross_user',
+        { signup: signupRes.status, dup: dupSignup.status, wrong: wrongPass.status, meBody }
+      )
+
+      // Browser A (IP 198.51.100.241) uploads 1 CV -> remaining=2
+      const uploadAs = async (ipAddr: string, cookieHeader: string) => {
+        const form = new FormData()
+        form.append('file', new File([VALID_CV_TEXT], 'cv.txt', { type: 'text/plain' }))
+        return cvPost(
+          new Request('http://localhost/api/chat/cv', {
+            method: 'POST',
+            headers: {
+              'user-agent': BROWSER_UA,
+              'x-vercel-forwarded-for': ipAddr,
+              cookie: cookieHeader,
+            },
+            body: form,
+          })
+        )
+      }
+
+      const b1Upload1 = await uploadAs('198.51.100.241', userCookie)
+      const b1Body1 = (await b1Upload1.json()) as { quota?: { remaining: number } }
+
+      // Browser B (new browser, different IP 198.51.100.242, NO aihunt_vid, signs into same account)
+      const loginB2 = await userLoginPost(
+        new Request('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.242' },
+          body: JSON.stringify({ username: 'cross_user', password: 'password123', mode: 'login' }),
+        })
+      )
+      const cookieB2 = extractCookieValue(loginB2.headers.get('set-cookie'))
+      const b2Status = await cvGet(
+        new Request('http://localhost/api/chat/cv', {
+          headers: { 'x-vercel-forwarded-for': '198.51.100.242', cookie: cookieB2 },
+        })
+      )
+      const b2StatusBody = (await b2Status.json()) as { remaining?: number }
+
+      const b2Upload2 = await uploadAs('198.51.100.242', cookieB2)
+      const b2Upload3 = await uploadAs('198.51.100.242', cookieB2)
+      const b1Upload4 = await uploadAs('198.51.100.241', userCookie)
+
+      check(
+        'cross-browser-quota: Browser B inherits remaining=2 and 4th upload across browsers is 429',
+        b1Upload1.status === 200 &&
+          b1Body1.quota?.remaining === 2 &&
+          b2StatusBody.remaining === 2 &&
+          b2Upload2.status === 200 &&
+          b2Upload3.status === 200 &&
+          b1Upload4.status === 429,
+        {
+          b1Remaining: b1Body1.quota?.remaining,
+          b2Remaining: b2StatusBody.remaining,
+          u2: b2Upload2.status,
+          u3: b2Upload3.status,
+          u4: b1Upload4.status,
+        }
+      )
+
+      const logoutRes = await userLogoutPost()
+      const clearedCookie = logoutRes.headers.get('set-cookie') || ''
+      check(
+        'user-auth: logout clears aihunt_user cookie',
+        logoutRes.status === 200 && clearedCookie.includes('aihunt_user=') && clearedCookie.includes('Max-Age=0'),
+        { status: logoutRes.status, clearedCookie }
+      )
+    } finally {
+      __resetLocalQuotaStoreForTests()
+      __resetMemUsersForTests()
+      if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuthSecret
     }
   }
 
