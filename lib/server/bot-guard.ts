@@ -1,6 +1,6 @@
 import 'server-only'
 import { createHash } from 'node:crypto'
-import { isFailClosedMode, isRedisConfigured, redisCommand } from '@/lib/server/redis'
+import { isFailClosedMode, isRedisConfigured, redisCommandResult } from '@/lib/server/redis'
 
 const AUTOMATED_UA_RE =
   /\b(curl|wget|python-requests|python-urllib|httpx|aiohttp|go-http-client|libwww-perl|scrapy|httpclient|java\/|okhttp|node-fetch|undici|postmanruntime|insomnia)\b/i
@@ -20,10 +20,14 @@ async function claimTurnstileTokenOnce(token: string): Promise<'ok' | 'reused' |
   const key = `aihunt:ts:used:${tokenHash}`
 
   if (isRedisConfigured()) {
-    const res = await redisCommand<string | null>(['set', key, '1', 'NX', 'EX', '300'])
-    if (res === 'OK') return 'ok'
-    if (res === null) return 'reused'
-    if (isFailClosedMode()) return 'unavailable'
+    const res = await redisCommandResult<string>(['set', key, '1', 'NX', 'EX', '300'])
+    if (res.ok) {
+      if (res.result === 'OK') return 'ok'
+      if (res.result === null) return 'reused'
+      if (isFailClosedMode()) return 'unavailable'
+    } else if (isFailClosedMode()) {
+      return 'unavailable'
+    }
   } else if (isFailClosedMode()) {
     return 'unavailable'
   }

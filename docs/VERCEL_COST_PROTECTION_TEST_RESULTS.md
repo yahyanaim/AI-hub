@@ -11,7 +11,7 @@
 | `npm run lint` | — | 0 | 0 | ESLint (`next lint`, **0 errors, 0 warnings**) |
 | `npm run seed:check` | 5 suites | 0 | 0 | Seed integrity (`1345` tools, `915` devtools, `461` repos, `205` courses, `341` offers) |
 | `npm run test:api` | 15 | 0 | 0 | IP extraction, CV upload validation, admin login (`scripts/api-security-tests.ts`) |
-| `npm run test:cost` | 40 | 0 | 0 | CV 3/dev + 12/IP, crash-safe CV reservation recovery, ownership, month boundary, commit/refund concurrency, ZSET token leases, prod fail-closed, secret guard, Turnstile action/host/replay hardening (`scripts/cost-protection-tests.ts`) |
+| `npm run test:cost` | 41 | 0 | 0 | CV 3/dev + 12/IP, crash-safe CV reservation recovery, ownership, month boundary, commit/refund concurrency, ZSET token leases, prod fail-closed, secret guard, Turnstile action/host/replay & Redis error classification (`scripts/cost-protection-tests.ts`) |
 | `npm run test:goal` | 101 | 0 | 0 | Goal-finder retrieval, prompt, output validation, timeouts, route contracts (`scripts/goal-finder-tests.ts`) |
 | `npm run build` | 3,418 routes | 0 | 0 | Next.js production build & SSG generation (`3418/3418` static pages) |
 | `npx tsx scripts/redis-smoke-test.ts` | — | — | **BLOCKED** | Blocked locally: `UPSTASH_REDIS_REST_URL` & `UPSTASH_REDIS_REST_TOKEN` unavailable in `.env`, `.env.local`, and Vercel link |

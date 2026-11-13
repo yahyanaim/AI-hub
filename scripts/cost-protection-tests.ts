@@ -806,6 +806,98 @@ async function run() {
     }
   }
 
+  // 28. Turnstile Redis error classification (claimed -> allow, SET NX null -> 403, Redis error -> 503)
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetTurnstileReplayStoreForTests()
+    const prevSecret = process.env.TURNSTILE_SECRET_KEY
+    const prevSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+    const prevMode = process.env.TURNSTILE_MODE
+    const prevFail = process.env.AIHUB_FAIL_CLOSED
+    const prevUrl = process.env.UPSTASH_REDIS_REST_URL
+    const prevTok = process.env.UPSTASH_REDIS_REST_TOKEN
+    const prevKey = process.env.NVIDIA_API_KEY
+    const prevFetch = globalThis.fetch
+
+    process.env.TURNSTILE_SECRET_KEY = 'ts-secret'
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY = 'ts-site'
+    process.env.TURNSTILE_MODE = 'always'
+    process.env.AIHUB_FAIL_CLOSED = '1'
+    process.env.UPSTASH_REDIS_REST_URL = 'https://mock-upstash.invalid'
+    process.env.UPSTASH_REDIS_REST_TOKEN = 'mock-token'
+    process.env.NVIDIA_API_KEY = ''
+
+    let redisMode: 'ok' | 'null' | 'error' = 'ok'
+    globalThis.fetch = (async (input: RequestInfo | URL) => {
+      const url = String(input)
+      if (url.includes('turnstile')) {
+        return new Response(JSON.stringify({ success: true, action: 'chat', hostname: 'www.aihubtools.ma' }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      }
+      if (redisMode === 'error') {
+        throw new Error('ECONNRESET')
+      }
+      if (redisMode === 'null') {
+        return new Response(JSON.stringify([{ result: null }]), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      }
+      return new Response(JSON.stringify([{ result: 'OK' }]), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      })
+    }) as typeof fetch
+
+    const makeTsReq = (tok: string) =>
+      chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            host: 'www.aihubtools.ma',
+            'x-turnstile-token': tok,
+            'x-vercel-forwarded-for': '198.51.100.253',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+
+    try {
+      redisMode = 'ok'
+      const rClaimed = await makeTsReq('tok-redis-1') // bot-guard passes, then quota Lua returns non-array -> 503 from quota, NOT 403
+      redisMode = 'null'
+      const rReused = await makeTsReq('tok-redis-2') // SET NX returned null -> MUST be 403
+      redisMode = 'error'
+      const rRedisDown = await makeTsReq('tok-redis-3') // Redis threw error -> MUST be 503, never 403
+
+      check(
+        'turnstile-redis: claimed passes bot-guard (!403), SET NX null -> 403, Redis error -> 503',
+        rClaimed.status !== 403 && rReused.status === 403 && rRedisDown.status === 503,
+        { rClaimed: rClaimed.status, rReused: rReused.status, rRedisDown: rRedisDown.status }
+      )
+    } finally {
+      globalThis.fetch = prevFetch
+      if (prevSecret === undefined) delete process.env.TURNSTILE_SECRET_KEY
+      else process.env.TURNSTILE_SECRET_KEY = prevSecret
+      if (prevSiteKey === undefined) delete process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+      else process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY = prevSiteKey
+      if (prevMode === undefined) delete process.env.TURNSTILE_MODE
+      else process.env.TURNSTILE_MODE = prevMode
+      if (prevFail === undefined) delete process.env.AIHUB_FAIL_CLOSED
+      else process.env.AIHUB_FAIL_CLOSED = prevFail
+      if (prevUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL
+      else process.env.UPSTASH_REDIS_REST_URL = prevUrl
+      if (prevTok === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN
+      else process.env.UPSTASH_REDIS_REST_TOKEN = prevTok
+      if (prevKey === undefined) delete process.env.NVIDIA_API_KEY
+      else process.env.NVIDIA_API_KEY = prevKey
+    }
+  }
+
   console.log(`\n${passed} passed, ${failed} failed`)
   if (failed > 0) process.exit(1)
 }

@@ -27,14 +27,20 @@ export function isFailClosedMode(): boolean {
   return false
 }
 
+export type RedisExecResult<T = unknown> =
+  | { ok: true; result: T | null }
+  | { ok: false; error: string }
+
 /**
- * Runs one command against the Upstash Redis REST endpoint and unwraps the
- * `result` field. Plain fetch instead of @upstash/redis so there is no extra
- * dependency and no build-time weight; the REST API is a stable contract.
+ * Runs one command against the Upstash Redis REST endpoint and preserves the
+ * distinction between a valid `null` Redis reply (e.g. SET NX miss) and an
+ * execution/network/command error.
  */
-export async function redisCommand<T = unknown>(cmd: string[]): Promise<T | null> {
+export async function redisCommandResult<T = unknown>(
+  cmd: string[]
+): Promise<RedisExecResult<T>> {
   const { url, token } = getUpstashConfig()
-  if (!url || !token) return null
+  if (!url || !token) return { ok: false, error: 'Redis is not configured.' }
   try {
     const res = await fetch(`${url}/pipeline`, {
       method: 'POST',
@@ -45,14 +51,28 @@ export async function redisCommand<T = unknown>(cmd: string[]): Promise<T | null
       body: JSON.stringify([cmd]),
       cache: 'no-store',
     })
-    if (!res.ok) return null
+    if (!res.ok) return { ok: false, error: `Redis HTTP ${res.status}` }
     const body = (await res.json()) as Array<{ result: T | null; error?: string }>
     const first = body[0]
-    if (!first || first.error) return null
-    return first.result
-  } catch {
-    return null
+    if (!first) return { ok: false, error: 'Empty Redis pipeline response.' }
+    if (first.error) return { ok: false, error: first.error }
+    return { ok: true, result: first.result }
+  } catch (err) {
+    return {
+      ok: false,
+      error: err instanceof Error ? err.message : 'Redis request failed.',
+    }
   }
+}
+
+/**
+ * Runs one command against the Upstash Redis REST endpoint and unwraps the
+ * `result` field. Plain fetch instead of @upstash/redis so there is no extra
+ * dependency and no build-time weight; the REST API is a stable contract.
+ */
+export async function redisCommand<T = unknown>(cmd: string[]): Promise<T | null> {
+  const res = await redisCommandResult<T>(cmd)
+  return res.ok ? res.result : null
 }
 
 /**

@@ -16,7 +16,7 @@
 - `AI-hub/lib/server/quota.ts` — Crash-safe `aihunt:cv:pending` ZSET, `LUA_CV_RECOVER_EXPIRED`, `LUA_CV_RESERVE` (with bounded lazy recovery + full-month metadata TTL), `LUA_CV_COMMIT`, `LUA_CV_REFUND` (atomic ownership + refund), and deterministic `nowMs` memory store alignment.
 - `AI-hub/app/api/chat/cv/route.ts` — Passes `identity` to `commitCvMonthlyQuota(reservationId, identity)` and `expectedAction: 'cv'` to `checkExpensiveAiBotGuard`.
 - `AI-hub/lib/client/turnstile.ts` — Accessible `role="dialog"` `interaction-only` overlay (no `display:none`), serialized execution queue, `AbortSignal` cleanup, `4.5s` script timeout, and `action` binding.
-- `AI-hub/lib/server/bot-guard.ts` — `siteverify` `action` & `hostname` validation plus `aihunt:ts:used:<hash>` (`SET NX EX 300`) replay prevention.
+- `AI-hub/lib/server/redis.ts` & `AI-hub/lib/server/bot-guard.ts` — Typed `redisCommandResult()` distinguishes a valid `null` `SET NX` reply (`403` replay) from Redis network/HTTP/command errors (`503` fail-closed), plus `siteverify` `action` & `hostname` validation.
 - `AI-hub/app/api/chat/route.ts`, `AI-hub/app/api/goal-match/route.ts`, `AI-hub/app/chat/page.tsx`, `AI-hub/components/goal/GoalFinder.tsx` — Action-bound Turnstile verification & abort propagation.
 - `AI-hub/scripts/cost-protection-tests.ts`, `AI-hub/scripts/redis-smoke-test.ts` — Added CV recovery, ownership, month-boundary, outage, concurrency, and Turnstile hardening tests; expanded live Redis smoke test in `aihunt:test:cost-protection:*`.
 - `AI-hub/docs/VERCEL_COST_PROTECTION_IMPLEMENTATION.md`, `AI-hub/docs/VERCEL_COST_PROTECTION_TEST_RESULTS.md`, `AI-hub/docs/VERCEL_20USD_BUDGET_PLAN.md` — Updated implementation, test evidence, and Vercel Pro Spend Management docs.
@@ -39,7 +39,7 @@
 - `npm run lint`: **0 errors, 0 warnings**
 - `npm run seed:check`: **Passed** (`3,267` entries across 5 datasets)
 - `npm run test:api`: **15 passed, 0 failed**
-- `npm run test:cost`: **40 passed, 0 failed** *(in-memory store + mocked `fetch` for Redis outage & Turnstile `siteverify`)*
+- `npm run test:cost`: **41 passed, 0 failed** *(in-memory store + mocked `fetch` for Redis outage, Redis error classification & Turnstile `siteverify`)*
 - `npm run test:goal`: **101 passed, 0 failed**
 - `npm run build`: **Passed (`3,418/3,418` static pages)**
 
