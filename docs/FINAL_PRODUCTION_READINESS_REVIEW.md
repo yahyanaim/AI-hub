@@ -35,20 +35,20 @@
 
 ## 7. Verification Matrix & Test Results
 
+*(Code & build checks below are the previously verified results from commit `c4e5d20` — no application code was modified in this verification pass.)*
+
 | Component | Status | Evidence | Remaining Action |
 |---|---|---|---|
-| TypeScript | **PASS** | `./node_modules/.bin/tsc -p tsconfig.json --noEmit` — 0 errors | None |
-| Lint | **PASS** | `npm run lint` — 0 errors, 0 warnings | None |
-| API tests | **PASS** | `npm run test:api` — 15 passed, 0 failed | None |
-| Cost tests | **PASS** | `npm run test:cost` — 41 passed, 0 failed *(in-memory store + mocked `fetch` for Redis outage, Redis error classification & Turnstile `siteverify`)* | None |
-| Goal tests | **PASS** | `npm run test:goal` — 101 passed, 0 failed | None |
-| Production build | **PASS** | `npm run build` — 3,418/3,418 static/SSG pages generated | None |
-| Live Upstash | **BLOCKED** | `npx tsx --conditions=react-server scripts/redis-smoke-test.ts` → `BLOCKED: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are not configured` | Export Upstash credentials and run `npx tsx --conditions=react-server scripts/redis-smoke-test.ts` |
-| Turnstile browser test | **BLOCKED** | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` & `TURNSTILE_SECRET_KEY` unset locally; no authorized Preview deployment | Test Chat, CV, and Goal Match across Chrome/Safari/Firefox on an authorized Preview deployment with real Turnstile keys |
-| Vercel environment | **UNVERIFIED** | `vercel env ls` → codebase not linked locally; `.env` / `.env.local` absent | Verify `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `AUTH_SECRET` (>=32 chars), `NVIDIA_API_KEY` in Vercel Production |
-| Spending controls | **UNVERIFIED** | Vercel Dashboard billing/Spend Management cannot be read locally | Enable Pro Spend Management, On-Demand Budget, **Pause Production Deployments**, Billing Alerts, and Vercel Firewall `/api/*` rule |
-
-Additional check: `npm run seed:check` → **PASS** (`1345` tools, `915` devtools, `461` repos, `205` courses, `341` offers).
+| Existing Upstash database | **BLOCKED** | `.env`, `.env.local`, `.env.production.local`, and `.vercel/project.json` are absent; `UPSTASH_REDIS_REST_URL` & `UPSTASH_REDIS_REST_TOKEN` unset in `process.env` | Export existing Upstash REST credentials locally or link Vercel project and pull env |
+| Redis REST connectivity | **BLOCKED** | `npx tsx --conditions=react-server scripts/redis-smoke-test.ts` → `BLOCKED: UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are not configured` | Re-run `npx tsx --conditions=react-server scripts/redis-smoke-test.ts` with credentials |
+| Redis Lua EVAL | **BLOCKED** | Same as above (isolated `aihunt:test:cost-protection:*` script ready) | Verify against live Upstash via `scripts/redis-smoke-test.ts` |
+| Quota enforcement | **PASS** *(mocked)* | Previous run: `npm run test:cost` — **41 passed, 0 failed**; `npm run test:api` — **15 passed, 0 failed** | Confirm live Redis `EVAL` parity via smoke test |
+| CV recovery | **PASS** *(mocked)* | Previous run: `npm run test:cost` tests 24–26 (crash recovery, ownership, month boundary, commit/refund concurrency, outage) | Confirm live Redis `LUA_CV_RECOVER_EXPIRED` via smoke test |
+| Redis security | **PASS** | Code audit: server-only `lib/server/redis.ts`, `503` fail-closed in prod, atomic Lua, bounded ZSET + month TTLs, `redisCommandResult` error classification | None |
+| Vercel environment | **UNVERIFIED** | Project not linked locally (`.vercel/project.json` missing); `vercel env ls` unlinked | Link existing Vercel project (`vercel link`) and verify Production/Preview env vars |
+| Turnstile | **BLOCKED** | `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_EXPECTED_HOSTNAME` unset locally; no authorized Preview deployment | Verify Chat, CV, and Goal Match in Chrome/Safari/Firefox on Preview with Turnstile keys |
+| Spending controls | **UNVERIFIED** | Vercel Dashboard billing/Spend Management cannot be inspected from local CLI | Enable Pro Spend Management, On-Demand Budget, **Pause Production Deployments**, Billing Alerts, and Vercel Firewall `/api/*` rule |
+| Production readiness | **CONDITIONAL GO** | Code, `tsc`, `lint`, `seed:check`, `test:api` (15/15), `test:cost` (41/41), `test:goal` (101/101), and `build` (3,418/3,418) pass | Complete live Upstash smoke test, Vercel env verification, and Dashboard spending controls |
 
 ## 8. Live Redis Test Status
 
