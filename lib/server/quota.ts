@@ -1,5 +1,6 @@
 import 'server-only'
-import { isFailClosedMode, isRedisConfigured, redisEval, redisPipeline } from '@/lib/server/redis'
+import { randomBytes } from 'node:crypto'
+import { isFailClosedMode, isRedisConfigured, redisCommand, redisEval, redisPipeline } from '@/lib/server/redis'
 import { getBudgetConfig, isAiEmergencyDisabled } from '@/lib/server/budget-config'
 import type { VisitorIdentity } from '@/lib/server/visitor'
 
@@ -15,9 +16,14 @@ export type QuotaCheckResult =
   | { ok: false; unavailable: false; retryAfterSeconds: number; failedKey: string }
 
 export type LeaseAcquireResult =
-  | { ok: true; release: () => Promise<void> }
+  | { ok: true; token: string; release: () => Promise<void>; renew: (ttlSeconds?: number) => Promise<boolean> }
   | { ok: false; unavailable: true; error: string }
   | { ok: false; unavailable: false; retryAfterSeconds: number }
+
+export type CvReserveResult =
+  | { ok: true; reservationId: string; remaining: number }
+  | { ok: false; unavailable: true; error: string }
+  | { ok: false; unavailable: false; retryAfterSeconds: number; failedKey: string }
 
 export type CvQuotaStatus = {
   limit: number
@@ -68,6 +74,10 @@ export function secondsUntilNextUtcDay(now = new Date()): number {
 
 type MemEntry = { count: number; expiresAt: number }
 const memStore = new Map<string, MemEntry>()
+// key -> Map<token, expiresAtMs>
+const memLeases = new Map<string, Map<string, number>>()
+// reservationId -> { keys: string[], expiresAtMs: number }
+const memReservations = new Map<string, { keys: string[]; expiresAtMs: number }>()
 const MAX_MEM_KEYS = 10_000
 
 function memGet(key: string, nowMs: number): number {
@@ -123,6 +133,8 @@ function memDecrClamp(keys: string[]): void {
 
 export function __resetLocalQuotaStoreForTests(): void {
   memStore.clear()
+  memLeases.clear()
+  memReservations.clear()
 }
 
 // ---- Atomic Lua Scripts -----------------------------------------------------
@@ -130,7 +142,7 @@ export function __resetLocalQuotaStoreForTests(): void {
 // KEYS = [k1, k2, ...], ARGV = [limit1, ttl1, limit2, ttl2, ...]
 // Returns [1, minRemaining] if all keys are below limit and incremented,
 // or [0, failedIndex1Based, retryAfterSeconds] without mutating any key.
-const LUA_MULTI_CHECK_AND_INCR = `
+export const LUA_MULTI_CHECK_AND_INCR = `
 local n = #KEYS
 for i = 1, n do
   local limit = tonumber(ARGV[(i - 1) * 2 + 1])
@@ -156,8 +168,104 @@ end
 return {1, minRem}
 `
 
-const LUA_MULTI_DECR_CLAMP = `
+// ZSET-based unique-token concurrency leases:
+// KEYS = [k1, k2, ...], ARGV = [nowMs, token, limit1, ttlMs1, limit2, ttlMs2, ...]
+export const LUA_LEASE_ACQUIRE = `
+local nowMs = tonumber(ARGV[1])
+local token = ARGV[2]
+local n = #KEYS
+for i = 1, n do
+  redis.call('ZREMRANGEBYSCORE', KEYS[i], '-inf', nowMs)
+  local limit = tonumber(ARGV[2 + (i - 1) * 2 + 1])
+  local count = redis.call('ZCARD', KEYS[i])
+  if count >= limit then
+    local earliest = redis.call('ZRANGE', KEYS[i], 0, 0, 'WITHSCORES')
+    local retry = 1
+    if earliest[2] then
+      retry = math.max(1, math.ceil((tonumber(earliest[2]) - nowMs) / 1000))
+    end
+    return {0, i, retry}
+  end
+end
+for i = 1, n do
+  local ttlMs = tonumber(ARGV[2 + (i - 1) * 2 + 2])
+  redis.call('ZADD', KEYS[i], nowMs + ttlMs, token)
+  redis.call('PEXPIRE', KEYS[i], ttlMs + 5000)
+end
+return {1}
+`
+
+// KEYS = [k1, k2, ...], ARGV = [nowMs, token, ttlMs1, ttlMs2, ...]
+export const LUA_LEASE_RENEW = `
+local nowMs = tonumber(ARGV[1])
+local token = ARGV[2]
+local n = #KEYS
+local renewed = 0
+for i = 1, n do
+  redis.call('ZREMRANGEBYSCORE', KEYS[i], '-inf', nowMs)
+  if redis.call('ZSCORE', KEYS[i], token) then
+    local ttlMs = tonumber(ARGV[2 + i])
+    redis.call('ZADD', KEYS[i], nowMs + ttlMs, token)
+    redis.call('PEXPIRE', KEYS[i], ttlMs + 5000)
+    renewed = renewed + 1
+  end
+end
+return renewed
+`
+
+// KEYS = [k1, k2, ...], ARGV = [token]
+export const LUA_LEASE_RELEASE = `
+local token = ARGV[1]
 for i = 1, #KEYS do
+  redis.call('ZREM', KEYS[i], token)
+end
+return 1
+`
+
+// KEYS = [ipKey, devKey, reservationKey], ARGV = [ipLimit, ipTtl, devLimit, devTtl, resTtl, resValue]
+export const LUA_CV_RESERVE = `
+local ipLimit = tonumber(ARGV[1])
+local ipTtl = tonumber(ARGV[2])
+local devLimit = tonumber(ARGV[3])
+local devTtl = tonumber(ARGV[4])
+local resTtl = tonumber(ARGV[5])
+local resValue = ARGV[6]
+
+local ipCur = tonumber(redis.call('GET', KEYS[1]) or '0')
+if ipCur >= ipLimit then
+  local ttl = redis.call('TTL', KEYS[1])
+  if ttl < 1 then ttl = ipTtl end
+  return {0, 1, ttl}
+end
+
+local devCur = tonumber(redis.call('GET', KEYS[2]) or '0')
+if devCur >= devLimit then
+  local ttl = redis.call('TTL', KEYS[2])
+  if ttl < 1 then ttl = devTtl end
+  return {0, 2, ttl}
+end
+
+local nextIp = redis.call('INCR', KEYS[1])
+if nextIp == 1 then redis.call('EXPIRE', KEYS[1], ipTtl) end
+
+local nextDev = redis.call('INCR', KEYS[2])
+if nextDev == 1 then redis.call('EXPIRE', KEYS[2], devTtl) end
+
+redis.call('SET', KEYS[3], resValue, 'EX', resTtl)
+
+local remIp = math.max(0, ipLimit - nextIp)
+local remDev = math.max(0, devLimit - nextDev)
+return {1, math.min(remIp, remDev)}
+`
+
+// KEYS = [reservationKey, ipKey, devKey]
+// Atomically deletes reservationKey; only decrements ipKey/devKey if reservation existed.
+export const LUA_CV_REFUND = `
+local existed = redis.call('DEL', KEYS[1])
+if existed == 0 then
+  return 0
+end
+for i = 2, #KEYS do
   local cur = tonumber(redis.call('GET', KEYS[i]) or '0')
   if cur > 0 then
     redis.call('DECR', KEYS[i])
@@ -207,36 +315,138 @@ export async function atomicCheckAndIncr(specs: QuotaWindowSpec[]): Promise<Quot
   return memCheckAndIncr(specs)
 }
 
-export async function atomicDecrementClamp(keys: string[]): Promise<void> {
-  if (keys.length === 0) return
-  if (isRedisConfigured()) {
-    await redisEval(LUA_MULTI_DECR_CLAMP, keys, [])
-    return
+function memLeaseAcquire(specs: QuotaWindowSpec[], token: string, nowMs: number): { ok: true } | { ok: false; retryAfterSeconds: number } {
+  for (const s of specs) {
+    let bucket = memLeases.get(s.key)
+    if (bucket) {
+      for (const [tok, exp] of bucket) {
+        if (exp <= nowMs) bucket.delete(tok)
+      }
+      if (bucket.size >= s.limit) {
+        let earliest = Infinity
+        for (const exp of bucket.values()) {
+          if (exp < earliest) earliest = exp
+        }
+        const retry = Number.isFinite(earliest) ? Math.max(1, Math.ceil((earliest - nowMs) / 1000)) : s.ttlSeconds
+        return { ok: false, retryAfterSeconds: retry }
+      }
+    }
   }
-  if (!isFailClosedMode()) {
-    memDecrClamp(keys)
+  for (const s of specs) {
+    let bucket = memLeases.get(s.key)
+    if (!bucket) {
+      bucket = new Map()
+      memLeases.set(s.key, bucket)
+    }
+    bucket.set(token, nowMs + s.ttlSeconds * 1000)
+  }
+  return { ok: true }
+}
+
+function memLeaseRenew(specs: QuotaWindowSpec[], token: string, nowMs: number, overrideTtlSeconds?: number): boolean {
+  let renewed = 0
+  for (const s of specs) {
+    const bucket = memLeases.get(s.key)
+    if (!bucket) continue
+    for (const [tok, exp] of bucket) {
+      if (exp <= nowMs) bucket.delete(tok)
+    }
+    if (bucket.has(token)) {
+      const ttlMs = (overrideTtlSeconds ?? s.ttlSeconds) * 1000
+      bucket.set(token, nowMs + ttlMs)
+      renewed += 1
+    }
+  }
+  return renewed === specs.length
+}
+
+function memLeaseRelease(keys: string[], token: string): void {
+  for (const key of keys) {
+    memLeases.get(key)?.delete(token)
   }
 }
 
 export async function acquireConcurrencyLease(specs: QuotaWindowSpec[]): Promise<LeaseAcquireResult> {
-  const res = await atomicCheckAndIncr(specs)
-  if (!res.ok) return res
+  if (specs.length === 0) {
+    return { ok: true, token: 'noop', release: async () => {}, renew: async () => true }
+  }
 
-  let released = false
+  const token = randomBytes(12).toString('hex')
   const keys = specs.map((s) => s.key)
+
+  if (isRedisConfigured()) {
+    const nowMs = Date.now()
+    const args: Array<string | number> = [nowMs, token]
+    for (const s of specs) {
+      args.push(s.limit, Math.max(1, s.ttlSeconds) * 1000)
+    }
+    const res = await redisEval<[number, number?, number?]>(LUA_LEASE_ACQUIRE, keys, args)
+    if (Array.isArray(res) && res[0] === 1) {
+      let released = false
+      return {
+        ok: true,
+        token,
+        release: async () => {
+          if (released) return
+          released = true
+          await redisEval(LUA_LEASE_RELEASE, keys, [token])
+        },
+        renew: async (overrideTtlSeconds?: number) => {
+          if (released) return false
+          const renewArgs: Array<string | number> = [Date.now(), token]
+          for (const s of specs) {
+            renewArgs.push(Math.max(1, overrideTtlSeconds ?? s.ttlSeconds) * 1000)
+          }
+          const renewed = await redisEval<number>(LUA_LEASE_RENEW, keys, renewArgs)
+          return Number(renewed) === keys.length
+        },
+      }
+    }
+    if (Array.isArray(res) && res[0] === 0) {
+      const idx = Math.max(0, Number(res[1] ?? 1) - 1)
+      const ttl = Math.max(1, Number(res[2] ?? specs[idx]?.ttlSeconds ?? 15))
+      return { ok: false, unavailable: false, retryAfterSeconds: ttl }
+    }
+    if (isFailClosedMode()) {
+      return {
+        ok: false,
+        unavailable: true,
+        error: 'Concurrency protection service is temporarily unavailable. Please try again shortly.',
+      }
+    }
+  } else if (isFailClosedMode()) {
+    return {
+      ok: false,
+      unavailable: true,
+      error: 'Concurrency protection service is not configured. Please try again later.',
+    }
+  }
+
+  const memRes = memLeaseAcquire(specs, token, Date.now())
+  if (!memRes.ok) {
+    return { ok: false, unavailable: false, retryAfterSeconds: memRes.retryAfterSeconds }
+  }
+  let released = false
   return {
     ok: true,
+    token,
     release: async () => {
       if (released) return
       released = true
-      await atomicDecrementClamp(keys)
+      memLeaseRelease(keys, token)
+    },
+    renew: async (overrideTtlSeconds?: number) => {
+      if (released) return false
+      return memLeaseRenew(specs, token, Date.now(), overrideTtlSeconds)
     },
   }
 }
 
-// ---- CV Monthly Quota (3 / UTC Month, Reserve / Commit / Refund) ------------
+// ---- CV Monthly Quota (3 / device / UTC Month, 12 / IP / UTC Month) --------
 
-export function cvQuotaKeys(identity: VisitorIdentity, now = new Date()): string[] {
+const CV_RESERVATION_TTL_SECONDS = 300
+
+export function cvQuotaKeys(identity: VisitorIdentity, now = new Date()): [string, string] {
   const month = utcMonthKey(now)
   return [
     `aihunt:cv:m:${month}:ip:${identity.ipHash}`,
@@ -244,27 +454,39 @@ export function cvQuotaKeys(identity: VisitorIdentity, now = new Date()): string
   ]
 }
 
+function cvReservationKey(reservationId: string): string {
+  return `aihunt:cv:res:${reservationId}`
+}
+
+function computeEffectiveCvStatus(ipUsed: number, devUsed: number, cvMonthlyLimit: number, cvIpMonthlyLimit: number, resetAt: string): CvQuotaStatus {
+  const devRemaining = Math.max(0, cvMonthlyLimit - devUsed)
+  const ipRemaining = Math.max(0, cvIpMonthlyLimit - ipUsed)
+  const remaining = Math.min(devRemaining, ipRemaining)
+  const used = Math.max(0, cvMonthlyLimit - remaining)
+  return {
+    limit: cvMonthlyLimit,
+    used,
+    remaining,
+    resetAt,
+  }
+}
+
 export async function getCvMonthlyQuotaStatus(
   identity: VisitorIdentity,
   now = new Date()
 ): Promise<{ ok: true; status: CvQuotaStatus } | { ok: false; error: string }> {
-  const { cvMonthlyLimit } = getBudgetConfig()
+  const { cvMonthlyLimit, cvIpMonthlyLimit } = getBudgetConfig()
   const keys = cvQuotaKeys(identity, now)
   const resetAt = nextUtcMonthResetIso(now)
 
   if (isRedisConfigured()) {
     const res = await redisPipeline(keys.map((k) => ['get', k]))
     if (res.length === keys.length && res.every((r) => !r.error)) {
-      const counts = res.map((r) => Math.max(0, Number(r.result ?? 0) || 0))
-      const used = Math.max(...counts)
+      const ipUsed = Math.max(0, Number(res[0]?.result ?? 0) || 0)
+      const devUsed = Math.max(0, Number(res[1]?.result ?? 0) || 0)
       return {
         ok: true,
-        status: {
-          limit: cvMonthlyLimit,
-          used,
-          remaining: Math.max(0, cvMonthlyLimit - used),
-          resetAt,
-        },
+        status: computeEffectiveCvStatus(ipUsed, devUsed, cvMonthlyLimit, cvIpMonthlyLimit, resetAt),
       }
     }
     if (isFailClosedMode()) {
@@ -275,39 +497,110 @@ export async function getCvMonthlyQuotaStatus(
   }
 
   const nowMs = now.getTime()
-  const used = Math.max(...keys.map((k) => memGet(k, nowMs)))
+  const ipUsed = memGet(keys[0], nowMs)
+  const devUsed = memGet(keys[1], nowMs)
   return {
     ok: true,
-    status: {
-      limit: cvMonthlyLimit,
-      used,
-      remaining: Math.max(0, cvMonthlyLimit - used),
-      resetAt,
-    },
+    status: computeEffectiveCvStatus(ipUsed, devUsed, cvMonthlyLimit, cvIpMonthlyLimit, resetAt),
   }
 }
 
 export async function reserveCvMonthlyQuota(
   identity: VisitorIdentity,
   now = new Date()
-): Promise<QuotaCheckResult> {
-  const { cvMonthlyLimit } = getBudgetConfig()
+): Promise<CvReserveResult> {
+  const { cvMonthlyLimit, cvIpMonthlyLimit } = getBudgetConfig()
   const ttl = secondsUntilNextUtcMonth(now) + 3600
-  const keys = cvQuotaKeys(identity, now)
-  return atomicCheckAndIncr(keys.map((key) => ({ key, limit: cvMonthlyLimit, ttlSeconds: ttl })))
+  const [ipKey, devKey] = cvQuotaKeys(identity, now)
+  const reservationId = randomBytes(12).toString('hex')
+  const resKey = cvReservationKey(reservationId)
+
+  if (isRedisConfigured()) {
+    const res = await redisEval<[number, number, number?]>(
+      LUA_CV_RESERVE,
+      [ipKey, devKey, resKey],
+      [cvIpMonthlyLimit, ttl, cvMonthlyLimit, ttl, CV_RESERVATION_TTL_SECONDS, `${ipKey}|${devKey}`]
+    )
+    if (Array.isArray(res) && res[0] === 1) {
+      return { ok: true, reservationId, remaining: Number(res[1] ?? 0) }
+    }
+    if (Array.isArray(res) && res[0] === 0) {
+      const idx = Number(res[1] ?? 2)
+      const failedKey = idx === 1 ? ipKey : devKey
+      const retryAfterSeconds = Math.max(1, Number(res[2] ?? ttl))
+      return { ok: false, unavailable: false, retryAfterSeconds, failedKey }
+    }
+    if (isFailClosedMode()) {
+      return {
+        ok: false,
+        unavailable: true,
+        error: 'CV quota protection service is temporarily unavailable. Please try again shortly.',
+      }
+    }
+  } else if (isFailClosedMode()) {
+    return {
+      ok: false,
+      unavailable: true,
+      error: 'CV quota protection service is not configured. Please try again later.',
+    }
+  }
+
+  const check = memCheckAndIncr([
+    { key: ipKey, limit: cvIpMonthlyLimit, ttlSeconds: ttl },
+    { key: devKey, limit: cvMonthlyLimit, ttlSeconds: ttl },
+  ])
+  if (!check.ok) return check
+
+  memReservations.set(reservationId, {
+    keys: [ipKey, devKey],
+    expiresAtMs: Date.now() + CV_RESERVATION_TTL_SECONDS * 1000,
+  })
+  return { ok: true, reservationId, remaining: check.remaining ?? 0 }
+}
+
+export async function commitCvMonthlyQuota(reservationId: string): Promise<void> {
+  if (!reservationId) return
+  if (isRedisConfigured()) {
+    await redisCommand(['del', cvReservationKey(reservationId)])
+    return
+  }
+  memReservations.delete(reservationId)
 }
 
 export async function refundCvMonthlyQuota(
   identity: VisitorIdentity,
+  reservationId: string,
   now = new Date()
-): Promise<void> {
-  await atomicDecrementClamp(cvQuotaKeys(identity, now))
+): Promise<boolean> {
+  if (!reservationId) return false
+  const [fallbackIpKey, fallbackDevKey] = cvQuotaKeys(identity, now)
+  const resKey = cvReservationKey(reservationId)
+
+  if (isRedisConfigured()) {
+    const stored = await redisCommand<string | null>(['get', resKey])
+    const parts = typeof stored === 'string' && stored.includes('|') ? stored.split('|', 2) : null
+    const ipKeyToRefund = parts?.[0] || fallbackIpKey
+    const devKeyToRefund = parts?.[1] || fallbackDevKey
+    const res = await redisEval<number>(LUA_CV_REFUND, [resKey, ipKeyToRefund, devKeyToRefund], [])
+    return Number(res) === 1
+  }
+
+  if (isFailClosedMode()) return false
+
+  const entry = memReservations.get(reservationId)
+  if (!entry || entry.expiresAtMs <= Date.now()) {
+    memReservations.delete(reservationId)
+    return false
+  }
+  memReservations.delete(reservationId)
+  memDecrClamp(entry.keys)
+  return true
 }
 
 // ---- Global + Endpoint AI Budget Guard --------------------------------------
 
 export type AiBudgetAcquireResult =
-  | { ok: true; release: () => Promise<void> }
+  | { ok: true; release: () => Promise<void>; renew: (ttlSeconds?: number) => Promise<boolean> }
   | { ok: false; status: 429 | 503; error: string; retryAfterSeconds?: number }
 
 export async function acquireAiExecutionBudget(
@@ -377,5 +670,5 @@ export async function acquireAiExecutionBudget(
     }
   }
 
-  return { ok: true, release: lease.release }
+  return { ok: true, release: lease.release, renew: lease.renew }
 }

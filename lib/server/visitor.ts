@@ -1,19 +1,46 @@
 import 'server-only'
 import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto'
 import type { NextResponse } from 'next/server'
+import { isFailClosedMode } from '@/lib/server/redis'
 
 export const VISITOR_COOKIE = 'aihunt_vid'
 const VISITOR_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
+export const MIN_VISITOR_SECRET_LENGTH = 32
 
-// Process-local fallback secret for local dev/tests when AUTH_SECRET is unset.
+export class VisitorSecretError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'VisitorSecretError'
+  }
+}
+
+// Process-local fallback secret ONLY for local dev/tests when not fail-closed.
 const DEV_FALLBACK_SECRET = randomBytes(32).toString('hex')
 
-function getHmacSecret(): string {
-  return (
+export function getConfiguredVisitorSecret(): string | null {
+  const candidate =
     process.env.VISITOR_HMAC_SECRET?.trim() ||
     process.env.AUTH_SECRET?.trim() ||
-    DEV_FALLBACK_SECRET
-  )
+    ''
+  if (candidate.length >= MIN_VISITOR_SECRET_LENGTH) {
+    return candidate
+  }
+  return null
+}
+
+export function isVisitorSecretConfigured(): boolean {
+  return getConfiguredVisitorSecret() !== null
+}
+
+function getHmacSecret(): string {
+  const configured = getConfiguredVisitorSecret()
+  if (configured) return configured
+  if (isFailClosedMode()) {
+    throw new VisitorSecretError(
+      `VISITOR_HMAC_SECRET or AUTH_SECRET must be at least ${MIN_VISITOR_SECRET_LENGTH} characters in fail-closed/production mode.`
+    )
+  }
+  return DEV_FALLBACK_SECRET
 }
 
 /**

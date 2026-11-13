@@ -12,7 +12,7 @@ import {
   type QuotaWindowSpec,
 } from '@/lib/server/quota'
 import { isRedisConfigured, redisCommand } from '@/lib/server/redis'
-import { attachVisitorCookie, resolveVisitorIdentity } from '@/lib/server/visitor'
+import { attachVisitorCookie, resolveVisitorIdentity, VisitorSecretError, type VisitorIdentity } from '@/lib/server/visitor'
 import { matchToolsByGoal, analyzeGoal, type GoalItemKind } from '@/lib/goal-finder'
 import { GOAL_MATCH_SYSTEM_PROMPT } from '@/lib/goal-prompt'
 import { runProviderRoundtrip, parseProviderOutput, type ProviderResult } from '@/lib/goal-provider-roundtrip'
@@ -97,7 +97,18 @@ export async function POST(req: Request) {
     build: process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.COMMIT_SHA ?? process.env.NEXT_PUBLIC_COMMIT_SHA ?? 'dev',
     prompt: PROMPT_VERSION,
   }
-  const identity = resolveVisitorIdentity(req)
+  let identity: VisitorIdentity
+  try {
+    identity = resolveVisitorIdentity(req)
+  } catch (err) {
+    if (err instanceof VisitorSecretError) {
+      return NextResponse.json(
+        { error: 'AI matching service temporarily unavailable due to incomplete security configuration.', fallback: true, meta },
+        { status: 503 }
+      )
+    }
+    throw err
+  }
   const jsonWithCookie = (body: unknown, status = 200, extraHeaders?: Record<string, string>) => {
     const res = NextResponse.json(body, { status, headers: extraHeaders })
     attachVisitorCookie(res, identity)

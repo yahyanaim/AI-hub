@@ -15,11 +15,16 @@ export function isRedisConfigured(): boolean {
  * In production (or when AIHUB_FAIL_CLOSED=1), expensive AI endpoints must fail
  * closed with 503 if Redis is unconfigured or unreachable rather than falling
  * back to uncoordinated per-instance memory counters.
+ *
+ * AIHUB_ALLOW_MEMORY_FALLBACK=1 is strictly ignored in production.
  */
 export function isFailClosedMode(): boolean {
+  if (process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production') {
+    return true
+  }
   if (process.env.AIHUB_FAIL_CLOSED === '1') return true
   if (process.env.AIHUB_ALLOW_MEMORY_FALLBACK === '1') return false
-  return process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production'
+  return false
 }
 
 /**

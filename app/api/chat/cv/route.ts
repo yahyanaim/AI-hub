@@ -5,6 +5,7 @@ import { checkExpensiveAiBotGuard } from '@/lib/server/bot-guard'
 import {
   acquireConcurrencyLease,
   atomicCheckAndIncr,
+  commitCvMonthlyQuota,
   getCvMonthlyQuotaStatus,
   nextUtcMonthResetIso,
   refundCvMonthlyQuota,
@@ -12,7 +13,7 @@ import {
   secondsUntilNextUtcMonth,
   utcMinuteKey,
 } from '@/lib/server/quota'
-import { attachVisitorCookie, resolveVisitorIdentity } from '@/lib/server/visitor'
+import { attachVisitorCookie, resolveVisitorIdentity, VisitorSecretError, type VisitorIdentity } from '@/lib/server/visitor'
 
 // Transient CV parser. The uploaded file is received in memory, converted to
 // plain text, returned to the client, and immediately discarded — nothing is
@@ -22,7 +23,18 @@ const MAX_MULTIPART_BYTES = 4_500_000
 const MAX_TEXT_CHARS = 12_000
 
 export async function GET(request: Request) {
-  const identity = resolveVisitorIdentity(request)
+  let identity: VisitorIdentity
+  try {
+    identity = resolveVisitorIdentity(request)
+  } catch (err) {
+    if (err instanceof VisitorSecretError) {
+      return NextResponse.json(
+        { error: 'CV service temporarily unavailable due to incomplete security configuration.' },
+        { status: 503 }
+      )
+    }
+    throw err
+  }
   if (isAiEmergencyDisabled()) {
     const res = NextResponse.json(
       { error: 'CV processing is temporarily paused for maintenance.' },
@@ -47,7 +59,18 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const identity = resolveVisitorIdentity(request)
+  let identity: VisitorIdentity
+  try {
+    identity = resolveVisitorIdentity(request)
+  } catch (err) {
+    if (err instanceof VisitorSecretError) {
+      return NextResponse.json(
+        { error: 'CV service temporarily unavailable due to incomplete security configuration.' },
+        { status: 503 }
+      )
+    }
+    throw err
+  }
   const respond = (
     body: unknown,
     status: number,
@@ -117,7 +140,7 @@ export async function POST(request: Request) {
     )
   }
 
-  let reserved = false
+  let reservationId: string | null = null
   try {
     const reservation = await reserveCvMonthlyQuota(identity, now)
     if (!reservation.ok) {
@@ -140,18 +163,18 @@ export async function POST(request: Request) {
         }
       )
     }
-    reserved = true
+    reservationId = reservation.reservationId
 
     const form = await request.formData().catch(() => null)
     const file = form?.get('file')
     if (!file || typeof file === 'string') {
-      await refundCvMonthlyQuota(identity, now)
-      reserved = false
+      await refundCvMonthlyQuota(identity, reservationId, now)
+      reservationId = null
       return respond({ error: 'No file received.' }, 400)
     }
     if (file.size > MAX_FILE_BYTES) {
-      await refundCvMonthlyQuota(identity, now)
-      reserved = false
+      await refundCvMonthlyQuota(identity, reservationId, now)
+      reservationId = null
       return respond({ error: 'File too large (max 4MB).' }, 400)
     }
 
@@ -165,8 +188,8 @@ export async function POST(request: Request) {
       const bytes = new Uint8Array(await (file as Blob).arrayBuffer())
       const header = String.fromCharCode(...bytes.slice(0, 5))
       if (header !== '%PDF-') {
-        await refundCvMonthlyQuota(identity, now)
-        reserved = false
+        await refundCvMonthlyQuota(identity, reservationId, now)
+        reservationId = null
         return respond(
           { error: 'Invalid PDF file. Please upload a genuine PDF document.' },
           415
@@ -176,8 +199,8 @@ export async function POST(request: Request) {
       const { text: extracted } = await extractText(pdf, { mergePages: true })
       text = Array.isArray(extracted) ? extracted.join('\n') : (extracted as string) ?? ''
     } else {
-      await refundCvMonthlyQuota(identity, now)
-      reserved = false
+      await refundCvMonthlyQuota(identity, reservationId, now)
+      reservationId = null
       return respond(
         { error: 'Unsupported format. Please attach a PDF or TXT file.' },
         415
@@ -186,14 +209,17 @@ export async function POST(request: Request) {
 
     text = text.replace(/\u0000/g, ' ').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim()
     if (!text || text.replace(/\s/g, '').length < 40) {
-      await refundCvMonthlyQuota(identity, now)
-      reserved = false
+      await refundCvMonthlyQuota(identity, reservationId, now)
+      reservationId = null
       return respond(
         { error: "Couldn't read any text from this file — if it's a scan, please paste the text instead." },
         422
       )
     }
     if (text.length > MAX_TEXT_CHARS) text = text.slice(0, MAX_TEXT_CHARS)
+
+    await commitCvMonthlyQuota(reservationId)
+    reservationId = null
 
     const remaining = Math.max(0, reservation.remaining ?? 0)
     const resetAt = nextUtcMonthResetIso(now)
@@ -216,8 +242,8 @@ export async function POST(request: Request) {
       }
     )
   } catch (err) {
-    if (reserved) {
-      await refundCvMonthlyQuota(identity, now).catch(() => {})
+    if (reservationId) {
+      await refundCvMonthlyQuota(identity, reservationId, now).catch(() => {})
     }
     console.error('[cv-parse]', err)
     return respond({ error: 'Failed to parse this file. Please try another PDF.' }, 500)

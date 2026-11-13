@@ -11,6 +11,7 @@ import {
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/ui/Markdown'
 import { Avatar } from '@/components/ui/Avatar'
+import { getTurnstileHeaders } from '@/lib/client/turnstile'
 
 // Standalone AI Career Advisor (opened from the widget header logo). Mirrors
 // the ChatGPT layout: collapsible left sidebar with the per-account chat
@@ -1705,7 +1706,8 @@ export default function ChatPage() {
       if (lower.endsWith('.pdf')) {
         const form = new FormData()
         form.append('file', file)
-        const res = await fetch('/api/chat/cv', { method: 'POST', body: form })
+        const turnstileHeaders = await getTurnstileHeaders()
+        const res = await fetch('/api/chat/cv', { method: 'POST', headers: turnstileHeaders, body: form })
         const data = await res.json().catch(() => ({}))
         if (data?.quota && typeof data.quota.remaining === 'number' && typeof data.quota.limit === 'number') {
           setCvQuota({
@@ -1765,9 +1767,10 @@ export default function ChatPage() {
     setLoading(true)
 
     const runOnce = async (): Promise<string> => {
+      const turnstileHeaders = await getTurnstileHeaders()
       const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...turnstileHeaders },
         body: JSON.stringify({
           cv: cvText || undefined,
           messages: withUser

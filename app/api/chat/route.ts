@@ -12,7 +12,7 @@ import {
   utcMonthKey,
   type QuotaWindowSpec,
 } from '@/lib/server/quota'
-import { attachVisitorCookie, resolveVisitorIdentity } from '@/lib/server/visitor'
+import { attachVisitorCookie, resolveVisitorIdentity, VisitorSecretError, type VisitorIdentity } from '@/lib/server/visitor'
 
 const API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions'
 // Nov 2026 audit: openai/gpt-oss-20b is still LISTED on integrate.api.nvidia.com
@@ -320,8 +320,20 @@ async function githubSnapshotFromText(text: string): Promise<string | null> {
 export const maxDuration = 300
 
 export async function POST(request: Request) {
-  const identity = resolveVisitorIdentity(request)
+  let identity: VisitorIdentity
+  try {
+    identity = resolveVisitorIdentity(request)
+  } catch (err) {
+    if (err instanceof VisitorSecretError) {
+      return NextResponse.json(
+        { error: 'AI chat service temporarily unavailable due to incomplete security configuration.' },
+        { status: 503 }
+      )
+    }
+    throw err
+  }
   let releaseBudget: (() => Promise<void>) | null = null
+  let renewBudget: ((ttlSeconds?: number) => Promise<boolean>) | null = null
   const jsonErr = (body: unknown, status: number, extraHeaders?: Record<string, string>) => {
     const res = NextResponse.json(body, { status, headers: extraHeaders })
     attachVisitorCookie(res, identity)
@@ -368,6 +380,7 @@ export async function POST(request: Request) {
       return jsonErr({ error: budget.error }, budget.status, headers)
     }
     releaseBudget = budget.release
+    renewBudget = budget.renew
 
     const body = await request.json().catch(() => null)
     const { messages } = body ?? {}
@@ -703,9 +716,14 @@ export async function POST(request: Request) {
     const encoder = new TextEncoder()
     const sseFrame = (obj: unknown) => `data: ${JSON.stringify(obj)}\n\n`
 
+    let cleanupTimers: (() => void) | null = null
     const stream = new ReadableStream({
       async start(controller) {
         let closed = false
+        const renewTimer = setInterval(() => {
+          if (closed || !renewBudget) return
+          void renewBudget(180).catch(() => {})
+        }, 60_000)
         const pinger = setInterval(() => {
           if (closed) return
           try {
@@ -714,10 +732,16 @@ export async function POST(request: Request) {
             closed = true
           }
         }, 3000)
+        cleanupTimers = () => {
+          clearInterval(renewTimer)
+          clearInterval(pinger)
+        }
         const finish = () => {
           if (closed) return
           closed = true
-          clearInterval(pinger)
+          cleanupTimers?.()
+          cleanupTimers = null
+          renewBudget = null
           if (releaseBudget) {
             void releaseBudget().catch(() => {})
             releaseBudget = null
@@ -949,6 +973,9 @@ export async function POST(request: Request) {
         }
       },
       cancel() {
+        cleanupTimers?.()
+        cleanupTimers = null
+        renewBudget = null
         if (releaseBudget) {
           void releaseBudget().catch(() => {})
           releaseBudget = null

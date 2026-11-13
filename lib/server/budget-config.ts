@@ -19,6 +19,7 @@ export function getBudgetConfig() {
     globalMaxConcurrent: envInt('AI_GLOBAL_MAX_CONCURRENT', 10),
 
     cvMonthlyLimit: envInt('CV_MONTHLY_LIMIT', 3),
+    cvIpMonthlyLimit: envInt('CV_IP_MONTHLY_LIMIT', 12),
     cvAbusePerMinuteLimit: envInt('CV_ABUSE_PER_MINUTE_LIMIT', 10),
 
     chatPerMinuteLimit: envInt('CHAT_PER_MINUTE_LIMIT', 5),

@@ -10,12 +10,14 @@ import {
   __resetLocalQuotaStoreForTests,
   acquireConcurrencyLease,
   atomicCheckAndIncr,
+  commitCvMonthlyQuota,
   getCvMonthlyQuotaStatus,
   nextUtcMonthResetIso,
   refundCvMonthlyQuota,
   reserveCvMonthlyQuota,
   utcMonthKey,
 } from '../lib/server/quota'
+import { isFailClosedMode } from '../lib/server/redis'
 import { resolveVisitorIdentity } from '../lib/server/visitor'
 import robotsGet from '../app/robots'
 
@@ -91,19 +93,46 @@ async function run() {
     const dGet = await rGet.json()
     check('cv-quota: GET returns remaining=0 and resetAt', rGet.status === 200 && dGet.remaining === 0 && typeof dGet.resetAt === 'string', dGet)
 
-    // 6. Cookie deletion / new device on same IP cannot bypass IP quota
-    const rNewCookie = await cvPost(
-      (() => {
+    // 6. Cookie deletion on same IP is bounded by CV_IP_MONTHLY_LIMIT (12)
+    // (3 already used by first device; 9 more allowed across new devices, then blocked with 429)
+    const prevAbuse = process.env.CV_ABUSE_PER_MINUTE_LIMIT
+    process.env.CV_ABUSE_PER_MINUTE_LIMIT = '30'
+    let allowedAcrossResets = 0
+    let rIpExhaustedStatus = 0
+    try {
+      for (let i = 0; i < 9; i++) {
         const form = new FormData()
         form.append('file', new File([VALID_CV_TEXT], 'cv.txt', { type: 'text/plain' }))
-        return new Request('http://localhost/api/chat/cv', {
-          method: 'POST',
-          headers: { 'x-vercel-forwarded-for': ip, 'user-agent': BROWSER_UA },
-          body: form,
-        })
-      })()
+        const res = await cvPost(
+          new Request('http://localhost/api/chat/cv', {
+            method: 'POST',
+            headers: { 'x-vercel-forwarded-for': ip, 'user-agent': BROWSER_UA },
+            body: form,
+          })
+        )
+        if (res.status === 200) allowedAcrossResets++
+      }
+      const rIpExhausted = await cvPost(
+        (() => {
+          const form = new FormData()
+          form.append('file', new File([VALID_CV_TEXT], 'cv.txt', { type: 'text/plain' }))
+          return new Request('http://localhost/api/chat/cv', {
+            method: 'POST',
+            headers: { 'x-vercel-forwarded-for': ip, 'user-agent': BROWSER_UA },
+            body: form,
+          })
+        })()
+      )
+      rIpExhaustedStatus = rIpExhausted.status
+    } finally {
+      if (prevAbuse === undefined) delete process.env.CV_ABUSE_PER_MINUTE_LIMIT
+      else process.env.CV_ABUSE_PER_MINUTE_LIMIT = prevAbuse
+    }
+    check(
+      'cv-quota: cookie deletion on same IP bounded at CV_IP_MONTHLY_LIMIT (12) then blocked (429)',
+      allowedAcrossResets === 9 && rIpExhaustedStatus === 429,
+      { allowedAcrossResets, status: rIpExhaustedStatus }
     )
-    check('cv-quota: cookie deletion on same IP still blocked (429)', rNewCookie.status === 429, rNewCookie.status)
 
     // 7. Same device cookie on changed IP cannot bypass device quota
     const rChangedIp = await cvPost(
@@ -150,9 +179,9 @@ async function run() {
     const id = resolveVisitorIdentity(req)
     const nov = new Date('2026-11-15T12:00:00Z')
     const dec = new Date('2026-12-01T00:00:01Z')
-    await reserveCvMonthlyQuota(id, nov)
-    await reserveCvMonthlyQuota(id, nov)
-    await reserveCvMonthlyQuota(id, nov)
+    const r1 = await reserveCvMonthlyQuota(id, nov)
+    const r2 = await reserveCvMonthlyQuota(id, nov)
+    const r3 = await reserveCvMonthlyQuota(id, nov)
     const novStatus = await getCvMonthlyQuotaStatus(id, nov)
     const decStatus = await getCvMonthlyQuotaStatus(id, dec)
     check(
@@ -166,7 +195,9 @@ async function run() {
         nextUtcMonthResetIso(nov) === '2026-12-01T00:00:00.000Z',
       { novStatus, decStatus }
     )
-    await refundCvMonthlyQuota(id, nov)
+    if (r1.ok) await refundCvMonthlyQuota(id, r1.reservationId, nov)
+    if (r2.ok) await refundCvMonthlyQuota(id, r2.reservationId, nov)
+    if (r3.ok) await refundCvMonthlyQuota(id, r3.reservationId, nov)
   }
 
   // 10. Atomic concurrency lease & concurrent upload protection
@@ -344,6 +375,240 @@ async function run() {
     const rules = Array.isArray(robots.rules) ? robots.rules : [robots.rules]
     const allowsRoot = rules.some((r: { allow?: string | string[] }) => r.allow === '/' || (Array.isArray(r.allow) && r.allow.includes('/')))
     check('seo: robots.ts allows root crawling and declares sitemap', allowsRoot && Boolean(robots.sitemap), robots)
+  }
+
+  // 17. Lease expiry, reacquisition, renewal, and delayed release safety
+  {
+    __resetLocalQuotaStoreForTests()
+    const specs = [{ key: 'aihunt:test:lease:exp', limit: 1, ttlSeconds: 1 }]
+    const leaseA = await acquireConcurrencyLease(specs)
+    check('lease: initial acquisition succeeds', leaseA.ok === true, leaseA)
+    if (leaseA.ok) {
+      const blocked = await acquireConcurrencyLease(specs)
+      check('lease: second concurrent request denied while active', !blocked.ok && !blocked.unavailable, blocked)
+
+      const renewed = await leaseA.renew(2)
+      check('lease: active lease can renew TTL', renewed === true, renewed)
+
+      // Wait for renewed 2s TTL to expire
+      await new Promise((r) => setTimeout(r, 2100))
+
+      const leaseB = await acquireConcurrencyLease(specs)
+      check('lease: expired lease allows new request B to acquire', leaseB.ok === true, leaseB)
+
+      // Delayed release of expired leaseA MUST NOT release leaseB!
+      await leaseA.release()
+      const blockedByB = await acquireConcurrencyLease(specs)
+      check('lease: delayed release of expired A does not release active B', !blockedByB.ok && !blockedByB.unavailable, blockedByB)
+
+      // Renewing expired A returns false
+      const renewExpiredA = await leaseA.renew(5)
+      check('lease: renewing released/expired lease returns false', renewExpiredA === false, renewExpiredA)
+
+      if (leaseB.ok) await leaseB.release()
+    }
+  }
+
+  // 18. Idempotent CV reservations: duplicate refunds & committed reservations are no-ops
+  {
+    __resetLocalQuotaStoreForTests()
+    const id = resolveVisitorIdentity(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': '198.51.100.230' } }))
+    const now = new Date('2026-11-20T12:00:00Z')
+    const res1 = await reserveCvMonthlyQuota(id, now)
+    const res2 = await reserveCvMonthlyQuota(id, now)
+    check('cv-res: two reservations succeed with distinct IDs', res1.ok && res2.ok && res1.reservationId !== res2.reservationId)
+    if (res1.ok && res2.ok) {
+      await commitCvMonthlyQuota(res1.reservationId)
+      const refundCommitted = await refundCvMonthlyQuota(id, res1.reservationId, now)
+      const refundOnce = await refundCvMonthlyQuota(id, res2.reservationId, now)
+      const refundTwice = await refundCvMonthlyQuota(id, res2.reservationId, now)
+      const status = await getCvMonthlyQuotaStatus(id, now)
+      check(
+        'cv-res: committed refund=false, first refund=true, duplicate refund=false (used=1, remaining=2)',
+        refundCommitted === false &&
+          refundOnce === true &&
+          refundTwice === false &&
+          status.ok &&
+          status.status.used === 1 &&
+          status.status.remaining === 2,
+        { refundCommitted, refundOnce, refundTwice, status }
+      )
+    }
+  }
+
+  // 19. Shared-IP fairness: distinct devices behind same NAT IP aren't blocked at 3
+  {
+    __resetLocalQuotaStoreForTests()
+    const sharedIp = '203.0.113.77'
+    const now = new Date('2026-11-20T12:00:00Z')
+    const dev1 = resolveVisitorIdentity(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': sharedIp } }))
+    const dev2 = resolveVisitorIdentity(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': sharedIp } }))
+    // Exhaust dev1 (3 uploads)
+    for (let i = 0; i < 3; i++) await reserveCvMonthlyQuota(dev1, now)
+    const dev1Extra = await reserveCvMonthlyQuota(dev1, now)
+    const dev2First = await reserveCvMonthlyQuota(dev2, now)
+    check(
+      'shared-ip: dev1 blocked at 3 while distinct dev2 on same IP still allowed',
+      !dev1Extra.ok && dev2First.ok,
+      { dev1Extra, dev2First }
+    )
+  }
+
+  // 20. Production fail-closed ignores AIHUB_ALLOW_MEMORY_FALLBACK=1
+  {
+    const prevEnv = process.env.VERCEL_ENV
+    const prevAllow = process.env.AIHUB_ALLOW_MEMORY_FALLBACK
+    process.env.VERCEL_ENV = 'production'
+    process.env.AIHUB_ALLOW_MEMORY_FALLBACK = '1'
+    try {
+      check('prod-fail-closed: AIHUB_ALLOW_MEMORY_FALLBACK=1 ignored in production', isFailClosedMode() === true)
+    } finally {
+      if (prevEnv === undefined) delete process.env.VERCEL_ENV
+      else process.env.VERCEL_ENV = prevEnv
+      if (prevAllow === undefined) delete process.env.AIHUB_ALLOW_MEMORY_FALLBACK
+      else process.env.AIHUB_ALLOW_MEMORY_FALLBACK = prevAllow
+    }
+  }
+
+  // 21. Missing or weak AUTH_SECRET / VISITOR_HMAC_SECRET fails safely (503) in fail-closed mode
+  {
+    const prevFail = process.env.AIHUB_FAIL_CLOSED
+    const prevAuth = process.env.AUTH_SECRET
+    const prevVis = process.env.VISITOR_HMAC_SECRET
+    process.env.AIHUB_FAIL_CLOSED = '1'
+    process.env.AUTH_SECRET = 'too-short'
+    delete process.env.VISITOR_HMAC_SECRET
+    try {
+      const rWeak = await cvGet(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': '198.51.100.240' } }))
+      check('secret-guard: weak AUTH_SECRET in fail-closed mode returns 503', rWeak.status === 503, rWeak.status)
+    } finally {
+      if (prevFail === undefined) delete process.env.AIHUB_FAIL_CLOSED
+      else process.env.AIHUB_FAIL_CLOSED = prevFail
+      if (prevAuth === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuth
+      if (prevVis === undefined) delete process.env.VISITOR_HMAC_SECRET
+      else process.env.VISITOR_HMAC_SECRET = prevVis
+    }
+  }
+
+  // 22. Redis network error fails closed with 503 in fail-closed mode
+  {
+    const prevFail = process.env.AIHUB_FAIL_CLOSED
+    const prevUrl = process.env.UPSTASH_REDIS_REST_URL
+    const prevTok = process.env.UPSTASH_REDIS_REST_TOKEN
+    const prevFetch = globalThis.fetch
+    process.env.AIHUB_FAIL_CLOSED = '1'
+    process.env.UPSTASH_REDIS_REST_URL = 'https://mock-upstash.invalid'
+    process.env.UPSTASH_REDIS_REST_TOKEN = 'mock-token'
+    globalThis.fetch = (async () => {
+      throw new Error('ECONNREFUSED')
+    }) as typeof fetch
+    try {
+      const rErr = await cvGet(new Request('http://localhost/api/chat/cv', { headers: { 'x-vercel-forwarded-for': '198.51.100.241' } }))
+      check('redis-error: unreachable Upstash in fail-closed mode returns 503', rErr.status === 503, rErr.status)
+    } finally {
+      globalThis.fetch = prevFetch
+      if (prevFail === undefined) delete process.env.AIHUB_FAIL_CLOSED
+      else process.env.AIHUB_FAIL_CLOSED = prevFail
+      if (prevUrl === undefined) delete process.env.UPSTASH_REDIS_REST_URL
+      else process.env.UPSTASH_REDIS_REST_URL = prevUrl
+      if (prevTok === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN
+      else process.env.UPSTASH_REDIS_REST_TOKEN = prevTok
+    }
+  }
+
+  // 23. Turnstile client compatibility & header/origin hardening
+  {
+    __resetLocalQuotaStoreForTests()
+    const prevSecret = process.env.TURNSTILE_SECRET_KEY
+    const prevSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+    const prevMode = process.env.TURNSTILE_MODE
+    const prevKey = process.env.NVIDIA_API_KEY
+    process.env.NVIDIA_API_KEY = ''
+
+    try {
+      // Case A: TURNSTILE_SECRET_KEY set without NEXT_PUBLIC_TURNSTILE_SITE_KEY -> does not break legit requests
+      process.env.TURNSTILE_SECRET_KEY = 'secret-only'
+      delete process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+      const rNoSiteKey = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'user-agent': BROWSER_UA, 'x-vercel-forwarded-for': '198.51.100.242' },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      check('turnstile: secret without site key does not break legitimate chat', rNoSiteKey.status !== 403, rNoSiteKey.status)
+
+      // Case B: Both keys set + TURNSTILE_MODE=risk -> browser headers pass without token; risky missing sec-fetch-site gets 403
+      process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY = 'site-key'
+      process.env.TURNSTILE_MODE = 'risk'
+      const rBrowserRisk = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            'sec-fetch-site': 'same-origin',
+            'accept-language': 'en-US,en;q=0.9',
+            'x-vercel-forwarded-for': '198.51.100.243',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      const rBotRisk = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            'x-vercel-forwarded-for': '198.51.100.244',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      check(
+        'turnstile-risk: same-origin browser passes; missing sec-fetch-site/accept-language challenged (403)',
+        rBrowserRisk.status !== 403 && rBotRisk.status === 403,
+        { rBrowserRisk: rBrowserRisk.status, rBotRisk: rBotRisk.status }
+      )
+
+      // Case C: Cross-site or Origin mismatch blocked with 403
+      const rCrossSite = await chatPost(
+        new Request('http://localhost/api/chat', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            'sec-fetch-site': 'cross-site',
+            'x-vercel-forwarded-for': '198.51.100.245',
+          },
+          body: JSON.stringify({ messages: [{ role: 'user', content: 'hi' }] }),
+        })
+      )
+      const rOriginMismatch = await goalPost(
+        new Request('http://localhost/api/goal-match', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'user-agent': BROWSER_UA,
+            host: 'www.aihubtools.ma',
+            origin: 'https://evil.example',
+            'x-vercel-forwarded-for': '198.51.100.246',
+          },
+          body: JSON.stringify({ goal: 'video editor' }),
+        })
+      )
+      check('bot-guard: blocks cross-site and origin mismatch with 403', rCrossSite.status === 403 && rOriginMismatch.status === 403, { rCrossSite: rCrossSite.status, rOriginMismatch: rOriginMismatch.status })
+    } finally {
+      if (prevSecret === undefined) delete process.env.TURNSTILE_SECRET_KEY
+      else process.env.TURNSTILE_SECRET_KEY = prevSecret
+      if (prevSiteKey === undefined) delete process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+      else process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY = prevSiteKey
+      if (prevMode === undefined) delete process.env.TURNSTILE_MODE
+      else process.env.TURNSTILE_MODE = prevMode
+      if (prevKey === undefined) delete process.env.NVIDIA_API_KEY
+      else process.env.NVIDIA_API_KEY = prevKey
+    }
   }
 
   console.log(`\n${passed} passed, ${failed} failed`)
