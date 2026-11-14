@@ -3,9 +3,12 @@
  * Run: npm run test:cost
  */
 
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { NextRequest } from 'next/server'
 import { GET as chatLockGet, POST as chatLockPost } from '../app/api/admin/chat-lock/route'
 import { GET as recoverGet, POST as recoverPost } from '../app/api/admin/recover-account/route'
+import { GET as signupsGet } from '../app/api/admin/signups/route'
 import { POST as userLoginPost } from '../app/api/auth/login/route'
 import { POST as userLogoutPost } from '../app/api/auth/logout/route'
 import { GET as userMeGet } from '../app/api/auth/me/route'
@@ -1448,6 +1451,80 @@ async function run() {
           newLoginStatus: newLogin.status,
           newLoginBody,
           quotaAfter,
+        }
+      )
+    } finally {
+      __resetLocalQuotaStoreForTests()
+      __resetMemUsersForTests()
+      if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuthSecret
+    }
+  }
+
+  // 52. Unauthenticated visitor on /profile/yahianaim sees Admin login trigger without leaking admin access
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetMemUsersForTests()
+    const prevAuthSecret = process.env.AUTH_SECRET
+    process.env.AUTH_SECRET = 'test-auth-secret-profile-ui-52-min-32'
+    try {
+      const profileViewSrc = readFileSync(
+        join(process.cwd(), 'components/profile/ProfileView.tsx'),
+        'utf8'
+      )
+      const adminBadgeIndex = profileViewSrc.indexOf('<AdminBadge')
+      const surrounding = profileViewSrc.slice(Math.max(0, adminBadgeIndex - 160), adminBadgeIndex + 120)
+      const rendersOnYahianaimWithoutIsOwn =
+        surrounding.includes("user.username.toLowerCase() === 'yahianaim'") &&
+        !surrounding.includes('{isOwn &&')
+
+      // Unauthenticated visitor (no user cookie, no admin cookie) gets 401 on all AdminBadge endpoints
+      const [sRes, lRes, rGetRes, rPostRes] = await Promise.all([
+        signupsGet(new NextRequest('http://localhost/api/admin/signups')),
+        chatLockGet(new NextRequest('http://localhost/api/admin/chat-lock')),
+        recoverGet(new NextRequest('http://localhost/api/admin/recover-account')),
+        recoverPost(
+          new NextRequest('http://localhost/api/admin/recover-account', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.91' },
+            body: JSON.stringify({ password: 'AttemptWithoutAdmin1' }),
+          })
+        ),
+      ])
+
+      // Admin authenticated via aihunt_admin ONLY (still no regular user session) unlocks AdminBadge + recovery UI
+      const adminJwt = await signAdminJwt()
+      const adminCookie = `${ADMIN_COOKIE}=${adminJwt}`
+      const [sAuth, lAuth, rAuth] = await Promise.all([
+        signupsGet(
+          new NextRequest('http://localhost/api/admin/signups', { headers: { cookie: adminCookie } })
+        ),
+        chatLockGet(
+          new NextRequest('http://localhost/api/admin/chat-lock', { headers: { cookie: adminCookie } })
+        ),
+        recoverGet(
+          new NextRequest('http://localhost/api/admin/recover-account', { headers: { cookie: adminCookie } })
+        ),
+      ])
+      const rAuthBody = (await rAuth.json()) as { used?: boolean }
+
+      check(
+        'admin-profile-access: AdminBadge mounts on yahianaim without user login, 401 unauth, 200 after admin JWT',
+        rendersOnYahianaimWithoutIsOwn &&
+          sRes.status === 401 &&
+          lRes.status === 401 &&
+          rGetRes.status === 401 &&
+          rPostRes.status === 401 &&
+          sAuth.status !== 401 &&
+          (sAuth.status === 200 || sAuth.status === 503) &&
+          lAuth.status === 200 &&
+          rAuth.status === 200 &&
+          rAuthBody.used === false,
+        {
+          rendersOnYahianaimWithoutIsOwn,
+          unauthStatuses: [sRes.status, lRes.status, rGetRes.status, rPostRes.status],
+          authStatuses: [sAuth.status, lAuth.status, rAuth.status],
+          rAuthBody,
         }
       )
     } finally {

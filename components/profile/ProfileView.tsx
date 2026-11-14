@@ -217,10 +217,10 @@ export function ProfileView({ username }: { username: string }) {
                 <BadgeCheck className="h-5 w-5 fill-brand-orange stroke-white" />
               </span>
             )}
-            {isOwn && (
+            {user.username.toLowerCase() === 'yahianaim' && (
               <AdminBadge
                 username={user.username}
-                canSee={currentUser?.username.toLowerCase() === 'yahianaim'}
+                canSee
               />
             )}
           </div>
