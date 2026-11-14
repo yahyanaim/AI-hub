@@ -520,15 +520,46 @@ function ListingHeader({
             DataCamp is an official partner of AIHubTools. {config.description}
           </p>
         </div>
-        <div className="w-full overflow-hidden rounded-2xl border border-[#03EF62]/35 bg-[#05192D] shadow-[0_8px_32px_rgba(3,239,98,0.12)]">
-          <Image
-            src="/datacamp-partner-banner.png"
-            alt="DataCamp Donates"
-            width={1024}
-            height={192}
-            priority
-            className="block h-auto w-full object-cover"
-          />
+        <div className="relative overflow-hidden rounded-2xl border border-[#03EF62]/35 bg-[#05192D] px-6 py-7 text-white shadow-[0_8px_32px_rgba(3,239,98,0.12)] sm:px-10 sm:py-8">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#03EF62]/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-[#03EF62]/10 blur-3xl" />
+          <div className="relative flex flex-col items-center justify-between gap-6 md:flex-row">
+            <div className="flex flex-col items-center gap-3 text-center md:items-start md:text-left">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#03EF62]/35 bg-[#03EF62]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#03EF62]">
+                Official Partner
+              </span>
+              <div className="flex flex-wrap items-center justify-center gap-4 md:justify-start">
+                <Image
+                  src="/datacamp-donates-logo.png"
+                  alt="DataCamp Donates"
+                  width={1024}
+                  height={282}
+                  priority
+                  className="h-9 w-auto object-contain sm:h-11"
+                />
+                <span className="text-lg font-light text-white/40" aria-hidden="true">
+                  ×
+                </span>
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm sm:h-10 sm:w-10">
+                    <Image
+                      src="/logo.png"
+                      alt="AIHubTools"
+                      width={28}
+                      height={28}
+                      className="h-7 w-7 object-contain"
+                    />
+                  </div>
+                  <span className="font-heading text-lg font-bold tracking-tight text-white sm:text-xl">
+                    AIHubTools
+                  </span>
+                </div>
+              </div>
+              <p className="max-w-2xl text-xs leading-relaxed text-slate-300 sm:text-sm">
+                DataCamp is an official partner of AIHubTools — curated data science, AI, Python, and cloud engineering tracks.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     )
