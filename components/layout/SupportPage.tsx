@@ -123,8 +123,8 @@ export function SupportPage() {
               </div>
             </div>
 
-            <div className="my-5 flex items-center justify-center rounded-2xl bg-[#0079C1]/5 p-3.5 ring-1 ring-[#0079C1]/15">
-              <PayPalLogo className="h-44 w-44" />
+            <div className="my-5 flex h-28 w-28 items-center justify-center rounded-2xl bg-[#0079C1]/5 ring-1 ring-[#0079C1]/15">
+              <PayPalLogo className="h-14 w-14" />
             </div>
 
             <div className="w-full space-y-3">
