@@ -3,7 +3,8 @@
 import { useDeferredValue, useEffect, useMemo, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Search, X, CornerDownLeft, ArrowRight, Clock } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
+import { FacetedArt } from '@/components/ui/FacetedArt'
 import { useApp } from '@/lib/store'
 import { cn, formatNumber } from '@/lib/utils'
 import { Logo } from '@/components/ui/Logo'
@@ -272,7 +273,7 @@ export function CommandPalette() {
         onKeyDown={onKeyDown}
       >
         <div className="flex items-center gap-3 border-b border-border px-4">
-          <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
+          <FacetedGlyph kind="search" className="h-5 w-5 shrink-0 text-muted-foreground" />
           <input
             ref={inputRef}
             value={query}
@@ -291,7 +292,7 @@ export function CommandPalette() {
             className="rounded-sm p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
             aria-label="Close search"
           >
-            <X className="h-4 w-4" />
+            <FacetedGlyph kind="close" className="h-4 w-4" />
           </button>
         </div>
 
@@ -315,7 +316,7 @@ export function CommandPalette() {
                   onClick={() => setQuery(s)}
                   className="flex w-full items-center gap-3 rounded-md px-2 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
                 >
-                  <Clock className="h-4 w-4 text-muted-foreground" />
+                  <FacetedGlyph kind="clock" className="h-4 w-4 text-muted-foreground" />
                   {s}
                 </button>
               ))}
@@ -324,6 +325,7 @@ export function CommandPalette() {
 
           {query.trim() && results.length === 0 && (
             <div className="px-4 py-12 text-center">
+              <FacetedArt kind="search" size={64} className="mx-auto mb-3 h-16 w-16" />
               <p className="text-sm text-muted-foreground">
                 {!hydrated ? 'Loading library…' : (
                   <>
@@ -340,7 +342,7 @@ export function CommandPalette() {
                   }}
                   className="mt-3 inline-flex items-center gap-1 text-sm text-accent hover:underline"
                 >
-                  Full search <ArrowRight className="h-3 w-3" />
+                  Full search <FacetedGlyph kind="arrow" className="h-3 w-3" />
                 </Link>
               )}
             </div>
@@ -408,7 +410,7 @@ export function CommandPalette() {
                         {r.meta}
                       </span>
                       {active && (
-                        <CornerDownLeft className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <FacetedGlyph kind="return" className="h-4 w-4 shrink-0 text-muted-foreground" />
                       )}
                     </button>
                   )

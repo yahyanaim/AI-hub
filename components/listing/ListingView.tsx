@@ -4,7 +4,8 @@ import { useMemo, useState, useEffect, useRef } from 'react'
 import { Suspense } from 'react'
 import Image from 'next/image'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import { SearchX, SlidersHorizontal, ChevronLeft, ChevronRight } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
+import { FacetedArt } from '@/components/ui/FacetedArt'
 import { CardGrid } from '@/components/cards/CardPrimitives'
 import { Dropdown, ChipFilter, ClearButton } from '@/components/layout/FilterBar'
 import type { FilterOption } from '@/components/layout/FilterBar'
@@ -370,7 +371,7 @@ function ListingViewInner<T extends { id: string }>({
       <div className="mb-6 space-y-3 border-b border-border pb-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            <SlidersHorizontal className="h-3.5 w-3.5" />
+            <FacetedGlyph kind="sliders" className="h-3.5 w-3.5" />
             Sort
           </span>
           <Dropdown label="" value={sort} options={SORT_OPTIONS} onChange={(v) => setSortWithUrl(v as SortKey)} />
@@ -406,7 +407,7 @@ function ListingViewInner<T extends { id: string }>({
       {/* Grid / List */}
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border py-20 text-center">
-          <SearchX className="mb-3 h-10 w-10 text-muted-foreground" />
+          <FacetedArt kind="search" size={80} className="mb-3 h-20 w-20" />
           <p className="text-sm text-muted-foreground">No results match your filters.</p>
           <button onClick={clearFilters} className="btn-ghost mt-3">
             Clear filters
@@ -440,7 +441,7 @@ function ListingViewInner<T extends { id: string }>({
             aria-label="Previous page"
             className="btn-ghost flex items-center gap-1 px-3 py-2 text-sm aria-disabled:pointer-events-none aria-disabled:opacity-30"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <FacetedGlyph kind="chevron-left" className="h-4 w-4" />
             Prev
           </a>          <div className="flex items-center gap-1">
             {(() => {
@@ -484,7 +485,7 @@ function ListingViewInner<T extends { id: string }>({
             className="btn-ghost flex items-center gap-1 px-3 py-2 text-sm aria-disabled:pointer-events-none aria-disabled:opacity-30"
           >
             Next
-            <ChevronRight className="h-4 w-4" />
+            <FacetedGlyph kind="chevron-right" className="h-4 w-4" />
           </a>
         </nav>
       )}

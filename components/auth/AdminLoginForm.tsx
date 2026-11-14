@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ShieldCheck, Loader2 } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 
 export function AdminLoginForm() {
   const router = useRouter()
@@ -72,7 +72,7 @@ export function AdminLoginForm() {
   if (checking) {
     return (
       <div className="flex min-h-[55vh] items-center justify-center px-4">
-        <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+        <FacetedGlyph kind="spinner" className="h-5 w-5 animate-spin text-muted-foreground" />
       </div>
     )
   }
@@ -85,7 +85,7 @@ export function AdminLoginForm() {
       >
         <div className="mb-4 flex items-center gap-2">
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-orange/15 text-brand-orange">
-            <ShieldCheck className="h-4 w-4" />
+            <FacetedGlyph kind="shield-check" className="h-4 w-4" />
           </span>
           <div>
             <h1 className="font-heading text-lg font-semibold leading-tight">Admin Sign In</h1>

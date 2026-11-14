@@ -3,42 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import {
-  Activity,
-  AlertTriangle,
-  BarChart3,
-  Bot,
-  Calendar,
-  CheckCircle2,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  Cpu,
-  Database,
-  FileText,
-  FolderKanban,
-  Info,
-  KeyRound,
-  LayoutDashboard,
-  Lock,
-  LogOut,
-  Megaphone,
-  Menu,
-  MessageSquare,
-  Moon,
-  RefreshCw,
-  Search,
-  Server,
-  Settings,
-  ShieldAlert,
-  ShieldCheck,
-  Sun,
-  Target,
-  TrendingUp,
-  Unlock,
-  Users,
-  X,
-} from 'lucide-react'
+import { FacetedGlyph, type FacetedGlyphKind } from '@/components/ui/FacetedGlyph'
 import { cn, formatNumber } from '@/lib/utils'
 import { BarTrendChart, HorizontalBreakdown, MiniSparkline } from '@/components/admin/AdminCharts'
 import type {
@@ -53,17 +18,17 @@ const NAV_ITEMS: Array<{
   label: string
   group: 'Overview' | 'Users' | 'Operations' | 'Security'
   subtitle: string
-  icon: typeof LayoutDashboard
+  icon: FacetedGlyphKind
 }> = [
-  { id: 'overview', label: 'Overview', group: 'Overview', subtitle: 'Executive summary of registrations, active users, AI usage, and platform health.', icon: LayoutDashboard },
-  { id: 'analytics', label: 'Analytics', group: 'Overview', subtitle: 'Daily active actors (DAU/WAU/MAU), signups, and endpoint breakdown.', icon: BarChart3 },
-  { id: 'users', label: 'Users', group: 'Users', subtitle: 'Registered accounts, safe metadata, and monthly CV quota consumption.', icon: Users },
-  { id: 'cv-quotas', label: 'CV Quotas', group: 'Users', subtitle: 'Monthly CV upload usage, blocks, refunds, and limit distribution.', icon: FileText },
-  { id: 'ai-usage', label: 'AI Usage', group: 'Operations', subtitle: 'AI Chat and Goal Match throughput, success rates, and rejections.', icon: Cpu },
-  { id: 'content', label: 'Content', group: 'Operations', subtitle: 'Catalog counts across tools, dev tools, courses, offers, and repos.', icon: FolderKanban },
-  { id: 'infrastructure', label: 'Infrastructure & Costs', group: 'Operations', subtitle: 'Upstash Redis, AI provider health, and Vercel Pro budget guardrails.', icon: Server },
-  { id: 'security', label: 'Security', group: 'Security', subtitle: 'Rate limits (429), anti-bot blocks (403), auth failures, and protections.', icon: ShieldAlert },
-  { id: 'settings', label: 'Settings', group: 'Security', subtitle: 'Global AI chat lock, push broadcasts, and one-time account recovery.', icon: Settings },
+  { id: 'overview', label: 'Overview', group: 'Overview', subtitle: 'Executive summary of registrations, active users, AI usage, and platform health.', icon: 'dashboard' },
+  { id: 'analytics', label: 'Analytics', group: 'Overview', subtitle: 'Daily active actors (DAU/WAU/MAU), signups, and endpoint breakdown.', icon: 'bar-chart' },
+  { id: 'users', label: 'Users', group: 'Users', subtitle: 'Registered accounts, safe metadata, and monthly CV quota consumption.', icon: 'users' },
+  { id: 'cv-quotas', label: 'CV Quotas', group: 'Users', subtitle: 'Monthly CV upload usage, blocks, refunds, and limit distribution.', icon: 'file' },
+  { id: 'ai-usage', label: 'AI Usage', group: 'Operations', subtitle: 'AI Chat and Goal Match throughput, success rates, and rejections.', icon: 'cpu' },
+  { id: 'content', label: 'Content', group: 'Operations', subtitle: 'Catalog counts across tools, dev tools, courses, offers, and repos.', icon: 'folder' },
+  { id: 'infrastructure', label: 'Infrastructure & Costs', group: 'Operations', subtitle: 'Upstash Redis, AI provider health, and Vercel Pro budget guardrails.', icon: 'server' },
+  { id: 'security', label: 'Security', group: 'Security', subtitle: 'Rate limits (429), anti-bot blocks (403), auth failures, and protections.', icon: 'shield-alert' },
+  { id: 'settings', label: 'Settings', group: 'Security', subtitle: 'Global AI chat lock, push broadcasts, and one-time account recovery.', icon: 'settings' },
 ]
 
 const TOP_GROUPS: Array<{
@@ -88,7 +53,7 @@ function KpiCard({
   value,
   sub,
   delta,
-  icon: Icon,
+  icon,
   sparkline,
   tone = 'default',
 }: {
@@ -96,7 +61,7 @@ function KpiCard({
   value: string
   sub: string
   delta?: string | null
-  icon: typeof Users
+  icon: FacetedGlyphKind
   sparkline?: number[]
   tone?: 'default' | 'orange' | 'emerald' | 'rose'
 }) {
@@ -119,7 +84,7 @@ function KpiCard({
           </p>
         </div>
         <span className={cn('inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl', iconTone)}>
-          <Icon className="h-4 w-4" />
+          <FacetedGlyph kind={icon} className="h-4 w-4" />
         </span>
       </div>
       <div className="mt-3 flex items-end justify-between gap-2">
@@ -368,7 +333,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
   const renderMobileNav = () => (
     <nav className="flex-1 space-y-1 p-3">
       {NAV_ITEMS.map((item) => {
-        const Icon = item.icon
+        const icon = item.icon
         const active = section === item.id
         return (
           <button
@@ -385,7 +350,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white'
             )}
           >
-            <Icon className="h-4 w-4 shrink-0" />
+            <FacetedGlyph kind={icon} onAccent={active} className="h-4 w-4 shrink-0" />
             <span className="truncate">{item.label}</span>
           </button>
         )
@@ -444,7 +409,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200/80 bg-white text-slate-700 shadow-sm lg:hidden dark:border-white/10 dark:bg-[#13161E] dark:text-slate-200"
             aria-label="Open navigation"
           >
-            <Menu className="h-4 w-4" />
+            <FacetedGlyph kind="menu" className="h-4 w-4" />
           </button>
           <div className="flex items-center gap-2.5">
             <span className="inline-flex h-10 w-10 items-center justify-center overflow-hidden">
@@ -456,9 +421,6 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 className="h-full w-full object-contain"
                 priority
               />
-            </span>
-            <span className="font-heading text-base font-bold tracking-tight text-slate-900 dark:text-white">
-              AIhubtools
             </span>
           </div>
         </div>
@@ -498,7 +460,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
               title="Refresh metrics"
               className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 disabled:opacity-50 dark:text-slate-300 dark:hover:bg-white/10"
             >
-              <RefreshCw className={cn('h-4 w-4', refreshing && 'animate-spin')} />
+              <FacetedGlyph kind="refresh" className={cn('h-4 w-4', refreshing && 'animate-spin')} />
             </button>
             <button
               type="button"
@@ -506,7 +468,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
               title="Search users"
               className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10"
             >
-              <Search className="h-4 w-4" />
+              <FacetedGlyph kind="search" className="h-4 w-4" />
             </button>
             <button
               type="button"
@@ -514,7 +476,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
               title="Security alerts"
               className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10"
             >
-              <ShieldAlert className="h-4 w-4" />
+              <FacetedGlyph kind="shield-alert" className="h-4 w-4" />
             </button>
           </div>
           <div className="inline-flex h-10 items-center gap-2 rounded-full border border-slate-200/80 bg-white pl-1.5 pr-3.5 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
@@ -534,13 +496,14 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
           <div className="fixed inset-0 bg-black/50 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
           <aside className="relative z-10 flex w-72 flex-col border-r border-slate-200 bg-white dark:border-white/10 dark:bg-[#13161E]">
             <div className="flex h-14 items-center justify-between border-b border-slate-200 px-4 dark:border-white/10">
-              <span className="font-heading text-sm font-bold">AIhubtools Admin</span>
+              <Image src="/logo.png" alt="AIhubtools admin" width={40} height={40} className="h-10 w-10 object-contain" />
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
+                aria-label="Close navigation"
                 className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
               >
-                <X className="h-4 w-4" />
+                <FacetedGlyph kind="close" className="h-4 w-4" />
               </button>
             </div>
             {renderMobileNav()}
@@ -550,7 +513,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 onClick={handleLogout}
                 className="flex flex-1 items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-rose-600 hover:bg-rose-500/10 dark:text-rose-400"
               >
-                <LogOut className="h-4 w-4" />
+                <FacetedGlyph kind="logout" className="h-4 w-4" />
                 Log out
               </button>
               <button
@@ -559,7 +522,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 dark:border-white/10 dark:text-slate-300"
                 aria-label="Toggle theme"
               >
-                {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {isDark ? <FacetedGlyph kind="sun" className="h-4 w-4" /> : <FacetedGlyph kind="moon" className="h-4 w-4" />}
               </button>
             </div>
           </aside>
@@ -586,7 +549,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                   : 'text-slate-400 hover:text-slate-200'
               )}
             >
-              <Sun className="h-3.5 w-3.5" />
+              <FacetedGlyph kind="sun" className="h-3.5 w-3.5" />
             </button>
             <button
               type="button"
@@ -599,14 +562,14 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                   : 'text-slate-400 hover:text-slate-700'
               )}
             >
-              <Moon className="h-3.5 w-3.5" />
+              <FacetedGlyph kind="moon" className="h-3.5 w-3.5" />
             </button>
           </div>
 
           {/* Section Icons */}
           <nav className="flex flex-col items-center gap-1.5">
             {NAV_ITEMS.map((item) => {
-              const Icon = item.icon
+              const icon = item.icon
               const active = section === item.id
               return (
                 <button
@@ -622,7 +585,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                       : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white'
                   )}
                 >
-                  <Icon className="h-[18px] w-[18px]" />
+                  <FacetedGlyph kind={icon} onAccent={active} className="h-[18px] w-[18px]" />
                   <span className="pointer-events-none absolute left-14 z-40 whitespace-nowrap rounded-lg bg-slate-900 px-2.5 py-1 text-[11px] font-medium text-white opacity-0 shadow-md transition-opacity group-hover:opacity-100 dark:bg-slate-800">
                     {item.label}
                   </span>
@@ -639,7 +602,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
             aria-label="Log out"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
           >
-            <LogOut className="h-[18px] w-[18px]" />
+            <FacetedGlyph kind="logout" className="h-[18px] w-[18px]" />
           </button>
         </aside>
 
@@ -648,7 +611,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
           {/* Identity & Environment Strip */}
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
             <div className="flex flex-wrap items-center gap-2 text-xs">
-              <ShieldCheck className="h-4 w-4 text-slate-400" />
+              <FacetedGlyph kind="shield-check" className="h-4 w-4 text-slate-400" />
               <span className="font-semibold text-slate-900 dark:text-white">{adminName}</span>
               <span className="rounded-full bg-brand-orange/12 px-2.5 py-0.5 text-[11px] font-semibold text-brand-orange">
                 Platform admin
@@ -716,9 +679,9 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                   onClick={() => setShowHowItWorks((v) => !v)}
                   className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-medium text-brand-orange transition-colors hover:bg-brand-orange/15"
                 >
-                  <Info className="h-3.5 w-3.5" />
+                  <FacetedGlyph kind="info" className="h-3.5 w-3.5" />
                   How metrics work
-                  <ChevronDown className={cn('h-3 w-3 transition-transform', showHowItWorks && 'rotate-180')} />
+                  <FacetedGlyph kind="chevron-down" className={cn('h-3 w-3 transition-transform', showHowItWorks && 'rotate-180')} />
                 </button>
                 {showHowItWorks && data && (
                   <p className="mt-2 max-w-2xl rounded-xl border border-slate-200/80 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
@@ -737,7 +700,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
               disabled={refreshing}
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-xs transition-colors hover:bg-slate-50 disabled:opacity-60 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
             >
-              <RefreshCw className={cn('h-3.5 w-3.5', refreshing && 'animate-spin')} />
+              <FacetedGlyph kind="refresh" className={cn('h-3.5 w-3.5', refreshing && 'animate-spin')} />
               {refreshing ? 'Refreshing…' : 'Refresh metrics'}
             </button>
           </div>
@@ -753,7 +716,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
             >
               <span>{actionFeedback.text}</span>
               <button type="button" onClick={() => setActionFeedback(null)}>
-                <X className="h-3.5 w-3.5" />
+                <FacetedGlyph kind="close" className="h-3.5 w-3.5" />
               </button>
             </div>
           )}
@@ -780,7 +743,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         label="Total Registered Users"
                         value={formatNumber(data.overview.totalRegisteredUsers)}
                         sub="Lifetime Redis signup counter"
-                        icon={Users}
+                        icon="users"
                         tone="orange"
                       />
                       <KpiCard
@@ -788,14 +751,14 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         value={formatNumber(data.overview.totals.signups)}
                         sub={`In selected ${data.range.daysCount}d window`}
                         delta={pctDelta(data.overview.totals.signups, data.overview.previousTotals?.signups)}
-                        icon={TrendingUp}
+                        icon="trending"
                         sparkline={sparklines.signups}
                       />
                       <KpiCard
                         label="Active Users (DAU / WAU / MAU)"
                         value={`${formatNumber(data.overview.activeUsers.dau)} / ${formatNumber(data.overview.activeUsers.wau)} / ${formatNumber(data.overview.activeUsers.mau)}`}
                         sub="Privacy-safe HyperLogLog uniques"
-                        icon={Activity}
+                        icon="activity"
                         sparkline={sparklines.dau}
                         tone="emerald"
                       />
@@ -804,7 +767,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         value={formatNumber(data.overview.totals.chatTotal)}
                         sub={`${formatNumber(data.aiUsage.chatDailyUsed)} today (live)`}
                         delta={pctDelta(data.overview.totals.chatTotal, data.overview.previousTotals?.chatTotal)}
-                        icon={MessageSquare}
+                        icon="message"
                         sparkline={sparklines.chat}
                       />
                       <KpiCard
@@ -812,7 +775,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         value={formatNumber(data.overview.totals.cvOk)}
                         sub={`${formatNumber(data.overview.totals.cvBlocked429)} blocked · ${formatNumber(data.overview.totals.cvRefunded)} refunded`}
                         delta={pctDelta(data.overview.totals.cvOk, data.overview.previousTotals?.cvOk)}
-                        icon={FileText}
+                        icon="file"
                         sparkline={sparklines.cv}
                       />
                       <KpiCard
@@ -820,7 +783,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         value={formatNumber(data.overview.totals.goalTotal)}
                         sub={`${formatNumber(data.aiUsage.goalDailyUsed)} today (live)`}
                         delta={pctDelta(data.overview.totals.goalTotal, data.overview.previousTotals?.goalTotal)}
-                        icon={Target}
+                        icon="target"
                         sparkline={sparklines.goal}
                       />
                       <KpiCard
@@ -831,7 +794,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                             : '—'
                         }
                         sub={`${formatNumber(data.overview.totals.aiTotal)} total evaluated`}
-                        icon={CheckCircle2}
+                        icon="check-circle"
                         tone="emerald"
                       />
                       <KpiCard
@@ -842,7 +805,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                             : '—'
                         }
                         sub={`${formatNumber(data.overview.totals.err503)} 503 · ${formatNumber(data.overview.totals.chatErr + data.overview.totals.goalErr)} 5xx`}
-                        icon={AlertTriangle}
+                        icon="alert"
                         tone="rose"
                       />
                     </div>
@@ -893,10 +856,10 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 {section === 'analytics' && (
                   <div className="space-y-6">
                     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                      <KpiCard label="Pageviews" value={formatNumber(data.overview.totals.pageviews)} sub="Privacy-safe Redis counter (no PII)" icon={TrendingUp} tone="orange" />
-                      <KpiCard label="DAU (Today)" value={formatNumber(data.overview.activeUsers.dau)} sub="Unique active actors today" icon={Activity} tone="emerald" />
-                      <KpiCard label="WAU (7 Days)" value={formatNumber(data.overview.activeUsers.wau)} sub="Unique active actors (7d HLL)" icon={Activity} />
-                      <KpiCard label="MAU (30 Days)" value={formatNumber(data.overview.activeUsers.mau)} sub="Unique active actors (30d HLL)" icon={Activity} />
+                      <KpiCard label="Pageviews" value={formatNumber(data.overview.totals.pageviews)} sub="Privacy-safe Redis counter (no PII)" icon="trending" tone="orange" />
+                      <KpiCard label="DAU (Today)" value={formatNumber(data.overview.activeUsers.dau)} sub="Unique active actors today" icon="activity" tone="emerald" />
+                      <KpiCard label="WAU (7 Days)" value={formatNumber(data.overview.activeUsers.wau)} sub="Unique active actors (7d HLL)" icon="activity" />
+                      <KpiCard label="MAU (30 Days)" value={formatNumber(data.overview.activeUsers.mau)} sub="Unique active actors (30d HLL)" icon="activity" />
                     </div>
                     <div className="grid gap-4 lg:grid-cols-2">
                       <BarTrendChart
@@ -973,9 +936,9 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 {section === 'users' && (
                   <div className="space-y-6">
                     <div className="grid gap-4 sm:grid-cols-3">
-                      <KpiCard label="Total Signups Counter" value={formatNumber(data.overview.totalRegisteredUsers)} sub="Redis signup counter" icon={Users} tone="orange" />
-                      <KpiCard label="Indexed Accounts" value={formatNumber(usersData?.total ?? data.usersPreview.total)} sub="Accounts in Redis index" icon={Database} />
-                      <KpiCard label="Accounts at 3/3 CV Limit" value={formatNumber(data.cvQuotas.accountsAtLimit)} sub="Current UTC month" icon={FileText} tone="rose" />
+                      <KpiCard label="Total Signups Counter" value={formatNumber(data.overview.totalRegisteredUsers)} sub="Redis signup counter" icon="users" tone="orange" />
+                      <KpiCard label="Indexed Accounts" value={formatNumber(usersData?.total ?? data.usersPreview.total)} sub="Accounts in Redis index" icon="database" />
+                      <KpiCard label="Accounts at 3/3 CV Limit" value={formatNumber(data.cvQuotas.accountsAtLimit)} sub="Current UTC month" icon="file" tone="rose" />
                     </div>
 
                     <HorizontalBreakdown
@@ -1000,7 +963,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         </div>
                         <div className="flex flex-wrap items-center gap-2">
                           <div className="relative w-full sm:w-64">
-                            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
+                            <FacetedGlyph kind="search" className="pointer-events-none absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
                             <input
                               type="search"
                               value={usersQuery}
@@ -1112,7 +1075,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                               onClick={() => setUsersPage((p) => Math.max(1, p - 1))}
                               className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 disabled:opacity-40 dark:border-white/10 dark:hover:bg-white/5"
                             >
-                              <ChevronLeft className="h-3.5 w-3.5" />
+                              <FacetedGlyph kind="chevron-left" className="h-3.5 w-3.5" />
                             </button>
                             <button
                               type="button"
@@ -1120,7 +1083,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                               onClick={() => setUsersPage((p) => p + 1)}
                               className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 disabled:opacity-40 dark:border-white/10 dark:hover:bg-white/5"
                             >
-                              <ChevronRight className="h-3.5 w-3.5" />
+                              <FacetedGlyph kind="chevron-right" className="h-3.5 w-3.5" />
                             </button>
                           </div>
                         </div>
@@ -1133,10 +1096,10 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 {section === 'ai-usage' && (
                   <div className="space-y-6">
                     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                      <KpiCard label="Global Daily Requests" value={`${formatNumber(data.aiUsage.globalDailyUsed)} / ${formatNumber(data.aiUsage.limits.globalDailyLimit)}`} sub="Current UTC day" icon={Cpu} tone="orange" />
-                      <KpiCard label="Global Monthly Requests" value={`${formatNumber(data.aiUsage.globalMonthlyUsed)} / ${formatNumber(data.aiUsage.limits.globalMonthlyLimit)}`} sub="Current UTC month" icon={Cpu} />
-                      <KpiCard label="HTTP 429 Rate Limits" value={formatNumber(data.overview.totals.rl429)} sub={`${formatNumber(data.overview.totals.conc429)} concurrency rejections`} icon={AlertTriangle} tone="rose" />
-                      <KpiCard label="HTTP 403 / 503 Rejections" value={`${formatNumber(data.overview.totals.bot403)} / ${formatNumber(data.overview.totals.err503)}`} sub="Anti-bot / infra failures" icon={Bot} />
+                      <KpiCard label="Global Daily Requests" value={`${formatNumber(data.aiUsage.globalDailyUsed)} / ${formatNumber(data.aiUsage.limits.globalDailyLimit)}`} sub="Current UTC day" icon="cpu" tone="orange" />
+                      <KpiCard label="Global Monthly Requests" value={`${formatNumber(data.aiUsage.globalMonthlyUsed)} / ${formatNumber(data.aiUsage.limits.globalMonthlyLimit)}`} sub="Current UTC month" icon="cpu" />
+                      <KpiCard label="HTTP 429 Rate Limits" value={formatNumber(data.overview.totals.rl429)} sub={`${formatNumber(data.overview.totals.conc429)} concurrency rejections`} icon="alert" tone="rose" />
+                      <KpiCard label="HTTP 403 / 503 Rejections" value={`${formatNumber(data.overview.totals.bot403)} / ${formatNumber(data.overview.totals.err503)}`} sub="Anti-bot / infra failures" icon="bot" />
                     </div>
 
                     <div className="grid gap-4 lg:grid-cols-2">
@@ -1169,10 +1132,10 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 {section === 'cv-quotas' && (
                   <div className="space-y-6">
                     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                      <KpiCard label="Successful CV Uploads" value={formatNumber(data.overview.totals.cvOk)} sub={`Limit: ${data.cvQuotas.monthlyLimitPerUser}/account/month`} icon={FileText} tone="emerald" />
-                      <KpiCard label="Accounts at Monthly Limit" value={formatNumber(data.cvQuotas.accountsAtLimit)} sub="Reached 3/3 this UTC month" icon={Users} tone="rose" />
-                      <KpiCard label="Blocked 4th-Upload Attempts" value={formatNumber(data.overview.totals.cvBlocked429)} sub={`${formatNumber(data.overview.totals.cvRefunded)} invalid uploads refunded`} icon={AlertTriangle} tone="orange" />
-                      <KpiCard label="Next UTC Monthly Reset" value={data.cvQuotas.nextResetAt.slice(0, 10)} sub={`${data.cvQuotas.pendingReservations} pending reservations`} icon={Calendar} />
+                      <KpiCard label="Successful CV Uploads" value={formatNumber(data.overview.totals.cvOk)} sub={`Limit: ${data.cvQuotas.monthlyLimitPerUser}/account/month`} icon="file" tone="emerald" />
+                      <KpiCard label="Accounts at Monthly Limit" value={formatNumber(data.cvQuotas.accountsAtLimit)} sub="Reached 3/3 this UTC month" icon="users" tone="rose" />
+                      <KpiCard label="Blocked 4th-Upload Attempts" value={formatNumber(data.overview.totals.cvBlocked429)} sub={`${formatNumber(data.overview.totals.cvRefunded)} invalid uploads refunded`} icon="alert" tone="orange" />
+                      <KpiCard label="Next UTC Monthly Reset" value={data.cvQuotas.nextResetAt.slice(0, 10)} sub={`${data.cvQuotas.pendingReservations} pending reservations`} icon="calendar" />
                     </div>
                     <div className="grid gap-4 lg:grid-cols-2">
                       <BarTrendChart
@@ -1202,11 +1165,11 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 {section === 'content' && (
                   <div className="space-y-6">
                     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-                      <KpiCard label="AI Tools" value={formatNumber(data.content.counts.tools)} sub="Curated catalog" icon={FolderKanban} tone="orange" />
-                      <KpiCard label="Dev Tools" value={formatNumber(data.content.counts.devTools)} sub="Developer ecosystem" icon={FolderKanban} />
-                      <KpiCard label="GitHub Repos" value={formatNumber(data.content.counts.repos)} sub="Open-source index" icon={FolderKanban} />
-                      <KpiCard label="Courses" value={formatNumber(data.content.counts.courses)} sub="Learning tracks" icon={FolderKanban} />
-                      <KpiCard label="Offers" value={formatNumber(data.content.counts.offers)} sub={`${formatNumber(data.content.pushSubscribers)} push subscribers`} icon={Megaphone} tone="emerald" />
+                      <KpiCard label="AI Tools" value={formatNumber(data.content.counts.tools)} sub="Curated catalog" icon="folder" tone="orange" />
+                      <KpiCard label="Dev Tools" value={formatNumber(data.content.counts.devTools)} sub="Developer ecosystem" icon="folder" />
+                      <KpiCard label="GitHub Repos" value={formatNumber(data.content.counts.repos)} sub="Open-source index" icon="folder" />
+                      <KpiCard label="Courses" value={formatNumber(data.content.counts.courses)} sub="Learning tracks" icon="folder" />
+                      <KpiCard label="Offers" value={formatNumber(data.content.counts.offers)} sub={`${formatNumber(data.content.pushSubscribers)} push subscribers`} icon="megaphone" tone="emerald" />
                     </div>
                     <div className="grid gap-4 lg:grid-cols-2">
                       <HorizontalBreakdown title="Top AI Tool Categories" items={data.content.toolCategories.map((c) => ({ label: c.category, value: c.count }))} />
@@ -1219,25 +1182,25 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 {section === 'infrastructure' && (
                   <div className="space-y-6">
                     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                      <KpiCard label="Vercel Plan & Budget" value={data.infrastructure.vercel.plan} sub={`Metered budget: $${data.infrastructure.vercel.meteredBudgetUsd}/mo`} icon={Server} tone="orange" />
+                      <KpiCard label="Vercel Plan & Budget" value={data.infrastructure.vercel.plan} sub={`Metered budget: $${data.infrastructure.vercel.meteredBudgetUsd}/mo`} icon="server" tone="orange" />
                       <KpiCard
                         label="Redis Health"
                         value={data.infrastructure.redis.healthy ? 'Healthy' : data.infrastructure.redis.configured ? 'Degraded' : 'Memory Fallback'}
                         sub={data.infrastructure.redis.latencyMs !== null ? `PING ${data.infrastructure.redis.latencyMs}ms · Fail-closed: ${data.infrastructure.redis.failClosed ? 'ON' : 'OFF'}` : 'Upstash REST'}
-                        icon={Database}
+                        icon="database"
                         tone={data.infrastructure.redis.healthy ? 'emerald' : 'rose'}
                       />
                       <KpiCard
                         label="Deployment"
                         value={data.infrastructure.vercel.environment.toUpperCase()}
                         sub={`${data.infrastructure.vercel.region}${data.infrastructure.vercel.commitSha ? ` · ${data.infrastructure.vercel.commitSha}` : ''}`}
-                        icon={Activity}
+                        icon="activity"
                       />
                       <KpiCard
                         label="AI Provider"
                         value={data.infrastructure.aiProvider.provider}
                         sub={data.infrastructure.aiProvider.configured ? 'API key configured' : 'API key missing'}
-                        icon={Cpu}
+                        icon="cpu"
                         tone={data.infrastructure.aiProvider.configured ? 'emerald' : 'rose'}
                       />
                     </div>
@@ -1352,11 +1315,11 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 {section === 'security' && (
                   <div className="space-y-6">
                     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-                      <KpiCard label="Rate-Limited (429)" value={formatNumber(data.overview.totals.rl429)} sub="Window + abuse limits" icon={AlertTriangle} tone="orange" />
-                      <KpiCard label="Anti-Bot Rejections (403)" value={formatNumber(data.overview.totals.bot403)} sub="Turnstile + origin + UA" icon={Bot} tone="rose" />
-                      <KpiCard label="Auth Failures (401)" value={formatNumber(data.overview.totals.authFail)} sub="Failed user/admin logins" icon={Lock} />
-                      <KpiCard label="Unauthorized Admin (401)" value={formatNumber(data.overview.totals.adminUnauth)} sub="Blocked /api/admin/* calls" icon={ShieldAlert} tone="rose" />
-                      <KpiCard label="Infra / Redis (503)" value={formatNumber(data.overview.totals.err503)} sub="Fail-closed / budget blocks" icon={Database} />
+                      <KpiCard label="Rate-Limited (429)" value={formatNumber(data.overview.totals.rl429)} sub="Window + abuse limits" icon="alert" tone="orange" />
+                      <KpiCard label="Anti-Bot Rejections (403)" value={formatNumber(data.overview.totals.bot403)} sub="Turnstile + origin + UA" icon="bot" tone="rose" />
+                      <KpiCard label="Auth Failures (401)" value={formatNumber(data.overview.totals.authFail)} sub="Failed user/admin logins" icon="lock" />
+                      <KpiCard label="Unauthorized Admin (401)" value={formatNumber(data.overview.totals.adminUnauth)} sub="Blocked /api/admin/* calls" icon="shield-alert" tone="rose" />
+                      <KpiCard label="Infra / Redis (503)" value={formatNumber(data.overview.totals.err503)} sub="Fail-closed / budget blocks" icon="database" />
                     </div>
                     <BarTrendChart
                       title="Security & Protection Events Over Time"
@@ -1390,7 +1353,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         onClick={() => setConfirmAction('chat-lock')}
                         className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-xs font-semibold hover:bg-secondary"
                       >
-                        {data.controls.chatLocked ? <Unlock className="h-3.5 w-3.5" /> : <Lock className="h-3.5 w-3.5" />}
+                        {data.controls.chatLocked ? <FacetedGlyph kind="unlock" className="h-3.5 w-3.5" /> : <FacetedGlyph kind="lock" className="h-3.5 w-3.5" />}
                         {data.controls.chatLocked ? 'Unlock AI Chat' : 'Lock AI Chat'}
                       </button>
                     </div>
@@ -1408,7 +1371,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         onClick={() => setConfirmAction('push-broadcast')}
                         className="btn-primary inline-flex items-center gap-2 px-4 py-2 text-xs"
                       >
-                        <Megaphone className="h-3.5 w-3.5" />
+                        <FacetedGlyph kind="megaphone" onAccent className="h-3.5 w-3.5" />
                         Push New Tools Notification
                       </button>
                     </div>
@@ -1416,7 +1379,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                     {!data.controls.recoveryUsed && (
                       <form onSubmit={handleRecovery} className="rounded-xl border border-border bg-card p-5 space-y-3">
                         <div className="flex items-center gap-2">
-                          <KeyRound className="h-4 w-4 text-brand-orange" />
+                          <FacetedGlyph kind="key" className="h-4 w-4 text-brand-orange" />
                           <h3 className="font-heading text-sm font-semibold">One-Time `yahianaim` Account Recovery</h3>
                         </div>
                         <p className="text-xs text-muted-foreground">
@@ -1454,7 +1417,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         onClick={handleLogout}
                         className="inline-flex items-center gap-2 rounded-lg border border-rose-500/30 bg-rose-500/10 px-4 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-500/20 dark:text-rose-400"
                       >
-                        <LogOut className="h-3.5 w-3.5" />
+                        <FacetedGlyph kind="logout" className="h-3.5 w-3.5" />
                         Log out of Admin Dashboard
                       </button>
                     </div>

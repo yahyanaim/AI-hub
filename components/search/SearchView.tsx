@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { Search, SearchX, X } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
+import { FacetedArt } from '@/components/ui/FacetedArt'
 import { useApp } from '@/lib/store'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
@@ -170,7 +171,7 @@ export function SearchView() {
 
       <div className="mx-auto mt-8 max-w-xl">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+          <FacetedGlyph kind="search" className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
           <label htmlFor="site-search" className="sr-only">Search tools, courses and repos</label>
           <input
             id="site-search"
@@ -193,7 +194,7 @@ export function SearchView() {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
               aria-label="Clear"
             >
-              <X className="h-4 w-4" />
+              <FacetedGlyph kind="close" className="h-4 w-4" />
             </button>
           )}
         </div>
@@ -227,7 +228,7 @@ export function SearchView() {
 
         {q && total === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <SearchX className="mb-3 h-10 w-10 text-muted-foreground" />
+            <FacetedArt kind="search" size={80} className="mb-3 h-20 w-20" />
             {!hydrated ? (
               <p className="text-sm text-muted-foreground">Loading library…</p>
             ) : (

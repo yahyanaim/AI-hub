@@ -4,21 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import { DonationGate } from './DonationGate'
 import { useRouter } from 'next/navigation'
 import imageHosts from '@/lib/image-hosts.json'
-import {
-  Wrench,
-  TerminalSquare,
-  Check,
-  ChevronRight,
-  ChevronLeft,
-  Loader2,
-  Link2,
-  Sparkles,
-  Share2,
-  Globe,
-  Star,
-  Package,
-  Gift,
-} from 'lucide-react'
+import { FacetedArt } from '@/components/ui/FacetedArt'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 import { useApp } from '@/lib/store'
 import { cn, slugify } from '@/lib/utils'
 import type { ItemType, Pricing, ToolCategory, DevToolCategory, EditToolCategory, OfferCategory } from '@/types'
@@ -310,7 +297,7 @@ export function SubmitForm() {
                       : 'border-border text-muted-foreground'
                 )}
               >
-                {i < step ? <Check className="h-4 w-4" /> : i + 1}
+                {i < step ? <FacetedGlyph kind="check" onAccent className="h-4 w-4" /> : i + 1}
               </div>
               <span
                 className={cn(
@@ -348,36 +335,37 @@ export function SubmitForm() {
                 [
                   {
                     type: 'tool',
-                    icon: Wrench,
+                    art: 'brain',
                     title: 'AI Tool',
                     desc: 'A product or service',
                   },
 
                   {
                     type: 'devtool',
-                    icon: Package,
+                    art: 'package',
                     title: 'Dev Tool',
                     desc: 'A library, framework, or CLI',
                   },
 
                   {
                     type: 'repo',
-                    icon: Share2,
+                    art: 'edit',
                     title: 'Editing Tool',
                     desc: 'A PDF, image, video, or design tool',
                   },
 
                   {
                     type: 'offer',
-                    icon: Gift,
+                    art: 'gift',
                     title: 'Offer',
                     desc: 'A scholarship, deal, or freebie',
                   },
                 ] as const
-              ).map(({ type, icon: Icon, title, desc }) => (
+              ).map(({ type, art, title, desc }) => (
                 <button
                   key={type}
                   onClick={() => setType(type)}
+                  aria-pressed={form.type === type}
                   className={cn(
                     'flex flex-col items-start rounded-md border p-4 text-left transition-all',
                     form.type === type
@@ -385,12 +373,7 @@ export function SubmitForm() {
                       : 'border-border bg-card hover:border-ring'
                   )}
                 >
-                  <Icon
-                    className={cn(
-                      'mb-3 h-6 w-6',
-                      form.type === type ? 'text-orange-700 dark:text-accent' : 'text-muted-foreground'
-                    )}
-                  />
+                  <FacetedArt kind={art} size={48} className="mb-3 h-12 w-12" />
                   <span className="font-heading text-sm font-semibold">{title}</span>
                   <span className="mt-0.5 text-xs text-muted-foreground">{desc}</span>
                 </button>
@@ -428,7 +411,7 @@ export function SubmitForm() {
                     </label>
                     <div className="flex gap-2">
                       <div className="relative flex-1">
-                        <Link2 className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                        <FacetedGlyph kind="link" className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                         <input
                           value={form.url}
                           onChange={(e) => set('url', e.target.value)}
@@ -443,9 +426,9 @@ export function SubmitForm() {
                         className="btn-secondary"
                       >
                         {fetching ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
+                          <FacetedGlyph kind="spinner" className="h-4 w-4 animate-spin" />
                         ) : (
-                          <Sparkles className="h-4 w-4" />
+                          <FacetedGlyph kind="sparkles" className="h-4 w-4" />
                         )}
                         Fetch
                       </button>
@@ -823,7 +806,7 @@ export function SubmitForm() {
             disabled={step === 0}
             className="btn-ghost"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <FacetedGlyph kind="chevron-left" className="h-4 w-4" />
             Back
           </button>
           {step < 3 ? (
@@ -833,7 +816,7 @@ export function SubmitForm() {
               className="btn-primary"
             >
               Continue
-              <ChevronRight className="h-4 w-4" />
+              <FacetedGlyph kind="chevron-right" onAccent className="h-4 w-4" />
             </button>
           ) : (
             <div className="flex flex-col items-end gap-2">
@@ -851,7 +834,7 @@ export function SubmitForm() {
                 onClick={handleSubmit}
                 className="inline-flex items-center gap-2 rounded-lg bg-brand-orange px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand-orange/25 transition-all hover:bg-orange-600 hover:shadow-xl hover:shadow-brand-orange/30 active:scale-[0.97]"
               >
-                <Check className="h-4 w-4" />
+                <FacetedGlyph kind="check" onAccent className="h-4 w-4" />
                 Submit
               </button>
             </div>
@@ -949,28 +932,23 @@ function SuccessState({
 }) {
   return (
     <div className="mx-auto max-w-md text-center">
-      <div className="relative mx-auto mb-6 flex h-20 w-20 items-center justify-center">
-        <div className="absolute inset-0 rounded-full bg-brand-green/20 blur-2xl" />
-        <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-brand-green/40 bg-brand-green/10 text-brand-green">
-          <Check className="h-8 w-8" />
-        </div>
-      </div>
+      <FacetedArt kind="document" size={96} className="mx-auto mb-6 h-24 w-24" />
       <h2 className="font-heading text-2xl font-semibold">Submitted!</h2>
       <p className="mt-2 text-sm text-muted-foreground">
         Your {type} is in the review queue. You can view it now or share it with the community.
       </p>
       <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
         <button onClick={onView} className="btn-primary">
-          <Globe className="h-4 w-4" />
+          <FacetedGlyph kind="external" onAccent className="h-4 w-4" />
           View {type}
         </button>
         <button onClick={onAnother} className="btn-secondary">
-          <Sparkles className="h-4 w-4" />
+          <FacetedGlyph kind="sparkles" className="h-4 w-4" />
           Submit another
         </button>
       </div>
       <div className="mt-4 flex items-center justify-center gap-3 text-xs text-muted-foreground">
-        <Star className="h-3 w-3" />
+        <FacetedGlyph kind="star" className="h-3 w-3" />
         New items start at 0 upvotes. Earn karma as the community engages!
       </div>
     </div>

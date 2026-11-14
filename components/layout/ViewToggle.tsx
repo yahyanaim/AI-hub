@@ -1,6 +1,6 @@
 'use client'
 
-import { LayoutGrid, List } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 import { cn } from '@/lib/utils'
 
 interface ViewToggleProps {
@@ -22,7 +22,7 @@ export function ViewToggle({ view, onChange }: ViewToggleProps) {
         aria-label="Grid view"
         aria-pressed={view === 'grid'}
       >
-        <LayoutGrid className="h-4 w-4" />
+        <FacetedGlyph kind="grid" className="h-4 w-4" />
       </button>
       <button
         onClick={() => onChange('list')}
@@ -35,7 +35,7 @@ export function ViewToggle({ view, onChange }: ViewToggleProps) {
         aria-label="List view"
         aria-pressed={view === 'list'}
       >
-        <List className="h-4 w-4" />
+        <FacetedGlyph kind="list" className="h-4 w-4" />
       </button>
     </div>
   )

@@ -14,6 +14,11 @@ const SOURCES = {
   rocket: '/illustrations/hero-rocket.svg',
   layers: '/illustrations/hero-layers.svg',
   database: '/illustrations/hero-database.svg',
+  package: '/illustrations/submit-package.svg',
+  edit: '/illustrations/submit-edit.svg',
+  gift: '/illustrations/submit-gift.svg',
+  document: '/illustrations/submit-document.svg',
+  search: '/illustrations/search-empty.svg',
 } as const
 
 export type FacetedArtKind = keyof typeof SOURCES

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { ChevronDown, Check, X } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 import { cn } from '@/lib/utils'
 
 export interface FilterOption {
@@ -55,7 +55,7 @@ export function Dropdown({
       >
         {label ? <span className="text-muted-foreground">{label}:</span> : null}
         <span className="font-medium">{selected?.label ?? value}</span>
-        <ChevronDown
+        <FacetedGlyph kind="chevron-down"
           className={cn('h-4 w-4 text-muted-foreground transition-transform', open && 'rotate-180')}
         />
       </button>
@@ -85,7 +85,7 @@ export function Dropdown({
               )}
             >
               {opt.label}
-              {opt.value === value && <Check className="h-4 w-4" />}
+              {opt.value === value && <FacetedGlyph kind="check" className="h-4 w-4" />}
             </button>
           ))}
         </div>
@@ -132,7 +132,7 @@ export function ClearButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       className="flex items-center gap-1 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
     >
-      <X className="h-4 w-4" />
+      <FacetedGlyph kind="close" className="h-4 w-4" />
       Clear
     </button>
   )
