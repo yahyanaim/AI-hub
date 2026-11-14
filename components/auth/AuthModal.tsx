@@ -70,7 +70,15 @@ export function AuthModal() {
         if (data.code === 'account-not-migrated') {
           setMode('signup')
         }
-        setNameError(data.error || 'Authentication failed.')
+        const normalizedAttempt = name.trim().toLowerCase().replace(/[^a-z0-9_]/g, '')
+        const baseError = data.error || 'Authentication failed.'
+        if (res.status === 409 && normalizedAttempt === 'yahianaim') {
+          setNameError(
+            `${baseError} If you are the admin without a password, sign in as Admin on /profile/yahianaim to use one-time recovery.`
+          )
+        } else {
+          setNameError(baseError)
+        }
         return
       }
       signIn(data.user.username, {

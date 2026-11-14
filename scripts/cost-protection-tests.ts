@@ -5,6 +5,7 @@
 
 import { NextRequest } from 'next/server'
 import { GET as chatLockGet, POST as chatLockPost } from '../app/api/admin/chat-lock/route'
+import { GET as recoverGet, POST as recoverPost } from '../app/api/admin/recover-account/route'
 import { POST as userLoginPost } from '../app/api/auth/login/route'
 import { POST as userLogoutPost } from '../app/api/auth/logout/route'
 import { GET as userMeGet } from '../app/api/auth/me/route'
@@ -1286,6 +1287,167 @@ async function run() {
           meBody,
           adminLockUserOnly: adminLockUserOnly.status,
           adminLockWithAdmin: adminLockWithAdmin.status,
+        }
+      )
+    } finally {
+      __resetLocalQuotaStoreForTests()
+      __resetMemUsersForTests()
+      if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuthSecret
+    }
+  }
+
+  // 51. One-time Admin-authorized recovery for existing yahianaim account
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetMemUsersForTests()
+    const prevAuthSecret = process.env.AUTH_SECRET
+    process.env.AUTH_SECRET = 'test-auth-secret-recovery-51-minimum-32-chars'
+    try {
+      // Simulate existing yahianaim account with unknown password + existing CV quota usage
+      const existingCreate = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.81' },
+          body: JSON.stringify({ username: 'Yahia Naim', password: 'UnknownOldPassword1!', mode: 'signup' }),
+        })
+      )
+      const oldCookie = (existingCreate.headers.get('set-cookie') || '').match(/aihunt_user=[^;]+/)?.[0] ?? ''
+      const oldVisitor = resolveVisitorIdentity(
+        new NextRequest('http://localhost/api/chat/cv', { headers: { cookie: oldCookie } })
+      )
+      await reserveCvMonthlyQuota(oldVisitor, new Date('2026-11-20T12:00:00Z'))
+
+      // Unauthenticated recovery must return 401 and leave password unchanged
+      const unauthGet = await recoverGet(new NextRequest('http://localhost/api/admin/recover-account'))
+      const unauthPost = await recoverPost(
+        new NextRequest('http://localhost/api/admin/recover-account', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.82' },
+          body: JSON.stringify({ password: 'NewRecoveredPass99' }),
+        })
+      )
+      const unauthBody = (await unauthPost.json()) as { error?: string }
+
+      // Sign in with old password still works
+      const oldLoginStillWorks = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.83' },
+          body: JSON.stringify({ username: 'yahianaim', password: 'UnknownOldPassword1!', mode: 'signin' }),
+        })
+      )
+
+      const adminJwt = await signAdminJwt()
+      const adminCookie = `${ADMIN_COOKIE}=${adminJwt}`
+
+      // Cross-site CSRF attempt rejected even with admin cookie
+      const csrfRes = await recoverPost(
+        new NextRequest('http://localhost/api/admin/recover-account', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            cookie: adminCookie,
+            'sec-fetch-site': 'cross-site',
+            'x-vercel-forwarded-for': '198.51.100.84',
+          },
+          body: JSON.stringify({ password: 'NewRecoveredPass99' }),
+        })
+      )
+
+      const statusBefore = await recoverGet(
+        new NextRequest('http://localhost/api/admin/recover-account', {
+          headers: { cookie: adminCookie },
+        })
+      )
+      const statusBeforeBody = (await statusBefore.json()) as { used?: boolean }
+
+      // Valid one-time admin recovery succeeds
+      const recoverRes = await recoverPost(
+        new NextRequest('http://localhost/api/admin/recover-account', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            cookie: adminCookie,
+            'x-vercel-forwarded-for': '198.51.100.85',
+          },
+          body: JSON.stringify({ password: 'NewRecoveredPass99' }),
+        })
+      )
+      const recoverBody = (await recoverRes.json()) as {
+        ok?: boolean
+        user?: { username: string; displayName: string }
+      }
+      const recoveredCookie = (recoverRes.headers.get('set-cookie') || '').match(/aihunt_user=[^;]+/)?.[0] ?? ''
+
+      // Replay must be rejected (409)
+      const replayRes = await recoverPost(
+        new NextRequest('http://localhost/api/admin/recover-account', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            cookie: adminCookie,
+            'x-vercel-forwarded-for': '198.51.100.86',
+          },
+          body: JSON.stringify({ password: 'AnotherPassword123' }),
+        })
+      )
+
+      const statusAfter = await recoverGet(
+        new NextRequest('http://localhost/api/admin/recover-account', {
+          headers: { cookie: adminCookie },
+        })
+      )
+      const statusAfterBody = (await statusAfter.json()) as { used?: boolean }
+
+      // New password works and preserves displayName + CV quota
+      const newLogin = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.87' },
+          body: JSON.stringify({ username: 'Yahia Naim', password: 'NewRecoveredPass99', mode: 'signin' }),
+        })
+      )
+      const newLoginBody = (await newLogin.json()) as { user?: { username: string; displayName: string } }
+      const recoveredVisitor = resolveVisitorIdentity(
+        new NextRequest('http://localhost/api/chat/cv', { headers: { cookie: recoveredCookie } })
+      )
+      const quotaAfter = await getCvMonthlyQuotaStatus(recoveredVisitor, new Date('2026-11-20T12:00:00Z'))
+
+      check(
+        'admin-recovery: 401 unauth, 403 CSRF, one-time 200 preserving displayName+quota, 409 replay',
+        unauthGet.status === 401 &&
+          unauthPost.status === 401 &&
+          Boolean(unauthBody.error?.includes('Admin login')) &&
+          oldLoginStillWorks.status === 200 &&
+          csrfRes.status === 403 &&
+          statusBefore.status === 200 &&
+          statusBeforeBody.used === false &&
+          recoverRes.status === 200 &&
+          recoverBody.ok === true &&
+          recoverBody.user?.username === 'yahianaim' &&
+          recoverBody.user?.displayName === 'Yahia Naim' &&
+          !('passwordHash' in recoverBody) &&
+          !('salt' in recoverBody) &&
+          recoveredCookie.startsWith('aihunt_user=') &&
+          replayRes.status === 409 &&
+          statusAfterBody.used === true &&
+          newLogin.status === 200 &&
+          newLoginBody.user?.displayName === 'Yahia Naim' &&
+          quotaAfter.ok &&
+          quotaAfter.status.used === 1,
+        {
+          unauthGet: unauthGet.status,
+          unauthPost: unauthPost.status,
+          csrfRes: csrfRes.status,
+          statusBeforeBody,
+          recoverStatus: recoverRes.status,
+          recoverBody,
+          replayStatus: replayRes.status,
+          statusAfterBody,
+          newLoginStatus: newLogin.status,
+          newLoginBody,
+          quotaAfter,
         }
       )
     } finally {

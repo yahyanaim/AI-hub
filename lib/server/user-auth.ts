@@ -4,6 +4,9 @@ import { isFailClosedMode, isRedisConfigured, redisCommandResult, SIGNUP_COUNT_K
 
 const USER_KEY_PREFIX = 'aihunt:user:'
 const DEVICE_ACCOUNT_PREFIX = 'aihunt:device:acct:'
+const ADMIN_RECOVERY_USERNAME = 'yahianaim'
+const ADMIN_RECOVERY_DISPLAY_NAME = 'Yahia Naim'
+const ADMIN_RECOVERY_USED_KEY = `${USER_KEY_PREFIX}${ADMIN_RECOVERY_USERNAME}:recovery_used`
 
 type StoredUser = {
   username: string
@@ -15,6 +18,7 @@ type StoredUser = {
 
 const memUsers = new Map<string, StoredUser>()
 const memDeviceAccounts = new Map<string, string>()
+let memAdminRecoveryUsed = false
 
 export function normalizeUsername(raw: string): string {
   return raw.trim().toLowerCase().replace(/[^a-z0-9_]/g, '')
@@ -222,7 +226,106 @@ export async function getStoredUserDisplayName(username: string): Promise<string
   }
 }
 
+export async function isAdminRecoveryUsed(): Promise<boolean> {
+  if (!isRedisConfigured()) {
+    return memAdminRecoveryUsed
+  }
+  const res = await redisCommandResult<string | null>(['get', ADMIN_RECOVERY_USED_KEY])
+  return Boolean(res.ok && res.result)
+}
+
+export async function recoverAdminUserPassword(newPassword: string): Promise<AuthUserResult> {
+  if (typeof newPassword !== 'string' || newPassword.length < 6 || newPassword.length > 128) {
+    return { ok: false, status: 400, error: 'Password must be 6–128 characters.' }
+  }
+
+  const salt = randomBytes(16).toString('hex')
+  const passwordHash = hashPassword(newPassword, salt)
+
+  if (!isRedisConfigured()) {
+    if (isFailClosedMode()) {
+      return { ok: false, status: 503, error: 'Account service temporarily unavailable.' }
+    }
+    if (memAdminRecoveryUsed) {
+      return {
+        ok: false,
+        status: 409,
+        code: 'recovery-already-used',
+        error: 'One-time account recovery has already been used.',
+      }
+    }
+    memAdminRecoveryUsed = true
+    const existing = memUsers.get(ADMIN_RECOVERY_USERNAME)
+    const updated: StoredUser = {
+      username: ADMIN_RECOVERY_USERNAME,
+      displayName: existing?.displayName || ADMIN_RECOVERY_DISPLAY_NAME,
+      salt,
+      passwordHash,
+      createdAt: existing?.createdAt || new Date().toISOString(),
+    }
+    memUsers.set(ADMIN_RECOVERY_USERNAME, updated)
+    return { ok: true, user: { username: updated.username, displayName: updated.displayName } }
+  }
+
+  const claim = await redisCommandResult<string | null>([
+    'set',
+    ADMIN_RECOVERY_USED_KEY,
+    new Date().toISOString(),
+    'NX',
+  ])
+  if (!claim.ok) {
+    return { ok: false, status: 503, error: 'Account service temporarily unavailable.' }
+  }
+  if (claim.result !== 'OK') {
+    return {
+      ok: false,
+      status: 409,
+      code: 'recovery-already-used',
+      error: 'One-time account recovery has already been used.',
+    }
+  }
+
+  const userKey = `${USER_KEY_PREFIX}${ADMIN_RECOVERY_USERNAME}`
+  const existingRes = await redisCommandResult<string | null>(['get', userKey])
+  if (!existingRes.ok) {
+    await redisCommandResult(['del', ADMIN_RECOVERY_USED_KEY])
+    return { ok: false, status: 503, error: 'Account service temporarily unavailable.' }
+  }
+
+  let existing: Partial<StoredUser> | null = null
+  if (existingRes.result) {
+    try {
+      existing = JSON.parse(existingRes.result) as Partial<StoredUser>
+    } catch {
+      existing = null
+    }
+  }
+
+  const updated: StoredUser = {
+    username: ADMIN_RECOVERY_USERNAME,
+    displayName:
+      typeof existing?.displayName === 'string' && existing.displayName.trim()
+        ? existing.displayName.trim()
+        : ADMIN_RECOVERY_DISPLAY_NAME,
+    salt,
+    passwordHash,
+    createdAt:
+      typeof existing?.createdAt === 'string' && existing.createdAt
+        ? existing.createdAt
+        : new Date().toISOString(),
+  }
+
+  const saveRes = await redisCommandResult<string>(['set', userKey, JSON.stringify(updated)])
+  if (!saveRes.ok || saveRes.result !== 'OK') {
+    await redisCommandResult(['del', ADMIN_RECOVERY_USED_KEY])
+    return { ok: false, status: 503, error: 'Account service temporarily unavailable.' }
+  }
+
+  return { ok: true, user: { username: updated.username, displayName: updated.displayName } }
+}
+
 export function __resetMemUsersForTests() {
   memUsers.clear()
   memDeviceAccounts.clear()
+  memAdminRecoveryUsed = false
 }

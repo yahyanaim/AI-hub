@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShieldCheck, LogOut, Loader2, Megaphone, Lock, Unlock } from 'lucide-react'
+import { ShieldCheck, LogOut, Loader2, Megaphone, Lock, Unlock, KeyRound } from 'lucide-react'
 import { cn, formatNumber } from '@/lib/utils'
 
 /**
@@ -34,6 +34,11 @@ export function AdminBadge({
   const [chatLocked, setChatLocked] = useState<boolean | null>(null)
   const [chatLockPending, setChatLockPending] = useState(false)
   const [chatLockMsg, setChatLockMsg] = useState<string | null>(null)
+  const [recoveryUsed, setRecoveryUsed] = useState<boolean | null>(null)
+  const [recoverOpen, setRecoverOpen] = useState(false)
+  const [recoverPassword, setRecoverPassword] = useState('')
+  const [recoverPending, setRecoverPending] = useState(false)
+  const [recoverMsg, setRecoverMsg] = useState<{ text: string; ok: boolean } | null>(null)
 
   const broadcast = async () => {
     setPushState('sending')
@@ -91,11 +96,41 @@ export function AdminBadge({
     }
   }
 
+  const submitRecovery = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (recoverPending) return
+    setRecoverPending(true)
+    setRecoverMsg(null)
+    try {
+      const res = await fetch('/api/admin/recover-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: recoverPassword }),
+      })
+      const data = (await res.json()) as { ok?: boolean; error?: string }
+      if (!res.ok) {
+        setRecoverMsg({ text: data.error || 'Could not set password.', ok: false })
+        if (res.status === 409) setRecoveryUsed(true)
+        return
+      }
+      setRecoverPassword('')
+      setRecoverOpen(false)
+      setRecoveryUsed(true)
+      setRecoverMsg({ text: 'Password set for yahianaim. You are signed in.', ok: true })
+      window.dispatchEvent(new Event('aihunt-auth-changed'))
+    } catch {
+      setRecoverMsg({ text: 'Network error, try again.', ok: false })
+    } finally {
+      setRecoverPending(false)
+    }
+  }
+
   const load = useCallback(async () => {
     try {
-      const [res, lockRes] = await Promise.all([
+      const [res, lockRes, recoverRes] = await Promise.all([
         fetch('/api/admin/signups', { cache: 'no-store' }),
         fetch('/api/admin/chat-lock', { cache: 'no-store' }),
+        fetch('/api/admin/recover-account', { cache: 'no-store' }),
       ])
       if (res.status === 401) {
         setStatus('auth')
@@ -110,6 +145,10 @@ export function AdminBadge({
       if (lockRes.ok) {
         const lockData = (await lockRes.json()) as { locked: boolean }
         setChatLocked(Boolean(lockData.locked))
+      }
+      if (recoverRes.ok) {
+        const recoverData = (await recoverRes.json()) as { used: boolean }
+        setRecoveryUsed(Boolean(recoverData.used))
       }
       setStatus('authed')
     } catch {
@@ -297,8 +336,32 @@ export function AdminBadge({
         )}
         {chatLocked ? 'Unlock Chat' : 'Lock Chat'}
       </button>
+      {recoveryUsed === false && (
+        <button
+          type="button"
+          onClick={() => {
+            setRecoverOpen((v) => !v)
+            setRecoverMsg(null)
+          }}
+          className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-600 transition-colors hover:bg-emerald-500/20 dark:text-emerald-400"
+          title="One-time password setup for your yahianaim user account"
+        >
+          <KeyRound className="h-3.5 w-3.5" />
+          Set yahianaim password
+        </button>
+      )}
       {chatLockMsg && (
         <span className="text-[11px] text-muted-foreground">{chatLockMsg}</span>
+      )}
+      {recoverMsg && (
+        <span
+          className={cn(
+            'text-[11px]',
+            recoverMsg.ok ? 'text-brand-green' : 'text-red-500'
+          )}
+        >
+          {recoverMsg.text}
+        </span>
       )}
       {pushMsg && (
         <span
@@ -309,6 +372,31 @@ export function AdminBadge({
         >
           {pushMsg}
         </span>
+      )}
+      {recoverOpen && recoveryUsed === false && (
+        <form
+          onSubmit={submitRecovery}
+          className="mt-2 flex w-full max-w-sm items-center gap-2 rounded-lg border border-border bg-card p-2.5"
+        >
+          <input
+            type="password"
+            minLength={6}
+            maxLength={128}
+            autoComplete="new-password"
+            placeholder="New yahianaim password (min 6)"
+            value={recoverPassword}
+            onChange={(e) => setRecoverPassword(e.target.value)}
+            className="min-w-0 flex-1 rounded-md border border-border bg-background px-2.5 py-1.5 text-xs outline-none focus:border-accent"
+            required
+          />
+          <button
+            type="submit"
+            disabled={recoverPending || recoverPassword.length < 6}
+            className="btn-primary shrink-0 px-3 py-1.5 text-xs"
+          >
+            {recoverPending ? 'Saving…' : 'Save'}
+          </button>
+        </form>
       )}
     </div>
   )
