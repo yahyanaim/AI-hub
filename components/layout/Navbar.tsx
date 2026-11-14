@@ -4,16 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
-import {
-  Plus,
-  Menu,
-  X,
-  LogOut,
-  Sparkles,
-  Search,
-  ChevronDown,
-  ChevronRight,
-} from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 import { cn } from '@/lib/utils'
 import { SupportArt } from '@/components/ui/SupportArt'
 import { useApp } from '@/lib/store'
@@ -103,7 +94,7 @@ export function Navbar() {
                 )}
               >
                 AI Tools
-                <ChevronDown
+                <FacetedGlyph kind="chevron-down"
                   className={cn(
                     'h-3.5 w-3.5 transition-transform',
                     toolsOpen && 'rotate-180'
@@ -165,9 +156,10 @@ export function Navbar() {
           {showSearch && (
             <button
               onClick={() => setPaletteOpen(true)}
+              aria-label="Search tools"
               className="hidden h-9 items-center gap-2 rounded-xl border border-border bg-muted/50 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:inline-flex"
             >
-              <Search className="h-4 w-4" />
+              <FacetedGlyph kind="search" className="h-4 w-4" />
               <span className="hidden lg:inline">Search…</span>
               <kbd className="hidden rounded-md border border-border bg-background px-1.5 py-0.5 font-sans text-[11px] xl:inline-block">
                 ⌘K
@@ -177,7 +169,7 @@ export function Navbar() {
 
           {/* Submit button */}
           <Link href="/submit" className="hidden h-9 items-center rounded-xl border border-border bg-background px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted sm:inline-flex">
-            <Plus className="mr-1 h-4 w-4" />
+            <FacetedGlyph kind="plus" className="mr-1 h-4 w-4" />
             Submit
           </Link>
 
@@ -204,7 +196,7 @@ export function Navbar() {
                 aria-label="Sign out"
                 title="Sign out"
               >
-                <LogOut className="h-4 w-4" />
+                <FacetedGlyph kind="logout" className="h-4 w-4" />
               </button>
             </div>
           ) : (
@@ -220,11 +212,11 @@ export function Navbar() {
           <button
             onClick={() => setMobileOpen((o) => !o)}
             className="inline-flex size-9 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted lg:hidden"
-            aria-label="Menu"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-controls="mobile-nav"
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? <FacetedGlyph kind="close" className="h-5 w-5" /> : <FacetedGlyph kind="menu" className="h-5 w-5" />}
           </button>
         </div>
       </div>
@@ -241,7 +233,7 @@ export function Navbar() {
                 }}
                 className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
               >
-                <Search className="h-4 w-4" /> Search
+                <FacetedGlyph kind="search" className="h-4 w-4" /> Search
               </button>
             )}
             {/* Mobile mirror of the desktop tools selector */}
@@ -252,7 +244,7 @@ export function Navbar() {
                 className="flex w-full items-center gap-2.5 px-3.5 py-3 text-left"
               >
                 <span className="flex size-7 items-center justify-center rounded-lg bg-brand-orange/10">
-                  <Sparkles className="h-4 w-4 text-brand-orange" />
+                  <FacetedGlyph kind="sparkles" className="h-4 w-4 text-brand-orange" />
                 </span>
                 <span className="flex-1 text-sm font-semibold text-foreground">
                   AI Tools
@@ -260,7 +252,7 @@ export function Navbar() {
                 <span className="rounded-full bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">
                   3
                 </span>
-                <ChevronDown
+                <FacetedGlyph kind="chevron-down"
                   className={cn(
                     'h-4 w-4 text-muted-foreground transition-transform',
                     mobileToolsOpen && 'rotate-180'
@@ -285,7 +277,7 @@ export function Navbar() {
                         )}
                       >
                         {link.label}
-                        <ChevronRight className="h-3.5 w-3.5 opacity-50" />
+                        <FacetedGlyph kind="chevron-right" className="h-3.5 w-3.5 opacity-50" />
                       </Link>
                     )
                   })}
@@ -305,7 +297,7 @@ export function Navbar() {
               href="/submit"
               className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium text-brand-orange hover:bg-secondary"
             >
-              <Sparkles className="h-4 w-4" /> Submit
+              <FacetedGlyph kind="sparkles" className="h-4 w-4" /> Submit
             </Link>
           </nav>
         </div>

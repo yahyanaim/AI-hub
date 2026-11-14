@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Bell, Check, Trash2 } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 import { useApp, notificationHref, type AppNotification } from '@/lib/store'
 import { cn, relativeTime } from '@/lib/utils'
 import { Logo } from '@/components/ui/Logo'
@@ -180,7 +180,7 @@ export function NotificationBell() {
         aria-label={`Notifications${unreadNotificationCount ? ` (${unreadNotificationCount} unread)` : ''}`}
         title="Notifications"
       >
-        <Bell className="h-4 w-4" />
+        <FacetedGlyph kind="bell" className="h-4 w-4" />
         {unreadNotificationCount > 0 && (
           <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-semibold leading-none text-white">
             {unreadNotificationCount > 9 ? '9+' : unreadNotificationCount}
@@ -211,7 +211,7 @@ export function NotificationBell() {
                       className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
                       title="Mark all as read"
                     >
-                      <Check className="h-3 w-3" />
+                      <FacetedGlyph kind="check" className="h-3 w-3" />
                       Mark all read
                     </button>
                   )}
@@ -220,7 +220,7 @@ export function NotificationBell() {
                     className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-red-500"
                     title="Clear all notifications"
                   >
-                    <Trash2 className="h-3 w-3" />
+                    <FacetedGlyph kind="trash" className="h-3 w-3" />
                     Clear
                   </button>
                 </>

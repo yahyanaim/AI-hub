@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { BellRing, Loader2, Smartphone } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 
 type PushState = 'checking' | 'unsupported' | 'unpermitted' | 'granted' | 'asking' | 'error'
 
@@ -122,7 +122,7 @@ export function PushSubscribeButton() {
   if (state === 'checking' || state === 'granted') {
     return state === 'granted' ? (
       <span className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
-        <BellRing className="h-3 w-3" />
+        <FacetedGlyph kind="bell-ring" className="h-3 w-3" />
         Push on
       </span>
     ) : null
@@ -141,9 +141,9 @@ export function PushSubscribeButton() {
         }
       >
         {busy ? (
-          <Loader2 className="h-3 w-3 animate-spin" />
+          <FacetedGlyph kind="spinner" className="h-3 w-3 animate-spin" />
         ) : (
-          <BellRing className="h-3 w-3" />
+          <FacetedGlyph kind="bell-ring" className="h-3 w-3" />
         )}
         {state === 'unpermitted' ? 'Push blocked' : 'Turn on notifications'}
       </button>
@@ -162,7 +162,7 @@ export function PushSubscribeButton() {
       )}
       {state !== 'unsupported' && isIOS && (
         <span className="flex items-center gap-1 text-[10px] text-muted-foreground">
-          <Smartphone className="h-3 w-3" />
+          <FacetedGlyph kind="smartphone" className="h-3 w-3" />
           iPhone: Add to Home Screen first (Share → Add to Home Screen).
         </span>
       )}

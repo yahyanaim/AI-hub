@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { Moon, Sun } from 'lucide-react'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 import { cn } from '@/lib/utils'
 
 const STORAGE_KEY = 'ai-hunt-theme'
@@ -68,7 +68,7 @@ export function ThemeToggle({ className }: { className?: string }) {
           className
         )}
       >
-        <Sun className="h-4 w-4" />
+        <FacetedGlyph kind="sun" className="h-4 w-4" />
       </span>
     )
   }
@@ -86,7 +86,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         className
       )}
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {isDark ? <FacetedGlyph kind="sun" className="h-4 w-4" /> : <FacetedGlyph kind="moon" className="h-4 w-4" />}
     </button>
   )
 }
