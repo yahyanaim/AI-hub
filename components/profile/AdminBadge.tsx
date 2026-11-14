@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ShieldCheck, LogOut, Loader2, Megaphone, Lock, Unlock, KeyRound } from 'lucide-react'
 import { cn, formatNumber } from '@/lib/utils'
@@ -17,6 +18,7 @@ export function AdminBadge({
   username: string
   canSee?: boolean
 }) {
+  const router = useRouter()
   const [count, setCount] = useState<number | null>(null)
   const [status, setStatus] = useState<'loading' | 'authed' | 'unauth' | 'unavailable'>(
     'loading'
@@ -189,10 +191,11 @@ export function AdminBadge({
   }, [status, load])
 
   const logout = async () => {
-    await fetch('/api/auth/admin-logout', { method: 'POST' }).catch(() => {})
+    await fetch('/api/auth/admin-logout', { method: 'POST', cache: 'no-store' }).catch(() => {})
     try { sessionStorage.removeItem('aihub_admin_ping_v1') } catch {}
     clearAdminState()
     setStatus('unauth')
+    router.refresh()
   }
 
   // Hidden from all guests, ordinary users, and unauthenticated visitors.

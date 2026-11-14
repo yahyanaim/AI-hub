@@ -316,7 +316,7 @@ interface AppContextValue {
 
   // auth
   signIn: (username: string, options?: { skipSignupPing?: boolean; displayName?: string }) => void
-  signOut: () => void
+  signOut: () => Promise<void> | void
   getUser: (id: string) => User | undefined
   getUserByUsername: (username: string) => User | undefined
 
@@ -1083,12 +1083,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (isNewSignup && !options?.skipSignupPing) void pingSignupCount(clean)
   }, [pingSignupCount])
 
-  const signOut = useCallback(() => {
+  const signOut = useCallback(async () => {
     try {
       localStorage.removeItem('ai-hunt-username')
     } catch {}
-    void fetch('/api/auth/logout', { method: 'POST' }).catch(() => {})
     setState((prev) => ({ ...prev, currentUserId: null }))
+    await fetch('/api/auth/logout', { method: 'POST', cache: 'no-store' }).catch(() => {})
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('aihunt-auth-changed'))
+    }
   }, [])
 
   // Keep client store synced with the server-side HttpOnly session cookie (aihunt_user).
