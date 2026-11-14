@@ -3993,7 +3993,7 @@ export const SEED_COURSES: Course[] = [
     tagline: 'Source-grounded Azure system design: from primitives to production AI',
     url: 'https://github.com/DrHazemAli/enterprise-system-design',
     pricing: 'free',
-    logoUrl: 'https://github.com/DrHazemAli.png',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/github.com.ico',
     category: 'backend',
     difficulty: 'advanced',
     duration: 'Self-paced',
