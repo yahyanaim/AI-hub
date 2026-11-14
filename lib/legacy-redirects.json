@@ -1344,7 +1344,14 @@
   "notta": "extension",
   "reelfolio": "video",
   "on-design": "for-creators",
-  "iter0": "no-code-platforms"
+  "iter0": "no-code-platforms",
+  "awesome-lists": "open-source",
+  "awesome-ai-tools": "open-source-ai",
+  "awesome-marketing": "marketing",
+  "awesome-productivity": "productivity",
+  "prompts-chat": "ai-skills",
+  "markdown-guide": "writing",
+  "awesome-public-datasets": "data"
  },
  "devtools": {
   "vs-code": "ide",
@@ -2261,7 +2268,10 @@
   "60fps-design": "websites",
   "land-book": "websites",
   "wedoflow": "templates",
-  "fontshare": "library"
+  "fontshare": "library",
+  "github-desktop": "source-control",
+  "github-pages-minimal-theme": "templates",
+  "github-stats-extended": "analytics"
  },
  "courses": {
   "cs50x-intro-cs": "computer-science",
@@ -2468,7 +2478,8 @@
   "snowflake-foundations-datacamp": "datacamp",
   "java-fundamentals-datacamp": "datacamp",
   "git-fundamentals-datacamp": "datacamp",
-  "ai-for-software-engineering-datacamp": "datacamp"
+  "ai-for-software-engineering-datacamp": "datacamp",
+  "introduction-to-github": "computer-science"
  },
  "offers": {
   "future-skills-academy": "learning",
