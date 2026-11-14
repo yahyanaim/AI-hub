@@ -11,9 +11,9 @@ import {
   ExternalLink,
 } from 'lucide-react'
 
-function PayPalLogo() {
+function PayPalLogo({ className = 'h-5 w-5' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
       <path
         fill="#003087"
         d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"
@@ -108,10 +108,10 @@ export function SupportPage() {
         {/* Payment Methods */}
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {/* PayPal */}
-          <div className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm">
-            <div className="flex items-center gap-2.5">
+          <div className="flex flex-col items-center justify-between rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
+            <div className="flex flex-col items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0079C1]/10">
-                <PayPalLogo />
+                <PayPalLogo className="h-5 w-5" />
               </div>
               <div>
                 <h2 className="font-heading text-base font-bold text-foreground">
@@ -123,12 +123,15 @@ export function SupportPage() {
               </div>
             </div>
 
-            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-              One-click support from anywhere in the world. Credit and debit cards are accepted
-              even without a PayPal account.
-            </p>
+            <div className="my-5 flex items-center justify-center rounded-2xl bg-[#0079C1]/5 p-3.5 ring-1 ring-[#0079C1]/15">
+              <PayPalLogo className="h-44 w-44" />
+            </div>
 
-            <div className="mt-auto space-y-3 pt-6">
+            <div className="w-full space-y-3">
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                One-click support from anywhere in the world. Credit and debit cards are accepted
+                even without a PayPal account.
+              </p>
               <a
                 href={PAYPAL_LINK}
                 target="_blank"
@@ -148,7 +151,7 @@ export function SupportPage() {
 
           {/* CIH Bank QR */}
           <div className="flex flex-col items-center justify-between rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
-            <div className="flex w-full items-center gap-2.5 text-left">
+            <div className="flex flex-col items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-orange/10 text-brand-orange">
                 <Landmark className="h-5 w-5" />
               </div>
