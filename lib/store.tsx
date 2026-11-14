@@ -514,6 +514,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const inflightSlicesRef = useRef<Set<SliceKey>>(new Set())
   // LocalStorage delta, read once on mount and reused for every slice merge.
   const deltaRef = useRef<StoredDelta | null>(null)
+  const authGenerationRef = useRef(0)
   const restoredUsersRef = useRef(false)
 
   // Synchronous mirror of state for submit callbacks: useState updaters run
@@ -582,7 +583,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
               (x) => !next.users.some((s) => s.username.toLowerCase() === x.username.toLowerCase())
             ) ?? []),
           ]
-          next.currentUserId = delta.currentUserId ?? next.currentUserId
+          if (authGenerationRef.current === 0) {
+            next.currentUserId = delta.currentUserId ?? next.currentUserId
+          }
           next.recentSearches = delta.recentSearches ?? next.recentSearches
           next.notifications = delta.notifications
             ? [...delta.notifications].sort((a, b) => dateValue(b.createdAt) - dateValue(a.createdAt))
@@ -1030,8 +1033,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const authGenerationRef = useRef(0)
-
   const signIn = useCallback((username: string, options?: { skipSignupPing?: boolean; displayName?: string }) => {
     authGenerationRef.current += 1
     const raw = username.trim().slice(0, MAX_USERNAME_LENGTH)
@@ -1089,6 +1090,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const signOut = useCallback(async () => {
     authGenerationRef.current += 1
+    if (deltaRef.current) {
+      deltaRef.current = { ...deltaRef.current, currentUserId: null }
+    }
     if (saveTimer.current) {
       clearTimeout(saveTimer.current)
       saveTimer.current = null
