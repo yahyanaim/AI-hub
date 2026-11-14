@@ -1,6 +1,18 @@
 import 'server-only'
 import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto'
-import { isFailClosedMode, isRedisConfigured, redisCommandResult, SIGNUP_COUNT_KEY } from '@/lib/server/redis'
+import {
+  indexUserAccount,
+  recordAdminMetric,
+  USERS_INDEX_KEY,
+} from '@/lib/server/admin-metrics'
+import { utcMonthKey } from '@/lib/server/quota'
+import {
+  isFailClosedMode,
+  isRedisConfigured,
+  redisCommandResult,
+  redisPipeline,
+  SIGNUP_COUNT_KEY,
+} from '@/lib/server/redis'
 
 const USER_KEY_PREFIX = 'aihunt:user:'
 const DEVICE_ACCOUNT_PREFIX = 'aihunt:device:acct:'
@@ -98,6 +110,7 @@ export async function registerUser(
     }
     memUsers.set(v.username, record)
     if (deviceHash && !options?.bypassDeviceLimit) memDeviceAccounts.set(deviceHash, v.username)
+    void recordAdminMetric('signups')
     return { ok: true, user: { username: record.username, displayName: record.displayName } }
   }
 
@@ -158,6 +171,8 @@ export async function registerUser(
   // Keep the admin signup counter accurate for every real new account
   // regardless of whether signup happened via AuthModal or /chat.
   await redisCommandResult(['incr', SIGNUP_COUNT_KEY]).catch(() => {})
+  void recordAdminMetric('signups')
+  void indexUserAccount(record.username, Date.parse(record.createdAt) || Date.now())
   return { ok: true, user: { username: record.username, displayName: record.displayName } }
 }
 
@@ -202,6 +217,7 @@ export async function authenticateUser(
   }
 
   if (!verifyPassword(password, record.salt, record.passwordHash)) {
+    void recordAdminMetric('auth_fail')
     return { ok: false, status: 401, error: 'Invalid username or password.' }
   }
 
@@ -322,6 +338,138 @@ export async function recoverAdminUserPassword(newPassword: string): Promise<Aut
   }
 
   return { ok: true, user: { username: updated.username, displayName: updated.displayName } }
+}
+
+export type SafeUserSummary = {
+  username: string
+  displayName: string
+  createdAt: string
+  cvUsedThisMonth: number
+  cvMonthlyLimit: number
+}
+
+export async function listSafeUsersPage(opts?: {
+  query?: string
+  page?: number
+  limit?: number
+  cvMonthlyLimit?: number
+}): Promise<{
+  users: SafeUserSummary[]
+  total: number
+  page: number
+  limit: number
+  quotaDistribution: { zero: number; partial: number; maxed: number }
+}> {
+  const page = Math.max(1, Math.min(100, opts?.page ?? 1))
+  const limit = Math.max(1, Math.min(50, opts?.limit ?? 20))
+  const q = (opts?.query ?? '').trim().toLowerCase()
+  const cvLimit = opts?.cvMonthlyLimit ?? 3
+  const month = utcMonthKey()
+
+  if (!isRedisConfigured()) {
+    const all = Array.from(memUsers.values())
+      .filter((u) => !q || u.username.includes(q) || u.displayName.toLowerCase().includes(q))
+      .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
+    const total = all.length
+    const slice = all.slice((page - 1) * limit, page * limit).map((u) => ({
+      username: u.username,
+      displayName: u.displayName,
+      createdAt: u.createdAt,
+      cvUsedThisMonth: 0,
+      cvMonthlyLimit: cvLimit,
+    }))
+    return {
+      users: slice,
+      total,
+      page,
+      limit,
+      quotaDistribution: { zero: total, partial: 0, maxed: 0 },
+    }
+  }
+
+  // Prefer the O(log N) ZSET index; backfill once from a capped SCAN if empty.
+  let usernames: string[] = []
+  const zRes = await redisCommandResult<string[]>(['ZREVRANGE', USERS_INDEX_KEY, '0', '499'])
+  if (zRes.ok && Array.isArray(zRes.result) && zRes.result.length > 0) {
+    usernames = zRes.result
+  } else {
+    let cursor = '0'
+    const discovered: string[] = []
+    for (let step = 0; step < 5; step++) {
+      const scanRes = await redisCommandResult<[string, string[]]>(['SCAN', cursor, 'MATCH', `${USER_KEY_PREFIX}*`, 'COUNT', '100'])
+      if (!scanRes.ok || !Array.isArray(scanRes.result)) break
+      cursor = scanRes.result[0]
+      const keys = scanRes.result[1] ?? []
+      for (const k of keys) {
+        if (k.endsWith(':recovery_used')) continue
+        const uname = k.slice(USER_KEY_PREFIX.length)
+        if (uname && !discovered.includes(uname)) discovered.push(uname)
+      }
+      if (cursor === '0' || discovered.length >= 250) break
+    }
+    usernames = discovered
+  }
+
+  if (usernames.length === 0) {
+    return { users: [], total: 0, page, limit, quotaDistribution: { zero: 0, partial: 0, maxed: 0 } }
+  }
+
+  const cmds: string[][] = []
+  for (const u of usernames) {
+    cmds.push(['GET', `${USER_KEY_PREFIX}${u}`])
+    cmds.push(['GET', `aihunt:cv:m:${month}:usr:${u}`])
+  }
+  const pipe = await redisPipeline(cmds)
+  const summaries: SafeUserSummary[] = []
+  const zaddCmds: string[][] = []
+  const quotaDistribution = { zero: 0, partial: 0, maxed: 0 }
+
+  if (pipe.length > 0) {
+    for (let i = 0; i < usernames.length; i++) {
+      const rawUser = pipe[i * 2]?.result
+      const rawCv = pipe[i * 2 + 1]?.result
+      if (typeof rawUser !== 'string') continue
+      try {
+        const parsed = JSON.parse(rawUser) as Partial<StoredUser>
+        const uname = typeof parsed.username === 'string' ? parsed.username : usernames[i]!
+        const displayName =
+          typeof parsed.displayName === 'string' && parsed.displayName.trim()
+            ? parsed.displayName.trim()
+            : uname
+        const createdAt = typeof parsed.createdAt === 'string' ? parsed.createdAt : ''
+        const cvUsed = Math.max(0, Number.parseInt(String(rawCv ?? '0'), 10) || 0)
+
+        if (cvUsed <= 0) quotaDistribution.zero++
+        else if (cvUsed >= cvLimit) quotaDistribution.maxed++
+        else quotaDistribution.partial++
+
+        if ((!zRes.ok || !zRes.result?.length) && uname) {
+          zaddCmds.push(['ZADD', USERS_INDEX_KEY, String(Date.parse(createdAt) || Date.now()), uname])
+        }
+
+        if (!q || uname.includes(q) || displayName.toLowerCase().includes(q)) {
+          summaries.push({
+            username: uname,
+            displayName,
+            createdAt,
+            cvUsedThisMonth: cvUsed,
+            cvMonthlyLimit: cvLimit,
+          })
+        }
+      } catch {
+        /* ignore malformed entry */
+      }
+    }
+  }
+
+  if (zaddCmds.length > 0) {
+    void redisPipeline(zaddCmds).catch(() => null)
+  }
+
+  summaries.sort((a, b) => (Date.parse(b.createdAt) || 0) - (Date.parse(a.createdAt) || 0))
+  const total = summaries.length
+  const users = summaries.slice((page - 1) * limit, page * limit)
+  return { users, total, page, limit, quotaDistribution }
 }
 
 export function __resetMemUsersForTests() {

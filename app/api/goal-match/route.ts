@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createHash, randomBytes } from 'node:crypto'
 import { getBudgetConfig } from '@/lib/server/budget-config'
+import { recordActiveVisitor, recordAdminMetric } from '@/lib/server/admin-metrics'
 import { checkExpensiveAiBotGuard } from '@/lib/server/bot-guard'
 import {
   acquireAiExecutionBudget,
@@ -110,6 +111,19 @@ export async function POST(req: Request) {
     throw err
   }
   const jsonWithCookie = (body: unknown, status = 200, extraHeaders?: Record<string, string>) => {
+    if (status === 403) void recordAdminMetric('bot_403')
+    else if (status === 429) {
+      const msg = body && typeof body === 'object' && 'error' in body ? String((body as { error?: unknown }).error ?? '') : ''
+      void recordAdminMetric(msg.toLowerCase().includes('another') || msg.toLowerCase().includes('concurrent') ? 'conc_429' : 'rl_429')
+    } else if (status === 503) {
+      void recordAdminMetric('err_503')
+      void recordAdminMetric('goal_err')
+    } else if (status >= 500) {
+      void recordAdminMetric('goal_err')
+    } else if (status === 200) {
+      void recordAdminMetric('goal_ok')
+      void recordActiveVisitor(identity.deviceHash)
+    }
     const res = NextResponse.json(body, { status, headers: extraHeaders })
     attachVisitorCookie(res, identity)
     return res

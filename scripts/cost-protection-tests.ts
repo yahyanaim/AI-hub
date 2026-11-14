@@ -8,9 +8,11 @@ import { join } from 'node:path'
 import { SignJWT } from 'jose'
 import { NextRequest } from 'next/server'
 import { GET as chatLockGet, POST as chatLockPost } from '../app/api/admin/chat-lock/route'
+import { GET as adminDashboardGet } from '../app/api/admin/dashboard/route'
 import { GET as recoverGet, POST as recoverPost } from '../app/api/admin/recover-account/route'
 import { GET as adminSessionGet } from '../app/api/admin/session/route'
 import { GET as signupsGet } from '../app/api/admin/signups/route'
+import { GET as adminUsersGet } from '../app/api/admin/users/route'
 import { POST as adminLogoutPost } from '../app/api/auth/admin-logout/route'
 import { POST as userLoginPost } from '../app/api/auth/login/route'
 import { POST as userLogoutPost } from '../app/api/auth/logout/route'
@@ -20,6 +22,7 @@ import { POST as chatPost } from '../app/api/chat/route'
 import { POST as goalPost } from '../app/api/goal-match/route'
 import { ADMIN_COOKIE, signAdminJwt } from '../lib/server/auth'
 import { __resetChatLockForTests } from '../lib/server/chat-lock'
+import { __resetAdminMetricsForTests, recordAdminMetric } from '../lib/server/admin-metrics'
 import { __resetMemUsersForTests } from '../lib/server/user-auth'
 import {
   __resetLocalQuotaStoreForTests,
@@ -1733,6 +1736,111 @@ async function run() {
     } finally {
       __resetLocalQuotaStoreForTests()
       __resetMemUsersForTests()
+      if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuthSecret
+    }
+  }
+
+  // 55. Admin Dashboard & Users APIs: 401 unauth/user-only, 200 admin, real metrics, no PII/secrets, no fabricated history
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetMemUsersForTests()
+    __resetAdminMetricsForTests()
+    const prevAuthSecret = process.env.AUTH_SECRET
+    process.env.AUTH_SECRET = 'test-auth-secret-dashboard-55-min-32'
+    try {
+      const signupRes = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.105' },
+          body: JSON.stringify({ username: 'Dash Test User', password: 'DashUserPass1!', mode: 'signup' }),
+        })
+      )
+      const userCookie =
+        (signupRes.headers.get('set-cookie') || '').match(/aihunt_user=[^;]+/)?.[0] ?? ''
+
+      // Unauthenticated & regular user attempts -> 401 + no-store
+      const [unauthDash, userDash, unauthUsers, userUsers] = await Promise.all([
+        adminDashboardGet(new NextRequest('http://localhost/api/admin/dashboard?range=7d')),
+        adminDashboardGet(
+          new NextRequest('http://localhost/api/admin/dashboard?range=7d', {
+            headers: { cookie: userCookie },
+          })
+        ),
+        adminUsersGet(new NextRequest('http://localhost/api/admin/users')),
+        adminUsersGet(
+          new NextRequest('http://localhost/api/admin/users', { headers: { cookie: userCookie } })
+        ),
+      ])
+
+      // Record real events
+      await recordAdminMetric('chat_ok', 2)
+      await recordAdminMetric('rl_429', 1)
+      await recordAdminMetric('bot_403', 1)
+
+      const adminJwt = await signAdminJwt()
+      const adminCookie = `${ADMIN_COOKIE}=${adminJwt}`
+      const dashRes = await adminDashboardGet(
+        new NextRequest('http://localhost/api/admin/dashboard?range=7d', {
+          headers: { cookie: adminCookie },
+        })
+      )
+      const dashBody = (await dashRes.json()) as {
+        overview: {
+          previousTotals: unknown
+          totals: { signups: number; chatOk: number; rl429: number; bot403: number; adminUnauth: number }
+        }
+        content: { counts: { total: number } }
+        infrastructure: { vercel: { billingApiConnected: boolean; billingNote: string } }
+      }
+      const usersRes = await adminUsersGet(
+        new NextRequest('http://localhost/api/admin/users?q=dash&page=1&limit=10', {
+          headers: { cookie: adminCookie },
+        })
+      )
+      const usersRaw = await usersRes.text()
+      const usersBody = JSON.parse(usersRaw) as {
+        users: Array<{ username: string; displayName: string; cvUsedThisMonth: number }>
+        total: number
+      }
+
+      const noSensitiveFields =
+        !usersRaw.includes('passwordHash') &&
+        !usersRaw.includes('salt') &&
+        !usersRaw.includes('198.51.100')
+
+      check(
+        'admin-dashboard-api: 401 unauth/user, 200 admin, real metrics, no fabricated prevTotals, zero PII/secrets',
+        unauthDash.status === 401 &&
+          userDash.status === 401 &&
+          unauthUsers.status === 401 &&
+          userUsers.status === 401 &&
+          dashRes.status === 200 &&
+          dashRes.headers.get('cache-control') === 'no-store' &&
+          dashBody.overview.previousTotals === null &&
+          dashBody.overview.totals.signups >= 1 &&
+          dashBody.overview.totals.chatOk === 2 &&
+          dashBody.overview.totals.rl429 === 1 &&
+          dashBody.overview.totals.bot403 === 1 &&
+          dashBody.overview.totals.adminUnauth >= 4 &&
+          dashBody.content.counts.total > 0 &&
+          dashBody.infrastructure.vercel.billingNote.includes('Not connected') &&
+          usersRes.status === 200 &&
+          usersRes.headers.get('cache-control') === 'no-store' &&
+          usersBody.users.some((u) => u.username === 'dashtestuser') &&
+          noSensitiveFields,
+        {
+          unauthStatuses: [unauthDash.status, userDash.status, unauthUsers.status, userUsers.status],
+          dashTotals: dashBody.overview?.totals,
+          previousTotals: dashBody.overview?.previousTotals,
+          usersCount: usersBody.total,
+          noSensitiveFields,
+        }
+      )
+    } finally {
+      __resetLocalQuotaStoreForTests()
+      __resetMemUsersForTests()
+      __resetAdminMetricsForTests()
       if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
       else process.env.AUTH_SECRET = prevAuthSecret
     }

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { SEED_COURSES } from '@/lib/seed/courses'
 import { getBudgetConfig } from '@/lib/server/budget-config'
+import { recordActiveVisitor, recordAdminMetric } from '@/lib/server/admin-metrics'
 import { checkExpensiveAiBotGuard } from '@/lib/server/bot-guard'
 import { isChatLocked } from '@/lib/server/chat-lock'
 import {
@@ -336,6 +337,16 @@ export async function POST(request: Request) {
   let releaseBudget: (() => Promise<void>) | null = null
   let renewBudget: ((ttlSeconds?: number) => Promise<boolean>) | null = null
   const jsonErr = (body: unknown, status: number, extraHeaders?: Record<string, string>) => {
+    if (status === 403) void recordAdminMetric('bot_403')
+    else if (status === 429) {
+      const msg = body && typeof body === 'object' && 'error' in body ? String((body as { error?: unknown }).error ?? '') : ''
+      void recordAdminMetric(msg.toLowerCase().includes('another') || msg.toLowerCase().includes('concurrent') ? 'conc_429' : 'rl_429')
+    } else if (status === 503) {
+      void recordAdminMetric('err_503')
+      void recordAdminMetric('chat_err')
+    } else if (status >= 500) {
+      void recordAdminMetric('chat_err')
+    }
     const res = NextResponse.json(body, { status, headers: extraHeaders })
     attachVisitorCookie(res, identity)
     return res
@@ -991,6 +1002,8 @@ export async function POST(request: Request) {
       },
     })
 
+    void recordAdminMetric('chat_ok')
+    void recordActiveVisitor(identity.deviceHash)
     const res = new Response(stream, {
       headers: {
         'Content-Type': 'text/event-stream',

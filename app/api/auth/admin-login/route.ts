@@ -6,6 +6,7 @@ import {
   isAdminEnvConfigured,
   signAdminJwt,
 } from '@/lib/server/auth'
+import { recordAdminMetric } from '@/lib/server/admin-metrics'
 import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
 
 const MAX_ATTEMPTS_PER_HOUR = 10
@@ -52,6 +53,7 @@ export async function POST(req: NextRequest) {
   const passwordOk = safeEqual(bodyPassword, password)
 
   if (!emailOk || !passwordOk) {
+    void recordAdminMetric('auth_fail')
     return NextResponse.json({ error: 'invalid-credentials' }, { status: 401 })
   }
 

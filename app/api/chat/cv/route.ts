@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { extractText, getDocumentProxy } from 'unpdf'
 import { getBudgetConfig, isAiEmergencyDisabled } from '@/lib/server/budget-config'
+import { recordActiveVisitor, recordAdminMetric } from '@/lib/server/admin-metrics'
 import { checkExpensiveAiBotGuard } from '@/lib/server/bot-guard'
 import { isChatLocked } from '@/lib/server/chat-lock'
 import {
@@ -79,6 +80,20 @@ export async function POST(request: Request) {
     status: number,
     extraHeaders?: Record<string, string>
   ) => {
+    if (status === 403) void recordAdminMetric('bot_403')
+    else if (status === 429) {
+      void recordAdminMetric('rl_429')
+      const msg = body && typeof body === 'object' && 'error' in body ? String((body as { error?: unknown }).error ?? '') : ''
+      if (msg.includes('Monthly CV limit')) void recordAdminMetric('cv_blocked_429')
+      if (msg.toLowerCase().includes('already processing')) void recordAdminMetric('conc_429')
+    } else if (status === 503) {
+      void recordAdminMetric('err_503')
+    } else if (status === 200) {
+      void recordAdminMetric('cv_ok')
+      void recordActiveVisitor(identity.deviceHash)
+    } else if (status === 400 || status === 415 || status === 422) {
+      void recordAdminMetric('cv_refunded')
+    }
     const res = NextResponse.json(body, { status, headers: extraHeaders })
     attachVisitorCookie(res, identity)
     return res
