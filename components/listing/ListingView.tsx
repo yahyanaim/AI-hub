@@ -520,44 +520,63 @@ function ListingHeader({
             DataCamp is an official partner of AIHubTools. {config.description}
           </p>
         </div>
-        <div className="relative overflow-hidden rounded-2xl border border-[#03EF62]/35 bg-[#05192D] px-6 py-7 text-white shadow-[0_8px_32px_rgba(3,239,98,0.12)] sm:px-10 sm:py-8">
-          <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#03EF62]/15 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-[#03EF62]/10 blur-3xl" />
-          <div className="relative flex flex-col items-center justify-between gap-6 md:flex-row">
-            <div className="flex flex-col items-center gap-3 text-center md:items-start md:text-left">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#03EF62]/35 bg-[#03EF62]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#03EF62]">
-                Official Partner
+        <div className="relative overflow-hidden rounded-2xl border border-[#03EF62]/35 bg-[#05192D] px-6 py-8 text-white shadow-[0_8px_32px_rgba(3,239,98,0.12)] sm:px-10 sm:py-10">
+          {/* DataCamp official geometric corner accents */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 1200 280"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 h-full w-full"
+          >
+            {/* Top-left green diagonal + blue/purple arc */}
+            <polygon points="0,0 245,0 0,145" fill="#03EF62" />
+            <polygon points="0,0 135,0 0,80" fill="#05192D" />
+            <circle cx="0" cy="118" r="24" fill="#00C5FF" />
+            <circle cx="0" cy="108" r="18" fill="#7933FF" />
+            {/* Top-right cyan geometric block */}
+            <polygon points="1030,0 1200,0 1200,105 1095,155" fill="#56E1FF" />
+            <polygon points="1105,0 1200,0 1200,105 1148,130" fill="#00B4FF" />
+            {/* Bottom-left purple geometric block */}
+            <polygon points="0,280 0,210 215,120 305,280" fill="#7933FF" />
+            <polygon points="105,280 215,120 305,280" fill="#975EFF" />
+            {/* Bottom-right green + purple diagonal bars */}
+            <polygon points="945,280 1200,145 1200,200 1050,280" fill="#03EF62" />
+            <polygon points="1035,280 1200,192 1200,280" fill="#7933FF" />
+          </svg>
+
+          <div className="relative flex flex-col items-center justify-center text-center">
+            <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-[#03EF62]/40 bg-[#05192D]/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#03EF62] backdrop-blur-sm">
+              Official Partner of AIHubTools
+            </span>
+            <h2 className="font-heading text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Build data skills online
+            </h2>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3.5">
+              <Image
+                src="/datacamp-donates-logo.png"
+                alt="DataCamp Donates"
+                width={1024}
+                height={282}
+                priority
+                className="h-8 w-auto object-contain sm:h-10"
+              />
+              <span className="text-base font-light text-white/40" aria-hidden="true">
+                ×
               </span>
-              <div className="flex flex-wrap items-center justify-center gap-4 md:justify-start">
-                <Image
-                  src="/datacamp-donates-logo.png"
-                  alt="DataCamp Donates"
-                  width={1024}
-                  height={282}
-                  priority
-                  className="h-9 w-auto object-contain sm:h-11"
-                />
-                <span className="text-lg font-light text-white/40" aria-hidden="true">
-                  ×
-                </span>
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm sm:h-10 sm:w-10">
-                    <Image
-                      src="/logo.png"
-                      alt="AIHubTools"
-                      width={28}
-                      height={28}
-                      className="h-7 w-7 object-contain"
-                    />
-                  </div>
-                  <span className="font-heading text-lg font-bold tracking-tight text-white sm:text-xl">
-                    AIHubTools
-                  </span>
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white shadow-sm">
+                  <Image
+                    src="/logo.png"
+                    alt="AIHubTools"
+                    width={24}
+                    height={24}
+                    className="h-6 w-6 object-contain"
+                  />
                 </div>
+                <span className="font-heading text-base font-bold tracking-tight text-white sm:text-lg">
+                  AIHubTools
+                </span>
               </div>
-              <p className="max-w-2xl text-xs leading-relaxed text-slate-300 sm:text-sm">
-                DataCamp is an official partner of AIHubTools — curated data science, AI, Python, and cloud engineering tracks.
-              </p>
             </div>
           </div>
         </div>
