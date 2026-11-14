@@ -315,7 +315,7 @@ interface AppContextValue {
   setOffersLang: (lang: OffersLang) => void
 
   // auth
-  signIn: (username: string, options?: { skipSignupPing?: boolean }) => void
+  signIn: (username: string, options?: { skipSignupPing?: boolean; displayName?: string }) => void
   signOut: () => void
   getUser: (id: string) => User | undefined
   getUserByUsername: (username: string) => User | undefined
@@ -1029,7 +1029,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const signIn = useCallback((username: string, options?: { skipSignupPing?: boolean }) => {
+  const signIn = useCallback((username: string, options?: { skipSignupPing?: boolean; displayName?: string }) => {
     const raw = username.trim().slice(0, MAX_USERNAME_LENGTH)
     const clean = raw.toLowerCase().replace(/[^a-z0-9_]/g, '')
     // Reject empty/short handles (e.g. '___' sanitizes to '') and cap the
@@ -1049,12 +1049,24 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const existing = prev.users.find(
         (u) => u.username.toLowerCase() === clean
       )
-      if (existing) return { ...prev, currentUserId: existing.id }
+      if (existing) {
+        const nextDisplay = options?.displayName?.trim()
+        if (nextDisplay && (!existing.displayName || existing.displayName === clean)) {
+          return {
+            ...prev,
+            users: prev.users.map((u) =>
+              u.id === existing.id ? { ...u, displayName: nextDisplay } : u
+            ),
+            currentUserId: existing.id,
+          }
+        }
+        return { ...prev, currentUserId: existing.id }
+      }
       if (prev.users.length >= MAX_USERS_STORED) return prev
       const newUser: User = {
         id: uuid(),
         username: clean,
-        displayName: raw,
+        displayName: options?.displayName?.trim() || raw,
         avatarUrl: '',
         bio: '',
         upvotedItems: [],
@@ -1086,13 +1098,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     let alive = true
     fetch('/api/auth/me', { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
-      .then((d: { user?: { username?: string } | null } | null) => {
+      .then((d: { user?: { username?: string; displayName?: string } | null } | null) => {
         if (!alive || !d) return
         if (d.user?.username) {
           const serverUser = d.user.username.toLowerCase()
           const cur = stateRef.current.users.find((u) => u.id === stateRef.current.currentUserId)
           if (!cur || cur.username.toLowerCase() !== serverUser) {
-            signIn(serverUser, { skipSignupPing: true })
+            signIn(serverUser, { skipSignupPing: true, displayName: d.user.displayName })
           }
         } else if (stateRef.current.currentUserId) {
           try {

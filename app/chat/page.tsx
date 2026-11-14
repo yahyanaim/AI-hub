@@ -2256,10 +2256,14 @@ export default function ChatPage() {
           }),
         })
         const data = (await res.json().catch(() => ({}))) as {
-          user?: { username: string }
+          user?: { username: string; displayName?: string }
           error?: string
+          code?: string
         }
         if (!res.ok || !data.user?.username) {
+          if (data.code === 'account-not-migrated') {
+            setSignupMode('signup')
+          }
           setSignupError(data.error || 'Authentication failed.')
           return
         }

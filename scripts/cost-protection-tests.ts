@@ -1048,7 +1048,7 @@ async function run() {
 
     try {
       const signupRes = await userLoginPost(
-        new Request('http://localhost/api/auth/login', {
+        new NextRequest('http://localhost/api/auth/login', {
           method: 'POST',
           headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.240' },
           body: JSON.stringify({ username: 'cross_user', password: 'password123', mode: 'signup' }),
@@ -1060,7 +1060,7 @@ async function run() {
       const vidMatch = allSetCookies.match(/aihunt_vid=[^;]+/)
       const vidCookie = vidMatch ? vidMatch[0] : ''
       const sameDeviceSecondAccount = await userLoginPost(
-        new Request('http://localhost/api/auth/login', {
+        new NextRequest('http://localhost/api/auth/login', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -1071,14 +1071,14 @@ async function run() {
         })
       )
       const dupSignup = await userLoginPost(
-        new Request('http://localhost/api/auth/login', {
+        new NextRequest('http://localhost/api/auth/login', {
           method: 'POST',
           headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.240' },
           body: JSON.stringify({ username: 'cross_user', password: 'password123', mode: 'signup' }),
         })
       )
       const wrongPass = await userLoginPost(
-        new Request('http://localhost/api/auth/login', {
+        new NextRequest('http://localhost/api/auth/login', {
           method: 'POST',
           headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.240' },
           body: JSON.stringify({ username: 'cross_user', password: 'wrong-password', mode: 'login' }),
@@ -1128,7 +1128,7 @@ async function run() {
 
       // Browser B (new browser, different IP 198.51.100.242, NO aihunt_vid, signs into same account)
       const loginB2 = await userLoginPost(
-        new Request('http://localhost/api/auth/login', {
+        new NextRequest('http://localhost/api/auth/login', {
           method: 'POST',
           headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.242' },
           body: JSON.stringify({ username: 'cross_user', password: 'password123', mode: 'login' }),
@@ -1170,6 +1170,123 @@ async function run() {
         'user-auth: logout clears aihunt_user cookie',
         logoutRes.status === 200 && clearedCookie.includes('aihunt_user=') && clearedCookie.includes('Max-Age=0'),
         { status: logoutRes.status, clearedCookie }
+      )
+    } finally {
+      __resetLocalQuotaStoreForTests()
+      __resetMemUsersForTests()
+      if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuthSecret
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 17. Legacy display name ("Yahia Naim" -> yahianaim), safe claim & admin separation
+  // ---------------------------------------------------------------------------
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetMemUsersForTests()
+    const prevAuthSecret = process.env.AUTH_SECRET
+    process.env.AUTH_SECRET = 'test-auth-secret-at-least-32-chars-long'
+
+    try {
+      const unmigratedLogin = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.245' },
+          body: JSON.stringify({ username: 'Yahia Naim', password: 'admin-password-1', mode: 'login' }),
+        })
+      )
+      const unmigratedBody = (await unmigratedLogin.json()) as { code?: string }
+      check(
+        'legacy-auth: unmigrated "Yahia Naim" login returns 404 account-not-migrated',
+        unmigratedLogin.status === 404 && unmigratedBody.code === 'account-not-migrated',
+        { status: unmigratedLogin.status, unmigratedBody }
+      )
+
+      // Simulate device already having created a test account first
+      const firstAcct = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.245' },
+          body: JSON.stringify({ username: 'test_dev_user', password: 'password123', mode: 'signup' }),
+        })
+      )
+      const vidMatch = (firstAcct.headers.get('set-cookie') || '').match(/aihunt_vid=[^;]+/)
+      const vidCookie = vidMatch ? vidMatch[0] : ''
+
+      // Admin with valid aihunt_admin cookie can still claim "Yahia Naim" -> yahianaim
+      const adminJwt = await signAdminJwt()
+      const adminCookie = `${ADMIN_COOKIE}=${adminJwt}`
+      const claimRes = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-vercel-forwarded-for': '198.51.100.245',
+            cookie: `${vidCookie}; ${adminCookie}`,
+          },
+          body: JSON.stringify({ username: 'Yahia Naim', password: 'yahia-secret-pass', mode: 'signup' }),
+        })
+      )
+      const claimBody = (await claimRes.json()) as Record<string, unknown> & {
+        user?: { username: string; displayName: string }
+      }
+      const claimCookies = claimRes.headers.get('set-cookie') || ''
+      const yahiaUserCookie = (claimCookies.match(/aihunt_user=[^;]+/) || [''])[0]
+
+      // Duplicate signup for yahianaim MUST NOT overwrite existing password (returns 409)
+      const overwriteAttempt = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-vercel-forwarded-for': '198.51.100.245',
+            cookie: adminCookie,
+          },
+          body: JSON.stringify({ username: 'Yahia Naim', password: 'new-password-hack', mode: 'signup' }),
+        })
+      )
+
+      // /api/auth/me preserves displayName "Yahia Naim" and normalized username "yahianaim"
+      const meRes = await userMeGet(
+        new Request('http://localhost/api/auth/me', { headers: { cookie: yahiaUserCookie } })
+      )
+      const meBody = (await meRes.json()) as Record<string, unknown> & {
+        user?: { username: string; displayName: string }
+      }
+
+      // Admin endpoint still requires aihunt_admin (aihunt_user alone is 401; aihunt_admin is 200)
+      const adminLockUserOnly = await chatLockGet(
+        new NextRequest('http://localhost/api/admin/chat-lock', {
+          headers: { cookie: yahiaUserCookie },
+        })
+      )
+      const adminLockWithAdmin = await chatLockGet(
+        new NextRequest('http://localhost/api/admin/chat-lock', {
+          headers: { cookie: `${yahiaUserCookie}; ${adminCookie}` },
+        })
+      )
+
+      check(
+        'legacy-auth: "Yahia Naim" normalizes to yahianaim, preserves displayName, blocks overwrite, keeps admin separate',
+        claimRes.status === 200 &&
+          claimBody.user?.username === 'yahianaim' &&
+          claimBody.user?.displayName === 'Yahia Naim' &&
+          !('passwordHash' in claimBody) &&
+          !('salt' in claimBody) &&
+          overwriteAttempt.status === 409 &&
+          meBody.user?.username === 'yahianaim' &&
+          meBody.user?.displayName === 'Yahia Naim' &&
+          adminLockUserOnly.status === 401 &&
+          adminLockWithAdmin.status === 200,
+        {
+          claimStatus: claimRes.status,
+          claimBody,
+          overwriteStatus: overwriteAttempt.status,
+          meBody,
+          adminLockUserOnly: adminLockUserOnly.status,
+          adminLockWithAdmin: adminLockWithAdmin.status,
+        }
       )
     } finally {
       __resetLocalQuotaStoreForTests()

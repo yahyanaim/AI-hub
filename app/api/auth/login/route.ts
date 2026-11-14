@@ -1,6 +1,7 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { getAdminFromRequest } from '@/lib/server/auth'
 import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
-import { authenticateUser, registerUser } from '@/lib/server/user-auth'
+import { authenticateUser, normalizeUsername, registerUser } from '@/lib/server/user-auth'
 import { attachUserCookie, UserSessionSecretError } from '@/lib/server/user-session'
 import {
   attachVisitorCookie,
@@ -14,7 +15,7 @@ const NO_STORE_HEADERS = { 'Cache-Control': 'no-store' }
 const MAX_AUTH_ATTEMPTS_PER_HOUR = 20
 const MAX_SIGNUPS_PER_IP_PER_DAY = 5
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   let body: { username?: unknown; password?: unknown; mode?: unknown } | null = null
   try {
     body = (await req.json()) as { username?: unknown; password?: unknown; mode?: unknown }
@@ -56,18 +57,19 @@ export async function POST(req: Request) {
     }
   }
 
-  // Always derive the physical device hash from the browser's `aihunt_vid`
-  // token so one device cannot create multiple accounts.
   const physicalDeviceHash = hmacIdentifier('dev', identity.rawDeviceId)
+  const admin =
+    mode === 'signup' && req.cookies ? await getAdminFromRequest(req) : null
+  const bypassDeviceLimit = Boolean(admin && normalizeUsername(username) === 'yahianaim')
 
   const result =
     mode === 'signup'
-      ? await registerUser(username, password, physicalDeviceHash)
+      ? await registerUser(username, password, physicalDeviceHash, { bypassDeviceLimit })
       : await authenticateUser(username, password)
 
   if (!result.ok) {
     const errRes = NextResponse.json(
-      { error: result.error },
+      result.code ? { error: result.error, code: result.code } : { error: result.error },
       { status: result.status, headers: NO_STORE_HEADERS }
     )
     attachVisitorCookie(errRes, identity)

@@ -62,14 +62,21 @@ export function AuthModal() {
         body: JSON.stringify({ username: name.trim(), password, mode }),
       })
       const data = (await res.json().catch(() => ({}))) as {
-        user?: { username: string }
+        user?: { username: string; displayName?: string }
         error?: string
+        code?: string
       }
       if (!res.ok || !data.user?.username) {
+        if (data.code === 'account-not-migrated') {
+          setMode('signup')
+        }
         setNameError(data.error || 'Authentication failed.')
         return
       }
-      signIn(data.user.username, { skipSignupPing: true })
+      signIn(data.user.username, {
+        skipSignupPing: true,
+        displayName: data.user.displayName,
+      })
       window.dispatchEvent(new Event('aihunt-auth-changed'))
       setAuthModalOpen(false)
       setTimeout(() => resolvePendingAction(), 0)

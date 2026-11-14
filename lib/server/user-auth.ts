@@ -50,12 +50,13 @@ function verifyPassword(password: string, salt: string, expectedHex: string): bo
 
 export type AuthUserResult =
   | { ok: true; user: { username: string; displayName: string } }
-  | { ok: false; status: number; error: string }
+  | { ok: false; status: number; error: string; code?: string }
 
 export async function registerUser(
   rawUsername: string,
   password: string,
-  deviceHash?: string
+  deviceHash?: string,
+  options?: { bypassDeviceLimit?: boolean }
 ): Promise<AuthUserResult> {
   const v = validateCredentials(rawUsername, password)
   if (!v.ok) return { ok: false, status: 400, error: v.error }
@@ -77,7 +78,7 @@ export async function registerUser(
         error: 'Authentication service temporarily unavailable.',
       }
     }
-    if (deviceHash && memDeviceAccounts.has(deviceHash)) {
+    if (deviceHash && !options?.bypassDeviceLimit && memDeviceAccounts.has(deviceHash)) {
       return {
         ok: false,
         status: 409,
@@ -92,11 +93,11 @@ export async function registerUser(
       }
     }
     memUsers.set(v.username, record)
-    if (deviceHash) memDeviceAccounts.set(deviceHash, v.username)
+    if (deviceHash && !options?.bypassDeviceLimit) memDeviceAccounts.set(deviceHash, v.username)
     return { ok: true, user: { username: record.username, displayName: record.displayName } }
   }
 
-  if (deviceHash) {
+  if (deviceHash && !options?.bypassDeviceLimit) {
     const existingDevice = await redisCommandResult<string>([
       'get',
       `${DEVICE_ACCOUNT_PREFIX}${deviceHash}`,
@@ -130,7 +131,7 @@ export async function registerUser(
     }
   }
 
-  if (deviceHash) {
+  if (deviceHash && !options?.bypassDeviceLimit) {
     const claim = await redisCommandResult<string>([
       'set',
       `${DEVICE_ACCOUNT_PREFIX}${deviceHash}`,
@@ -187,11 +188,38 @@ export async function authenticateUser(
     }
   }
 
-  if (!record || !verifyPassword(password, record.salt, record.passwordHash)) {
+  if (!record) {
+    return {
+      ok: false,
+      status: 404,
+      code: 'account-not-migrated',
+      error: 'No password set for this account yet. Switch to "Create account" to set your password.',
+    }
+  }
+
+  if (!verifyPassword(password, record.salt, record.passwordHash)) {
     return { ok: false, status: 401, error: 'Invalid username or password.' }
   }
 
   return { ok: true, user: { username: record.username, displayName: record.displayName } }
+}
+
+export async function getStoredUserDisplayName(username: string): Promise<string | null> {
+  const clean = normalizeUsername(username)
+  if (!clean) return null
+  if (!isRedisConfigured()) {
+    return memUsers.get(clean)?.displayName ?? null
+  }
+  const res = await redisCommandResult<string>(['get', `${USER_KEY_PREFIX}${clean}`])
+  if (!res.ok || !res.result) return null
+  try {
+    const parsed = JSON.parse(res.result) as Partial<StoredUser>
+    return typeof parsed.displayName === 'string' && parsed.displayName.trim()
+      ? parsed.displayName.trim()
+      : null
+  } catch {
+    return null
+  }
 }
 
 export function __resetMemUsersForTests() {

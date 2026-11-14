@@ -1,11 +1,24 @@
 import { NextResponse } from 'next/server'
+import { getStoredUserDisplayName } from '@/lib/server/user-auth'
 import { getUserSessionFromRequest, UserSessionSecretError } from '@/lib/server/user-session'
 
 export async function GET(req: Request) {
   try {
     const session = getUserSessionFromRequest(req)
+    if (!session) {
+      return NextResponse.json(
+        { user: null },
+        { headers: { 'Cache-Control': 'no-store' } }
+      )
+    }
+    const displayName = await getStoredUserDisplayName(session.username)
     return NextResponse.json(
-      { user: session ? { username: session.username } : null },
+      {
+        user: {
+          username: session.username,
+          displayName: displayName ?? session.username,
+        },
+      },
       { headers: { 'Cache-Control': 'no-store' } }
     )
   } catch (err) {
