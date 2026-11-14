@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(
       {
         error:
-          'Admin authentication required. Please sign in via Admin login on /profile/yahianaim first.',
+          'Admin authentication required. Please sign in via Admin login at /admin/login first.',
       },
       { status: 401, headers: NO_STORE_HEADERS }
     )
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error:
-          'Admin authentication required. Please sign in via Admin login on /profile/yahianaim first.',
+          'Admin authentication required. Please sign in via Admin login at /admin/login first.',
       },
       { status: 401, headers: NO_STORE_HEADERS }
     )

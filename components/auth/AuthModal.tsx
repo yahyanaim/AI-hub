@@ -74,7 +74,7 @@ export function AuthModal() {
         const baseError = data.error || 'Authentication failed.'
         if (res.status === 409 && normalizedAttempt === 'yahianaim') {
           setNameError(
-            `${baseError} If you are the admin without a password, sign in as Admin on /profile/yahianaim to use one-time recovery.`
+            `${baseError} If you are the admin without a password, sign in via /admin/login to use one-time recovery.`
           )
         } else {
           setNameError(baseError)

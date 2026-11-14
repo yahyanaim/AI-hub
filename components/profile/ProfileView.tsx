@@ -218,10 +218,7 @@ export function ProfileView({ username }: { username: string }) {
               </span>
             )}
             {user.username.toLowerCase() === 'yahianaim' && (
-              <AdminBadge
-                username={user.username}
-                canSee
-              />
+              <AdminBadge username={user.username} />
             )}
           </div>
           <p className="mt-0.5 flex items-center gap-1.5 text-sm text-muted-foreground">

@@ -5,9 +5,11 @@
 
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { SignJWT } from 'jose'
 import { NextRequest } from 'next/server'
 import { GET as chatLockGet, POST as chatLockPost } from '../app/api/admin/chat-lock/route'
 import { GET as recoverGet, POST as recoverPost } from '../app/api/admin/recover-account/route'
+import { GET as adminSessionGet } from '../app/api/admin/session/route'
 import { GET as signupsGet } from '../app/api/admin/signups/route'
 import { POST as userLoginPost } from '../app/api/auth/login/route'
 import { POST as userLogoutPost } from '../app/api/auth/logout/route'
@@ -1525,6 +1527,112 @@ async function run() {
           unauthStatuses: [sRes.status, lRes.status, rGetRes.status, rPostRes.status],
           authStatuses: [sAuth.status, lAuth.status, rAuth.status],
           rAuthBody,
+        }
+      )
+    } finally {
+      __resetLocalQuotaStoreForTests()
+      __resetMemUsersForTests()
+      if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuthSecret
+    }
+  }
+
+  // 53. Private Admin UI: /api/admin/session rejects guests, ordinary/yahianaim user cookies, and expired admin JWTs
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetMemUsersForTests()
+    const prevAuthSecret = process.env.AUTH_SECRET
+    const testSecret = 'test-auth-secret-private-admin-53-min-32'
+    process.env.AUTH_SECRET = testSecret
+    try {
+      const adminBadgeSrc = readFileSync(
+        join(process.cwd(), 'components/profile/AdminBadge.tsx'),
+        'utf8'
+      )
+      const hasNoUnauthAdminButton =
+        !adminBadgeSrc.includes("status === 'auth'") &&
+        !adminBadgeSrc.includes('title="Admin login"') &&
+        adminBadgeSrc.includes("status === 'unauth'")
+
+      // 1. Unauthenticated guest
+      const guestSession = await adminSessionGet(
+        new NextRequest('http://localhost/api/admin/session')
+      )
+      const guestBody = (await guestSession.json()) as { authenticated?: boolean }
+
+      // 2. Ordinary user & user with username yahianaim (no aihunt_admin cookie)
+      const userSignup = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.95' },
+          body: JSON.stringify({ username: 'Yahia Naim', password: 'UserOnlyPass1!', mode: 'signup' }),
+        })
+      )
+      const userCookie =
+        (userSignup.headers.get('set-cookie') || '').match(/aihunt_user=[^;]+/)?.[0] ?? ''
+      const userSession = await adminSessionGet(
+        new NextRequest('http://localhost/api/admin/session', {
+          headers: { cookie: userCookie },
+        })
+      )
+      const userSessionBody = (await userSession.json()) as { authenticated?: boolean }
+      const userRecoverRes = await recoverGet(
+        new NextRequest('http://localhost/api/admin/recover-account', {
+          headers: { cookie: userCookie },
+        })
+      )
+
+      // 3. Valid authenticated Admin
+      const adminJwt = await signAdminJwt()
+      const adminCookie = `${ADMIN_COOKIE}=${adminJwt}`
+      const adminSession = await adminSessionGet(
+        new NextRequest('http://localhost/api/admin/session', {
+          headers: { cookie: adminCookie },
+        })
+      )
+      const adminSessionBody = (await adminSession.json()) as { authenticated?: boolean }
+
+      // 4. Expired Admin JWT
+      const expiredJwt = await new SignJWT({ role: 'admin', name: 'Yahia Naim' })
+        .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+        .setSubject('yahia-naim')
+        .setIssuedAt(Math.floor(Date.now() / 1000) - 3600)
+        .setExpirationTime(Math.floor(Date.now() / 1000) - 60)
+        .sign(new TextEncoder().encode(testSecret))
+      const expiredCookie = `${ADMIN_COOKIE}=${expiredJwt}`
+      const expiredSession = await adminSessionGet(
+        new NextRequest('http://localhost/api/admin/session', {
+          headers: { cookie: expiredCookie },
+        })
+      )
+      const expiredBody = (await expiredSession.json()) as { authenticated?: boolean }
+      const expiredRecover = await recoverGet(
+        new NextRequest('http://localhost/api/admin/recover-account', {
+          headers: { cookie: expiredCookie },
+        })
+      )
+
+      check(
+        'private-admin-ui: no unauth Admin button, session false for guest/user/expired, true for valid admin',
+        hasNoUnauthAdminButton &&
+          guestSession.status === 200 &&
+          guestBody.authenticated === false &&
+          userSession.status === 200 &&
+          userSessionBody.authenticated === false &&
+          userRecoverRes.status === 401 &&
+          adminSession.status === 200 &&
+          adminSessionBody.authenticated === true &&
+          expiredSession.status === 200 &&
+          expiredBody.authenticated === false &&
+          expiredRecover.status === 401,
+        {
+          hasNoUnauthAdminButton,
+          guestBody,
+          userSessionBody,
+          userRecoverStatus: userRecoverRes.status,
+          adminSessionBody,
+          expiredBody,
+          expiredRecoverStatus: expiredRecover.status,
         }
       )
     } finally {
