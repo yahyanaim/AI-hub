@@ -3,6 +3,7 @@ import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto'
 import { isFailClosedMode, isRedisConfigured, redisCommandResult, SIGNUP_COUNT_KEY } from '@/lib/server/redis'
 
 const USER_KEY_PREFIX = 'aihunt:user:'
+const DEVICE_ACCOUNT_PREFIX = 'aihunt:device:acct:'
 
 type StoredUser = {
   username: string
@@ -13,6 +14,7 @@ type StoredUser = {
 }
 
 const memUsers = new Map<string, StoredUser>()
+const memDeviceAccounts = new Map<string, string>()
 
 export function normalizeUsername(raw: string): string {
   return raw.trim().toLowerCase().replace(/[^a-z0-9_]/g, '')
@@ -52,7 +54,8 @@ export type AuthUserResult =
 
 export async function registerUser(
   rawUsername: string,
-  password: string
+  password: string,
+  deviceHash?: string
 ): Promise<AuthUserResult> {
   const v = validateCredentials(rawUsername, password)
   if (!v.ok) return { ok: false, status: 400, error: v.error }
@@ -74,6 +77,13 @@ export async function registerUser(
         error: 'Authentication service temporarily unavailable.',
       }
     }
+    if (deviceHash && memDeviceAccounts.has(deviceHash)) {
+      return {
+        ok: false,
+        status: 409,
+        error: 'Only one account can be created per device. Please sign in to your existing account.',
+      }
+    }
     if (memUsers.has(v.username)) {
       return {
         ok: false,
@@ -82,7 +92,25 @@ export async function registerUser(
       }
     }
     memUsers.set(v.username, record)
+    if (deviceHash) memDeviceAccounts.set(deviceHash, v.username)
     return { ok: true, user: { username: record.username, displayName: record.displayName } }
+  }
+
+  if (deviceHash) {
+    const existingDevice = await redisCommandResult<string>([
+      'get',
+      `${DEVICE_ACCOUNT_PREFIX}${deviceHash}`,
+    ])
+    if (!existingDevice.ok) {
+      return { ok: false, status: 503, error: 'Authentication service temporarily unavailable.' }
+    }
+    if (existingDevice.result) {
+      return {
+        ok: false,
+        status: 409,
+        error: 'Only one account can be created per device. Please sign in to your existing account.',
+      }
+    }
   }
 
   const res = await redisCommandResult<string>([
@@ -101,6 +129,27 @@ export async function registerUser(
       error: 'Username already exists. Please sign in instead.',
     }
   }
+
+  if (deviceHash) {
+    const claim = await redisCommandResult<string>([
+      'set',
+      `${DEVICE_ACCOUNT_PREFIX}${deviceHash}`,
+      v.username,
+      'NX',
+    ])
+    if (!claim.ok || claim.result !== 'OK') {
+      await redisCommandResult(['del', `${USER_KEY_PREFIX}${v.username}`]).catch(() => {})
+      if (!claim.ok) {
+        return { ok: false, status: 503, error: 'Authentication service temporarily unavailable.' }
+      }
+      return {
+        ok: false,
+        status: 409,
+        error: 'Only one account can be created per device. Please sign in to your existing account.',
+      }
+    }
+  }
+
   // Keep the admin signup counter accurate for every real new account
   // regardless of whether signup happened via AuthModal or /chat.
   await redisCommandResult(['incr', SIGNUP_COUNT_KEY]).catch(() => {})
@@ -147,4 +196,5 @@ export async function authenticateUser(
 
 export function __resetMemUsersForTests() {
   memUsers.clear()
+  memDeviceAccounts.clear()
 }

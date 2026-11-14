@@ -2,9 +2,17 @@ import { NextResponse } from 'next/server'
 import { checkRateLimit, getClientIp } from '@/lib/server/rate-limit'
 import { authenticateUser, registerUser } from '@/lib/server/user-auth'
 import { attachUserCookie, UserSessionSecretError } from '@/lib/server/user-session'
+import {
+  attachVisitorCookie,
+  hmacIdentifier,
+  resolveVisitorIdentity,
+  VisitorSecretError,
+  type VisitorIdentity,
+} from '@/lib/server/visitor'
 
 const NO_STORE_HEADERS = { 'Cache-Control': 'no-store' }
 const MAX_AUTH_ATTEMPTS_PER_HOUR = 20
+const MAX_SIGNUPS_PER_IP_PER_DAY = 5
 
 export async function POST(req: Request) {
   let body: { username?: unknown; password?: unknown; mode?: unknown } | null = null
@@ -26,20 +34,49 @@ export async function POST(req: Request) {
     )
   }
 
+  let identity: VisitorIdentity
+  try {
+    identity = resolveVisitorIdentity(req)
+  } catch (err) {
+    if (err instanceof VisitorSecretError) {
+      return NextResponse.json(
+        { error: 'Authentication service temporarily unavailable.' },
+        { status: 503, headers: NO_STORE_HEADERS }
+      )
+    }
+    throw err
+  }
+
+  if (mode === 'signup') {
+    if (await checkRateLimit('usersignup', ip, MAX_SIGNUPS_PER_IP_PER_DAY, 60 * 60 * 24)) {
+      return NextResponse.json(
+        { error: 'Too many accounts created from this network. Please sign in to your existing account.' },
+        { status: 429, headers: NO_STORE_HEADERS }
+      )
+    }
+  }
+
+  // Always derive the physical device hash from the browser's `aihunt_vid`
+  // token so one device cannot create multiple accounts.
+  const physicalDeviceHash = hmacIdentifier('dev', identity.rawDeviceId)
+
   const result =
     mode === 'signup'
-      ? await registerUser(username, password)
+      ? await registerUser(username, password, physicalDeviceHash)
       : await authenticateUser(username, password)
 
   if (!result.ok) {
-    return NextResponse.json(
+    const errRes = NextResponse.json(
       { error: result.error },
       { status: result.status, headers: NO_STORE_HEADERS }
     )
+    attachVisitorCookie(errRes, identity)
+    return errRes
   }
 
   try {
     const res = NextResponse.json({ ok: true, user: result.user }, { headers: NO_STORE_HEADERS })
+    attachVisitorCookie(res, identity)
     attachUserCookie(res, result.user.username)
     return res
   } catch (err) {

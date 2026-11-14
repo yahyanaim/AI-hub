@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { redisCommand, redisPipeline, isRedisConfigured } from '@/lib/server/redis'
+import { redisPipeline, isRedisConfigured } from '@/lib/server/redis'
+import { getClientIp } from '@/lib/server/visitor'
 
 /**
  * Signup counter endpoint. Called fire-and-forget by the client when a new
@@ -12,10 +13,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, reason: 'redis-not-configured' }, { status: 200 })
   }
 
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    req.headers.get('x-real-ip')?.trim() ||
-    'unknown'
+  const ip = getClientIp(req)
   const rlKey = `aihunt:rl:signup:${ip}`
 
   // SET ... NX EX — first call within the window counts, repeats are ignored.

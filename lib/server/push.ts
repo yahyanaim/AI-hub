@@ -37,6 +37,32 @@ export function getVapidPublicKey(): string | null {
   return process.env.VAPID_PUBLIC_KEY || null
 }
 
+function isAllowedPushEndpoint(raw: string): boolean {
+  let url: URL
+  try {
+    url = new URL(raw)
+  } catch {
+    return false
+  }
+  if (url.protocol !== 'https:' || url.port) return false
+  const host = url.hostname.toLowerCase()
+  if (
+    host === 'localhost' ||
+    /^\d+\.\d+\.\d+\.\d+$/.test(host) ||
+    host.includes(':')
+  ) {
+    return false
+  }
+  return (
+    host === 'fcm.googleapis.com' ||
+    host === 'android.googleapis.com' ||
+    host === 'web.push.apple.com' ||
+    host.endsWith('.push.apple.com') ||
+    host.endsWith('.push.services.mozilla.com') ||
+    host.endsWith('.notify.windows.com')
+  )
+}
+
 /** Validates the shape of a browser PushSubscription and stores it. */
 export async function saveSubscription(
   raw: unknown,
@@ -52,7 +78,7 @@ export async function saveSubscription(
   const auth = sub?.keys?.auth
   if (
     typeof endpoint !== 'string' ||
-    !/^https:\/\//.test(endpoint) ||
+    !isAllowedPushEndpoint(endpoint) ||
     typeof p256dh !== 'string' ||
     typeof auth !== 'string'
   ) {

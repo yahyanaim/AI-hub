@@ -1054,7 +1054,22 @@ async function run() {
           body: JSON.stringify({ username: 'cross_user', password: 'password123', mode: 'signup' }),
         })
       )
-      const userCookie = extractCookieValue(signupRes.headers.get('set-cookie'))
+      const allSetCookies = signupRes.headers.get('set-cookie') || ''
+      const userMatch = allSetCookies.match(/aihunt_user=[^;]+/)
+      const userCookie = userMatch ? userMatch[0] : ''
+      const vidMatch = allSetCookies.match(/aihunt_vid=[^;]+/)
+      const vidCookie = vidMatch ? vidMatch[0] : ''
+      const sameDeviceSecondAccount = await userLoginPost(
+        new Request('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-vercel-forwarded-for': '198.51.100.240',
+            cookie: vidCookie,
+          },
+          body: JSON.stringify({ username: 'cross_user_2', password: 'password123', mode: 'signup' }),
+        })
+      )
       const dupSignup = await userLoginPost(
         new Request('http://localhost/api/auth/login', {
           method: 'POST',
@@ -1074,13 +1089,21 @@ async function run() {
       )
       const meBody = (await meRes.json()) as { user?: { username: string } | null }
       check(
-        'user-auth: signup, duplicate 409, wrong password 401, and /api/auth/me',
+        'user-auth: signup, 1-account-per-device 409, duplicate 409, wrong password 401, and /api/auth/me',
         signupRes.status === 200 &&
-          userCookie.startsWith('aihunt_user=') &&
+          allSetCookies.includes('aihunt_user=') &&
+          vidCookie.startsWith('aihunt_vid=') &&
+          sameDeviceSecondAccount.status === 409 &&
           dupSignup.status === 409 &&
           wrongPass.status === 401 &&
           meBody.user?.username === 'cross_user',
-        { signup: signupRes.status, dup: dupSignup.status, wrong: wrongPass.status, meBody }
+        {
+          signup: signupRes.status,
+          sameDevice: sameDeviceSecondAccount.status,
+          dup: dupSignup.status,
+          wrong: wrongPass.status,
+          meBody,
+        }
       )
 
       // Browser A (IP 198.51.100.241) uploads 1 CV -> remaining=2
@@ -1111,7 +1134,8 @@ async function run() {
           body: JSON.stringify({ username: 'cross_user', password: 'password123', mode: 'login' }),
         })
       )
-      const cookieB2 = extractCookieValue(loginB2.headers.get('set-cookie'))
+      const cookieB2Match = (loginB2.headers.get('set-cookie') || '').match(/aihunt_user=[^;]+/)
+      const cookieB2 = cookieB2Match ? cookieB2Match[0] : ''
       const b2Status = await cvGet(
         new Request('http://localhost/api/chat/cv', {
           headers: { 'x-vercel-forwarded-for': '198.51.100.242', cookie: cookieB2 },
