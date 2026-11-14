@@ -1080,16 +1080,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [])
 
   // Keep client store synced with the server-side HttpOnly session cookie (aihunt_user).
+  // If no valid server cookie exists, clear any legacy local-only currentUserId so
+  // users are prompted to sign in with their password and sync cross-device quotas.
   useEffect(() => {
     let alive = true
     fetch('/api/auth/me', { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
       .then((d: { user?: { username?: string } | null } | null) => {
-        if (!alive || !d?.user?.username) return
-        const serverUser = d.user.username.toLowerCase()
-        const cur = stateRef.current.users.find((u) => u.id === stateRef.current.currentUserId)
-        if (!cur || cur.username.toLowerCase() !== serverUser) {
-          signIn(serverUser, { skipSignupPing: true })
+        if (!alive || !d) return
+        if (d.user?.username) {
+          const serverUser = d.user.username.toLowerCase()
+          const cur = stateRef.current.users.find((u) => u.id === stateRef.current.currentUserId)
+          if (!cur || cur.username.toLowerCase() !== serverUser) {
+            signIn(serverUser, { skipSignupPing: true })
+          }
+        } else if (stateRef.current.currentUserId) {
+          try {
+            localStorage.removeItem('ai-hunt-username')
+          } catch {}
+          setState((prev) => ({ ...prev, currentUserId: null }))
         }
       })
       .catch(() => {})

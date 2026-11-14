@@ -1446,9 +1446,10 @@ export default function ChatPage() {
     setIsMobile(window.matchMedia('(max-width: 767px)').matches)
     const mobile = window.matchMedia('(max-width: 767px)').matches
     setSidebarOpen(!mobile)
+    // Pre-fill legacy username hint if present, without auto-logging in
+    // unless the server confirms a valid HttpOnly `aihunt_user` session cookie.
+    let legacyName = ''
     try {
-      // Already logged in on the site? Derive the username from the site
-      // state (currentUserId) — never re-ask for a name.
       let name = localStorage.getItem(USERNAME_KEY)
       if (!name) {
         const rawState = localStorage.getItem(STATE_KEY)
@@ -1464,15 +1465,15 @@ export default function ChatPage() {
           if (typeof cu?.username === 'string') name = cu.username
         }
       }
-      if (name && name.length >= 2) signIn(name)
+      if (name && name.length >= 2) legacyName = name
     } catch {}
     // Prefill from the widget handoff: /chat?q=<question>
     try {
       const q = new URLSearchParams(window.location.search).get('q')
       if (q) setInput(q)
     } catch {}
-    // Check server-side HttpOnly session cookie (aihunt_user) so cross-browser
-    // accounts stay signed in and synced with their Redis quota.
+    // Require server-side HttpOnly session cookie (aihunt_user) so cross-browser
+    // and cross-device accounts stay genuinely signed in and synced with Redis quota.
     let alive = true
     fetch('/api/auth/me', { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
@@ -1480,6 +1481,11 @@ export default function ChatPage() {
         if (!alive) return
         if (d?.user?.username) {
           signIn(d.user.username)
+        } else {
+          try {
+            localStorage.removeItem(USERNAME_KEY)
+          } catch {}
+          if (legacyName) setSignupName(legacyName)
         }
       })
       .catch(() => {})
