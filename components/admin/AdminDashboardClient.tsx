@@ -9,12 +9,14 @@ import {
   Bot,
   Calendar,
   CheckCircle2,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Cpu,
   Database,
   FileText,
   FolderKanban,
+  Info,
   KeyRound,
   LayoutDashboard,
   Lock,
@@ -22,14 +24,14 @@ import {
   Megaphone,
   Menu,
   MessageSquare,
-  PanelLeftClose,
-  PanelLeftOpen,
+  Moon,
   RefreshCw,
   Search,
   Server,
   Settings,
   ShieldAlert,
   ShieldCheck,
+  Sun,
   Target,
   TrendingUp,
   Unlock,
@@ -48,17 +50,29 @@ import type {
 const NAV_ITEMS: Array<{
   id: AdminSectionId
   label: string
+  group: 'Overview' | 'Users' | 'Operations' | 'Security'
+  subtitle: string
   icon: typeof LayoutDashboard
 }> = [
-  { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-  { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-  { id: 'users', label: 'Users', icon: Users },
-  { id: 'ai-usage', label: 'AI Usage', icon: Cpu },
-  { id: 'cv-quotas', label: 'CV Quotas', icon: FileText },
-  { id: 'content', label: 'Content', icon: FolderKanban },
-  { id: 'infrastructure', label: 'Infrastructure & Costs', icon: Server },
-  { id: 'security', label: 'Security', icon: ShieldAlert },
-  { id: 'settings', label: 'Settings', icon: Settings },
+  { id: 'overview', label: 'Overview', group: 'Overview', subtitle: 'Executive summary of registrations, active users, AI usage, and platform health.', icon: LayoutDashboard },
+  { id: 'analytics', label: 'Analytics', group: 'Overview', subtitle: 'Daily active actors (DAU/WAU/MAU), signups, and endpoint breakdown.', icon: BarChart3 },
+  { id: 'users', label: 'Users', group: 'Users', subtitle: 'Registered accounts, safe metadata, and monthly CV quota consumption.', icon: Users },
+  { id: 'cv-quotas', label: 'CV Quotas', group: 'Users', subtitle: 'Monthly CV upload usage, blocks, refunds, and limit distribution.', icon: FileText },
+  { id: 'ai-usage', label: 'AI Usage', group: 'Operations', subtitle: 'AI Chat and Goal Match throughput, success rates, and rejections.', icon: Cpu },
+  { id: 'content', label: 'Content', group: 'Operations', subtitle: 'Catalog counts across tools, dev tools, courses, offers, and repos.', icon: FolderKanban },
+  { id: 'infrastructure', label: 'Infrastructure & Costs', group: 'Operations', subtitle: 'Upstash Redis, AI provider health, and Vercel Pro budget guardrails.', icon: Server },
+  { id: 'security', label: 'Security', group: 'Security', subtitle: 'Rate limits (429), anti-bot blocks (403), auth failures, and protections.', icon: ShieldAlert },
+  { id: 'settings', label: 'Settings', group: 'Security', subtitle: 'Global AI chat lock, push broadcasts, and one-time account recovery.', icon: Settings },
+]
+
+const TOP_GROUPS: Array<{
+  label: 'Overview' | 'Users' | 'Operations' | 'Security'
+  defaultSection: AdminSectionId
+}> = [
+  { label: 'Overview', defaultSection: 'overview' },
+  { label: 'Users', defaultSection: 'users' },
+  { label: 'Operations', defaultSection: 'ai-usage' },
+  { label: 'Security', defaultSection: 'security' },
 ]
 
 function pctDelta(current: number, prev: number | null | undefined): string | null {
@@ -95,15 +109,15 @@ function KpiCard({
       : 'bg-secondary text-foreground'
 
   return (
-    <div className="rounded-xl border border-border bg-card p-4 transition-colors hover:border-border/80">
+    <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_1px_2px_rgba(16,24,40,0.04)] transition-colors hover:border-slate-300/90 dark:border-white/10 dark:bg-[#13161E] dark:hover:border-white/20">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-xs font-medium text-muted-foreground">{label}</p>
-          <p className="mt-1.5 font-heading text-2xl font-bold tracking-tight text-foreground tabular-nums">
+          <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</p>
+          <p className="mt-2 font-heading text-2xl font-bold tracking-tight text-slate-900 tabular-nums dark:text-white sm:text-[26px]">
             {value}
           </p>
         </div>
-        <span className={cn('inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg', iconTone)}>
+        <span className={cn('inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl', iconTone)}>
           <Icon className="h-4 w-4" />
         </span>
       </div>
@@ -112,7 +126,7 @@ function KpiCard({
           {delta && (
             <span
               className={cn(
-                'mr-1.5 inline-block rounded px-1.5 py-0.5 text-[10px] font-semibold tabular-nums',
+                'mr-1.5 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold tabular-nums',
                 delta.startsWith('+')
                   ? 'bg-emerald-500/12 text-emerald-600 dark:text-emerald-400'
                   : delta.startsWith('-')
@@ -123,7 +137,7 @@ function KpiCard({
               {delta}
             </span>
           )}
-          <span className="text-[11px] text-muted-foreground">{sub}</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400">{sub}</span>
         </div>
         {sparkline && sparkline.length >= 2 && <MiniSparkline values={sparkline} />}
       </div>
@@ -134,8 +148,22 @@ function KpiCard({
 export function AdminDashboardClient({ adminName }: { adminName: string }) {
   const router = useRouter()
   const [section, setSection] = useState<AdminSectionId>('overview')
-  const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [showHowItWorks, setShowHowItWorks] = useState(false)
+  const [isDark, setIsDark] = useState(false)
+  const [quotaFilter, setQuotaFilter] = useState<'all' | 'zero' | 'partial' | 'maxed'>('all')
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains('dark'))
+  }, [])
+
+  const applyTheme = (dark: boolean) => {
+    setIsDark(dark)
+    document.documentElement.classList.toggle('dark', dark)
+    try {
+      localStorage.setItem('theme', dark ? 'dark' : 'light')
+    } catch {}
+  }
 
   const [preset, setPreset] = useState<DateRangePreset>('30d')
   const [customFrom, setCustomFrom] = useState('')
@@ -336,7 +364,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
     }
   }, [data])
 
-  const renderSidebarNav = (isMobile = false) => (
+  const renderMobileNav = () => (
     <nav className="flex-1 space-y-1 p-3">
       {NAV_ITEMS.map((item) => {
         const Icon = item.icon
@@ -347,19 +375,17 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
             type="button"
             onClick={() => {
               setSection(item.id)
-              if (isMobile) setMobileOpen(false)
+              setMobileOpen(false)
             }}
             className={cn(
-              'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors',
+              'flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition-colors',
               active
-                ? 'bg-brand-orange/12 text-brand-orange'
-                : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
-              !isMobile && collapsed && 'justify-center px-2'
+                ? 'bg-brand-orange text-white shadow-sm'
+                : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white'
             )}
-            title={!isMobile && collapsed ? item.label : undefined}
           >
             <Icon className="h-4 w-4 shrink-0" />
-            {(isMobile || !collapsed) && <span className="truncate">{item.label}</span>}
+            <span className="truncate">{item.label}</span>
           </button>
         )
       })}
@@ -367,7 +393,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
   )
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[#F5F6FA] text-slate-900 dark:bg-[#0B0D12] dark:text-slate-100">
       {/* Confirmation dialog */}
       {confirmAction && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
@@ -408,202 +434,335 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
         </div>
       )}
 
-      <div className="flex min-h-screen">
-        {/* Desktop collapsible sidebar */}
-        <aside
-          className={cn(
-            'hidden shrink-0 flex-col border-r border-border bg-card transition-all duration-200 lg:flex',
-            collapsed ? 'w-[68px]' : 'w-60'
-          )}
+      {/* Top Floating Header Bar */}
+      <header className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 pt-4 sm:px-6">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200/80 bg-white text-slate-700 shadow-sm lg:hidden dark:border-white/10 dark:bg-[#13161E] dark:text-slate-200"
+            aria-label="Open navigation"
+          >
+            <Menu className="h-4 w-4" />
+          </button>
+          <div className="flex items-center gap-2.5">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-orange text-white shadow-sm shadow-brand-orange/25">
+              <ShieldCheck className="h-4.5 w-4.5" />
+            </span>
+            <span className="font-heading text-base font-bold tracking-tight text-slate-900 dark:text-white">
+              AIhubtools
+            </span>
+          </div>
+        </div>
+
+        {/* Center Top-Level Pill Navigation */}
+        <nav
+          aria-label="Admin workspace sections"
+          className="hidden items-center gap-1 rounded-full border border-slate-200/80 bg-white p-1 shadow-[0_1px_2px_rgba(16,24,40,0.04)] md:inline-flex dark:border-white/10 dark:bg-[#13161E]"
         >
-          <div className="flex h-14 items-center justify-between border-b border-border px-3">
-            {!collapsed && (
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-brand-orange text-white">
-                  <ShieldCheck className="h-4 w-4" />
-                </span>
-                <span className="font-heading text-sm font-bold tracking-tight">AIhubtools Admin</span>
-              </div>
-            )}
+          {TOP_GROUPS.map((g) => {
+            const isActiveGroup = activeNav.group === g.label
+            return (
+              <button
+                key={g.label}
+                type="button"
+                onClick={() => setSection(g.defaultSection)}
+                className={cn(
+                  'rounded-full px-4 py-1.5 text-xs font-semibold transition-all',
+                  isActiveGroup
+                    ? 'bg-brand-orange text-white shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                )}
+              >
+                {g.label}
+              </button>
+            )
+          })}
+        </nav>
+
+        {/* Right Floating Utility Pill */}
+        <div className="flex items-center gap-2">
+          <div className="inline-flex items-center gap-1 rounded-full border border-slate-200/80 bg-white p-1 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
             <button
               type="button"
-              onClick={() => setCollapsed((c) => !c)}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground"
-              aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+              onClick={() => void fetchDashboard({ silent: true })}
+              disabled={refreshing}
+              title="Refresh metrics"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 disabled:opacity-50 dark:text-slate-300 dark:hover:bg-white/10"
             >
-              {collapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
+              <RefreshCw className={cn('h-4 w-4', refreshing && 'animate-spin')} />
             </button>
-          </div>
-          {renderSidebarNav(false)}
-          <div className="border-t border-border p-3">
             <button
               type="button"
-              onClick={handleLogout}
-              className={cn(
-                'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400',
-                collapsed && 'justify-center px-2'
-              )}
-              title="Log out"
+              onClick={() => setSection('users')}
+              title="Search users"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10"
             >
-              <LogOut className="h-4 w-4 shrink-0" />
-              {!collapsed && <span>Log out</span>}
+              <Search className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setSection('security')}
+              title="Security alerts"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/10"
+            >
+              <ShieldAlert className="h-4 w-4" />
             </button>
           </div>
-        </aside>
-
-        {/* Mobile drawer */}
-        {mobileOpen && (
-          <div className="fixed inset-0 z-50 flex lg:hidden">
-            <div className="fixed inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
-            <aside className="relative z-10 flex w-64 flex-col border-r border-border bg-card">
-              <div className="flex h-14 items-center justify-between border-b border-border px-4">
-                <span className="font-heading text-sm font-bold">AIhubtools Admin</span>
-                <button
-                  type="button"
-                  onClick={() => setMobileOpen(false)}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-secondary"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-              {renderSidebarNav(true)}
-              <div className="border-t border-border p-3">
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-rose-600 hover:bg-rose-500/10 dark:text-rose-400"
-                >
-                  <LogOut className="h-4 w-4" />
-                  Log out
-                </button>
-              </div>
-            </aside>
+          <div className="inline-flex h-10 items-center gap-2 rounded-full border border-slate-200/80 bg-white pl-1.5 pr-3.5 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-orange/15 text-xs font-bold text-brand-orange">
+              {adminName.slice(0, 1).toUpperCase()}
+            </span>
+            <span className="hidden text-xs font-semibold text-slate-700 sm:inline dark:text-slate-200">
+              {adminName}
+            </span>
           </div>
-        )}
+        </div>
+      </header>
 
-        {/* Main content column */}
-        <div className="flex min-w-0 flex-1 flex-col">
-          {/* Top navigation */}
-          <header className="sticky top-0 z-30 flex flex-wrap items-center justify-between gap-3 border-b border-border bg-card/90 px-4 py-3 backdrop-blur-md md:px-6">
-            <div className="flex items-center gap-3">
+      {/* Mobile Drawer */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 flex lg:hidden">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
+          <aside className="relative z-10 flex w-72 flex-col border-r border-slate-200 bg-white dark:border-white/10 dark:bg-[#13161E]">
+            <div className="flex h-14 items-center justify-between border-b border-slate-200 px-4 dark:border-white/10">
+              <span className="font-heading text-sm font-bold">AIhubtools Admin</span>
               <button
                 type="button"
-                onClick={() => setMobileOpen(true)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border text-foreground lg:hidden"
-                aria-label="Open navigation"
+                onClick={() => setMobileOpen(false)}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10"
               >
-                <Menu className="h-4 w-4" />
+                <X className="h-4 w-4" />
               </button>
-              <div>
-                <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                  <span>Admin</span>
-                  <span>/</span>
-                  <span className="text-foreground">{activeNav.label}</span>
-                </div>
-                <h1 className="font-heading text-lg font-bold leading-tight">{activeNav.label}</h1>
-              </div>
+            </div>
+            {renderMobileNav()}
+            <div className="flex items-center justify-between border-t border-slate-200 p-3 dark:border-white/10">
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="flex flex-1 items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-rose-600 hover:bg-rose-500/10 dark:text-rose-400"
+              >
+                <LogOut className="h-4 w-4" />
+                Log out
+              </button>
+              <button
+                type="button"
+                onClick={() => applyTheme(!isDark)}
+                className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 dark:border-white/10 dark:text-slate-300"
+                aria-label="Toggle theme"
+              >
+                {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
+
+      {/* Main Layout: Left Floating Icon Rail + Content Workspace */}
+      <div className="mx-auto flex w-full max-w-[1440px] gap-5 px-4 py-5 sm:px-6">
+        {/* Left Floating Vertical Icon Rail (Nexora-style) */}
+        <aside
+          aria-label="Admin section rail"
+          className="sticky top-5 hidden h-[calc(100vh-7rem)] w-[62px] shrink-0 flex-col items-center justify-between rounded-[28px] border border-slate-200/80 bg-white py-3 shadow-[0_1px_2px_rgba(16,24,40,0.04)] lg:flex dark:border-white/10 dark:bg-[#13161E]"
+        >
+          {/* Theme Toggle Pill */}
+          <div className="flex flex-col items-center gap-1 rounded-full bg-slate-100 p-1 dark:bg-white/5">
+            <button
+              type="button"
+              onClick={() => applyTheme(false)}
+              title="Light mode"
+              className={cn(
+                'inline-flex h-7 w-7 items-center justify-center rounded-full transition-colors',
+                !isDark
+                  ? 'bg-white text-slate-900 shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200'
+              )}
+            >
+              <Sun className="h-3.5 w-3.5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => applyTheme(true)}
+              title="Dark mode"
+              className={cn(
+                'inline-flex h-7 w-7 items-center justify-center rounded-full transition-colors',
+                isDark
+                  ? 'bg-slate-800 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-700'
+              )}
+            >
+              <Moon className="h-3.5 w-3.5" />
+            </button>
+          </div>
+
+          {/* Section Icons */}
+          <nav className="flex flex-col items-center gap-1.5">
+            {NAV_ITEMS.map((item) => {
+              const Icon = item.icon
+              const active = section === item.id
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setSection(item.id)}
+                  title={item.label}
+                  aria-label={item.label}
+                  className={cn(
+                    'group relative inline-flex h-10 w-10 items-center justify-center rounded-full transition-all',
+                    active
+                      ? 'bg-brand-orange text-white shadow-md shadow-brand-orange/25'
+                      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white'
+                  )}
+                >
+                  <Icon className="h-[18px] w-[18px]" />
+                  <span className="pointer-events-none absolute left-14 z-40 whitespace-nowrap rounded-lg bg-slate-900 px-2.5 py-1 text-[11px] font-medium text-white opacity-0 shadow-md transition-opacity group-hover:opacity-100 dark:bg-slate-800">
+                    {item.label}
+                  </span>
+                </button>
+              )
+            })}
+          </nav>
+
+          {/* Logout Icon */}
+          <button
+            type="button"
+            onClick={handleLogout}
+            title="Log out"
+            aria-label="Log out"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-500/10 dark:hover:text-rose-400"
+          >
+            <LogOut className="h-[18px] w-[18px]" />
+          </button>
+        </aside>
+
+        {/* Main Content Workspace */}
+        <main className="min-w-0 flex-1 space-y-5">
+          {/* Identity & Environment Strip */}
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              <ShieldCheck className="h-4 w-4 text-slate-400" />
+              <span className="font-semibold text-slate-900 dark:text-white">{adminName}</span>
+              <span className="rounded-full bg-brand-orange/12 px-2.5 py-0.5 text-[11px] font-semibold text-brand-orange">
+                Platform admin
+              </span>
+              <span className="text-slate-300 dark:text-slate-600">·</span>
+              <span className="text-slate-500 dark:text-slate-400">Environment</span>
+              <span className="rounded-full bg-emerald-500/12 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
+                Production (Upstash Redis)
+              </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <div className="inline-flex items-center rounded-lg border border-border bg-background p-0.5 text-xs">
+              <div className="inline-flex items-center rounded-full border border-slate-200/80 bg-slate-50 p-0.5 text-[11px] dark:border-white/10 dark:bg-white/5">
                 {(['today', '7d', '30d', '90d', 'custom'] as DateRangePreset[]).map((p) => (
                   <button
                     key={p}
                     type="button"
                     onClick={() => setPreset(p)}
                     className={cn(
-                      'rounded-md px-2.5 py-1 font-medium transition-colors',
+                      'rounded-full px-2.5 py-1 font-medium transition-colors',
                       preset === p
-                        ? 'bg-brand-orange text-white'
-                        : 'text-muted-foreground hover:text-foreground'
+                        ? 'bg-brand-orange text-white shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                     )}
                   >
                     {p === 'today' ? 'Today' : p === 'custom' ? 'Custom' : p.toUpperCase()}
                   </button>
                 ))}
               </div>
-
               {preset === 'custom' && (
                 <div className="flex items-center gap-1.5 text-xs">
                   <input
                     type="date"
                     value={customFrom}
                     onChange={(e) => setCustomFrom(e.target.value)}
-                    className="rounded-md border border-border bg-background px-2 py-1 text-xs"
+                    className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs dark:border-white/10 dark:bg-[#0B0D12]"
                   />
-                  <span className="text-muted-foreground">–</span>
+                  <span className="text-slate-400">–</span>
                   <input
                     type="date"
                     value={customTo}
                     onChange={(e) => setCustomTo(e.target.value)}
-                    className="rounded-md border border-border bg-background px-2 py-1 text-xs"
+                    className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs dark:border-white/10 dark:bg-[#0B0D12]"
                   />
                 </div>
               )}
-
-              <button
-                type="button"
-                onClick={() => void fetchDashboard({ silent: true })}
-                disabled={refreshing}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground hover:bg-secondary disabled:opacity-60"
-              >
-                <RefreshCw className={cn('h-3.5 w-3.5', refreshing && 'animate-spin')} />
-                Refresh
-              </button>
-
-              <span className="hidden items-center gap-1.5 rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-xs font-medium sm:inline-flex">
-                <ShieldCheck className="h-3.5 w-3.5 text-brand-orange" />
-                {adminName}
-              </span>
             </div>
-          </header>
+          </div>
 
-          {/* Body */}
-          <main className="flex-1 space-y-6 p-4 md:p-6">
-            {actionFeedback && (
-              <div
-                className={cn(
-                  'flex items-center justify-between rounded-xl border px-4 py-3 text-xs font-medium',
-                  actionFeedback.ok
-                    ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300'
-                    : 'border-rose-500/30 bg-rose-500/10 text-rose-700 dark:text-rose-300'
-                )}
-              >
-                <span>{actionFeedback.text}</span>
-                <button type="button" onClick={() => setActionFeedback(null)}>
-                  <X className="h-3.5 w-3.5" />
+          {/* Page Header Card */}
+          <div className="flex flex-wrap items-start justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_1px_2px_rgba(16,24,40,0.04)] sm:p-6 dark:border-white/10 dark:bg-[#13161E]">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                <span>{activeNav.group}</span>
+                <span>›</span>
+                <span className="font-medium text-slate-600 dark:text-slate-300">{activeNav.label}</span>
+              </div>
+              <h1 className="font-heading text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {activeNav.label}
+              </h1>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{activeNav.subtitle}</p>
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={() => setShowHowItWorks((v) => !v)}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-medium text-brand-orange transition-colors hover:bg-brand-orange/15"
+                >
+                  <Info className="h-3.5 w-3.5" />
+                  How metrics work
+                  <ChevronDown className={cn('h-3 w-3 transition-transform', showHowItWorks && 'rotate-180')} />
                 </button>
+                {showHowItWorks && data && (
+                  <p className="mt-2 max-w-2xl rounded-xl border border-slate-200/80 bg-slate-50 px-3.5 py-2.5 text-xs text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
+                    Range: <strong>{data.range.from}</strong> to <strong>{data.range.to}</strong> ({data.range.daysCount}d).{' '}
+                    {data.range.trackingStartedAt
+                      ? `Time-series tracking started on ${data.range.trackingStartedAt}; prior days are zero and never fabricated.`
+                      : 'Time-series tracking starts on first recorded event; lifetime totals reflect existing Redis data.'}
+                  </p>
+                )}
               </div>
-            )}
+            </div>
 
-            {data && (
-              <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-card/60 px-3.5 py-2 text-[11px] text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <Calendar className="h-3.5 w-3.5 text-brand-orange" />
-                  Range: <strong className="text-foreground">{data.range.from}</strong> to{' '}
-                  <strong className="text-foreground">{data.range.to}</strong> ({data.range.daysCount}d)
-                </span>
-                <span>
-                  {data.range.trackingStartedAt
-                    ? `Time-series tracking started on ${data.range.trackingStartedAt} (historical pre-tracking days are zero, never fabricated)`
-                    : 'Time-series tracking starts on first recorded event — lifetime totals below reflect existing Redis data.'}
-                </span>
-              </div>
-            )}
+            <button
+              type="button"
+              onClick={() => void fetchDashboard({ silent: true })}
+              disabled={refreshing}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-xs transition-colors hover:bg-slate-50 disabled:opacity-60 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+            >
+              <RefreshCw className={cn('h-3.5 w-3.5', refreshing && 'animate-spin')} />
+              {refreshing ? 'Refreshing…' : 'Refresh metrics'}
+            </button>
+          </div>
 
-            {error && (
-              <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-600 dark:text-rose-300">
-                {error}
-              </div>
-            )}
+          {actionFeedback && (
+            <div
+              className={cn(
+                'flex items-center justify-between rounded-2xl border px-4 py-3 text-xs font-medium',
+                actionFeedback.ok
+                  ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300'
+                  : 'border-rose-500/30 bg-rose-500/10 text-rose-700 dark:text-rose-300'
+              )}
+            >
+              <span>{actionFeedback.text}</span>
+              <button type="button" onClick={() => setActionFeedback(null)}>
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          )}
 
-            {loading && !data ? (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <div key={i} className="h-28 animate-pulse rounded-xl border border-border bg-card" />
-                ))}
-              </div>
-            ) : data ? (
+          {error && (
+            <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-600 dark:text-rose-300">
+              {error}
+            </div>
+          )}
+
+          {loading && !data ? (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="h-28 animate-pulse rounded-2xl border border-slate-200/80 bg-white dark:border-white/10 dark:bg-[#13161E]" />
+              ))}
+            </div>
+          ) : data ? (
               <>
                 {/* 1. OVERVIEW */}
                 {section === 'overview' && (
@@ -739,35 +898,51 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                         { key: 'signups', label: 'Signups', colorClass: 'bg-brand-orange', dotClass: 'bg-brand-orange' },
                       ]}
                     />
-                    <div className="overflow-x-auto rounded-xl border border-border bg-card">
-                      <table className="w-full text-left text-xs">
-                        <thead className="border-b border-border bg-secondary/40 text-muted-foreground">
-                          <tr>
-                            <th className="px-4 py-3 font-medium">Date (UTC)</th>
-                            <th className="px-4 py-3 font-medium">DAU</th>
-                            <th className="px-4 py-3 font-medium">Signups</th>
-                            <th className="px-4 py-3 font-medium">AI Chat</th>
-                            <th className="px-4 py-3 font-medium">Goal Match</th>
-                            <th className="px-4 py-3 font-medium">CV Uploads</th>
-                            <th className="px-4 py-3 font-medium">429 / 403 / 503</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-border/70">
-                          {[...data.series].reverse().slice(0, 30).map((row) => (
-                            <tr key={row.date} className="hover:bg-secondary/20">
-                              <td className="px-4 py-2.5 font-medium tabular-nums">{row.date}</td>
-                              <td className="px-4 py-2.5 tabular-nums">{formatNumber(row.dau)}</td>
-                              <td className="px-4 py-2.5 tabular-nums">{formatNumber(row.signups)}</td>
-                              <td className="px-4 py-2.5 tabular-nums">{formatNumber(row.aiChatTotal)}</td>
-                              <td className="px-4 py-2.5 tabular-nums">{formatNumber(row.goalMatchTotal)}</td>
-                              <td className="px-4 py-2.5 tabular-nums">{formatNumber(row.cv_ok)}</td>
-                              <td className="px-4 py-2.5 tabular-nums text-muted-foreground">
-                                {row.rl_429} / {row.bot_403} / {row.err_503}
-                              </td>
+                    <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
+                      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-6 py-4 dark:border-white/10">
+                        <div>
+                          <h3 className="font-heading text-base font-semibold text-slate-900 dark:text-white">
+                            Daily Activity Breakdown
+                          </h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">
+                            UTC daily counters for active actors, signups, AI endpoints, and rejections.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left text-xs">
+                          <thead className="border-b border-slate-100 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:border-white/10">
+                            <tr>
+                              <th className="px-6 py-3.5">Date (UTC)</th>
+                              <th className="px-4 py-3.5">DAU</th>
+                              <th className="px-4 py-3.5">Signups</th>
+                              <th className="px-4 py-3.5">AI Chat</th>
+                              <th className="px-4 py-3.5">Goal Match</th>
+                              <th className="px-4 py-3.5">CV Uploads</th>
+                              <th className="px-6 py-3.5">429 / 403 / 503</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 dark:divide-white/5">
+                            {[...data.series].reverse().slice(0, 30).map((row) => (
+                              <tr key={row.date} className="transition-colors hover:bg-slate-50/80 dark:hover:bg-white/[0.03]">
+                                <td className="px-6 py-3.5 font-mono text-xs font-semibold text-slate-900 tabular-nums dark:text-white">
+                                  {row.date}
+                                </td>
+                                <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">{formatNumber(row.dau)}</td>
+                                <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">{formatNumber(row.signups)}</td>
+                                <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">{formatNumber(row.aiChatTotal)}</td>
+                                <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">{formatNumber(row.goalMatchTotal)}</td>
+                                <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">{formatNumber(row.cv_ok)}</td>
+                                <td className="px-6 py-3.5 tabular-nums">
+                                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-600 dark:bg-white/10 dark:text-slate-300">
+                                    {row.rl_429} / {row.bot_403} / {row.err_503}
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -791,81 +966,120 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                       ]}
                     />
 
-                    <div className="rounded-xl border border-border bg-card">
-                      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border p-4">
+                    <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
+                      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-6 py-4 dark:border-white/10">
                         <div>
-                          <h3 className="font-heading text-sm font-semibold">Registered Accounts</h3>
-                          <p className="text-xs text-muted-foreground">
+                          <h3 className="font-heading text-base font-semibold text-slate-900 dark:text-white">
+                            Registered Accounts
+                          </h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">
                             Safe metadata only — hashes, salts, tokens, and IPs are never exposed.
                           </p>
                         </div>
-                        <div className="relative w-full sm:w-64">
-                          <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                          <input
-                            type="search"
-                            value={usersQuery}
-                            onChange={(e) => {
-                              setUsersQuery(e.target.value)
-                              setUsersPage(1)
-                            }}
-                            placeholder="Search username or display name…"
-                            className="w-full rounded-lg border border-border bg-background py-1.5 pl-8 pr-3 text-xs outline-none focus:border-brand-orange"
-                          />
+                        <div className="flex flex-wrap items-center gap-2">
+                          <div className="relative w-full sm:w-64">
+                            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
+                            <input
+                              type="search"
+                              value={usersQuery}
+                              onChange={(e) => {
+                                setUsersQuery(e.target.value)
+                                setUsersPage(1)
+                              }}
+                              placeholder="Search username or display name…"
+                              className="w-full rounded-full border border-slate-200 bg-slate-50/70 py-2 pl-9 pr-3.5 text-xs outline-none transition-colors focus:border-brand-orange focus:bg-white dark:border-white/10 dark:bg-white/5 dark:focus:bg-[#0B0D12]"
+                            />
+                          </div>
+                          <select
+                            value={quotaFilter}
+                            onChange={(e) => setQuotaFilter(e.target.value as typeof quotaFilter)}
+                            aria-label="Filter by CV quota status"
+                            className="rounded-full border border-slate-200 bg-white px-3.5 py-2 text-xs font-medium text-slate-700 outline-none focus:border-brand-orange dark:border-white/10 dark:bg-white/5 dark:text-slate-200"
+                          >
+                            <option value="all">All quotas</option>
+                            <option value="zero">0 used</option>
+                            <option value="partial">1–2 used</option>
+                            <option value="maxed">3/3 maxed</option>
+                          </select>
                         </div>
                       </div>
 
                       <div className="overflow-x-auto">
                         <table className="w-full text-left text-xs">
-                          <thead className="border-b border-border bg-secondary/40 text-muted-foreground">
+                          <thead className="border-b border-slate-100 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:border-white/10">
                             <tr>
-                              <th className="px-4 py-3 font-medium">Username</th>
-                              <th className="px-4 py-3 font-medium">Display Name</th>
-                              <th className="px-4 py-3 font-medium">Registered</th>
-                              <th className="px-4 py-3 font-medium">CV Quota (UTC Month)</th>
+                              <th className="px-6 py-3.5">Username</th>
+                              <th className="px-4 py-3.5">Display Name</th>
+                              <th className="px-4 py-3.5">Registered</th>
+                              <th className="px-4 py-3.5">CV Quota (UTC Month)</th>
+                              <th className="px-6 py-3.5 text-right">Status</th>
                             </tr>
                           </thead>
-                          <tbody className="divide-y divide-border/70">
-                            {usersLoading ? (
-                              <tr>
-                                <td colSpan={4} className="px-4 py-8 text-center text-muted-foreground">
-                                  Loading accounts…
-                                </td>
-                              </tr>
-                            ) : (usersData?.users ?? []).length === 0 ? (
-                              <tr>
-                                <td colSpan={4} className="px-4 py-8 text-center text-muted-foreground">
-                                  No matching accounts found.
-                                </td>
-                              </tr>
-                            ) : (
-                              (usersData?.users ?? []).map((u) => (
-                                <tr key={u.username} className="hover:bg-secondary/20">
-                                  <td className="px-4 py-2.5 font-mono text-[11px] font-medium">@{u.username}</td>
-                                  <td className="px-4 py-2.5">{u.displayName}</td>
-                                  <td className="px-4 py-2.5 text-muted-foreground">
-                                    {u.createdAt ? u.createdAt.slice(0, 10) : '—'}
-                                  </td>
-                                  <td className="px-4 py-2.5 tabular-nums">
-                                    <span
-                                      className={cn(
-                                        'inline-flex rounded-full px-2 py-0.5 text-[11px] font-medium',
-                                        u.cvUsedThisMonth >= u.cvMonthlyLimit
-                                          ? 'bg-rose-500/12 text-rose-600 dark:text-rose-400'
-                                          : 'bg-secondary text-foreground'
-                                      )}
-                                    >
-                                      {u.cvUsedThisMonth} / {u.cvMonthlyLimit}
-                                    </span>
-                                  </td>
-                                </tr>
-                              ))
-                            )}
+                          <tbody className="divide-y divide-slate-100 dark:divide-white/5">
+                            {(() => {
+                              const filteredUsers = (usersData?.users ?? []).filter((u) => {
+                                if (quotaFilter === 'zero') return u.cvUsedThisMonth === 0
+                                if (quotaFilter === 'partial') return u.cvUsedThisMonth > 0 && u.cvUsedThisMonth < u.cvMonthlyLimit
+                                if (quotaFilter === 'maxed') return u.cvUsedThisMonth >= u.cvMonthlyLimit
+                                return true
+                              })
+                              if (usersLoading) {
+                                return (
+                                  <tr>
+                                    <td colSpan={5} className="px-6 py-10 text-center text-slate-500">
+                                      Loading accounts…
+                                    </td>
+                                  </tr>
+                                )
+                              }
+                              if (filteredUsers.length === 0) {
+                                return (
+                                  <tr>
+                                    <td colSpan={5} className="px-6 py-10 text-center text-slate-500">
+                                      No matching accounts found.
+                                    </td>
+                                  </tr>
+                                )
+                              }
+                              return filteredUsers.map((u) => {
+                                const maxed = u.cvUsedThisMonth >= u.cvMonthlyLimit
+                                const partial = u.cvUsedThisMonth > 0 && !maxed
+                                return (
+                                  <tr key={u.username} className="transition-colors hover:bg-slate-50/80 dark:hover:bg-white/[0.03]">
+                                    <td className="px-6 py-3.5 font-mono text-xs font-semibold text-slate-900 dark:text-white">
+                                      @{u.username}
+                                    </td>
+                                    <td className="px-4 py-3.5 font-medium text-slate-700 dark:text-slate-200">{u.displayName}</td>
+                                    <td className="px-4 py-3.5 text-slate-500 tabular-nums dark:text-slate-400">
+                                      {u.createdAt ? u.createdAt.slice(0, 10) : '—'}
+                                    </td>
+                                    <td className="px-4 py-3.5 font-medium tabular-nums text-slate-700 dark:text-slate-200">
+                                      {u.cvUsedThisMonth} / {u.cvMonthlyLimit} uploads
+                                    </td>
+                                    <td className="px-6 py-3.5 text-right">
+                                      <span
+                                        className={cn(
+                                          'inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-semibold',
+                                          maxed
+                                            ? 'bg-rose-500/12 text-rose-600 dark:text-rose-400'
+                                            : partial
+                                            ? 'bg-brand-orange/12 text-brand-orange'
+                                            : 'bg-emerald-500/12 text-emerald-700 dark:text-emerald-400'
+                                        )}
+                                      >
+                                        {maxed ? 'Limit reached' : partial ? 'Active' : 'Available'}
+                                      </span>
+                                    </td>
+                                  </tr>
+                                )
+                              })
+                            })()}
                           </tbody>
                         </table>
                       </div>
 
                       {usersData && usersData.total > usersData.limit && (
-                        <div className="flex items-center justify-between border-t border-border px-4 py-3 text-xs text-muted-foreground">
+                        <div className="flex items-center justify-between border-t border-slate-100 px-6 py-3.5 text-xs text-slate-500 dark:border-white/10">
                           <span>
                             Page {usersData.page} of {Math.max(1, Math.ceil(usersData.total / usersData.limit))} ({formatNumber(usersData.total)} total)
                           </span>
@@ -874,7 +1088,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                               type="button"
                               disabled={usersPage <= 1}
                               onClick={() => setUsersPage((p) => Math.max(1, p - 1))}
-                              className="inline-flex h-7 w-7 items-center justify-center rounded border border-border disabled:opacity-40"
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 disabled:opacity-40 dark:border-white/10 dark:hover:bg-white/5"
                             >
                               <ChevronLeft className="h-3.5 w-3.5" />
                             </button>
@@ -882,7 +1096,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                               type="button"
                               disabled={usersPage >= Math.ceil(usersData.total / usersData.limit)}
                               onClick={() => setUsersPage((p) => p + 1)}
-                              className="inline-flex h-7 w-7 items-center justify-center rounded border border-border disabled:opacity-40"
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 hover:bg-slate-50 disabled:opacity-40 dark:border-white/10 dark:hover:bg-white/5"
                             >
                               <ChevronRight className="h-3.5 w-3.5" />
                             </button>
@@ -1151,7 +1365,6 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
             ) : null}
           </main>
         </div>
-      </div>
     </div>
   )
 }

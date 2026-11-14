@@ -68,10 +68,10 @@ export function BarTrendChart({
   const hovered = hoveredIdx !== null ? data[hoveredIdx] : null
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5">
+    <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
       <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="font-heading text-sm font-semibold text-foreground">{title}</h3>
+          <h3 className="font-heading text-base font-semibold text-foreground">{title}</h3>
           {subtitle && <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>}
         </div>
         <div className="flex flex-wrap items-center gap-3">
@@ -165,9 +165,9 @@ export function HorizontalBreakdown({
   const max = Math.max(...items.map((i) => i.max ?? i.value), 1)
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5">
+    <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
       <div className="mb-4">
-        <h3 className="font-heading text-sm font-semibold text-foreground">{title}</h3>
+        <h3 className="font-heading text-base font-semibold text-foreground">{title}</h3>
         {subtitle && <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>}
       </div>
       <div className="space-y-3">
