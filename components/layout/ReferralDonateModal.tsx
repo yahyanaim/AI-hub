@@ -1,10 +1,13 @@
 'use client'
 
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
+
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { HeartHandshake, X, Share2, Check, Star, Globe, Sparkles } from 'lucide-react'
+import { X } from 'lucide-react'
+import { SupportArt } from '@/components/ui/SupportArt'
 import {
   REFERRAL_MODAL_SESSION_KEY,
   shouldShowReferralModal,
@@ -13,12 +16,10 @@ import {
 const AUTO_DISMISS_MS = 5000
 const SHOW_DELAY_MS = 600
 
-const FLOATING_ICONS = [
-  { Icon: HeartHandshake, x: '8%', y: '12%', size: 20, delay: 0, duration: 6, opacity: 0.16 },
-  { Icon: Share2, x: '86%', y: '16%', size: 18, delay: 0.5, duration: 7, opacity: 0.14 },
-  { Icon: Sparkles, x: '14%', y: '78%', size: 16, delay: 0.8, duration: 6.5, opacity: 0.13 },
-  { Icon: Star, x: '88%', y: '72%', size: 15, delay: 0.3, duration: 5.5, opacity: 0.15 },
-  { Icon: Globe, x: '50%', y: '6%', size: 14, delay: 1.0, duration: 7.5, opacity: 0.12 },
+const FLOATING_ART = [
+  { kind: 'coffee', x: '5%', y: '14%', size: 48, delay: 0, duration: 6, opacity: 0.14 },
+  { kind: 'share', x: '82%', y: '16%', size: 44, delay: 0.5, duration: 7, opacity: 0.14 },
+  { kind: 'heart', x: '8%', y: '75%', size: 40, delay: 0.8, duration: 6.5, opacity: 0.10 },
 ] as const
 
 export function ReferralDonateModal() {
@@ -134,32 +135,28 @@ export function ReferralDonateModal() {
             aria-hidden="true"
           />
           <motion.div
-            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-brand-orange/60 bg-card bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] shadow-2xl sm:max-w-lg"
+            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-brand-orange/60 bg-background shadow-2xl sm:max-w-lg"
             initial={{ opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: leaving ? 0 : 1, y: leaving ? 8 : 0, scale: 1 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.25 }}
           >
-            {/* Floating background icons (mirrors the on-page banner) */}
+            {/* Decorative artwork mirrors the on-page support banner. */}
             <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
-              {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
-                <motion.div
+              {FLOATING_ART.map(({ kind, x, y, size, delay, duration, opacity }, i) => (
+                <div
                   key={i}
-                  className="absolute text-brand-orange"
-                  style={{ left: x, top: y, opacity }}
-                  animate={{
-                    y: [0, -12, 0, 10, 0],
-                    opacity: [opacity, opacity * 1.6, opacity, opacity * 1.3, opacity],
-                  }}
-                  transition={{
-                    duration,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                    delay,
+                  className="absolute animate-float-soft motion-reduce:animate-none"
+                  style={{
+                    left: x,
+                    top: y,
+                    opacity,
+                    animationDuration: `${duration}s`,
+                    animationDelay: `${delay}s`,
                   }}
                 >
-                  <Icon size={size} />
-                </motion.div>
+                  <SupportArt kind={kind} size={size} />
+                </div>
               ))}
             </div>
             <button
@@ -172,9 +169,7 @@ export function ReferralDonateModal() {
             </button>
 
             <div className="relative p-8 text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange/10">
-                <HeartHandshake className="h-7 w-7 text-brand-orange" />
-              </div>
+              <SupportArt kind="heart" size={96} className="mx-auto mb-4 h-24 w-24" />
               <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                 AI Hub Tools is 100% free
               </h2>
@@ -196,12 +191,12 @@ export function ReferralDonateModal() {
                 >
                   {copied ? (
                     <>
-                      <Check className="h-4 w-4 text-green-600" />
+                      <FacetedGlyph kind="check" className="h-4 w-4 text-green-600" />
                       Link copied!
                     </>
                   ) : (
                     <>
-                      <Share2 className="h-4 w-4" />
+                      <FacetedGlyph kind="share" className="h-4 w-4" />
                       Share the platform
                     </>
                   )}
@@ -209,7 +204,7 @@ export function ReferralDonateModal() {
               </div>
 
               <p className="mt-3.5 text-center text-xs text-muted-foreground/80">
-                Even one share makes a difference 🧡
+                Even one share makes a difference <FacetedGlyph kind="heart" size={14} className="inline-block align-text-bottom" />
               </p>
             </div>
           </motion.div>

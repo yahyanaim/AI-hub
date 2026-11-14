@@ -2,30 +2,31 @@
 
 import { useReducedMotion } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import type { LucideIcon } from 'lucide-react'
-import { ArrowRight, Sparkles, Search, TrendingUp, Brain, Code, Globe, Zap, Terminal, Rocket, Layers, Database } from 'lucide-react'
+import { FacetedArt, type FacetedArtKind } from '@/components/ui/FacetedArt'
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
-interface FloatingIcon {
-  Icon: LucideIcon
+interface FloatingArt {
+  kind: FacetedArtKind
   x: string
   y: string
   size: number
   delay: number
   duration: number
   opacity: number
+  desktopOnly?: boolean
 }
 
-const FLOATING_ICONS: FloatingIcon[] = [
-  { Icon: Brain, x: '6%', y: '8%', size: 24, delay: 0, duration: 6, opacity: 0.18 },
-  { Icon: Code, x: '85%', y: '15%', size: 22, delay: 0.5, duration: 7, opacity: 0.16 },
-  { Icon: Globe, x: '45%', y: '5%', size: 19, delay: 0.8, duration: 8, opacity: 0.17 },
-  { Icon: Zap, x: '90%', y: '45%', size: 16, delay: 1.2, duration: 5, opacity: 0.12 },
-  { Icon: Terminal, x: '68%', y: '82%', size: 17, delay: 0.9, duration: 6, opacity: 0.13 },
-  { Icon: Rocket, x: '3%', y: '52%', size: 17, delay: 0.7, duration: 5.5, opacity: 0.18 },
-  { Icon: Layers, x: '80%', y: '32%', size: 16, delay: 0.2, duration: 6, opacity: 0.14 },
-  { Icon: Database, x: '50%', y: '95%', size: 14, delay: 0.2, duration: 6.5, opacity: 0.15 },
+const FLOATING_ART: FloatingArt[] = [
+  { kind: 'brain', x: '3%', y: '8%', size: 36, delay: 0, duration: 6, opacity: 0.20 },
+  { kind: 'code', x: '85%', y: '12%', size: 34, delay: 0.5, duration: 7, opacity: 0.18 },
+  { kind: 'globe', x: '46%', y: '0%', size: 26, delay: 0.8, duration: 8, opacity: 0.14 },
+  { kind: 'bolt', x: '92%', y: '48%', size: 26, delay: 1.2, duration: 5, opacity: 0.14 },
+  { kind: 'terminal', x: '68%', y: '86%', size: 30, delay: 0.9, duration: 6, opacity: 0.14 },
+  { kind: 'rocket', x: '1%', y: '54%', size: 34, delay: 0.7, duration: 5.5, opacity: 0.18 },
+  { kind: 'layers', x: '81%', y: '35%', size: 28, delay: 0.2, duration: 6, opacity: 0.12, desktopOnly: true },
+  { kind: 'database', x: '40%', y: '88%', size: 26, delay: 0.2, duration: 6.5, opacity: 0.12, desktopOnly: true },
 ]
 
 interface HeroSectionProps {
@@ -76,24 +77,26 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
     : phraseAt(phraseIdx).slice(0, charCount)
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
+    <section className="relative overflow-hidden bg-background py-16 md:py-24">
       {/* Floating background icons: pure CSS float loop (compositor-only),
           no JS rAF loop. Opacity stays at its base value; bob via transform.
           Honors reduced-motion via Tailwind's motion-reduce variant. */}
       <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
-        {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
+        {FLOATING_ART.map(({ kind, x, y, size, delay, duration, opacity, desktopOnly }, i) => (
           <div
             key={i}
-            className="absolute animate-float-soft text-brand-orange motion-reduce:animate-none"
+            className={`absolute animate-float-soft motion-reduce:animate-none ${desktopOnly ? 'hidden sm:block' : ''}`}
             style={{
               left: x,
               top: y,
+              width: size,
+              height: size,
               opacity,
               animationDuration: `${duration}s`,
               animationDelay: `${delay}s`,
             }}
           >
-            <Icon size={size} />
+            <FacetedArt kind={kind} size={size} className="h-6 w-6 sm:h-full sm:w-full" />
           </div>
         ))}
       </div>
@@ -102,7 +105,7 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
           subtitle and must paint immediately from SSR HTML instead of
           starting at opacity: 0 and waiting for hydration + animation. */}
       <div
-        className="mx-auto max-w-3xl text-center"
+        className="relative z-10 mx-auto max-w-3xl text-center"
       >
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-1.5 text-xs text-muted-foreground">
           <span className="relative flex h-2 w-2">
@@ -140,7 +143,7 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
             onClick={onSearch}
             className="group flex w-full items-center gap-3 rounded-xl border border-border bg-muted/50 px-4 py-3 text-left text-sm text-muted-foreground transition-colors hover:bg-muted hover:border-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
           >
-            <Search className="h-4 w-4 shrink-0" />
+            <FacetedGlyph kind="search" className="h-4 w-4 shrink-0" />
             <span className="flex-1">Search tools, dev tools, repos...</span>
             <kbd className="hidden rounded-md border border-border bg-background px-1.5 py-0.5 font-sans text-xs text-muted-foreground sm:inline-block">
               &#8984;K
@@ -151,7 +154,7 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
         <div className="mt-6 flex items-center justify-center gap-3">
           <Link href="/tools">
             <Button className="gap-2 bg-brand-orange px-6 py-5 text-sm font-semibold text-white shadow-lg shadow-brand-orange/25 hover:bg-orange-600">
-              <TrendingUp className="h-4 w-4" />
+              <FacetedGlyph kind="trending" onAccent className="h-4 w-4" />
               Browse tools
             </Button>
           </Link>
@@ -160,9 +163,9 @@ export function HeroSection({ onSearch, toolCount, promptCount, repoCount, cours
               variant="outline"
               className="gap-2 px-6 py-5 text-sm font-semibold"
             >
-              <Sparkles className="h-4 w-4" />
+              <FacetedGlyph kind="sparkles" className="h-4 w-4" />
               Submit yours
-              <ArrowRight className="h-4 w-4" />
+              <FacetedGlyph kind="arrow" className="h-4 w-4" />
             </Button>
           </Link>
         </div>

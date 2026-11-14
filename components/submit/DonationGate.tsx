@@ -1,7 +1,10 @@
 'use client'
 
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
+
 import { useEffect, useState } from 'react'
-import { Code2, ArrowRight, Mail, Copy, Check } from 'lucide-react'
+
+import { SupportArt } from '@/components/ui/SupportArt'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const PAYPAL_EMAIL = 'yahyanaim2001@gmail.com'
@@ -59,9 +62,7 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="px-6 pb-6 pt-8">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-brand-orange/10">
-                <Code2 className={`h-8 w-8 ${supported ? 'text-brand-orange' : 'text-brand-orange'}`} />
-              </div>
+              <SupportArt kind="coffee" size={96} className="mx-auto mb-4 h-24 w-24" />
 
               <h2 className="text-center font-heading text-xl font-bold text-foreground">
                 Buy me a coffee
@@ -77,9 +78,9 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
                 onClick={handleSupport}
                 className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-brand-orange px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
               >
-                <Mail className="h-5 w-5" />
+                <FacetedGlyph kind="mail" onAccent className="h-5 w-5" />
                 Donate via PayPal
-                <ArrowRight className="h-4 w-4" />
+                <FacetedGlyph kind="arrow" onAccent className="h-4 w-4" />
               </a>
 
               <button
@@ -87,13 +88,13 @@ export function DonationGate({ onDismiss }: { onDismiss: () => void }) {
                 className="mt-3 flex w-full items-center justify-between gap-2 rounded-lg border border-border bg-muted/40 px-3 py-2.5 text-left transition-colors hover:bg-muted"
               >
                 <span className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
-                  <Mail className="h-3.5 w-3.5 shrink-0" />
+                  <FacetedGlyph kind="mail" className="h-3.5 w-3.5 shrink-0" />
                   <span className="truncate">{PAYPAL_EMAIL}</span>
                 </span>
                 {copied ? (
-                  <Check className="h-4 w-4 shrink-0 text-green-600" />
+                  <FacetedGlyph kind="check" className="h-4 w-4 shrink-0 text-green-600" />
                 ) : (
-                  <Copy className="h-4 w-4 shrink-0 text-muted-foreground" />
+                  <FacetedGlyph kind="copy" className="h-4 w-4 shrink-0 text-muted-foreground" />
                 )}
               </button>
 

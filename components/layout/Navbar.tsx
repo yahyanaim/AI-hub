@@ -10,12 +10,12 @@ import {
   X,
   LogOut,
   Sparkles,
-  Coffee,
   Search,
   ChevronDown,
   ChevronRight,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { SupportArt } from '@/components/ui/SupportArt'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
 import { ThemeToggle } from '@/components/layout/ThemeToggle'
@@ -148,7 +148,7 @@ export function Navbar() {
                       : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
                   )}
                 >
-                  {link.href === '/support' && <Coffee className="h-3.5 w-3.5 text-brand-orange" />}
+                  {link.href === '/support' && <SupportArt kind="coffee" size={20} className="h-5 w-5" />}
                   {link.label}
                 </Link>
               )

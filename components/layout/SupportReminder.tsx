@@ -1,20 +1,19 @@
 'use client'
 
+import { FacetedGlyph } from '@/components/ui/FacetedGlyph'
+
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Share2, Check, Brain, Code, Rocket, Zap, Sparkles, Terminal, Globe, Star } from 'lucide-react'
 
-const FLOATING_ICONS = [
-  { Icon: Brain, x: '6%', y: '18%', size: 22, delay: 0, duration: 6, opacity: 0.16 },
-  { Icon: Rocket, x: '88%', y: '14%', size: 20, delay: 0.5, duration: 7, opacity: 0.15 },
-  { Icon: Code, x: '12%', y: '70%', size: 19, delay: 0.8, duration: 6.5, opacity: 0.14 },
-  { Icon: Zap, x: '90%', y: '62%', size: 17, delay: 0.3, duration: 5.5, opacity: 0.13 },
-  { Icon: Terminal, x: '30%', y: '8%', size: 16, delay: 1.0, duration: 7, opacity: 0.13 },
-  { Icon: Globe, x: '72%', y: '82%', size: 18, delay: 0.6, duration: 7.5, opacity: 0.14 },
-  { Icon: Star, x: '45%', y: '4%', size: 14, delay: 0.2, duration: 6, opacity: 0.15 },
-  { Icon: Sparkles, x: '60%', y: '90%', size: 15, delay: 0.9, duration: 6.8, opacity: 0.13 },
-]
+import { SupportArt } from '@/components/ui/SupportArt'
+
+const FLOATING_ART = [
+  { kind: 'coffee', x: '5%', y: '14%', size: 56, delay: 0, duration: 6, opacity: 0.16 },
+  { kind: 'share', x: '84%', y: '12%', size: 52, delay: 0.5, duration: 7, opacity: 0.16 },
+  { kind: 'heart', x: '12%', y: '68%', size: 44, delay: 0.8, duration: 6.5, opacity: 0.12 },
+  { kind: 'coffee', x: '80%', y: '70%', size: 44, delay: 0.3, duration: 5.5, opacity: 0.12 },
+] as const
 
 export function SupportReminder() {
   const [copied, setCopied] = useState(false)
@@ -50,10 +49,10 @@ export function SupportReminder() {
   }
 
   return (
-    <div className="relative mt-8 overflow-hidden rounded-xl border border-brand-orange/60 bg-card bg-gradient-to-br from-brand-orange/[0.07] via-transparent to-brand-orange/[0.05] px-6 py-10 text-center transition-all duration-200 hover:border-accent hover:shadow-[0_0_24px_var(--accent-glow)]">
-      {/* Floating icons: pure CSS float loop (compositor-only), no JS rAF loop. */}
-      <div className="pointer-events-none absolute inset-0 select-none">
-        {FLOATING_ICONS.map(({ Icon, x, y, size, delay, duration, opacity }, i) => (
+    <div className="relative mt-8 overflow-hidden rounded-xl border border-brand-orange/60 bg-background px-6 py-10 text-center transition-all duration-200 hover:border-accent hover:shadow-[0_0_24px_var(--accent-glow)]">
+      {/* Decorative support artwork; reduced motion keeps the illustration still. */}
+      <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
+        {FLOATING_ART.map(({ kind, x, y, size, delay, duration, opacity }, i) => (
           <div
             key={i}
             className="absolute animate-float-soft text-brand-orange motion-reduce:animate-none"
@@ -65,12 +64,13 @@ export function SupportReminder() {
               animationDelay: `${delay}s`,
             }}
           >
-            <Icon size={size} />
+            <SupportArt kind={kind} size={size} />
           </div>
         ))}
       </div>
 
       <div className="relative">
+        <SupportArt kind="heart" size={96} className="mx-auto mb-4 h-24 w-24" />
         <h3 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
           AI Hub Tools is 100% free
         </h3>
@@ -91,12 +91,12 @@ export function SupportReminder() {
           >
             {copied ? (
               <>
-                <Check className="h-4 w-4 text-green-600" />
+                <FacetedGlyph kind="check" className="h-4 w-4 text-green-600" />
                 Link copied!
               </>
             ) : (
               <>
-                <Share2 className="h-4 w-4" />
+                <FacetedGlyph kind="share" className="h-4 w-4" />
                 Share the platform
               </>
             )}
@@ -104,7 +104,7 @@ export function SupportReminder() {
         </div>
 
         <p className="mt-3.5 text-center text-xs text-muted-foreground/80">
-          Even one share makes a difference 🧡
+          Even one share makes a difference <FacetedGlyph kind="heart" size={14} className="inline-block align-text-bottom" />
         </p>
       </div>
     </div>
