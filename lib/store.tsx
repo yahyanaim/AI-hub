@@ -774,7 +774,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
                     ),
                   ]
                 : prev.users,
-            currentUserId: delta.currentUserId ?? prev.currentUserId,
+            currentUserId:
+              'currentUserId' in delta ? (delta.currentUserId ?? null) : prev.currentUserId,
             recentSearches: delta.recentSearches ?? prev.recentSearches,
             tools: mergeAdded(prev.tools, delta.addedTools),
             devTools: mergeAdded(prev.devTools, delta.addedDevTools),
@@ -1029,7 +1030,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  const authGenerationRef = useRef(0)
+
   const signIn = useCallback((username: string, options?: { skipSignupPing?: boolean; displayName?: string }) => {
+    authGenerationRef.current += 1
     const raw = username.trim().slice(0, MAX_USERNAME_LENGTH)
     const clean = raw.toLowerCase().replace(/[^a-z0-9_]/g, '')
     // Reject empty/short handles (e.g. '___' sanitizes to '') and cap the
@@ -1084,11 +1088,29 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [pingSignupCount])
 
   const signOut = useCallback(async () => {
+    authGenerationRef.current += 1
+    if (saveTimer.current) {
+      clearTimeout(saveTimer.current)
+      saveTimer.current = null
+    }
     try {
       localStorage.removeItem('ai-hunt-username')
+      const raw = localStorage.getItem(STORAGE_KEY)
+      if (raw) {
+        const parsed = JSON.parse(raw) as Record<string, unknown>
+        parsed.currentUserId = null
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed))
+      }
     } catch {}
     setState((prev) => ({ ...prev, currentUserId: null }))
-    await fetch('/api/auth/logout', { method: 'POST', cache: 'no-store' }).catch(() => {})
+    try {
+      const res = await fetch('/api/auth/logout', { method: 'POST', cache: 'no-store' })
+      if (!res.ok) {
+        await fetch('/api/auth/logout', { method: 'POST', cache: 'no-store' })
+      }
+    } catch {
+      /* ignore network errors; local session is cleared */
+    }
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new Event('aihunt-auth-changed'))
     }
@@ -1099,10 +1121,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // users are prompted to sign in with their password and sync cross-device quotas.
   useEffect(() => {
     let alive = true
+    const gen = authGenerationRef.current
     fetch('/api/auth/me', { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
       .then((d: { user?: { username?: string; displayName?: string } | null } | null) => {
-        if (!alive || !d) return
+        if (!alive || gen !== authGenerationRef.current || !d) return
         if (d.user?.username) {
           const serverUser = d.user.username.toLowerCase()
           const cur = stateRef.current.users.find((u) => u.id === stateRef.current.currentUserId)

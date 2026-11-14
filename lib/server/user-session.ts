@@ -120,6 +120,7 @@ export function clearUserCookie(res: NextResponse | Response): void {
     `${USER_COOKIE}=`,
     'Path=/',
     'Max-Age=0',
+    'Expires=Thu, 01 Jan 1970 00:00:00 GMT',
     'HttpOnly',
     'SameSite=Lax',
   ]

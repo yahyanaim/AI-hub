@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { getStoredUserDisplayName } from '@/lib/server/user-auth'
 import { getUserSessionFromRequest, UserSessionSecretError } from '@/lib/server/user-session'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: Request) {
   try {
     const session = getUserSessionFromRequest(req)

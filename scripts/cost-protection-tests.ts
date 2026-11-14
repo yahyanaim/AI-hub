@@ -1670,6 +1670,74 @@ async function run() {
     }
   }
 
+  // 54. Regular user login -> logout -> refresh (/api/auth/me returns null) -> repeated logout
+  {
+    __resetLocalQuotaStoreForTests()
+    __resetMemUsersForTests()
+    const prevAuthSecret = process.env.AUTH_SECRET
+    process.env.AUTH_SECRET = 'test-auth-secret-user-logout-54-min-32'
+    try {
+      const signupRes = await userLoginPost(
+        new NextRequest('http://localhost/api/auth/login', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', 'x-vercel-forwarded-for': '198.51.100.99' },
+          body: JSON.stringify({ username: 'Regular User', password: 'RegularPass123', mode: 'signup' }),
+        })
+      )
+      const userCookie =
+        (signupRes.headers.get('set-cookie') || '').match(/aihunt_user=[^;]+/)?.[0] ?? ''
+
+      const meBefore = await userMeGet(
+        new Request('http://localhost/api/auth/me', { headers: { cookie: userCookie } })
+      )
+      const meBeforeBody = (await meBefore.json()) as { user: { username: string } | null }
+
+      const logout1 = await userLogoutPost()
+      const setCookie1 = logout1.headers.get('set-cookie') || ''
+      const logout2 = await userLogoutPost()
+      const setCookie2 = logout2.headers.get('set-cookie') || ''
+
+      // Simulate browser refresh after cookie expiration (empty aihunt_user= or omitted cookie)
+      const meAfterCleared = await userMeGet(
+        new Request('http://localhost/api/auth/me', { headers: { cookie: 'aihunt_user=' } })
+      )
+      const meAfterClearedBody = (await meAfterCleared.json()) as { user: unknown }
+
+      const meAfterNoCookie = await userMeGet(new Request('http://localhost/api/auth/me'))
+      const meAfterNoCookieBody = (await meAfterNoCookie.json()) as { user: unknown }
+
+      check(
+        'user-logout-cycle: login -> logout clears cookie with Max-Age=0+Expires -> /api/auth/me null -> repeat logout ok',
+        signupRes.status === 200 &&
+          meBeforeBody.user?.username === 'regularuser' &&
+          logout1.status === 200 &&
+          logout1.headers.get('cache-control') === 'no-store' &&
+          setCookie1.includes('aihunt_user=') &&
+          setCookie1.includes('Max-Age=0') &&
+          setCookie1.includes('Expires=Thu, 01 Jan 1970 00:00:00 GMT') &&
+          setCookie1.includes('HttpOnly') &&
+          setCookie1.includes('SameSite=Lax') &&
+          logout2.status === 200 &&
+          setCookie2.includes('Max-Age=0') &&
+          meAfterCleared.headers.get('cache-control') === 'no-store' &&
+          meAfterClearedBody.user === null &&
+          meAfterNoCookieBody.user === null,
+        {
+          meBeforeBody,
+          setCookie1,
+          setCookie2,
+          meAfterClearedBody,
+          meAfterNoCookieBody,
+        }
+      )
+    } finally {
+      __resetLocalQuotaStoreForTests()
+      __resetMemUsersForTests()
+      if (prevAuthSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = prevAuthSecret
+    }
+  }
+
   console.log(`\n${passed} passed, ${failed} failed`)
   if (failed > 0) process.exit(1)
 }
