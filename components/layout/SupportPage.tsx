@@ -8,24 +8,12 @@ import {
   Copy,
   Check,
   Landmark,
-  User,
-  Hash,
-  Globe,
   ExternalLink,
   ShieldCheck,
 } from 'lucide-react'
 
 const PAYPAL_EMAIL = 'yahyanaim2001@gmail.com'
 const PAYPAL_LINK = `https://www.paypal.com/myaccount/transfer/homepage/pay?recipient=${PAYPAL_EMAIL}`
-
-const BANK = {
-  holder: 'MONSIEUR YAHIA NAIM',
-  account: '3505240211002500',
-  rib: '230 590 3505240211002500 72',
-  iban: 'MA64 2305 9035 0524 0211 0025 0072',
-  swift: 'CIHMMAMC',
-  bank: 'CIH Bank',
-}
 
 function CopyRow({
   icon,
@@ -87,7 +75,7 @@ export function SupportPage() {
       {/* Subtle AI Hunt ambient accent */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-72 w-[38rem] -translate-x-1/2 rounded-full bg-brand-orange/10 blur-[120px]" />
 
-      <div className="container-page mx-auto max-w-5xl">
+      <div className="container-page mx-auto max-w-4xl">
         {/* Hero */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-3 py-1 text-xs font-semibold text-brand-orange">
@@ -104,9 +92,9 @@ export function SupportPage() {
         </div>
 
         {/* Payment Methods */}
-        <div className="mt-8 grid gap-5 lg:grid-cols-5">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {/* PayPal */}
-          <div className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm lg:col-span-2">
+          <div className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm">
             <div className="flex items-center gap-2.5">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-orange/10 text-brand-orange">
                 <Mail className="h-5 w-5" />
@@ -144,76 +132,42 @@ export function SupportPage() {
             </div>
           </div>
 
-          {/* CIH Bank Transfer */}
-          <div className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm lg:col-span-3">
-            <div className="flex items-center justify-between gap-3">
+          {/* CIH Bank QR */}
+          <div className="flex flex-col items-center justify-between rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
+            <div className="flex w-full items-center justify-between gap-3 text-left">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-orange/10 text-brand-orange">
                   <Landmark className="h-5 w-5" />
                 </div>
                 <div>
                   <h2 className="font-heading text-base font-bold text-foreground">
-                    Bank Transfer — CIH Bank
+                    CIH Bank Transfer
                   </h2>
                   <p className="text-xs text-muted-foreground">
-                    Morocco (RIB) or International (IBAN / SWIFT)
+                    Scan QR with CIH Mobile
                   </p>
                 </div>
               </div>
-              <span className="hidden items-center gap-1 rounded-full border border-border bg-muted/60 px-2.5 py-1 text-[11px] font-medium text-muted-foreground sm:inline-flex">
+              <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted/60 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
                 <ShieldCheck className="h-3.5 w-3.5 text-brand-orange" />
                 Verified
               </span>
             </div>
 
-            <div className="mt-5 grid gap-4 sm:grid-cols-[1fr_auto] sm:items-stretch">
-              <div className="space-y-2">
-                <CopyRow
-                  icon={<User className="h-3.5 w-3.5" />}
-                  label="Account Holder"
-                  value={BANK.holder}
-                />
-                <CopyRow
-                  icon={<Landmark className="h-3.5 w-3.5" />}
-                  label="Bank · SWIFT Code"
-                  value={`${BANK.bank} · ${BANK.swift}`}
-                />
-                <CopyRow
-                  icon={<Hash className="h-3.5 w-3.5" />}
-                  label="Account Number"
-                  value={BANK.account}
-                />
-                <CopyRow
-                  icon={<Hash className="h-3.5 w-3.5" />}
-                  label="RIB"
-                  value={BANK.rib}
-                />
-                <CopyRow
-                  icon={<Globe className="h-3.5 w-3.5" />}
-                  label="IBAN"
-                  value={BANK.iban}
-                />
-              </div>
-
-              {/* QR Code Card */}
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-border bg-muted/30 p-4 text-center sm:w-44">
-                <div className="overflow-hidden rounded-xl bg-white p-2 shadow-sm ring-1 ring-black/5">
-                  <Image
-                    src="/cih-qr.png"
-                    alt="CIH Bank QR Code for MONSIEUR YAHIA NAIM"
-                    width={136}
-                    height={136}
-                    className="h-32 w-32 object-contain"
-                  />
-                </div>
-                <p className="mt-2.5 text-xs font-semibold text-foreground">
-                  Scan with CIH Mobile
-                </p>
-                <p className="mt-0.5 text-[11px] leading-snug text-muted-foreground">
-                  Instant local transfer
-                </p>
-              </div>
+            <div className="my-5 overflow-hidden rounded-2xl bg-white p-3.5 shadow-sm ring-1 ring-black/5">
+              <Image
+                src="/cih-qr.png"
+                alt="CIH Bank QR Code"
+                width={184}
+                height={184}
+                className="h-44 w-44 object-contain"
+              />
             </div>
+
+            <p className="text-xs text-muted-foreground">
+              Open <span className="font-medium text-foreground">CIH Mobile</span> and scan the QR
+              code to transfer instantly.
+            </p>
           </div>
         </div>
 
