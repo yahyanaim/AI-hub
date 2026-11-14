@@ -15,7 +15,6 @@ import {
 } from 'lucide-react'
 import { useApp } from '@/lib/store'
 import { Avatar } from '@/components/ui/Avatar'
-import { AdminBadge } from '@/components/profile/AdminBadge'
 import { ToolCard } from '@/components/cards/ToolCard'
 import { DevToolCard } from '@/components/cards/DevToolCard'
 import { RepoCard } from '@/components/cards/RepoCard'
@@ -216,9 +215,6 @@ export function ProfileView({ username }: { username: string }) {
               >
                 <BadgeCheck className="h-5 w-5 fill-brand-orange stroke-white" />
               </span>
-            )}
-            {user.username.toLowerCase() === 'yahianaim' && (
-              <AdminBadge username={user.username} />
             )}
           </div>
           <p className="mt-0.5 flex items-center gap-1.5 text-sm text-muted-foreground">

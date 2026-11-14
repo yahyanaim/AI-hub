@@ -19,7 +19,7 @@ export function AdminLoginForm() {
       .then((data: { authenticated?: boolean }) => {
         if (cancelled) return
         if (data.authenticated) {
-          router.replace('/profile/yahianaim')
+          router.replace('/admin/dashboard')
           return
         }
         setChecking(false)
@@ -60,7 +60,7 @@ export function AdminLoginForm() {
       try {
         sessionStorage.removeItem('aihub_admin_ping_v1')
       } catch {}
-      router.replace('/profile/yahianaim')
+      router.replace('/admin/dashboard')
       router.refresh()
     } catch {
       setError('Network error — please try again.')

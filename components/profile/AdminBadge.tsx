@@ -195,6 +195,7 @@ export function AdminBadge({
     try { sessionStorage.removeItem('aihub_admin_ping_v1') } catch {}
     clearAdminState()
     setStatus('unauth')
+    router.replace('/admin/login')
     router.refresh()
   }
 

@@ -11,6 +11,7 @@ import { GET as chatLockGet, POST as chatLockPost } from '../app/api/admin/chat-
 import { GET as recoverGet, POST as recoverPost } from '../app/api/admin/recover-account/route'
 import { GET as adminSessionGet } from '../app/api/admin/session/route'
 import { GET as signupsGet } from '../app/api/admin/signups/route'
+import { POST as adminLogoutPost } from '../app/api/auth/admin-logout/route'
 import { POST as userLoginPost } from '../app/api/auth/login/route'
 import { POST as userLogoutPost } from '../app/api/auth/logout/route'
 import { GET as userMeGet } from '../app/api/auth/me/route'
@@ -1463,7 +1464,7 @@ async function run() {
     }
   }
 
-  // 52. Unauthenticated visitor on /profile/yahianaim sees Admin login trigger without leaking admin access
+  // 52. Public profile never renders Admin controls; /admin/dashboard & APIs require valid aihunt_admin JWT
   {
     __resetLocalQuotaStoreForTests()
     __resetMemUsersForTests()
@@ -1474,13 +1475,25 @@ async function run() {
         join(process.cwd(), 'components/profile/ProfileView.tsx'),
         'utf8'
       )
-      const adminBadgeIndex = profileViewSrc.indexOf('<AdminBadge')
-      const surrounding = profileViewSrc.slice(Math.max(0, adminBadgeIndex - 160), adminBadgeIndex + 120)
-      const rendersOnYahianaimWithoutIsOwn =
-        surrounding.includes("user.username.toLowerCase() === 'yahianaim'") &&
-        !surrounding.includes('{isOwn &&')
+      const dashboardSrc = readFileSync(
+        join(process.cwd(), 'app/admin/dashboard/page.tsx'),
+        'utf8'
+      )
+      const loginFormSrc = readFileSync(
+        join(process.cwd(), 'components/auth/AdminLoginForm.tsx'),
+        'utf8'
+      )
+      const publicProfileClean =
+        !profileViewSrc.includes('AdminBadge') && !profileViewSrc.includes('/admin/')
+      const dashboardProtected =
+        dashboardSrc.includes("export const dynamic = 'force-dynamic'") &&
+        dashboardSrc.includes('verifyAdminJwt') &&
+        dashboardSrc.includes("redirect('/admin/login')")
+      const loginRedirectsToDashboard =
+        loginFormSrc.includes("router.replace('/admin/dashboard')") &&
+        !loginFormSrc.includes('/profile/yahianaim')
 
-      // Unauthenticated visitor (no user cookie, no admin cookie) gets 401 on all AdminBadge endpoints
+      // Unauthenticated visitor gets 401 on all Admin endpoints
       const [sRes, lRes, rGetRes, rPostRes] = await Promise.all([
         signupsGet(new NextRequest('http://localhost/api/admin/signups')),
         chatLockGet(new NextRequest('http://localhost/api/admin/chat-lock')),
@@ -1494,7 +1507,7 @@ async function run() {
         ),
       ])
 
-      // Admin authenticated via aihunt_admin ONLY (still no regular user session) unlocks AdminBadge + recovery UI
+      // Admin authenticated via aihunt_admin unlocks dashboard APIs; logout clears aihunt_admin
       const adminJwt = await signAdminJwt()
       const adminCookie = `${ADMIN_COOKIE}=${adminJwt}`
       const [sAuth, lAuth, rAuth] = await Promise.all([
@@ -1510,9 +1523,19 @@ async function run() {
       ])
       const rAuthBody = (await rAuth.json()) as { used?: boolean }
 
+      const logoutRes = await adminLogoutPost()
+      const logoutSetCookie = logoutRes.headers.get('set-cookie') || ''
+      const logoutClearsCookie =
+        logoutRes.status === 200 &&
+        logoutRes.headers.get('cache-control') === 'no-store' &&
+        logoutSetCookie.includes(`${ADMIN_COOKIE}=`) &&
+        logoutSetCookie.includes('Max-Age=0')
+
       check(
-        'admin-profile-access: AdminBadge mounts on yahianaim without user login, 401 unauth, 200 after admin JWT',
-        rendersOnYahianaimWithoutIsOwn &&
+        'admin-dashboard: public profile clean, /admin/dashboard protected, login->dashboard, logout clears cookie',
+        publicProfileClean &&
+          dashboardProtected &&
+          loginRedirectsToDashboard &&
           sRes.status === 401 &&
           lRes.status === 401 &&
           rGetRes.status === 401 &&
@@ -1521,12 +1544,16 @@ async function run() {
           (sAuth.status === 200 || sAuth.status === 503) &&
           lAuth.status === 200 &&
           rAuth.status === 200 &&
-          rAuthBody.used === false,
+          rAuthBody.used === false &&
+          logoutClearsCookie,
         {
-          rendersOnYahianaimWithoutIsOwn,
+          publicProfileClean,
+          dashboardProtected,
+          loginRedirectsToDashboard,
           unauthStatuses: [sRes.status, lRes.status, rGetRes.status, rPostRes.status],
           authStatuses: [sAuth.status, lAuth.status, rAuth.status],
           rAuthBody,
+          logoutClearsCookie,
         }
       )
     } finally {
