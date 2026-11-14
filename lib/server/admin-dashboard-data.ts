@@ -9,6 +9,7 @@ import {
   buildEmptyDailyRow,
   getMemMetricsSnapshot,
   getMemTrackingStartedAt,
+  getTopPages,
   METRIC_FIELDS,
   METRICS_DAY_PREFIX,
   METRICS_STARTED_KEY,
@@ -40,6 +41,7 @@ export type PeriodTotals = {
   conc429: number
   authFail: number
   adminUnauth: number
+  pageviews: number
   aiTotal: number
   aiSuccessRate: number | null
   apiErrorRate: number | null
@@ -120,6 +122,7 @@ function summarizeRows(rows: DailyMetricRow[]): PeriodTotals {
   let conc429 = 0
   let authFail = 0
   let adminUnauth = 0
+  let pageviews = 0
 
   for (const r of rows) {
     signups += r.signups
@@ -136,6 +139,7 @@ function summarizeRows(rows: DailyMetricRow[]): PeriodTotals {
     conc429 += r.conc_429
     authFail += r.auth_fail
     adminUnauth += r.admin_unauth
+    pageviews += r.pageviews
   }
 
   const chatTotal = chatOk + chatErr
@@ -163,6 +167,7 @@ function summarizeRows(rows: DailyMetricRow[]): PeriodTotals {
     conc429,
     authFail,
     adminUnauth,
+    pageviews,
     aiTotal,
     aiSuccessRate,
     apiErrorRate,
@@ -341,7 +346,91 @@ export async function buildAdminDashboardPayload(opts?: {
     lastBroadcastAt,
   }
 
-  const vercelTokenPresent = Boolean(process.env.VERCEL_API_TOKEN?.trim())
+  const vercelToken = process.env.VERCEL_API_TOKEN?.trim() || ''
+  const vercelTokenPresent = Boolean(vercelToken)
+  const vercelProjectId = process.env.VERCEL_PROJECT_ID?.trim() || 'prj_9qTZMmBcU2JDjMM0udwVHQ7UaLJo'
+  const vercelTeamId = process.env.VERCEL_TEAM_ID?.trim() || 'team_OwAXtSrjrocoxww4Z1plwxVj'
+
+  type VercelDeploymentRow = {
+    uid: string
+    url: string | null
+    state: string
+    target: string | null
+    createdAt: number
+    buildDurationSec: number | null
+    commitSha: string | null
+    commitMessage: string | null
+  }
+
+  let recentDeployments: VercelDeploymentRow[] = []
+  let currentMonthChargesUsd: number | null = null
+  let billingApiConnected = vercelTokenPresent
+  let billingNote = vercelTokenPresent
+    ? 'Connected to Vercel REST API.'
+    : 'Not connected — add a read-only VERCEL_API_TOKEN env var to pull live Vercel deployments and Spend Management.'
+
+  if (vercelTokenPresent) {
+    const headers = { Authorization: `Bearer ${vercelToken}` }
+    const [depRes, chargesRes] = await Promise.all([
+      fetch(
+        `https://api.vercel.com/v6/deployments?projectId=${encodeURIComponent(vercelProjectId)}&teamId=${encodeURIComponent(vercelTeamId)}&limit=8`,
+        { headers, cache: 'no-store', signal: AbortSignal.timeout(4000) }
+      ).catch(() => null),
+      fetch(
+        `https://api.vercel.com/v1/billing/charges?teamId=${encodeURIComponent(vercelTeamId)}`,
+        { headers, cache: 'no-store', signal: AbortSignal.timeout(4000) }
+      ).catch(() => null),
+    ])
+
+    if (depRes?.ok) {
+      const depJson = (await depRes.json().catch(() => null)) as {
+        deployments?: Array<{
+          uid?: string
+          url?: string
+          state?: string
+          readyState?: string
+          target?: string | null
+          created?: number
+          buildingAt?: number
+          ready?: number
+          meta?: Record<string, string>
+        }>
+      } | null
+      recentDeployments = (depJson?.deployments ?? []).map((d) => {
+        const startMs = typeof d.buildingAt === 'number' ? d.buildingAt : d.created ?? 0
+        const endMs = typeof d.ready === 'number' ? d.ready : 0
+        const dur = startMs > 0 && endMs > startMs ? Math.round((endMs - startMs) / 1000) : null
+        return {
+          uid: String(d.uid ?? ''),
+          url: d.url ? `https://${d.url}` : null,
+          state: String(d.readyState || d.state || 'UNKNOWN'),
+          target: d.target ?? null,
+          createdAt: Number(d.created ?? 0),
+          buildDurationSec: dur,
+          commitSha: d.meta?.githubCommitSha ? d.meta.githubCommitSha.slice(0, 7) : null,
+          commitMessage: d.meta?.githubCommitMessage ? d.meta.githubCommitMessage.slice(0, 80) : null,
+        }
+      })
+    } else if (depRes) {
+      billingApiConnected = false
+      billingNote = `Vercel API returned HTTP ${depRes.status} — verify VERCEL_API_TOKEN permissions.`
+    }
+
+    if (chargesRes?.ok) {
+      const chargesJson = (await chargesRes.json().catch(() => null)) as {
+        charges?: Array<{ total?: number; amount?: number }>
+        total?: number
+      } | null
+      if (typeof chargesJson?.total === 'number') {
+        currentMonthChargesUsd = Math.round(chargesJson.total * 100) / 100
+      } else if (Array.isArray(chargesJson?.charges)) {
+        const sum = chargesJson.charges.reduce((s, c) => s + Number(c.total ?? c.amount ?? 0), 0)
+        currentMonthChargesUsd = Math.round(sum * 100) / 100
+      }
+    }
+  }
+
+  const topPages = await getTopPages(days, 10)
 
   return {
     generatedAt: now.toISOString(),
@@ -381,6 +470,7 @@ export async function buildAdminDashboardPayload(opts?: {
     },
     usersPreview: usersPage,
     content,
+    topPages,
     infrastructure: {
       vercel: {
         plan: 'Vercel Pro ($20/month)',
@@ -389,10 +479,10 @@ export async function buildAdminDashboardPayload(opts?: {
         region: process.env.VERCEL_REGION || 'local',
         commitSha: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) || null,
         buildTime: process.env.NEXT_PUBLIC_BUILD_TIME || null,
-        billingApiConnected: vercelTokenPresent,
-        billingNote: vercelTokenPresent
-          ? 'Read-only Vercel API token detected.'
-          : 'Not connected — add a read-only VERCEL_API_TOKEN env var to pull live Vercel Spend Management & function usage.',
+        billingApiConnected,
+        billingNote,
+        currentMonthChargesUsd,
+        recentDeployments,
       },
       redis: {
         configured: redisConfigured,

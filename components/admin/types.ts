@@ -27,6 +27,7 @@ export type DailyMetricRow = {
   conc_429: number
   auth_fail: number
   admin_unauth: number
+  pageviews: number
   aiChatTotal: number
   goalMatchTotal: number
   cvUploadsTotal: number
@@ -50,6 +51,7 @@ export type PeriodTotals = {
   conc429: number
   authFail: number
   adminUnauth: number
+  pageviews: number
   aiTotal: number
   aiSuccessRate: number | null
   apiErrorRate: number | null
@@ -139,6 +141,7 @@ export type AdminDashboardPayload = {
     pushSubscribers: number
     lastBroadcastAt: string | null
   }
+  topPages: Array<{ path: string; views: number }>
   infrastructure: {
     vercel: {
       plan: string
@@ -149,6 +152,17 @@ export type AdminDashboardPayload = {
       buildTime: string | null
       billingApiConnected: boolean
       billingNote: string
+      currentMonthChargesUsd: number | null
+      recentDeployments: Array<{
+        uid: string
+        url: string | null
+        state: string
+        target: string | null
+        createdAt: number
+        buildDurationSec: number | null
+        commitSha: string | null
+        commitMessage: string | null
+      }>
     }
     redis: {
       configured: boolean

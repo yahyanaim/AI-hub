@@ -892,20 +892,32 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                 {/* 2. ANALYTICS */}
                 {section === 'analytics' && (
                   <div className="space-y-6">
-                    <div className="grid gap-4 sm:grid-cols-3">
-                      <KpiCard label="DAU (Today)" value={formatNumber(data.overview.activeUsers.dau)} sub="Unique active actors today" icon={Activity} tone="orange" />
-                      <KpiCard label="WAU (7 Days)" value={formatNumber(data.overview.activeUsers.wau)} sub="Unique active actors (7d HLL)" icon={Activity} tone="emerald" />
+                    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                      <KpiCard label="Pageviews" value={formatNumber(data.overview.totals.pageviews)} sub="Privacy-safe Redis counter (no PII)" icon={TrendingUp} tone="orange" />
+                      <KpiCard label="DAU (Today)" value={formatNumber(data.overview.activeUsers.dau)} sub="Unique active actors today" icon={Activity} tone="emerald" />
+                      <KpiCard label="WAU (7 Days)" value={formatNumber(data.overview.activeUsers.wau)} sub="Unique active actors (7d HLL)" icon={Activity} />
                       <KpiCard label="MAU (30 Days)" value={formatNumber(data.overview.activeUsers.mau)} sub="Unique active actors (30d HLL)" icon={Activity} />
                     </div>
-                    <BarTrendChart
-                      title="Daily Active Actors & Signups"
-                      subtitle="HyperLogLog daily uniques vs new signups"
-                      data={data.series}
-                      series={[
-                        { key: 'dau', label: 'DAU', colorClass: 'bg-emerald-500', dotClass: 'bg-emerald-500' },
-                        { key: 'signups', label: 'Signups', colorClass: 'bg-brand-orange', dotClass: 'bg-brand-orange' },
-                      ]}
-                    />
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <BarTrendChart
+                        title="Pageviews & Active Actors"
+                        subtitle="Daily public pageviews vs HyperLogLog active actors"
+                        data={data.series}
+                        series={[
+                          { key: 'pageviews', label: 'Pageviews', colorClass: 'bg-brand-orange', dotClass: 'bg-brand-orange' },
+                          { key: 'dau', label: 'DAU', colorClass: 'bg-emerald-500', dotClass: 'bg-emerald-500' },
+                        ]}
+                      />
+                      <HorizontalBreakdown
+                        title="Top Visited Pages (Last 14 Days)"
+                        subtitle={data.topPages.length > 0 ? 'Aggregated from privacy-safe Redis path counters' : 'Pageviews will appear here as visitors browse public pages'}
+                        items={
+                          data.topPages.length > 0
+                            ? data.topPages.map((p) => ({ label: p.path, value: p.views }))
+                            : [{ label: 'No pageviews recorded yet', value: 0 }]
+                        }
+                      />
+                    </div>
                     <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
                       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-6 py-4 dark:border-white/10">
                         <div>
@@ -913,7 +925,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                             Daily Activity Breakdown
                           </h3>
                           <p className="text-xs text-slate-500 dark:text-slate-400">
-                            UTC daily counters for active actors, signups, AI endpoints, and rejections.
+                            UTC daily counters for pageviews, active actors, signups, AI endpoints, and rejections.
                           </p>
                         </div>
                       </div>
@@ -922,6 +934,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                           <thead className="border-b border-slate-100 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:border-white/10">
                             <tr>
                               <th className="px-6 py-3.5">Date (UTC)</th>
+                              <th className="px-4 py-3.5">Pageviews</th>
                               <th className="px-4 py-3.5">DAU</th>
                               <th className="px-4 py-3.5">Signups</th>
                               <th className="px-4 py-3.5">AI Chat</th>
@@ -936,6 +949,7 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                                 <td className="px-6 py-3.5 font-mono text-xs font-semibold text-slate-900 tabular-nums dark:text-white">
                                   {row.date}
                                 </td>
+                                <td className="px-4 py-3.5 tabular-nums font-medium text-slate-900 dark:text-white">{formatNumber(row.pageviews)}</td>
                                 <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">{formatNumber(row.dau)}</td>
                                 <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">{formatNumber(row.signups)}</td>
                                 <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">{formatNumber(row.aiChatTotal)}</td>
@@ -1229,20 +1243,28 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                     </div>
 
                     <div className="grid gap-4 lg:grid-cols-2">
-                      <div className="rounded-xl border border-border bg-card p-5">
-                        <h3 className="font-heading text-sm font-semibold">Vercel Spend & Usage API</h3>
+                      <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
+                        <h3 className="font-heading text-base font-semibold">Vercel Spend & Usage API</h3>
                         <p className="mt-1 text-xs text-muted-foreground">
                           Status:{' '}
                           <strong className="text-foreground">
                             {data.infrastructure.vercel.billingApiConnected ? 'Connected' : 'Not connected'}
                           </strong>
+                          {data.infrastructure.vercel.currentMonthChargesUsd !== null && (
+                            <>
+                              {' · '}Current charges:{' '}
+                              <strong className="text-foreground">
+                                ${data.infrastructure.vercel.currentMonthChargesUsd.toFixed(2)}
+                              </strong>
+                            </>
+                          )}
                         </p>
                         <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
                           {data.infrastructure.vercel.billingNote}
                         </p>
                       </div>
-                      <div className="rounded-xl border border-border bg-card p-5">
-                        <h3 className="font-heading text-sm font-semibold">AI Provider Spend Visibility</h3>
+                      <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
+                        <h3 className="font-heading text-base font-semibold">AI Provider Spend Visibility</h3>
                         <p className="mt-1 text-xs text-muted-foreground">
                           Status:{' '}
                           <strong className="text-foreground">
@@ -1253,6 +1275,75 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
                           {data.infrastructure.aiProvider.billingNote}
                         </p>
                       </div>
+                    </div>
+
+                    <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)] dark:border-white/10 dark:bg-[#13161E]">
+                      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-6 py-4 dark:border-white/10">
+                        <div>
+                          <h3 className="font-heading text-base font-semibold text-slate-900 dark:text-white">
+                            Recent Vercel Deployments
+                          </h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400">
+                            {data.infrastructure.vercel.recentDeployments.length > 0
+                              ? 'Live deployment feed from Vercel REST API (/v6/deployments).'
+                              : 'Add a read-only VERCEL_API_TOKEN env var in Vercel Production to display live deployments here.'}
+                          </p>
+                        </div>
+                      </div>
+                      {data.infrastructure.vercel.recentDeployments.length > 0 && (
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-left text-xs">
+                            <thead className="border-b border-slate-100 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:border-white/10">
+                              <tr>
+                                <th className="px-6 py-3.5">Commit</th>
+                                <th className="px-4 py-3.5">Environment</th>
+                                <th className="px-4 py-3.5">Build</th>
+                                <th className="px-4 py-3.5">Created</th>
+                                <th className="px-6 py-3.5 text-right">Status</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 dark:divide-white/5">
+                              {data.infrastructure.vercel.recentDeployments.map((d) => (
+                                <tr key={d.uid} className="transition-colors hover:bg-slate-50/80 dark:hover:bg-white/[0.03]">
+                                  <td className="px-6 py-3.5">
+                                    <span className="font-mono text-xs font-semibold text-slate-900 dark:text-white">
+                                      {d.commitSha ?? d.uid.slice(0, 7)}
+                                    </span>
+                                    {d.commitMessage && (
+                                      <p className="mt-0.5 max-w-xs truncate text-[11px] text-slate-500">
+                                        {d.commitMessage}
+                                      </p>
+                                    )}
+                                  </td>
+                                  <td className="px-4 py-3.5 capitalize text-slate-700 dark:text-slate-300">
+                                    {d.target || 'preview'}
+                                  </td>
+                                  <td className="px-4 py-3.5 tabular-nums text-slate-700 dark:text-slate-300">
+                                    {d.buildDurationSec !== null ? `${d.buildDurationSec}s` : '—'}
+                                  </td>
+                                  <td className="px-4 py-3.5 tabular-nums text-slate-500">
+                                    {d.createdAt ? new Date(d.createdAt).toISOString().slice(0, 16).replace('T', ' ') : '—'}
+                                  </td>
+                                  <td className="px-6 py-3.5 text-right">
+                                    <span
+                                      className={cn(
+                                        'inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-semibold',
+                                        d.state === 'READY'
+                                          ? 'bg-emerald-500/12 text-emerald-700 dark:text-emerald-400'
+                                          : d.state === 'ERROR'
+                                          ? 'bg-rose-500/12 text-rose-600 dark:text-rose-400'
+                                          : 'bg-amber-500/12 text-amber-700 dark:text-amber-300'
+                                      )}
+                                    >
+                                      {d.state}
+                                    </span>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

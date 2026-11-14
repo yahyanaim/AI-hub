@@ -16,6 +16,7 @@ import { ToolDetailModal } from '@/components/detail/ToolDetailModal'
 import { RepoDetailModal } from '@/components/detail/RepoDetail'
 import { CourseDetailModal } from '@/components/detail/CourseDetail'
 import { Analytics } from '@vercel/analytics/react'
+import { PageviewTracker } from '@/components/analytics/PageviewTracker'
 import dynamic from 'next/dynamic'
 import { safeJsonLd } from '@/lib/json-ld'
 
@@ -218,6 +219,7 @@ export default function RootLayout({
           <RepoDetailModal />
           <CourseDetailModal />
           <Analytics />
+          <PageviewTracker />
           {process.env.NEXT_PUBLIC_GA_ID && (
             <>
               <Script
