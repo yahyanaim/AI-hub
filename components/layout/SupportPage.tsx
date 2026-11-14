@@ -9,8 +9,22 @@ import {
   Check,
   Landmark,
   ExternalLink,
-  ShieldCheck,
 } from 'lucide-react'
+
+function PayPalLogo() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+      <path
+        fill="#003087"
+        d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"
+      />
+      <path
+        fill="#0079C1"
+        d="M23.048 7.667c-.028.179-.06.362-.096.55-1.237 6.351-5.469 8.545-10.874 8.545H9.326c-.661 0-1.218.48-1.321 1.132l-1.337 8.474-.378 2.4a.584.584 0 0 0 .576.675h4.05c.579 0 1.07-.42 1.16-.99l.048-.248.92-5.833.06-.323c.09-.57.581-.99 1.16-.99h.73c4.73 0 8.433-1.922 9.515-7.479.452-2.323.218-4.262-.983-5.622a4.68 4.68 0 0 0-1.486-1.091z"
+      />
+    </svg>
+  )
+}
 
 const PAYPAL_EMAIL = 'yahyanaim2001@gmail.com'
 const PAYPAL_LINK = `https://www.paypal.com/myaccount/transfer/homepage/pay?recipient=${PAYPAL_EMAIL}`
@@ -96,8 +110,8 @@ export function SupportPage() {
           {/* PayPal */}
           <div className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-orange/10 text-brand-orange">
-                <Mail className="h-5 w-5" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0079C1]/10">
+                <PayPalLogo />
               </div>
               <div>
                 <h2 className="font-heading text-base font-bold text-foreground">
@@ -134,24 +148,18 @@ export function SupportPage() {
 
           {/* CIH Bank QR */}
           <div className="flex flex-col items-center justify-between rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
-            <div className="flex w-full items-center justify-between gap-3 text-left">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-orange/10 text-brand-orange">
-                  <Landmark className="h-5 w-5" />
-                </div>
-                <div>
-                  <h2 className="font-heading text-base font-bold text-foreground">
-                    CIH Bank Transfer
-                  </h2>
-                  <p className="text-xs text-muted-foreground">
-                    Scan QR with CIH Mobile
-                  </p>
-                </div>
+            <div className="flex w-full items-center gap-2.5 text-left">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-orange/10 text-brand-orange">
+                <Landmark className="h-5 w-5" />
               </div>
-              <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted/60 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-                <ShieldCheck className="h-3.5 w-3.5 text-brand-orange" />
-                Verified
-              </span>
+              <div>
+                <h2 className="font-heading text-base font-bold text-foreground">
+                  CIH Bank Transfer
+                </h2>
+                <p className="text-xs text-muted-foreground">
+                  Scan QR with CIH Mobile
+                </p>
+              </div>
             </div>
 
             <div className="my-5 overflow-hidden rounded-2xl bg-white p-3.5 shadow-sm ring-1 ring-black/5">
