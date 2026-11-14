@@ -16971,7 +16971,7 @@ export const SEED_DEV_TOOLS: DevTool[] = [
     tagline: 'Dynamically generate GitHub stats for your READMEs',
     description: 'A customizable tool that generates visual GitHub statistics, including contribution activity, repository information, and programming language usage for developer profiles and README files.',
     url: 'https://github.com/stats-organization/github-stats-extended',
-    logoUrl: 'https://github.com/stats-organization.png',
+    logoUrl: 'https://icons.duckduckgo.com/ip3/github.com.ico',
     category: 'analytics',
     tags: ['github', 'statistics', 'profile', 'open-source'],
     pricing: 'open-source',
