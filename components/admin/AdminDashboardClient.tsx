@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import {
   Activity,
@@ -446,8 +447,15 @@ export function AdminDashboardClient({ adminName }: { adminName: string }) {
             <Menu className="h-4 w-4" />
           </button>
           <div className="flex items-center gap-2.5">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand-orange text-white shadow-sm shadow-brand-orange/25">
-              <ShieldCheck className="h-4.5 w-4.5" />
+            <span className="inline-flex h-10 w-10 items-center justify-center overflow-hidden">
+              <Image
+                src="/logo.png"
+                alt="AIhubtools"
+                width={40}
+                height={40}
+                className="h-full w-full object-contain"
+                priority
+              />
             </span>
             <span className="font-heading text-base font-bold tracking-tight text-slate-900 dark:text-white">
               AIhubtools
